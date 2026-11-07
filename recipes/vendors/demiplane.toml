@@ -1,0 +1,64 @@
+schema = 1
+name = "Demiplane (online RPG books and character tools)"
+kind = "route"
+service = true        # web-only books: nothing to download, no Steam entry
+notes = """
+Demiplane (owned by Roll20 since 2024) sells RPG rulebooks as online "Nexus"
+editions: read in the browser or Demiplane's apps, with character builders,
+and not downloadable as files. Humble items published by "Demiplane" are
+these editions ("... (Demiplane Edition)").
+
+In the census so far they only appear in the Candela Obscura bundle, whose
+text says every key is redeemed through DriveThruRPG; that bundle-level rule
+(vendors/drivethrurpg) outranks the developers rule below, so the three
+Demiplane editions there have item recipes under items/demiplane/. This
+vendor's own match rules catch Demiplane editions in future bundles and keys
+that point at demiplane.com.
+
+How a DriveThruRPG redemption reaches Demiplane is not documented in the
+sources found: Demiplane staff say purchases elsewhere don't unlock Demiplane
+editions "unless otherwise specified", and the documented cross-platform sync
+is Demiplane <-> Roll20. A product sold as a "Demiplane Edition" is the
+specified case; expect it to appear in the Demiplane library once the
+accounts are linked (inference, unverified).
+"""
+
+[match]
+developers = ["Demiplane"]
+domains = ["demiplane.com"]
+key_names = ['demiplane']
+
+[redeem]
+where = "the redemption link for the item on the Humble download page (for the Candela Obscura bundle: DriveThruRPG), then https://app.demiplane.com"
+account = true
+delivers = "the book in the Demiplane library (online reader + tools), for as long as the Demiplane account exists"
+expires = "not stated; Key.is_expired from Humble is authoritative"
+steps = [
+  "Create or log in to a Demiplane account (https://app.demiplane.com) and, if the redemption goes through DriveThruRPG or Roll20, link those accounts to it (Demiplane/Roll20 account integration).",
+  "Open the item's redemption link from the Humble download page and complete the $0 checkout (see vendors/drivethrurpg for the DriveThruRPG flow).",
+  "Open the Demiplane library and check the edition is there. If it is not, contact Demiplane support (support.demiplane.com) with the Humble order.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download: Demiplane editions are online books"
+
+[library]
+files = "none (online only)"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://forums.demiplane.com/t/i-have-the-set/3169"
+claim = "Demiplane staff: the Demiplane edition is separate; purchases from other retailers do not grant Demiplane access unless otherwise specified"
+[[sources]]
+url = "https://www.demiplane.com/blog/now-unlocked-taldorei-reborn-candela-obscura-for-cross-platform-sync"
+claim = "Candela Obscura joined Demiplane <-> Roll20 cross-platform sync (June 2025); sync the accounts"
+[[sources]]
+url = "https://comicbook.com/gaming/news/roll20-announces-purchase-of-demiplane"
+claim = "Roll20 bought Demiplane"
+[[sources]]
+url = "https://www.humblebundle.com/books/candela-obscura-darrington-press-friends-books"
+claim = "three items published by Demiplane, '(Demiplane Edition)'; bundle says keys are redeemable through DriveThruRPG (census)"

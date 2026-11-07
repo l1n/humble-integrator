@@ -1,0 +1,33 @@
+schema = 1
+name = "Syntronik 2 single instruments"
+vendor = "ik-multimedia"
+kind = "content"
+machine_names = ["syntronik2blau", "syntronik2gs-v", "syntronik2sh-v", "syntronik2cato", "syntronik2sam", "syntronik299", "syntronik2pro-v", "syntronik2pro-vs", "syntronik2bully", "syntronik2harpy260"]
+verified = false
+notes = """
+Single synths from IK's Syntronik 2 (recreations of the PPG Wave as Blau, Roland GS/SH, Octave Cat as CATO, Oberheim SEM as SAM, Yamaha SY99 as 99, Prophet-5/10 and Prophet VS as Pro-V/Pro-VS, Moog Taurus as Bully, ARP 2600 as Harpy 260). They play inside the Syntronik 2 instrument plug-in, which Product Manager installs with them (inference: not checked whether a separate free Syntronik 2 shell is needed). No Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = "Register the Humble serial on the IK account, then install from IK Product Manager (Software tab; sample content from the Sounds tab). Authorization happens in Product Manager."
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+prefix = "audio-plugins"
+notes = "Installs into the host plug-in's Windows install in the shared audio-plugins prefix (untested)."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/ik-pro-sound-suite-software"
+claim = "Syntronik 2 single-instrument items and their descriptions (census)"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/29332171355675-IK-Multimedia-Redemption-Instructions-EULA"
+claim = "register at ikmultimedia.com/registration; IK Product Manager: Software tab > Install, Sounds tab > Install"

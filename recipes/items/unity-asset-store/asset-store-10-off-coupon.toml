@@ -1,0 +1,47 @@
+schema = 1
+name = "Unity Asset Store 10% off Coupon"
+vendor = "unity-asset-store"
+kind = "service"
+service = true
+machine_names = ["unityassetstore10offcoupon", "holidayencore_unityassetstore10offcoupon"]
+publisher = "Unity Asset Store"
+verified = false
+notes = """
+A discount coupon, not a product voucher: "Get 10% off a single order of
+models and assets. One use per user. Coupon does not stack with other
+discounts." Seen in Fantasy and Sci-Fi Essentials for Unity (expired
+September 30th, 2023), Game Dev's
+Guide to Fantasy Character Assets (expired August 31st, 2023) and the
+Holiday Encore Unity Art / Unity Tools bundles (expired January 31, 2023).
+Every known copy has expired; the tool should only list it, never act on
+it. Nothing to install or download.
+"""
+
+[redeem]
+where = "https://assetstore.unity.com/"
+account = true
+expiry_text = "Holiday Encore: January 31, 2023; Fantasy and Sci Fi Essentials for Unity: September 30th, 2023 11am PST; Game Dev's Guide to Fantasy Character Assets: August 31st, 2023 (item descriptions)"
+steps = [
+  "Log in to the Unity Asset Store, add the assets to the cart.",
+  "At checkout, enter the code in the coupon code box and Apply; it takes 10% off that one order.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "Nothing to install."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/game-devs-guide-to-fantasy-character-assets-software"
+claim = "item description: 'Get 10% off a single order of models and assets. Expires August 31st, 2023. One use per user. Coupon does not stack with other discounts.'"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/holiday-encore-unity-art-software"
+claim = "item description: 'Asset Store 10% off Coupon ... Expires January 31, 2023'"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/50227631575835-How-do-I-redeem-an-Asset-Store-voucher"
+claim = "continuous-string Asset Store vouchers are entered in the coupon code box at checkout and applied to the order"

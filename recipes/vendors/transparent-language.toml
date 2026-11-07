@@ -1,0 +1,68 @@
+schema = 1
+name = "Transparent Language Online (language-learning subscriptions)"
+kind = "route"
+service = true        # web/app subscription: nothing to install, no Steam entry
+notes = """
+Humble sold Transparent Language Online subscriptions in two bundles: "Continue
+your Olympic journey" (learn-language-software, 2021, 12-month subscriptions for
+six languages) and "Learn a New Language and Travel the World"
+(learn-new-language-and-travel-world-software, 2022, 3/6/12 months for ~15
+languages). Each key is an activation code for one language for the stated
+term. Transparent Language Online is a browser course (plus mobile apps), so
+there is nothing to install or add to Steam.
+
+The same bundles carry Transparent Language's free PDF/EPUB guides (Beginner's
+Guide to French, Around the World in 17 Recipes, ...). Those are ordinary Humble
+downloads and are claimed by item transparent-language/language-guides
+(kind = "document"), not by this route. The Lonely Planet ebooks in the 2022
+bundle stay on the generic ebook route, which is why this recipe matches by
+developer/publisher rather than by the bundle's redemption text.
+
+Deadlines: the 2022 codes had to be redeemed by April 1st, 2023 (bundle page);
+the term starts at redemption, so by now every code has either lapsed or was
+never redeemable. Keep the route for completeness; Key.is_expired from Humble
+is authoritative.
+"""
+
+[match]
+developers = ["Transparent Language", "IMC Corporation"]
+domains = ["transparent.com"]
+key_names = ['transparent ?language']
+
+[redeem]
+where = "https://education.transparent.com/mylearning/game/ng/#/signup/activationcode"
+account = true
+delivers = "a time-limited licence (3, 6 or 12 months) for one language in Transparent Language Online"
+expires = "2022 bundle: 'Transparent Language codes must be redeemed by April 1st, 2023'; 2021 bundle: check the bundle page. Key.is_expired from Humble is authoritative."
+expiry_text = '(?i)redeemed by(?:\s|&nbsp;| )*([A-Z][a-z]+ \d{1,2}(?:st|nd|rd|th)?,? \d{4})'
+steps = [
+  "Reveal the key on Humble (one activation code per language and term).",
+  "New users: open https://education.transparent.com/mylearning/game/ng/#/signup/activationcode, enter the code under the SIGN UP tab, create the account and pick the first language.",
+  "Existing users: log in at https://education.transparent.com/mylearning/game/ng/#/login, open Profile (top right) > Licenses, click Add License and enter the code.",
+  "Check the licence term under Profile > Licenses. Switch languages with 'More Languages' in the top menu.",
+  "Support: support@transparent.com.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download: lessons run in the browser or the Transparent Language mobile apps"
+
+[library]
+files = "none for the subscriptions; the bundle's PDF/EPUB guides are Humble downloads (item transparent-language/language-guides)"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360019828893-Humble-Software-Bundle-Continue-your-Olympic-journey-Learn-Japanese-Spanish-French-Mandarin-Chinese-German-and-Korean-Transparent-Language-key-instructions"
+claim = "2021 bundle: new users enter the code under SIGN UP at education.transparent.com/.../signup/activationcode; existing users Profile > Licenses > Add License; support@transparent.com"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/6569717131675-Humble-Software-Bundle-Learn-a-New-Language-and-Travel-the-World-Redemption-Instructions"
+claim = "2022 bundle: same activation-code flow; licence duration shown under Profile > Licenses"
+[[sources]]
+url = "https://www.humblebundle.com/software/learn-new-language-and-travel-world-software"
+claim = "'can be redeemed through the Transparent Language website on a variety of web browsers'; 'Transparent Language codes must be redeemed by April 1st, 2023' (census redeem_text)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360019653634-Humble-Learn-a-New-Language-Bundle-Lesson-language-availability"
+claim = "which instruction languages each course is offered in"

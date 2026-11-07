@@ -1,0 +1,32 @@
+schema = 1
+name = "Producer Loops packs Humble lists without a delivery method"
+vendor = "producer-loops"
+kind = "content"
+machine_names = ["synthwaveanthems2", "cinematictools", "rhythmicfoley", "futurebassessentialsvol1", "futurebassessentialsvol2", "futureretro", "summerhouseanthemsvol1", "bootyton"]
+verified = false
+notes = """
+Eight Producer Loops sample packs (Synthwave Anthems 2, Laniakea Sounds: Cinematic Tools, Rhythmic Foley, Future Bass Essentials 1 and 2, Future Retro, Summer House, Bootyton) that Humble's Music Producer 2023 page (not DRM-free) lists without a delivery method, so no generic route would take them. The same packs are plain DRM-free downloads in Music Creators Unlimited (hb-drmfree) and in the DRM-free Epic Music Producer 2022, Mega Music Producer Black Friday and Holiday Special bundles, so they are fetched from the Humble download page like any pack. WAV/MIDI; no Steam entry.
+"""
+
+[install]
+source = "humble"
+serial = "none"
+notes = "Unzip into audio/producer-loops/<pack>."
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/music-producer-2023-plugins-software-essentials-software"
+claim = "these packs have no delivery; the other Producer Loops packs are hb-drmfree audio files (census)"
+
+
+[[sources]]
+url = "https://www.humblebundle.com/software/music-creators-unlimited-sounds-loops-instruments-software"
+claim = "the same eight packs delivered hb-drmfree (census)"

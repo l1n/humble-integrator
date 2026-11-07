@@ -1,0 +1,47 @@
+schema = 1
+name = "Luminar Neo"
+vendor = "skylum"
+kind = "app"
+machine_names = ["software_luminarneo"]
+verified = false
+notes = """
+Neon & Noir - Elite Photos with Luminar Neo (Oct 2025). AI photo editor;
+native macOS app (Humble lists this item as Mac only; Skylum also has a
+Windows build). The Humble key is an activation code entered after install
+(see vendors/skylum). macOS: install natively and add a Steam shortcut.
+Linux: no native build and no Wine reports, so nothing is installed there.
+App name is a glob, not confirmed.
+"""
+
+[install]
+source = "vendor"
+url = "https://skylum.com/download/luminar-neo-paid"
+serial = "account"
+
+[launch]
+find = "C:/Program Files*/Skylum/Luminar Neo/*.exe"
+notes = "Windows path only relevant if a Windows build is ever tried under Wine (not recommended)."
+
+[steam]
+shortcut = true
+title = "Luminar Neo"
+steamgriddb = "Luminar Neo"
+
+[platforms.macos]
+runner = "native"
+file = "*Luminar*Neo*.dmg"
+app_find = "/Applications/Luminar Neo*.app"
+
+[platforms.linux]
+runner = "none"
+notes = "No Linux build; no Wine/Proton reports found."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/41741926086683-Software-Luminar-Neo-Redemption-Instructions"
+claim = "download skylum.com/download/luminar-neo-paid, install, 'Use Activation Code', create account with the purchase email"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/20278053941275-Luminar-Neo-Lite-Redemption-Instructions"
+claim = "macOS installer Mac_Luminar_Neo.dmg; Windows MSI zip"
+[[sources]]
+url = "https://www.humblebundle.com/software/neon-noir-elite-photos-with-luminar-neo-software"
+claim = "Software: Luminar Neo, hb-key, platform Mac (census)"

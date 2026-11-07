@@ -1,0 +1,130 @@
+schema = 1
+name = "Ashampoo"
+kind = "route"
+notes = """
+Windows-only. Each Humble item is an Ashampoo licence key for one product
+(lifetime licence). Two ways in: (1) the product's own installer/activation
+dialog takes the key directly, no account needed; (2) the Ashampoo App
+(Humble's current instructions) links the key to an Ashampoo account and
+installs the program. Route (1) is the one to automate under Wine: the
+Ashampoo App is an extra Windows client and is not required.
+Activation is online and the licence is re-verified periodically, so the
+prefix needs network access. A fresh prefix counts as a new PC: Ashampoo may
+answer 'licence key already activated' (error 157); the fix is the Reset
+button under Licenses at https://www.ashampoo.com/loc/login (account needed).
+The 3D CAD / Home Design programs are .NET Framework apps (CAD.exe); the
+catalog extensions install into them, so everything Ashampoo shares one
+prefix.
+Ashampoo's Windows maintenance utilities (WinOptimizer, UnInstaller, Driver
+Updater, and Snap's screen capture) have no purpose inside a Wine prefix:
+their item recipes are marked skip so their keys stay unrevealed/giftable.
+EaseUS items in the 2025 'EaseUS x Ashampoo' bundle list Ashampoo as
+publisher; recipes/items/easeus claims them.
+"""
+
+[match]
+developers = ["Ashampoo", "Ashampoo GmbH & Co. KG"]
+domains = ["ashampoo.com", "ashampoo.net"]
+key_names = ["ashampoo", "(interior|kitchen|office) catalog"]
+
+[redeem]
+where = "the product's activation dialog (or https://www.ashampoo.com/en-us/app)"
+account = false
+delivers = "an activated program; optionally the licence listed in MyAshampoo"
+expires = "licences are lifetime, but newer bundles set a redeem-by date (2026 'Build Your Dream Home' bundle: redeem before 2027-09-15, a year after the bundle ended)"
+steps = [
+  "Reveal the Humble key; it is the Ashampoo licence key for that one product.",
+  "Download the product's installer from Ashampoo (redirectors like https://www.ashampoo.com/ashampoo_3d_cad_professional_12.exe; see each item) or, for the 2021 bundle, from the Humble bundle page.",
+  "Run the installer; on its key page paste the key and choose 'Activate now!'. If skipped, start the program and use 'Enter key manually' in the activation/trial window. No login is needed.",
+  "Alternative (Humble's Dec 2024 instructions): install the Ashampoo App, sign up or log in, Activate Product, paste the key, Verify, Add, then Install from the App.",
+  "Catalog extensions: install the CAD/Home Design program first, then run the extension's installer, pick the program to extend, enter the extension's key.",
+  "If activation says the key is already in use (error 157, e.g. after rebuilding a prefix): log in at https://www.ashampoo.com/loc/login, Licenses, Reset.",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+driver = "inno"
+driver_notes = """
+Installers are Inno Setup (Home Design 6: 5.5.7; 3D CAD 12: 6.4.2; catalog
+extensions: 6.7.0). Ashampoo documents no switches. The installer script
+references Ashampoo options /supersilent, /NoTrial, /NoMP and a dir
+parameter; standard Inno /VERYSILENT /SUPPRESSMSGBOXES /DIR= probably work,
+but nobody has checked what silent mode does with the key page, so run the
+wizard and let the tool type the user's key into it. Home Design 6 carries an
+'Add MyAshampoo toolbar' checkbox: untick it. Newer installers look for
+HKLM/HKCU Software\\Ashampoo\\Ashampoo App and fetch .NET runtimes as needed.
+Old versions (CAD 8, Home Design 6) no longer have product pages but their
+download redirectors still resolve (undocumented; may vanish).
+"""
+
+[prefix]
+name = "ashampoo"
+arch = "win64"
+windows = "win10"
+winetricks = ["dotnet48", "corefonts"]
+notes = "dotnet48 is inferred from CAD.exe being a .NET Framework program; untested."
+
+[platforms.macos]
+runner = "crossover"
+windows = "win10"
+notes = "No Mac version (Windows 10/11 only, no ARM). CodeWeavers lists 'Ashampoo 3D Cad Pro' but its rating could not be read; untested."
+
+[platforms.linux]
+runner = "umu"
+fallback = "wine"
+launch_via = "wrapper"
+notes = "No Linux version; no Wine/Proton reports found. Use one fixed prefix (WINEPREFIX=<data>/prefixes/ashampoo) so catalog extensions find the CAD program; the Steam shortcut runs a wrapper with that prefix."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/5626237932059"
+claim = "Humble: 3D CAD keys are entered in setup / the activation dialog ('Enter key manually')"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/31690262391323"
+claim = "Humble (Dec 2024): Ashampoo App > Activate Product > paste key > Verify > Add > Install"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/1260807019309"
+claim = "2021 bundle: installers downloadable from the Humble bundle page"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/1260807029850"
+claim = "catalog extensions: separate installers, choose the target program, then the key; work with CAD Pro 8, Architecture 8, Home Design 6"
+
+[[sources]]
+url = "https://support.ashampoo.com/hc/en-us/articles/360007143653"
+claim = "programs can be activated without logging in to an Ashampoo account"
+
+[[sources]]
+url = "https://support.ashampoo.com/hc/en-us/articles/8263577302162"
+claim = "keys bought elsewhere are not added to MyAshampoo automatically"
+
+[[sources]]
+url = "https://www.ashampoo.com/en-us/app"
+claim = "Ashampoo App: free Windows client that installs/updates programs and manages licences"
+
+[[sources]]
+url = "https://support.ashampoo.com/hc/en-us/articles/21869682110226"
+claim = "activation needs an internet connection; offline activation by email for some products"
+
+[[sources]]
+url = "https://support.ashampoo.com/hc/en-us/articles/360010046794"
+claim = "'already activated' / error 157 after reinstall: reset the licence under Licenses at ashampoo.com/loc/login"
+
+[[sources]]
+url = "https://www.ashampoo.com/en-us/3d-cad-professional-12/requirements"
+claim = "Windows 11/10 only, no ARM; licence re-verified periodically; admin rights"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/7787617301275"
+claim = "Humble: Ashampoo bundle products are one-time-payment lifetime licences"
+
+[[sources]]
+url = "https://www.codeweavers.com/compatibility/crossover/ashampoo-3d-cad-pro"
+claim = "CodeWeavers has an 'Ashampoo 3D Cad Pro' entry (rating not readable)"
+
+[[sources]]
+url = "https://jrsoftware.org/ishelp/topic_setupcmdline.htm"
+claim = "Inno Setup command-line switches"

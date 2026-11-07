@@ -1,0 +1,38 @@
+schema = 1
+name = "Synthesizer Expander Module (Cherry Audio)"
+vendor = "cherry-audio"
+kind = "addon"
+machine_names = ["synthesizerexpandermodule"]
+verified = false
+notes = """
+Free Cherry Audio emulation of the 1974 Oberheim SEM. Humble lists it under Soundtrack Loops in Music Creators Studio Essentials ('Soundtrack Loops items ... redeemable on the Soundtrack Loops page'), but it is a Cherry Audio product: try the code at store.cherryaudio.com/redeem; since the product is free in the Cherry Audio store, adding it there gives the same result if the code is refused (inference). Plug-in (AU, VST, VST3, AAX) and standalone; hosted by any DAW, so no Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "account"
+notes = "Redeem at store.cherryaudio.com/redeem, download the installer for this OS from the account, install, then sign in to the Cherry Audio account in the plug-in (Settings > Account) to activate online (up to 4 computers)."
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = "No Linux build. Untested: Windows installer into the shared audio-plugins Wine prefix, bridged into a Linux DAW with yabridge."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/music-creators-studio-essentials-software"
+claim = "'Synthesizer Expander Module is a free emulation of the classic Oberheim self-contained synthesizer module' (census)"
+
+[[sources]]
+url = "https://store.cherryaudio.com/redeem"
+claim = "Cherry Audio store lists Synthesizer Expander Module among its products"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360052885994-Cherry-Audio-Key-Redemption-Instructions"
+claim = "redeem the code at store.cherryaudio.com/redeem into a Cherry Audio account; download from the confirmation page"

@@ -1,0 +1,75 @@
+schema = 1
+name = "Markt+Technik (MUT) - BeckerCAD"
+kind = "route"
+notes = """
+BeckerCAD (2D, 3D, 3D PRO) is Markt+Technik's Windows CAD program (mut.de,
+Germany; also distributed by SoftMaker). Humble sold it twice:
+- "Everything you need to know about CAD" (Feb-Mar 2023): BeckerCAD 14 2D /
+  3D / 3D PRO as keys only (developer "Markt + Technik"), next to BPB training
+  ebooks.
+- "Become The Architect: CAD Software & Tutorials" (2025): BeckerCAD 15 2D /
+  3D / 3D PRO by "MUT", published by Richdale Ventures, as a Humble download
+  plus a "Richdale Key".
+The 2025 key is redeemed on Markt+Technik's licence portal through the
+'Redeem Here' link: it returns a download link and the program's licence key,
+which BeckerCAD asks for when it is first started. The 2023 keys presumably
+work the same way (inference: no Humble article for that bundle).
+
+Coordination: extracted keys labelled "Richdale Key" are matched by
+vendors/richdale-ventures (same portal steps). This recipe deliberately has no
+match rules (MUT also publishes the BeckerCAD training ebook, which must stay
+on the generic ebook route); the BeckerCAD census items are claimed by the
+item recipes markt-technik/beckercad-2d, -3d and -3d-pro.
+
+Licence: perpetual, up to 3 Windows PCs. Windows 8/10/11 only, OpenGL graphics.
+No Mac or Linux build and no CrossOver/WineHQ reports were found.
+"""
+
+[redeem]
+where = "the 'Redeem Here' link under the key on the Humble download page (Markt+Technik licence portal)"
+account = false
+delivers = "a download link for the BeckerCAD installer and the BeckerCAD licence key"
+expires = "not stated; check the Humble download page. Key.is_expired from Humble is authoritative."
+steps = [
+  "Reveal the key on the Humble download page and click 'Redeem Here'.",
+  "Paste the key into the portal's redemption box and click Next.",
+  "Registering with an email address is optional: choose 'Do not register' to skip it, then Next.",
+  "Save the download link and the licence key shown on the result page ('BeckerCAD 15 3D PRO Humble': 1. Download, 2. Installation, 3. Activation).",
+  "Unzip the download if it is a ZIP, run the installer, and enter the licence key when BeckerCAD asks for it.",
+  "Support: info@mut.de.",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+notes = "Installer framework and silent switches not documented. The licence key is asked for at activation ('When prompted, enter the license key'), not as an installer argument."
+
+[prefix]
+name = "beckercad"
+arch = "win64"
+windows = "win10"
+winetricks = []
+
+[platforms.macos]
+runner = "crossover"
+windows = "win10"
+notes = "Windows-only; no CrossOver ratings for BeckerCAD. Needs OpenGL; untested."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Windows-only; no Wine/Proton reports found."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/35631023293595-Become-The-Architect-CAD-Software-Tutorials-Redemption-Instructions"
+claim = "reveal the Richdale Key; Redeem Here; paste key, Next; optional registration ('Do not register'); then a download link and licence key; result page screenshot: '1. Download 2. Installation (unzip if necessary, double-click) 3. Activation: when prompted, enter the license key', help info@mut.de"
+[[sources]]
+url = "https://www.humblebundle.com/software/everything-you-need-to-know-about-cad-software"
+claim = "BeckerCAD 14 3D PRO / 3D / 2D by Markt + Technik, hb-key, Windows (census)"
+[[sources]]
+url = "https://www.softmaker.com/en/beckercad"
+claim = "Windows 11/10/8; perpetual licence; may be installed on 3 Windows PCs"
+[[sources]]
+url = "https://engelmann.com/en/products/beckercad-15-3d"
+claim = "requirements: Windows 11/10/8.1/8, 1-2 GB RAM, 2 GB disk, OpenGL graphics card"

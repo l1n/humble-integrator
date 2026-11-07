@@ -1,0 +1,40 @@
+schema = 1
+name = "Boom 3D"
+vendor = "global-delight"
+kind = "app"
+machine_names = ["boom3d"]
+verified = false
+notes = """
+System-wide audio enhancer: 3D surround over any headphones, 31-band
+equalizer and presets, volume booster (Mac). macOS 11+ and Windows 10/11
+x64; Mac and Windows are sold as separate licences, so the Humble key may
+only activate one of them. Not a game and runs in the background, so no
+Steam shortcut. Version 2.3.2 (Sep 2026).
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+notes = """
+macOS: the trial download is Boom3D.dmg; install the app from it and
+activate with the key (inference: the dmg contents, any audio-component
+permission prompt and the activation dialog were not checked). Windows:
+x64 trial installer from the same page.
+"""
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+[platforms.linux]
+runner = "none"
+notes = "No Linux build; it installs a system audio device, so Wine is not an option."
+
+[[sources]]
+url = "https://www.globaldelight.com/boom/"
+claim = "features, OS requirements, separate Mac/Windows purchases, trial downloads, version 2.3.2"
+[[sources]]
+url = "https://www.humblebundle.com/software/boom-royalty-free-sounds-music-audio"
+claim = "BOOM 3D key, available for Windows and Mac (census)"

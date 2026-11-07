@@ -1,0 +1,33 @@
+schema = 1
+name = "MODO BASS single basses"
+vendor = "ik-multimedia"
+kind = "content"
+machine_names = ["modobass-fretlessjazzbass", "modobass-punkbass", "modobass_studiobass", "modobass_studioupright"]
+verified = false
+notes = """
+Single physically modelled basses for MODO BASS 2: Fretless Jazz, Punk Bass, Studio Bass, Studio Upright. They load in the free MODO BASS 2 CS host (inference that CS hosts bought basses; IK sells them separately at $49.99 each). No Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = "Register the Humble serial on the IK account, then install from IK Product Manager (Software tab; sample content from the Sounds tab). Authorization happens in Product Manager."
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+prefix = "audio-plugins"
+notes = "Installs into the host plug-in's Windows install in the shared audio-plugins prefix (untested)."
+
+[[sources]]
+url = "https://ikmultimedia.com/products.json"
+claim = "MODO BASS 2 CS at $0; MODO BASS - Fretless Jazz, Punk Bass, Studio Bass, Studio Upright sold separately"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/29332171355675-IK-Multimedia-Redemption-Instructions-EULA"
+claim = "register at ikmultimedia.com/registration; IK Product Manager: Software tab > Install, Sounds tab > Install"

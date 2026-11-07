@@ -1,0 +1,36 @@
+schema = 1
+name = "Transparent Language beginner's guides and ebooks (PDF/EPUB)"
+vendor = "transparent-language"
+kind = "document"
+machine_names = [
+  "aroundtheworldin17recipes",
+  "10waystomakemoretimeforlanguagelearning",
+  "beginnersguidetobrazilianportuguese",
+  "beginnersguidetofrench",
+  "beginnersguidetogerman",
+  "beginnersguidetoitalian",
+  "beginnersguidtomandarinchinese",
+  "beginnersguidtospanish",
+  "japanesebeginningconversationbook",
+  "koreanessentialscourseguide",
+]
+verified = false
+notes = """
+Free ebooks bundled with the Transparent Language subscriptions. In the 2022
+bundle they are DRM-free Humble downloads (hb-drmfree); in the 2021 snapshot
+most show no delivery icon at all, but they are the same ebooks (inference).
+Download them into the library folder like any ebook (epub first, then pdf).
+One recipe for the set: each guide is a small standalone document.
+"""
+
+[install]
+source = "humble"
+file = "*"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/learn-new-language-and-travel-world-software"
+claim = "the guides are hb-drmfree ebook items published by Transparent Language (census)"

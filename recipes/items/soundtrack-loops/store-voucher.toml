@@ -1,0 +1,29 @@
+schema = 1
+name = "Soundtrack Loops store voucher ($15 / $25)"
+vendor = "soundtrack-loops"
+kind = "service"
+machine_names = ["soundtrackloopsstorevoucher25", "soundtrackloopsstorevoucher15", "soundtrackloopsstorevoucher25_megasounddesignerloopcrate3_softwarebundle", "soundtrackloopsstorevoucher15_megasounddesignerloopcrate3_softwarebundle", "15voucher", "25voucherwithsoundtrackloops", "25storecreditvoucher"]
+verified = false
+notes = """
+A $15 or $25 discount code for soundtrackloops.com, applied as a coupon at checkout; any unused remainder is lost. Most vouchers expire (check the Humble download page; Make Music, Change Lives: redeem by 31 Mar 2027). In Loop Crate 3 the $25 voucher replaced the $15 one. Optional and only useful when buying more packs; nothing to install.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "Add packs to the cart on soundtrackloops.com, follow the apply-coupon link at checkout, enter the voucher code, Apply Coupon."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360053754173-Soundtrack-Loops-Store-Voucher-Redemption-Instructions"
+claim = "coupon at checkout; no credit for the remaining balance; most vouchers expire; customer support cannot replace expired coupons"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/make-music-change-lives-software"
+claim = "'Redemption codes must be redeemed by user no later than March 31, 2027' (census)"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/mega-sound-designer-loop-crate-3-software"
+claim = "'NOTE: Soundtrack Loops Store Voucher $25 will replace the $15 Voucher' (census)"

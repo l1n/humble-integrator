@@ -1,0 +1,24 @@
+schema = 1
+name = "Moho School Days Content Pack"
+vendor = "lost-marble-moho"
+kind = "content"
+machine_names = ["schooldayscontentpack"]
+recommends = ["lost-marble-moho/moho-pro-12", "lost-marble-moho/moho-debut-12"]
+verified = false
+notes = "2026 Moho Pro bundle. Pre-animated school-themed content and sample files for Moho Debut/Pro; copy into the Custom Content folder. Lost Marble's current pack pages list Moho 13.5+ as a requirement; whether the packs load in 12.5 is unverified."
+
+[install]
+source = "vendor"
+file = "*.zip"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://moho.lostmarble.com/products/characters-content-pack"
+claim = "Characters pack: 8 .moho files; product page lists Moho 13.5+"
+
+[[sources]]
+url = "https://lostmarble.net/forum/viewtopic.php?p=217828"
+claim = "brushes: copy .mohobrush/.png into Custom Content/Brushes, reload with Ctrl+Alt+Shift+L"

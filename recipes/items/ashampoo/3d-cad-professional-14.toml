@@ -1,0 +1,41 @@
+schema = 1
+name = "Ashampoo 3D CAD Professional 14"
+vendor = "ashampoo"
+kind = "app"
+machine_names = ["ashampoo3dcadprofessional14"]
+verified = false
+notes = "2026 'Build Your Dream Home' Humble bundle (redeem before 2027-09-15). Redirector resolves to cdn1.ashampoo.net/ashampoo/2560/ashampoo_3d_cad_professional_14_14.0.0.exe. Owning several versions of the same line: the newest is enough, the older keys can stay unrevealed."
+
+[install]
+source = "vendor"
+url = "https://www.ashampoo.com/ashampoo_3d_cad_professional_14.exe"
+file = "ashampoo_3d_cad_professional_14*.exe"
+args = []
+serial = "per-product"
+notes = "Key goes into the installer's key page ('Activate now!') or the program's 'Enter key manually' dialog. Redirector URL observed working Oct 2026 (undocumented)."
+
+[launch]
+exe = 'C:\Program Files\Ashampoo\Ashampoo 3D CAD Professional 14\program\CAD.exe'
+find = "C:/Program Files*/Ashampoo/Ashampoo 3D CAD Professional 14/program/CAD.exe"
+notes = "Path read from the installer's Inno header (DefaultDirName + program\\CAD.exe); not yet seen on disk."
+
+[steam]
+shortcut = true
+title = "Ashampoo 3D CAD Professional 14"
+steamgriddb = "Ashampoo 3D CAD Professional 14"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/5626237932059"
+claim = "Humble: 3D CAD keys are entered in setup / the activation dialog ('Enter key manually')"
+
+[[sources]]
+url = "https://support.ashampoo.com/hc/en-us/articles/360007143653"
+claim = "programs can be activated without logging in to an Ashampoo account"
+
+[[sources]]
+url = "https://support.ashampoo.com/hc/en-us/articles/360010046794"
+claim = "'already activated' / error 157 after reinstall: reset the licence under Licenses at ashampoo.com/loc/login"
+
+[[sources]]
+url = "https://www.ashampoo.com/en-us/3d-cad-professional-12"
+claim = "download redirector pattern ashampoo.com/<product>.exe -> cdn1.ashampoo.net"

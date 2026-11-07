@@ -1,0 +1,28 @@
+schema = 1
+name = "Gothic Interior Megapack (Unity)"
+vendor = "unity-asset-store"
+kind = "content"
+machine_names = ["gothicinteriormegapackunity"]
+publisher = "Meshingun Studio"
+verified = false
+notes = "Unity edition (Supported Unity Versions: 2021.3.6f1, Render pipeline: HDRP URP Built-in) inside Deluxe Dev Dream: 3D Unreal Engine and Unity Mega Bundle (August 2024 and its December 2024 encore), a bundle routed to vendors/fab. Inference: the bundle text names no store, and Meshingun's Unity editions are Asset Store listings (its BAD ASSet bundle was 'redeemable on the Unity website', and its Bigger Better bundle page promised 'Unity Asset Store keys'), so this key is taken to be a Unity voucher while the bundle's Unreal keys go to Fab. The Unreal edition of the same pack is a separate Humble item (gothicinteriormegapackue) on the Fab route. Humble's key text decides: if it names Fab/Epic, redeem it there instead."
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "Redeem the voucher at id.unity.com, then download and import in the Unity Editor: Package Manager > My Assets."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://gamefromscratch.com/meshingun-3d-environment-unreal-engine-unity-bundle-returns/"
+claim = "Deluxe Dev Dreams rerun lists Gothic Interior Megapack (Unity) among the Unity versions"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/bad-asset-bundle-unity-exclusive-software"
+claim = "Meshingun's Unity-only BAD ASSet bundle: 'Keys redeemable on the Unity website'"
+
+[[sources]]
+url = "https://slickdeals.net/f/19615476-65-item-bigger-better-unreal-engine-assets-bundle-12-000-assets-22"
+claim = "Meshingun + Dekogon Bigger Better bundle: 'Professional Fab Marketplace keys and Unity Asset Store keys provided'"

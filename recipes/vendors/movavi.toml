@@ -1,0 +1,73 @@
+schema = 1
+name = "Movavi"
+kind = "route"
+notes = """
+Almost every Movavi item Humble sold is a Steam key (Video Editor Plus 2020,
+Gecata, Photo Editor, Slideshow Maker, Video Converter and most effect sets
+are Steam apps/DLC), and those must stay on generic/steam-key. Vendor
+recipes are tried before the generic routes and cannot filter on delivery,
+so this recipe deliberately has NO developer/publisher match: it catches
+only extracted keys whose instructions point at movavi.com (genuine Movavi
+activation keys), and item recipes claim the few non-Steam items.
+If a future bundle ships Movavi activation keys (one buyer of the 'Movavi &
+EaseUS: Media Mastery Pack' reported 11 Steam keys + 3 software keys), add
+item recipes for those machine names rather than a developer match.
+"""
+
+[match]
+domains = ["movavi.com"]
+
+[redeem]
+where = "inside the Movavi app: Help > Activate software"
+account = false
+delivers = "an activated desktop app (one computer per licence)"
+expires = "none documented"
+steps = [
+  "Steam keys from Movavi bundles: nothing here, they go to generic/steam-key.",
+  "Movavi activation key: install the product from movavi.com (web-installer .exe on Windows, .dmg on Mac), open Help > Activate software and paste the key; offline activation on Windows goes through reg@movavi.com.",
+  "Effect pack (.mpack) for Video Editor 20 or older: open or drag the .mpack into the editor and enter its key in the 'Activating Package' dialog; Video Editor 21+: Effects > Packs > right-click > Activate.",
+  "Standalone effect packs do not work in the Steam (or App Store) build of a Movavi editor (Movavi support); for Steam builds the packs must be Steam DLC.",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+driver = "movavi-web-installer"
+driver_notes = "Current Movavi installers (e.g. MovaviVideoEditorPlusSetup.exe, 2.8 MB) are a custom web downloader ('MovaviWebInstallerSetup'), not Inno/NSIS/MSI; no documented silent switch."
+
+[platforms.macos]
+runner = "native"
+notes = "Movavi ships native Mac builds; for Humble's Steam keys the Steam macOS depot is the build to use (the non-Steam Video Editor Plus 2020 for Mac is Intel-only: Rosetta)."
+
+[platforms.linux]
+runner = "proton"
+notes = "Steam builds under Proton: ProtonDB has Video Editor Plus 2020 (1182920) at Bronze from 3 reports (best Platinum). No native Linux build."
+
+[[sources]]
+url = "https://help.movavi.com/kb/license-recovery/activate-an-effects-pack"
+claim = "packs for Video Editor <=20 are .mpack files opened/dragged into the editor, then a key in 'Activating Package'; effects are not supported in App Store or Steam versions"
+
+[[sources]]
+url = "https://help.movavi.com/kb/license-recovery/offline-activation-on-windows"
+claim = "keys are entered via Help > Activate software; offline activation by email (Windows)"
+
+[[sources]]
+url = "https://help.movavi.com/kb/license-usage-rules/license-limitations-and-usage-rules"
+claim = "one computer per licence; transfers via support; some products need a Movavi account"
+
+[[sources]]
+url = "https://store.steampowered.com/app/1182920/"
+claim = "Video Editor Plus 2020 on Steam (Windows + macOS), with the effect sets as DLC (e.g. Space Journey 1253753)"
+
+[[sources]]
+url = "https://www.protondb.com/app/1182920"
+claim = "Bronze, 3 reports"
+
+[[sources]]
+url = "https://doesitarm.com/app/movavi-video-editor-plus-2020"
+claim = "non-Steam VEP 2020 for Mac is Intel-only"
+
+[[sources]]
+url = "https://www.steamgifts.com/discussion/QKwNf/"
+claim = "a Movavi/EaseUS bundle mixed Steam keys and software keys (forum report)"

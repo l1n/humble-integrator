@@ -1,0 +1,39 @@
+schema = 1
+name = "AmpliTube Metal / SVX / SVX 2"
+vendor = "ik-multimedia"
+kind = "addon"
+machine_names = ["amplitubemetal", "amplitubesvx", "amplitubesvx2"]
+recommends = ["ik-multimedia/amplitube-5-se"]
+verified = false
+notes = """
+AmpliTube gear collections: Metal (high-gain amps and stompboxes) and SVX / SVX 2 (Ampeg bass amps and cabinets). They add their gear to AmpliTube 5; without a paid AmpliTube 5, IK's free AmpliTube 5 CS should host them (inference). No Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = "Register the Humble serial on the IK account, then install from IK Product Manager (Software tab; sample content from the Sounds tab). Authorization happens in Product Manager."
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = "No Linux build. Untested: Windows installer into the shared audio-plugins Wine prefix, bridged into a Linux DAW with yabridge."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/ik-multimedia-presents-audio-master-suite-software"
+claim = "AmpliTube Metal, SVX and SVX 2 as IK keys (census)"
+
+[[sources]]
+url = "https://ikmultimedia.com/products.json"
+claim = "AmpliTube 5 CS listed at $0; Metal, SVX, SVX 2 sold as AmpliTube collections"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/29332171355675-IK-Multimedia-Redemption-Instructions-EULA"
+claim = "register at ikmultimedia.com/registration; IK Product Manager: Software tab > Install, Sounds tab > Install"

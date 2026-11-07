@@ -1,0 +1,62 @@
+schema = 1
+name = "CodeAndWeb (SpriteIlluminator, TexturePacker, PhysicsEditor)"
+kind = "route"
+notes = """
+CodeAndWeb GmbH makes game-dev desktop tools with native builds for all
+three OSes (Windows .msi, macOS .dmg, Ubuntu .deb). Humble sold
+SpriteIlluminator (normal-map editor for 2D sprites) in the Grand Game Dev
+Toolbox (Apr 2022) as a key; older Humble GameDev bundles (2016) also sold
+it. The key is a CodeAndWeb licence key entered in the app ('Enter license
+key'). A single-user licence covers up to 2 computers of the same user;
+'Deactivate license' moves it (once within 14 days); the online License
+Manager can reset it.
+
+Matched by developer: CodeAndWeb items so far are keys only (no DRM-free
+Humble builds to protect).
+"""
+
+[match]
+developers = ["CodeAndWeb", "CodeAndWeb GmbH"]
+domains = ["codeandweb.com"]
+key_names = ['spriteilluminator', 'texturepacker', 'physicseditor', 'codeandweb']
+
+[redeem]
+where = "in the app: Enter license key (File menu on Windows, presumably also on Linux; application menu on macOS)"
+account = false
+delivers = "a single-user licence for up to 2 computers"
+expires = "none documented for the licence; old Humble bundles set 'redeem before' dates for the key itself (2016 bundle: Jan 31st, 2017). Key.is_expired from Humble is authoritative."
+steps = [
+  "Reveal the key on the Humble download page.",
+  "Download the installer for this OS from the product's download page (e.g. https://www.codeandweb.com/spriteilluminator/download) and install it.",
+  "Start the app, choose 'Enter license key' (File menu on Windows; application menu on macOS) and paste the key; activation is online (offline activation is documented separately).",
+  "To move the licence: 'Deactivate license' in the app on the old computer, or the License Manager on codeandweb.com.",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+notes = "Native installers; the download page also offers version-less URLs for scripted installs (not transcribed)."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+notes = "Official .deb for Ubuntu (2.x: Ubuntu 20.04/22.04+). On other distros unpack the .deb (inference) or use the Windows build in Wine."
+
+[[sources]]
+url = "https://www.codeandweb.com/spriteilluminator/download"
+claim = "Windows .msi, macOS .dmg, Linux .deb (Ubuntu 20.04+/22.04+ for 2.x); release list to 2.2.0 (2026-10-02); version-less URLs for scripts"
+[[sources]]
+url = "https://www.codeandweb.com/knowledgebase/how-to-activate-a-license"
+claim = "'Enter license key' menu entry: File menu on Windows, application menu on macOS"
+[[sources]]
+url = "https://www.codeandweb.com/knowledgebase/on-how-many-computers-can-i-use-a-license"
+claim = "single-user licence: up to 2 computers, same user"
+[[sources]]
+url = "https://www.codeandweb.com/knowledgebase/how-can-i-transfer-a-license-to-another-computer"
+claim = "'Deactivate license' in the app; License Manager; uninstall once within 14 days"
+[[sources]]
+url = "https://www.steamgifts.com/discussion/WRBng/the-humble-gamedev-software-bundle"
+claim = "2016 Humble GameDev Software Bundle: SpriteIlluminator lifetime licence, redeem before Jan 31st, 2017"

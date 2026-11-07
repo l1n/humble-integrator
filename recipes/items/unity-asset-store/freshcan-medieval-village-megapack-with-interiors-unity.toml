@@ -1,0 +1,28 @@
+schema = 1
+name = "Medieval Village Megapack with Interiors - UNITY"
+vendor = "unity-asset-store"
+kind = "content"
+machine_names = ["medievalvillagemegapackwithinteriors_unity"]
+publisher = "Freshcan3D"
+verified = false
+notes = "Unity edition (its Humble description was copied from another item; the Unity listing is the Standard (built-in) pipeline edition) inside Epic Environments Mega Bundle: Unreal Engine & Unity Bundle for Fantasy Worlds (May 2024), a bundle routed to vendors/fab. Inference: the bundle text names no store ('Redeem your keys'); its Unreal items are taken to be Unreal Engine Marketplace codes (now Fab) and this Unity edition an Asset Store voucher. If the download page shows a yarrawah.com link instead (Yarrawah ran some Freshcan3D bundles through its own store), follow that. The Unreal edition of the same pack is a separate Humble item (medievalvillagemegapackwithinteriors) on the Fab route. Humble's key text decides: if it names Fab/Epic, redeem it there instead."
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "Redeem the voucher at id.unity.com, then download and import in the Unity Editor: Package Manager > My Assets."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://assetstore.unity.com/packages/3d/environments/historic/medieval-village-megapack-with-interiors-184159"
+claim = "Unity Asset Store listing 'Medieval Village Megapack with Interiors' (Standard render pipeline, released December 2020)"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/epic-environments-mega-bundle-unreal-engine-unity-bundle-for-fantasy-worlds-software"
+claim = "census: bundle text 'Redeem your keys' only; items named '- UNITY' next to their Unreal editions"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/16471369810843-Unreal-Essentials-Bundle-Redemption-Instructions"
+claim = "an earlier bundle delivered Freshcan3D (and Dekogon) assets through yarrawah.com, for bundle purchases only"

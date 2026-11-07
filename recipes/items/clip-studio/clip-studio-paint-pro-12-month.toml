@@ -1,0 +1,52 @@
+schema = 1
+name = "Clip Studio Paint PRO (12-month licence)"
+vendor = "clip-studio"
+kind = "app"
+machine_names = [
+  "clipstudiopaintproversion30_12monthlicense",
+  "clipstudiopaintproversion40_12monthlicense",
+  "clipstudiopaintproversion50_12monthlicense",
+]
+verified = false
+notes = "Graphixly's Clip Studio bundles ('Create, Paint and Animate'; 'Clip Studio Creativity Collection: Paint, Draw, Illustrate' and '... Animate'). A 12-month single-device plan that starts at registration and expires without renewing; Humble's 'Version 3.0/4.0/5.0' labels only record the version at sale. Ask the user before registering the code, since that starts the clock."
+
+[install]
+source = "vendor"
+url = "https://www.clipstudio.net/en/dl/"
+file = "CSP_*w_setup.exe"
+args = ["/s"]
+serial = "account"
+notes = "/s from winget's manifest, undocumented by CELSYS."
+
+[launch]
+exe = 'C:\Program Files\CELSYS\CLIP STUDIO 1.5\CLIP STUDIO PAINT\CLIPStudioPaint.exe'
+
+[steam]
+shortcut = true
+title = "Clip Studio Paint"
+steamgriddb = "Clip Studio Paint"
+
+[platforms.macos]
+runner = "native"
+file = "CSP_*m_app.pkg"
+app = "/Applications/CLIP STUDIO 1.5/App/CLIP STUDIO PAINT.app"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/27353366165915"
+claim = "CSP is a 12-month licence; all packs (incl. Moho Debut 12.5) are perpetual"
+
+[[sources]]
+url = "https://clipstudio.net/en/news/202402/13_02"
+claim = "12-month code: licence expires one year after registration, no auto-renew; single-device plan"
+
+[[sources]]
+url = "https://support.clip-studio.com/en-us/faq/articles/20200152"
+claim = "enter the activation code at ec.clip-studio.com/en-us/activation-codes/, then activate in the app signed in to the same Clip Studio account"
+
+[[sources]]
+url = "https://raw.githubusercontent.com/microsoft/winget-pkgs/master/manifests/c/Celsys/ClipStudioPaint/5.1.4/Celsys.ClipStudioPaint.installer.yaml"
+claim = "Windows installer CSP_514w_setup.exe (5.1.4), silent switch /s per winget, needs WebView2"
+
+[[sources]]
+url = "https://support.clip-studio.com/en-us/faq/articles/20190086"
+claim = 'C:\Program Files\CELSYS\CLIP STUDIO 1.5\CLIP STUDIO PAINT\CLIPStudioPaint.exe'

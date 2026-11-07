@@ -1,0 +1,33 @@
+schema = 1
+name = "Environmental Ambience Unity Plugin"
+vendor = "ovani-sound"
+kind = "content"
+machine_names = ["environmentalambienceunityplugin"]
+verified = false
+notes = """
+Ambience system for Unity (Requires Unity 2021.3+), meant for Ovani's Environmental Ambiences packs; video start-up tutorial. A game-engine add-on, not a system install: it goes into a Unity project (Requires Unity 2021.3+ for the music, ambience and footsteps plugins), by hand, per project; no Steam entry. Humble lists Windows/macOS/Linux icons on some bundles; the plugin is engine code and presumably runs wherever the engine runs (inference).
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = """
+Download from the Ovani order after redeeming the Humble coupon, keep the archive in the library (audio/ovani-sound/plugins/), then: Import the package into the project (Assets > Import Package > Custom Package, or drag it into the Project window; inference). Package format not checked.
+"""
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://ovanisound.com/products/environmental-ambience-unity-plugin"
+claim = "product page: Environmental Ambience Unity Plugin features and engine requirement"
+
+[[sources]]
+url = "https://ovanisound.com/products/humble-bundle-audio-arcade-tier-1"
+claim = "delivered through the Humble tier coupon on Ovani's store"

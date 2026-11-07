@@ -1,0 +1,108 @@
+schema = 1
+name = "Binary Fortress Software (DisplayFusion, ClipboardFusion, FileSeek, LogFusion, TrayStatus, VoiceBot)"
+kind = "route"
+notes = """
+Windows-only utilities. Each Humble code is (inferred) the product's licence
+key itself: Humble says 'License codes provided are redeemed via an
+installation client for each product', there is no redeem page
+(binaryfortress.com/Redeem/ is 404), and the installers take a key. 'Pro
+Standard' = one computer, lifetime, all future versions.
+Most of these are Windows-shell utilities (multi-monitor taskbars, tray
+icons, clipboard hooks, voice macros for games); inside a Wine prefix they
+can only see that prefix's own windows, so they are of little use on macOS
+or Linux. FileSeek and LogFusion are ordinary windowed apps and the only
+ones worth a Steam shortcut. Current builds need the .NET 10 desktop runtime
+and WebView2 (the 2023 Humble builds: .NET 7 + WebView2); WebView2 is a
+known weak spot under Wine (inferred). Each product is independent, so no
+shared prefix.
+DisplayFusion is also sold on Steam; the key_names below only match the
+Humble 'Pro Standard' licence names so a Steam key for DisplayFusion would
+still go to generic/steam-key.
+"""
+
+[match]
+developers = ["Binary Fortress Software", "Binary Fortress"]
+domains = [
+  "binaryfortress.com",
+  "displayfusion.com",
+  "clipboardfusion.com",
+  "fileseek.ca",
+  "logfusion.ca",
+  "traystatus.com",
+  "voicebot.net",
+]
+key_names = ["(displayfusion|clipboardfusion|traystatus|voicebot|fileseek|logfusion) pro standard"]
+
+[redeem]
+where = "the product's installer (licence key page) or Settings > License Key"
+account = false
+delivers = "a Pro licence for one computer"
+expires = "none documented"
+steps = [
+  "Reveal the Humble code; it is the product's licence key (inferred).",
+  "Download the installer from the product's site (e.g. https://www.displayfusion.com/Download/, https://www.fileseek.ca/Download/); old builds remain on binaryfortressdownloads.com.",
+  "Enter the key on the installer's licence page, or pass it with /LKEYUSER=\"KEY\" (current user) or /LKEYALL=\"KEY\" (all users); or later under Settings > License Key.",
+  "To move a licence to another PC, clear it in Settings > License Key (or uninstall) on the old one. 'Find My License' on the product site can e-mail keys tied to a Binary Fortress account.",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = true
+driver = "inno"
+args = ["/VERYSILENT", "/LAUNCHAFTER=0", "/LKEYALL={key}"]
+driver_notes = "Documented: /SILENT /VERYSILENT /LANG=en /DIR=\"...\" /LKEYUSER=\"key\" /LKEYALL=\"key\" /LPATHUSER= /LPATHALL= /LAUNCHAFTER=0 /MERGETASKS=\"!desktopicon,...\"; DisplayFusion adds /STARTUPUSER /STARTUPALL /CONTEXTMENU=0 /NOPREREQS=1 (skips .NET/VC++). {key} stands for the user's own revealed key. Installers need admin rights. A 'Download without Installer' ZIP exists but Binary Fortress says it is for testing only."
+
+[platforms.macos]
+runner = "crossover"
+windows = "win10"
+notes = "Windows-only (ClipboardFusion has a separate macOS sync companion app, not the full program). No CrossOver ratings beyond an old unrated 'DisplayFusion 9.1' entry."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Windows-only; no Wine/Proton reports found. Needs dotnet desktop runtime + WebView2 in the prefix."
+
+[[sources]]
+url = "https://www.displayfusion.com/KB/SilentInstallation"
+claim = "Inno Setup switches incl. /VERYSILENT /DIR= /LKEYUSER= /LKEYALL= /LAUNCHAFTER=0 /MERGETASKS=; DisplayFusion adds /STARTUPUSER /STARTUPALL /CONTEXTMENU=0 /NOPREREQS=1"
+
+[[sources]]
+url = "https://www.clipboardfusion.com/KB/SilentInstallation"
+claim = "same switches for ClipboardFusion"
+
+[[sources]]
+url = "https://www.fileseek.ca/KB/SilentInstallation"
+claim = "same switches for FileSeek"
+
+[[sources]]
+url = "https://www.displayfusion.com/FAQ/"
+claim = "key entered in the installer, or later in Settings > License Key; no key = 30-day trial"
+
+[[sources]]
+url = "https://www.fileseek.ca/FAQ/"
+claim = "licence moves by clearing the key on the old PC"
+
+[[sources]]
+url = "https://www.displayfusion.com/License/"
+claim = "Standard licence: 1 computer, lifetime, all future versions"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/14672723550107"
+claim = "Humble 2023 bundle: Windows, .NET 7 desktop runtime and WebView2"
+
+[[sources]]
+url = "https://www.displayfusion.com/Download/"
+claim = "current builds need .NET 10 desktop runtime and WebView2"
+
+[[sources]]
+url = "https://github.com/microsoft/winget-pkgs/tree/master/manifests/b/BinaryFortress"
+claim = "installer URLs binaryfortressdownloads.com/Download/BFSFiles/<id>/<Product>Setup-<ver>.exe; old builds still hosted"
+
+[[sources]]
+url = "https://www.clipboardfusion.com/Apps/"
+claim = "ClipboardFusion companion apps for macOS/iOS/Android"
+
+[[sources]]
+url = "https://www.codeweavers.com/compatibility?name=DisplayFusion"
+claim = "only an old unrated DisplayFusion 9.1 entry"

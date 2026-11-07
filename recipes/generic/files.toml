@@ -1,0 +1,8 @@
+schema = 1
+name = "Other DRM-free files"
+kind = "route"
+priority = 90
+notes = "Anything else Humble serves as a direct download: fetch every file for this item into the library folder."
+
+[match]
+delivery = ["hb-drmfree"]

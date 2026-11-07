@@ -1,0 +1,15 @@
+schema = 1
+name = "The Artist's Roadmap to Multiple Streams of Income (ebook)"
+vendor = "paintstorm"
+kind = "document"
+machine_names = ["artistsroadmaptomultiplestreamsofincome"]
+verified = false
+notes = "PDF ebook by Graphixly LLC in the 2024 Paintstorm bundle. Humble lists it as a key (hb-key) with a PDF icon, so it is redeemed rather than downloaded from Humble; where is undocumented (the bundle says keys are redeemed through the Paintstorm Studio website; Graphixly is the publisher). Store the PDF in the library folder; no Steam entry."
+
+[install]
+source = "vendor"
+file = "*.pdf"
+serial = "none"
+
+[steam]
+shortcut = false

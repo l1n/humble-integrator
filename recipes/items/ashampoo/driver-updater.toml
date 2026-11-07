@@ -1,0 +1,27 @@
+schema = 1
+name = "Ashampoo Driver Updater"
+vendor = "ashampoo"
+kind = "app"
+machine_names = ["ashampoodriverupdater"]
+verified = false
+skip = true
+skip_reason = "Windows system utility with no purpose inside a Wine prefix; keep the key unrevealed (it stays giftable) unless the user also runs real Windows."
+notes = "2025 'EaseUS x Ashampoo Windows Powerhouse' Humble bundle. Updates Windows hardware drivers: does nothing useful under Wine on macOS/Linux (time-limited licence on Ashampoo's site; Humble term unknown)."
+
+[install]
+source = "vendor"
+url = "https://www.ashampoo.com/ashampoo_driver_updater.exe"
+file = "ashampoo_driver_updater*.exe"
+serial = "per-product"
+notes = "If installed anyway (on real Windows): key in setup or 'Enter key manually', as for every Ashampoo product. Redirector observed working Oct 2026."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/5626237932059"
+claim = "Humble: 3D CAD keys are entered in setup / the activation dialog ('Enter key manually')"
+
+[[sources]]
+url = "https://support.ashampoo.com/hc/en-us/articles/360007143653"
+claim = "programs can be activated without logging in to an Ashampoo account"

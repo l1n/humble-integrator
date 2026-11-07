@@ -1,0 +1,72 @@
+schema = 1
+name = "GameMaker (Studio 2 Creator / Indie licence)"
+vendor = "yoyo-games"
+kind = "app"
+machine_names = ["gamemakerstudio2desktop", "gamemakerstudio2indie"]
+verified = false
+notes = """
+The Humble items are 12-month licence codes (Creator = desktop export, Indie =
+desktop + web + mobile), not installers. The IDE is free; install it and sign
+in with the GameMaker account the code was redeemed to.
+
+Best route into Steam: the free 'GameMaker' app on Steam (app 1670460, Windows
+and macOS, requires the GameMaker account; Steam must be online to log in).
+Linked accounts can use either the Steam or the standalone version, and
+subscriptions show as GameMaker DLC on Steam. On Linux the Steam app lists no
+Linux/SteamOS support, so use the native Ubuntu (Beta) IDE and a non-Steam
+shortcut instead (whether the Windows Steam build runs under Proton is
+untested).
+"""
+
+[install]
+source = "steam"
+steam_app_id = 1670460
+serial = "account"
+url = "https://gamemaker.io/en/download"
+notes = "Alternative to Steam: standalone installers from gamemaker.io/en/download (Windows GameMaker.exe, macOS GameMaker.pkg, Ubuntu (Beta) GameMaker.zip; LTS and Beta channels). Back up projects before using Beta."
+
+[launch]
+find = "C:/Program Files*/GameMaker*/GameMaker.exe"
+notes = "Only for a standalone Windows install under Wine, which is never needed (native macOS and Ubuntu builds exist). Path inferred, not checked."
+
+[steam]
+shortcut = false
+title = "GameMaker"
+steamgriddb = "GameMaker"
+notes = "On Windows/macOS GameMaker is itself a Steam app (1670460), so no shortcut. On Linux add a shortcut to the native Ubuntu IDE."
+
+[platforms.macos]
+runner = "native"
+app = "GameMaker.app"
+file = "GameMaker.pkg"
+notes = "Steam app or the standalone .pkg; both native."
+
+[platforms.linux]
+runner = "native"
+source = "vendor"
+file = "GameMaker.zip"
+shortcut = true
+notes = """
+Ubuntu (Beta) IDE: officially Ubuntu LTS only (Ubuntu 22 unsupported from
+2024.13; Ubuntu 24 needs kernel.apparmor_restrict_unprivileged_userns=0 to
+build). Building games also needs build-essential, clang, ffmpeg, libfuse2,
+pulseaudio, the Steam Runtime (/opt/steam-runtime), linuxdeploy and
+appimagetool. The archive's layout and the IDE binary's path were not checked,
+so no exe_find is given.
+"""
+
+[[sources]]
+url = "https://store.steampowered.com/app/1670460/GameMaker/"
+claim = "free GameMaker app on Steam; Windows and macOS requirements; requires a YoYo account (linkable to Steam); Professional/Enterprise as paid add-ons"
+[[sources]]
+url = "https://gamemaker.io/en/help/articles/purchasing-and-using-gamemaker-via-steam"
+claim = "link the GameMaker account to Steam to use either version; Steam must be online; subscriptions are DLC of 'GameMaker'"
+[[sources]]
+url = "https://gamemaker.io/en/download"
+claim = "Windows GameMaker.exe, macOS GameMaker.pkg, Ubuntu (Beta) GameMaker.zip; LTS and Beta channels; free download"
+[[sources]]
+url = "https://gamemaker.io/en/help/articles/setting-up-for-ubuntu"
+claim = "Ubuntu packages, Steam Runtime/linuxdeploy/appimagetool paths, Ubuntu 22/24 caveats, other distros unsupported"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4412573865499-GameMaker-Studio-2-System-Requirements"
+claim = "GMS2: 64-bit Windows 7+, macOS 10.14+, OpenGL 4, 3 GB disk"

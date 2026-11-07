@@ -1,0 +1,96 @@
+schema = 1
+name = "Hivemind (Unreal Engine & Unity asset bundles)"
+kind = "route"
+notes = """
+Hivemind (hivemind3d.io) makes modular environment kits sold on Fab (Unreal
+Engine) and the Unity Asset Store. Its mixed Humble bundles list each kit
+once per engine: "(Unreal Engine)" items are Fab codes (Professional
+licence), "(Unity)" items are Unity Asset Store vouchers. This recipe claims
+those mixed bundles whose text does not name a single store - The Game Dev
+Asset Mega Bundle (Dec 2024 - Jan 2025: "Keys for this bundle are redeemed
+on either FAB or the Unity Asset Store, dependent on title") and the Massive
+Unreal Engine & Unity Asset Bundle (Nov 2025: items say "* Professional Fab
+Marketplace Key is provided!" or "*Unity Asset Store Key Is Provided!") -
+and routes them to Fab, the store of most items. Every "(Unity)" item has an
+item recipe under items/hivemind/ that sends it to vendors/unity-asset-store;
+the four sound packs (Game Music Essentials, Horror Ambient Loops, Monster
+Sounds, Rain & Wind Sounds; "available DRM-Free") have item recipes too.
+
+Not here: Battle-Hardened (vendors/fab by slug, Unity items under
+items/unity-asset-store/), The Builder's Vault Unreal edition (vendors/fab)
+and Unity edition (vendors/unity-asset-store), whose texts name their store.
+The match rule below is any bundle text crediting Hivemind ("from/by
+Hivemind") that names neither Fab keys nor a single redemption store, so a
+future mixed Hivemind bundle lands here; a new bundle's "(Unity)" items then
+need item recipes like the ones in items/hivemind/.
+
+Fab facts as in vendors/fab: one code per asset, redeemed at
+epicgames.com/account/code-redemption or fab.com (Profile > Redeem Code);
+Fab rate-limits many redemptions in quick succession; choose the Unreal
+Engine / Professional licence, not UEFN. Unreal content is added to a
+project from the Epic Games Launcher (Fab Library) or the Fab plugin in
+Unreal Editor 5.3+.
+"""
+
+[match]
+redeem_text = [
+  '(?s)^(?!.*\b(?:Fab Marketplace keys?|redeem\w*(?:\s|&nbsp;| )+(?:through|on|via|at)(?:\s|&nbsp;| )+(?:the(?:\s|&nbsp;| )+)?(?:Fab|Unity)\b|battle-hardened game assets)).*\b(?:from|by)(?:\s|&nbsp;| )+Hivemind\b',
+]
+# No bundle_slugs: at key level a slug rule would catch the bundle's Unity keys before
+# vendors/unity-asset-store sees them. No domains/key_names: Hivemind keys resolve by
+# their own names ("(Unreal Engine)" -> vendors/fab, "(Unity)" -> vendors/unity-asset-store).
+
+[redeem]
+where = "https://www.epicgames.com/account/code-redemption"
+account = true
+delivers = "one Fab listing (Professional licence) per '(Unreal Engine)' code, in the Epic account's Fab library; '(Unity)' items: see vendors/unity-asset-store"
+expiry_text = "none stated on these bundles' pages; Unity vouchers: redeem within 12 months of purchase (Unity)"
+steps = [
+  "Reveal the key on Humble (one key per asset). '(Unity)' items are Unity Asset Store vouchers: redeem them as in vendors/unity-asset-store.",
+  "For '(Unreal Engine)' items: sign in to (or create) an Epic Games account and open https://www.epicgames.com/account/code-redemption (or fab.com > profile icon > Redeem Code).",
+  "Enter the code, Redeem, confirm. If a licence type is offered, choose the Unreal Engine / Professional one, not UEFN.",
+  "Repeat per code; pause when Fab's anti-spam limit kicks in.",
+  "Add the asset to a project from the Epic Games Launcher (Unreal Engine > Fab Library > Add to Project) or from the Fab plugin in Unreal Editor 5.3+.",
+  "Sound packs: download the Humble DRM-free files.",
+]
+
+[download]
+scriptable = false
+how = "Unreal content: Epic Games Launcher or the in-editor Fab plugin; Unity content: Unity Editor Package Manager > My Assets; sound packs: Humble downloads"
+notes = "No public download API for Fab or the Asset Store. Only the sound packs land as files the tool can fetch."
+
+[library]
+files = "the sound packs (loopable music and ambiences, monster SFX; Humble downloads); environment kits stay in the Epic / Unity accounts and are added per project"
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer. Unreal kits are added to a project by the Launcher or the Fab plugin; Unity kits are imported in the Unity Editor."
+
+[platforms.macos]
+runner = "native"
+notes = "Epic Games Launcher, Unreal Editor and Unity Editor are native on macOS."
+
+[platforms.linux]
+runner = "native"
+notes = "No Epic Games Launcher on Linux: use the Fab plugin in the Linux Unreal Editor (5.3+; community reports) or another machine. Unity Hub/Editor are native."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/gamedev-asset-mega-bundle-unreal-engine-unity-software"
+claim = "'Keys for this bundle are redeemed on either FAB or the Unity Asset Store, dependent on title'; items named '(Unreal Engine)' or '(Unity)'; four sound packs delivered DRM-free"
+[[sources]]
+url = "https://www.humblebundle.com/software/massive-unreal-engine-unity-asset-bundle-hivemind-software"
+claim = "item descriptions: '* Professional Fab Marketplace Key is provided!' (Unreal Engine items) / '*Unity Asset Store Key Is Provided!' (Unity items); 'Rain & Wind Sounds (Loopable), Game Music Essentials (Loopable), Horror Ambient Loops (Loopable), and Monster Sounds are available DRM-Free'"
+[[sources]]
+url = "https://gamefromscratch.com/massive-unreal-unity-hivemind-asset-humble-bundle/"
+claim = "the Unreal Engine assets are redeemed on the Fab marketplace, the Unity assets on the Unity Asset Store"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/53302161018651-FAB-Keys-Redemption-Instructions"
+claim = "Humble: log in at Fab.com, profile icon > 'Redeem Code', enter the key, Redeem; then Epic Games Launcher > vault > 'Add to Project'"
+[[sources]]
+url = "https://dev.epicgames.com/documentation/en-us/fab/purchasing-and-downloading-assets-in-fab"
+claim = "codes redeem at epicgames.com/account/code-redemption; content then in the Launcher's Fab Library or the Fab plugin (UE 5.3+)"
+[[sources]]
+url = "https://forums.unrealengine.com/t/i-missclicked-to-the-uefn-licence-instead-of-unreal/2745558"
+claim = "a Humble pack redeemed with the UEFN licence by mistake could not be changed to the Unreal one"

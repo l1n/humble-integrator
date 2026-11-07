@@ -1,0 +1,136 @@
+schema = 1
+name = "Cadsoft (Personal Architect / Envisioneer) and ArchiMaster 3D"
+kind = "route"
+notes = """
+Windows-only home-design CAD. Two families, one code base:
+- Cadsoft's Personal Architect desktop editions (Platinum, Interiors,
+  Kitchen & Bath, Landscape) are Envisioneer-based programs activated with a
+  serial in their 'Software Activation' dialog. The Humble editions are not
+  on cadsoft.com any more (desktop Personal Architect is now an annual
+  subscription), so the download comes from the instructions Cadsoft sends
+  for the Humble serial (inferred).
+- ArchiMaster 3D (archimaster3d.com, published by Richdale Ventures) is the
+  same Envisioneer engine under another name (inferred from the installer's
+  Cadsoft Cs*.dll modules and fonts). v3 is one installer for all editions;
+  the key decides which edition unlocks. Permanent licences.
+- Personal Architect Online is a browser app (no install, no Steam entry).
+Humble lists Richdale Ventures as publisher of all of these; the item
+recipes claim them by machine name.
+Each desktop product is independent; no shared prefix required.
+"""
+
+[match]
+developers = ["Cadsoft", "Cadsoft Corporation", "ArchiMaster", "ArchiMaster 3D"]
+domains = ["cadsoft.com", "personalarch.com", "archimaster3d.com", "envisioneer.com"]
+key_names = ["personal architect", "archimaster", "envisioneer", "cadsoft"]
+
+[redeem]
+where = "the program's Software Activation dialog (Cadsoft) / https://www.archimaster3d.com/downloads (ArchiMaster)"
+account = true
+delivers = "a permanent desktop licence per serial; Personal Architect Online unlocks Pro tools in the browser"
+expires = "unknown for Humble codes (StackSocial's ArchiMaster codes must be redeemed within 30 days; Humble's deadline not found)"
+steps = [
+  "Reveal the Humble key (one per product).",
+  "Personal Architect desktop editions: the key is the Cadsoft serial (inferred). Download the installer from Cadsoft's download page or the instructions email (a download manager that fetches the full program), install, start, choose the full product, enter the serial in 'Software Activation' and click Activate (online; offline: email codes@cadsoft.com).",
+  "ArchiMaster 3D: sign in / create an account at https://www.archimaster3d.com, download the v3 installer (ArchiMaster 3D_V3_English.exe) from /downloads, install, start and paste the key; the key selects the edition. With the older v2 installer each edition is its own desktop program ('AM2 Ultimate Home Design', 'AM2 Kitchen and Bath', 'AM2 Landscape and Deck'), each activated with its own key.",
+  "Personal Architect Online: sign in at https://designer.personalarch.com and unlock Pro with the key (inferred; no published Humble steps or term).",
+  "Before rebuilding a prefix, deactivate desktop programs via Help > Software Deactivation, or the activation count runs out.",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+driver = "installaware"
+driver_notes = """
+Inferred, not confirmed: Cadsoft's download is a web 'download manager'
+(probably InstallAware web media), and ArchiMaster v2's 2.85 GB installer is
+a 7-Zip self-extractor ('RunProgram=ArchiMaster 3D_English.exe') around an
+.msi plus data\\OFFLINE folders and redistributables (VC_redist, WebView2) -
+an InstallAware layout. InstallAware documents /s; untested here. The
+serial is not asked by the installer but by the program's Software
+Activation dialog at first launch, which the tool can fill with the user's
+own key. Admin rights are required.
+"""
+
+[platforms.macos]
+runner = "crossover"
+windows = "win10"
+notes = "No Mac version of the desktop programs (Cadsoft recommends Boot Camp; there is an iPad/iPhone 'Personal Architect' app that runs on Apple Silicon Macs, unverified for macOS). No CrossOver ratings for Envisioneer, Personal Architect or ArchiMaster. Personal Architect Online works in any browser."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "64-bit Windows only. The only Wine report is for Envisioneer 4.5 Express (installer fixed in Wine 1.5.4, then 'installs and works very well'); current versions untested. The bundled WebView2 may need extra work under Wine (inferred)."
+
+[[sources]]
+url = "https://www.cadsoft.com/authorization-procedure/"
+claim = "first launch: trial or full; Software Activation dialog takes the serial; online, or offline via codes@cadsoft.com; Help > Software Deactivation"
+
+[[sources]]
+url = "https://www.cadsoft.com/installing/"
+claim = "serial comes from the download instructions email"
+
+[[sources]]
+url = "https://cadsoft.com/?p=5132"
+claim = "download page: the file opens a download manager that fetches the full program"
+
+[[sources]]
+url = "https://www.cadsoft.com/products/system-requirements/"
+claim = "Windows 11/10/8, 64-bit only, admin account; no Mac version"
+
+[[sources]]
+url = "https://www.cadsoft.com/buy-or-upgrade/"
+claim = "desktop Personal Architect is now an annual subscription"
+
+[[sources]]
+url = "https://bugs.winehq.org/show_bug.cgi?id=21128"
+claim = "Envisioneer 4.5 Express installer bug fixed in Wine 1.5.4; then 'installs and works very well'"
+
+[[sources]]
+url = "https://www.cadsoft.com/?p=5964"
+claim = "Cadsoft staff (2017) recommend Boot Camp over Parallels/Fusion for Envisioneer on Macs"
+
+[[sources]]
+url = "https://www.personalarch.com/pro/"
+claim = "Personal Architect Online: browser app with Free and Pro tiers"
+
+[[sources]]
+url = "https://www.personalarch.com/"
+claim = "browser app at designer.personalarch.com"
+
+[[sources]]
+url = "https://apps.apple.com/us/app/personal-architect/id6476518025"
+claim = "iPad/iPhone app runs on M1+ Macs, not verified for macOS"
+
+[[sources]]
+url = "https://www.archimaster3d.com/about"
+claim = "ArchiMaster 3D is from Richdale"
+
+[[sources]]
+url = "https://www.archimaster3d.com/downloads"
+claim = "v3: one installer (ArchiMaster 3D_V3_English.exe) for all editions; the key picks the edition; download after signing in"
+
+[[sources]]
+url = "https://www.archimaster3d.com/support"
+claim = "permanent licence, 10-day trial"
+
+[[sources]]
+url = "https://www.archimaster3d.com/system-requirements"
+claim = "Windows 11/10/8/7 64-bit, admin rights to install"
+
+[[sources]]
+url = "https://support.fanatical.com/api/v2/help_center/en-us/articles/21633794963474.json"
+claim = "v2: one installer creates 'AM2 Kitchen and Bath', 'AM2 Landscape and Deck', 'AM2 Ultimate Home Design', each activated with its own key"
+
+[[sources]]
+url = "https://archimaster.s3.eu-central-1.amazonaws.com/ArchiMaster+3D_English_v2.0C1_Multi_1.exe"
+claim = "v2 installer: 7-Zip SFX with an .msi, Cadsoft Cs*.dll modules and Envisioneer fonts; main program 'ArchiMaster 3D_2.exe' (file list inspected)"
+
+[[sources]]
+url = "https://www.stacksocial.com/sales/archimaster-3d-ultimate-home-design-lifetime-license"
+claim = "reseller codes: redeem within 30 days; support@archimaster3d.com"
+
+[[sources]]
+url = "https://www.installaware.com/flashhelp/setupcommandlineparameters.htm"
+claim = "InstallAware /s"

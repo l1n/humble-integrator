@@ -1,0 +1,74 @@
+schema = 1
+name = "EaseUS"
+kind = "route"
+notes = """
+Windows utilities (partition/backup/PC-transfer/key-finder tools) plus a few
+cross-platform apps (Video Downloader, RecExperts, Data Recovery Wizard have
+Mac editions). A Humble EaseUS key is a 25-character licence code typed into
+the activation window at first launch; no account. Term varies: 2022 Humble
+OS2Go / Todo PCTrans keys were one-year; the 2025 'EaseUS x Ashampoo' items
+match Ashampoo's lifetime, 2-device SKUs (inferred). The 2025 bundle lists
+Ashampoo as publisher; the item recipes claim those items by machine name.
+Most EaseUS tools manage the Windows installation or disks they run on,
+which is meaningless (or risky) inside a Wine prefix: those items are
+marked skip. Only Video Downloader-type apps make sense, natively on Mac.
+"""
+
+[match]
+developers = ["EaseUS", "EaseUS Software", "CHENGDU YIWO Tech Development Co., Ltd"]
+domains = ["easeus.com"]
+key_names = ["easeus"]
+
+[redeem]
+where = "the program's activation window at first launch"
+account = false
+delivers = "an activated licence (1 or 2 PCs depending on product)"
+expires = "some Humble EaseUS keys were one-year licences (2022); check the item"
+steps = [
+  "Download the program from the link in Humble's instructions (down.easeus.com ... ?ref=hb) or easeus.com.",
+  "Install, start, and paste the 25-character code into the activation window (or 'Upgrade to Full Version' > Enter License).",
+  "Offline: generate a machine code and use https://activation.easeus.com/alloffline.php.",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+driver = "nsis"
+driver_notes = 'down.easeus.com links are ~1.5 MB NSIS 3.03 online stubs (admin required) that fetch the full Inno Setup installer; full installers install to %ProgramFiles%\EaseUS\<product> (e.g. EaseUS Todo PCTrans\bin\PCTrans.exe). No documented silent switches for the stubs.'
+
+[platforms.macos]
+runner = "native"
+notes = "Only some EaseUS products have Mac editions (Video Downloader, RecExperts, Data Recovery Wizard); Key Finder, PCTrans and OS2Go are Windows-only. Whether a Windows code activates a Mac edition is undocumented (Humble's Video Downloader article links both builds)."
+
+[platforms.linux]
+runner = "wine"
+notes = "No Linux editions; the system tools are pointless under Wine."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/26504838051483"
+claim = "EaseUS Humble keys: download from EaseUS links (?ref=hb), enter the activation code when prompted"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/26273189175707"
+claim = "Movavi & EaseUS Media Mastery Pack: EaseUS Partition Master and Video Downloader"
+
+[[sources]]
+url = "https://kb.easeus.com/art.php?id=10001"
+claim = "25-character codes, activation window at first launch; offline activation at activation.easeus.com/alloffline.php"
+
+[[sources]]
+url = "https://support.ashampoo.com/hc/en-us/articles/13675666721810"
+claim = "EaseUS products sold by Ashampoo: activation window at startup with a licence-key field"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4416028046619"
+claim = "2022 Humble OS2Go key good for one year"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4416019384219"
+claim = "2022 Humble Todo PCTrans key good for one year"
+
+[[sources]]
+url = "https://github.com/microsoft/winget-pkgs/tree/master/manifests/e/EaseUS"
+claim = 'full installers are Inno Setup into %ProgramFiles%\EaseUS'

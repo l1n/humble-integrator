@@ -1,0 +1,19 @@
+schema = 1
+name = "HDR FX"
+vendor = "distinct-ai"
+kind = "addon"
+machine_names = ["hdrfx"]
+verified = false
+notes = "AI HDR plug-in for PaintShop Pro, Photoshop and other photo editors (Humble description). Windows-only, GPU-heavy local AI: expect it not to run under Wine/CrossOver."
+recommends = ["corel/paintshop-pro"]
+
+[install]
+source = "vendor"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://learn.corel.com/wp-content/uploads/2023/08/AI-Vision-FX-Installation-instructions.pdf"
+claim = "Vision FX: delivered as an ISO with Setup.exe; plugin under Effects > Plugins (Bitmaps in CorelDRAW) of PaintShop Pro, Painter, CorelDRAW, PHOTO-PAINT; Windows 10/11 64-bit, 16 GB RAM, 8 GB GPU recommended"

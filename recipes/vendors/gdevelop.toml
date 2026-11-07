@@ -1,0 +1,68 @@
+schema = 1
+name = "GDevelop (no-code game engine; premium subscriptions)"
+kind = "route"
+service = true        # the Humble keys are account subscriptions: nothing to install from them
+notes = """
+GDevelop is a free, open-source no-code game engine (desktop builds for
+Windows, macOS and Linux incl. Flathub, plus a web editor). Humble has sold
+two GDevelop bundles:
+
+  The No-Code GameDev Bundle (Dec 2022): asset packs (DRM-free downloads,
+    generic routes), game templates by The Gem Dev (items/itch-io), and
+    GDevelop Silver (3 months) / Gold (6 months) subscription codes.
+  No-Code No Problem Game Dev Bundle (Jun 2025): DRM-free asset packs and
+    templates published by GDevelop (generic routes) plus 6 months of
+    GDevelop Silver as a key.
+
+The subscription codes are redeemed in the GDevelop account; they have item
+recipes (items/gdevelop/). No developers rule here: GDevelop is also the
+publisher of the 2025 bundle's DRM-free asset packs, which must stay on the
+generic download routes. This vendor catches extracted keys that name
+GDevelop.
+
+The engine itself is not a Humble item; if the user wants it, install the
+free desktop build (native on macOS and Linux) and log in with the account
+that holds the subscription. That is the only thing worth a Steam shortcut
+and it is outside the Humble purchase.
+"""
+
+[match]
+domains = ["gdevelop.io", "gdevelop-app.com"]
+key_names = ['gdevelop']
+
+[redeem]
+where = "https://editor.gdevelop.io/?initial-dialog=subscription"
+account = true
+delivers = "GDevelop Silver or Gold on the GDevelop account for the stated months"
+expires = "check the Humble download page; Key.is_expired from Humble is authoritative"
+steps = [
+  "Open https://editor.gdevelop.io/?initial-dialog=subscription (or the profile's subscriptions window in the desktop app).",
+  "Create a GDevelop account (email, username, password) or log in.",
+  "Click 'Redeem a code' (bottom right), enter the Humble code and press Redeem; it applies within seconds.",
+  "A code works once, for one account. Switching to another paid plan later cancels the redeemed one.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download from the key; GDevelop itself is free at https://gdevelop.io/download"
+
+[install]
+source = "vendor"
+serial = "account"
+notes = "Optional: install the free GDevelop desktop app (native macOS/Linux builds, Flathub) and log in."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/10611633952411-GDevelop-Humble-Bundle-Subscription-Code-Redemption-Instructions"
+claim = "subscription from The No-Code GameDev bundle; editor.gdevelop.io/?initial-dialog=subscription, create account, 'Redeem a code', applied in seconds; one code per account; switching plans cancels it"
+[[sources]]
+url = "https://gdevelop.io/download"
+claim = "desktop downloads for Windows, macOS, Linux (and Linux ARM64, Flathub), plus the web editor"
+[[sources]]
+url = "https://www.humblebundle.com/software/nocode-no-problem-game-dev-bundle-software"
+claim = "2025 bundle: DRM-free asset packs published by GDevelop and a '6 months of GDevelop Silver' key (census)"

@@ -1,0 +1,42 @@
+schema = 1
+name = "Corel AfterShot Pro 3"
+vendor = "corel"
+kind = "app"
+machine_names = ["aftershotpro3"]
+verified = false
+notes = "RAW photo workflow app (also listed as plain 'AfterShot Pro'). Humble serves Windows and Mac builds plus a serial. AfterShot Pro 3 also has a native 64-bit Linux build; that a Humble serial unlocks it is inferred, not confirmed."
+
+[install]
+source = "humble"
+file = "*AfterShot*"
+serial = "per-product"
+notes = "Corel's web trial for Windows (AfterShotPro3.exe, 658 KB) is only a downloader; use Humble's full installer."
+
+[launch]
+find = "C:/Program Files*/Corel/AfterShot*3*/AfterShot*.exe"
+notes = "Exe name not documented (inferred AfterShot*.exe)."
+
+[steam]
+shortcut = true
+title = "AfterShot Pro 3"
+steamgriddb = "AfterShot Pro"
+
+[platforms.macos]
+runner = "native"
+file = "*.dmg"
+app_find = "/Applications/AfterShot*.app"
+
+[platforms.linux]
+runner = "native"
+url = "https://dwnld.aftershotpro.com/trials/3/AfterShotPro3.deb"
+file = "AfterShotPro3*.{deb,rpm}"
+exe_find = "opt/AfterShot*/bin/AfterShot*"
+notes = "Corel's Linux builds: AfterShotPro3.deb, AfterShotPro3-system-QT.deb (Ubuntu 16.10+), AfterShotPro3.rpm (dated Jan 2021, labelled trials). Extract the .deb without root and enter the Humble serial (inferred to work). exe_find inferred. Plugins are installed by hand on Linux."
+
+[[sources]]
+url = "https://www.aftershotpro.com/en/"
+claim = "AfterShot Pro 3 for Windows, Mac and Linux (64-bit Fedora 19 / Ubuntu 14.04+)"
+
+[[sources]]
+url = "https://www.aftershotpro.com/en/free-trials/aftershot-pro.html"
+claim = "Linux .deb/.rpm builds still downloadable (as trials)"

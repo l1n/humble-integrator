@@ -1,0 +1,60 @@
+schema = 1
+name = "Skylum (Luminar Neo, Luminar AI/4, Aurora HDR)"
+kind = "route"
+notes = """
+Skylum photo editors: native Windows and macOS apps, activated with a code
+into a Skylum account. Humble's 'Neon & Noir - Elite Photos with Luminar Neo'
+(Oct 2025) is mostly DRM-free add-on files (presets .lnpc, LUTs, overlays,
+skies; a course) that stay on the generic download routes, plus two keys:
+the Luminar Neo software (activation code) and the 'Street Vibe' LUT
+collection. Both have item recipes under items/skylum/. Earlier Humble
+bundles sold Luminar 4, Luminar AI, Luminar Neo Lite and Aurora HDR.
+
+No developers rule: 'Skylum Software' is also the developer of the DRM-free
+add-on files. Extracted keys are matched by domain and product name.
+
+Linux: no native build, and no Wine/Proton reports were found for Luminar
+Neo (untested; it is a GPU-heavy AI editor, so expect trouble).
+"""
+
+[match]
+domains = ["skylum.com", "macphun.com"]
+key_names = ['luminar', 'aurora ?hdr', 'skylum']
+
+[redeem]
+where = "the installed app's 'Use Activation Code' step (Luminar Neo); purchases then live in the Skylum account (My Add-ons)"
+account = true
+delivers = "an activated Luminar Neo on the Skylum account; add-ons listed under My Add-ons"
+expires = "not stated; check the Humble download page"
+steps = [
+  "Download the installer from https://skylum.com/download/luminar-neo-paid (Windows or macOS) and install it.",
+  "When installation finishes choose 'Use Activation Code', enter the Humble key and 'Activate & Continue'.",
+  "Create the Skylum account with the same email as the Humble purchase.",
+  "Add-on files (LUTs, presets, overlays, skies) from the Humble download page are loaded from inside Luminar Neo (see items/skylum/street-vibe-luts and Humble's install article).",
+  "Support: https://skylum.com/support/contact.",
+]
+
+[install]
+source = "vendor"
+serial = "account"
+silent = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "none"
+notes = "No Linux build; Windows build under Wine is unreported (untested)."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/41741926086683-Software-Luminar-Neo-Redemption-Instructions"
+claim = "installer skylum.com/download/luminar-neo-paid; Install; 'Use Activation Code'; enter code, 'Activate & Continue'; create account with the purchase email (2025-10)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/20278053941275-Luminar-Neo-Lite-Redemption-Instructions"
+claim = "Luminar Neo downloads: Win_Luminar_Neo_MSI.zip and Mac_Luminar_Neo.dmg on downloads.skylum.com; account, then activation code"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/20278358380059-Luminar-Neo-LUTs-Overlays-Presets-and-Skies-Installation-Instructions"
+claim = "how LUTs, overlays, .lnpc presets and skies are loaded into Luminar Neo; support skylum.com/support/contact"
+[[sources]]
+url = "https://www.humblebundle.com/software/neon-noir-elite-photos-with-luminar-neo-software"
+claim = "bundle is DRM-free for Mac; add-ons are DRM-free/no-delivery items by Skylum Software; Luminar Neo and Street Vibe LUTs are keys (census)"

@@ -1,0 +1,44 @@
+schema = 1
+name = "Pianissimo Grand Piano"
+vendor = "acoustica"
+kind = "addon"
+machine_names = ["pianissimograndpianovst"]
+verified = false
+notes = """
+Acoustica's virtual grand piano (sampling plus physical modelling), included with Mixcraft Pro Studio: Windows VST plug-in and standalone. No Steam entry. On macOS the Windows VST cannot load in a Mac DAW, so it is only usable inside Mixcraft or standalone under CrossOver.
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = "Redeem at store.acoustica.com/redeem, download the installer, then run the standalone Pianissimo: Help > Enter Registration Code (or the yin-yang button), Registration ID and 20-character code."
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "crossover"
+prefix = "acoustica"
+notes = "Windows only; untested. Install into the same CrossOver bottle as Mixcraft to use it there."
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = "No Linux build. Untested: Windows installer into the shared audio-plugins Wine prefix, bridged into a Linux DAW with yabridge."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360052885894-Pianissimo-Grand-Piano-VST-instructions"
+claim = "retrieval page, e-mail with ID and code, install, register from Help"
+
+[[sources]]
+url = "https://acoustica.kayako.com/article/453-how-do-i-register-pianissimo"
+claim = "standalone Help > Enter Registration Code, Registration ID + 20-character code"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/level-up-remix-software"
+claim = "'Pianissimo ... is included with Mixcraft Pro Studio' (census)"
+
+[[sources]]
+url = "https://store.acoustica.com/redeem"
+claim = "redeem the code into an Acoustica account; download from the order details page"

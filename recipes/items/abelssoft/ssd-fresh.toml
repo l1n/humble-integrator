@@ -1,0 +1,30 @@
+schema = 1
+name = "Abelssoft SSD Fresh"
+vendor = "abelssoft"
+kind = "app"
+machine_names = ["ssdfresh"]
+verified = false
+notes = "2022 'Entertainment, Privacy & PC Health' bundle (Humble installer + key). Tunes Windows for SSDs: meaningless (and pointless to risk) inside a Wine prefix."
+skip = true
+skip_reason = "Windows system tool with no purpose inside a Wine prefix; keep the key unless the user also runs real Windows."
+
+[install]
+source = "humble"
+file = "*.exe"
+args = ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"]
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/*/Program/SSDFresh.exe"
+notes = "{commonpf}\\<Product>\\Program\\<exe> per the current installer's Inno header; the 2022 Humble build may differ."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/5873424950427"
+claim = "Abelssoft: install from the Humble download; first launch asks for the 20-digit key, then name + email, 'Get free unlock mail now', click the e-mailed link"
+
+[[sources]]
+url = "https://www.abelssoft.de/ssdfreshsetup.exe"
+claim = "current installer (Inno header inspected)"

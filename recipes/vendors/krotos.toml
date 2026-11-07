@@ -1,0 +1,82 @@
+schema = 1
+name = "Krotos (Krotos Audio)"
+kind = "route"
+notes = """
+Scottish sound-design company: Concept / Simple Concept synth plug-ins,
+Krotos Studio (subscription app/plug-in of procedural sound presets),
+Dehumaniser, Reformer, and SFX libraries (Starter 10.5 GB, Fundamentals
+51 GB). Humble bundles: KROTOS SFX & Plugins for Game Audio (2022: the SFX
+libraries as DRM-free Humble downloads, Concept 2 and Simple Concept as
+keys), KROTOS SFX & Plugins for Sound Design (2024, all keys: "Keys can be
+redeemed on the Krotos Audio website"), Krotos Cinematic Sound Suite (2026,
+all keys).
+
+Two kinds of key. Product keys are "licence deposit codes": Humble's
+redemption URL prefills the code on krotosaudio.com, and the product's
+downloads and licence keys appear in the Krotos account dashboard. Krotos
+Studio keys are subscription coupons applied at krotos.studio checkout
+(card details are taken even at 100% off; cancel before the free period
+ends). Concept 2 and Simple Concept use Krotos' own copy protection, not
+iLok: paste the licence key into the plug-in and press Activate (online,
+2 activations, can be deactivated and moved).
+
+Formats VST, VST3, AU, AAX (64-bit); Windows 10 1909+ and macOS 10.13+. No
+Linux build; no Steam entries.
+"""
+
+[match]
+# No developers rule: the 2022 bundle's SFX libraries are DRM-free Humble downloads.
+redeem_text = ['Krotos Audio website', 'krotosaudio\.com']
+bundle_slugs = ['^krotos-cinematic-sound-suite', '^krotos-sfx-plugins', '^krotoscinematicsoundsuite', '^krotossfxplugins']
+domains = ["krotosaudio.com", "krotos.studio"]
+key_names = ['krotos']
+
+[redeem]
+where = "https://www.krotosaudio.com/"
+account = true
+delivers = "product downloads and licence keys in the Krotos account dashboard; for Krotos Studio a discounted subscription on krotos.studio"
+steps = [
+  "Register an account at krotosaudio.com (or log in).",
+  "Product keys: click the redemption URL Humble shows with the key; it prefills the licence deposit code on krotosaudio.com. The products then appear in the account dashboard with download links and licence keys.",
+  "Krotos Studio coupon: see items/krotos/krotos-studio-subscription (krotos.studio checkout, cancel before renewal).",
+  "SFX libraries: download from the dashboard into audio/krotos/<library>.",
+  "Plug-ins: install, open in a DAW, paste the licence key from the dashboard and press Activate (internet needed).",
+]
+
+[download]
+scriptable = false
+how = "per-product download links in the krotosaudio.com account dashboard"
+
+[library]
+files = "WAV sound-effect libraries (Starter ~10.5 GB, Fundamentals ~51 GB; 2022 bundle categories as separate Humble downloads): audio/krotos/<library>"
+licence = "royalty-free SFX (Humble's descriptions)"
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = "No Linux build. Untested: Windows plug-ins in the shared audio-plugins prefix with yabridge; licence activation is online from inside the plug-in. SFX libraries are plain files and need nothing."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/7480413269275-Krotos-Audio-Redemption-Instructions"
+claim = "register at krotosaudio.com; the Humble redemption URL prefills the licence deposit code; downloads and licence keys in the account dashboard; Krotos Studio coupon on krotos.studio: log in, pick plan, apply coupon, card details required even when fully discounted, cancel any time before the complimentary period ends"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/24674181589275-KROTOS-SFX-PLUGINS-FOR-SOUND-DESIGN-System-Requirements"
+claim = "Concept 2 / Simple Concept / Krotos Studio: Windows 10 1909+, macOS 10.13+, VST/VST3/AU/AAX 64-bit; no iLok; 2 activations; internet needed to activate"
+[[sources]]
+url = "https://www.krotosaudio.com/support/faq/how-do-i-start-my-demo-or-activate-my-license-of-concept/"
+claim = "Concept uses Krotos' own copy protection: paste the licence key and press Activate; can be deactivated and moved; no iLok"
+[[sources]]
+url = "https://www.humblebundle.com/software/krotos-sfx-plugins-for-sound-design-software"
+claim = "'Keys can be redemed on the Krotos Audio website' (census)"
+[[sources]]
+url = "https://www.humblebundle.com/software/krotos-audio-software"
+claim = "2022 bundle: SFX library categories delivered DRM-free, Concept 2 and Simple Concept as keys (census)"

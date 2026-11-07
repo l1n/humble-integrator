@@ -1,0 +1,82 @@
+schema = 1
+name = "MeldaProduction"
+kind = "route"
+notes = """
+Czech effects and instruments developer (MReverb, MUltraMaximizer,
+MSoundFactory ...). On Humble: plugins and a 25%-off store coupon in the FL
+Studio, UVI & Friends Hitmaking Bundle (Dec 2023; coupon expired 31 Dec
+2023), and in other multi-vendor music bundles (Music Producer 2023, Opus
+FX 2025). A reseller key is a redemption code that becomes a licence file
+in the Melda account. Every plugin is installed with one manager app,
+MPluginManager (offline installation data also offered). Licences are
+"to-person": activate on any number of computers you personally own, no
+internet or dongle needed (drag the licence file onto the plugin).
+
+Windows 10/11 64-bit (VST, VST3, AAX) and macOS 10.14+ (VST, VST3, AU,
+AAX). Linux: not supported, but Melda says the plugins apparently run under
+Wine once Microsoft TrueType fonts are installed in the prefix; yabridge
+notes minor redraw issues with GPU acceleration on (disable it in the
+plugin settings). No Steam entries.
+"""
+
+[match]
+developers = ["MeldaProduction", "Melda", "Melda Production", "MeldaProduction s.r.o."]
+domains = ["meldaproduction.com"]
+key_names = ['melda']
+
+[redeem]
+where = "https://www.meldaproduction.com/about/redeem"
+account = true
+delivers = "a licence file per product (emailed and under My licenses); installers via MPluginManager"
+steps = [
+  "Create an account on meldaproduction.com or sign in; click your user name to open MY ACCOUNT.",
+  "Click 'Redeem key', paste the Humble code into 'Your licence key', press 'Submit key'.",
+  "Download the licence file from the email or My licenses.",
+  "Download MPluginManager from https://www.meldaproduction.com/downloads, select the purchased plugins (they may be listed among the free effects; the licence unlocks the full versions) and press INSTALL/CHANGE.",
+  "Open the plugin in a DAW, click Activate and drag the licence file onto the plugin window; reload the plugin.",
+  "The 25%-off coupon item is a store discount that expired on 31 Dec 2023; nothing to do.",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+notes = "MPluginManager installs and updates everything; for machines without internet, download the offline installation data zip and load it in MPluginManager's Offline Installation Settings tab."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+winetricks = ["corefonts"]
+notes = "Windows plugins under Wine with core fonts (Melda: 'apparently possible'); bridge with yabridge and turn GPU acceleration off in the plugin settings if it redraws badly. Untested here."
+
+[[sources]]
+url = "https://www.meldaproduction.com/about/redeem"
+claim = "partner codes: MY ACCOUNT > Redeem key > Submit key; licence emailed and in My licenses"
+[[sources]]
+url = "https://www.meldaproduction.com/about/licencing"
+claim = "licence files, drag-and-drop activation, no internet or dongle, any number of personally owned computers, 20% transfer fee"
+[[sources]]
+url = "https://www.meldaproduction.com/about/system-requirements"
+claim = "Windows 10/11 64-bit, macOS 10.14+, formats; Linux not supported but apparently works under Wine with MS TrueType fonts"
+[[sources]]
+url = "https://www.meldaproduction.com/downloads"
+claim = "MPluginManager installs all Melda plugins (installer 03.01, Win .exe / Mac .zip)"
+[[sources]]
+url = "https://www.meldaproduction.com/downloads/offline"
+claim = "offline installation data for MPluginManager"
+[[sources]]
+url = "https://github.com/robbert-vdh/yabridge"
+claim = "MeldaProduction plugins: minor rendering issues with GPU acceleration under Wine; disable it"
+[[sources]]
+url = "https://rekkerd.org/tag/humble-bundle/"
+claim = "Opus FX (Jul 2025) Humble bundle with United Plugins and MeldaProduction plugins"
+[[sources]]
+url = "https://synthanatomy.com/2023/02/music-producer-2023-bundle-with-8-plugins-sample-libraries-and-more-for-23e.html"
+claim = "Music Producer 2023 Humble bundle: W.A. Production, United Plugins, MeldaProduction, Producer Loops (plugins, samples, coupons)"
+[[sources]]
+url = "https://waproduction.zendesk.com/hc/en-us/articles/4620688566674"
+claim = "same Melda redemption and MAudioPlugins/MPluginManager install flow for codes sold by a reseller"

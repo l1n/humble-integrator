@@ -1,0 +1,26 @@
+schema = 1
+name = "Games by Hyper 3 Month Subscription"
+vendor = "games-by-hyper"
+kind = "service"
+service = true
+machine_names = ["gamesbyhyper3monthsubscription"]   # Mega Game Dev Assets & Tools
+verified = false
+notes = """
+Three months of a Games by Hyper subscription (discounts on modules,
+loyalty points, exclusive perks); the item links gamesbyhyper.com's
+subscription page, so it is applied there, not on Cosmos (inference; the
+tier is not named - compare Best Core's "Hyper Gold Tier 3 month
+Subscription", items/leartes-cosmos/hyper-gold-3-month). Redeem only when the
+user asks (it starts a clock); cancel renewal if a payment method is stored.
+"""
+
+[redeem]
+where = "https://gamesbyhyper.com/product-category/subscriptions/"
+steps = ["Log in on gamesbyhyper.com, pick the subscription and apply the code at checkout (unconfirmed); cancel automatic renewal afterwards if asked for a payment method."]
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/mega-game-dev-assets-tools-bundle-software"
+claim = "'https://gamesbyhyper.com/product-category/subscriptions/ Subscriptions are the best way to save while growing your Hyper toolkit. Choose a subscription tier and enjoy discounts, loyalty points, exclusive ...'; item links gamesbyhyper.com/subscription"

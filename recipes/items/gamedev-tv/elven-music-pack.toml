@@ -1,0 +1,32 @@
+schema = 1
+name = "Elven Music Pack (Elven Village)"
+vendor = "gamedev-tv"
+kind = "content"
+machine_names = ["elvenvillagemusicpack"]
+verified = false
+notes = """
+GameDev.tv asset pack, not a course: 14 fantasy music tracks by Jorge Velasco (census description).
+It is redeemed like every GameDev.tv coupon (see vendors/gamedev-tv). It then
+appears in My Library, and its page lists the downloadable files. Download
+them into the library folder. Nothing to install and no Steam entry: the
+files are imported by hand into any engine or editor (audio files).
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+file = "*"
+notes = "Audio files. Format not stated for this pack. GameDev.tv's FPS pack ships MP3 and WAV."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/2025-learn-unity-game-development-bundle-software"
+claim = "item in this GameDev.tv bundle, keyed (hb-key); contents from the census description"
+[[sources]]
+url = "https://gamedev.tv/assets/scifi-starships"
+claim = "GameDev.tv asset pack pages list a Downloads section of per-engine files plus a licence .txt (pattern for the older packs; inference)"
+[[sources]]
+url = "https://gamedev.tv/p/help"
+claim = "lifetime access; products in My Library; course assets usable in your own (commercial) projects"

@@ -1,0 +1,34 @@
+schema = 1
+name = "DisplayFusion Pro"
+vendor = "binary-fortress"
+kind = "app"
+machine_names = ["displayfusionprostandard"]
+verified = false
+notes = "2023 Binary Fortress Desktop Software Bundle ('Pro Standard' licence). Multi-monitor taskbars, title-bar buttons, hotkeys, wallpaper. A Windows-shell tool: no use inside a Wine prefix, so no Steam shortcut. Extra switches: /STARTUPUSER /STARTUPALL /CONTEXTMENU=0 /NOPREREQS=1."
+
+[install]
+source = "vendor"
+url = "https://www.displayfusion.com/Download/"
+file = "DisplayFusionSetup*.exe"
+args = ["/VERYSILENT", "/LAUNCHAFTER=0", "/LKEYALL={key}"]
+serial = "per-product"
+notes = "{key} = the user's own revealed Humble key, passed to the documented /LKEYALL switch."
+
+[launch]
+exe = 'C:\Program Files\DisplayFusion\DisplayFusion.exe'
+notes = 'Default folder {commonpf}\<Product> read from the installer; not yet seen in a prefix.'
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.displayfusion.com/KB/SilentInstallation"
+claim = "Inno Setup switches incl. /VERYSILENT /DIR= /LKEYUSER= /LKEYALL= /LAUNCHAFTER=0 /MERGETASKS=; DisplayFusion adds /STARTUPUSER /STARTUPALL /CONTEXTMENU=0 /NOPREREQS=1"
+
+[[sources]]
+url = "https://www.displayfusion.com/FAQ/"
+claim = "key entered in the installer, or later in Settings > License Key; no key = 30-day trial"
+
+[[sources]]
+url = "https://www.displayfusion.com/Download/"
+claim = "download page"

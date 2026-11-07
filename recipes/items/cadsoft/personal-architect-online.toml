@@ -1,0 +1,15 @@
+schema = 1
+name = "Personal Architect Online"
+vendor = "cadsoft"
+kind = "service"
+machine_names = ["personalarchitectonline", "cadsoftpersonalarchitectonline"]
+verified = false
+notes = "Browser-based home design (https://designer.personalarch.com), Free and Pro tiers; the Humble key presumably unlocks Pro (inferred). Subscription term for the Humble code is not published. Nothing to install and no Steam entry. In 2023/2024 bundles as 'Personal Architect Online', in 2026 as 'Cadsoft Personal Architect Online'."
+
+[[sources]]
+url = "https://www.personalarch.com/pro/"
+claim = "Personal Architect Online: browser app with Free and Pro tiers"
+
+[[sources]]
+url = "https://www.personalarch.com/"
+claim = "web app at designer.personalarch.com"

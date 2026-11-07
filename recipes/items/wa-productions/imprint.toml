@@ -1,0 +1,38 @@
+schema = 1
+name = "Imprint (W. A. Production)"
+vendor = "wa-productions"
+kind = "addon"
+machine_names = ["imprint"]
+verified = false
+notes = """
+Transient shaper. Audio effect plugin (VST, VST3, AU, AAX; Intel and Apple Silicon) hosted by any DAW; no Steam entry. Sold on Humble in W. A. Production bundles (2023).
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = """
+After redeeming on waproduction.com, download the Mac or Windows installer from My Orders; the serial is under My Keys and Redemption Codes. Open the plugin in a DAW and enter the key in its info ('i') or about window, or log in with the waproduction.com account for 2024+ plugins. Installer type and silent switches unknown.
+"""
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = """
+No Linux build. Untested: Windows installer into the shared audio-plugins prefix, yabridge for the DAW; online activation inside Wine may fail.
+"""
+
+[[sources]]
+url = "https://www.waproduction.com/plugins/view/imprint"
+claim = "product page: formats VST/VST3/AU/AAX, Windows 10/11 64-bit, macOS 10.15+"
+
+[[sources]]
+url = "https://waproduction.zendesk.com/hc/en-us/articles/360015783540"
+claim = "activation: paste the licence key in the plugin's 'i'/about window, or log in / licence file (2024+ plugins)"

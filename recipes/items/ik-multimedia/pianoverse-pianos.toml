@@ -1,0 +1,37 @@
+schema = 1
+name = "Pianoverse pianos"
+vendor = "ik-multimedia"
+kind = "content"
+machine_names = ["pianoverse-concertgrandyf3", "pianoverse-libertyupright", "pianoverse_grandpianoy7", "pianoverse_royaluprighty5"]
+verified = false
+notes = """
+Pianoverse pianos: Concert Grand YF3 (Yamaha CFIII), Liberty Upright (Koch & Korselt, with honky-tonk version), Grand Piano Y7 (Yamaha C7), Royal Upright Y5 (Yamaha U5). They play inside IK's Pianoverse instrument, installed by Product Manager (inference that the Pianoverse shell itself is free). No Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = "Register the Humble serial on the IK account, then install from IK Product Manager (Software tab; sample content from the Sounds tab). Authorization happens in Product Manager."
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+prefix = "audio-plugins"
+notes = "Installs into the host plug-in's Windows install in the shared audio-plugins prefix (untested)."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/ik-multimedia-presents-audio-master-suite-software"
+claim = "Pianoverse piano items and descriptions (census)"
+
+[[sources]]
+url = "https://ikmultimedia.com/products.json"
+claim = "Pianoverse pianos sold separately ($99.99) next to Pianoverse MAX"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/29332171355675-IK-Multimedia-Redemption-Instructions-EULA"
+claim = "register at ikmultimedia.com/registration; IK Product Manager: Software tab > Install, Sounds tab > Install"

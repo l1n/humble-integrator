@@ -1,0 +1,69 @@
+schema = 1
+name = "Yarrawah Interactive"
+kind = "route"
+notes = """
+Small asset seller (Unreal Engine and Unity props, vehicles, effects,
+animations; Shopify store at yarrawah.com with a "My Downloads" area).
+Humble bundles redeemed on its store: Post-Apocalyptic Asset Bundle and The
+Ultimate FPS & TPS Animation Collection (2024). Neither is in the census yet;
+this route is matched by redemption text, bundle names and extracted-key
+instructions.
+
+What a key is: one licence key per tier, used on a tier-specific link that
+opens a pre-filled cart on yarrawah.com. Only the highest tier bought needs
+redeeming (it includes the lower ones), and a key spent on the wrong tier
+link is gone: pick the link that matches the purchase. Checkout needs
+details but no payment; download links arrive by email, and activating the
+(free) store account keeps the products and their future updates
+available.
+"""
+
+[match]
+# No developers rule: Yarrawah Interactive items also come in Epic Games Store /
+# Fab bundles (Epic Adventures Asset Mega Pack, Epic Environments Mega Bundle).
+domains = ["yarrawah.com"]
+key_names = ['\byarrawah\b']
+redeem_text = ['redeem\w*[^.]{0,60}\byarrawah\b']
+bundle_slugs = [
+  '^post-?apocalyptic-?asset-?bundle',
+  '^(the-?)?ultimate-?fps-?(and-?|&-?)?tps-?animation-?collection',
+]
+
+[redeem]
+where = "https://www.yarrawah.com/"
+account = false
+delivers = "the tier's assets as a $0 Shopify order: download links by email, and in My Downloads once the store account is activated"
+expires = "not stated on Humble's instructions"
+steps = [
+  "Pick the link for the highest tier bought. Post-Apocalyptic Asset Bundle: https://www.yarrawah.com/hb-tier-3 (Beat the $25), /hb-tier-2 (Beat the Average), /hb-tier-1 (Beat the $1). FPS & TPS Animation Collection: https://www.yarrawah.com/anim-bundle-t3, /anim-bundle-t2, /anim-bundle-t1. A key used on the wrong tier link cannot be used again.",
+  "The link opens a pre-filled cart; at the bottom enter the licence key from the Humble download page and press apply.",
+  "Enter the required details and click 'Continue to payment' (no payment information is needed) to finish.",
+  "Download from the emailed links; optionally activate the store account for My Downloads and future updates.",
+]
+
+[download]
+scriptable = false
+how = "emailed Shopify download links, or My Downloads on yarrawah.com"
+notes = "No API. The emailed links can be fetched into the library folder once the user hands them to the tool (inference, untested)."
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer: Unreal Engine / Unity asset packages, added per project by hand."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/12165160456347-Post-Apocalyptic-Asset-Bundle-Redemption-Instructions"
+claim = "tier links yarrawah.com/hb-tier-1..3; only the highest tier link; wrong tier link uses up the key; pre-filled cart; key applied at the bottom; no payment; links emailed; optional account for updates"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/29305385633947-The-Ultimate-FPS-TPS-Animation-Collection-Yarrawah-Redemption-Instructions"
+claim = "tier links yarrawah.com/anim-bundle-t1..t3, same flow"
+[[sources]]
+url = "https://www.yarrawah.com/hb-tier-1"
+claim = "redirects to a pre-filled Shopify cart on Yarrawah Interactive's store (Oct 2026); store has My Downloads and Log in"

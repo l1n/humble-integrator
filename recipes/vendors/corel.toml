@@ -1,0 +1,133 @@
+schema = 1
+name = "Corel (Alludo): Painter, PaintShop Pro, CorelDRAW, AfterShot Pro, VideoStudio, Pinnacle, WordPerfect, MindManager, WinZip"
+kind = "route"
+notes = """
+Corel's Humble items come three ways: applications (Painter, Painter
+Essentials, PaintShop Pro, CorelDRAW Standard/Essentials/Graphics Suite 2024,
+AfterShot Pro, VideoStudio, WordPerfect) are installers served by Humble PLUS
+a serial key (CorelDRAW Graphics Suite 2025 and Pinnacle Studio: key only,
+installer from Corel/Humble page); add-on content (Painter brush and paper
+packs, PaintShop Pro scripts, VideoStudio overlays) is plain DRM-free
+downloads or keys; MindManager and WinZip are 1-year subscription codes
+(services). Pinnacle Systems (MultiCam Capture, Pinnacle Studio) is Corel's.
+Serials are typed into the installer and the app activates online with a
+Corel account sign-in; Corel counts machines per serial, so reuse one prefix
+rather than rebuilding it. Painter, Painter Essentials, CorelDRAW Graphics
+Suite and AfterShot Pro have native Mac builds (one serial covers Mac or PC,
+inferred); AfterShot Pro also has a native Linux build. PaintShop Pro,
+VideoStudio, Pinnacle, WordPerfect and CorelDRAW Standard/Essentials are
+Windows-only with no known-good Wine/CrossOver reports for these versions.
+Each app is independent apart from plug-ins/content, which go into the
+prefix of their host app.
+"""
+
+[match]
+developers = ["Corel", "Corel Corporation", "Alludo", "Pinnacle Systems"]
+domains = [
+  "corel.com",
+  "coreldraw.com",
+  "painterartist.com",
+  "paintshoppro.com",
+  "aftershotpro.com",
+  "videostudiopro.com",
+  "pinnaclesys.com",
+  "wordperfect.com",
+  "mindmanager.com",
+  "winzip.com",
+]
+key_names = [
+  "corel ?draw",
+  "corel painter",
+  'painter (20\d\d|essentials)',
+  "paintshop ?pro",
+  "aftershot ?pro",
+  "videostudio",
+  "pinnacle studio",
+  "multicam capture",
+  "wordperfect",
+  "particleshop",
+  "mindmanager",
+  "winzip",
+]
+
+[redeem]
+where = "the product installer's serial-number page, then Corel account sign-in at first launch"
+account = true
+delivers = "an activated permanent licence per serial (apps); a 1-year subscription (MindManager, WinZip)"
+expires = "apps: none known; subscription codes: likely past their redemption window for the 2022 bundles (not confirmed)"
+steps = [
+  "Download the installer for this OS from the Humble order (Painter and AfterShot Pro also have Mac builds) and reveal the item's key: it is the Corel serial.",
+  "Windows: run the installer and type/paste the serial into the 'Serial Number' box; Mac: open the .dmg and run the .pkg, then enter the serial when the app asks.",
+  "Sign in to or create a Corel account when the app asks; activation needs internet. Registration skipped during install can be done at https://www.corel.com/support/register.",
+  "Repeated reinstalls can hit Corel's activation limit (then contact Corel support): reuse one prefix rather than rebuilding it.",
+  "Brush/paper packs: download and import into Painter (see the item recipe).",
+  "MindManager / WinZip subscription codes: see their service recipes.",
+]
+
+[install]
+source = "humble"
+serial = "per-product"
+silent = false
+driver = "msi"
+driver_notes = """
+Corel's Windows setups are a Setup.exe wrapping several MSIs (Painter 2022:
+Setup.msi, ICA.msi, Painter.msi, EN.msi, Content.msi). Corel's Painter
+2022 Deployment Guide documents /q[n|b|r|f], /L "log", /x, /f and public
+properties SERIALNUMBER=, INSTALLDIR="path" (no trailing backslash),
+USERNAME=, ALLOW_PRODUCTUPDATES=0|1|2, REBOOT=ReallySuppress, PROFILEID=.
+That guide is written for volume-licence server images (37-character
+PF22C22/PF22S22 serials, EULA accepted when the image is made), so
+`Setup.exe /qn SERIALNUMBER=<serial>` with a retail Humble serial is
+unverified; run the wizard and let the tool type the user's serial into the
+'Serial Number' box. The Humble download may be a self-extractor that
+unpacks Setup.exe first (unverified).
+"""
+
+[platforms.macos]
+runner = "native"
+notes = "Painter 2022 and AfterShot Pro 3 are native (Painter 2022: macOS 10.15/11, Intel or Apple M1; case-sensitive volumes unsupported). PaintShop Pro and VideoStudio are Windows-only: CrossOver, untested for 2022, and PaintShop Pro 2023 is rated 'Will Not Install'."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "AfterShot Pro 3 has a native Linux build (.deb/.rpm). Painter, PaintShop Pro and VideoStudio need Wine; no reports for the 2022 versions (CodeWeavers lists Painter 2019 and older only)."
+
+[[sources]]
+url = "http://product.corel.com/help/Painter/540111155/Corel-Painter-en/Deployment-Guide-Corel-Painter-2022.pdf"
+claim = "Setup.exe wraps MSI; switches /a /q[n|b|r|f] /L /x /f; public properties SERIALNUMBER, INSTALLDIR, USERNAME, ALLOW_PRODUCTUPDATES, PROFILEID, REBOOT; macOS 10.15/11, Intel or M1"
+
+[[sources]]
+url = "http://apps.corel.com/redirect?_redirect=command&function=pdf&subfunction=userguide&app=painter&version=2022&lang=EN"
+claim = "Painter 2022 User Guide: serial typed during install; activation needs internet + registration; brush/paper library import"
+
+[[sources]]
+url = "https://kb.corel.com/128613"
+claim = "Mac: Corel Painter 2022.pkg inside CorelPainter2022.dmg; sign-in prompt at launch is normal"
+
+[[sources]]
+url = "https://www.painterartist.com/en/product/painter/"
+claim = "Painter licensing supports both Mac and PC"
+
+[[sources]]
+url = "https://www.aftershotpro.com/en/"
+claim = "AfterShot Pro 3 for Windows, Mac and Linux (64-bit Fedora 19 / Ubuntu 14.04+)"
+
+[[sources]]
+url = "https://www.aftershotpro.com/en/free-trials/aftershot-pro.html"
+claim = "Linux .deb/.rpm builds still downloadable (as trials)"
+
+[[sources]]
+url = "https://www.codeweavers.com/compatibility/search?name=corel"
+claim = "CodeWeavers: entries only up to Painter 2019, VideoStudio X3, PaintShop Pro 2023; none for the 2022 versions"
+
+[[sources]]
+url = "https://www.codeweavers.com/compatibility/crossover/corel-paintshop-pro-2023"
+claim = "PaintShop Pro 2023: 'Will Not Install' on CrossOver 24.0.7 Mac (search snippet)"
+
+[[sources]]
+url = "https://store.mindmanager.com/1494/purl-humble-bundle"
+claim = "MindManager Essentials Humble store page: $99/year web app, coupon field, renews unless cancelled"
+
+[[sources]]
+url = "https://www.winzip.com/en/pages/redeem/"
+claim = "'Redeem your Corel product' form e-mails a serial"

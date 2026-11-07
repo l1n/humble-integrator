@@ -1,0 +1,56 @@
+schema = 1
+name = "Noise Alchemy (Dark Fantasy Studio)"
+kind = "route"
+notes = """
+Noise Alchemy (noisealchemy.com) is Dark Fantasy Studio's web platform: a
+sound-effects library plus browser tools that generate sounds (Futurgun,
+Scream, Steps Generator, Sound Mutator, ...). Humble bundles: Noise Alchemy
+SFX Bundle (2026) and Lifetime Access Creator (2026). Both are DRM-free:
+the SFX and music packs are Humble downloads (WAV; the Pixel music packs
+also MIDI) that the generic routes fetch. The extra items are platform
+access codes (1-day try, 1-month try, 1-year access, lifetime access +
+packs), which are services: nothing to install (items/noise-alchemy/
+platform-access).
+"""
+
+[match]
+# No developers rule: the packs are DRM-free Humble downloads.
+domains = ["noisealchemy.com"]
+key_names = ['noise ?alchemy']
+
+[redeem]
+where = "https://noisealchemy.com/Redeem"
+account = true
+delivers = "packs: Humble downloads; access codes: time-limited or lifetime access to the Noise Alchemy web platform"
+steps = [
+  "Packs: nothing to redeem; download them from the bundle's Humble download page into audio/noise-alchemy/<pack>.",
+  "Access codes: create an account at https://noisealchemy.com/Register, then enter the code at https://noisealchemy.com/Redeem (inference: the site has these pages but Humble publishes no instructions). Redeem a 1-day or 1-month code only when you have time to use it.",
+  "Sounds made or downloaded on the platform during the access period go into audio/noise-alchemy/platform/ by hand.",
+]
+
+[download]
+scriptable = false
+how = "Humble download page for the packs; the platform's downloads are per sound in the browser"
+
+[library]
+files = "WAV sound-effect packs, many with reverse/loop variants; Pixel music packs as WAV + MIDI: audio/noise-alchemy/<pack>"
+licence = "royalty-free for games, film and content (Humble's descriptions)"
+
+[install]
+source = "humble"
+serial = "none"
+
+[platforms.macos]
+runner = "native"
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/lifetime-access-creator-software"
+claim = "tiers: 24-hour, 30-day and lifetime access to the platform; 'All of the software in this bundle is available DRM-Free' (census)"
+[[sources]]
+url = "https://www.humblebundle.com/software/noise-alchemy-sfx-bundle-software"
+claim = "SFX packs by Dark Fantasy Studio as DRM-free downloads; 1-day, 1-month and 1-year access codes (census)"
+[[sources]]
+url = "https://noisealchemy.com/"
+claim = "web platform with tool pages (Futurgun, Morpher, Monsters, ...) and Register, Redeem, Pricing pages (site navigation, Oct 2026)"

@@ -1,0 +1,115 @@
+schema = 1
+name = "GameDev Market"
+kind = "route"
+notes = """
+Redemption route, not a publisher: GameDev Market (gamedevmarket.net, GameDev
+Network Ltd) is a marketplace, and its Humble bundles list each asset's small
+seller as the developer (cruizrf, Wowu, UntiedGames, Rexard, GuttyKreum,
+SHASHIRAJproductions, ...) with "GameDev Market" as publisher. Since August
+2023 GDM's Humble and Fanatical bundles are redeemed on GDM itself, so the
+buyer gets the assets in a GDM account and receives the sellers' later
+updates. Most bundles have one key per asset, each entered separately; some
+(GameDev Market Best of 2024, RPG Adventure Essentials) give a single key
+for the whole bundle although Humble lists every asset. Content: 2D sprites, tilesets, GUI kits, icons, music and
+SFX packs, mostly as zip archives (PNG/PSD/AI/EPS, WAV/OGG/MP3); nothing to
+install. Licence: GDM's Pro licence (linked from the bundle page).
+
+Some GDM bundles also contain a "GameDev Market Coupon - 15% off $10 or more"
+key: that is a checkout coupon, not an asset (items/gamedev-market/coupon-15off).
+
+Not everything by GDM sellers comes this way: older GDM Humble bundles
+(e.g. the Music & SFX bundle, whose Humble page only carries GDM's EULA) and
+some packs in mixed bundles were hosted by Humble directly (hb-drmfree) and
+stay at the version uploaded then. That is why this route matches on the
+bundle's redemption text and named key bundles, not on the "GameDev Market"
+publisher: publisher matching would pull those DRM-free downloads off
+generic/files. If an hb-drmfree item does land here, fetch it from Humble.
+Sellers' own itch.io pages are not unlocked by a Humble purchase.
+
+Caveat: the redeem_text rule claims every item in a matching bundle, which
+also sweeps the bundle's "10% off Humble Choice" coupon
+(humblemonthly_10percentoff_general) onto this route; that coupon is
+Humble's own and needs no GDM step.
+"""
+
+[match]
+# No developers rule on purpose (see notes): "GameDev Market" is also the
+# publisher of older DRM-free bundles that belong on generic/files.
+domains = ["gamedevmarket.net"]
+key_names = ['\bgame ?dev ?market']   # also the coupon's machine name gamedevmarket_coupon_...
+# "All software in this bundle is redeemable on the GameDev Market website",
+# "Redeem your keys on the GameDev Market website",
+# "Key redeemable on the GamedevMarket website"
+redeem_text = ['redeem\w*[^.]{0,60}\bgame ?dev ?market\b']
+bundle_slugs = [
+  '^gamedev-?market',                                 # gamedev-market-best-2024, gamedev-markets-rpg-adventure-essentials (all slug forms)
+  '^best-(of-)?\d{4}-asset-bundle-from-gamedev-?market',   # URL slug and bundle-name slug
+  '^best\d{4}assetbundlefromgamedevmarket',               # its Humble machine name
+  '^2d-game-creation-mega-bundle',                   # URL slug and bundle-name slug
+  '^ultimate2dgamecreationbundle',                   # its Humble machine name
+  '^all-?in-?one-2d-game-dev-level-creation-pack',
+  '^allinone2dgamedevlevelcreationpack',
+]
+
+[redeem]
+where = "https://www.gamedevmarket.net/redeem-an-asset-bundle"
+account = true
+delivers = "each code unlocks one asset pack in the GDM account, downloadable any number of times, with future updates"
+expires = "per bundle: 'Please redeem before June 3rd, 2027' (All-in-One 2D Level Creation Pack); the 2023 and Best-of-2025 bundles state no date"
+steps = [
+  "Create a GameDev Market account at https://www.gamedevmarket.net/register (or log in) and confirm it with the link GDM emails ('Authorise the account').",
+  "Open the redemption page (https://www.gamedevmarket.net/redeem-an-asset-bundle walks through 'Sign in or Sign up', 'Head to your dashboard', 'Redeem your code'); from the account menu choose 'Redeem Code'.",
+  "Paste one code and press 'Redeem Code'. Repeat for every code: one code per asset.",
+  "The assets are then listed under 'View Redeemed Purchases' in the account menu.",
+]
+
+[download]
+scriptable = false
+how = "per asset from 'View Redeemed Purchases' in the GDM account (zip files)"
+notes = """
+No public buyer API is known. gamedevmarket.net sits behind Cloudflare:
+plain HTTP clients get 403 even on public pages (observed with curl, Oct
+2026), so redemption and downloads go through the user's own logged-in
+browser. Driving that browser (or reusing its session) to save each zip into
+the library folder is possible in principle but untested.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer: unzip each pack into the library folder; the assets are used by hand in Unity, Godot, GameMaker, Unreal, etc."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://www.gamedevmarket.net/news/latest-updates-at-gdm-august-2023"
+claim = "new Dashboard section for redeeming an external purchase: Humble Bundle / Fanatical bundle assets are redeemed on GDM, get updates and GDM support"
+[[sources]]
+url = "https://www.gamedevmarket.net/redeem-an-asset-bundle"
+claim = "redemption walkthrough: 1 Sign in or Sign up, 2 Head to your dashboard, 3 Redeem your code; assets unlocked for unlimited use, with future updates (Humble links here with utm_source=humblebundle)"
+[[sources]]
+url = "https://support.fanatical.com/hc/en-us/articles/18481197803025-How-do-I-activate-and-access-my-GameDevMarket-bundles"
+claim = "register, authorise the account by email link, 'Redeem Code' menu, one code at a time, redeemed assets under 'View Redeemed Purchases' (Fanatical's guide; same GDM flow)"
+[[sources]]
+url = "https://static.gamedevmarket.net/terms-conditions/#pro-licence"
+claim = "licence for the bundle's assets (linked from the 2D Game Creation Mega Bundle page)"
+[[sources]]
+url = "https://www.humblebundle.com/software/allinone-2d-game-dev-level-creation-pack-software"
+claim = "'Redeem your keys on the GameDev Market website'; 'Please redeem before June 3rd, 2027'"
+[[sources]]
+url = "https://www.humblebundle.com/software/best-2025-asset-bundle-from-gamedev-market-software"
+claim = "'Key redeemable on the GamedevMarket website'"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360038364094-Humble-Sound-Effects-and-Music-for-Games-Films-and-Content-Creators-Bundle-GameDev-Market-EULA"
+claim = "older GDM Music & SFX Humble bundle: GDM standard (Pro) licence, support@gamedevmarket.net; no redemption step described"
+[[sources]]
+url = "https://itch.io/post/7983366"
+claim = "seller (Saito Interactive / unTied Games): some Humble assets are redeemed on GDM, others were hosted by Humble and stay at the bundled version"
+[[sources]]
+url = "https://itch.io/post/7743606"
+claim = "seller GuttyKreum: a Humble purchase does not unlock the packs on the seller's itch.io page"

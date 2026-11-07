@@ -1,0 +1,36 @@
+schema = 1
+name = "Rebelle paper packs"
+vendor = "escape-motions"
+kind = "content"
+machine_names = [
+  "paperwhitesimple",
+  "paperessential",
+  "paper_machinemadeline",
+  "paperclassic",
+  "paper_washilong",
+  "paperaquarelle",
+  "paper_hotpressedgentle",
+]
+requires = ["escape-motions/rebelle-5"]
+verified = false
+notes = "Seven paper packs (White Simple, Essential, Machinemade Line, Classic, Washi Long, Aquarelle, Hot Pressed Gentle). Each Humble code is redeemed on the Escape Motions site; the pack's .zip then downloads from My Account > Purchases. Install: drag the .zip onto the Rebelle window or File > Import Assets... (Ctrl/Cmd+Shift+A), then restart Rebelle. Grouped in one recipe because they install identically."
+
+[install]
+source = "vendor"
+file = "*.zip"
+serial = "account"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.escapemotions.com/community/humblebundle"
+claim = "Humble redeem page ('Humble Software Bundle: Become a Painting Pro'): one code at a time, email verification"
+
+[[sources]]
+url = "https://escapemotions.com/community/forum/t/42333/spread-the-word-and-get-free-papers-worth-15"
+claim = "paper packs: drag the .zip onto Rebelle or File > Import Assets, then restart"
+
+[[sources]]
+url = "https://www.escapemotions.com/products/rebelle/manual/latest/interface/menu-bar/"
+claim = "File > Import Assets"

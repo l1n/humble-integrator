@@ -1,0 +1,36 @@
+schema = 1
+name = "FileSeek Pro"
+vendor = "binary-fortress"
+kind = "app"
+machine_names = ["fileseekprostandard"]
+verified = false
+notes = "2023 Binary Fortress Desktop Software Bundle ('Pro Standard' licence). File-content search (plain or regex). An ordinary windowed app: worth a shortcut, though native tools (ripgrep, Spotlight) do the same on macOS/Linux."
+
+[install]
+source = "vendor"
+url = "https://www.fileseek.ca/Download/"
+file = "FileSeekSetup*.exe"
+args = ["/VERYSILENT", "/LAUNCHAFTER=0", "/LKEYALL={key}"]
+serial = "per-product"
+notes = "{key} = the user's own revealed Humble key, passed to the documented /LKEYALL switch."
+
+[launch]
+exe = 'C:\Program Files\FileSeek\FileSeek.exe'
+notes = 'Default folder {commonpf}\<Product> read from the installer; not yet seen in a prefix.'
+
+[steam]
+shortcut = true
+title = "FileSeek"
+steamgriddb = "FileSeek"
+
+[[sources]]
+url = "https://www.displayfusion.com/KB/SilentInstallation"
+claim = "Inno Setup switches incl. /VERYSILENT /DIR= /LKEYUSER= /LKEYALL= /LAUNCHAFTER=0 /MERGETASKS=; DisplayFusion adds /STARTUPUSER /STARTUPALL /CONTEXTMENU=0 /NOPREREQS=1"
+
+[[sources]]
+url = "https://www.displayfusion.com/FAQ/"
+claim = "key entered in the installer, or later in Settings > License Key; no key = 30-day trial"
+
+[[sources]]
+url = "https://www.fileseek.ca/Download/"
+claim = "download page"

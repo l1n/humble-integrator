@@ -1,0 +1,15 @@
+schema = 1
+name = "Introduction to Residential Design (Envisioneer guide)"
+vendor = "cadsoft"
+kind = "document"
+machine_names = ["introductiontoresidentialdesign"]
+verified = false
+notes = "Ebook from both 'Architect - Home & Landscape Design' bundles: a DRM-free PDF/ePub served by Humble itself (no key). Download it into the library folder like any ebook (epub first, then pdf)."
+
+[install]
+source = "humble"
+file = "*"
+serial = "none"
+
+[steam]
+shortcut = false

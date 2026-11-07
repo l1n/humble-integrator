@@ -1,0 +1,19 @@
+schema = 1
+name = "Beginner Restorative Yoga (ebook)"
+vendor = "dailyom"
+kind = "document"
+machine_names = ["beginnersrestorativeyoga"]
+verified = false
+notes = "The one DRM-free item in the DailyOM bundle: a PDF/EPUB served by Humble itself (no key). Download it into the library folder like any ebook (epub first, then pdf)."
+
+[install]
+source = "humble"
+file = "*"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/find-your-dailyom-software"
+claim = "hb-drmfree ebook item with PDF and EPUB files (census)"

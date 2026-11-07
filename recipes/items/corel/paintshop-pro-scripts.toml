@@ -1,0 +1,33 @@
+schema = 1
+name = "PaintShop Pro effect scripts"
+vendor = "corel"
+kind = "content"
+machine_names = [
+  "draganeffectscript",
+  "dreamyeffectscript",
+  "fallingsnowscript",
+  "glitcheffectscript",
+  "warmsummerglowscript",
+  "wintrybluescript",
+  "fieryred",
+  "superselfie",
+]
+recommends = ["corel/paintshop-pro"]
+verified = false
+notes = "One-click PaintShop Pro scripts from 'Create with Visual Impact' (2021) + Encore (Dragan, Dreamy, Falling Snow, Glitch, Warm Summer Glow, Wintry Blue, Fiery Red, Super Selfie). Scripts are .PspScript files: put them in Documents\\Corel PaintShop Pro\\<ver>\\Scripts-Restricted (Scripts-Trusted if they save/delete/rename files) inside the PaintShop Pro prefix and run via File > Script > Run. Humble's downloads may instead be small Windows installers that do this (unverified). Grouped because they install identically."
+
+[install]
+source = "humble"
+file = "*"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://help.corel.com/paintshop-pro/v24/en/help/Corel_PaintShop_Pro/recording_and_saving_a_script.html"
+claim = "PaintShop Pro scripts run via File > Script > Run from the Scripts-Restricted / Scripts-Trusted folders"
+
+[[sources]]
+url = "https://scrapbookcampus.com/2023/03/what-file-goes-where-in-paintshop-pro/"
+claim = "PaintShop Pro script folders"

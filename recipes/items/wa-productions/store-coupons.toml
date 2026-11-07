@@ -1,0 +1,25 @@
+schema = 1
+name = "W. A. Production discount coupons (50% / 30% off)"
+vendor = "wa-productions"
+kind = "service"
+machine_names = ["waproductionvouchertier2", "waproductioncoupon30percentoff"]
+verified = false
+notes = """
+Discount codes for W. A. Production plug-ins on waproduction.com: 50% off (Music Producer 2023; expired end of December 2023) and 30% off (Opus FX, 2025). Optional and cost money to use. Humble lists the 2023 one under Producer Loops. Nothing to install.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "Add W. A. Production products to the cart on waproduction.com, click USE COUPON, paste the code, ADD DISCOUNT, continue with the order."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/12715790932891-Music-Producer-2023-Plugins-Software-Essentials-Coupon-Redemption-Information"
+claim = "WA Production 50% OFF coupon for any WA plug-in; expires end of Dec 2023"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/38758090098715-Humble-Software-Bundle-Opus-FX-Superior-Plugins-Orchestral-Elegance-Redemption-Instructions"
+claim = "WA Production Coupon 30% Off: cart > USE COUPON > ADD DISCOUNT"

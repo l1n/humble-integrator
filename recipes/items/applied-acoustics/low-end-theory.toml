@@ -1,0 +1,38 @@
+schema = 1
+name = "Low End Theory (AAS sound pack)"
+vendor = "applied-acoustics"
+kind = "content"
+machine_names = ["lowendtheory"]
+requires = ["applied-acoustics/aas-player"]
+verified = false
+notes = """
+Preset sound pack for Ultra Analog VA-3 (or VA-2): 114 bass, kick and low-end presets by Sean Divine. Plays in the free AAS Player (listed as required: the full Ultra Analog VA-3 is usually not in the same bundle) or in the full synth if you own it. Royalty-free. No Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = """
+Registered with its Humble key on the AAS account; install with the account's installer for the pack (or the 'All' installer), after the AAS Player.
+"""
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+prefix = "audio-plugins"
+notes = """
+Installs into the AAS Player's Windows install in the shared audio-plugins prefix (untested).
+"""
+
+[[sources]]
+url = "https://www.applied-acoustics.com/low-end-theory/"
+claim = "Compatible with Ultra Analog VA-3, Ultra Analog VA-2, and the free AAS Player"
+
+[[sources]]
+url = "https://www.applied-acoustics.com/support/apple-m1-compatibility/"
+claim = "all sound packs native on Apple Silicon"

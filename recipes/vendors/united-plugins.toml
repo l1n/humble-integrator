@@ -1,0 +1,66 @@
+schema = 1
+name = "United Plugins"
+kind = "route"
+notes = """
+Umbrella for small effect-plugin brands (FireSonic, JMG, Instant Audio,
+...); each plugin is listed under its brand. On Humble: FireMaster, Autoformer and Retronaut plus a
+25%-off store coupon in the FL Studio, UVI & Friends Hitmaking Bundle (Dec
+2023), and plugins in other multi-vendor music bundles. A reseller key is a
+redemption code: redeeming it on unitedplugins.com issues a licence file,
+which activates the plugin either online (account login inside the plugin)
+or by dragging the file onto the plugin. Licences are personal and can be
+transferred for a 20% fee.
+
+Windows 10/11 64-bit and macOS 10.14+ (Intel and Apple Silicon); no Linux
+build. United Plugins appear to share MeldaProduction's licensing system
+(identical redeem and licence-file flow; inference), and Melda says its plugins apparently run under Wine with Microsoft core fonts
+installed; United Plugins under yabridge is untested (inference). No Steam
+entries: these live in a DAW.
+"""
+
+[match]
+developers = ["United Plugins", "UnitedPlugins", "FireSonic", "JMG Sound"]
+domains = ["unitedplugins.com"]
+key_names = ['united\s?plugins']
+
+[redeem]
+where = "https://unitedplugins.com/Redeemalicense"
+account = true
+delivers = "a licence file per plugin (emailed and under My licenses) plus Mac/Windows installers"
+steps = [
+  "Create an account on unitedplugins.com (or sign in).",
+  "Account menu > My licenses > Redeem license key; paste the Humble code into 'Your licence key' and press Submit key.",
+  "The licence download link is emailed and appears under My licenses; download the licence file and the Mac or Windows installer.",
+  "Install, restart the Mac if it is High Sierra or newer, then open the plugin in a DAW: Activate (or right-click > License Manager) and either log in and choose 'Online activate licenses', or drag the licence file onto the manual-activation area. Restart the DAW.",
+  "The 25%-off coupon item is a store discount, not a product: use it only for a new purchase.",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+notes = "Licence files rather than serials. Presets install to Documents/<Brand>/<Plugin> on both OSes (FAQ). Installer type and silent switches not documented."
+
+[platforms.macos]
+runner = "native"
+notes = "Reboot after installing on High Sierra or newer before the DAW lists the plugins (FAQ)."
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+winetricks = ["corefonts"]
+notes = "No Linux build. Untested: Windows installers into the shared audio-plugins prefix with core fonts, yabridge for the DAW, offline activation by licence file."
+
+[[sources]]
+url = "https://unitedplugins.com/Redeemalicense"
+claim = "reseller codes: account > My licenses > Redeem license key > Submit key; licence emailed and in the account"
+[[sources]]
+url = "https://unitedplugins.com/plugin-activation"
+claim = "activation: online with account credentials, or drag the licence file to manual activation; restart"
+[[sources]]
+url = "https://unitedplugins.com/faq/"
+claim = "Windows 10/11 64-bit, macOS 10.14+ incl. Apple Silicon; reboot after install on High Sierra+; preset folders; transfer fee 20%; reseller codes are redeemed on the UP site"
+[[sources]]
+url = "https://www.meldaproduction.com/about/system-requirements"
+claim = "Melda: Linux not supported, plugins apparently run under Wine with Microsoft TrueType fonts"

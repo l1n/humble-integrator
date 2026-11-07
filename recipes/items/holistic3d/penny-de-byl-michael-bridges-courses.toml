@@ -1,0 +1,63 @@
+schema = 1
+name = "Penny de Byl (Holistic3D) and Michael Bridges Unity / Blender courses (Packt)"
+vendor = "packt"      # redeemed as Packt vouchers: reuse vendors/packt's [redeem]
+kind = "service"
+machine_names = [
+  # Penny de Byl (also in becoming-c-and-unity-game-developer-packt-software)
+  "createminecraft-inspiredvoxelworlds_unity6compatible",
+  "fromzerotounityshaderdeveloper_unity6compatible",
+  "gamemathfoundations_unity6compatible",
+  "buildanendlessrunnergamein3d_unity6compatible",
+  "advancedgameaisystemswithbehaviourtrees_unity6compatible",
+  "unitygamecreationbootcamp_unity6compatible",
+  "effectivegamedesignpatterns_unity6compatible",
+  "aigamedevelopmentessentialsforbeginners_unity6integration",
+  # Penny de Byl + Michael Bridges (also in becoming-c-and-unity-game-developer-packt-software)
+  "proceduralmazebuilding_unity6andblendercompatible",
+  "towerdefensegamedevelopment_unity6andblendercompatible",
+  "masterinventorysystemcreation_unity6andblenderfundamentals",
+  # Michael Bridges (Blender)
+  "materialfundamentals_proceduraltexturesinblender44",
+  "geometrynodesblender44",
+  "blenderandpythonscripting_astep-by-stepguideforbeginners",
+  "proceduralweapongenerationwithblender44",
+  "blender44foundations_fundamentalblenderknowledge",
+]
+verified = false
+notes = """
+Video courses by Penny de Byl (Holistic3D) and Michael Bridges, sold on Humble
+as Packt courses (publisher Packt) in "Game Development - Mega Bundle" (June 2026,
+"the latest Game Development Mega Bundle by Packt"; keys expire, redeem before
+July 13, 2027) and, for eleven of them, in "Becoming a C# and Unity Game
+Developer" (a Packt bundle the Packt route already claims). Each key is a Packt
+voucher (inference: same publisher, same courses and the same 'Keys expire'
+wording as the other Packt bundles; the Mega Bundle's text does not name the
+redemption site and Humble has no article for it). This recipe points at
+vendors/packt so the redemption steps, library layout and expiry handling are
+Packt's.
+
+The game-development-mega-bundle's other courses (3D Tudor, Eduonix, David
+Nixon, Codestars, Ron Erez) are also Packt-published; they are not claimed here.
+The cleanest long-term fix is a bundle_slugs entry for
+'^game-development-mega-bundle' in vendors/packt.toml (left to that file's owner).
+
+Nothing to install and no Steam entry; course videos stream in the Packt
+library (offline download only if Packt offers it for the redeemed course).
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/game-development-mega-bundle-software"
+claim = "'the latest Game Development Mega Bundle by Packt'; every item published by Packt; 'Keys expire. Please redeem your keys before July 13, 2027' (census redeem_text)"
+[[sources]]
+url = "https://www.humblebundle.com/software/becoming-c-and-unity-game-developer-packt-software"
+claim = "the same Penny de Byl / Michael Bridges courses (same machine names) in a Packt course bundle (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/14637082608155-Packt-Bundle-Key-Redemption-Instructions"
+claim = "Packt vouchers are redeemed at packtpub.com/voucher/redeem; course added to the Packt account library"

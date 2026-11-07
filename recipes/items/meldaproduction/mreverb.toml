@@ -1,0 +1,38 @@
+schema = 1
+name = "MReverb (MeldaProduction)"
+vendor = "meldaproduction"
+kind = "addon"
+machine_names = ["mreverb"]
+verified = false
+notes = """
+Algorithmic reverb with a spatial positioning system. Installed with MPluginManager (may be listed among the free effects; the licence unlocks the full version). Hosted by a DAW; no Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = """
+Redeem the code on meldaproduction.com, install via MPluginManager, then drag the licence file onto the plugin.
+"""
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = """
+Melda: apparently works under Wine with Microsoft TrueType fonts; disable GPU acceleration if it redraws badly (yabridge). Untested here.
+"""
+
+[[sources]]
+url = "https://www.humblebundle.com/software/fl-studio-uvi-friends-hitmaking-bundle-software"
+claim = "item description in the FL Studio, UVI & Friends Hitmaking Bundle (census)"
+
+[[sources]]
+url = "https://www.meldaproduction.com/about/system-requirements"
+claim = "OS/format support and the Wine note"

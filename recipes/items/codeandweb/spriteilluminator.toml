@@ -1,0 +1,50 @@
+schema = 1
+name = "SpriteIlluminator"
+vendor = "codeandweb"
+kind = "app"
+machine_names = ["spriteilluminator"]
+verified = false
+notes = """
+Grand Game Dev Toolbox (Apr 2022). Normal-map editor for 2D sprites (inflate,
+height/angle/structure brushes; exports for any engine). Native on macOS
+(.dmg) and Linux (.deb), so no Wine. The Humble key is the CodeAndWeb licence
+key (see vendors/codeandweb). Install paths below are inferred from how
+CodeAndWeb packages its apps; they are globs, not confirmed.
+"""
+
+[install]
+source = "vendor"
+url = "https://www.codeandweb.com/spriteilluminator/download"
+file = "*SpriteIlluminator*.msi"
+serial = "per-product"
+notes = "Licence entered in the app after install ('Enter license key'), not in the installer."
+
+[launch]
+find = "C:/Program Files*/CodeAndWeb/SpriteIlluminator/**/SpriteIlluminator*.exe"
+notes = "Windows path only matters if the Windows build is ever used; native builds below are preferred."
+
+[steam]
+shortcut = true
+title = "SpriteIlluminator"
+steamgriddb = "SpriteIlluminator"
+
+[platforms.macos]
+runner = "native"
+file = "*SpriteIlluminator*.dmg"
+app_find = "/Applications/SpriteIlluminator*.app"
+
+[platforms.linux]
+runner = "native"
+file = "*SpriteIlluminator*.deb"
+exe_find = "/usr/bin/SpriteIlluminator*"
+notes = "Ubuntu .deb (2.x needs Ubuntu 20.04/22.04+ libraries); exe path inferred."
+
+[[sources]]
+url = "https://www.codeandweb.com/spriteilluminator/download"
+claim = "MSI / DMG / DEB downloads; current 2.2.0 (2026-10-02)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/5151074706715-Grand-Game-Dev-Toolbox-System-Requirements"
+claim = "SpriteIlluminator: Windows 7/8/10, Mac 10.8 (Humble's 2022 requirements)"
+[[sources]]
+url = "https://www.codeandweb.com/knowledgebase/how-to-activate-a-license"
+claim = "licence key entered via 'Enter license key' in the app"

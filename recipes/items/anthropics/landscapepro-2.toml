@@ -1,0 +1,40 @@
+schema = 1
+name = "LandscapePro 2 (Standard / Studio / Studio Max)"
+vendor = "anthropics"
+kind = "app"
+machine_names = ["landscapepro2", "landscapeprostudio2", "landscapeprostudiomax2"]
+verified = false
+notes = "2023 Humble bundle. Sky/landscape editing; Studio adds RAW and plug-ins, Studio Max adds batch mode and histogram. Separate token and installer per edition."
+
+[install]
+source = "vendor"
+file = "LandscapePro*Setup*.exe"
+args = ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"]
+serial = "per-product"
+notes = "Pick the installer whose edition matches the token (Standard / Studio / Studio Max). The token is typed into the app at first launch, not the installer."
+
+[launch]
+find = "C:/Program Files*/LandscapePro*/*.exe"
+
+[steam]
+shortcut = true
+title = "LandscapePro 2"
+steamgriddb = "LandscapePro 2"
+
+[platforms.macos]
+runner = "native"
+file = "*.pkg"
+app_find = "/Applications/LandscapePro*.app"
+notes = "LandscapePro 2.x for Mac is Intel-only (com.anthropics.LandscapeProStd): Rosetta on Apple Silicon."
+
+[[sources]]
+url = "https://www.anthropics.com/portraitpro/redeem/"
+claim = "redeem form: activation token + name + email; download links are emailed"
+
+[[sources]]
+url = "https://www.anthropics.com/support/activating/"
+claim = "token entered in the app on first launch; online activation, or manual activation via fingerprint + key file"
+
+[[sources]]
+url = "https://rosettacheck.com/apps/4zd3uhx4"
+claim = "LandscapePro 2.7.1 Mac build is Intel-only"

@@ -1,0 +1,28 @@
+schema = 1
+name = "Modular Viking Village Megapack (Unity Asset Store Key)"
+vendor = "unity-asset-store"
+kind = "content"
+machine_names = ["modularvikingvillagemegapackunityassetstorekey"]
+publisher = "Hivemind"
+verified = false
+notes = "Unity Asset Store voucher (item text: \"*Unity asset store key is provided!\") inside the Battle-Hardened Game Asset Bundle by Hivemind, whose other keys are Fab codes: redeem this one on Unity, not on Fab. The Unreal/Fab edition of the same pack, where the bundle has one, is a separate Humble item on the Fab route. Also in The Builder's Vault by Hivemind - Unity Edition (builders-vault-hivemind-unity-edition-software), a Unity-only bundle: same voucher route."
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "Redeem the voucher at id.unity.com, then download and import in the Unity Editor: Package Manager > My Assets."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://gamefromscratch.com/battle-hardened-game-asset-hivemind-humble-bundle/"
+claim = "Hivemind bundle: Unreal assets redeemed on Fab, Unity assets on the Unity Asset Store"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/battle-hardened-game-asset-bundle-hivemind-software"
+claim = "item names end in '(Unity Asset Store Key)' or '(FAB Professional License Key)'"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/battle-hardened-game-asset-bundle-hivemind-software"
+claim = "item description begins: *Unity asset store key is provided!"

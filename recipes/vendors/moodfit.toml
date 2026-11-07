@@ -1,0 +1,42 @@
+schema = 1
+name = "Moodfit (mental-health app subscription)"
+kind = "route"
+service = true        # phone-app subscription: nothing for desktop or Steam
+notes = """
+The Healthy Habits Toolkit (Mar 2024): Moodfit, 90-day subscription. Moodfit
+is an iOS and Android app; nothing to install on macOS/Linux and no Steam
+entry. Existing subscribers can email hello@getmoodfit.com to have the 90
+days added instead.
+"""
+
+[match]
+developers = ["Moodfit"]
+domains = ["getmoodfit.com", "moodfit.com"]
+key_names = ['moodfit']
+
+[redeem]
+where = "the unique URL for the item on the Humble download page"
+account = true
+delivers = "90 days of Moodfit premium on the Moodfit account (iOS/Android)"
+expires = "not stated; check the Humble download page"
+steps = [
+  "Open the item's unique URL from the Humble download page.",
+  "Create an account on the redemption page and enter the code in the 'Program Code' field.",
+  "Install Moodfit from the App Store or Google Play and sign in.",
+  "Already a subscriber: email hello@getmoodfit.com to have 90 days added.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download"
+
+[install]
+source = "vendor"
+serial = "account"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/23178442442011--Moodfit-90-Day-Subscription-Redemption-Instructions"
+claim = "unique URL on the download page; create account, 'Program Code' field; app from Google Play/App Store; existing customers email hello@getmoodfit.com"
+[[sources]]
+url = "https://www.humblebundle.com/software/healthy-habits-toolkit-build-successful-routines-for-life-software"
+claim = "Moodfit available for iOS and Android, new and existing customers (census description)"

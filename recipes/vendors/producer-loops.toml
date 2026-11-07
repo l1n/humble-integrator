@@ -1,0 +1,60 @@
+schema = 1
+name = "Producer Loops"
+kind = "route"
+notes = """
+Large sample-pack marketplace and label (producerloops.com; WAV, MIDI,
+presets, Kontakt). On Humble its packs come as DRM-free downloads (Epic
+Music Producer 2022, Mega Music Producer Black Friday Special, Music
+Creators Spectacular Holiday Special, Music Creators Unlimited, Music
+Producer 2023: Plugins & Software Essentials, FL Studio, UVI & Friends),
+which the generic routes fetch, plus discount coupons for producerloops.com.
+Humble files its system requirements as "Producer Loops (WA Productions)":
+the same bundles carry W. A. Production, United Plugins and MeldaProduction
+plugins, each redeemed on its maker's site.
+
+No developers or bundle rule, on purpose: a bundle rule would take the
+partner plugins away from their own recipes, and the packs need no
+redemption. Item recipes cover the coupons and the few packs Humble's page
+lists without a delivery method.
+"""
+
+[match]
+domains = ["producerloops.com"]
+key_names = ['producer ?loops']
+
+[redeem]
+where = "https://www.producerloops.com/"
+account = true
+delivers = "packs: Humble downloads; coupons: a discount at producerloops.com checkout"
+steps = [
+  "Sample packs: nothing to redeem; download each from the bundle's Humble download page into audio/producer-loops/<pack>.",
+  "Coupons: optional and cost money (they are discounts). Log in on producerloops.com, add packs to the cart and enter the code at checkout (inference: standard store coupon field; Humble gives no instructions). Codes from 2022-2023 bundles are probably expired.",
+]
+
+[download]
+scriptable = true
+how = "Humble download page for the packs; producerloops.com account downloads for anything bought with a coupon"
+
+[library]
+files = "WAV loops/one-shots, MIDI and synth presets per pack: audio/producer-loops/<pack>"
+licence = "royalty-free sample licence of each label (Producer Loops sells 587 labels)"
+
+[install]
+source = "humble"
+serial = "none"
+notes = "Nothing to install: unzip into the library folder. Synth presets (Serum, Spire, ...) are copied into the synth's preset folder by hand."
+
+[platforms.macos]
+runner = "native"
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://www.producerloops.com/"
+claim = "world's largest sample pack retailer; 38,867 downloads from 587 labels; WAV, MIDI, Kontakt, presets; instant download"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/18729667953819-Producer-Loops-WA-Productions-System-Requirements"
+claim = "Humble files Producer Loops system requirements under WA Productions (Windows 8+, macOS 10.13+)"
+[[sources]]
+url = "https://www.humblebundle.com/software/music-producer-2023-plugins-software-essentials-software"
+claim = "Producer Loops packs (hb-drmfree, audio files) next to W. A. Production, United Plugins and Melda keys and Producer Loops coupons (census)"

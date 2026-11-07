@@ -1,0 +1,35 @@
+schema = 1
+name = "Corel Painter Essentials 8"
+vendor = "corel"
+kind = "app"
+machine_names = ["painteressentials8"]
+verified = false
+notes = "Beginner version of Painter, from the 2024 'Corel Productivity & Creativity Essentials' bundle. Humble download (Windows; Humble's requirements also list macOS 10.15-14 on Intel/M1) + serial; internet registration required. If full Painter is owned too, this one is redundant."
+
+[install]
+source = "humble"
+file = "*Painter*Essentials*"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/Corel/*Painter Essentials*/*.exe"
+notes = "Exe name not documented."
+
+[steam]
+shortcut = true
+title = "Painter Essentials 8"
+steamgriddb = "Painter Essentials"
+
+[platforms.macos]
+runner = "native"
+file = "*.dmg"
+app_find = "/Applications/**/*Painter Essentials*.app"
+notes = "Mac build availability from the Humble page unverified (Humble's census lists the key for Windows and Mac)."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/25291350269723"
+claim = "Painter Essentials 8: installer from Humble, serial at the prompt, internet registration"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/25293457176731"
+claim = "2024 bundle requirements: Painter Essentials 8 on Windows 10 and macOS 10.15-14 (Intel/M1); others Windows-only"

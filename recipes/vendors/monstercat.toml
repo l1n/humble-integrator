@@ -1,0 +1,37 @@
+schema = 1
+name = "Monstercat"
+kind = "route"
+notes = """
+Music label; Monstercat Gold was its creator licence, letting streamers and
+video makers use the catalogue without copyright claims. Humble's Get Into
+Streaming bundle (Jan 2023) sold 1-, 3- and 6-month Gold memberships, new
+users only. A time-limited service: nothing to download or install, no
+Steam entry; given the 2023 dates the codes have very likely lapsed. The
+redemption page for these codes was not found (inference: entered on the
+Monstercat account's subscription page). See item monstercat/gold-membership.
+"""
+
+[match]
+developers = ["Monstercat"]
+domains = ["monstercat.com"]
+key_names = ['monstercat']
+
+[redeem]
+where = "https://www.monstercat.com/"
+account = true
+delivers = "a 1-, 3- or 6-month Monstercat Gold membership (new accounts only)"
+steps = [
+  "Follow the instructions that come with the Humble key; they name the Monstercat redemption page.",
+  "Create a Monstercat account (new users only) and apply the code; then link the streaming channels the licence should cover.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/getintostreaming-bundle-software"
+claim = "Monstercat Gold 1/3/6-month memberships, new users only; micro-licensing for streamers and creators (census)"
+[[sources]]
+url = "https://www.monstercat.com/gold"
+claim = "Monstercat's creator licensing for streams, videos and games"

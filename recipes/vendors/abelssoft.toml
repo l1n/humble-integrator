@@ -1,0 +1,79 @@
+schema = 1
+name = "Abelssoft"
+kind = "route"
+notes = """
+Small Windows utilities. Humble serves each program's Windows installer
+(Inno Setup) plus a 20-digit key; the key is entered in the program's
+registration screen at first launch and unlocked through an e-mailed link
+(new customers give name + email). One computer per licence; which Abelssoft
+licence type the Humble keys are (current-version vs lifetime updates) was
+not found. The programs are .NET Framework 4.8 / WPF apps (HackCheck,
+AbLauncher inspected), so a Wine prefix needs dotnet48 (inferred).
+Several are Windows maintenance tools (SSD Fresh, WashAndGo, AntiBrowserSpy)
+that do nothing useful inside a Wine prefix; those items are marked skip.
+"""
+
+[match]
+developers = ["Abelssoft", "Abelssoft GmbH"]
+domains = ["abelssoft.de", "abelssoft.net"]
+key_names = [
+  "abelssoft",
+  "antibrowser ?spy",
+  "converter4video",
+  "ssd ?fresh",
+  "washandgo",
+  "hackcheck",
+  "youtube song downloader",
+]
+
+[redeem]
+where = "the program's registration screen at first launch"
+account = false
+email = true
+delivers = "an unlock e-mail that activates the installed program (one PC)"
+expires = "not documented"
+steps = [
+  "Install from the Humble download (Abelssoft's own current installers also work for most: abelssoft.de/<product>-setup.exe).",
+  "At first launch paste the 20-digit key > Continue; new customers enter name and email and click 'Get free unlock mail now'.",
+  "Leave the program open and click the link in the e-mail to unlock it.",
+]
+
+[install]
+source = "humble"
+serial = "per-product"
+silent = true
+driver = "inno"
+args = ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"]
+driver_notes = 'Inno Setup (current builds 6.1.0-6.4.3). Default folder {commonpf}\<Product> with the program in {app}\Program\<Product>.exe plus {app}\AbLauncher.exe (launcher/updater). Silent switches are standard Inno, not documented by Abelssoft. The key is entered in the program, not the installer.'
+
+[prefix]
+name = "abelssoft"
+arch = "win64"
+windows = "win10"
+winetricks = ["dotnet48"]
+notes = "dotnet48 inferred from .NET Framework 4.8 targets; untested."
+
+[platforms.macos]
+runner = "crossover"
+notes = "Windows-only; no CrossOver reports."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Windows-only; no Wine/Proton reports."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/5873424950427"
+claim = "Abelssoft: install from the Humble download; first launch asks for the 20-digit key, then name + email, 'Get free unlock mail now', click the e-mailed link"
+
+[[sources]]
+url = "https://www.abelssoft.de/en/terms"
+claim = "licence types (Current Version / Saver Subscription / Lifetime Updates); one computer per licence"
+
+[[sources]]
+url = "https://www.abelssoft.de/HackCheck-setup.exe"
+claim = 'Inno Setup header: {pf}\HackCheck, {app}\Program\HackCheck.exe; .NET 4.8 WPF'
+
+[[sources]]
+url = "https://www.abelssoft.de/en/windows/system-utilities/ssd-fresh"
+claim = "Windows 7-11 only"

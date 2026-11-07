@@ -1,0 +1,83 @@
+schema = 1
+name = "Soundtrack Loops"
+kind = "route"
+notes = """
+Royalty-free loop and sample label (soundtrackloops.com, 20+ years; WAV,
+Apple Loops, MIDI, presets, the Double Scoop VST/AU). Humble bundles 2020-
+2026: Mega Sound Designer Loop Crate 1-3, LEVEL UP! Music Creators Power
+Pack (+ Encore), Level Up Remix, Music Creators Studio Essentials, Make
+Music, Change Lives. Partners in the same bundles (Cherry Audio, Acoustica)
+have their own recipes; item recipes take precedence over this route.
+
+Sample packs are Humble downloads ("Soundtrack Loops products are available
+DRM-Free for Windows and Mac"); this route only claims the bundles where
+Humble's page gives the packs no delivery icon (the Loop Crates: inference
+that they too were Humble downloads, since Humble's text only says the
+software is activated with keys) or files them as apps (Level Up Remix, and
+one pack in LEVEL UP! Power Pack), so that they are downloaded into the
+library instead of being installed with a Steam shortcut. Store vouchers and
+Double Scoop are discount codes on soundtrackloops.com (see
+items/soundtrack-loops/*).
+
+The Cherry Audio and Acoustica keys in these same bundles are not
+Soundtrack Loops': they are redeemed on store.cherryaudio.com and
+store.acoustica.com. Every such product in the census has an item recipe
+(items/cherry-audio/*, items/acoustica/*), which outranks this bundle rule;
+a new partner product in one of these bundles needs one too.
+
+Licence: every loop, one-shot and preset is royalty-free for use in any
+audio or video production; file names carry tempo and key.
+"""
+
+[match]
+# No developers rule: most Soundtrack Loops packs on Humble are DRM-free downloads
+# that the generic routes already fetch.
+redeem_text = ['redeemable on the Soundtrack Loops']
+bundle_slugs = ['^mega-sound-designer-loop-crate', '^megasounddesignerloopcrate', '^level-up-remix', '^levelupremix', '^level-up-music-creators-power-pack', '^megasoundbundle']
+domains = ["soundtrackloops.com"]
+key_names = ['soundtrack ?loops', 'double scoop']
+
+[redeem]
+where = "https://www.humblebundle.com/home/library"
+account = false
+delivers = "sample-pack zips on the bundle's Humble download page; codes (vouchers, Double Scoop) are coupons at soundtrackloops.com checkout"
+steps = [
+  "Sample packs: nothing to redeem; download each from the bundle's Humble download page into audio/soundtrack-loops/<pack>.",
+  "Partner software in the same bundle (Cherry Audio, Acoustica) is redeemed on the partner's site (their recipes).",
+  "Codes for soundtrackloops.com (store vouchers, Double Scoop): see the item recipes; they are applied as coupons at checkout and most expire.",
+]
+
+[download]
+scriptable = true
+how = "Humble download page (packs); soundtrackloops.com account downloads for anything bought with a voucher"
+notes = "Humble downloads are fetched like any DRM-free file. soundtrackloops.com sits behind Cloudflare, so its account downloads are a browser job."
+
+[library]
+files = "WAV loops and one-shots (with Apple Loops/MIDI in some packs), one folder per pack: audio/soundtrack-loops/<pack>"
+licence = "royalty-free for any audio/video production (store pages); no redistribution of the raw files"
+
+[install]
+source = "humble"
+serial = "none"
+notes = "Nothing to install for the packs: unzip into the library folder."
+
+[platforms.macos]
+runner = "native"
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/level-up-music-creators-power-pack-software"
+claim = "'Soundtrack Loops products are available DRM-Free for Windows and Mac. Cherry Audio products are redeemed by keys.' (census)"
+[[sources]]
+url = "https://www.humblebundle.com/software/mega-sound-designer-loop-crate-3-software"
+claim = "'Redeem your keys. Activate your software with the keys provided!'; the Soundtrack Loops packs carry no delivery icon (Wayback snapshot 2022-03-24)"
+[[sources]]
+url = "https://www.humblebundle.com/software/music-creators-studio-essentials-software"
+claim = "'The Soundtrack Loops items in this bundle are redeemable on the Soundtrack Loops page' (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360053754173-Soundtrack-Loops-Store-Voucher-Redemption-Instructions"
+claim = "vouchers are coupon discounts at soundtrackloops.com checkout; no credit for any remainder; most vouchers expire"
+[[sources]]
+url = "https://soundtrackloops.com/double-scoop/"
+claim = "store page boilerplate: all loops, one-shots and presets royalty-free for any audio/video composition; file names include tempo and key; downloads kept in the account (read via Wayback, Feb 2026)"

@@ -1,0 +1,46 @@
+schema = 1
+name = "Paintstorm Studio"
+vendor = "paintstorm"
+kind = "app"
+machine_names = ["painstormstudio"]
+verified = false
+notes = "2024 'Avant-garde Artists Toolkit' bundle (Humble's machine name is misspelt 'painstormstudio'). Native builds for all three OSes; registration by account email inside the app."
+
+[install]
+source = "vendor"
+url = "https://www.paintstormstudio.com/download.html"
+file = "PaintstormSetup_v*_x64.exe"
+serial = "account"
+
+[launch]
+exe = 'C:\Program Files\Paintstorm Studio\Paintstorm.exe'
+find = "C:/Program Files*/Paintstorm Studio/*.exe"
+notes = "Folder documented; exe name inferred."
+
+[steam]
+shortcut = true
+title = "Paintstorm Studio"
+steamgriddb = "Paintstorm Studio"
+
+[platforms.macos]
+runner = "native"
+file = "PaintstormStudio-v*.pkg"
+app_find = "/Applications/Paintstorm*.app"
+
+[platforms.linux]
+runner = "native"
+file = "Paintstorm_linux_v*.run.tar.gz"
+exe_find = "/usr/share/paintstorm/*aintstorm*"
+notes = "Official install needs sudo (to /usr/share/paintstorm); work folder ~/Paintstorm."
+
+[[sources]]
+url = "https://www.paintstormstudio.com/download.html"
+claim = "v2.50: PaintstormSetup_v2.50_x64.exe, PaintstormStudio-v2.50.pkg, Paintstorm_linux_v2.50.run.tar.gz"
+
+[[sources]]
+url = "https://paintstormstudio.com/help/installation-and-files"
+claim = 'Linux: extract, sudo sh ./Paintstorm_linux_vX.run, installs to /usr/share/paintstorm, work folder ~/Paintstorm; Windows C:\Program Files\Paintstorm Studio; Mac Gatekeeper override'
+
+[[sources]]
+url = "https://www.paintstormstudio.com/help/registrationfaq/"
+claim = "no serial: register in the app (v1.41+) with the account email; internet once, then offline; account at login.html"

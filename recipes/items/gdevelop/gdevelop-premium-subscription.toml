@@ -1,0 +1,30 @@
+schema = 1
+name = "GDevelop premium subscription (Silver 3 or 6 months, Gold 6 months)"
+vendor = "gdevelop"
+kind = "service"
+machine_names = [
+  "3-monthsilverpro",                    # No-Code GameDev Bundle (2022): 3-Month GDevelop Silver
+  "6-monthgoldpro",                      # No-Code GameDev Bundle (2022): 6-Month GDevelop Gold
+  "6monthsofgdevelopofgdevelopsilver",   # No-Code No Problem Game Dev Bundle (2025): 6 months of Silver
+]
+verified = false
+notes = """
+A code for a time-limited GDevelop plan (cloud builds, cloud project
+saves, leaderboards and so on). Redeem it in the GDevelop account (see
+vendors/gdevelop); nothing to install. The 2022 codes date from a bundle that
+ended in Dec 2022; whether unredeemed codes still work is not stated.
+"""
+
+[install]
+source = "vendor"
+serial = "account"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/10611633952411-GDevelop-Humble-Bundle-Subscription-Code-Redemption-Instructions"
+claim = "redeem at editor.gdevelop.io/?initial-dialog=subscription > Redeem a code; one code per account"
+[[sources]]
+url = "https://www.humblebundle.com/software/no-code-gamedev-bundle-software"
+claim = "3-Month Silver and 6-Month Gold items with plan features (census descriptions)"

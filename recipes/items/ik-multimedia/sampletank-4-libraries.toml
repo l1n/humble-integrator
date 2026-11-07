@@ -1,0 +1,38 @@
+schema = 1
+name = "SampleTank 4 instrument collections"
+vendor = "ik-multimedia"
+kind = "content"
+machine_names = ["cinekinetik_malletension", "cinekinetik_malletopia", "cinekinetik_fracturedpiano", "hitmaker_edm", "hitmaker_synthwave", "electromagnetik_electricpianobass", "electromagnetik_electricgrandc70p", "codevolume1", "mojosynthesis_ringofdoom", "mojosynthesis_vectorvision", "mojosynthesis_alienharbours", "elektronika_trance", "elektronika_chillout", "elektronika_minimal", "elektronika_techno", "futuresynths", "alternatekeys", "spaceport77", "artdecopiano", "brandenburgpiano", "americanacoustic", "orchestralpercussion", "cinematicpercussion", "bionicdrums", "powerup_ikmultimedia", "nanotube", "salsapercussionloops"]
+recommends = ["ik-multimedia/sampletank-4"]
+verified = false
+notes = """
+SampleTank 4 instrument collections: Cinekinetik (Malletension, Malletopia, Fractured Piano), Hitmaker (EDM, Synthwave), Electromagnetik (Electric Piano Bass, Electric Grand C70P), The Code Volume 1, Mojo Synthesis (Ring of Doom, Vector Vision, Alien Harbours), Elektronika (Trance, Chillout, Minimal, Techno), Future Synths, Alternate Keys, Spaceport '77, Art Deco Piano, Brandenburg Piano, American Acoustic, Orchestral and Cinematic Percussion, Bionic Drums, Power Up, Nanotube, Salsa Percussion Loops. They load in SampleTank 4 (or MAX v2); without either, in IK's free SampleTank 4 Custom Shop (inference). Orchestral Percussion also loads in Miroslav Philharmonik 2. Installed from Product Manager's Sounds tab; no Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = "Register the Humble serial on the IK account, then install from IK Product Manager (Software tab; sample content from the Sounds tab). Authorization happens in Product Manager."
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+prefix = "audio-plugins"
+notes = "Installs into the host plug-in's Windows install in the shared audio-plugins prefix (untested)."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/ik-pro-sound-suite-software"
+claim = "item descriptions call these SampleTank instrument collections/libraries (census)"
+
+[[sources]]
+url = "https://ikmultimedia.com/products.json"
+claim = "IK sells them as SampleTank products (handles st..., st3...) and lists 'SampleTank 4 Custom Shop' at $0"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/29332171355675-IK-Multimedia-Redemption-Instructions-EULA"
+claim = "register at ikmultimedia.com/registration; IK Product Manager: Software tab > Install, Sounds tab > Install"

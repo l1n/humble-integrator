@@ -1,0 +1,60 @@
+schema = 1
+name = "Richdale Ventures (publisher of record for several software bundles)"
+kind = "route"
+notes = """
+"Richdale Ventures" (also just "Richdale") is the publisher Humble lists on
+several partner bundles. It is not a course platform or a store of its own,
+and most of its items are redeemed with their real developer:
+
+  Anthropics (PortraitPro, LandscapePro)  -> the Anthropics recipe
+  Applied Acoustics Systems               -> the Applied Acoustics recipe
+  Cadsoft Personal Architect, ArchiMaster -> the Cadsoft / desktop-software recipe
+  uTalk language subscriptions            -> vendors/utalk
+  Lonely Planet, Sourcecad ebooks (PDF)   -> generic ebook route (DRM-free)
+  BeckerCAD 2D / 3D / 3D PRO (MUT)        -> generic DRM-free download + a
+                                             "Richdale Key" redeemed below
+
+So this recipe deliberately does NOT match census items by the publisher
+name. A vendor rule wins over the generic routes, and matching
+"Richdale"/"Richdale Ventures" would pull the DRM-free ebooks (and, for
+vendors that sort after "richdale", their items too) onto this route. It only
+catches extracted keys labelled as a Richdale key, i.e. the BeckerCAD
+licences from "Become The Architect: CAD Software & Tutorials" (2025). Those
+are redeemed on the Markt+Technik (MUT, Germany) licence portal linked from
+the Humble download page ("Redeem Here"). The portal returns a download link
+and the product's licence key. Installing BeckerCAD (Windows-only) is a
+desktop-software job and is not described here.
+
+If a future census item is published by Richdale Ventures and none of the
+recipes above claims it, give it a recipe under its developer's name.
+"""
+
+[match]
+domains = ["mut.de", "mut.com"]
+key_names = ["\\brichdale\\b", "beckercad", "markt ?\\+ ?technik"]
+
+[redeem]
+where = "the 'Redeem Here' link under the Richdale key on the Humble download page (Markt+Technik licence portal)"
+account = false
+delivers = "a download link for the software and its licence key (BeckerCAD)"
+expires = "check the Humble download page. Key.is_expired from Humble is authoritative."
+steps = [
+  "Reveal the 'Richdale Key' on the Humble download page and click 'Redeem Here'.",
+  "On the Markt+Technik page ('How to get the license key for your product') paste the key and click Next.",
+  "Registering the product with an email address is optional: tick 'Do not register' to skip it. Then Next.",
+  "The page shows the download link and the licence key. Save both. The licence key is what the installer asks for.",
+  "Technical support: info@mut.de (Humble's article says info@mut.com).",
+]
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/35631023293595-Become-The-Architect-CAD-Software-Tutorials-Redemption-Instructions"
+claim = "reveal the Richdale Key, Redeem Here, paste key, optional registration (Do not register), then a download link and licence key; support info@mut.com; portal screenshots are Markt+Technik-branded with info@mut.de (2025-04)"
+[[sources]]
+url = "https://www.humblebundle.com/software/become-architect-cad-software-tutorials-software"
+claim = "'Redeemable through Richdale Ventures'; BeckerCAD items by MUT are hb-drmfree + hb-key, Windows; Sourcecad PDFs (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/16611525138843-Anthropics-Key-Redemption-Instructions"
+claim = "Richdale-published Anthropics keys are redeemed at anthropics.com/licenses, not via Richdale"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/19927834627995-Personal-Architect-Key-Redemption-Instructions"
+claim = "Richdale-published Cadsoft Personal Architect keys are redeemed at personalarch.com (Account > Enter Code)"

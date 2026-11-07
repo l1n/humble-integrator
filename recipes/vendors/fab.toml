@@ -1,0 +1,222 @@
+schema = 1
+name = "Fab (Epic Games marketplace)"
+kind = "route"
+notes = """
+Redemption route, not a publisher: every Humble item whose key is a Fab
+code, whoever made the asset (Hivemind, Dekogon, Evolve Studio, Meshingun,
+Bugrimov Maksim, Befour Studios, Gabriel Aguiar, RagTarock, Lyoshko,
+GeorgeShachnev, Entroverse Lab, Stonemocap, VRhinoFX, Leartes/Stylarts,
+Freshcan3D, Yarrawah Interactive, Racksuz/TrextoR, Scans Factory, PropHaus,
+WanadevStudio, Velarion, Denys Rutkovskyi, JustB Studios, Laya Design,
+DanStudios, Nature Manufacture, Infinity PBR, ...).
+Fab replaced the Unreal Engine Marketplace in October 2024 (the old
+Marketplace was switched off) and is absorbing the ArtStation and Sketchfab
+marketplaces; older Humble "Unreal Engine Marketplace" / "Epic Games
+Marketplace" / "Epic Store" codes are assumed to redeem the same way
+(inference; Humble's own Unreal Engine key article still points at the Epic
+code-redemption page). Humble's bundle text names the store in many ways:
+"Professional Fab Marketplace keys provided", "Redeem your keys through
+Fab", "Redeem through FAB", "can be redeemed on the FAB Marketplace",
+"Redeem your keys in FAB Redemption Instruction here", "Please redeem Fab
+keys on Epic Games", "redeemable via Epic Games", "can be redeemed via the
+Epic Games Store", "Keys are redeemed through (the) Epic Games Store / Epic
+Store", "can be redeemed on the Epic Games Marketplace"; item names and
+descriptions say "(FAB Professional License Key)", "*Professional License
+redeeming from Fab Marketplace!" or "Fab Professional License Redeem Code",
+and Bugrimov machine names end in "_fab". The Epic-worded redeem_text rule
+only fires when the bundle text also says "asset(s)" and never mentions
+Steam, so an Epic Games Store *game* bundle is not pulled onto this route.
+Some asset items carry Humble's hb-epic delivery icon (Elites: Creator's
+Superbundle, Meshingun All-Stars, Deluxe Dev Dream encores): still a code
+for this route, not an Epic game.
+
+What the code unlocks: one Fab listing, with a Professional licence, in the
+Fab library of the Epic Games account that redeems it. One code per asset:
+Fab redeems one code at a time and rate-limits many redemptions in quick
+succession, so the tool should pace them (and ask before each batch).
+A forum report says the confirm step can offer a UEFN licence instead of the
+Unreal Engine one and the choice can't be changed afterwards: pick the
+Unreal Engine / Professional option.
+
+How assets reach the user:
+  * Unreal Engine format (.uasset projects, most of these bundles): only via
+    the Epic Games Launcher (Fab Library tab; Windows and macOS) or the Fab
+    plugin inside Unreal Editor 5.3+ ("My Library", any OS the editor runs
+    on, including the Linux editor - community reports only). Not a file the
+    tool can fetch into a library folder.
+  * Other formats a seller provides (FBX/OBJ/GLB, Unity packages, textures):
+    downloadable from fab.com > My Library > download icon. The tool could
+    fetch these with the user's logged-in browser session (no public API;
+    inference, untested).
+
+Bundles routed here as a whole (bundle_slugs) because their text doesn't
+name the store, or so that extracted keys find this route from the bundle
+name:
+  * Battlefield Frontlines (Dekogon Studios + Evolve Studio, "90+ top-rated
+    Fab packs").
+  * Bigger Better Bundle (Dekogon + Meshingun). A deal post quoting the
+    bundle page says "Professional Fab Marketplace keys and Unity Asset
+    Store keys provided": the two Meshingun items whose descriptions are
+    Unity listings (Gothic Interior Megapack, Feudal Japan Megapack) are
+    probably Unity vouchers, but their machine names are shared with the
+    Unreal editions in other bundles, so no item recipe can single them out;
+    redeem such a key on Unity if Humble's key text says Unity.
+  * Hivemind's Battle-Hardened bundle (each item's name says "(FAB
+    Professional License Key)" or "(Unity Asset Store Key)"; the Unity ones
+    have item recipes under items/unity-asset-store/). The All-in-One Unreal
+    & Unity GameDev Bundle is mixed the same way ("( Unity )" items are
+    Unity vouchers, item recipes too).
+  * Deluxe Dev Dream: 3D Unreal Engine and Unity Mega Bundle (Meshingun
+    Studio; August 2024, December 2024 encore, December 2025 holiday encore).
+    The text only says "Redeem your keys"; the 2024 original adds "Due to
+    upcoming Unreal Engine Marketplace changes, please redeem your bundle
+    codes within 10 days". Its three "(Unity)" items (Gothic Megapack,
+    Gothic Interior Megapack, Medieval Village Megapack) have item recipes
+    under items/unity-asset-store/ (inference: Meshingun's Unity editions
+    are Asset Store listings, as in its BAD ASSet Unity bundle). The 2025
+    holiday encore lists Feudal Japan Megapack with a Unity description
+    under the shared machine name: same caveat as Bigger Better.
+  * Epic Environments Mega Bundle: Unreal Engine & Unity Bundle for Fantasy
+    Worlds (Freshcan3D + Yarrawah Interactive, May 2024). The text names no
+    store; the Unreal items are taken to be Unreal Engine Marketplace codes,
+    now Fab (inference), and the four "- UNITY" Freshcan3D items have item
+    recipes under items/unity-asset-store/ (inference). Yarrawah ran its
+    own bundles through yarrawah.com (vendors/yarrawah); if a buyer's
+    download page shows a yarrawah.com link instead, follow that.
+  * Dekogon's own bundles (^dekogon-), Meshingun All-Stars, Elites:
+    Creator's Superbundle, Level Up: 5K World Building Assets, Massive Game
+    Dev Asset Collection (Bugrimov Maksim), Epic Adventures Asset Mega Pack,
+    Open World Essentials II, Mega Unreal Engine Bundle (Laya Design +
+    DanStudios) and Unreal Nature & Fantasy Assets (Nature Manufacture +
+    Infinity PBR): their text names Fab or Epic (redeem_text); the slugs are
+    for extracted keys.
+Unity editions inside these bundles: Level Up: 5K's "Apocalyptic Hospital
+(Unity)" has an item recipe under items/unity-asset-store/. Open World
+Essentials II's Yarrawah "Medieval Shields - Prop Pack" (UE 5.4-5.8) reuses
+the machine name medievalandvikingweaponsandshieldsset18piecesunity of a
+Leartes Unity item; it is a Fab code here. GameFromScratch says Epic
+Adventures has "a touch of Unity assets thrown in", but every census item
+there is an Unreal listing: redeem on Unity only if Humble's key text says
+so.
+A few Dekogon and Synty items also carry a Humble direct download
+(hb-drmfree) besides the key: fetch that file into the library folder as
+well.
+"""
+
+[match]
+bundle_slugs = [
+  "^battlefield-frontlines",
+  "^bigger-better-bundle",
+  "^battle-hardened-game-asset-bundle-hivemind",
+  "^deluxe-dev-dream-",                   # text names no store (Meshingun; Unity items have item recipes)
+  "^epic-environments-mega-bundle",       # text names no store (Freshcan3D + Yarrawah; Unity items have item recipes)
+  "^dekogon-",                            # Dekogon's own bundles (Townscape Essentials, ...)
+  "meshingun-all-?stars",
+  "elites-creator-?s-superbundle",
+  "level-up-5k-world-building-assets",
+  "massive-game-dev-asset-collection",
+  "epic-adventures-asset-mega-pack",
+  "open-world-essentials",
+  "mega-unreal-engine-bundle",
+  "^unreal-nature-(?:and-)?fantasy-assets|^nature-manufacture-unreal",
+]
+redeem_text = [
+  '\bFab Marketplace keys?\b',
+  '\bredeem\w*(?:\s|&nbsp;| )+(?:your(?:\s|&nbsp;| )+)?(?:keys?(?:\s|&nbsp;| )+)?(?:on|via|through|at|from)(?:\s|&nbsp;| )+(?:the(?:\s|&nbsp;| )+)?Fab\b',
+  # "redeem your Fab keys before ...", "Please redeem Fab keys on Epic Games"
+  '\bredeem\w*(?:\s|&nbsp;| )+(?:your(?:\s|&nbsp;| )+)?Fab(?:\s|&nbsp;| )+keys?\b',
+  '\bat the Fab\b(?:\s|&nbsp;| )+and Unity asset stores',
+  '\bredeem\w*[^.]{0,80}\bUnreal Engine Marketplace\b',
+  # "Redeem your keys in FAB Redemption Instruction here"
+  '\bFab(?:\s|&nbsp;| )+Redemption\b',
+  # "redeemable via Epic Games", "can be redeemed via the Epic Games Store", "Keys are redeemed
+  # through Epic Store", "can be redeemed on the Epic Games Marketplace". Only asset bundles
+  # (the text says "asset(s)") without a Steam game, so Epic Games Store game bundles stay off.
+  '(?s)^(?=.*\bassets?\b)(?!.*\bon Steam\b).*\bredeem\w*(?:\s|&nbsp;| )+(?:on|via|through|at|from)(?:\s|&nbsp;| )+(?:the(?:\s|&nbsp;| )+)?Epic\b',
+]
+domains = ["fab.com"]
+key_names = ['\bfab\b', '_fab\b', 'unreal engine marketplace', '\(\s*unreal engine\s*\)', 'fab professional license']
+
+[redeem]
+where = "https://www.epicgames.com/account/code-redemption"
+account = true
+delivers = "one Fab listing (Professional licence) per code, in the Epic account's Fab library"
+expiry_text = "per bundle page, e.g. Blades, Blasters & Beasts: July 13 2028; Premium Assets Unreal: October 15th 2027; All-in-One Unreal & Unity: Fab keys July 6th 2027; Builder's Vault (Unreal): August 22th 2027; Mega Unreal Engine Bundle: September 21st 2027; Open World Essentials II: September 16th 2027. Deluxe Dev Dream (August 2024) asked buyers to redeem within 10 days because of the Marketplace-to-Fab switch; whether its unredeemed codes still work on Fab is unknown."
+steps = [
+  "Reveal the key on Humble (one key per asset).",
+  "Sign in to (or create) an Epic Games account and open https://www.epicgames.com/account/code-redemption (or, on fab.com, profile icon > Redeem Code; or the Epic Games Launcher: username > Redeem Code).",
+  "Enter the code, select Redeem, confirm the message. If a licence type is offered, choose the Unreal Engine / Professional one, not UEFN.",
+  "Repeat per code; pause when Fab's anti-spam limit kicks in.",
+  "The asset is now in https://www.fab.com/library ('My Library'). Unreal Engine content: add to a project from the Epic Games Launcher (Unreal Engine > Fab Library / Vault > Add to Project) or from the Fab plugin in Unreal Editor 5.3+. Other formats: download from My Library on fab.com.",
+]
+
+[download]
+scriptable = false
+how = "Unreal-format listings: Epic Games Launcher (Fab Library > Add to Project) or the in-editor Fab plugin. Other formats: fab.com > My Library > download, in a logged-in browser."
+notes = "No public download API. Unreal content never lands as a plain file the tool can put in the library folder; non-Unreal formats could be fetched with the user's browser session (inference, untested)."
+
+[library]
+files = "only the non-Unreal formats a seller offers (FBX/OBJ/GLB, textures, Unity packages), downloaded from fab.com My Library; Unreal-format listings stay in the Epic account and are added per project"
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer. Unreal content is added to a project by the Launcher or the in-editor Fab plugin; FBX/Unity/other formats are plain downloads."
+
+[platforms.macos]
+runner = "native"
+notes = "Epic Games Launcher and Unreal Editor are native on macOS; use either to add Fab content to a project."
+
+[platforms.linux]
+runner = "native"
+notes = "No Epic Games Launcher on Linux. Use the Fab plugin inside the Linux Unreal Editor (5.3+), or a Windows/macOS machine; non-Unreal formats download from fab.com in any browser. Linux Fab plugin use is from community reports only."
+
+[[sources]]
+url = "https://dev.epicgames.com/documentation/en-us/fab/purchasing-and-downloading-assets-in-fab"
+claim = "codes redeem at epicgames.com/account/code-redemption; then content is in the Epic Games Launcher, the Fab library, or the Fab plugin (UE 5.3+); UE products show in the Launcher's Fab Library; other formats download from My Library"
+[[sources]]
+url = "https://support.fab.com/s/article/How-to-Redeem-a-Product-Key?language=en_US"
+claim = "Fab help: How to Redeem a Product Key (same steps)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/53302161018651-FAB-Keys-Redemption-Instructions"
+claim = "Humble: log in at Fab.com, profile icon > Redeem Code, enter the key, Redeem; the product is added to the library for use in Unreal Engine; Epic Games Launcher > vault > Add to Project"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360056175594-Unreal-Engine-Key-Redemption-Instructions"
+claim = "Humble: Unreal Engine keys redeem at epicgames.com/account/code-redemption, Redeem then Confirm; download from the Epic Games Launcher"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360020257973-How-to-Redeem-on-Epic-Games"
+claim = "Humble: some assets from Software bundles still provide Epic Games keys; redeem via the Epic Games redemption page or Launcher > username > Redeem Code"
+[[sources]]
+url = "https://forums.unrealengine.com/t/please-let-us-redeem-multiple-fab-keys-at-once-please/2736877"
+claim = "Fab redeems one key at a time; anti-spam limits after several redemptions in quick succession; Humble bundles with dozens of individual Fab keys"
+[[sources]]
+url = "https://forums.unrealengine.com/t/i-missclicked-to-the-uefn-licence-instead-of-unreal/2745558"
+claim = "a Humble pack redeemed with the UEFN licence by mistake could not be changed to the Unreal one"
+[[sources]]
+url = "https://forums.unrealengine.com/t/wer-nutzt-unreal-engine-editor-auf-linux-was-fur-erfahrungen-habt-ihr-gesammelt-nutzt-ihr-auch-fab-und-quixel-bridge/2628542"
+claim = "community: Fab plugin present and usable in the Linux Unreal Editor 5.6"
+[[sources]]
+url = "https://www.cgchannel.com/2024/10/epic-games-launches-its-new-fab-marketplace-in-october-2024"
+claim = "Fab launched October 2024; old Unreal Engine Marketplace disabled; Fab will replace ArtStation and Sketchfab marketplaces"
+[[sources]]
+url = "https://gamefromscratch.com/battle-hardened-game-asset-hivemind-humble-bundle/"
+claim = "Hivemind bundle: Unreal assets redeemed on Fab, Unity assets on the Unity Asset Store"
+[[sources]]
+url = "https://www.humblebundle.com/software/blades-blasters-beasts-software"
+claim = "'redeemable via Epic Games'; 'Professional Fab Marketplace keys provided'; redeem before July 13, 2028"
+[[sources]]
+url = "https://slickdeals.net/f/19615476-65-item-bigger-better-unreal-engine-assets-bundle-12-000-assets-22"
+claim = "Bigger Better bundle (Meshingun + Dekogon): 'Professional Fab Marketplace keys and Unity Asset Store keys provided'; redeem before May 19th, 2027"
+[[sources]]
+url = "https://gamefromscratch.com/epic-adventures-asset-mega-pack/"
+claim = "Epic Adventures Asset Mega Pack: 'a collection of assets redeemed on the Fab marketplace for Unreal Engine (with a touch of Unity assets thrown in)'"
+[[sources]]
+url = "https://gamefromscratch.com/meshingun-3d-environment-unreal-engine-unity-bundle-returns/"
+claim = "Deluxe Dev Dreams 3D Unreal Engine & Unity bundle (December 2024 rerun): mostly Unreal environment packs plus Gothic Megapack, Gothic Interior Megapack and Medieval Village Megapack as Unity versions"
+[[sources]]
+url = "https://gamefromscratch.com/unreal-nature-and-fantasy-assets-humble-bundle/"
+claim = "Unreal Nature and Fantasy Assets (December 2022): assets from Nature Manufacture and Infinity PBR for Unreal"
+[[sources]]
+url = "https://www.humblebundle.com/software/dekogon-townscape-essentials-2000-unreal-engine-assets"
+claim = "census redeem_text: 'They can be redeemed on the Epic Games Marketplace' (the encore says 'on the FAB Marketplace'); Massive Game Dev Asset Collection 'redeemable via Epic Games'; Elites, Level Up 5K and Meshingun All-Stars 'can be redeemed via the Epic Games Store'; Epic Adventures 'Keys are redeemed through the Epic Games Store'; Unreal Nature & Fantasy 'Keys are redeemed through Epic Store'; Open World Essentials II 'Please redeem Fab keys on Epic Games'; Mega Unreal Engine Bundle 'Redeem your keys in FAB Redemption Instruction here'"

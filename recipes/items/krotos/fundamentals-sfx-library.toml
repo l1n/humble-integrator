@@ -1,0 +1,31 @@
+schema = 1
+name = "Krotos Fundamentals Sound Effects Library"
+vendor = "krotos"
+kind = "content"
+machine_names = ["fundamentalssoundeffectslibrary", "krotosfundamentalslibrary"]
+verified = false
+notes = """
+About 51 GB, 5,069 royalty-free sound-effect components across the essential sound-design categories (a superset of Starter: inference from sizes). Plain audio files; no Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "Redeem via the Humble redemption URL, then download from the Krotos account dashboard into audio/krotos/<library>."
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/7480413269275-Krotos-Audio-Redemption-Instructions"
+claim = "Humble redemption URL prefills the licence deposit code on krotosaudio.com; downloads and licence keys in the account dashboard"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/krotos-sfx-plugins-for-sound-design-software"
+claim = "Starter Library (10.5 GB) and Fundamentals Library (51GB) items and descriptions (census)"

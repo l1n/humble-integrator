@@ -1,0 +1,34 @@
+schema = 1
+name = "MAGIX Music Maker Premium (2024 / 2025)"
+vendor = "magix"
+kind = "app"
+machine_names = ["musicmaker2024premium", "musicmaker2025premium"]
+verified = false
+notes = "Loop-based music production; 2024 edition from the 2025 VEGAS bundle, 2025 edition from the 2026 'Create Magic with MAGIX' bundle. Install only the newer one if both are owned. Windows 10/11 64-bit. Soundpool coupons are redeemed inside its Store tab."
+
+[install]
+source = "humble"
+file = "*"
+serial = "per-product"
+notes = "Installer from the Humble bundle page (a MAGIX download manager); serial + MAGIX account at setup/first start."
+
+[launch]
+find = "C:/Program Files*/MAGIX/**/*Music Maker*/*.exe"
+notes = "Exe name not documented; pick the main program after install."
+
+[steam]
+shortcut = true
+title = "MAGIX Music Maker Premium (2024 / 2025)"
+steamgriddb = "MAGIX Music Maker Premium"
+
+[[sources]]
+url = "https://www.magix.com/us/support/technical-support"
+claim = "activation needs serial + email + internet; P3 serials bind to a device (changeable monthly); online re-validation at least monthly; installers/serials under Service Center > My products"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/10769322783771"
+claim = "MAGIX bundle: download the installer from the bundle page, enter the serial at first start, Activate, sign in/register a MAGIX account"
+
+[[sources]]
+url = "https://www.magix.com/us/music-editing/music-maker/specifications/"
+claim = "Windows 10/11 64-bit"

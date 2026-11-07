@@ -1,0 +1,58 @@
+schema = 1
+name = "Image-Line (FL Studio)"
+kind = "route"
+notes = """
+Makers of FL Studio. On Humble (FL Studio, UVI & Friends Hitmaking Bundle,
+Dec 2023, listed under the developer name "FL Studio"): the Sakura plugin,
+FLEX sound packs (Chill Lo-Fi, Black Octopus Pandora and Atlantis), and a
+20%-off coupon for FL Studio Fruity Edition. FL Studio itself was not in
+the bundle, and these products are used inside FL Studio (FLEX packs load
+in the FLEX instrument; Sakura is an FL Studio plugin), so they need an FL
+Studio install (the free trial runs, but saving projects needs a licence;
+not checked here). Image-Line codes are 20-digit product redemption codes
+redeemed in the Image-Line account; products then unlock in FL Studio by
+logging into that account (inference from Image-Line's account pages).
+
+FL Studio is native on macOS and Windows; no Linux build (community
+reports of FL Studio under Wine exist but were not checked). No Steam
+entries.
+"""
+
+[match]
+developers = ["FL Studio", "Image-Line", "Image Line"]
+domains = ["image-line.com"]
+key_names = ['fl\s?studio', 'image-?line']
+
+[redeem]
+where = "https://support.image-line.com/redirect/redeem_code"
+account = true
+delivers = "the products on the Image-Line account (Licenses page), unlocked inside FL Studio"
+steps = [
+  "Create or log into an Image-Line account at https://support.image-line.com/action/login.",
+  "Open the redeem-code page (https://support.image-line.com/redirect/redeem_code, login required) and enter each 20-digit code.",
+  "Check https://support.image-line.com/action/profile/licenses for the new products.",
+  "In FL Studio, unlock with the account (Help > About > Unlock with account, inference) and download the FLEX packs from FLEX's browser.",
+  "The Fruity Edition 20%-off item is a discount on a purchase (time-limited in 2023), not a product.",
+]
+
+[install]
+source = "vendor"
+serial = "account"
+silent = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+notes = "No Linux build; FL Studio under Wine is unverified here."
+
+[[sources]]
+url = "https://support.image-line.com/redirect/redeem_code"
+claim = "redeem-code page on the Image-Line account (redirects to login)"
+[[sources]]
+url = "https://support.image-line.com/action/ticketing"
+claim = "Image-Line product redemption codes are 20 digits (support form field)"
+[[sources]]
+url = "https://www.humblebundle.com/software/fl-studio-uvi-friends-hitmaking-bundle-software"
+claim = "contents: Sakura, Chill Lo-Fi, Black Octopus Pandora (128 presets) and Atlantis (155 FLEX presets), FL Studio Fruity Edition 20% off (census)"

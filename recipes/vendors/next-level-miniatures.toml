@@ -1,0 +1,64 @@
+schema = 1
+name = "Next Level Miniatures (3D-print STL miniatures)"
+kind = "route"
+item_kind = "content"   # STL files for a library folder; nothing to install, no Steam entry
+notes = """
+Next Level Miniatures is a small design studio in Fenton, Missouri, that
+makes fantasy minis, among them the official Rappan Athuk line for Frog God
+Games. Its Humble bundle, "Adventurers and Adversaries STL Miniatures
+Bundle" (Mar-Apr 2025), was paid to Frog God Games and is DRM-free: "Redeem
+DRM-Free. All of the software in this bundle is available DRM-Free." It
+holds 50 STL miniatures (items with developer "Next Level Miniatures", no
+delivery icon of their own) and two Frog God Games 5e PDFs: Rappan Athuk
+(5e), and Lairs of the Under Realms (5e), "Exclusive for Next Level
+Miniatures".
+
+Nothing to redeem: every file is a Humble download. The census marks the
+bundle drm_free, so its items resolve to generic/files. In a real account
+they are downloadable subproducts, so generic/files (or generic/ebook for
+the PDFs, if Humble labels them ebook) fetches them into the library
+folder. This recipe therefore deliberately claims NO census item by
+developer or slug: generic/files is the natural route for plain downloads.
+It only claims extracted keys that point at
+nextlevelminiatures.com, in case a later offer uses keys. A future
+key-redeemed Next Level bundle would show up in `cover` as uncovered
+"- | Next Level Miniatures" and needs a developers rule here then.
+"""
+
+[match]
+domains = ["nextlevelminiatures.com"]
+key_names = ["next ?level ?miniatures"]
+
+[redeem]
+where = "https://www.humblebundle.com/home/library"
+account = false   # Humble account only
+delivers = "Humble downloads: 50 ready-to-print STL miniatures and two 5e PDFs (Rappan Athuk; Lairs of the Under Realms)"
+steps = [
+  "Nothing to redeem: open the bundle in your Humble library and download each item (the generic files route does this).",
+  "Keep the STL items under <library>/3d-print/next-level-miniatures/<miniature>/ and the two PDFs with your ebooks; unpack any archives with 7z.",
+  "If a key for this studio ever turns up instead, its Humble instructions name the site; Next Level's own store is https://www.nextlevelminiatures.com.",
+]
+
+[install]
+source = "humble"
+serial = "none"
+unpack = "7z"
+notes = "Files only, no installer. File names and archive layout per item not confirmed (no one has opened a download for this recipe)."
+
+[platforms.macos]
+runner = "native"
+notes = "Files only, nothing to run. STL opens in any slicer."
+
+[platforms.linux]
+runner = "native"
+notes = "Files only, nothing to run. STL opens in any slicer."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/adventurers-and-adversaries-stl-miniatures-bundle-software"
+claim = "archived capture 2025-03-31 (web.archive.org/web/20250331204059/...): 'Redeem DRM-Free. All of the software in this bundle is available DRM-Free'; author/payee Frog God Games; item developer-url https://www.nextlevelminiatures.com; Lairs of the Under Realms 'Exclusive for Next Level Miniatures'"
+[[sources]]
+url = "https://www.wargamer.com/dnd/3d-printer-minis-humble-bundle"
+claim = "bundle has 50 ready-to-print STL files plus Rappan Athuk and Lairs of the Under Realms PDFs; Next Level Miniatures is a small studio in Fenton, Missouri (updated Apr 11, 2025)"
+[[sources]]
+url = "https://www.coolminiornot.com/forums/threads/next-level-miniatures-arrives-on-kickstarter.69643/post-900274"
+claim = "Next Level Miniatures partnered with Frog God Games on an official Rappan Athuk miniatures line (via search index)"

@@ -1,0 +1,33 @@
+schema = 1
+name = "Norton VPN Standard (1 year, 1 device)"
+vendor = "norton"
+kind = "app"
+machine_names = ["nortonvpnstandard"]
+verified = false
+notes = """
+Norton & Laplink Solid Security Flash Sale (Jul 2025). Activated at
+norton.com/setup like Norton AntiVirus (see vendors/norton; renewal payment
+method required, auto-renews unless cancelled). Clients: Windows, macOS,
+Android, iOS; one device. macOS: native client from the Norton account.
+Linux: no client (a VPN inside a Wine prefix would not route the system's
+traffic), so use the licence on another device. No Steam shortcut.
+"""
+
+[install]
+source = "vendor"
+url = "https://www.norton.com/setup"
+serial = "account"
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "none"
+notes = "No Linux client; use the licence on a Mac, Windows PC, Android or iOS device."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/39034677574043-Norton-Laplink-Solid-Security-Flash-Sale-Redemption-Instructions"
+claim = "Norton VPN Standard: norton.com/setup, 25-character key, renewal payment method; Windows, macOS, Android 10+, iOS; 1 device"

@@ -1,0 +1,44 @@
+schema = 1
+name = "Lightstream Studio (browser-based streaming studio)"
+kind = "route"
+service = true        # cloud streaming studio: nothing to install, no Steam entry
+notes = """
+Lightstream Studio is a cloud/browser streaming studio (overlays, scenes,
+console and mobile streaming). Humble's "Get Into Streaming" bundle (Jan 2023)
+sold 1-, 3- and 6-month 'Gamer Studio @ 1080' promo codes, new Lightstream
+customers only, one user on unlimited devices. Codes had to be redeemed by
+July 1st, 2023, so they are almost certainly unusable now. The subscription
+auto-renews at the normal price after the promo period unless cancelled.
+"""
+
+[match]
+developers = ["Lightstream"]
+domains = ["golightstream.com"]
+key_names = ['lightstream']
+
+[redeem]
+where = "https://gamer.golightstream.com"
+account = true
+delivers = "a 1-, 3- or 6-month Lightstream Gamer (1080p30) subscription for a new account"
+expires = "2023-07-01 ('Redemption Deadline: July 1st, 2023')"
+steps = [
+  "Open Lightstream Studio at https://gamer.golightstream.com and sign in with your streaming platform (new Lightstream customers only).",
+  "Choose the Monthly GAMER plan (1080p 30fps).",
+  "Enter the Humble code in the 'Promo Code' field at checkout.",
+  "The plan auto-renews afterwards; cancel before the renewal date if you don't want to pay.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download: Lightstream Studio runs in the browser (Chrome, Firefox, Edge, Brave)"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/11432935381659-Lightstream-Key-Redemption-Instructions"
+claim = "new customers only; 1 user, unlimited devices; deadline July 1st, 2023; gamer.golightstream.com, sign in with streaming platform, Monthly GAMER 1080p30 plan, Promo Code at checkout; auto-renews"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/11334856127259-Get-Into-Streaming-Bundle-System-Requirements"
+claim = "browser requirements (Chrome 57+, Firefox 42+, Edge, Brave); 1/3/6-month keys by tier; new users only"

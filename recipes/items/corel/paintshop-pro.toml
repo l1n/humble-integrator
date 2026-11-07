@@ -1,0 +1,30 @@
+schema = 1
+name = "Corel PaintShop Pro (2021 / 2022 / 2023)"
+vendor = "corel"
+kind = "app"
+machine_names = ["paintshoppro2021", "paintshoppro2022", "paintshoppro2023"]
+verified = false
+notes = "Windows-only photo editor; each version is a Humble download + its own serial; install only the newest owned. No Mac/Linux build; CrossOver rates PaintShop Pro 2023 'Will Not Install' on Mac (24.0.7) and nothing newer is rated, so expect trouble under Wine."
+
+[install]
+source = "humble"
+file = "*PaintShop*Pro*"
+serial = "per-product"
+notes = "Serial in the installer's serial page (Corel MSI-based setup; see vendor driver_notes)."
+
+[launch]
+find = "C:/Program Files*/Corel/*PaintShop Pro 20*/*PaintShop Pro*.exe"
+notes = "Inferred: 'Corel PaintShop Pro.exe' in 'Corel PaintShop Pro <year> (64-bit)'."
+
+[steam]
+shortcut = true
+title = "PaintShop Pro"
+steamgriddb = "PaintShop Pro"
+
+[[sources]]
+url = "https://www.codeweavers.com/compatibility/search?name=corel"
+claim = "CodeWeavers: entries only up to Painter 2019, VideoStudio X3, PaintShop Pro 2023; none for the 2022 versions"
+
+[[sources]]
+url = "https://www.codeweavers.com/compatibility/crossover/corel-paintshop-pro-2023"
+claim = "PaintShop Pro 2023: 'Will Not Install' on CrossOver 24.0.7 Mac (search snippet)"

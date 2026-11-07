@@ -1,0 +1,26 @@
+schema = 1
+name = "No-Code GameDev Bundle placeholder ('More games coming soon!')"
+vendor = "gdevelop"
+kind = "service"
+machine_names = ["mysterybox_101x145"]
+verified = false
+skip = true
+skip_reason = "Placeholder tile, not a product: Humble showed it until the bundle's mid-sale additions were revealed; the revealed items are separate entries on the download page."
+notes = """
+The census snapshot caught The No-Code GameDev Bundle (Dec 2022) before its
+mid-sale reveal: the item has no developer, no delivery and says 'More games
+will be added to this bundle next Tuesday... If you pay more than the average
+price ... you'll automatically receive the additional games'. Nothing to
+redeem or download for this entry itself.
+"""
+
+[install]
+source = "humble"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/no-code-gamedev-bundle-software"
+claim = "item 'More games coming soon!' with no developer or delivery; description promises later additions to beat-the-average buyers (census)"

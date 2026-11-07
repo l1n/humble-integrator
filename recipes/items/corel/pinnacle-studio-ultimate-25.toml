@@ -1,0 +1,29 @@
+schema = 1
+name = "Pinnacle Studio 25 Ultimate"
+vendor = "corel"
+kind = "app"
+machine_names = ["pinnaclestudioultimate25"]
+verified = false
+notes = "2024 'Corel Productivity & Creativity Essentials' bundle. Windows-only video editor (Corel-owned Pinnacle). Humble: reveal the key, download the installer from the Humble page, paste the serial when prompted (support: pinnaclesys.com/en/support). No Wine reports found."
+
+[install]
+source = "humble"
+file = "*Pinnacle*"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/Pinnacle/Studio 25*/*.exe"
+notes = "Folder and exe not documented."
+
+[steam]
+shortcut = true
+title = "Pinnacle Studio 25"
+steamgriddb = "Pinnacle Studio"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/25291014517275"
+claim = "Pinnacle Studio 25: reveal key, installer from the Humble page, paste serial when prompted"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/25293457176731"
+claim = "2024 bundle requirements: Painter Essentials 8 on Windows 10 and macOS 10.15-14 (Intel/M1); others Windows-only"

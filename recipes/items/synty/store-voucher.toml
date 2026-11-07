@@ -1,0 +1,31 @@
+schema = 1
+name = "Synty Store $10 voucher"
+vendor = "synty"
+kind = "service"
+machine_names = [
+  "syntystore10usdvoucher",                                # Best POLYGON, Best of Synty 1/2 Remix/5 and encores
+  "10dollarsoff_syntystore",                               # Best of Synty Remix + encore (2023)
+  "10_voucher_bestsyntygamedevassetsbundle6_softwarebundle", # Best of Synty 6
+]
+verified = false
+notes = """
+A US$10 discount code for a future order on syntystore.com, not an asset:
+nothing to download. Each bundle's voucher has its own expiry printed in the
+item text (Remix 2023: October 31, 2024; 2 Remix: April 30th, 2025; Best of
+Synty 4: March 31, 2026); most early ones have lapsed. The tool should only
+show the code and its deadline.
+"""
+
+[redeem]
+where = "https://syntystore.com/"
+steps = ["Enter the code as a discount code at Synty Store checkout before its expiry date."]
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/best-synty-game-dev-assets-remix-software"
+claim = "'This coupon will get you $10 USD off your next order from the Synty Store. Coupon expires October 31, 2024.'"
+[[sources]]
+url = "https://syntystore.com/products/humble-bundle-synty-sci-fi-bundle"
+claim = "Humble Synty bundles include a $10 Synty Store Voucher"

@@ -1,0 +1,36 @@
+schema = 1
+name = "London Symphonic Strings Soloists Bundle (Aria Sounds)"
+vendor = "audio-plugin-deals"
+kind = "content"
+machine_names = ["londonsymphonicstringssoloistsbundle"]
+verified = false
+notes = """
+Aria Sounds' solo violin, viola, cello and double bass, recorded in a London concert hall with four mixable microphone positions (24-bit/48 kHz WAV, ~16 GB). A Kontakt library that needs the full Kontakt (5.6.8+), not the free Kontakt Player; Kontakt is not part of the bundle. Redeemed and installed with Pulse; redeem before 5 May 2027. No Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "Pulse: Add a Product, enter the key, Install into a sample-library folder; then add the library in Kontakt."
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "none"
+notes = "Pulse runs on Linux and can download the files, but the full Kontakt that plays them has no Linux build."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/48987205836699-London-Symphonic-Strings-Soloists-Bundle-Redemption-Instructions"
+claim = "redeem in Pulse Downloader: Add a Product, enter key, Install"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/london-symphonic-strings-soloists-bundle-software"
+claim = "'Redeemable on Pulse Downloader'; 'Please redeem before May 5th, 2027'; four mic perspectives (census)"
+
+[[sources]]
+url = "https://rekkerd.org/london-symphonic-strings-soloist-bundle-by-aria-sounds-on-sale/"
+claim = "LSS solo strings bundle ~16 GB, for the full version of Kontakt (via web search summary)"

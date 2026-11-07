@@ -1,0 +1,80 @@
+schema = 1
+name = "itch.io"
+kind = "route"
+notes = """
+Redemption route for Humble bundles whose keys are itch.io links. Humble has
+run such bundles (it keeps two "Itch.io Redemption Instructions" articles,
+2024 and 2025), but none is in the census yet, so this route is matched by
+redemption text and extracted-key instructions only. Sellers who merely also
+sell on itch.io (GameDev Market sellers, ElvGames) say a Humble purchase does
+not unlock their itch.io pages; their bundles go to their own routes.
+
+What a key is: a link on the Humble download page ("the green link") that
+opens an itch.io redemption page; logged in, it claims the bundle (or the
+project's download key) into the account. An itch.io download key is a URL
+(https://SELLER.itch.io/PROJECT/download/KEY) giving access to the project's
+current uploads, including later updates; once linked to an account only its
+owner can open it. The library is at itch.io/my-collections ("My Library").
+
+Unlike the other marketplaces this one is scriptable with a documented API:
+an itch.io API key lists the user's owned keys
+(https://api.itch.io/profile/owned-keys, scope profile:owned). Fetching the
+files themselves is what the itch app / butler do; those upload endpoints
+are not in the public reference, so treat that part as inference.
+"""
+
+[match]
+domains = ["itch.io"]
+key_names = ['\bitch\.io\b']
+redeem_text = ['redeem\w*[^.]{0,60}\bitch\.io\b']
+
+[redeem]
+where = "https://itch.io/my-collections"
+account = true
+delivers = "the bundle's projects in the itch.io library, with all their current and future uploads"
+expires = "per bundle (none seen yet); itch.io's docs give download keys no expiry of their own"
+steps = [
+  "Create or log in to an itch.io account.",
+  "On the Humble download page click the (green) redeem link; it opens an itch.io redemption page. Claim the bundle/key to the account.",
+  "Follow the page to each project's download page and download the uploads for this OS (assets: everything).",
+  "Everything stays under My Library: https://itch.io/my-collections.",
+]
+
+[download]
+scriptable = true
+how = "itch.io server-side API with the user's API key (owned keys), then the project's uploads"
+notes = """
+Create an API key at itch.io account settings (API keys). GET
+https://api.itch.io/profile/owned-keys pages through every owned key (game,
+seller, purchase); each project's files are its uploads, which the itch app
+and butler download. Games with native builds could then go through the
+generic DRM-free app path; assets go to the library folder.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "Assets: unpack into the library folder. Games: native build for this OS first (generic/drm-free-app handling)."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/1260802589229-Itch-io-Key-Redemption-Instructions"
+claim = "click the green link on the bundle page, redirected to an itch.io redemption page, log in, download page; content again in My Library (itch.io/my-collections)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/36347720060571-Itch-io-Redemption-Instructions"
+claim = "create an itch.io account, use the key link to claim the bundle to the account, download the assets (2025)"
+[[sources]]
+url = "https://itch.io/docs/creators/download-keys"
+claim = "a download key is a unique URL giving access to a project's files (purchases, bundles, generated keys); keys linked to an account are only viewable by its owner; current uploads always available to key holders"
+[[sources]]
+url = "https://itch.io/docs/api/serverside"
+claim = "api.itch.io with Bearer API keys; /profile/owned-keys lists owned keys from purchases, claims, bundles and gifts; download URL form SELLER.itch.io/GAME/download/KEY"
+[[sources]]
+url = "https://itch.io/post/7743606"
+claim = "a seller: Humble Bundle doesn't grant access to the packs on their itch.io page"

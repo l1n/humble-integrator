@@ -1,0 +1,33 @@
+schema = 1
+name = "Minecraft Music Plugin"
+vendor = "ovani-sound"
+kind = "content"
+machine_names = ["minecraftmusicplugin"]
+verified = false
+notes = """
+Music control for Minecraft worlds: song intensity, track choice, random play, seamless looping, fades, crossfades and per-player music, beyond what standard add-ons can do. Ovani's page speaks of Minecraft 'Addons', the Bedrock Edition term (inference: Bedrock); Humble lists it as Windows only. No Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = """
+Download from the Ovani order after redeeming the Humble coupon; import into the world/add-on as its included instructions say (format not checked).
+"""
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://ovanisound.com/products/minecraft-music-plugin"
+claim = "product page: features; 'Unlike standard Minecraft Addons'"
+
+[[sources]]
+url = "https://ovanisound.com/products/humble-bundle-audio-arcade-tier-1"
+claim = "delivered through the Humble tier coupon on Ovani's store"

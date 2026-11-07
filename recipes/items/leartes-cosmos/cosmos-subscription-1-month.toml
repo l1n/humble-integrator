@@ -1,0 +1,43 @@
+schema = 1
+name = "Cosmos 1-month subscription"
+vendor = "leartes-cosmos"
+kind = "service"
+service = true
+machine_names = [
+  "cosmosonemonthfreesubscription",   # Big Bang
+  "cosmos1monthsubscription",         # Gigantic, Best Leartes Gigantic, Godot Ultimate, Mega Game Dev, Legendary
+  "cosmosone-monthstandardsubscription",   # Black Friday Mega
+  "cosmos1-monthsubscription_cosmoseclipsegamedevassetstoolsbundleunrealunitygodot",   # Cosmos Eclipse
+]
+verified = false
+notes = """
+One month of a Cosmos standard subscription: unlimited access to the Cosmos
+content library excluding environments (props, VFX, SFX, decals, materials -
+"Unlocks the 1000+ Props", cosmos.leartesstudios.com/assets). Redeemed on
+Cosmos like the other codes; items received during the subscription stay in
+the account after it ends (Cosmos FAQ, about Premium). Subscriptions are
+billed through Xsolla: if a payment method is asked for, cancel auto-renewal
+there. The tool should redeem it only when the user asks (it starts a clock).
+In bundles routed to Fab or Gumroad (Best Leartes Gigantic, Legendary) this
+code still goes to Cosmos.
+"""
+
+[redeem]
+where = "https://cosmos.leartesstudios.com/redeem"
+steps = [
+  "Redeem the code on Cosmos when ready to use the month.",
+  "If it set up a renewing subscription, cancel automatic renewal in the Xsolla account (Subscriptions).",
+]
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/best-leartes-gigantic-game-dev-assets-tools-megabundle-software"
+claim = "'Cosmos 1 month subscription ... Unlocks the 1000+ Props'"
+[[sources]]
+url = "https://www.humblebundle.com/software/godot-ultimate-asset-bundle-software"
+claim = "'Enjoy 30 days of unlimited access to the Cosmos content library - excluding environments ... props, VFX, SFX, decals, materials'"
+[[sources]]
+url = "https://cosmos.leartesstudios.com/frequently-asked-questions"
+claim = "subscriptions managed and cancelled via Xsolla; products received through a premium subscription remain yours"

@@ -1,0 +1,18 @@
+schema = 1
+name = "Eldamar Studio Bonus Coupon - 50% Discount Code"
+vendor = "eldamar-studio"
+kind = "service"
+machine_names = ["bonuscoupon_50discountcode"]
+verified = false
+notes = "A 50% discount code for anything in the Eldamar Studio store (All-in-One Game Dev, Biggest Graphics 2025, Blender 3D Modeling Course bundles). Nothing to download; the tool only shows the code."
+
+[redeem]
+where = "https://eldamar-studio.com/"
+steps = ["Apply the code at checkout on eldamar-studio.com."]
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/allinone-game-dev-bundle-software"
+claim = "'As a bonus, you'll get a 50% discount code to use on anything in our store.'"

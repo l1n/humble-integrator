@@ -1,0 +1,20 @@
+schema = 1
+name = "100 IK JamPoints"
+vendor = "ik-multimedia"
+kind = "service"
+machine_names = ["100jampoints"]
+verified = false
+notes = """
+IK's JamPoints reward points: credit toward a later IK purchase. Registering the serial adds the points to the IK account (inference). Nothing to install, no Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/ik-pro-sound-suite-software"
+claim = "'Get reward points for your next IK product. JamPoints - IK Multimedia rewards program' (census)"

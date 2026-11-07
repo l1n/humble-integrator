@@ -1,0 +1,42 @@
+schema = 1
+name = "RescueTime (time tracking subscription)"
+kind = "route"
+service = true        # account subscription; desktop client is a free download
+notes = """
+The Healthy Habits Toolkit (Mar 2024): RescueTime, 12-month subscription,
+for new or Lite users only (not current premium users). Account-based
+service; the tracking client is installed per device (Mac, Windows, iOS,
+Android, Firefox; Humble's list names no Linux client). Not a Steam item.
+"""
+
+[match]
+developers = ["RescueTime"]
+domains = ["rescuetime.com"]
+key_names = ['rescue ?time']
+
+[redeem]
+where = "https://www.rescuetime.com/deals/redeem/"
+account = true
+delivers = "12 months of RescueTime premium on the account"
+expires = "not stated; check the Humble download page"
+steps = [
+  "Open https://www.rescuetime.com/deals/redeem/ and enter the code from the Humble download page.",
+  "Create the account on the following form and confirm the email address.",
+  "Install the client for each device (Mac, Windows, iOS, Android, Firefox).",
+  "The licence expiry is at https://www.rescuetime.com/accounts/billing. Support: https://newrescuetime.helpscoutdocs.com/.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download from the key"
+
+[install]
+source = "vendor"
+serial = "account"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/23135567720731-RescueTime-Redemption-Instructions"
+claim = "rescuetime.com/deals/redeem; create account; install client for Mac, Windows, iOS, Android, Firefox; expiry at rescuetime.com/accounts/billing"
+[[sources]]
+url = "https://www.humblebundle.com/software/healthy-habits-toolkit-build-successful-routines-for-life-software"
+claim = "offer for new or Lite RescueTime users only (census description)"

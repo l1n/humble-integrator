@@ -1,0 +1,42 @@
+schema = 1
+name = "Q Up Arts"
+kind = "route"
+notes = """
+Sample and music library publisher (Q Space music packs, Pop Strings UK
+construction kits, Gadd DrumScores, Voices of India ...; files in REX, Apple
+Loops and WAV). In Humble's 2021 audio bundle (with Boom 3D) the Q Up Arts
+packs have no delivery icon, so the census cannot place them; only Boom 3D
+was a key ("BOOM 3D is available for Windows and Mac"). They are Humble
+downloads (inference), so this recipe claims that bundle's census rows by
+slug and leaves real downloads to the generic routes. Boom 3D itself
+resolves to vendors/global-delight. The 2024 Q Up Arts Remix bundle
+(samples, loops and virtual instruments) is not in the census yet and is not
+matched here.
+"""
+
+[match]
+bundle_slugs = ['^boom-royalty-free-sounds-music-audio']
+
+[redeem]
+where = "https://www.humblebundle.com/home/library"
+account = false
+delivers = "sample-pack zips on the bundle's Humble download page"
+steps = [
+  "Nothing to redeem for the Q Up Arts packs: download them from the bundle's Humble download page into audio/q-up-arts/<pack>.",
+]
+
+[install]
+source = "humble"
+serial = "none"
+
+[platforms.macos]
+runner = "native"
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/boom-royalty-free-sounds-music-audio"
+claim = "Q Up Arts packs with no delivery icon; only Boom 3D needs a key (census)"
+[[sources]]
+url = "https://rekkerd.org/tag/humble-bundle/"
+claim = "separate Q Up Arts Remix bundle on Humble, Aug 2024"

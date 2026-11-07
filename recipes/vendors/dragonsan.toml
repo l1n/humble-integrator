@@ -1,0 +1,77 @@
+schema = 1
+name = "Dragonsan Studios (Atavism store: MMO character models and icon packs)"
+kind = "route"
+notes = """
+Dragonsan Studios (dragonsan.com) makes the Atavism MMO framework for Unity and
+sells game-ready 3D character packs (Orcs, Ogres, Goblins, Dwarves, Elves,
+Humans, Human NPC 'Complete Packs', UMA and non-UMA) and 2D icon packs (skills,
+loot, herbs, potions, food, jewels, gems, fishing, scrolls, resources). Humble's
+"The Fantasy Realms Bundle by Dragonsan" (Jan-Feb 2024) sold 17 packs plus a
+'Dragonsan 90% Discount Coupon' for the "Dragonsan Studios Store" (valid until
+12/31/24).
+
+Where the pack keys are redeemed is not stated in the bundle text and Humble has
+no article for it. The coupon item names Dragonsan's own store
+(atavismonline.com/store), whose FAQ describes exactly a coupon flow (log in,
+add the product to the cart, 'Apply Coupon' at checkout, then download the
+files from a direct link for icon and model purchases); the packs are inferred
+to be 100%-off coupons there. The earlier "Mini DragonSan Flash Sale" (Dec 2023)
+sold some of the same packs as Unity Asset Store vouchers and stays on the
+unity-asset-store route; if a Fantasy Realms key turns out to be a Unity voucher,
+redeem it there instead. Dragonsan now also sells on Fab.
+
+Content only: Unity-ready models and PNG icon sets imported by hand; nothing to
+install, no Steam entry. Matched by bundle slug only, so the Unity-voucher
+bundle is not touched.
+"""
+
+[match]
+domains = ["atavismonline.com", "dragonsan.com"]
+key_names = ['dragonsan', 'atavism']
+bundle_slugs = ['^fantasy-realms-bundle-dragonsan']
+
+[redeem]
+where = "https://atavismonline.com/store (Dragonsan Studios store; inferred for the pack keys)"
+account = true
+delivers = "the asset pack as a $0 order with download links (icons, UMA / non-UMA models); the 90% coupon discounts further store purchases"
+expires = "90% discount coupon: 'Coupon will expire on 12/31/24'; pack keys: not stated"
+steps = [
+  "Read the instructions shown with each key on the Humble download page; they name the store (Dragonsan store or Unity Asset Store).",
+  "Dragonsan store: log in to or register an account at https://atavismonline.com (email or Facebook).",
+  "Add the pack matching the key to the cart; at checkout enter the code and click 'Apply Coupon'; the total should be 0. Complete the order.",
+  "Download the files from the order's direct link (icons and models) into the library folder.",
+  "Help: support@dragonsan.com, forum.atavismonline.com, or Atavism's Discord.",
+]
+
+[download]
+scriptable = false
+how = "direct download links after the order on atavismonline.com (logged in)"
+notes = "No API; a logged-in session could save the archives into the library folder (inference, untested)."
+
+[library]
+files = "Unity-ready 3D character packs (FBX/Unity packages, UMA and non-UMA variants) and PNG icon sets (inferred from the product descriptions)"
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer: assets are imported into Unity (or used as plain image files) by hand."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/fantasy-realms-bundle-dragonsan-software"
+claim = "'Pro-quality MMO assets for Unity'; 17 Dragonsan packs and a 90% discount coupon for the 'Dragonsan Studios Store' expiring 12/31/24; no redemption site named (census)"
+[[sources]]
+url = "https://atavismonline.com/store/f-a-q"
+claim = "'How to redeem coupon code': log in or create an account, add a product to the cart, provide the coupon at checkout and click Apply Coupon, then access the files by direct link for icons and UMA/non-UMA models; support@dragonsan.com"
+[[sources]]
+url = "https://www.humblebundle.com/software/mini-dragonsan-flash-sale-software"
+claim = "the same packs in an earlier bundle: 'Keys are redeemed through the Unity asset store' (census redeem_text)"
+[[sources]]
+url = "https://dragonsan.com/"
+claim = "Dragonsan Studios: Atavism, 3D models and 2D icons; links to its Fab seller page"

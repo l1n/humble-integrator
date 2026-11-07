@@ -1,0 +1,56 @@
+schema = 1
+name = "Master Your Workflow: project-management & productivity video courses (Packt)"
+vendor = "packt"
+kind = "service"
+machine_names = [
+  "productmanagementcertificationwithagileproductownerandscrum",
+  "alteryxforbeginners",
+  "completescrummastercertificationandagilescrumcourse",
+  "pmi_rmpcertificationtraining",
+  "simplestguidetoprojectmanagementandpmi-pmpcertificationexam",
+  "completeprojectmanagementfundamentalscourse",
+  "scrumadvanced_softwaredevelopmentandprogrammanagement",
+  "powerbitipsandtricksincludestime-savingchatgptprompts",
+  "comprehensiveguidetoagilescrumfoundations",
+  "agilemasterclass_agileforprojectmanagement",
+  "microsoftexcel2021and365_beginnertoadvanced",
+  "completeexcelguide_beginnerstoadvanced",
+  "gettingstartedwithjira",
+  "microsoftpowerbi_thecompletemasterclass2023edition",
+  "agileretrospective_continuousimprovementandkaizenwithscrum",
+  "scrumtrainingforprojectmanagementandcertificationprep",
+  "planningandcontrolusingmicrosoftproject365and2021",
+  "programmanagementprofessionalpgmpexamprepcourse",
+  "alteryxmasterclass_letsgetstarted",
+  "microsoftproject2021frombeginnerstoadvanced",
+]
+verified = false
+notes = """
+'Master Your Workflow: The Ultimate Project Management & Productivity Bundle'
+(Jun 2024): 20 online video courses by many instructors (Paul Ashun, Simon
+Sez IT, Learnkart, YESI Education, Monika Rawat, Dan We, Nikolai Schuler,
+Paul E. Harris, Aslam Khan, Pavan Lalwani) that are all Packt courses: every
+item lists Packt as publisher. The bundle's text only says 'Redeem your
+keys', so vendors/packt's bundle-level rules miss it; this item recipe
+routes the courses to Packt's voucher redemption instead (the vendor's
+[redeem] applies: packtpub.com/voucher/redeem). Nine of these machine
+names also appear in other Packt course bundles (Agile in Action, Business
+Intelligence Analyst, Data Analyst Pro Guide, Manager's Toolkit, Leadership
+and Project Management, Data Management Bootcamp), which already resolved to
+vendors/packt; the redemption is the same there. One file for the 20 courses
+because they are handled identically.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/master-your-workflow-ultimate-project-management-productivity-bundle-software"
+claim = "20 hb-key course items, each with publisher Packt; text says 'online courses' and 'Redeem your keys' without naming a site (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/14637082608155-Packt-Bundle-Key-Redemption-Instructions"
+claim = "Packt course keys are vouchers redeemed at packtpub.com/voucher/redeem into the Packt account library"

@@ -1,0 +1,97 @@
+schema = 1
+name = "Mammoth Interactive / Mammoth Club (online courses, exams, ebooks, asset packs)"
+kind = "route"
+service = true        # course platform: nothing to install, no Steam entry
+notes = """
+Humble's Mammoth bundles are certification and practice-exam bundles
+(AWS / CompTIA / Azure / Google Cloud / NVIDIA ...), "Anyone Can Learn to
+Code", "Complete ... Bundle" course megabundles and "All-in-One ... Game Dev"
+bundles. They are all redeemed on the Mammoth Club school (mammothclub.com),
+which Mammoth Interactive runs.
+The census names the vendor several ways: publisher "Mammoth Interactive",
+"MammothClub" or "Mammoth Club"; developer "Mammoth Interactive INC." or
+"Team Mammoth". Often the developer field is a long list of instructors,
+e.g. "Jared Matson, James Dabalus, John Bura, ...". Those lists change
+from bundle to bundle, so match on the publisher names and on the
+redemption text, never on instructor names.
+
+Each Humble key is a coupon built into a mammothclub.com redemption URL
+(the code is the last part of the URL). Depending on the bundle there is one
+link for everything ("A single key will be provided") or one link per tier.
+The coupon works once. If the $0 / "Lifetime FREE" option is missing, it
+has probably been used already: check the Student Dashboard first.
+
+Safety: this is a real shop checkout. Never enter payment details and never
+pick a subscription or "Yearly" plan. Continue only when the total is $0.
+
+A bundle may contain courses, ebooks (Books tab), audiobooks (M4B
+downloads), practice exams (Exams tab) and game asset packs: FBX models
+with PNG textures and sample Godot / Unity / Unreal projects, or code
+templates. Census descriptions of e.g. "Sands of Adventure", "Ultimate 3D
+Model Collection" and "Godot 4 Game Engine Script Vault" say so. They all
+land in the same Mammoth Club dashboard after one redemption. Exactly how
+asset-pack files are offered for download there is not documented
+(unverified).
+
+Humble Choice discount coupons in a Mammoth bundle (developer "Humble
+Choice") get swept up by this route's redeem_text rule, because the rule
+matches the whole bundle. They are not Mammoth items.
+"""
+
+[match]
+developers = [
+  "Mammoth Interactive", "Mammoth Interactive INC.", "Mammoth Interactive Inc.",
+  "Mammoth Club", "MammothClub", "Team Mammoth",
+]
+domains = ["mammothclub.com", "mammothinteractive.com"]
+key_names = ["mammoth ?(club|interactive)"]
+redeem_text = [
+  # "All keys can be redeemed on the Mammoth website", "All the content in this
+  # bundle is redeemed on the Mammoth Interactive website", "Keys are redeemable
+  # on the MammothClub website", "Keys are redeemed through Mammoth."
+  "redeem\\w*[^.]{0,60}\\bmammoth ?(?:club|interactive)?(?:\\s|&nbsp;)*(?:website|\\.com|\\.|$)",
+  "mammothclub\\.com",                                    # "Redeem your content via https://mammothclub.com/..."
+]
+
+[redeem]
+where = "https://mammothclub.com/"
+account = true
+delivers = "the bundle (or tier) as a Mammoth Club enrolment: Courses, Books, Exams tabs of the Student Dashboard (https://mammothclub.com/student-dash/courses); lifetime access"
+expires = "per bundle: e.g. 'Please redeem your keys before September 24th, 2027', 'Please redeem before October 5, 2027' (about a year after the bundle ends). Key.is_expired from Humble is authoritative."
+expiry_text = "(?i)redeem (?:your keys )?before ([A-Z][a-z]+ \\d{1,2}(?:st|nd|rd|th)?,? \\d{4})"
+steps = [
+  "Reveal the key on Humble and open its redemption URL ('Redeem Content Here'). It leads to the bundle or tier page on mammothclub.com. The coupon code is the last part of that URL.",
+  "Log in to (or register, free) a Mammoth Club account. It is separate from the Humble account. Use one account for every Mammoth key.",
+  "On the page choose the 'Lifetime' / 'Lifetime FREE forever' option, never a yearly plan or subscription, and click 'Add to cart' / 'Buy Lifetime Access'.",
+  "Open the cart and go to Checkout. Skip any 'Bonus Offers' / upsell page ('Continue to Checkout' / 'Continue to Confirmation').",
+  "The coupon is normally applied automatically. If the total is not $0.00, enter the code from the end of the redemption URL in the coupon / 'Enter Code' box and Apply.",
+  "Only when the total is $0.00: click 'Enroll now' / 'Proceed to Payment'. No card is needed.",
+  "Courses are in the Courses tab (the first entry is the bundle itself, with a recommended course order), ebooks in Books, practice exams in Exams.",
+  "If the free option is missing, the coupon may already be used: check the Student Dashboard. Otherwise retry in a private window. Support: support@mammothinteractive.com or https://mammothclub.com/contact.",
+]
+
+[library]
+videos = false                 # no documented download of course videos (streamed in the dashboard)
+files = "ebooks from the Books tab; audiobooks as downloadable M4B files in the Courses tab; completion certificates; asset-pack / template files where the item offers them (unverified)"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/14854375872539-Mammoth-Interactive-Course-Redemption-Instructions"
+claim = "redemption URL on the download page; one link or one per tier; choose Lifetime; separate Mammoth Club account; Bonus Offers > Continue to Confirmation > Proceed to Payment; Courses/Books/Exams tabs; audiobooks as M4B downloads; coupon in the URL, one-time (updated 2026-08-05)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/35354193644955-MammothClub-Course-Redemption-Instructions"
+claim = "'Lifetime FREE forever' option, Add to cart, free account, 100% code pre-applied, Enroll; support@mammothinteractive.com (2025)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/51027522330779-The-Complete-Business-and-AI-Certification-Bundle-Redemption-Instructions"
+claim = "coupon is the last part of https://mammothclub.com/course/<bundle>/<coupon>; apply it by hand if the total is not $0; courses and exams on the student dashboard (2026)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/52464430707995-IT-AI-500-Certification-Exams-Redemption-Instructions"
+claim = "2026 flow: Redeem Content Here, Add to cart, Checkout tab, enter code, total must drop to zero, Enroll now"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/50395682646043-Mammoth-Interactive-Key-Redemption"
+claim = "acquire the bundle without any subscription; support@mammothinteractive.com (2026)"
+[[sources]]
+url = "https://support.fanatical.com/hc/en-us/articles/22129384862482-Redeeming-your-Mammoth-Interactive-course"
+claim = "Fanatical's variant of the same coupon flow: choose LIFETIME, not the default Yearly, and the coupon brings the price to $0 (read via the Zendesk API)"
+[[sources]]
+url = "https://www.humblebundle.com/software/anyone-can-learn-to-code-software"
+claim = "'All content is redeemable with a key on the Mammoth website'; 'A single key will be provided' (census redeem_text)"

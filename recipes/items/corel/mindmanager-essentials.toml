@@ -1,0 +1,11 @@
+schema = 1
+name = "MindManager Essentials (1-year subscription)"
+vendor = "corel"
+kind = "service"
+machine_names = ["mindmanageressentials-1yearsubscription"]
+verified = false
+notes = "MindManager Essentials is a web app (mind maps in the browser). The Humble code is presumably entered as the coupon on MindManager's Humble checkout page (inferred). That page describes a recurring $99/year subscription that renews unless cancelled before the term ends: warn the user to turn off auto-renewal. Codes from the 2022 bundles may no longer be redeemable (unconfirmed). No install, no Steam entry."
+
+[[sources]]
+url = "https://store.mindmanager.com/1494/purl-humble-bundle"
+claim = "MindManager Essentials Humble store page: $99/year web app, coupon field, renews unless cancelled"

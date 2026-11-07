@@ -1,0 +1,54 @@
+schema = 1
+name = "Learn Squared (art and design video courses)"
+kind = "route"
+service = true        # course platform: nothing to install, no Steam entry
+notes = """
+Humble's "Character and Creature Megabundle" (2026) is Learn Squared
+courses. Each item names the instructor as developer and "Learn Squared" as
+publisher. The Humble key is a code for a $0 checkout of the bundle product
+on learnsquared.com. The courses then sit in the account under "Your
+Courses" with lifetime access.
+
+Offline use: Learn Squared does not let course videos be downloaded. Lessons
+do come with downloadable project files: fetch those into the library folder.
+"""
+
+[match]
+developers = ["Learn Squared", "Learn Squared, Inc."]
+domains = ["learnsquared.com"]
+key_names = ["learn ?squared"]
+redeem_text = [
+  "redeem\\w*[^.]{0,60}\\blearn ?squared\\b",
+  "learnsquared\\.com",
+]
+
+[redeem]
+where = "https://www.learnsquared.com/"
+account = true
+delivers = "the bundle's courses under 'Your Courses' on learnsquared.com; lifetime access"
+expires = "per bundle, on the Humble download page. Humble support cannot replace expired keys."
+expiry_text = "(?i)redeem (?:your keys )?before ([A-Z][a-z]+ \\d{1,2}(?:st|nd|rd|th)?,? \\d{4})"
+steps = [
+  "Create an account or log in at https://www.learnsquared.com/.",
+  "Reveal the code on the Humble download page and click the 'here' link under it. It opens the bundle on Learn Squared.",
+  "Click 'Add Bundle to Cart', enter the Humble code, and check the total is zero.",
+  "Fill in the checkout form and complete checkout. No payment is needed.",
+  "The content opens after checkout, and stays under 'Your Courses' in the account.",
+]
+
+[library]
+videos = false                 # Learn Squared: no offline video download
+files = "per-lesson downloadable project files"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/30093333191579-Learn-Squared-Redemption-Instructions"
+claim = "account, reveal code, 'here' link, Add Bundle to Cart, enter code (total zero), checkout, 'Your Courses'; expired keys cannot be replaced (updated 2025-01)"
+[[sources]]
+url = "https://help.learnsquared.com/article/10-downloading-videos"
+claim = "videos cannot be downloaded for offline viewing; project files are downloadable"
+[[sources]]
+url = "https://help.learnsquared.com/article/12-how-long-do-i-have-access-to-my-course"
+claim = "all courses come with lifetime access"
+[[sources]]
+url = "https://www.humblebundle.com/software/character-and-creature-megabundle-software"
+claim = "'This high-quality collection from Learn Squared'; publisher 'Learn Squared' (census)"

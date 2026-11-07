@@ -1,0 +1,29 @@
+schema = 1
+name = "Games by Hyper 50% Discount Code"
+vendor = "games-by-hyper"
+kind = "service"
+service = true
+machine_names = [
+  "gamesbyhyper50discountcode",       # Best Core Game Dev Assets & Tools
+  "50discountcodegamesbyhyperstore",  # Mega Game Dev Assets & Tools
+]
+verified = false
+notes = """
+A 50% discount code for Games by Hyper's own store (gamesbyhyper.com), not
+for Cosmos, valid for 3 months after the bundle purchase. Bundled in Leartes
+bundles whose other keys redeem on Cosmos. Nothing to download.
+"""
+
+[redeem]
+where = "https://gamesbyhyper.com/"
+steps = ["Apply the code at checkout on gamesbyhyper.com within 3 months."]
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/best-core-game-dev-assets-tools-megabundle-software"
+claim = "'50% Discount code valid for all Games by Hyper https://gamesbyhyper.com/ The Redemption period only valid for 3 month'"
+[[sources]]
+url = "https://www.humblebundle.com/software/mega-game-dev-assets-tools-bundle-software"
+claim = "'50% Discount Code Games by Hyper Store': same text"

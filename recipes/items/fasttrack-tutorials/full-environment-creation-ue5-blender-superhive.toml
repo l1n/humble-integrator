@@ -1,0 +1,50 @@
+schema = 1
+name = "Full Environment Creation in UE5 & Blender - In-Depth Course (Blender Market bundle copy)"
+vendor = "fasttrack-tutorials"
+kind = "document"
+machine_names = ["fullenvironmentcreationinue5andblender_in-depthcourse"]
+verified = false
+notes = """
+This copy of the FastTrackTutorials course came in Blender Market's
+"Essential Game Modding Toolkit" bundle and its Encore (publisher "Blender
+Market"). It is not redeemed on fasttracktutorials.com. The bundle has ONE
+coupon for everything, used at a $0 checkout of the bundle product on Blender
+Market, now Superhive (superhivemarket.com). The course files (videos and
+project files) are then downloaded from the Superhive account's Orders page
+into the library folder. No Steam entry.
+
+The same course in FastTrack's own Humble bundles has a different machine
+name (fullenvironmentcreationinue5andblender) and follows the vendor recipe.
+If a Blender Market / Superhive vendor recipe is added later, it covers this
+bundle's other ~40 items. This file only keeps the FastTrack developer rule
+from misrouting this course to FastTrack's site.
+"""
+
+[redeem]
+where = "https://blendermarket.com/products/blender-markets-essential-game-modding-toolkit"
+account = true
+steps = [
+  "Reveal the bundle's single coupon on Humble.",
+  "Open the bundle product on Blender Market (now superhivemarket.com) and choose the variant/tier that was bought.",
+  "Enter the coupon at checkout (type it rather than paste it if it fails) and check out at $0.",
+  "Download the course files from the Superhive account's Orders page.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+file = "*"
+notes = "Superhive order downloads (zip archives of lessons and project files; layout not confirmed)."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/26912354384411-Blender-Market-s-Essential-Game-Modding-Toolkit-License-and-Bundle-Information"
+claim = "bundle redemption: product link, choose variant, coupon code, checkout; lifetime licence, no future updates; this course listed with the bundle's licences"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/51303757621659-Creature-and-Character-Creation-Bundle-Redemption-Instructions"
+claim = "Superhive bundles: $0 checkout with the Humble coupon; product files downloadable any time from the Superhive account Orders page"
+[[sources]]
+url = "https://www.humblebundle.com/software/blender-markets-essential-game-modding-toolkit-software"
+claim = "'A single key will be provided to redeem the content in your bundle'; item developer FastTrackTutorials, publisher Blender Market (census)"

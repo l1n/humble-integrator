@@ -1,0 +1,55 @@
+schema = 1
+name = "INeedMusic.Co"
+kind = "route"
+notes = """
+Royalty-free music packs (lo-fi, synthwave, 8-bit, cinematic ...) sold on a
+Shopify store, ineedmusic.co. Humble bundles: Creator Boombox (Apr 2024) and
+The Legendary Soundtrack Suite (Aug 2024, Encore Sep 2025). Humble: "Keys
+are redeemed through INeedMusic.Co's website. A single key will be provided
+to redeem content in your bundle"; Humble's page shows the items with a
+download icon anyway. The store has one redemption product per Humble tier
+that a 100%-off coupon unlocks, the same flow as Ovani Sound. Add only the
+tier you bought; a combined 'Legendary Soundtrack Suite Tier 3 + Creator
+Boombox Tier 3' product serves the $30 Tier 4.
+"""
+
+[match]
+developers = ["INeedMusic.Co", "INeedMusic", "I Need Music"]
+redeem_text = ['INeedMusic']
+domains = ["ineedmusic.co"]
+key_names = ['ineedmusic', 'i need music']
+
+[redeem]
+where = "https://ineedmusic.co/"
+account = true
+delivers = "a $0 order whose music-pack downloads (zips) arrive by email and in the order status page"
+steps = [
+  "Open the redemption product for the tier you bought (see [redeem.tier_products]; https://ineedmusic.co/products/<handle>) and add it to the cart. Add only that tier.",
+  "Keep it in the cart: it adds the tier's packs and drops to $0 at checkout.",
+  "Enter the Humble coupon in the code field at the bottom of the cart page and click Check Out. Use the standard checkout only (PayPal, Apple Pay and Google Pay reject the coupon).",
+  "No card details should be asked for; if they are, stop.",
+  "Download the packs into audio/ineedmusic/<pack>.",
+]
+
+[redeem.tier_products]
+"creator-boombox" = ["april-humble-bundle-tier-1", "april-humble-bundle-tier-2", "april-humble-bundle-tier-3"]
+"legendary-soundtrack-suite" = ["the-legendary-soundtrack-suite-tier-1", "the-legendary-soundtrack-suite-tier-2", "the-legendary-soundtrack-suite-tier-3", "the-legendary-soundtrack-suite-tier-4"]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[platforms.macos]
+runner = "native"
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://ineedmusic.co/products/april-humble-bundle-tier-1"
+claim = "Humble tier redemption product: add only your tier, keep it in the cart, coupon at the bottom of the cart, standard checkout only, coupon covers 100%"
+[[sources]]
+url = "https://ineedmusic.co/products/the-legendary-soundtrack-suite-tier-4"
+claim = "Tier 4 ($30) product combines Legendary Soundtrack Suite Tier 3 and Creator Boombox Tier 3"
+[[sources]]
+url = "https://www.humblebundle.com/software/creator-boombox-loopable-royaltyfree-songs-for-an-upgraded-experience-software"
+claim = "keys redeemed through INeedMusic.Co's website; single key for the bundle (census)"

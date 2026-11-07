@@ -1,0 +1,116 @@
+schema = 1
+name = "MAGIX (Music Maker, Video Pro X, Photostory, Photo Manager) and VEGAS / SOUND FORGE (now Boris FX)"
+kind = "route"
+notes = """
+Windows-only creative software. Humble's MAGIX/VEGAS items are serials: the
+installer comes from the Humble bundle page (Humble warns installers from
+elsewhere may not accept the bundle voucher), the serial is entered in setup
+or at first start, and activation is online with a MAGIX account (serial +
+email). Activation binds to the device and the program re-validates online
+at least once a month (a few days' grace), so the prefix needs network
+access for as long as it is used. Licences from these bundles are
+perpetual ('Unlimited').
+Boris FX bought VEGAS Pro, SOUND FORGE and ACID Pro in March 2026; licences
+bought under MAGIX stay with MAGIX (Service Center > My products, which also
+hosts the legacy installers), while new Boris FX versions use Boris FX
+account logins. VEGAS: 2 installs, 1 running at a time.
+Wine/Proton status is poor: no working reports for current versions (VEGAS
+Pro 18 Edit is 'borked' on ProtonDB; older VEGAS versions crash at start
+under Wine). Treat Linux/macOS installs as experimental. Many MAGIX/VEGAS
+products are also sold on Steam; Steam keys for them stay on
+generic/steam-key (key_names here only match 'magix'/coupon names).
+"""
+
+[match]
+developers = ["MAGIX", "MAGIX Software GmbH", "MAGIX Software", "VEGAS Creative Software"]
+domains = ["magix.com", "vegascreativesoftware.com", "producerplanet.com", "magix.info"]
+key_names = ["magix", "soundpool", "producer ?planet"]
+
+[redeem]
+where = "the program's activation dialog (serial + MAGIX account); management at the MAGIX Service Center (My products)"
+account = true
+delivers = "a perpetual, device-bound licence; installers and serials listed under MAGIX Service Center > My products"
+expires = "software: none ('Unlimited' in Humble's terms); content coupons can expire (a 2024 bundle's soundpools expired 8/31/2024); check the Humble download page"
+steps = [
+  "Download the installer from the Humble bundle page (not from magix.com: it may not take the voucher) and reveal the serial.",
+  "Install; enter the serial when setup or the first start asks, choose 'Activate & register immediately online', and sign in to or create a MAGIX account (email).",
+  "Keep the prefix online: the licence re-validates at least monthly. To move it, deactivate under MAGIX Service Center > My products (device changes allowed about once a month).",
+  "Content coupons: see their service recipe (redeemed in Music Maker's Store or on producerplanet.com).",
+]
+
+[install]
+source = "humble"
+serial = "per-product"
+silent = false
+driver = "magix-setup"
+driver_notes = "MAGIX installers are a 'MAGIX Setup' download manager (the trial stub is ~6 MB, '_dlm_' in the name) with a serial page and an account sign-in, MSI-based underneath (inferred from Windows Installer strings). No silent switches are documented for the consumer products; the only precedent is Sequoia's setup accepting /q. Run interactively and let the tool type the user's serial and email."
+
+[platforms.macos]
+runner = "crossover"
+windows = "win10"
+notes = "No Mac versions (the old SOUND FORGE Pro Mac is discontinued). CrossOver untested; VEGAS needs a GPU-heavy Windows stack and is unlikely to run."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "No native builds; Proton/Wine reports are negative or absent (VEGAS Pro 18 Edit borked; older VEGAS crash at start; a 2025 VEGAS 22 on Pop!_OS thread reports no success). Music Maker / Photostory / Photo Manager untested."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/10769322783771"
+claim = "MAGIX bundle: download the installer from the bundle page, enter the serial at first start, Activate, sign in/register a MAGIX account"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/13682881852443"
+claim = "do not download the installer from another source; it may not work with the bundle voucher"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/10768735675931"
+claim = "SOUND FORGE Pro: serial prompt at launch, 'Activate & register immediately online'"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/10769238721947"
+claim = "VEGAS Pro 18/19: light installer asks for serial + email during setup; may need a MAGIX account login"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/10769136503195"
+claim = "Movie Studio: same pattern as VEGAS Pro"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/31976675080475"
+claim = "internet required for download, registering and validation"
+
+[[sources]]
+url = "https://www.magix.com/us/support/technical-support"
+claim = "activation needs serial + email + internet; P3 serials bind to a device (changeable monthly); online re-validation at least monthly; installers/serials under Service Center > My products"
+
+[[sources]]
+url = "https://blog.borisfx.com/press/boris-fx-acquires-vegas-pro-sound-forge-and-acid-pro"
+claim = "Boris FX bought VEGAS Pro, SOUND FORGE and ACID Pro from MAGIX (2026-03-30)"
+
+[[sources]]
+url = "https://support.borisfx.com/hc/en-us/articles/44650605900301"
+claim = "lifetime licences bought from MAGIX remain valid under MAGIX"
+
+[[sources]]
+url = "https://support.borisfx.com/hc/en-us/articles/43560493112589"
+claim = "legacy installers: MAGIX Service Center > My products > Show more details"
+
+[[sources]]
+url = "https://support.borisfx.com/hc/en-us/articles/43421008790541"
+claim = "VEGAS installs on 2 PCs, runs on 1 at a time; deactivate under My Products"
+
+[[sources]]
+url = "https://support.borisfx.com/hc/en-us/articles/43584813034509"
+claim = "VEGAS is Windows-only (Boot Camp suggested on Macs)"
+
+[[sources]]
+url = "https://support.borisfx.com/hc/en-us/articles/38966008635789"
+claim = "MAGIX-heritage Sequoia setup runs silently with /q (precedent only)"
+
+[[sources]]
+url = "https://www.protondb.com/api/v1/reports/summaries/1325400.json"
+claim = "VEGAS Pro 18 Edit (Steam): 1 ProtonDB report, borked"
+
+[[sources]]
+url = "https://www.winehq.org/pipermail/wine-bugs/2017-July/473727.html"
+claim = "older VEGAS Pro versions stall/crash at startup under Wine"

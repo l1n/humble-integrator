@@ -1,0 +1,34 @@
+schema = 1
+name = "SampleTank 4 MAX v2"
+vendor = "ik-multimedia"
+kind = "addon"
+machine_names = ["sampletank4maxv2"]
+verified = false
+notes = """
+The complete SampleTank 4 workstation: over 600 GB of samples and about 19,600 instrument presets, including 88 SampleTank libraries and SampleTank-powered instruments (Humble's description). Supersedes the separate SampleTank 4 and most collections if owned; choose a big disk for its Sounds. No Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = "Register the Humble serial on the IK account, then install from IK Product Manager (Software tab; sample content from the Sounds tab). Authorization happens in Product Manager."
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = "No Linux build. Untested: Windows installer into the shared audio-plugins Wine prefix, bridged into a Linux DAW with yabridge."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/ik-pro-sound-suite-software-encore"
+claim = "'over 600 GB of samples', '19,638 instrument presets', '88 SampleTank libraries' (census description)"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/29332171355675-IK-Multimedia-Redemption-Instructions-EULA"
+claim = "register at ikmultimedia.com/registration; IK Product Manager: Software tab > Install, Sounds tab > Install"

@@ -1,0 +1,34 @@
+schema = 1
+name = "AmpliTube 5 SE"
+vendor = "ik-multimedia"
+kind = "addon"
+machine_names = ["amplitube5se"]
+verified = false
+notes = """
+Guitar and bass amp/cabinet/effects modeller (80 models), standalone and plug-in, with TONEX integration. Host for the AmpliTube gear collections. Standalone use is still a DAW-style tool; no Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = "Register the Humble serial on the IK account, then install from IK Product Manager (Software tab; sample content from the Sounds tab). Authorization happens in Product Manager."
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = "No Linux build. Untested: Windows installer into the shared audio-plugins Wine prefix, bridged into a Linux DAW with yabridge."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/ik-multimedia-presents-audio-master-suite-software"
+claim = "'80 models covering all the must-have gear. Seamless TONEX integration' (census)"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/29332171355675-IK-Multimedia-Redemption-Instructions-EULA"
+claim = "register at ikmultimedia.com/registration; IK Product Manager: Software tab > Install, Sounds tab > Install"

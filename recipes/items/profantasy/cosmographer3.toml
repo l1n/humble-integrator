@@ -1,0 +1,24 @@
+schema = 1
+name = "Cosmographer 3"
+vendor = "profantasy"
+kind = "addon"
+machine_names = ["cosmographer3plus"]
+requires = ["profantasy/cc3plus"]
+verified = false
+notes = "Runs inside CC3+ (its own menu file loads from CC3+'s add-on buttons); no Steam entry. Installed size about 400 MB."
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = "Use the ...ForCC3Plus installer. Install after CC3+ and its update, with CC3+ closed."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.profantasy.com/cchelp/options/hlp_cmd_menu.htm"
+claim = "add-ons load their own menu inside CC3+"
+
+[[sources]]
+url = "https://forum.profantasy.com/discussion/15750/latest-humble-bundle-and-installing-cartographers-annuals"
+claim = "install order"

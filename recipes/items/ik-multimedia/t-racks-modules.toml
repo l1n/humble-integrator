@@ -1,0 +1,38 @@
+schema = 1
+name = "T-RackS single processors"
+vendor = "ik-multimedia"
+kind = "addon"
+machine_names = ["t-racksdelaylab", "t-rackslo-fipunch", "t-racksoptocompressor", "t-rackscomprexxor", "t-rackschannelstripx", "t-racksbassone", "prismreverb"]
+verified = false
+notes = """
+Single T-RackS mixing/mastering processors: Delay Lab, Lo-Fi Punch, Opto Compressor, Comprexxor, Channel Strip X, Bass ONE, Prism Reverb. Each works as its own plug-in (VST/AU/AAX) and inside the T-RackS 6 rack, whose free shell is T-RackS 6 INTRO (inference that the INTRO shell hosts bought modules). No Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = "Register the Humble serial on the IK account, then install from IK Product Manager (Software tab; sample content from the Sounds tab). Authorization happens in Product Manager."
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = "No Linux build. Untested: Windows installer into the shared audio-plugins Wine prefix, bridged into a Linux DAW with yabridge."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/ik-multimedia-presents-audio-master-suite-software"
+claim = "T-RackS modules as IK keys; Lo-Fi Punch etc. described as T-RackS plug-ins (census)"
+
+[[sources]]
+url = "https://ikmultimedia.com/products.json"
+claim = "'Prism Reverb' sold as a T-RackS product (trprismreverb), 'Available as VST, AU, and AAX for Mac and PC'; T-RackS 6 INTRO at $0"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/29332171355675-IK-Multimedia-Redemption-Instructions-EULA"
+claim = "register at ikmultimedia.com/registration; IK Product Manager: Software tab > Install, Sounds tab > Install"

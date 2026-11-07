@@ -1,0 +1,102 @@
+schema = 1
+name = "Hayland Terrain (3D-print STL terrain, with AlbinoRavenMini)"
+kind = "route"
+item_kind = "content"   # STL files for a library folder; nothing to install, no Steam entry
+notes = """
+Hayland Terrain sells 28 mm STL terrain, scatter and miniatures from its
+Shopify store (haylandterrain.com, prices in GBP, products typed
+"3d Digital Download"). Licence on every Humble item: personal,
+non-commercial use; commercial licences from Haylandgames@gmail.com.
+Its first two Humble bundles also carried AlbinoRavenMini, a sculptor of
+32 mm fantasy and modern/sci-fi soldiers who sells on MyMiniFactory and
+CGTrader (the 2022 bundle links each AlbinoRaven item to one of those
+store pages).
+
+This recipe claims only those first two bundles, by URL slug and by the
+order machine_name an account reports:
+- "Humble Dungeons & Monsters 3D Printable Tabletop Bundle" (ended
+  2021-11-18; machine dungeonsmonsters3dprintabletabletop_softwarebundle):
+  80 Hayland items (one, jungleruins_plants, typed "ebook" by Humble) and
+  40 AlbinoRavenMini minis.
+- "Humble 3D Printable Models Urban, Apocalyptic Wasteland Bundle"
+  (ended 2022-06-16; machine modernscifiwasteland_softwarebundle): 48
+  Hayland items, 44 AlbinoRavenMini items, and a Humble Choice coupon
+  (that one goes to generic/humble-coupon).
+Neither page, in any archived capture during the sale, says how the files
+are delivered: no "Redeem your keys", no single-key notice, no DRM-free
+line, no delivery icons on items. The Help Centre has no article for
+either creator.
+
+Every later Hayland bundle in the census (Dungeons & Pirates, Oct 2022, and
+the dozen since) says "Redeem DRM-Free. All of the software in this bundle
+is available DRM-Free", so they resolve to generic/files. This recipe
+therefore has NO developers rule: Hayland and AlbinoRaven items in those
+bundles must stay on the files route.
+
+Inference, unconfirmed: these two bundles were Humble downloads as well.
+Same creators, same store-page links, no key wording. And Humble's own
+pages of that era show the same lack of icons on bundles later confirmed
+DRM-free (see vendors/a-bards-tale). If so, nothing is lost by routing
+them here: `hi apply` still fetches a vendor-route item's Humble
+downloads, into <library>/vendors/hayland-terrain/<item>/. The fallback
+steps cover a key, if one turns up instead.
+"""
+
+[match]
+domains = ["haylandterrain.com"]
+key_names = ["hayland", "albino ?raven"]
+bundle_slugs = [
+  '^dungeons-monsters-3d-printable-tabletop-software',  # URL slug (census)
+  '^dungeonsmonsters3dprintabletabletop',               # order machine_name, as an account reports it
+  '^modernscifiwasteland',                              # URL slug and order machine_name
+]
+
+[redeem]
+where = "https://www.humblebundle.com/home/library"
+account = false   # Humble account only, unless a key turns up (see steps)
+delivers = "STL files per item (Hayland: 28 mm terrain and scatter, FDM- and resin-printable, some supportless; AlbinoRavenMini: 32 mm minis, pre-supported and unsupported STL plus OBJ)"
+steps = [
+  "Open the bundle in your Humble library. If its items show Download buttons there is nothing to redeem: `hi apply` fetches every item's files into <library>/vendors/hayland-terrain/<item>/.",
+  "If the order shows a key instead, reveal it (Keys & Entitlements) and follow the instructions Humble shows next to it. If they name MyMiniFactory, see vendors/myminifactory (files land in MMF Library > Objects shared with me).",
+  "Unpack each item's archive(s) with 7z next to the download.",
+  "Missing or broken files: Humble support first; Hayland Terrain answers at Haylandgames@gmail.com (the address on every Hayland item).",
+]
+
+[install]
+source = "humble"
+serial = "none"
+unpack = "7z"
+notes = "Files only, no installer. Archive names and layout per item are not confirmed: nobody has opened a download for this recipe yet."
+
+[download]
+scriptable = true
+how = "Humble order downloads (signed URLs from Humble's order API), fetched by `hi apply`"
+notes = "Holds only if the bundle really was Humble downloads (see notes). A key would follow the redeem fallback; the MyMiniFactory API needs OAuth (vendors/myminifactory)."
+
+[library]
+files = "STL per item; AlbinoRavenMini items also OBJ, pre-supported and unsupported versions (from the item descriptions)"
+licence = "personal, non-commercial use only; commercial use by arrangement with Haylandgames@gmail.com"
+
+[platforms.macos]
+runner = "native"
+notes = "Files only, nothing to run. STL and OBJ open in any slicer (PrusaSlicer, Cura, Lychee, Chitubox)."
+
+[platforms.linux]
+runner = "native"
+notes = "Files only, nothing to run. STL and OBJ open in any slicer (PrusaSlicer, Cura, Lychee)."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/dungeons-monsters-3d-printable-tabletop-software"
+claim = "archived captures 2021-10-28, 2021-11-15 and 2022-01-28 (web.archive.org/web/20211115192942/...): no delivery wording or item icons; Hayland developer-urls on haylandterrain.com; item text 'STLS - NON - Commercial ... Contact us at Haylandgames@gmail.com', 'Digital Download Only'; AlbinoRavenMini '32 mm scale ready for 3d printing'"
+[[sources]]
+url = "https://www.humblebundle.com/software/modernscifiwasteland-software"
+claim = "archived captures 2022-05-26, 2022-06-16 and 2022-06-28 (web.archive.org/web/20220616154331/...): 'These 3D models come in STL file format'; no key or DRM-free wording; AlbinoRavenMini developer-urls on myminifactory.com/object/... and cgtrader.com; descriptions 'presupported and nosupport version ... Stl and Obj'"
+[[sources]]
+url = "https://www.humblebundle.com/software/dungeons-and-pirates-3d-printable-tabletop-software"
+claim = "archived capture 2022-10-11: first Hayland bundle stating 'Redeem DRM-Free. All of the software in this bundle is available DRM-Free'; every later Hayland bundle in the census says the same or 'available for direct download'"
+[[sources]]
+url = "https://support.humblebundle.com/api/v2/help_center/articles/search.json?query=Hayland"
+claim = "Humble Help Centre, Oct 2026: no article for Hayland Terrain (0 results), none for AlbinoRaven either"
+[[sources]]
+url = "https://haylandterrain.com/search?q=humble"
+claim = "Hayland Terrain Shopify store (hayland-terrain.myshopify.com, prices in GBP): products of type '3d Digital Download'; no Humble redemption page"

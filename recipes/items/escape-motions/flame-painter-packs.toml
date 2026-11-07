@@ -1,0 +1,41 @@
+schema = 1
+name = "Flame Painter brush packs and particle systems"
+vendor = "escape-motions"
+kind = "content"
+machine_names = [
+  "brushpack_flame",
+  "brushpack_ribbon",
+  "brushpack_follow",
+  "brushpack_fuzzy",
+  "particlesystemflame",
+  "particlesystemribbon",
+  "particlesystemfollow",
+  "particlesystem_fuzzy",
+]
+requires = ["escape-motions/flame-painter-4"]
+verified = false
+notes = "Brush Packs and Particle Systems (Flame, Ribbon, Follow, Fuzzy) for Flame Painter 4. Each Humble code is redeemed on the Escape Motions site. Particle systems are account entitlements that unlock in the app after the Community login (limited to 3 devices); brush packs are (inferred) zips of brush images: drag them onto Flame Painter's Brushes panel, or copy them into Help > Show Library Folder > Brushes and reopen the app. Grouped in one recipe because they install identically."
+
+[install]
+source = "vendor"
+file = "*"
+serial = "account"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.escapemotions.com/community/humblebundle"
+claim = "Humble redeem page ('Humble Software Bundle: Become a Painting Pro'): one code at a time, email verification"
+
+[[sources]]
+url = "https://www.escapemotions.com/products/flamepainter/documents/Flame_Manual_v.4.1.pdf"
+claim = "Flame Painter 4: log in with the Community account on first launch; brushes via Brushes panel or library folder"
+
+[[sources]]
+url = "https://www.escapemotions.com/community/forum/t/39346/will-uninstalling-rebelle-delete-its-license"
+claim = "licence on 3 Win/Mac devices, one at a time; particle systems also limited to 3 devices"
+
+[[sources]]
+url = "https://www.escapemotions.com/products/flamepainter/brushes.php"
+claim = "Flame/Ribbon/Follow ship with the app; others unlock through the account"

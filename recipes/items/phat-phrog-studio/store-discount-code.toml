@@ -1,0 +1,26 @@
+schema = 1
+name = "Phat Phrog Studio store discount code (70%)"
+vendor = "phat-phrog-studio"
+kind = "service"
+machine_names = ["70phatphrogdiscountcode", "70discountphatphrogstudiostore_bigphatbangersmusicbundle_softwarebundle"]
+verified = false
+notes = """
+A 70%-off code for one future order on the Phat Phrog Studio store (Audio
+Ascension, 2025; Big Phat Bangers, 2026, "4000 Early Bird Codes"). It
+unlocks nothing by itself: use it only if you want to buy something.
+The tool should list it, never act on it. Expiry not stated.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/audio-ascension-game-music-character-voices-mega-bundle-software"
+claim = "'70% off your entire next order on Phat Phrog Studio Store' (census item description)"
+[[sources]]
+url = "https://www.humblebundle.com/software/big-phat-bangers-music-bundle-software"
+claim = "'70% Discount on Phat Phrog Studio Store - 4000 Early Bird Codes' (census)"

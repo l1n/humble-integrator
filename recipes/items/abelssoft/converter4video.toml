@@ -1,0 +1,30 @@
+schema = 1
+name = "Abelssoft Converter4Video"
+vendor = "abelssoft"
+kind = "app"
+machine_names = ["converter4video"]
+verified = false
+notes = "2022 'Entertainment, Privacy & PC Health' bundle (Humble installer + key). Video format converter. Works on files, so it is usable under Wine (untested); ffmpeg/HandBrake do the same natively."
+
+[install]
+source = "humble"
+file = "*.exe"
+args = ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"]
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/*/Program/Converter4Video.exe"
+notes = "{commonpf}\\<Product>\\Program\\<exe> per the current installer's Inno header; the 2022 Humble build may differ."
+
+[steam]
+shortcut = true
+title = "Converter4Video"
+steamgriddb = "Abelssoft Converter4Video"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/5873424950427"
+claim = "Abelssoft: install from the Humble download; first launch asks for the 20-digit key, then name + email, 'Get free unlock mail now', click the e-mailed link"
+
+[[sources]]
+url = "https://www.abelssoft.de/converter4video-setup.exe"
+claim = "current installer (Inno header inspected)"

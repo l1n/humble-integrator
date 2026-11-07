@@ -1,0 +1,59 @@
+schema = 1
+name = "DailyOM (online wellbeing courses)"
+kind = "route"
+service = true        # course platform: nothing to install, no Steam entry
+notes = """
+"Greater Health, Happiness, and Prosperity by DailyOM" (find-your-dailyom-software,
+Jan 2024): about 19 self-paced DailyOM video/audio courses, one key per course.
+Each key comes with a unique DailyOM checkout link; the key is a 100%-off promo
+code applied at that checkout. Courses then live in the DailyOM account (web and
+the DailyOM app) for as long as DailyOM keeps the course on its platform.
+
+The census snapshot shows the course items with no delivery icon at all; they
+are matched through the bundle's redemption text ("All courses redeemed on the
+DailyOM website"). The bundle also has one DRM-free ebook, Beginner Restorative
+Yoga, claimed by item dailyom/beginner-restorative-yoga, and Humble's 10%-off
+Humble Choice coupon (generic/humble-coupon).
+
+No developers rule: DailyOM is also the publisher of DRM-free ebooks that should
+stay on the generic download routes.
+"""
+
+[match]
+domains = ["dailyom.com"]
+key_names = ['daily ?om']
+# "All courses redeemed on the DailyOM website."
+redeem_text = ['redeem\w*[^.]{0,60}\bdaily ?om\b']
+
+[redeem]
+where = "the unique DailyOM checkout link shown next to each key on the Humble download page"
+account = true
+delivers = "the course in the DailyOM account (web and app), available while DailyOM keeps it on the platform"
+expires = "not stated in the bundle text or Humble's article"
+steps = [
+  "Reveal the key on the Humble download page; it is a 100%-off promo code for one course.",
+  "Open the course's unique checkout link from the download page.",
+  "Enter your email address, apply the promo code and skip payment details; the total should be $0.",
+  "Complete the 'purchase', then finish creating the DailyOM account (use the same email for every course).",
+  "Repeat for each course key. Support: https://www.dailyom.com/contact-us/.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download: lessons are watched or listened to on dailyom.com or in the DailyOM app"
+notes = "Whether lesson media or worksheets can be saved for offline use was not found (unverified)."
+
+[library]
+videos = false
+files = "none known; the bundle's ebook is a Humble download (item dailyom/beginner-restorative-yoga)"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/22176007680283-DailyOM-Key-Redemption-Instructions"
+claim = "unique checkout link on the download page; enter email, apply the 100% off promo code, skip payment, complete purchase, finish account setup; unlimited access while the course stays on DailyOM; support at dailyom.com/contact-us"
+[[sources]]
+url = "https://www.humblebundle.com/software/find-your-dailyom-software"
+claim = "'All courses redeemed on the DailyOM website' (census redeem_text); course items have no delivery icon in the snapshot"

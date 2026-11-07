@@ -1,0 +1,60 @@
+schema = 1
+name = "Animpic Studio"
+kind = "route"
+notes = """
+Low-poly asset seller ("POLY" packs: cities, survival kits, weapons,
+vehicles, villages) for Godot, Unity and Unreal, with its own store at
+animpic.store. Humble bundles redeemed there: Godot 4 Mega Polygon Assets
+Bundle (2025, 27 packs, "Keys can be redeemed on the Animpic Studio
+website") and POLY Game Dev Assets Collection #3 (2026). A key is a product
+key for the store's Activate page; one key can unlock several products,
+which then appear in the Animpic Library with files per engine.
+
+No developers rule: Animpic's packs are also sold on the Unity Asset Store
+and Fab, and bundles redeemed there must keep their own routes.
+"""
+
+[match]
+domains = ["animpic.store", "animpic.studio"]
+key_names = ['\banimpic\b']
+# "Keys can be redeemed on the Animpic Studio website"
+redeem_text = ['redeem\w*[^.]{0,60}\banimpic\b']
+# Breaks the tie in two-maker bundles ("redeemable through Animpic and Eldamar
+# websites"): each item goes to its own maker's site.
+developers = ["Animpic Studio", "Animpic"]
+bundle_slugs = ['^godot-?4-?mega-?polygon-?assets']
+
+[redeem]
+where = "https://animpic.store/account/activate/"
+account = true
+delivers = "the key's products (one key may hold several) in the Animpic Library, downloadable per engine/application"
+expires = "not stated"
+steps = [
+  "Sign in to (or create) an Animpic Store account.",
+  "Open https://animpic.store/account/activate/, enter the Humble key in 'Product key', click Activate.",
+  "Open the Animpic Library, pick each product and download the files for the engine wanted (Godot for the Godot 4 bundle).",
+]
+
+[download]
+scriptable = false
+how = "Animpic Library on animpic.store, per product and engine"
+notes = "No API known; a logged-in session could fetch the archives into the library folder (inference, untested)."
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer: engine packages/projects imported per project by hand."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/55995948397979-POLY-Game-Dev-Assets-Collection-3-Redemption-Instructions"
+claim = "sign in to the Animpic Store; animpic.store/account/activate/; Product key; Activate; one key may include several products; download from the Animpic Library per engine; support info@animpic.studio"
+[[sources]]
+url = "https://www.humblebundle.com/software/godot4-mega-polygon-assets-bundle-software"
+claim = "'Keys can be redeemed on the Animpic Studio website'"

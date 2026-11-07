@@ -1,0 +1,24 @@
+schema = 1
+name = "Troll Lord Games store coupon (20% off)"
+vendor = "troll-lord-games"
+kind = "service"
+machine_names = ["couponpage"]
+verified = false
+notes = """
+Castles & Crusades RPG Experience (Oct-Nov 2026): 'Coupon Page', 20% off
+the next purchase at the Troll Lord Games store. A discount, not a product;
+no delivery icon in the census, so the code/link is on the Humble download
+page. Optional; nothing to download. The machine name is generic: another
+publisher's 'couponpage' would need its own recipe.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/castles-crusades-rpg-experience-software"
+claim = "'Enjoy 20% off your next purchase at the Troll Lord Games Store with this exclusive coupon!' (census)"

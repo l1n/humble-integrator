@@ -1,0 +1,40 @@
+schema = 1
+name = "Rebelle 5"
+vendor = "escape-motions"
+kind = "app"
+machine_names = ["rebelle5exe"]
+verified = false
+notes = "2023 'Become a Painting Pro with Rebelle 5' bundle: Humble serves Windows and Mac DRM-free builds. Realistic watercolour/oil painting. Activates by Community-account login at first launch."
+
+[install]
+source = "humble"
+file = "Rebelle 5*"
+args = ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"]
+serial = "account"
+notes = "Same build is downloadable from the Escape Motions account (My Account > Purchases) once redeemed."
+
+[launch]
+find = "C:/Program Files*/**/Rebelle 5*.exe"
+notes = "Exe name inferred from the installer naming (Rebelle 8 installs 'Rebelle 8.exe')."
+
+[steam]
+shortcut = true
+title = "Rebelle 5"
+steamgriddb = "Rebelle 5"
+
+[platforms.macos]
+runner = "native"
+file = "*.dmg"
+app_find = "/Applications/Rebelle 5*.app"
+
+[[sources]]
+url = "https://www.escapemotions.com/community/humblebundle"
+claim = "Humble redeem page ('Humble Software Bundle: Become a Painting Pro'): one code at a time, email verification"
+
+[[sources]]
+url = "https://www.escapemotions.com/community/forum/t/719/humble-bundle-activation-code-no-longer-valid"
+claim = "staff: Humble codes register products on the site and are not install keys; a used code can't be reused"
+
+[[sources]]
+url = "https://www.escapemotions.com/products/rebelle/manual/latest/getting-started/installing/"
+claim = "installers 'Rebelle N.exe/.dmg'; installs to Program Files"

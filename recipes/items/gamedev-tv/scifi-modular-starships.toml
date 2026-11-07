@@ -1,0 +1,32 @@
+schema = 1
+name = "Sci-Fi Modular Starships & Carriers Kit"
+vendor = "gamedev-tv"
+kind = "content"
+machine_names = ["sci-fimodularstarshipsandcarrierskit"]
+verified = false
+notes = """
+GameDev.tv asset pack, not a course: 21 starships and 100+ modular parts in 9 colour variations; full commercial licence.
+It is redeemed like every GameDev.tv coupon (see vendors/gamedev-tv). It then
+appears in My Library, and its page lists the downloadable files. Download
+them into the library folder. Nothing to install and no Steam entry: the
+files are imported by hand into Unity, Unreal Engine 5, Godot, Blender (or any engine via FBX/glTF).
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+file = "*"
+notes = "The product page lists these files: (UNREAL)_*.zip; (UNITY_URP)/(UNITY_HDRP)/(UNITY)*.unitypackage; (GODOT)*.zip; (glTF)*.zip; (FBX)*.zip; (BLENDER)_*.blend; 'GameDev.tv General Asset License 2.0.txt'. Fetch all of them, or only the engines the user picked."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/2025-learn-unity-game-development-bundle-software"
+claim = "item in this GameDev.tv bundle, keyed (hb-key); contents from the census description"
+[[sources]]
+url = "https://gamedev.tv/assets/scifi-starships"
+claim = "product page: Downloads list (per-engine files, licence txt), Lifetime Access"
+[[sources]]
+url = "https://gamedev.tv/p/help"
+claim = "lifetime access; products in My Library; course assets usable in your own (commercial) projects"

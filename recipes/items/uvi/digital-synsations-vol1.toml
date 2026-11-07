@@ -1,0 +1,36 @@
+schema = 1
+name = "Digital Synsations Vol. 1 (UVI)"
+vendor = "uvi"
+kind = "addon"
+machine_names = ["digitalsynsations_vol1"]
+verified = false
+notes = """
+Four instruments modelled on famous 1990s digital synths, 600+ presets. A UVI soundbank: plays in the free UVI Workstation or in Falcon (plugin or standalone), installed and activated through UVI Portal and iLok. No Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = """
+Register the serial in UVI Portal, activate the iLok licence (machine or dongle), and let UVI Portal install the soundbank and UVI Workstation.
+"""
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "none"
+notes = """
+iLok-protected; no Linux route known.
+"""
+
+[[sources]]
+url = "https://www.humblebundle.com/software/fl-studio-uvi-friends-hitmaking-bundle-software"
+claim = "item description in the FL Studio, UVI & Friends Hitmaking Bundle (census)"
+
+[[sources]]
+url = "https://www.uvi.net/uvi-portal"
+claim = "UVI Portal + iLok registration, install and activation"

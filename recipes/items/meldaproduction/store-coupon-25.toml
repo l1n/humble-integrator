@@ -1,0 +1,28 @@
+schema = 1
+name = "MeldaProduction store coupons (25% off / EUR 15)"
+vendor = "meldaproduction"
+kind = "service"
+machine_names = ["25percentoffcoupon_melda", "meldacoupon25percentoff", "meldavouchertier3"]
+verified = false
+notes = """
+Discount codes for meldaproduction.com: 25% off any order (FL Studio, UVI & Friends, 2023: expired 31 December 2023 per Humble's description; Opus FX, 2025: no expiry stated) and a EUR 15 voucher (Music Producer 2023: expired end of December 2023). Optional, cost money to use; apply in the discount column at checkout. Nothing to install.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/fl-studio-uvi-friends-hitmaking-bundle-software"
+claim = "item description in the FL Studio, UVI & Friends Hitmaking Bundle (census)"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/12715790932891-Music-Producer-2023-Plugins-Software-Essentials-Coupon-Redemption-Information"
+claim = "EUR 15 Melda coupon for any Melda plug-in at meldaproduction.com, applied at checkout; expires end of Dec 2023"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/opus-fx-superior-plugins-orchestral-elegance-software"
+claim = "'Melda Coupon 25% Off' item (census)"

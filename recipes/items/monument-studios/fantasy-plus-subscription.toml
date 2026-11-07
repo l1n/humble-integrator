@@ -1,0 +1,34 @@
+schema = 1
+name = "Fantasy+ Subscription (Monument Studios)"
+vendor = "monument-studios"
+kind = "service"
+service = true
+machine_names = ["fantasyplussubscription_1month", "fantasyplussubscription_2month", "fantasyplussubscription_3month"]
+publisher = "Monument Studios"
+verified = false
+notes = "Fantasy+ is Monument Studios' TTRPG audio library app (5,000+ files, streamed). The Humble keys are subscription codes entered when signing up at fantasyplus.app; the 1-, 2- and 3-month keys of the TTRPG Audio Compendium tiers stack (3 months in total at the highest tier). Nothing to download or install; the tool only shows the code and the link."
+
+[redeem]
+where = "https://fantasyplus.app/"
+account = true
+expiry_text = "not stated"
+steps = [
+  "Open https://fantasyplus.app/ and sign up (or sign in).",
+  "Enter the Humble key when asked during sign-up; repeat for each Fantasy+ key from the bundle (they stack).",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "Web app: nothing to install."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/30744363287963-Fantasy-Subscription-Redemption-Instructions"
+claim = "redeem the key from the bundle page when signing up at https://fantasyplus.app/; the subscription stacks (3 months total if purchasing the highest tier)"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/monument-studios-ttrpg-audio-compendium-software"
+claim = "items 'Fantasy+ Subscription: 1 Month / 2 Month / 3 Month'; 'Explore the world's most powerful TTRPG audio library. With over 5,000+ audio files'"

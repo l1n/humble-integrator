@@ -1,0 +1,73 @@
+schema = 1
+name = "GETREKT Labs"
+kind = "route"
+notes = """
+Stream-overlay seller (getrektlabs.com): animated overlay,
+alert and scene packages for OBS, Streamlabs and StreamElements, and Twitch /
+YouTube emote packs. Humble bundles: GETREKT Retro Stream Overlays (2024),
+Best Stream Overlays 2024 and Overlay Extreme Bundle (Sept-Oct 2025: 11
+overlay packages and 9 emote packs, "available for Getrekt"), one code per
+package. Each code is a discount code for one package's product; "each code
+is redeemed individually" because the checkout takes only one code at a time.
+Personal-use licence, one user, unlimited devices. No deadline to redeem
+(Retro bundle). Overlay Extreme has no Humble article of its own; its codes
+are assumed to follow the same getrektlabs.com flow (inference), and its emote
+packs arrive the same way as image files for upload to Twitch/YouTube.
+
+Caveat: the bundle-level match also sweeps the Retro bundle's "10% off
+Humble Choice" coupon onto this route; that coupon is Humble's own.
+"""
+
+[match]
+domains = ["getrektlabs.com"]
+key_names = ['\bgetrekt\b']
+developers = ["GETREKT", "GETREKT Labs"]
+# "The content in this bundle is redeemable on the GETREKT Labs website";
+# Overlay Extreme: "All of the software in this bundle is available for Getrekt."
+redeem_text = ['redeem\w*[^.]{0,60}\bgetrekt\b', '\bavailable (?:for|on|at|through) (?:the )?getrekt\b']
+bundle_slugs = ['getrekt', '^overlay-extreme-bundle']
+
+[redeem]
+where = "https://getrektlabs.com/"
+account = true
+delivers = "each code makes one overlay package or emote pack a $0 order; files and setup instructions under Orders > View Order"
+expires = "Retro Stream Overlays: 'No deadline to redeem'; others not stated"
+steps = [
+  "Create an account at https://getrektlabs.com/.",
+  "Open the redemption URL from the Humble download page and add that package to the cart (one product per checkout).",
+  "At checkout enter that package's code; the total should be $0. Check out.",
+  "In the account's Orders, 'View Order' to download the files and instructions. Repeat for each code.",
+]
+
+[download]
+scriptable = false
+how = "Orders > View Order on getrektlabs.com"
+notes = "No API; a logged-in session could fetch the order files into the library folder (inference, untested)."
+
+[library]
+files = "overlay/alert/scene packages (animated video and image files plus setup instructions for OBS, Streamlabs, StreamElements); emote packs as image files"
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer: overlay packages imported into OBS/Streamlabs/StreamElements by hand, per the instructions in each order."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/26598713097115-GETREKT-Retro-Stream-Overlays-Redemption-Instructions"
+claim = "account at getrektlabs.com; one product per checkout with its code; redemption URL from the download page; total $0; Orders > View Order to download"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/26506989499547-GETREKT-Retro-Stream-Overlays-Bundle-Redemption-Requirements"
+claim = "personal use; Streamlabs, StreamElements and OBS; 1 user, unlimited devices; 'No deadline to redeem'"
+[[sources]]
+url = "https://www.humblebundle.com/software/getrekt-best-stream-overlays-2024-software"
+claim = "'redeemable on the GETREKT Labs website. Each code is redeemed individually.'"
+[[sources]]
+url = "https://www.humblebundle.com/software/overlay-extreme-bundle-software"
+claim = "Overlay Extreme Bundle from GETREKT: stream overlay packages and emote packs, hb-key; 'All of the software in this bundle is available for Getrekt' (census redeem_text)"

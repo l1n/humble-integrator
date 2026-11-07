@@ -1,0 +1,29 @@
+schema = 1
+name = "CorelDRAW Standard 2024"
+vendor = "corel"
+kind = "app"
+machine_names = ["coreldrawstandard2024"]
+verified = false
+notes = "'Design Unlimited' bundle (+ Encore) and 'Design with CorelDRAW, Perfect with AI'. Windows-only (serial prefix JK25); perpetual licence (gamefromscratch). Humble download + serial at install; Corel sign-in."
+
+[install]
+source = "humble"
+file = "*CorelDRAW*Standard*"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/Corel/CorelDRAW Standard*/Programs64/*.exe"
+notes = "Exe name not documented."
+
+[steam]
+shortcut = true
+title = "CorelDRAW Standard 2024"
+steamgriddb = "CorelDRAW"
+
+[[sources]]
+url = "https://www.coreldraw.com/en/pages/download/"
+claim = "serial prefixes: Graphics Suite 2025 DR26, 2024 DR25 (Win+Mac), Standard 2024 JK25, Essentials 2021 JL23 (Win); installers CorelDRAWGraphicsSuite<year>Installer_AM.exe / .dmg"
+
+[[sources]]
+url = "https://gamefromscratch.com/amazing-new-corel-draw-humble-bundle/"
+claim = "Humble's CorelDRAW Standard 2024 is a perpetual licence"

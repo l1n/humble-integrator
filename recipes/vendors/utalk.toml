@@ -1,0 +1,62 @@
+schema = 1
+name = "uTalk (language-learning app subscriptions)"
+kind = "route"
+service = true        # time-limited app subscription: nothing to install via Steam
+notes = """
+uTalk items ("uTalk Learn Japanese 12 month", "... 6 month") came in the
+2023 "ASIAN Travel and Language with Lonely Planet and uTalk" bundle. Humble
+lists the publisher as "Richdale". Each key is a uTalk "Redeem" code that
+unlocks one language, already chosen, for 6 or 12 months in the uTalk app.
+Whether the months count from redemption or from the bundle date is not
+documented (unverified). The bundle is from 2023, so its codes may well have
+expired.
+
+Matching is by developer only. The same bundle holds Lonely Planet ebooks
+(publisher "Richdale"), which belong on the generic ebook route. A
+bundle-level redeem_text rule here would claim them too.
+
+Platforms: uTalk apps exist for Windows (32/64-bit), Mac, iPhone/iPad and
+Android, plus a browser version for computers. macOS: install the native Mac
+app from utalk.com/app. Linux: use the browser version
+(https://utalk.com/app/webgl). No Steam shortcut: it is a subscription
+service, not a game.
+"""
+
+[match]
+developers = ["uTalk", "uTalk Language Learning", "EuroTalk"]
+domains = ["utalk.com"]
+key_names = ["\\butalk\\b"]
+
+[redeem]
+where = "https://utalk.com/start"
+account = true
+delivers = "the purchased language unlocked in the uTalk account for the stated period (6 or 12 months); apps from https://utalk.com/app"
+expires = "check the Humble download page. Key.is_expired from Humble is authoritative."
+steps = [
+  "Reveal the uTalk code on Humble.",
+  "Open https://utalk.com/start and enter the code and the email address to log into the app with, then 'Get Started'. Use the same email for every uTalk code.",
+  "Redeem codes come with their language already chosen. 'Choose Any Language' codes ask for one.",
+  "New account: enter a name and choose a password, then 'Confirm'. Click the button in the 'Activate your uTalk account' email.",
+  "Install the app (macOS: Mac app from https://utalk.com/app; Linux: browser version at https://utalk.com/app/webgl) and log in with the same email. The new language is at the top of the language list.",
+  "Support: support@utalk.com, +44 (0)20 7371 7711.",
+]
+
+[platforms.macos]
+runner = "native"
+notes = "uTalk Mac app from https://utalk.com/mac (via utalk.com/app)."
+[platforms.linux]
+runner = "native"
+notes = "No Linux app; the browser version (https://utalk.com/app/webgl, computers only) works without installing anything."
+
+[[sources]]
+url = "https://support.utalk.com/hc/en-us/articles/360011539117-I-have-a-Choose-Any-Language-or-Redeem-code-how-do-I-get-started"
+claim = "redeem at utalk.com/start with code + email; Redeem codes have the language pre-selected; name/password for new accounts; download the app from utalk.com/app; support email and phone (updated 2026-08)"
+[[sources]]
+url = "https://support.fanatical.com/hc/en-us/articles/360006847857-uTalk-Coupon-Redemption-Instructions"
+claim = "one code adds languages to one uTalk account; 'Activate your uTalk account' email; progress syncs across devices (read via the Zendesk API)"
+[[sources]]
+url = "https://utalk.com/app"
+claim = "downloads for iPhone & iPad, Android, Windows 32, Windows 64, Mac; 'Learn in your web browser (computers only)' at /app/webgl"
+[[sources]]
+url = "https://www.humblebundle.com/software/asian-travel-and-language-with-lonely-planet-and-utalk-software"
+claim = "uTalk items: hb-key for Windows/Mac, 6/12-month names; Lonely Planet ebooks in the same bundle; publisher 'Richdale' (census)"

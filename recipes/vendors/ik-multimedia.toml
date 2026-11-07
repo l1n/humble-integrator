@@ -1,0 +1,100 @@
+schema = 1
+name = "IK Multimedia"
+kind = "route"
+notes = """
+Italian maker of SampleTank, Miroslav Philharmonik, Syntronik, MODO BASS /
+MODO DRUM, Pianoverse, AmpliTube, TONEX, T-RackS and MixBox. Humble bundles
+(2024-2026): IK Pro Sound Suite (+ Encore; one key for the whole bundle),
+Studio Essentials: Pianos, Bass, Drums & Cinematic Sounds (a key per
+product, redeem before 2 June 2027), Audio Master Suite (a key per
+product). Every IK item is a serial number registered to an IK account;
+nothing is a Humble download, even where Humble's page shows Windows/Mac
+icons.
+
+IK serials are 18 characters in groups of 5-8-5 (e.g. ATX30-xxxxxxxx-xxxxx).
+Since 2024 everything goes through the free IK Product Manager (Windows and
+macOS): it registers serials, downloads, installs, authorizes and updates
+the software (Software tab) and its sample libraries (Sounds tab). Legacy
+products use the older Authorization Manager, which also has an offline
+(request-file) authorization. Many purchases are content (instrument
+collections, kits, basses, pianos, gear, Tone Models) that load inside a
+host plugin; IK's free hosts (SampleTank 4 Custom Shop, MODO BASS 2 CS,
+AmpliTube 5 CS, TONEX 2 CS, T-RackS 6 INTRO; for MODO DRUM presumably the
+free CS edition with its Studio kit) can be installed from Product Manager
+when the paid host is not owned (see items/ik-multimedia/*). That a free
+host unlocks a purchased add-on is inference from IK's product line, not
+checked per product.
+
+Formats: VST2/VST3/AU/AAX plus standalone for the instruments and
+AmpliTube/TONEX; Windows and macOS (Apple Silicon native). No Linux builds
+and no Steam entries: these live in a DAW.
+"""
+
+[match]
+# IK never sells DRM-free Humble bundles; every IK item is a serial.
+developers = ["IK Multimedia", "IK Multimedia Production", "IK Multimedia US"]
+redeem_text = ['redeem\w*\W+(through|on|at|via)\W+(the\W+)?IK\W+Multimedia']
+# URL slugs (census) and bundle machine names (extracted keys).
+bundle_slugs = ['^ik-multimedia', '^ik-pro-sound-suite', '^ikmultimedia', '^ikprosoundsuite']
+domains = ["ikmultimedia.com"]
+key_names = ['\bik multimedia\b', 'sampletank', 'amplitube', 't-racks', 'syntronik', 'miroslav philharmonik', 'modo (bass|drum)', 'pianoverse', '\btonex\b', 'mixbox']
+
+[redeem]
+where = "https://ikmultimedia.com/registration"
+account = true
+expires = "Studio Essentials keys: redeem before 2 June 2027 (Humble). Other IK bundles state no deadline."
+delivers = "the products on the IK account (User Area > My Products), installable and authorized through IK Product Manager"
+steps = [
+  "Create an IK Multimedia account (User Area) if you do not have one.",
+  "Register each Humble serial at https://ikmultimedia.com/registration (or in IK Product Manager). Pro Sound Suite bundles give one serial that registers the whole tier.",
+  "Install IK Product Manager (Windows/macOS) and log in.",
+  "Software tab: Install each product (this also authorizes it on this computer). Sounds tab: Install the sample libraries of each instrument.",
+  "Content items (SampleTank collections, MODO kits/basses, Pianoverse pianos, AmpliTube gear, Tone Models, MixBox modules) need their host: install the paid host if owned, else IK's free CS/INTRO version from Product Manager.",
+]
+
+[download]
+scriptable = false
+how = "IK Product Manager downloads and installs everything after login; the User Area offers per-product installers as a fallback"
+notes = "No documented API; installs are driven from the Product Manager GUI."
+
+[library]
+files = "sample libraries go where Product Manager's Sounds tab puts them (a user-chosen folder; Pro Sound Suite Encore's SampleTank 4 Max v2 is ~600 GB)"
+licence = "IK EULA (https://www.ikmultimedia.com/eula per Humble)"
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+driver_notes = "Installs run inside IK Product Manager; no unattended installer switches are documented."
+
+[platforms.macos]
+runner = "native"
+notes = "Native macOS builds (Intel and Apple Silicon) installed by IK Product Manager into the standard plug-in folders."
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = "No Linux build. Untested: IK Product Manager and the Windows plug-ins in the shared audio-plugins Wine prefix, bridged into a Linux DAW with yabridge. Product Manager's online authorization under Wine is unverified."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/29332171355675-IK-Multimedia-Redemption-Instructions-EULA"
+claim = "redemption URL ikmultimedia.com/registration; create an IK account, install and log in to IK Product Manager, Software tab > Install, then Sounds tab > Install per library; EULA link"
+[[sources]]
+url = "https://ikmultimedia.com/en-us/pages/ik-product-manager"
+claim = "IK Product Manager: registration, downloads, installation, authorization and updates for all current IK products; Windows and macOS; legacy products use the Authorization Manager"
+[[sources]]
+url = "https://ikmultimedia.com/en-us/pages/authorizationmanager"
+claim = "Authorization Manager: registers and authorizes with only the serial; offline authorization for computers without internet; needed for legacy products"
+[[sources]]
+url = "https://ikmultimedia.com/en-us/pages/faq"
+claim = "FAQ 'What is the Serial Number?': 18 characters in groups of 5, 8 and 5; used to register via Authorization Manager or the Product Registration page"
+[[sources]]
+url = "https://www.humblebundle.com/software/ik-multimedia-presents-studio-essentials-pianos-bass-drums-cinematic-sounds-software"
+claim = "'All products in this bundle are redeemable through IK Multimedia website'; keys expire; redeem before June 2nd, 2027 (census)"
+[[sources]]
+url = "https://www.humblebundle.com/software/ik-pro-sound-suite-software"
+claim = "'A single key will be provided to redeem all the content in your bundle' (census)"
+[[sources]]
+url = "https://ikmultimedia.com/products.json"
+claim = "IK's store lists free hosts: SampleTank 4 Custom Shop, MODO BASS 2 CS, AmpliTube 5 CS, TONEX 2 CS, T-RackS 6 INTRO and the MODO DRUM Studio kit (all $0); single MODO BASS basses, MODO DRUM kits, Pianoverse pianos and SampleTank collections sold separately"

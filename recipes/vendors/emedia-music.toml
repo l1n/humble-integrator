@@ -1,0 +1,77 @@
+schema = 1
+name = "eMedia Music"
+kind = "route"
+notes = """
+Interactive music-lesson programs (Guitar/Piano/Singing For Dummies, Bass
+and Ukulele Method, My Guitar/Piano/Violin for kids, ...), published on
+Humble by Richdale. Music for Dummies (2025): each title a Windows download
+on the Humble page plus a serial; Music for Dummies 2026: Windows downloads
+("...windownload") with a key each, "All keys will need the installer to
+access content", redeem before 16 Dec 2026.
+
+The serial is not redeemed anywhere: install the program from the Humble
+download and type the serial when it first starts. The installer (by its
+screens an Inno-style wizard: destination, Start-menu folder, desktop icon)
+also installs Apple QuickTime, which the lessons' videos need, and asks for
+a reboot. These are standalone apps, so each gets a Steam shortcut.
+
+Humble offers Windows builds only, so both macOS and Linux run them under
+Wine (untested). QuickTime 7.6 under Wine is available as the winetricks
+verb quicktime76.
+"""
+
+[match]
+# eMedia titles are always installer + serial; the item recipes take precedence.
+developers = ["eMediaMusic", "eMedia Music", "eMedia"]
+bundle_slugs = ['^music-for-dummies', '^musicfordummies']
+domains = ["emediamusic.com"]
+key_names = ['\bemedia\b']
+
+[redeem]
+where = "the program's first-start serial prompt"
+account = false
+expires = "Music for Dummies 2026: redeem before 16 Dec 2026 (Humble)."
+delivers = "a registered, perpetual copy of the lesson program"
+steps = [
+  "Download the Windows installer for each title from the bundle's Humble download page and reveal its key.",
+  "Run the installer (accept UAC, pick the folder - default C:\\Program Files (x86)\\eMedia <Title> - Start-menu folder and desktop icon), let it install QuickTime when asked, then restart if offered.",
+  "Start the program and enter the serial number that came with it.",
+]
+
+[download]
+scriptable = true
+how = "Humble download page (Windows installer per title)"
+
+[install]
+source = "humble"
+serial = "per-product"
+silent = false
+driver = "inno"
+driver_notes = "Wizard pages match an Inno Setup installer (destination, Start menu folder, additional tasks, ready to install) per Humble's walkthrough; not confirmed by inspecting the file. A QuickTime installer is chained mid-install; the program asks for the serial at first start, not the installer."
+
+[prefix]
+name = "emedia"
+arch = "win32"
+windows = "win7"
+winetricks = ["quicktime76"]
+
+[platforms.macos]
+runner = "crossover"
+notes = "Humble ships Windows builds only. Untested under CrossOver; the QuickTime dependency is the likely problem."
+
+[platforms.linux]
+runner = "wine"
+notes = "Windows builds under Wine, untested. Pre-install QuickTime with winetricks quicktime76 if the bundled QuickTime installer fails."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/34961162564123-Humble-Software-Bundle-Music-for-Dummies-Redemption-Instructions"
+claim = "same steps for all eMedia products: setup wizard, default C:\\Program Files (x86)\\eMedia Guitar For Dummies, Start menu folder, desktop shortcut, QuickTime install, restart, enter the serial at first launch; support at support.emediamusic.com"
+[[sources]]
+url = "https://www.humblebundle.com/software/music-for-dummies-2026-software"
+claim = "'All keys will need the installer to access content'; keys expire, redeem before December 16th, 2026; Windows items (census)"
+[[sources]]
+url = "https://www.humblebundle.com/software/music-for-dummies-software"
+claim = "2025 bundle: each title a Windows DRM-free download plus a key (census)"
+[[sources]]
+url = "https://github.com/Winetricks/winetricks"
+claim = "winetricks has a quicktime76 verb (QuickTime 7.6)"

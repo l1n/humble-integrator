@@ -1,0 +1,11 @@
+schema = 1
+name = "$125 credit towards Moho Pro 14 upgrade"
+vendor = "lost-marble-moho"
+kind = "service"
+machine_names = ["125credittowardsmohopro14upgrade"]
+verified = false
+notes = "A discount for buying the Moho Pro 14 upgrade on https://moho.lostmarble.com/upgrade (inferred: entered in the checkout's 'DISCOUNT CODE/SERIAL NUMBER' field, where the Moho Pro 12 serial also goes; Pro 12 to 14 lists at $349.99 and upgrade pricing can't be combined with other discounts, so check how the credit stacks before paying). Expiry unknown. Nothing to install; spending money is the user's decision."
+
+[[sources]]
+url = "https://moho.lostmarble.com/upgrade"
+claim = "upgrade checkout takes a Moho Pro 12 serial in 'DISCOUNT CODE/SERIAL NUMBER'; 12 to 14 is $349.99"

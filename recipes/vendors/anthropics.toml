@@ -1,0 +1,145 @@
+schema = 1
+name = "Anthropics Technology (PortraitPro, PortraitPro Body, LandscapePro, Smart Photo Editor)"
+kind = "route"
+notes = """
+Every Humble item is an Anthropics activation token (format XXX-XXX-XXX-XXX-XXX),
+one per product and edition. Windows and Mac are both native builds and one
+token covers either, so macOS installs the native .pkg and only Linux needs
+Wine. Each edition (Standard / Studio / Studio Max) has its own installer;
+the token does not unlock a higher edition in a lower edition's build, so
+use the installer that matches the token's edition. The apps are
+independent of each other: no shared prefix is needed. Studio editions also
+install Photoshop/Lightroom plug-ins, which are irrelevant here.
+Humble also lists Richdale Ventures as publisher on some of these items; the
+item recipes claim them by machine name, so that does not matter.
+"""
+
+[match]
+developers = ["Anthropics", "Anthropics Technology", "Anthropics Technology Ltd"]
+domains = ["anthropics.com", "portraitpro.com", "landscapepro.pics", "smartphotoeditor.com"]
+key_names = ["portrait ?pro", "landscape ?pro", "smart ?photo ?editor"]
+
+[redeem]
+where = "https://www.anthropics.com/portraitpro/redeem/"
+account = false
+email = true
+delivers = "an email with Windows and Mac download links for the token's product and edition; the token itself is the licence"
+expires = "none documented"
+steps = [
+  "Reveal the Humble key: it is an Anthropics activation token.",
+  "Enter the token, your name and your email at https://www.anthropics.com/portraitpro/redeem/ (the form only exists under /portraitpro/; that it also takes LandscapePro, Body and Smart Photo Editor tokens is inferred, not confirmed). The download links arrive by email.",
+  "If the email never comes, or to see a token's product/version and upgrade offers, use the License Manager at https://www.anthropics.com/licenses/ (it can re-send tokens to an email; allow ~30 minutes).",
+  "Download the installer for the token's edition (Standard, Studio or Studio Max are separate installers) and run it; at first launch, enter the same token.",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+driver = "inno"
+silent = true
+args = ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"]
+driver_notes = """
+Windows installers are Inno Setup (5.5.7 strings in v23, 6.4.0 in v27;
+uninstaller unins000.exe), so the standard Inno switches apply; the token is
+not asked by the installer but by the app on first launch ('enter your
+activation token'), activating online. Offline: the app shows a system
+fingerprint, the fingerprint + token go into Anthropics' manual-activation
+page, and the returned key or key file is loaded with 'Load Key From File'.
+The tool can paste the user's own token into the first-run dialog; it must
+not touch the activation itself. Mac installers are .pkg (Gatekeeper may
+need right-click > Open); `installer -pkg X.pkg -target /` needs admin, so
+the tool should open the pkg for the user instead.
+Installer names seen on Anthropics' CDN: PortraitProSetup64.exe,
+PortraitProStudioSetup64.exe, PortraitProStudioMaxSetup64.exe and .pkg
+twins (cloudfrontsecure.anthropics.com/<version>/...). Older versions'
+paths are not guessable: use the links from the redeem email.
+"""
+
+[platforms.macos]
+runner = "native"
+notes = """
+Native Mac builds for every product; one token works on Windows or Mac.
+PortraitPro 23 runs natively on Apple Silicon; Body, LandscapePro and Smart
+Photo Editor got native Apple Silicon builds in Oct 2024 (older ones run
+under Rosetta). Current PortraitPro needs macOS 13+, Body and Smart Photo
+Editor macOS 11+. v27's pkg installs 'PortraitPro Standard.app' /
+'PortraitPro Studio.app' into /Applications; older versions' .app names are
+unverified, hence the globs in the item recipes.
+"""
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+windows = "win10"
+notes = """
+Windows build under Wine. CodeWeavers' CrossOver (Linux, 22.1) reports:
+PortraitPro 23 'Limited Functionality', PortraitPro Body 3 'Runs Well',
+LandscapePro 3 'Runs Well'. A WineHQ bug about PortraitPro Body Studio
+crashing (41244) was closed as abandoned. No Proton reports found.
+Smart Photo Editor needs an internet connection to run; the others work
+offline after activation.
+"""
+
+[[sources]]
+url = "https://www.anthropics.com/portraitpro/redeem/"
+claim = "redeem form: activation token + name + email; download links are emailed"
+
+[[sources]]
+url = "https://www.anthropics.com/licenses/"
+claim = "License Manager: look up a token, upgrades, re-send tokens to an email"
+
+[[sources]]
+url = "https://www.anthropics.com/support/activating/"
+claim = "token entered in the app on first launch; online activation, or manual activation via fingerprint + key file"
+
+[[sources]]
+url = "https://www.anthropics.com/support/installing/"
+claim = "installers are exe (Windows) and dmg/pkg (Mac); install, launch, enter the token"
+
+[[sources]]
+url = "https://www.anthropics.com/portraitpro/faq/?q=14"
+claim = "buyers get links for both the Windows and the Mac version"
+
+[[sources]]
+url = "https://www.anthropics.com/portraitpro/activate/"
+claim = "token format: 5 groups of 3 characters"
+
+[[sources]]
+url = "https://help.landscapepro.pics/v3-activating-with-a-license-token/"
+claim = "trial builds can't be activated; install the full build"
+
+[[sources]]
+url = "https://www.anthropics.com/portraitpro/faq/?q=11"
+claim = "moving machines / 'token already used' goes through support"
+
+[[sources]]
+url = "https://jrsoftware.org/ishelp/topic_setupcmdline.htm"
+claim = "Inno Setup silent switches /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /DIR="
+
+[[sources]]
+url = "https://www.anthropics.com/portraitpro/faq/?q=75"
+claim = "Mac pkg may need right-click > Open"
+
+[[sources]]
+url = "https://www.mactech.com/2024/10/09/anthropics-technology-releases-updates-to-its-photo-editing-software/amp/"
+claim = "Oct 2024: native Apple Silicon for Body, LandscapePro, Smart Photo Editor"
+
+[[sources]]
+url = "https://www.anthropics.com/support/portraitpro/"
+claim = 'PortraitPro needs macOS 13+; installs to C:\Program Files\PortraitPro <ver>'
+
+[[sources]]
+url = "https://codeweavers.com/compatibility/crossover/portraitpro-23"
+claim = "PortraitPro 23: Limited Functionality on CrossOver 22.1 (Linux)"
+
+[[sources]]
+url = "https://codeweavers.com/compatibility/crossover/portraitpro-body-3"
+claim = "PortraitPro Body 3: Runs Well on CrossOver 22.1"
+
+[[sources]]
+url = "https://codeweavers.com/compatibility/crossover/landscapepro-3"
+claim = "LandscapePro 3: Runs Well on CrossOver 22.1 (Linux)"
+
+[[sources]]
+url = "https://www.anthropics.com/support/smartphotoeditor/"
+claim = "Smart Photo Editor needs macOS 11+ and an internet connection"

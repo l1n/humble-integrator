@@ -1,0 +1,39 @@
+schema = 1
+name = "Moho Pro 12.5"
+vendor = "lost-marble-moho"
+kind = "app"
+machine_names = ["mohostudiopro_12_5"]
+verified = false
+notes = "2026 'Animate Like a Pro with Moho PRO' bundle. Native Windows and macOS. Serial + email at install/first launch. Lost Marble's Humble page hosts the installers (Dropbox links)."
+
+[install]
+source = "vendor"
+url = "https://moho.lostmarble.com/pages/humblebundle"
+file = "Moho-Windows*.exe"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/**/Moho x64.exe"
+notes = "'Moho x64.exe' read from the installer; its Program Files folder name not verified."
+
+[steam]
+shortcut = true
+title = "Moho Pro 12"
+steamgriddb = "Moho"
+
+[platforms.macos]
+runner = "native"
+file = "Moho-Mac*.pkg"
+app = "/Applications/Moho.app"
+
+[[sources]]
+url = "https://moho.lostmarble.com/pages/humblebundle"
+claim = "Lost Marble's Humble page: download Moho Pro 12.5 (Moho-Windows.exe / Moho-Mac.pkg), install, enter the serial; works on Apple Silicon"
+
+[[sources]]
+url = "https://lostmarble.net/Moho125/index.html"
+claim = "Moho 12.5 manual: serial + email at install; manual (offline) activation; deactivation via support"
+
+[[sources]]
+url = "https://bugs.winehq.org/show_bug.cgi?id=59204"
+claim = "Moho Pro 12.5 crashes at launch under Wine 10.20; duplicate of 48217 (msvcr120); winetricks vcrun2013"

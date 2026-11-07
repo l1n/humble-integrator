@@ -1,0 +1,40 @@
+schema = 1
+name = "Fractal Terrains 3+"
+vendor = "profantasy"
+kind = "app"
+machine_names = ["fractalterrains3"]
+recommends = ["profantasy/cc3plus"]
+verified = false
+notes = "Standalone world generator with a 64-bit core; exports to CC3+. Exe name unconfirmed (FT3.5 used FT.exe), so the launcher is found after install."
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = "Independent of CC3+; install any time. Conflicting reports on the installer under Wine: it needs a 64-bit environment (fails in a win32 prefix), yet staff advised the 32-bit installer. On CrossOver 25.x switch the bottle to Windows 10 for this install only."
+
+[launch]
+find = 'C:\Program Files*\ProFantasy\*Fractal*\*.exe'
+
+[steam]
+shortcut = true
+title = "Fractal Terrains 3+"
+steamgriddb = "Fractal Terrains 3+"
+
+[platforms.macos]
+windows = "win10"
+
+[[sources]]
+url = "https://rpgmaps.profantasy.com/fractal-terrains-3-plus/"
+claim = "FT3+ has a 64-bit core"
+
+[[sources]]
+url = "https://forum.profantasy.com/discussion/14047/wine-installer-error-any-ideas"
+claim = "FT3+ installer requires a 64-bit OS; fails in a win32 prefix"
+
+[[sources]]
+url = "https://forum.profantasy.com/discussion/comment/117286"
+claim = "staff: use the 32-bit FT3+ installer"
+
+[[sources]]
+url = "https://www.codeweavers.com/compatibility/crossover/tips/campaign-cartographer-374-plus/installation-2025"
+claim = "Win10 bottle while installing FT3+"

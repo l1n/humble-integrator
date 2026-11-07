@@ -1,0 +1,205 @@
+schema = 1
+name = "HighCraft Miniatures (3D-print STL miniatures)"
+kind = "route"
+item_kind = "content"   # STL / Lychee files for a library folder; nothing to install, no Steam entry
+notes = """
+HighCraft Miniatures sculpts fantasy tabletop minis (Grogs, Dagors, Pirate
+Toads, Stag Goblins, Raily Dwarfs, Fuse/Koper skeletons, Rekan, Ger...). Its
+Humble bundles are paid to "Mints Interactive Limited" (Humble's payee/split
+name for both bundles below), and the miniatures are sold on MyMiniFactory
+(store https://www.myminifactory.com/users/HighCraft), Gumroad
+(highcraft.gumroad.com) and once on highcraftminiatures.com (now only a
+contact page). Each miniature ships as STL unsupported, STL pre-supported
+and a pre-supported Lychee scene (.lys), with universal bases of 25 to
+60 mm.
+
+Census bundles, all items with no Humble delivery icon:
+- "Humble 3D Printable Adventure Bundle" (Nov-Dec 2021, 50 minis, 5e stat
+  blocks): "ATTENTION: A single key will be provided to redeem content in
+  your bundle." The page says only "Redeem your keys" and names no site;
+  items link to highcraftminiatures.com.
+- "85 Miniatures Designed for Easy 3D Printing" (Feb-Mar 2025, 83 items):
+  no key wording, no DRM-free wording. Every item links to its MMF object
+  page (IDs in [mmf_objects]). Delivery is therefore unknown: a key for MMF
+  or Humble downloads. 15 machine names (grog*, dagor*, rekan*) also appear
+  in the 2021 bundle.
+- "3D Printable Miniatures for Board Games & Wargaming" (Jan 2021): no
+  archived capture with item data; claimed by slug in case one turns up.
+
+The 2021 key was redeemed at http://redeem.highcraftminiatures.com/, which
+emails a MyMiniFactory link; the files then appear in the MyMiniFactory
+Library under "Objects shared with me" (Humble article 4410689415195).
+
+Matching is deliberate. Census items match on the developer name
+"HighCraft Miniatures" and on the bundles' URL slugs. Not on "Mints
+Interactive Limited": in a real account, a downloadable Humble subproduct
+arrives with its payee as developer and the order's machine_name as slug.
+If the 2025 bundle turns out to be Humble downloads, those must keep
+falling through to generic/files. (Items on a vendor route still get their
+Humble downloads fetched by `hi apply`.) Keys match on the HighCraft/bundle names.
+"""
+
+[match]
+developers = ["HighCraft Miniatures", "Highcraft Miniatures", "High Craft Miniatures", "HighCraft"]
+domains = ["highcraftminiatures.com", "highcraft.gumroad.com", "myminifactory.com/users/highcraft"]
+key_names = [
+  "high ?craft",
+  "3d printable adventure",
+  "fantasyminiaturesfor3dprinting",
+  "85 ?miniatures ?designed",
+  "3d printable miniatures for board games",
+]
+bundle_slugs = [           # URL-slug form only (census); an account's order slug is the product machine_name
+  '^3d-printable-adventure-software',
+  '^85-miniatures-designed-for-easy-3d-printing',
+  '^3d-printable-miniatures-for-board-games-wargaming',
+]
+
+[redeem]
+where = "https://www.humblebundle.com/home/keys"
+account = true
+delivers = "STL miniatures: unsupported STL, pre-supported STL and a pre-supported Lychee scene (.lys) per model, plus universal bases"
+expires = "No deadline on either bundle page. Humble's terms (Dec 2024) expire unrevealed/unclaimed keys 3 years after purchase, so the 2021 key may already be gone; Key.is_expired from Humble is authoritative."
+steps = [
+  "Open the order on Humble. If its items show Download buttons (possible for the 2025 '85 Miniatures' bundle), there is no key: download them from Humble into <library>/3d-print/highcraft-miniatures/.",
+  "Otherwise reveal the bundle's single key (Keys & Entitlements). It covers every miniature in the tier you paid for. Read the instructions Humble shows next to it: they name the site it is redeemed on.",
+  "If that site is MyMiniFactory (most likely, HighCraft's store is https://www.myminifactory.com/users/HighCraft): sign in to or create a free MMF account (https://www.myminifactory.com/register/), redeem the key as instructed, then download each miniature from your MMF Library. Details: vendors/myminifactory.",
+  "If the instructions name another store (highcraftminiatures.com, https://highcraft.gumroad.com), follow them there. If the site no longer works, ask HighCraft through the contact form on https://highcraftminiatures.com.",
+  "Save each miniature under <library>/3d-print/highcraft-miniatures/<miniature>/ and unpack its archive(s) with 7z.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+file = "*.zip"
+unpack = "7z"
+notes = "Files only: no installer. Pick the pre-supported STL or the .lys scene for resin printers; the unsupported STL is for adding your own supports."
+
+[download]
+scriptable = "possible, unverified"
+notes = """
+If the purchase ends up in an MMF Library, the MyMiniFactory API (OAuth;
+see vendors/myminifactory [download]) returns each object's
+archive_download_url. [mmf_objects] maps the 2025 bundle's machine names to
+the MMF objects Humble linked (rockbaseset3models had no link). The 2021
+bundle linked only to highcraftminiatures.com: its 15 shared machine names
+map through this table, the other 35 need an MMF search by miniature name.
+"""
+
+[mmf_objects]   # Humble machine_name -> MyMiniFactory object id (https://www.myminifactory.com/object/<id>), from the 2025 bundle page
+dagorarcher = 186584
+dagoraxeman = 305709
+dagorbackstabber = 305710
+dagorbodyguard = 188421
+dagorcultist = 188428
+dagorgeneral = 305711
+dagorshaman = 188429
+dagorstriker = 305712
+dagortactician = 188430
+fuseskeletonaimor = 305927
+fuseskeletonbardan = 305930
+fuseskeletonblazt = 188731
+fuseskeletonfrago = 188727
+fuseskeletongunz = 188732
+fuseskeletonhuntero = 305931
+fuseskeletonkez = 305933
+fuseskeletonkings = 305935
+fuseskeletonnitro = 188728
+fuseskeletonpyro = 188726
+fuseskeletonshut = 305936
+fuseskeletontrowan = 305937
+geramphibian = 305705
+gerbud = 305698
+gerkraken = 305706
+gerpaw = 305701
+gerscorpion = 305702
+gerspider = 305704
+gerspine = 305707
+gertentacle = 305708
+grogarchivist = 180052
+grogbouncer = 173853
+grogchef = 180055
+grogcrossbowman = 173849
+grogexecutioner = 180057
+groggambler = 173850
+grogguard = 173851
+grogmercenary = 180058
+grogsentinel = 180059
+grogspearman = 173812
+koperskeletonarcher = 178797
+koperskeletondoctor = 178803
+koperskeletongravedigger = 178802
+koperskeletonscout = 178801
+koperskeletonwoodcutter = 178798
+krongorcblacksmith = 178809
+krongorcfighter = 178814
+krongorcshaman = 178815
+piratetoadbard = 188718
+piratetoadbarman = 188719
+piratetoadbomber = 188712
+piratetoadcook = 188713
+piratetoaddigger = 188720
+piratetoadfakecaptain = 188714
+piratetoadhunter = 188715
+piratetoadmage = 188716
+piratetoadrealcaptain = 188721
+piratetoadswordsman = 188722
+railydwarfassassin = 180067
+railydwarfaxethrower = 194936
+railydwarfbarkeeper = 180068
+railydwarfmechanic = 194937
+railydwarfminer = 180069
+railydwarfofficer = 194938
+railydwarfracer = 194939
+railydwarfraider = 180070
+railydwarfsinger = 194940
+rekanaltar = 305693
+rekanchandelier = 305694
+rekancoldbasher = 194909
+rekankinghunter = 194911
+rekansilentcrusher = 194912
+rekantotem = 305696
+staggoblinadventurer = 194914
+staggoblincraftsman = 194918
+staggoblinduelist = 194919
+staggoblinfakelord = 194920
+staggoblinfirestarter = 194928
+staggoblinmercenary = 194930
+staggoblinmerchant = 194931
+staggoblinpoet = 194933
+staggoblinpunk = 194934
+staggoblinrogue = 194921
+
+[platforms.macos]
+runner = "native"
+notes = "Files only, nothing to run. STL opens in any slicer; .lys scenes need Lychee Slicer."
+
+[platforms.linux]
+runner = "native"
+notes = "Files only, nothing to run. STL opens in any slicer; .lys scenes need Lychee Slicer."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/3d-printable-adventure-software"
+claim = "archived capture 2021-11-22 (web.archive.org/web/20211122215725/...): 'A single key will be provided to redeem content in your bundle'; 'Redeem your keys' with no site named; developer-url https://highcraftminiatures.com; payee split 'Mints Interactive Limited'; items 'Model in STL format | Pre-supported (STL & Lychee)'"
+[[sources]]
+url = "https://www.humblebundle.com/software/85-miniatures-designed-for-easy-3d-printing-software"
+claim = "archived capture 2025-02-28 (web.archive.org/web/20250228000050/...): author and payee 'Mints Interactive Limited'; no key or DRM-free wording; each item's developer-url is its MMF object page; STL, pre-supported STL, pre-supported Lychee scene, universal bases"
+[[sources]]
+url = "https://www.myminifactory.com/users/HighCraft"
+claim = "HighCraft's MMF store (81 objects, pre-supported, RPG/5e minis), seen via search index; the site returns 403 to scripted fetches"
+[[sources]]
+url = "https://www.myminifactory.com/object/3d-print-stag-goblin-punk-194934"
+claim = "a HighCraft MMF listing ($5, Feb 2025) that links HighCraft's Patreon (40% MMF discount for patrons), via search index"
+[[sources]]
+url = "https://highcraft.gumroad.com"
+claim = "HighCraft Gumroad store: STL, resin pre-supported, Lychee pre-supported and unsupported versions (via search index)"
+[[sources]]
+url = "https://highcraftminiatures.com"
+claim = "HighCraft site, Oct 2026: GoDaddy page with only a contact form and newsletter signup; no shop, no Humble mention"
+[[sources]]
+url = "https://twistedvoxel.com/humble-bundle-unused-unclaimed-game-codes-will-expire-after-3-years/"
+claim = "Humble terms update (Dec 24, 2024): unused/unclaimed codes expire after 3 years (reported for game keys)"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4410689415195"
+claim = "2021 bundle: redeem at redeem.highcraftminiatures.com, which emails a MyMiniFactory link; files land in the MMF Library"

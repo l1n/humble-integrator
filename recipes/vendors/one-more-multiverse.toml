@@ -1,0 +1,54 @@
+schema = 1
+name = "One More Multiverse (multiverse.com online tabletop; closed August 2024)"
+kind = "route"
+service = true        # browser VTT content; the service no longer exists
+skip = true
+skip_reason = "One More Multiverse shut down in August 2024 and wiped its databases; the keys can no longer be redeemed or used."
+notes = """
+One More Multiverse Bundle (Apr 2023): Humblewood 5e (OMM Edition), Blades
+in the Dark (OMM Edition), Yazeba's Online and Animated Pixel Art Monsters,
+all content for OMM's browser-based virtual tabletop, each redeemed on its own
+multiverse.com page. Multiverse Inc. announced the closure in May 2024, gave
+users 90 days to save progress and assets, and shut the service in August
+2024 (Yazeba's Online playable until August 11th). multiverse.com now
+redirects to an unrelated company (multiverse.io). Nothing to redeem,
+download or install; the recipe exists so these items are accounted for.
+"""
+
+[match]
+developers = ["multiverse.com", "One More Multiverse", "Multiverse Inc."]
+domains = ["multiverse.com", "onemultiverse.com"]
+key_names = ['one more multiverse', '\bomm edition\b']
+# "Keys are redeemed through onemultiverse.com."
+redeem_text = ['redeem\w*[^.]{0,40}\b(?:one)?multiverse\.com\b']
+
+[redeem]
+where = "(defunct) per-product pages on multiverse.com"
+account = true
+delivers = "nothing any more: content lived only in the OMM account, deleted at closure"
+expires = "2024-08 (service closure)"
+steps = [
+  "Nothing to do: One More Multiverse closed in August 2024.",
+  "Historical flow (Humble): create an account at multiverse.com/login, copy each key from the download page, redeem at multiverse.com/redeemAssetBundles (Animated Pixel Art Monsters), /redeemblades (Blades in the Dark), /redeemYazebas (Yazeba's Online), /bundles/humblewood (Humblewood 5e); support@multiverse.com.",
+]
+
+[download]
+scriptable = false
+how = "nothing: the service and its data are gone"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/14084476903067-One-More-Multiverse-Redemption-Instructions"
+claim = "account at multiverse.com/login; per-product redemption pages redeemAssetBundles, redeemblades, redeemYazebas, bundles/humblewood; support@multiverse.com"
+[[sources]]
+url = "https://www.gamespot.com/articles/one-of-the-best-ways-to-remotely-play-ttrpgs-is-shutting-down/1100-6523410/"
+claim = "One More Multiverse shutting down (May 2024): 90 days to download progress and assets, then databases shut down and wiped; Yazeba's Online playable until August 11th"
+[[sources]]
+url = "https://www.dicebreaker.com/companies/one-more-multiverse/news/one-more-multiverse-is-shutting-down"
+claim = "OMM, home to digital Blades in the Dark and Yazeba's B&B, is shutting down"
+[[sources]]
+url = "https://multiverse.com/"
+claim = "now 302-redirects to www.multiverse.io (checked 2026-11-07)"

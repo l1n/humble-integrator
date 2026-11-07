@@ -1,0 +1,26 @@
+schema = 1
+name = "Corel VideoStudio Pro (2021 / 2022 / 2023)"
+vendor = "corel"
+kind = "app"
+machine_names = ["videostudiopro2021", "videostudiopro2022", "videostudiopro2023"]
+verified = false
+notes = "Windows-only video editor; Humble download + serial per version. Humble reused the machine name 'videostudiopro2021' for VideoStudio Pro 2022 in the 2022 Painter bundle, so the version is whatever that order's download is. No Wine/CrossOver reports for these versions (CodeWeavers only lists VideoStudio X3)."
+
+[install]
+source = "humble"
+file = "*VideoStudio*"
+serial = "per-product"
+notes = "Serial in the installer's serial page (Corel MSI-based setup; see vendor driver_notes)."
+
+[launch]
+find = "C:/Program Files*/Corel/*VideoStudio*/[Vv][Ss]tudio.exe"
+notes = "vstudio.exe is inferred, not documented."
+
+[steam]
+shortcut = true
+title = "VideoStudio Pro"
+steamgriddb = "Corel VideoStudio"
+
+[[sources]]
+url = "https://www.codeweavers.com/compatibility/search?name=corel"
+claim = "CodeWeavers: entries only up to Painter 2019, VideoStudio X3, PaintShop Pro 2023; none for the 2022 versions"

@@ -1,0 +1,37 @@
+schema = 1
+name = "Troll Lord Games (Castles & Crusades) store coupons"
+kind = "route"
+service = true        # store discount coupon: nothing to download
+notes = """
+Castles & Crusades RPG Experience (Oct-Nov 2026): the Troll Lord Games
+ebooks are DRM-free Humble downloads (generic ebook route; hence no
+developers rule here), plus a 'Coupon Page' item: 20% off the next purchase
+at the Troll Lord Games store (item recipe troll-lord-games/store-coupon).
+This vendor exists for that item and for extracted keys pointing at
+trolllord.com.
+"""
+
+[match]
+domains = ["trolllord.com"]
+
+[redeem]
+where = "the Troll Lord Games web store (link and code on the Humble download page)"
+account = false
+delivers = "20% off one order at the Troll Lord Games store"
+expires = "not stated; check the Humble download page"
+steps = [
+  "Open the coupon item on the Humble download page and note the code and store link.",
+  "Shop at the Troll Lord Games store and enter the code at checkout (optional: it is a discount, not a product).",
+]
+
+[download]
+scriptable = false
+how = "nothing to download"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/castles-crusades-rpg-experience-software"
+claim = "'Coupon Page' item: 'Enjoy 20% off your next purchase at the Troll Lord Games Store with this exclusive coupon!'; no delivery icon; other items are hb-drmfree ebooks by Troll Lord Games (census)"

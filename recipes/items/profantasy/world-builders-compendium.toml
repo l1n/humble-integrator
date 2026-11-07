@@ -1,0 +1,20 @@
+schema = 1
+name = "World Builder's Compendium"
+vendor = "profantasy"
+kind = "document"
+machine_names = ["worldbuilderscompendium"]
+recommends = ["profantasy/cc3plus"]
+verified = false
+notes = "About 350-page PDF plus maps and support files."
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = "A serial-validated installer, not a bare PDF."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://forum.profantasy.com/discussion/15429/weird-behavior-while-installing-via-wine"
+claim = "these installers ask for serial validation"

@@ -1,0 +1,31 @@
+schema = 1
+name = "Medieval Furniture Props (Unity)"
+vendor = "unity-asset-store"
+kind = "content"
+publisher = "Hivemind"
+machine_names = [
+  "medievalfurniturepropsunity",
+]
+verified = false
+notes = """
+Unity Asset Store voucher for Hivemind's Medieval Furniture Props (Unity edition), in Massive Unreal Engine & Unity Asset Bundle by Hivemind, Nov 2025.
+Those bundles route to Fab (vendors/hivemind) because their '(Unreal Engine)'
+items are Fab codes; this '(Unity)' item is redeemed on Unity instead. The
+Unreal edition of the same kit is a separate Humble item on the Fab route.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "Redeem the voucher at id.unity.com, then download and import in the Unity Editor: Package Manager > My Assets."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://gamefromscratch.com/massive-unreal-unity-hivemind-asset-humble-bundle/"
+claim = "Hivemind bundle: Unreal Engine assets are redeemed on Fab, Unity assets on the Unity Asset Store"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/massive-unreal-engine-unity-asset-bundle-hivemind-software"
+claim = "item description begins: *Unity Asset Store Key Is Provided!"

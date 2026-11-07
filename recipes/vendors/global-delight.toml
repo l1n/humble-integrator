@@ -1,0 +1,42 @@
+schema = 1
+name = "Global Delight Technologies"
+kind = "route"
+notes = """
+Makers of Boom 3D, a system-wide audio enhancer/equalizer app (not a
+plugin) for macOS 11+ and Windows 10/11 x64; Mac and Windows licences are
+sold separately. Humble sold Boom 3D keys in a 2021 audio bundle. No Linux
+version; as a system audio driver it is not a candidate for Wine (on Linux
+use a native PipeWire equalizer instead). See item global-delight/boom-3d.
+"""
+
+[match]
+developers = ["Global Delight Technologies", "Global Delight"]
+domains = ["globaldelight.com"]
+key_names = ['boom\s?3d', 'global\s?delight']
+
+[redeem]
+where = "https://www.globaldelight.com/boom/"
+account = false
+delivers = "a Boom 3D licence key that unlocks the trial build"
+steps = [
+  "Download the free trial for your OS from https://www.globaldelight.com/boom/ (macOS 11+, or Windows 10/11 x64).",
+  "Activate it in the app with the Humble key (inference: the activation dialog was not checked; Humble's key may be valid for one OS only).",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+
+[platforms.macos]
+runner = "native"
+[platforms.linux]
+runner = "none"
+notes = "No Linux build and not usable under Wine (it installs a system audio device)."
+
+[[sources]]
+url = "https://www.globaldelight.com/boom/"
+claim = "Boom 3D for macOS 11+ and Windows 10/11 x64, separate Mac and Windows purchases, 15-day trial downloads"
+[[sources]]
+url = "https://www.humblebundle.com/software/boom-royalty-free-sounds-music-audio"
+claim = "'Redeem your keys. BOOM 3D is available for Windows and Mac' (census)"

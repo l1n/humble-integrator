@@ -1,0 +1,70 @@
+schema = 1
+name = "Janets (UK e-learning courses)"
+kind = "route"
+service = true        # course platform: nothing to install, no Steam entry
+notes = """
+Humble's Janets bundles ("Become a Design Pro with Janets", "Code
+Naturally With Python") are online CPD-style courses on janets.org.uk. Each
+Humble key is a single-course voucher (one key per course). It is redeemed
+with a form, not a shop checkout. The form creates or attaches the student
+account, enrols the course automatically and emails login details.
+
+Access period: Janets' own FAQ says courses come with 1 year of access,
+extendable to lifetime for a fee. Fanatical's article says Janets courses
+bought there have lifetime access: Janets support extends access by a year,
+free, on request, each year. Humble's article says nothing either way.
+Assume 1 year, and ask Janets support for the free extension
+(unverified for Humble purchases).
+
+A few items also carry Humble's DRM-free icon next to the key
+(python3forbeginners in code-naturally-with-python). The census lists no
+files for it. If Humble serves files, fetch them into the library folder too.
+"""
+
+[match]
+developers = ["Janets", "Janet's", "Janets eLearning"]
+domains = ["janets.org.uk"]
+key_names = ["\\bjanets\\b"]
+bundle_slugs = ["janets"]                     # become-design-pro-with-janets-software
+redeem_text = [
+  "redeem\\w*[^.]{0,60}\\bjanets?\\b",          # "Keys redeemable on the Janets website"
+  "janets\\.org\\.uk",
+]
+
+[redeem]
+where = "https://www.janets.org.uk/redeem/"
+account = true
+delivers = "the course, enrolled automatically on janets.org.uk; login details by email"
+expires = "per bundle: e.g. 'Please redeem your keys before September 8th, 2027'. Key.is_expired from Humble is authoritative."
+expiry_text = "(?i)redeem (?:your keys )?before ([A-Z][a-z]+ \\d{1,2}(?:st|nd|rd|th)?,? \\d{4})"
+steps = [
+  "Reveal the Janets voucher on Humble (one per course).",
+  "Open https://www.janets.org.uk/redeem/ and fill in the form: Student Name, Student Email Address, Phone Number (optional), Voucher Code, Purchased Course Name (the Humble item name).",
+  "Submit. The course is assigned automatically and a welcome email with the login details is sent. Use the same name and email for every voucher, so all courses land in one account.",
+  "Repeat for every key in the bundle.",
+  "Log in at https://www.janets.org.uk/ to study. Problems: info@janets.org.uk, live chat, or +44 20 3970 9786.",
+]
+
+[library]
+videos = false                 # Janets: video content is streamed online
+files = "supporting materials (PDFs etc.) can be downloaded from each course page after login"
+certificates = "digital certificate after completion. Janets' FAQ prices a PDF certificate at £9.99 and a printed one at £15.99."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/36847754264475-Become-a-Design-Pro-with-Janets-Redemption-Instructions"
+claim = "Janets Redeem Voucher page; enter details and the key in Voucher Code; auto-enrolled; info@janets.org.uk (2025)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/54295204029851-Humble-Software-Bundle-Code-Naturally-With-Python-Redemption-Instructions"
+claim = "same Janets voucher flow for Code Naturally With Python (2026-08)"
+[[sources]]
+url = "https://www.janets.org.uk/redeem/"
+claim = "form fields: Student Name*, Student Email Address*, Phone Number, Voucher Code*, Purchased Course Name*"
+[[sources]]
+url = "https://www.janets.org.uk/faq/"
+claim = "1-year access (extendable to lifetime for a fee); videos streamed, PDFs downloadable; certificate prices; voucher redemption link"
+[[sources]]
+url = "https://support.fanatical.com/hc/en-us/articles/5626020513681-How-do-I-access-my-Janets-eLearning-courses"
+claim = "Fanatical: janets.org.uk/redeem, one voucher per course, welcome email; lifetime access via free yearly extensions from Janets support (read via the Zendesk API)"
+[[sources]]
+url = "https://www.humblebundle.com/software/code-naturally-with-python-software"
+claim = "'Keys redeemable on the Janets website'; 'Please redeem your keys before September 8th, 2027' (census redeem_text)"

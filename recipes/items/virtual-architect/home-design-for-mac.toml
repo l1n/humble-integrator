@@ -1,0 +1,37 @@
+schema = 1
+name = "Virtual Architect Home Design for Mac"
+vendor = "virtual-architect"
+kind = "app"
+machine_names = ["virtualarchitecthomedesignformac"]
+verified = false
+notes = "Native macOS edition (macOS 10.14 Mojave and later, listed up to macOS 13 Ventura). Mac-only product: nothing to install on Linux. Whether it runs natively on Apple Silicon or under Rosetta 2 was not found."
+
+[install]
+source = "vendor"
+file = "*.dmg"
+serial = "per-product"
+notes = "Installer and serial come from the instructions attached to the Humble key (see vendors/virtual-architect). Download format (.dmg/.pkg) not checked."
+
+[launch]
+find = "/Applications/Virtual Architect*.app"
+notes = "Native app; the glob is for the Mac app bundle."
+
+[steam]
+shortcut = true
+title = "Virtual Architect Home Design"
+steamgriddb = "Virtual Architect"
+
+[platforms.macos]
+runner = "native"
+app_find = "/Applications/Virtual Architect*.app"
+
+[platforms.linux]
+skip = true
+skip_reason = "Mac-only product"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/16132283283867-Home-and-Landscape-Design-System-Requirements"
+claim = "Mac edition: macOS 10.14 Mojave and later including macOS 13 Ventura"
+[[sources]]
+url = "https://support.novadevelopment.com/support/solutions/articles/1000284549-virtual-architect-home-design-macos-catalina-compatibility-release"
+claim = "Catalina compatibility update for Virtual Architect Home Design (Mac)"

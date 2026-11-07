@@ -1,0 +1,27 @@
+schema = 1
+name = "MAGIX content coupons (Soundpools, Songs or Animations)"
+vendor = "magix"
+kind = "service"
+machine_names = ["contentcouponsforsoundpoolssongsoranimations"]
+verified = false
+notes = "Six US$10 coupons (2025 VEGAS bundle and 2026 MAGIX bundle) for MAGIX content: redeem inside Music Maker (Store tab > pick a soundpool > Purchase > 'Redeem Coupon', choose Commercial > Buy Now; it installs to the Loops tab) or Movie Studio, or on https://www.producerplanet.com (add to cart, log in, Redeem Coupon, then download from MY PRODUCTS). Coupons may expire (a 2024 bundle's did); choosing content is the user's call. Nothing for Steam."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/25133506127259"
+claim = "Soundpool coupons: Music Maker Store > Purchase > Redeem Coupon; content installs to the Loops tab"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360019144533"
+claim = "coupons can also be redeemed on producerplanet.com (Redeem Coupon, then MY PRODUCTS)"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/18385187406747"
+claim = "precedent: a bundle's soundpool coupons expired (8/31/2024) while software licences were unlimited"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/13682599842843"
+claim = "soundpool coupon redemption in Music Maker"
+
+[[sources]]
+url = "https://www.producerplanet.com/us"
+claim = "Producer Planet is MAGIX's content store (soundpools, songs, animations)"

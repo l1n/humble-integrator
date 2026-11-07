@@ -1,0 +1,54 @@
+schema = 1
+name = "Games by Hyper (gamesbyhyper.com)"
+kind = "route"
+notes = """
+Games by Hyper makes Unreal Engine gameplay modules ("Hyper" frameworks:
+inventory, menus, footsteps, time manager, landscape material, ...) and is a
+Leartes partner. Its modules inside Leartes bundles are ordinary Cosmos codes
+(vendors/leartes-cosmos, by bundle) - Games by Hyper also sells on Fab, so
+there is no developers rule here. This recipe exists only for the codes that
+apply on Games by Hyper's own WooCommerce store, gamesbyhyper.com: the 50%
+discount codes (Best Core, Mega Game Dev) and the 3-month subscription (Mega
+Game Dev). The Hyper Gold code in Best Core is listed under Cosmos and stays
+in items/leartes-cosmos/hyper-gold-3-month.
+
+How the subscription code is applied is not documented (inference: as a
+coupon on a subscription product at checkout). Subscriptions renew: check for
+a stored payment method and cancel renewal in the account if one is set up.
+"""
+
+[match]
+domains = ["gamesbyhyper.com"]
+key_names = ['\bgames ?by ?hyper\b.{0,40}\b(?:discount|subscription|store)\b']
+
+[redeem]
+where = "https://gamesbyhyper.com/"
+account = true
+expiry_text = "discount codes: 'The Redemption period only valid for 3 month'"
+steps = [
+  "Create or log in to an account on https://gamesbyhyper.com/.",
+  "Discount code: add the Hyper modules wanted to the cart and apply the code at checkout within 3 months of the purchase.",
+  "Subscription code: pick the subscription tier on https://gamesbyhyper.com/product-category/subscriptions/ and apply the code at checkout (unconfirmed); cancel automatic renewal afterwards if a payment method was stored.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "Nothing to install from the codes themselves; modules bought with them download from the user's Games by Hyper account (or Fab)."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/best-core-game-dev-assets-tools-megabundle-software"
+claim = "'50% Discount code valid for all Games by Hyper https://gamesbyhyper.com/ The Redemption period only valid for 3 month'"
+[[sources]]
+url = "https://www.humblebundle.com/software/mega-game-dev-assets-tools-bundle-software"
+claim = "'Games by Hyper 3 Month Subscription' (links gamesbyhyper.com/subscription; 'Choose a subscription tier and enjoy discounts, loyalty points, exclusive ...') and '50% Discount Code Games by Hyper Store'"
+[[sources]]
+url = "https://gamesbyhyper.com/subscription/"
+claim = "subscription perks: increased bundle discounts, monthly redeemable loyalty points, Discord roles"

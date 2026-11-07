@@ -1,0 +1,117 @@
+schema = 1
+name = "CELSYS Clip Studio Paint (via Graphixly)"
+kind = "route"
+notes = """
+Clip Studio Paint (CELSYS) has native Windows and macOS (Intel + Apple
+Silicon) builds; no Linux build. Humble sold it through Graphixly, which
+also published Moho and Paintstorm bundles: each Humble code is a 100%-off
+discount code for a Graphixly product page, and Graphixly then e-mails the
+real deliverables (a CSP activation code; pack downloads; Moho Debut serial).
+The CSP item is a 12-month single-device plan: the year starts when the
+activation code is registered at Clip Studio, it does not auto-renew, and
+the app stops being licensed afterwards - so register it only when the user
+wants to start using it. The 'Version 3.0/4.0/5.0' in Humble's names is just
+the version current at sale; the plan always gets the latest version.
+Graphixly's packs are perpetual and need CSP PRO/EX.
+The Graphixly-made packs (developer 'Graphixly') are claimed by item
+recipes; this vendor recipe deliberately does not match 'Graphixly' because
+vendor recipes are tried alphabetically and that publisher name is also on
+Moho and Paintstorm items.
+"""
+
+[match]
+developers = ["Celsys", "CELSYS", "Celsys Inc.", "CELSYS, Inc."]
+domains = ["clip-studio.com", "clipstudio.net", "graphixly.com"]
+key_names = ["clip ?studio", "graphixly"]
+
+[redeem]
+where = "the Graphixly product page named in Humble's instructions, then https://ec.clip-studio.com/en-us/activation-codes/"
+account = true
+delivers = "a Clip Studio activation code (12-month plan) and download links for the packs"
+expires = "redeem the Humble codes on Graphixly before the bundle's deadline (2026 bundle: before 2027-07-22); the CSP plan runs 12 months from registration"
+steps = [
+  "Reveal the Humble code and open the Graphixly product page from Humble's instructions (e.g. https://graphixly.com/products/clip-studio-paint-pro-vers-5-0-12-month-license-content-for-humble-bundle for the 5.0 bundle).",
+  "Buy Digital > Proceed to Checkout, paste the code into the discount-code field, Apply (total becomes 0), fill in name/email and Complete Order. Moho Debut 12.5 uses its own code on https://graphixly.com/products/moho-debut-12-5.",
+  "Graphixly's confirmation e-mail has the download links and the CSP activation code.",
+  "When ready to start the 12 months: sign in to a free Clip Studio account, enter the activation code at https://ec.clip-studio.com/en-us/activation-codes/ ('Use for new plan').",
+  "Install CSP, start it, choose 'I already have a license', sign in with the same account, select the plan and Activate (or Review/Change License later). One device at a time; move it with Review/Change License.",
+]
+
+[install]
+source = "vendor"
+serial = "account"
+silent = true
+driver = "exe"
+args = ["/s"]
+driver_notes = "Windows installer CSP_<ver>w_setup.exe from vd.clipstudio.net (e.g. .../paint/app/514/CSP_514w_setup.exe); winget uses /s as the silent switch but CELSYS documents none (other sources say /S /v\"/qn\"). Needs the WebView2 runtime. Mac: CSP_<ver>m_app.pkg installs /Applications/CLIP STUDIO 1.5/App/CLIP STUDIO PAINT.app and the launcher /Applications/CLIP STUDIO 1.5/CLIP STUDIO.app, universal (x86_64 + arm64). Licensing is done in the app by account sign-in, not in the installer."
+
+[platforms.macos]
+runner = "native"
+notes = "Native universal build; current versions need macOS 14+."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+windows = "win81"
+winetricks = ["vcrun2019", "allfonts"]
+notes = "Unsupported by CELSYS ('virtual environments not supported'). Community: under Wine 11.10 the login window is blank (WebView2) until community DLLs are added, and PAINT crashes unless the prefix is set to Windows 8.1; vcrun2019 + allfonts are the usual extras. The CLIP STUDIO launcher misses most of its sidebar under Wine (bug 58445) but PAINT launches. Pen pressure / modifier keys can misbehave. Treat as experimental."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/52327069996443"
+claim = "Humble code is a 100%-off discount code at a Graphixly product page checkout; confirmation email with download/activation instructions"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/35794830138267"
+claim = "Graphixly redemption steps; Moho Debut 12.5 uses a second code on graphixly.com/products/moho-debut-12-5"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/27353366165915"
+claim = "CSP is a 12-month licence; all packs (incl. Moho Debut 12.5) are perpetual"
+
+[[sources]]
+url = "https://graphixly.com/products/clip-studio-paint-pro-vers-5-0-12-month-license-content-for-humble-bundle"
+claim = "Graphixly product page for the 5.0 Humble licence; packs need CSP PRO or EX"
+
+[[sources]]
+url = "https://graphixly.com/blogs/news/activating-csp-one-year-license"
+claim = "Graphixly emails a CSP activation code"
+
+[[sources]]
+url = "https://support.clip-studio.com/en-us/faq/articles/20200152"
+claim = "enter the activation code at ec.clip-studio.com/en-us/activation-codes/, then activate in the app signed in to the same Clip Studio account"
+
+[[sources]]
+url = "https://support.clip-studio.com/en-us/faq/articles/20200134"
+claim = "plan codes work on Windows, macOS, iPad, iPhone, Android, Chromebook; some codes have a registration deadline"
+
+[[sources]]
+url = "https://clipstudio.net/en/news/202402/13_02"
+claim = "12-month code: licence expires one year after registration, no auto-renew; single-device plan"
+
+[[sources]]
+url = "https://raw.githubusercontent.com/microsoft/winget-pkgs/master/manifests/c/Celsys/ClipStudioPaint/5.1.4/Celsys.ClipStudioPaint.installer.yaml"
+claim = "Windows installer CSP_514w_setup.exe (5.1.4), silent switch /s per winget, needs WebView2"
+
+[[sources]]
+url = "https://support.clip-studio.com/en-us/faq/articles/20190086"
+claim = 'C:\Program Files\CELSYS\CLIP STUDIO 1.5\CLIP STUDIO PAINT\CLIPStudioPaint.exe'
+
+[[sources]]
+url = "https://www.celsys.com/en/topic/20201111"
+claim = "native Apple Silicon since 1.10.3"
+
+[[sources]]
+url = "https://www.clipstudio.net/en/dl/system/"
+claim = "Windows 10/11 x64, macOS 14/15/26; virtual environments not supported; no Linux"
+
+[[sources]]
+url = "https://bbs.archlinux.org/viewtopic.php?id=313882"
+claim = "Wine 11.10 (2026): blank login window fixed with community DLLs; crash fixed by Windows 8.1 mode"
+
+[[sources]]
+url = "https://list.winehq.org/hyperkitty/list/wine-bugs@list.winehq.org/thread/CEFIEARB5WZVFZMT4BLLVYZSDQWRTP2V/"
+claim = "WineHQ bug 58445: CLIP STUDIO launcher sidebar/news missing; PAINT still launches"
+
+[[sources]]
+url = "https://lutris.net/games/install/25385/view"
+claim = 'Lutris script; launcher path CLIP STUDIO 1.5\CLIP STUDIO\CLIPStudio.exe'

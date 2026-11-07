@@ -1,0 +1,48 @@
+schema = 1
+name = "Make: Community (Make: magazine, Maker Shed)"
+kind = "route"
+service = true        # coupons for Make:'s own stores: nothing to download
+notes = """
+Make: Community publishes the Make: book bundles on Humble. The ebooks are
+ordinary DRM-free Humble downloads (generic ebook route), so there is no
+developers/publisher rule here ('Makershed'/'Make' also appear on those
+ebooks). Some Make: bundles add a coupon item for Make:'s own stores:
+
+  DIY Electronics Gadgets, Games and More (Oct-Nov 2026): 'Subscription
+    Offer', 55% off a Make: magazine subscription (item recipe
+    make-community/make-magazine-subscription-offer).
+  Microcontroller Classics and More by Make (2026, not in the census): a
+    Maker Shed ESP32 starter pack, product page + coupon at checkout.
+
+Keys whose instructions point at makershed.com / make.co land here.
+"""
+
+[match]
+# make.co written with its scheme so it does not match inside other domains (make.com, remake.co)
+domains = ["makershed.com", "makezine.com", "://make.co/", "www.make.co/"]
+
+[redeem]
+where = "the offer link on the Humble download page (Maker Shed / Make: subscription checkout), with the coupon code shown there"
+account = false
+delivers = "a discounted (or free) Make: product or subscription; physical goods ship by post"
+expires = "not stated; check the Humble download page"
+steps = [
+  "Open the offer's product page from the Humble download page (e.g. https://www.makershed.com/products/humble-bundle-make-esp32-starter-pack for the ESP32 pack).",
+  "Add the item to the cart and check out.",
+  "Enter the coupon code from the Humble page, then complete the order (paying any remaining price and shipping).",
+]
+
+[download]
+scriptable = false
+how = "nothing to download"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/54932422888091-Redemption-Instructions-Microcontroller-Classics-and-More-by-Make"
+claim = "makershed.com product page for the Humble ESP32 starter pack; add to cart, check out, add the coupon, complete the order"
+[[sources]]
+url = "https://www.humblebundle.com/books/diy-electronics-gadgets-games-and-more-make-books"
+claim = "'Subscription Offer' item: 55% off Make: magazine; developer Makershed, publisher Make; also DRM-free ebooks by Makershed/Make (census)"

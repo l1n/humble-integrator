@@ -1,0 +1,42 @@
+schema = 1
+name = "Ashampoo Kitchen Catalog Extension"
+vendor = "ashampoo"
+kind = "addon"
+machine_names = ["kitchencatalog", "kitchencatalogextension"]
+recommends = [
+  "ashampoo/3d-cad-professional-8",
+  "ashampoo/3d-cad-professional-10",
+  "ashampoo/3d-cad-professional-11",
+  "ashampoo/3d-cad-professional-12",
+  "ashampoo/3d-cad-architecture-8",
+  "ashampoo/3d-cad-architecture-10",
+  "ashampoo/3d-cad-architecture-11",
+  "ashampoo/3d-cad-architecture-12",
+  "ashampoo/3d-cad-professional-14",
+  "ashampoo/3d-cad-architecture-14",
+  "ashampoo/home-design-6",
+  "ashampoo/home-design-8",
+  "ashampoo/home-design-9",
+  "ashampoo/home-design-10",
+  "ashampoo/home-design-11",
+]
+verified = false
+notes = "Same product sold as 'Kitchen Catalog' (2021) and 'Kitchen Catalog Extension' (2024, 2025). Ashampoo says it needs 3D CAD Architecture or Professional 5+ (Home Design not listed); Humble's 2021 article says it also works with Home Design 6. Installs into an already installed Ashampoo CAD/Home Design in the shared 'ashampoo' prefix; no Steam entry of its own. Install it after the newest CAD program owned (recommends orders it after any of them)."
+
+[install]
+source = "vendor"
+url = "https://www.ashampoo.com/ashampoo_kitchen_catalog_extension_sm.exe"
+file = "ashampoo_kitchen_catalog_extension*.exe"
+serial = "per-product"
+notes = "Separate Inno Setup installer (x64, 1.0.0): asks which installed program to extend, then the extension's own key."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/1260807029850"
+claim = "catalog extensions: separate installers, choose the target program, then the key; work with CAD Pro 8, Architecture 8, Home Design 6"
+
+[[sources]]
+url = "https://www.ashampoo.com/en-us/office-catalog-extension/requirements"
+claim = "compatibility requirements"

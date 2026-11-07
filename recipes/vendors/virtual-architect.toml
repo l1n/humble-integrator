@@ -1,0 +1,89 @@
+schema = 1
+name = "Virtual Architect (Nova Development home-design software)"
+kind = "route"
+notes = """
+Virtual Architect is Nova Development's (Avanquest) consumer home-design line:
+Professional Home Design, Ultimate Home Design with Landscaping & Decks, Home &
+Landscape Platinum Suite, Kitchens & Baths and Instant Makeover for Windows,
+plus separate 'Home Design for Mac' and 'Professional Home Design for Mac'
+products. The Windows programs use Cadsoft's home-design technology (the same
+family as Personal Architect / Envisioneer, see vendors/cadsoft), but Nova sells
+and supports them. Humble's "Home & Landscape Design Made Easy" (June 2023,
+publisher Richdale Ventures) sold one key per product: five Windows and two Mac
+editions.
+
+How the keys turn into installers was not found: there is no Humble
+redemption article for this bundle. Other Richdale-published bundles give a key
+plus a 'Redeem Here' link that returns a download link and the program's
+licence key (BeckerCAD), or a key entered in the program's activation dialog
+(Cadsoft). Expect one of those; the tool must show the instructions Humble
+attaches to the key (inference). Windows installers need an Administrator
+account.
+
+On macOS prefer the Mac editions where owned; the Windows editions need
+CrossOver. No CrossOver or WineHQ reports exist for any Virtual Architect
+title; Cadsoft's own Mac advice for its engine is Parallels/Boot Camp/VMware,
+not Wine.
+"""
+
+[match]
+developers = ["Virtual Architect", "Nova Development"]
+domains = ["novadevelopment.com"]
+key_names = ['virtual ?architect']
+
+[redeem]
+where = "the instructions attached to each key on the Humble download page (not documented publicly)"
+account = false
+delivers = "a licence key per product, and (presumably) a download link for its installer"
+expires = "not stated in the bundle text"
+steps = [
+  "Reveal each key on the Humble download page and read the instructions shown with it (redeem link and/or download link).",
+  "If the key leads to a redemption page, it returns the installer download and the product's serial/licence key; save both (inference from other Richdale-published bundles).",
+  "Install as an Administrator; enter the serial when the installer or the program's registration/activation dialog asks for it.",
+  "Support: Nova Development / Avanquest customer service (customerservice@avanquestusa.com), knowledge base https://support.novadevelopment.com/support/home.",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+driver = "installshield"
+driver_notes = "Inferred from Nova Development's knowledge base, whose generic install articles are about InstallShield and Windows Installer errors (1305, 1330). No silent switches documented for Virtual Architect."
+
+[prefix]
+name = "virtual-architect"
+arch = "win64"
+windows = "win10"
+winetricks = []
+
+[platforms.macos]
+runner = "crossover"
+windows = "win10"
+notes = "Windows editions under CrossOver (untested). The two Mac editions are native: macOS 10.14 Mojave and later, listed up to macOS 13 Ventura; Intel or Apple Silicon not stated."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Windows editions only; 64-bit, 8 GB RAM and a 2 GB video card recommended for the 3D view. No Wine/Proton reports found."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/16132283283867-Home-and-Landscape-Design-System-Requirements"
+claim = "per-product requirements: Windows 11/10/8 64-bit, Administrator account to install, 8 GB RAM, 2 GB video; Instant Makeover 32/64-bit; Mac editions macOS 10.14 to 13"
+[[sources]]
+url = "https://www.humblebundle.com/software/home-and-landscape-design-made-easy-software"
+claim = "seven Virtual Architect items by Virtual Architect / Richdale Ventures, hb-key; 'available for Windows and some for Mac' (census)"
+[[sources]]
+url = "https://www.novadevelopment.com/"
+claim = "Nova Development sells the Virtual Architect line (Windows and 'for Mac' editions); support knowledge base and customerservice@avanquestusa.com"
+[[sources]]
+url = "https://www.cadsoft.com/?p=9097"
+claim = "Cadsoft forum: Virtual Architect uses Cadsoft technology but is sold and supported by Nova Development"
+[[sources]]
+url = "https://support.novadevelopment.com/support/home"
+claim = "Nova's install knowledge base covers InstallShield and Windows Installer errors"
+[[sources]]
+url = "https://support.novadevelopment.com/support/solutions/articles/1000284550-virtual-architect-home-design-professional-macos-catalina-compatibility-release"
+claim = "Nova released macOS Catalina compatibility updates for both Mac editions (Nov 2019)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/19828747059099-Architect-Home-Landscape-Design-System-Requirements"
+claim = "Cadsoft's home-design programs do not run natively on Mac; Cadsoft suggests Parallels, Boot Camp or VMware Fusion"

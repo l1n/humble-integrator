@@ -1,0 +1,41 @@
+schema = 1
+name = "RoboForm (password manager subscription)"
+kind = "route"
+service = true        # account subscription; apps/extensions are free downloads
+notes = """
+The Healthy Habits Toolkit (Mar 2024): RoboForm Premium, 12-month
+subscription, personal use, new subscribers only. The key had a hard
+redemption deadline of March 20th, 2025 (Humble's article), so unredeemed
+keys from this bundle are expired. The subscription is account-based; the
+RoboForm apps (Windows, macOS, iOS, Android, browser extensions) are free
+downloads. On Linux only the browser extensions apply. Nothing for Steam.
+"""
+
+[match]
+developers = ["RoboForm", "Siber Systems"]
+domains = ["roboform.com"]
+key_names = ['roboform']
+
+[redeem]
+where = "https://www.roboform.com/key"
+account = true
+delivers = "12 months of RoboForm Premium on the RoboForm account"
+expires = "2025-03-20"
+steps = [
+  "Create or log in to a RoboForm account: https://online.roboform.com/login.",
+  "Install RoboForm for this platform (https://www.roboform.com/download; on Linux use the browser extension).",
+  "Open https://www.roboform.com/key, log in if asked, enter the licence key (XXX-XXX-XXX-XXX) from the Humble page, complete the form and Submit.",
+  "The licence and its expiry show under License in the account navigation.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download from the key"
+
+[install]
+source = "vendor"
+serial = "account"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/22462310942619-RoboForm-Premium-12-Month-Subscription-Redemption-Steps"
+claim = "1-year licence, personal use, new subscribers only, key expiration March 20th 2025; online.roboform.com/login, roboform.com/download, roboform.com/key; Windows, macOS, iOS, Android, Chromium/Firefox/Safari browsers"

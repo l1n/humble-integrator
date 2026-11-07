@@ -1,0 +1,38 @@
+schema = 1
+name = "Campaign Cartographer 3+"
+vendor = "profantasy"
+kind = "app"
+machine_names = ["campaigncartograher3pluslicenseextension"]
+verified = false
+notes = "Humble's 'Lifetime License' is the standard permanent CC3+ licence (lower tiers of some bundles sold a one-year licence). Latest is 3.98 (Update 28). Does not include CC4."
+
+[install]
+source = "vendor"
+serial = "per-product"
+file = "CC3PlusSetup.exe"
+then = ["run:profantasy/cc3plus"]
+notes = "After install, run fcw32.exe once, save the map it opens and close it: that writes the AppPath registry data add-on installers use to find CC3+. Then apply CC3PlusUpdate*.exe."
+
+[launch]
+exe = 'C:\Program Files (x86)\ProFantasy\CC3Plus\fcw32.exe'
+
+[steam]
+shortcut = true
+title = "Campaign Cartographer 3+"
+steamgriddb = "Campaign Cartographer 3+"
+
+[[sources]]
+url = "https://forum.profantasy.com/discussion/10738/question-about-running-the-cc3-program"
+claim = "program folder C:\\Program Files (x86)\\ProFantasy\\CC3Plus is fixed"
+
+[[sources]]
+url = "https://www.profantasy.com/pages/technical-support"
+claim = "run CC3+ once and save before add-ons"
+
+[[sources]]
+url = "https://forum.profantasy.com/discussion/comment/110992"
+claim = "'lifetime' = standard permanent licence"
+
+[[sources]]
+url = "https://rpgmaps.profantasy.com/newsletter-website-update-mappa-mundi-and-the-forgotten-realms-atlas/"
+claim = "3.98 / Update 28 still current mid-2026"

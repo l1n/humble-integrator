@@ -1,0 +1,58 @@
+schema = 1
+name = "InformIT (Pearson video courses / LiveLessons)"
+kind = "route"
+service = true        # video-course platform: nothing to install, no Steam entry
+notes = """
+Pearson's video courses (LiveLessons by Jez Humble, Paul Duvall, Sander van
+Vugt, ...) are sold on Humble as keys redeemed on InformIT, Pearson's IT store:
+"DevOps Video Bundle by Pearson" (devops-video-bundle-pearson-software, Dec 2023),
+one key per course. Each key is a 'Digital Product Voucher' code entered on the
+InformIT account page; the course then appears under Digital Purchases with
+lifetime access.
+
+Matched by the bundle's redemption text only. Pearson (Addison-Wesley, Que,
+Cisco Press, ...) is also the publisher of DRM-free Humble Book Bundles, so
+"Pearson" must not become a developers rule here.
+
+Offline: Humble's article says the courses need QuickTime and that
+"downloadable videos" play on any h.264 player, so at least some courses offer
+video downloads from Digital Purchases. Which ones do is not documented.
+"""
+
+[match]
+domains = ["informit.com"]
+key_names = ['informit', 'pearson video']
+# "All of the video courses in this bundle can be redeemed on the InformIT website."
+redeem_text = ['redeem\w*[^.]{0,60}\binformit\b']
+
+[redeem]
+where = "https://www.informit.com/join (then the account page's 'Digital Product Voucher' box)"
+account = true
+delivers = "the video course under Digital Purchases on the InformIT account page; lifetime access"
+expires = "not stated in the bundle text"
+steps = [
+  "Reveal the key on Humble (one code per course).",
+  "Sign in to or create an InformIT account at https://www.informit.com/join.",
+  "On the Account page, enter the code in the 'Digital Product Voucher' box at the top of the right column and click 'Submit your code'.",
+  "The course is listed under Digital Purchases; 'Watch Now' streams it. Where a download link is offered, save the videos into the library folder.",
+  "Support: http://pearsonitp.echelp.org.",
+]
+
+[download]
+scriptable = false
+how = "Account > Digital Purchases on informit.com: 'Watch Now', and a video download where the course offers one"
+notes = "No API; a logged-in session could save offered downloads into the library folder (inference, untested)."
+
+[library]
+videos = "maybe: h.264 video files where the course offers a download (Humble's article mentions downloadable videos); otherwise streaming only"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/20784369179675-Pearson-Video-InformIT-Redemption-Instructions"
+claim = "sign in at informit.com/join; Account page 'Digital Product Voucher' box; 'Submit your code'; products under Digital Purchases; 'Watch Now'; downloadable videos play on any h.264 player; lifetime access; support pearsonitp.echelp.org"
+[[sources]]
+url = "https://www.humblebundle.com/software/devops-video-bundle-pearson-software"
+claim = "'All of the video courses in this bundle can be redeemed on the InformIT website' (census redeem_text)"

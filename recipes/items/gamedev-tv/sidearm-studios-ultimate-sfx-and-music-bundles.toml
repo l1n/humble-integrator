@@ -1,0 +1,49 @@
+schema = 1
+name = "Sidearm Studios Ultimate SFX Bundle and Ultimate Music Bundle"
+vendor = "gamedev-tv"
+kind = "content"
+machine_names = [
+  "ultimatesfxbundlebysidearmstudios",     # ~10,000 game-ready sound effects (all Sidearm SFX packs)
+  "ultimatemusicbundlebysidearmstudios",   # 100+ game-ready music tracks
+]
+verified = false
+notes = """
+Humble Software Bundle: Learn Unity Game Development (Nov 2021), GameDev.tv's
+own bundle. Two audio asset packs by Sidearm Studios sat next to the
+GameDev.tv courses and GameDev.tv's own asset pack. The bundle says only
+'All of the coupons in this bundle are redeemed via coupon code', and Humble
+has no article naming another site, so these are taken to be GameDev.tv
+coupon URLs like the rest of the bundle (inference). The vendor's developers
+rule misses them only because the developer is Sidearm Studios.
+
+Caveats: Sidearm Studios sells the same packs on the Unity Asset Store (a
+later Humble bundle routed its 'Ultimate Sound FX Bundle' there), so if the
+Humble page shows an Asset Store voucher instead, use vendors/unity-asset-store.
+GameDev.tv codes from its 2021 Unity bundles had redemption deadlines (the
+Feb 2021 bundle's expired 2023-01-25), so these are probably expired
+(unverified); Key.is_expired from Humble is authoritative.
+
+Library: audio files (formats not stated), downloaded from the product's
+page in My Library; imported by hand into any engine. No Steam entry.
+"""
+
+[install]
+source = "vendor"
+file = "*"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/learn-unity-game-development-software"
+claim = "GameDev.tv bundle; 'All of the coupons in this bundle are redeemed via coupon code'; two hb-key items by Sidearm Studios with pack contents (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360038734333-GameDev-tv-Redemption-Instructions"
+claim = "GameDev.tv bundles: click the link on the download page, Add to Cart, checkout, products in the account"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/1260801686029-Humble-Learn-To-Create-Games-in-Unity-Bundle-Redemption-instructions"
+claim = "the Feb 2021 GameDev.tv Unity bundle's codes expired January 25th, 2023"
+[[sources]]
+url = "https://gamefromscratch.com/learn-unity-game-development-with-gamedev-tv-humble-bundle/"
+claim = "the bundle included the Ultimate SFX Bundle among its asset packs"

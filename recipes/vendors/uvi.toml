@@ -1,0 +1,48 @@
+schema = 1
+name = "UVI"
+kind = "route"
+notes = """
+French sample-library and instrument maker. UVI instruments are soundbanks
+that play in the free UVI Workstation or in Falcon; everything is
+registered, downloaded and installed with the UVI Portal app, and licences
+live in the user's iLok account (activate the computer itself or an iLok
+dongle with iLok License Manager; an internet connection is needed for
+activation). On Humble: Digital Synsations Vol. 1 and Model D Piano in the
+FL Studio, UVI & Friends Hitmaking Bundle (Dec 2023).
+
+macOS 10.14 to 27 and Windows 10/11 64-bit. No Linux build; iLok License
+Manager under Wine is not known to work (inference, nothing found either
+way), so treat Linux as unsupported. No Steam entries.
+"""
+
+[match]
+developers = ["UVI", "UVI Sound Tools"]
+domains = ["uvi.net"]
+key_names = ['\buvi\b']
+
+[redeem]
+where = "https://www.uvi.net/uvi-portal"
+account = true
+delivers = "the product licence in the user's iLok account and the soundbank download in UVI Portal"
+steps = [
+  "Create a UVI account and a free iLok account (UVI Portal links the two).",
+  "Install UVI Portal (https://www.uvi.net/download-portal) and register the Humble serial in it; the licence is deposited in the iLok account.",
+  "From UVI Portal, launch iLok License Manager and activate the licence on this computer or on an iLok dongle.",
+  "Install the soundbank and the free UVI Workstation (or Falcon) with UVI Portal's one-click install.",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "none"
+notes = "No Linux build; iLok activation under Wine is not known to work."
+
+[[sources]]
+url = "https://www.uvi.net/uvi-portal"
+claim = "UVI Portal registers serials (linked to the iLok account), downloads/installs everything, launches iLok License Manager for machine or dongle activation; macOS 10.14-27, Windows 10/11 64-bit; internet needed for activation"

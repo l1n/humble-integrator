@@ -1,0 +1,41 @@
+schema = 1
+name = "Beeminder (goal tracking with money on the line)"
+kind = "route"
+service = true        # web service credit: nothing to install
+notes = """
+The Healthy Habits Toolkit (Mar 2024): '$10 Credit' on Beeminder, plus an
+optional 50%-off coupon for more credit. Web service (with phone apps);
+nothing to install, no Steam entry. Beeminder's sign-up says you pay $5 if
+you don't set up a goal by the deadline (about a week after sign-up); the
+$10 credit covers that. Redeeming does not require a card if you opt out of
+the 50%-off offer.
+"""
+
+[match]
+developers = ["Beeminder"]
+domains = ["beeminder.com"]
+key_names = ['beeminder']
+
+[redeem]
+where = "https://www.beeminder.com/humblebundle"
+account = true
+delivers = "$10 of Beeminder credit ('Honey Money') on the account"
+expires = "not stated; check the Humble download page"
+steps = [
+  "Create a Beeminder account (the form ends with 'Add Your Payment Method'; click it to create the account, then close that window).",
+  "Go back to https://www.beeminder.com/humblebundle while logged in and enter the Humble code in the 'Humble Bundle Code' field.",
+  "To skip the 50%-off extra-credit offer (and any payment details), click the X; the $10 credit is applied either way.",
+  "Support: support@beeminder.com.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download"
+
+[install]
+source = "vendor"
+serial = "account"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/23114085474971-Beeminder-Redemption-Instructions"
+claim = "beeminder.com/humblebundle; $10 credit + optional 50%-off coupon; account first; opt out with the X; $5 no-goal fee covered by the credit; support@beeminder.com"

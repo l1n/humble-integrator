@@ -1,0 +1,110 @@
+schema = 1
+name = "Gumroad"
+kind = "route"
+notes = """
+Redemption route, not a publisher: Gumroad is a storefront where each seller
+has a subdomain shop, and several Humble asset bundles are redeemed there:
+JRO Tools' (JROTools, environmentdesign.gumroad.com: ZBrush IMM/insert-mesh
+brushes, kitbash meshes in OBJ/FBX, alphas, decals, Substance materials,
+Photoshop/Procreate brushes, photobash references, concept-art tutorials)
+and ThreeDee's Character Creator & 3D Asset Bundle (threedeeshop.gumroad.com).
+Humble's steps for Leartes' GameMasters Toolkit (Assets & Tutorials) are
+Gumroad's checkout too ('Click here to redeem', 'I want this!', 'Get'), but
+that bundle says "redeemable through Leartes's website" and is left to
+vendors/leartes-cosmos; it would redeem the same way as here.
+
+What a key is: a Gumroad discount code. Humble's download page shows it as
+a "Click here to redeem" link that opens the seller's product with the code
+already applied (per-item bundles: one link per asset; tiered bundles such
+as ThreeDee's or JRO's Photobash pack: one code for the tier's product,
+where a higher tier includes the lower ones and the code only works on its
+own tier). Checkout is $0 and needs only an email; the files are then on the
+Gumroad download page, and an account (same email) keeps them in the
+Library with the seller's later updates. Never pay: if the total is not
+zero the code is wrong or spent (Humble support).
+
+Expiry is per bundle: "Keys expire, redeem before June 19th, 2026" (3D
+Artist Tools, Assets and Brushes Mega Bundle; past as of Oct 2026); none
+stated for the 2025 Brushes Mega Bundle.
+"""
+
+[match]
+# No developers rule: JRO Tools and ThreeDee items also appear inside
+# Superhive (Blender Market) bundles, where the key is a Superhive coupon.
+domains = ["gumroad.com", "gum.co"]
+key_names = ['\bgumroad\b', '\bjro ?tools?\b', '\bthreedee\b']
+# "Keys redeemable on the Gumroad website", "All keys can be redeemed on JROTool's Gumroad site"
+redeem_text = ['redeem\w*[^.]{0,60}\bgumroad\b']
+bundle_slugs = [
+  '^3d-artist-tools-(assets-and-)?brushes-mega-bundle',   # URL slug and bundle-name slug
+  '^3dartisttools(assetsand)?brushesmegabundle',          # Humble machine name
+  'jro-?tools',                                           # JROTools Pro Photobash Reference Megapack
+  '^digital-?artist-?tutorial-?learning-?bundle',         # JRO's Digital Artist Tutorial Learning Bundle
+  'threedee',                                             # ThreeDee Character Creator & 3D Asset Bundle
+]
+
+[redeem]
+where = "https://gumroad.com/library"
+account = false
+delivers = "a $0 Gumroad purchase per code (one product, or one tier product), downloadable from its Gumroad page and, with an account, the Library"
+expires = "per bundle: 'redeem before June 19th, 2026' (3D Artist Tools, Assets and Brushes Mega Bundle); none stated for the 2025 Brushes Mega Bundle"
+steps = [
+  "Optional but recommended: create a Gumroad account (https://gumroad.com/signup) with the email to use below, so every redemption lands in one Library.",
+  "On the Humble download page, click 'Click here to redeem' for the item (or, for tier bundles, open the seller's tier page and enter the code in the discount-code field). The code should apply itself.",
+  "Pick the use licence if offered, leave any 'fair price' at the discounted $0, and press 'I want this!'.",
+  "Check that the total is $0, enter the email, press 'Get'. Do not pay if it is not $0.",
+  "Download from the Gumroad download page (or later from the receipt's 'View content' link or the Library).",
+]
+
+[download]
+scriptable = false
+how = "per product from its Gumroad content page (receipt 'View content' link, or Library > product)"
+notes = """
+Gumroad's public API (api.gumroad.com) is for sellers; nothing documented
+lists a buyer's library. With the user's logged-in browser session the
+library and content pages can in principle be walked and each file saved
+into the library folder (inference, untested). Guest purchases are reachable
+from the receipt link alone (Gumroad may ask for the purchase email). The
+tool should open each Humble redeem link in the user's browser rather than
+complete checkouts itself.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer: archives of brushes, meshes, textures, references and tutorials, loaded by hand into ZBrush, Blender, Substance, Photoshop, Procreate, etc."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/37227940736155-Gumroad-Redemption-Instructions"
+claim = "'Click here to redeem' on the Humble download page; choose licence; fair price; 'I want this!'; email; 'Get'; download from the Gumroad download page"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/23831123482779-GameMasters-Toolkit-Assets-Redemption-Instructions"
+claim = "one 'Click here to redeem' link per asset; the unique coupon applies automatically; no payment method; optional account by setting a password"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/55884612058523-Redemption-Instructions-for-ThreeDee-Character-Creator-3D-Asset-Bundle"
+claim = "tier pages threedeeshop.gumroad.com/l/humble-bundle-tier-N; code in the discount field; total must be zero; each code works once and only for its tier; higher tiers include lower"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/55680135587483-Redeption-Instructions-for-JROTools-Pro-Photobash-Reference-Megapack"
+claim = "open the redemption link, add the tier to the cart, check out with email"
+[[sources]]
+url = "https://www.humblebundle.com/software/3d-artist-tools-assets-and-brushes-mega-bundle-software"
+claim = "'Keys redeemable on the Gumroad website' (links gumroad.com); 'Keys expire, redeem before June 19th, 2026'"
+[[sources]]
+url = "https://www.humblebundle.com/software/3d-artist-tools-brushes-mega-bundle-software"
+claim = "'All keys can be redeemed on JROTool's Gumroad site' (links environmentdesign.gumroad.com)"
+[[sources]]
+url = "https://gumroad.com/help/article/270-url-parameters"
+claim = "discount URL form {YourProductID}/{YourDiscountCode}"
+[[sources]]
+url = "https://gumroad.com/help/article/199-how-do-i-access-my-purchase"
+claim = "access via the receipt's 'View content' button, the product page, or the Library of an account with the purchase email"
+[[sources]]
+url = "https://gumroad.com/help/article/198-your-gumroad-library"
+claim = "the Library holds all purchases; accounts created later with the same email sync earlier purchases"

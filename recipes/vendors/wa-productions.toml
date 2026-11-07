@@ -1,0 +1,111 @@
+schema = 1
+name = "W. A. Production"
+kind = "route"
+notes = """
+Czech sample-pack label and plugin developer (waproduction.com; the old
+wa-production.com name did not resolve when checked in Oct 2026). Humble bundles (2022-2024)
+mix sample packs (WAV loops, MIDI, presets, DAW templates) with W. A.
+Production effect plugins. Humble's own text: "available for Windows and
+Mac, and redeemable on the WA Productions site"; Humble's page shows the
+items with an audio icon, but by that text they are not Humble downloads. W. A.
+Production keeps one "HumbleBundle <year> <name> Bundle - Tier n" product
+per Humble tier on its store (2023 Production, 2023 Fall Production = the
+Audio FX Plugins & Royalty-Free Sounds Mega Bundle, 2024 FX = Sound FX
+Odyssey, 2024 Vocal), which a Humble coupon unlocks like any discount code;
+reseller plugin codes from February 2022 on are instead redemption codes
+added on the account's licence page. Some Humble bundles also mix in
+partner developers (United Plugins, MeldaProduction, Producer Loops, UVI,
+Image-Line in the 2023 FL Studio, UVI & Friends bundle), whose codes are
+redeemed on those developers' sites (their own vendor recipes).
+
+Plugins: VST, VST3, AU, AAX; Windows 10/11 64-bit and macOS 10.15+ (Intel
+and Apple Silicon). No Linux builds; yabridge under Wine is untested and
+in-plugin online activation may not work there (2024+ plugins accept an
+offline licence file). A licence activates on up to 3 devices.
+"""
+
+[match]
+developers = ["WA Production", "W. A. Production", "W.A. Production", "WA Productions", "W.A Production"]
+redeem_text = ['redeemable on the W\.?\s?A\.? Productions? site']
+# + bundles whose Humble redemption article is W. A. Production's alone (Music Pro 2023,
+# Royalty-Free EDM Game Design 2022, Hip Hop, Lofi & Trap Mega Bundle 2026; the last two still being crawled).
+bundle_slugs = ['^audio-fx-plugins-royalty-free-sounds', '^sound-fx-odyssey-complete-cinema', '^music-pro-2023-plugins', '^musicpro2023plugins', '^royalty-?free-edm-game-design', '^royaltyfreeedmgamedesign', '^hip-?hop-lo-?fi-(and-)?trap', '^hiphoplofi(and)?trap']
+domains = ["waproduction.com", "wa-production.com"]
+key_names = ['\bw\.?\s?a\.? production']
+
+[redeem]
+where = "https://www.waproduction.com/users/login"
+account = true
+delivers = "a $0 order on waproduction.com (downloads under My Orders; plugin serials under My Keys and Redemption Codes), or a plugin licence added to the account"
+steps = [
+  "Create an account or log in at https://www.waproduction.com/users/login.",
+  "If the Humble key is a tier coupon: open the matching 'HumbleBundle ... - Tier n' bundle product on waproduction.com (see [redeem.tier_products]), click Buy Now, then View Your Cart.",
+  "Remove everything else from the cart (the code fails if anything else is in it), click USE COUPON (not Checkout), enter the code, click ADD DISCOUNT.",
+  "Only if the total now shows the discount: CHECKOUT, tick the Terms & Conditions box, CONFIRM ORDER. If the total did not change, stop, or you will be charged.",
+  "If the key is a plugin redemption code instead: log in and enter it at https://www.waproduction.com/users/licenses, then Add.",
+  "Download from My Orders on https://www.waproduction.com/users/profile; plugin serial keys are under My Keys and Redemption Codes (also emailed).",
+  "Partner plugins (United Plugins, MeldaProduction, ...): the code shown under My Keys is a redemption code for the partner's own site; follow the instructions inside that product's download.",
+]
+
+[redeem.tier_products]
+# Humble bundle (census slug prefix) -> W. A. Production store bundle handles
+# (https://www.waproduction.com/bundles/view/<handle>), from the store sitemap, Oct 2026.
+# Mapping by name and date; the 2023 spring one is not matched to a Humble slug yet.
+"audio-fx-plugins-royalty-free-sounds" = ["humblebundle-2023-fall-production-bundle-tier-1", "humblebundle-2023-fall-production-bundle-tier-2", "humblebundle-2023-fall-production-bundle-tier-3"]
+"sound-fx-odyssey-complete-cinema" = ["humblebundle-2024-fx-bundle-tier-1", "humblebundle-2024-fx-bundle-tier-2", "humblebundle-2024-fx-bundle-tier-3"]
+"vocal-master-collection" = ["humblebundle-2024-vocal-bundle-tier-1", "humblebundle-2024-vocal-bundle-tier-2", "humblebundle-2024-vocal-bundle-tier-3"]
+"(unmatched, 2023)" = ["humblebundle-2023-production-bundle-tier-1", "humblebundle-2023-production-bundle-tier-2", "humblebundle-2023-production-bundle-tier-3"]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+notes = """
+Sample packs: unzip into the library folder (audio/wa-production/<pack>).
+Plugins: run the Mac or Windows installer from My Orders, then activate in
+the DAW (see items/wa-productions/*). Installer technology and silent
+switches are not documented.
+"""
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = "No native Linux plugins. Untested: Windows installers into the shared audio-plugins prefix, bridged with yabridge. Sample packs are plain WAV/MIDI and need nothing."
+
+[[sources]]
+url = "https://waproduction.zendesk.com/hc/en-us/articles/4432586222226"
+claim = "reseller purchases (Humble Bundle named) since Feb 2022 come with a redemption code entered at waproduction.com/users/licenses; MIDIQ and Ascension codes are product keys entered in the plugin"
+[[sources]]
+url = "https://waproduction.zendesk.com/hc/en-us/articles/4402828701458"
+claim = "partner discount codes: product page > Buy Now > cart with nothing else > USE COUPON > ADD DISCOUNT > check total > CHECKOUT > CONFIRM ORDER; downloads in My Orders, serials in My Keys and Redemption Codes"
+[[sources]]
+url = "https://www.waproduction.com/bundles/view/humblebundle-2023-fall-production-bundle-tier-1"
+claim = "Humble tier bundle products exist on the W. A. Production store (sitemap lists 2023, 2023 Fall, 2024 FX, 2024 Vocal)"
+[[sources]]
+url = "https://waproduction.zendesk.com/hc/en-us/articles/360015783540"
+claim = "activation: 2024+ plugins via account login or offline licence file; older ones by pasting the licence key in the plugin's info/about window"
+[[sources]]
+url = "https://waproduction.zendesk.com/hc/en-us/articles/360015783300"
+claim = "one licence works on up to 3 devices"
+[[sources]]
+url = "https://waproduction.zendesk.com/hc/en-us/articles/6701450668562"
+claim = "partner-developer plugins use a redemption code on the partner's site, with instructions in the download"
+[[sources]]
+url = "https://www.waproduction.com/plugins/view/obsidian"
+claim = "plugin formats VST, VST3, AU, AAX; Windows 10/11 64-bit, macOS 10.15+, Intel and Apple Silicon"
+[[sources]]
+url = "https://rekkerd.org/tag/humble-bundle/"
+claim = "Humble Sound FX Odyssey (Aug 2024) is W. A. Production plugins and sound packs"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/15117173345307-Music-Pro-2023-Plugins-Samples-Redemption-Instructions"
+claim = "Music Pro 2023: create or log into a waproduction.com account, enter the redemption key at waproduction.com/users/licenses, Add"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/6578375307291-Humble-Software-Bundle-Royalty-Free-EDM-Game-Design-Music-and-SFX-Tools-Redemption-Instructions"
+claim = "Royalty-Free EDM Game Design bundle: sign in at waproduction.com, profile > register Product, paste the licence key, add"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/51637618979611-Humble-Software-Bundle-Hip-Hop-Lofi-Trap-Mega-Bundle"
+claim = "Hip Hop, Lofi & Trap Mega Bundle (2026): redeem the bundle/tier licence on waproduction.com (licences page), then download and activate the plug-ins"

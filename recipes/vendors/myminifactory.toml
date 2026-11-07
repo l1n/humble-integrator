@@ -1,0 +1,181 @@
+schema = 1
+name = "MyMiniFactory (3D-print files redeemed on MMF)"
+kind = "route"
+item_kind = "content"   # STL / Lychee files for a library folder; nothing to install, no Steam entry
+notes = """
+MyMiniFactory (MMF) is a marketplace for 3D-printable files. Humble's
+3D-print "pack" bundles that are fulfilled on MMF give ONE key for the whole
+order ("ATTENTION: A single key will be provided to redeem all the content in
+your bundle") and say "Keys in this bundle are reedemable [sic] on the
+MyMiniFactory site". The packs themselves carry no Humble delivery icon and
+nothing downloads from Humble: the key, redeemed on MMF, puts every pack of
+the tier you paid for into your MMF Library, and the files come from there.
+
+Census example: The 3D Printable Beastmasters Compendium Bundle (ended
+2024-04-18): 28 monster packs by several MMF creators. Humble lists
+"MyMiniFactory" as each pack's publisher and links each to its MMF object
+page (IDs in [mmf_objects] below). Packs contain unsupported and
+pre-supported STL, some also Lychee scenes (.lys).
+
+How MMF redemption works, from Humble's own articles for two 2021 Modiphius
+book bundles whose STL files were fulfilled on MMF (Fallout RPG & 3D
+Miniatures; Mutant Chronicles). Humble's download page carries a link to
+MyMiniFactory, which invites you to redeem the Humble files and asks you to
+sign in or create an account. The files are then added to your MMF Library
+automatically, under the tab "Objects shared with me", in a folder named
+after the bundle (e.g. "HumbleBundle", "Mutant Chronicles RPG 3D Print
+Characters"). HighCraft's 2021 bundle went through a creator-run redeem page
+instead, which emails an MMF link, and ended in the same tab (see
+vendors/highcraft-miniatures). Not confirmed for the 2024 key bundles:
+whether the key is a link or a code typed on MMF. Humble's instructions
+next to the key decide.
+
+Matching: publisher/developer "MyMiniFactory", plus bundle redemption text
+that names MMF as the place to redeem, claim or receive files or codes. So
+every part of a pack, and later MMF-fulfilled bundles from any creator,
+resolve here. Bundles that only mention an MMF store, such as Master Forge
+(DRM-free, licence page on MMF), are not matched. Extracted keys match
+myminifactory.com in Humble's key instructions. Creators with their own
+recipe (e.g. highcraft-miniatures, hayland-terrain) match first and carry
+the same MMF steps.
+Caveats (inference): if a future bundle lists MMF as publisher but Humble
+serves the files itself, those downloads also land here. That is harmless:
+`hi apply` still fetches a vendor-route item's Humble downloads. A mixed
+bundle (ebooks downloaded from Humble, STLs on MMF, like the Modiphius ones)
+whose text matches would put its ebooks in this vendor's folder too.
+"""
+
+[match]
+developers = ["MyMiniFactory", "My Mini Factory"]
+domains = ["myminifactory.com"]
+key_names = ["myminifactory", "my mini factory", "beastmasters compendium", "3dprintablebeastmasterscompendium"]
+redeem_text = [
+  're+de+m\w*[^.]{0,80}\bmy ?mini ?factory',              # "reedemable on the MyMiniFactory site", "redeemed on MyMiniFactory", "redeem via MyMiniFactory"
+  '\bmy ?mini ?factory\b[^.]{0,20}\b(site|website|account|library)\b',
+  '\bclaim\w*[^.]{0,80}\bmy ?mini ?factory',               # "claim your files on MyMiniFactory"
+  '\bmy ?mini ?factory\b[^.]{0,20}\b(keys?|codes?)\b',     # "a MyMiniFactory code"
+  '\b(delivered|fulfill?ed|unlock\w*)\b[^.]{0,40}\b(on|via|through|at)\s+(the\s+)?my ?mini ?factory',
+]
+
+[redeem]
+where = "https://www.myminifactory.com/library"
+account = true
+delivers = "every pack of the tier bought, in the buyer's MyMiniFactory Library under 'Objects shared with me', in a folder named after the bundle; each pack downloads as one or more archives (.zip, sometimes .rar) of STL files (unsupported and pre-supported) and, where the pack says so, Lychee .lys scenes"
+expires = "No deadline on the Beastmasters page. Humble's terms (Dec 2024) expire unrevealed/unclaimed keys 3 years after purchase; Key.is_expired from Humble is authoritative. Redeemed files stay in the MMF Library."
+steps = [
+  "Open the bundle's Humble download page. Reveal the single key if it has one (Keys & Entitlements). It covers every pack in the tier you paid for; there is no per-pack key and you cannot add packs later.",
+  "Follow the MyMiniFactory link or instructions Humble shows there. MMF invites you to redeem the Humble files.",
+  "Sign in to, or create, a free MyMiniFactory account when asked (email and password, or Google). Use one MMF account for every Humble MMF key.",
+  "The files are added to your MMF Library automatically, and you should be redirected there. If not, open https://www.myminifactory.com/library, tab 'Objects shared with me', and expand the folder named after the bundle.",
+  "Download each pack's archive(s), save each pack under <library>/3d-print/myminifactory/<pack name>/, and unpack it there with 7z (handles .zip, .rar and .7z).",
+  "Download trouble on MMF: https://www.myminifactory.com/contact_us/; redemption trouble: Humble support.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+file = "*.zip"
+unpack = "7z"
+notes = "Files only: no installer. Some creators split a pack into several archives (unsupported / pre-supported / Lychee) or use .rar."
+
+[download]
+scriptable = "unverified"
+how = "from the MMF Library (Objects shared with me) in a browser; by script only through the MMF API with OAuth"
+api = "https://www.myminifactory.com/api/v2"
+auth = "OAuth 2.0 authorization-code or implicit flow: https://auth.myminifactory.com/web/authorize?client_id=...&redirect_uri=...&response_type=code&state=...; token from https://auth.myminifactory.com/v1/oauth/tokens. The user creates the API client in their MMF account settings."
+endpoints = [
+  "GET /objects/{object_id}: archive_download_url (only for an OAuth-connected user, not with an API key)",
+  "GET /objects/{object_id}/files: items[].download_url per file (OAuth user only)",
+  "GET /files/{file_id}: one file's download_url",
+]
+notes = """
+A script can fetch the files once the user has redeemed the key and
+authorised it through OAuth: for each object ID, GET /objects/{id} and save
+archive_download_url, or list /objects/{id}/files and save each download_url.
+The published API has no endpoint that lists a user's Library, purchases or
+"Objects shared with me", so the script needs object IDs. [mmf_objects] maps
+every Humble machine_name of this route to the MMF object Humble linked it
+to (from the archived Humble page). Unconfirmed inference: that the
+redeemed entitlement is exactly those objects (not one combined bundle
+object), and that shared objects return download URLs through these
+endpoints. Check the Library after the first redemption. Without API
+access, download from the Library in a browser. A community browser
+extension ("MyMiniFactory Download All") adds a button that fetches a
+release's archives, PDFs and parts one at a time. Scraping the Library
+HTML is not dependable: the site sits behind bot protection.
+"""
+
+[library]
+files = "per pack: unsupported STL, pre-supported STL, and Lychee .lys scenes where the pack lists them, as .zip/.rar archives"
+
+[mmf_objects]   # Humble machine_name -> MyMiniFactory object id (https://www.myminifactory.com/object/<id>)
+carniflorajunglepredatorspack = 210381
+rockmonstersfrommagicvalleypack = 300857
+infernalmagmapack = 259894
+landofbonespack = 267680
+totalspiderspack = 222819
+nightmaregrottofungipack = 147035
+desertorcspack = 195703
+basaltearthelementalpack = 195721
+jungledarknessmotherpack = 195518
+toxicratsdominationpack = 337233
+lizardmenguardianpack = 122689
+wormssubterraneanterrorspack = 222804
+shadowcreepwoodpack = 273039
+demonspack = 118797
+pumpkinsfromhellpack = 333332
+lurkersofthedeeppack = 215635
+plaguearmyofspookyswamppack = 281596
+carnivorousplantspack = 110712
+swampinvasionpack = 175379
+infernalhivepack = 195700
+thrallsoftheoozelordpack = 196598
+giantspiderspack = 195445
+intheclutchesofterrorpack = 206310
+zombiespack = 110542
+totalinsectspack = 237617
+darkwatersanctumpack = 175204
+lostmushroomspack = 326528
+undeadpiratespack = 132292
+
+[platforms.macos]
+runner = "native"
+notes = "Files only, nothing to run. STL opens in any slicer; .lys scenes need Lychee Slicer."
+
+[platforms.linux]
+runner = "native"
+notes = "Files only, nothing to run. STL opens in any slicer; .lys scenes need Lychee Slicer."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/3d-printable-beastmasters-compendium-bundle-software"
+claim = "archived capture 2024-03-28 (web.archive.org/web/20240328202608/...): 'Keys in this bundle are reedemable on the MyMiniFactory site'; 'A single key will be provided to redeem all the content in your bundle'; each pack's publisher is MyMiniFactory with publisher-url to its MMF object page; pack descriptions list pre-supported/unsupported STL and Lychee files"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4405060331291-Humble-RPG-Bundle-Mutant-Chronicles-How-to-Redeem-Your-3D-Miniatures-Files"
+claim = "Humble article (2021-08): click the link on your download page; MMF invites you to redeem the Humble files; create an account or log in; files are added to your library automatically under 'Objects shared with me', folder 'Mutant Chronicles RPG 3D Print Characters'; library at https://www.myminifactory.com/library"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/1260802614930-Humble-Book-Bundle-Fallout-RPG-3D-Miniatures-How-to-Redeem-Your-STL-Files-for-the-Parked-Vertibird-Pre-War-APC-and-Vault-Girl"
+claim = "Humble article (2021-02): same MMF flow for three Fallout .STL files; indexed under the 'HumbleBundle' folder in 'Objects shared with me'"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4410689415195-Humble-3D-Printable-Adventure-Bundle-HighCraft-miniatures-instructions"
+claim = "Humble article (2021-11, updated 2024-11): HighCraft code entered on redeem.highcraftminiatures.com, emailed 'Redeem here' link, MMF login, files in Library (Objects Shared with me); MMF download problems to https://www.myminifactory.com/contact_us/"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/40292330141595-Master-Forge-Fantasy-3D-Printable-Models-MAX-Savings-Bundle-System-Requirements"
+claim = "Master Forge bundles (DRM-free on Humble) only link their licence to an MMF object page; not an MMF redemption"
+[[sources]]
+url = "https://github.com/MyMiniFactory/api-documentation"
+claim = "MMF API v2 (myminifactory-api.yaml, oauth2-instructions.md, last commit 2024-06): base URL, OAuth endpoints, clients created in account settings, archive_download_url / download_url only for OAuth-connected users; no library or purchases endpoint"
+[[sources]]
+url = "https://www.myminifactory.com/register/"
+claim = "MMF account registration; purchases are kept in a Library for download (seen via search index)"
+[[sources]]
+url = "https://www.patreon.com/posts/58334008"
+claim = "creator post on MMF-delivered rewards: files appear under Library > Shared With Me; a redeem email/button otherwise; new users can create an account or sign in with Google (not Humble-specific)"
+[[sources]]
+url = "https://www.patreon.com/posts/42766769"
+claim = "creator post: files redeemed on MMF remain permanently in the user's MMF library (not Humble-specific)"
+[[sources]]
+url = "https://www.chromeboard.com/extension/myminifactory-download-al-allafnocinibcoichinbaipmjholbiml"
+claim = "'MyMiniFactory Download All' extension: Download All Files button on Library release pop-ups; .zip/.rar archives, PDFs, parts; one file at a time with a 500 ms delay"
+[[sources]]
+url = "https://twistedvoxel.com/humble-bundle-unused-unclaimed-game-codes-will-expire-after-3-years/"
+claim = "Humble terms update (Dec 24, 2024): unused/unclaimed codes expire after 3 years (reported for game keys)"

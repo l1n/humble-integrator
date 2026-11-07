@@ -1,0 +1,97 @@
+schema = 1
+name = "GameDev.tv (online courses and asset packs)"
+kind = "route"
+service = true        # course platform: nothing to install, no Steam entry
+notes = """
+Humble's GameDev.tv bundles (Learn Unity / Unreal / Blender, Complete
+Character Creation, ...) are online video courses on gamedev.tv. Each Humble
+key is a GameDev.tv coupon URL. Opening it puts the course, or the tier's
+"bundle" product, in the GameDev.tv cart at $0. Humble's help article says
+there is one link per tier backed. The census shows some bundles with one key
+per course (single_key = false) and some with one key for everything
+(single_key = true).
+
+Some GameDev.tv bundles mix courses with downloadable asset packs: 3D kits,
+music packs, Blender brush and material packs. Those have item recipes
+(kind = "content") under items/gamedev-tv/. Their files are downloaded from
+the product's page in My Library. Everything else is a streamed course.
+
+Redeem coupons one at a time. GameDev.tv's help centre says that if several
+Humble coupons are applied together, only the last one counts. The site has
+also shown a coupon as applied when it was not, or as applying to the wrong
+product. So check the cart total is $0 before checking out.
+
+A few items also carry Humble's DRM-free icon next to the key: for example
+cplusplusfundamentalscourse in the UE5 encore bundle. The census lists no
+files for it. If Humble really serves files for such an item, fetch them into
+the library folder as well. The coupon is still the main delivery.
+
+Humble Choice discount coupons in GameDev.tv bundles (developer "Humble
+Choice", e.g. in 2023-learn-unity-game-development-bundle) get swept up by
+this route's redeem_text rule, because the rule matches the whole bundle.
+They are not GameDev.tv items.
+"""
+
+[match]
+developers = ["GameDev.tv", "GameDev.tv Team", "GameDev.tv Ltd"]
+domains = ["gamedev.tv"]
+key_names = ["gamedev\\.?tv"]
+redeem_text = [
+  # Only redemption sentences, not "courses from GameDev.tv": a bundle-level
+  # rule claims every item in the bundle, so keep it to GameDev.tv's own bundles.
+  # "can be redeemed on the GameDev.tv website", "Keys are redeemed through
+  # GameDev.tv website", "Content will be redeemable through Gamedev.tv"
+  "redeem\\w*[^.]{0,60}\\bgamedev\\.tv\\b",
+]
+# GameDev.tv's own bundles whose text never says where keys go (e.g. the Game
+# Jam Bundle: assets at gamedev.tv/assets/game-jam-assets-bundle).
+bundle_slugs = ["^gamedevtvs-"]
+
+[redeem]
+where = "https://gamedev.tv/"
+account = true
+delivers = "the courses / asset packs in the GameDev.tv account's My Library (profile icon > My Library); lifetime access"
+expires = "per bundle: recent bundle pages say e.g. 'Please redeem before July 23rd, 2027' (about a year after the bundle ends). The 2021 Learn To Create Games in Unity codes expired 2023-01-25. Key.is_expired from Humble is authoritative."
+expiry_text = "(?i)redeem (?:your keys )?before ([A-Z][a-z]+ \\d{1,2}(?:st|nd|rd|th)?,? \\d{4})"
+steps = [
+  "Reveal the key on Humble. It is a coupon URL for one course, or for one tier's bundle product.",
+  "Log in to (or create) a GameDev.tv account at https://gamedev.tv/login. Use one account for every coupon. Purchases are tied to the account's email.",
+  "Open the coupon URL. On the GameDev.tv product/bundle page click the green 'Add to Cart'.",
+  "Open the cart (trolley icon). Check that exactly one coupon product is in it and that the total is $0. Then Checkout.",
+  "Complete the $0 checkout. The products appear under profile icon > My Library.",
+  "Repeat for each remaining coupon, one at a time. Applying several Humble coupons together leaves only the last one valid.",
+  "Problems (coupon shows applied but price is not $0, wrong product): support@gamedev.tv.",
+]
+
+[library]
+videos = false                 # GameDev.tv: course videos cannot be downloaded for offline use on desktop
+files = "per-lecture downloadable resources (project assets, starter files) inside each course, after login"
+asset_packs = "items/gamedev-tv/*: the product page in My Library lists Downloads per engine (.unitypackage, .zip, .blend, FBX/glTF zips, licence .txt)"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360038734333-GameDev-tv-Redemption-Instructions"
+claim = "click the link on the download page for each course; Add to Cart, checkout, log in/create account; repeat per tier backed; courses in the account dashboard; check the bundle page for deadlines (updated 2024-08-29)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/51182888593563-The-2026-Learn-Unity-Game-Development-Bundle-Redemption-Instructions"
+claim = "2026 flow: click the coupon URL, green Add to Cart, cart icon, Checkout, create/log in, complete checkout; products added to the account"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/52327392257691-Complete-Character-Creation-for-Games-Redemption-Instructions"
+claim = "same coupon-URL flow for Complete Character Creation for Games (2026)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/1260801686029-Humble-Learn-To-Create-Games-in-Unity-Bundle-Redemption-instructions"
+claim = "older flow; codes expired 2023-01-25; courses separated by tier; My Courses; support at info.gamedev.tv/contact"
+[[sources]]
+url = "https://help.gamedev.tv/article/8-humble-coupons-broken"
+claim = "redeem Humble coupons one at a time (only the latest applied coupon works); the site may show a coupon as applied when it is not"
+[[sources]]
+url = "https://gamedev.tv/p/help"
+claim = "FAQ: lifetime access; courses in My Library; course videos can't be downloaded for offline use on desktop; course assets usable in your own projects; support@gamedev.tv"
+[[sources]]
+url = "https://gamedev.tv/assets/scifi-starships"
+claim = "asset pack pages list per-engine downloadable files (Unreal/Unity/Godot/glTF/FBX/Blender) plus a licence file; lifetime access"
+[[sources]]
+url = "https://community.gamedev.tv/t/playable-courses-via-mobile-pc-offline/239974"
+claim = "staff: no legal way to download courses from the GameDev.tv back end; support can copy courses to Udemy, whose mobile app can download (limited codes per month)"
+[[sources]]
+url = "https://www.humblebundle.com/software/2025-learn-unity-game-development-bundle-software"
+claim = "'Keys redeemable on the GameDev.tv website'; bundle mixes courses with asset packs (Sci-Fi Modular Starships kit, Elven Music Pack) (census redeem_text)"

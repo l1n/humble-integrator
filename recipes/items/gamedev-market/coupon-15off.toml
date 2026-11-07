@@ -1,0 +1,28 @@
+schema = 1
+name = "GameDev Market Coupon - 15% off $10 or more"
+vendor = "gamedev-market"
+kind = "service"
+machine_names = ["gamedevmarket_coupon_15off10dollars"]
+verified = false
+notes = """
+A discount code for GameDev Market's own checkout (15% off orders of $10 or
+more; not on items already discounted), not an asset: nothing to redeem on
+the dashboard and nothing to download. Each bundle's copy has its own end
+date: 31 January 2026 (Best of 2025 bundle, already past) and 31 August 2026
+(All-in-One 2D Level Creation Pack, also past as of October 2026). The tool
+should only report the code and its date, never spend it.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/best-2025-asset-bundle-from-gamedev-market-software"
+claim = "'Get 15% off orders of $10 or more on GameDev Market! Coupon valid until January 31st, 2026 23:59 PM. Cannot be used on item already discounted'"
+[[sources]]
+url = "https://www.humblebundle.com/software/allinone-2d-game-dev-level-creation-pack-software"
+claim = "same coupon, 'valid until 23:59 on 31st August 2026'; bundle text 'The coupon expires on August 31st, 2026'"

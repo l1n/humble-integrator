@@ -1,0 +1,39 @@
+schema = 1
+name = "Objeq Delay"
+vendor = "applied-acoustics"
+kind = "addon"
+machine_names = ["objeqdelay"]
+verified = false
+notes = """
+Delay effect whose echoes pass through physically modelled resonators (plates, beams, strings, membranes). Objeq Delay v1.3.5; Objeq Delay 2 is a separate later product. VST3, AU, AAX Native (and NKS); macOS 10.13+, Windows 10+ 64-bit. No Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+file = "objeq-delay-v*"
+notes = """
+Account installer authorizes automatically when online; offline unlock via applied-acoustics.com/unlock.
+"""
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = """
+No Linux build. Untested: Windows installer into the shared audio-plugins prefix, yabridge for the DAW, offline unlock if needed.
+"""
+
+[[sources]]
+url = "https://www.applied-acoustics.com/objeq-delay/"
+claim = "formats and system requirements"
+
+[[sources]]
+url = "https://www.applied-acoustics.com/support/"
+claim = "latest installers per product, Mac and Windows only"

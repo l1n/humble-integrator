@@ -1,0 +1,80 @@
+schema = 1
+name = "Lone Wolf Development (Hero Lab Online / Hero Lab Classic)"
+kind = "route"
+service = true        # every Humble item so far is Hero Lab Online (browser) content
+notes = """
+Lone Wolf Development makes Hero Lab, the licensed character builder for
+Pathfinder and other tabletop RPGs, in two forms:
+- Hero Lab Online (herolab.online): a browser app for PC, Mac, Linux, phones
+  and tablets. A small recurring server fee ("service time") keeps character
+  creation/editing active; bought content is kept even when service lapses.
+- Hero Lab Classic: a desktop program for Windows and macOS (and iPad),
+  licensed per account and managed on Lone Wolf's site.
+
+Humble's "Hero Lab X Pathfinder" bundle (Feb-Mar 2026) sold Hero Lab Online
+activation codes: Pathfinder 2E rulebooks and adventure 'character content'
+packs, 'Hero Lab Online Access', and 3 months of Standard service time (one
+code for new users, one for current users). Humble's article sends every code
+to herolab.online/redeem, so all of these are kind "service": nothing to
+install and no Steam entry. Hero Lab Classic does not appear in the census; if
+it ever does, it needs an item recipe of kind "app" (Windows build under
+CrossOver/Wine, or the native Mac build).
+
+Item recipes: lone-wolf-development/hero-lab-online (access + service time) and
+lone-wolf-development/pathfinder-2e-content (the rulebook/adventure unlocks,
+which are only useful on an account with access).
+"""
+
+[match]
+developers = ["Lone Wolf Development", "Lone Wolf Development, Inc."]
+domains = ["herolab.online", "wolflair.com"]
+key_names = ['hero ?lab', 'lone wolf development']
+# "Keys redeemable on the HeroLab website."
+redeem_text = ['redeem\w*[^.]{0,60}\bhero ?lab\b']
+
+[redeem]
+where = "https://herolab.online/redeem"
+account = true
+delivers = "Hero Lab Online access, service time and Pathfinder 2E content unlocks on the Hero Lab Online account"
+expires = "Hero Lab X Pathfinder: 'Keys expire. Redeem before Feb 17th, 2027'. Key.is_expired from Humble is authoritative."
+expiry_text = '(?i)redeem (?:your keys )?before ([A-Z][a-z]+ \d{1,2}(?:st|nd|rd|th)?,? \d{4})'
+steps = [
+  "Reveal and copy each key on the Humble download page.",
+  "Open https://herolab.online/redeem and choose to create a new account or add the purchase to an existing one.",
+  "New account: fill in the form with the activation code and the account details, then confirm the account from the email Lone Wolf sends.",
+  "Existing account: enter its login and the activation code.",
+  "Redeem the access / service-time code first (the 'New Users Only' or 'Current Users Only' one that fits the account), then each content code on the same account.",
+  "Support: support@wolflair.com.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download: Hero Lab Online runs in the browser (it caches data locally and has an offline view of the last-synced characters)"
+
+[library]
+files = "none"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[platforms.macos]
+runner = "native"
+notes = "Browser app. (Hero Lab Classic, not sold in the census bundles, has a native Mac build.)"
+
+[platforms.linux]
+runner = "native"
+notes = "Browser app; Lone Wolf lists Linux among supported platforms for Hero Lab Online."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/17589620619931-Hero-Lab-Redemption-Instructions"
+claim = "copy the key; https://herolab.online/redeem; create a new account (activation code + details, confirm by email) or add to an existing account with its login and the code"
+[[sources]]
+url = "https://www.humblebundle.com/software/hero-lab-x-pathfinder-software"
+claim = "'Keys redeemable on the HeroLab website'; 'Keys expire. Redeem before Feb 17th, 2027'; PF2E content, Hero Lab Online Access, 3 months of Standard service time for new / current users (census)"
+[[sources]]
+url = "https://www.wolflair.com/hero-lab-online/"
+claim = "Hero Lab Online is browser-based (PC, Mac, Linux, phones, tablets); recurring server fee; purchased content kept if payment lapses; Classic is the desktop program; support@wolflair.com"
+[[sources]]
+url = "https://www.wolflair.com/hero-lab-classic/"
+claim = "Hero Lab Classic runs on Windows, Mac and iPad; licences managed on Lone Wolf's site"

@@ -1,0 +1,44 @@
+schema = 1
+name = "Realistic Paint Studio (+ VIP content)"
+vendor = "paintstorm"
+kind = "app"
+machine_names = ["realisticpaintstudioplusvipcontent"]
+verified = false
+notes = "2024 'Avant-garde Artists Toolkit' bundle. Natural-media painting app by the Paintstorm developer; Windows and macOS (and iPad). Registration by account email in the app, Hardware-ID bound. VIP content presumably unlocks with the licence (unverified)."
+
+[install]
+source = "vendor"
+url = "https://www.realisticpaint.com/downloads.html"
+file = "RealisticSetup_v*_x64.exe"
+serial = "account"
+
+[launch]
+find = "C:/Program Files*/Realistic Paint*/*.exe"
+notes = "Folder and exe name inferred."
+
+[steam]
+shortcut = true
+title = "Realistic Paint Studio"
+steamgriddb = "Realistic Paint Studio"
+
+[platforms.macos]
+runner = "native"
+file = "RealisticPaintStudio_v*.pkg"
+app_find = "/Applications/Realistic*.app"
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "No Linux build and no Wine reports found."
+
+[[sources]]
+url = "https://realisticpaint.com/support/?page_id=106"
+claim = "Realistic Paint Studio: register by email in the app, Hardware ID, deactivate in the account once a week; info@realisticpaint.com"
+
+[[sources]]
+url = "https://www.realisticpaint.com/downloads.html"
+claim = "RealisticSetup_v2.00_x64.exe, RealisticPaintStudio_v2.00.pkg, iPad; no Linux"
+
+[[sources]]
+url = "https://www.windowscentral.com/realistic-paint-studio-review"
+claim = "Realistic Paint Studio is by the Paintstorm developer (Aleksandr Komarov)"

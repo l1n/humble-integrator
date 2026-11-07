@@ -1,0 +1,30 @@
+schema = 1
+name = "MAGIX Photo Manager 17 deluxe"
+vendor = "magix"
+kind = "app"
+machine_names = ["photomanager17deluxe"]
+verified = false
+notes = "Photo organiser, from the 2026 'Create Magic with MAGIX' bundle. On macOS/Linux the native photo managers make this of limited use."
+
+[install]
+source = "humble"
+file = "*"
+serial = "per-product"
+notes = "Installer from the Humble bundle page (a MAGIX download manager); serial + MAGIX account at setup/first start."
+
+[launch]
+find = "C:/Program Files*/MAGIX/**/*Photo Manager*/*.exe"
+notes = "Exe name not documented; pick the main program after install."
+
+[steam]
+shortcut = true
+title = "MAGIX Photo Manager 17 deluxe"
+steamgriddb = "MAGIX Photo Manager 17 deluxe"
+
+[[sources]]
+url = "https://www.magix.com/us/support/technical-support"
+claim = "activation needs serial + email + internet; P3 serials bind to a device (changeable monthly); online re-validation at least monthly; installers/serials under Service Center > My products"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/10769322783771"
+claim = "MAGIX bundle: download the installer from the bundle page, enter the serial at first start, Activate, sign in/register a MAGIX account"

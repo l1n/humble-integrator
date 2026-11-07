@@ -1,0 +1,107 @@
+schema = 1
+name = "Packt (video courses, incl. ACI Learning)"
+kind = "route"
+service = true        # course platform: nothing to install, no Steam entry
+notes = """
+Humble's Packt *software* bundles ("Humble Video Learning Bundle ... by Packt",
+"... by Packt") are online video courses. Each Humble key is a Packt voucher;
+redeemed on packtpub.com, it adds that course (or, for single-key bundles,
+the whole bundle) to the buyer's Packt account library. Most bundles give one
+key per course (single_key = false). Some, e.g. "ACI - Professional
+Developer", give one key for everything ("A single key will be provided").
+ACI Learning (formerly ITProTV) courses are sold through Packt on Humble and
+redeemed on Packt, so there is no separate aci-learning route. Census items
+carry ACI Learning as developer or publisher ("ACI LEARNING"), and Packt
+items list Packt as publisher.
+
+Not claimed here: Packt *ebook* bundles (Humble Book Bundles, slug ...-books,
+items with publisher "Packt" and delivery hb-drmfree). Those are ordinary
+Humble downloads (PDF/EPUB/MOBI, and in older bundles MP4 videos), handled
+by the generic ebook/files routes. That is why "Packt" is deliberately left
+out of match.developers: it is the publisher of those ebooks too. Packt course
+bundles are recognised by the bundle's redemption text instead (inference;
+checked against every Packt bundle in the census as of Oct 2026). A future
+Packt course bundle whose text names neither Packt nor packtpub and whose slug
+lacks "packt" will show as uncovered and needs another pattern here.
+
+A few Packt course items also show Humble's DRM-free icon next to the key
+(e.g. 6 items in becoming-c-and-unreal-game-developer-packt-software). The
+census shows no files or platforms for them. If Humble really does serve
+files for such an item, fetch them into the library folder as well. The key
+is still the main thing to deliver.
+
+Offline use: Packt's own FAQ says purchased (owned) videos download as a ZIP
+of MP4s from My Account > My Videos > "Download Now". Nobody has confirmed
+that a Humble voucher grants that owned/downloadable status rather than
+streaming-only library access. Check the library entry after redeeming
+(unverified).
+
+Bundle-level rules claim every item in a matched bundle. That includes
+Humble's "10% off your first month of Humble Choice" coupon in the ACI
+bundles, unless a Humble Choice recipe that sorts earlier claims it by
+developer.
+"""
+
+[match]
+developers = ["ACI Learning", "ACI LEARNING"]
+domains = ["packtpub.com", "packt.com", "packt.link"]
+key_names = ["packt", "aci learning", "itpro\\.?tv"]
+bundle_slugs = [
+  "packt.*software",          # ...-packt-software (URL slug) or ...packt-softwarebundle (order machine_name)
+  "^aci-",                    # ACI Learning bundles (sold and redeemed via Packt)
+  # Packt course bundles whose slug and text never name Packt's site; their
+  # machine names are Packt courses elsewhere (wave-2 learning-apps report).
+  "^game-dev-toolbox-master-unity-unreal-engine-blender",
+  "^game-development-mega-bundle",
+]
+# Every text pattern refuses ebook bundles (leading guard): a Packt *book*
+# bundle that also mentions a Packt voucher must stay on the generic download
+# routes. Patterns are searched case-insensitively over the bundle's text.
+redeem_text = [
+  # "redeemed on the Packt website", "Keys redeemable on Packt website", "Redeem your keys through
+  # Packt website", "available through the Packt website", "via www.packtub.com" (Humble's typo)
+  '^(?!.*\b(?:book bundle|bundle of (?:e-?)?books|(?:e-?)?books (?:from|by) packt)).*?(?:\bpackt(?:pub)?\b[^.]{0,30}\bwebsite|redeem[^.]{0,80}\bpackt|\bpackt(?:pub|ub)?\.(?:com|link))',
+  # "bundle of video courses from Packt", "digital learning courses by Packt", unless the keys are
+  # redeemed on some other named website (code-naturally-with-python-software says "courses from
+  # Packt" but "Keys redeemable on the Janets website")
+  '^(?!.*\b(?:book bundle|bundle of (?:e-?)?books|(?:e-?)?books (?:from|by) packt))(?!.*\bredeem\w*\s+(?:on|through|via|at)\s+(?:the\s+)?(?!packt)[\w.-]+(?:\s+academy)?\s+website).*\bcourses?\s+(?:from|by)\s+(?:the\s+(?:pros|experts)\s+at\s+)?packt\b',
+  # "from the pros at Packt with our latest Humble Video Learning Bundle"
+  'video learning bundle[^.]{0,150}\bpackt\b|\bpackt\b[^.]{0,150}video learning bundle',
+]
+
+[redeem]
+where = "https://www.packtpub.com/voucher/redeem"
+prefill = "https://www.packtpub.com/voucher/redeem?voucher={key}"
+account = true
+delivers = "the course(s) in the buyer's Packt account library; lifetime access to what was redeemed"
+expires = "per bundle: Humble's page says e.g. 'Keys expire. Please redeem before May 4th, 2027' (about one year after the bundle ends). Key.is_expired from Humble is authoritative."
+expiry_text = "(?i)redeem (?:your keys )?before ([A-Z][a-z]+ \\d{1,2}(?:st|nd|rd|th)?,? \\d{4})"
+steps = [
+  "Reveal the key on Humble (it is a Packt voucher code). Single-key bundles have one voucher for every course in the tier bought.",
+  "Log in to (or create) a Packt account at https://www.packtpub.com/login. One account should hold every voucher.",
+  "Open https://www.packtpub.com/voucher/redeem (or the prefilled link https://www.packtpub.com/voucher/redeem?voucher=<KEY>), enter the voucher, click Check, then Redeem.",
+  "The course is now in the Packt account library: watch it on packtpub.com or in the Packt app.",
+  "Offline: if the course shows a download option (My Account > My Videos > Download Now in Packt's FAQ), save the ZIP (MP4s) into the library folder under packt/<course>.",
+]
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/14637082608155-Packt-Bundle-Key-Redemption-Instructions"
+claim = "Humble: redemption URL https://www.packtpub.com/voucher/redeem?voucher=; log in, enter voucher, Check then Redeem; video content added to the Packt account library (updated 2026-08-26)"
+[[sources]]
+url = "https://www.packtpub.com/en-us/help/faqs"
+claim = "Packt FAQ: owned videos download from My Account > My Videos > Download Now as ZIP files (seen via search index; the site blocks scripted fetches)"
+[[sources]]
+url = "https://www.humblebundle.com/software/aws-cloud-mastery-bundle-software"
+claim = "bundle text: 'Keys redeemable on the Packt website', 'Keys expire. Please redeem before May 4th, 2027' (census redeem_text)"
+[[sources]]
+url = "https://www.humblebundle.com/software/aci-professional-developer-easy-steps-to-mastery-software"
+claim = "ACI Learning content 'can be redeemed on the Packt website'; a single key for the whole bundle (census redeem_text)"
+[[sources]]
+url = "https://www.humblebundle.com/software/aci-network-mastery-software"
+claim = "ACI Learning courses sold as 'a bundle of video courses from Packt' (census redeem_text)"
+[[sources]]
+url = "https://www.humblebundle.com/software/agile-in-action-scrum-jira-ai-project-management-software"
+claim = "'Redeem your video bundle keys via www.packtub.com' (Humble's typo for packtpub.com; census redeem_text)"
+[[sources]]
+url = "https://www.goodreads.com/author_blog_posts/17328177-pay-what-you-want-for-the-humble-book-bundle-game-development-by-packt"
+claim = "older Packt Humble *Book* Bundles shipped videos as MP4 downloads from Humble (so book bundles stay on the generic download routes)"

@@ -1,0 +1,33 @@
+schema = 1
+name = "Norton AntiVirus Plus (1 year, 1 device)"
+vendor = "norton"
+kind = "app"
+machine_names = ["nortonantivirus"]
+verified = false
+notes = """
+Norton & Laplink Solid Security Flash Sale (Jul 2025). Activated at
+norton.com/setup (see vendors/norton; a renewal payment method is required
+and the subscription auto-renews unless cancelled). macOS: native client
+downloaded from the Norton account after activation. Linux: no client, and
+the Windows client inside Wine would only scan the prefix, so nothing to do.
+A background security service: no Steam shortcut.
+"""
+
+[install]
+source = "vendor"
+url = "https://www.norton.com/setup"
+serial = "account"
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "none"
+notes = "No Linux client; keep the key for a Mac, Windows PC or phone."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/39034677574043-Norton-Laplink-Solid-Security-Flash-Sale-Redemption-Instructions"
+claim = "Norton Antivirus: norton.com/setup, 25-character key, renewal payment method, download client; PC or Mac only; 1 device"

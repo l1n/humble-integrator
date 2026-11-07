@@ -1,0 +1,33 @@
+schema = 1
+name = "Apprehension Engine Sample Library"
+vendor = "ovani-sound"
+kind = "content"
+machine_names = ["apprehensionenginesamplelibrary"]
+verified = false
+notes = """
+Horror sample library recorded on Ovani's own Apprehension Engine (the instrument used on The Witch and The Lighthouse): three volumes (Vol. 1 The Wheel, Vol. 2 Strings & Springs, Vol. 3 Wood & Metal), 821 samples (chords, notes, loops, experimental sounds), 96 kHz/24-bit WAV with metadata tags, royalty-free. Plain audio files for any DAW or game engine; no plugin, no Steam entry. Humble sold it as its own bundle (Apr 2026).
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = """
+Redeem the Humble key on ovanisound.com (vendor recipe). No Humble redemption product for this bundle was found by handle, so the key is presumably a coupon for the three-volume bundle product (inference). Unzip each volume into audio/ovani-sound/apprehension-engine/.
+"""
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://ovanisound.com/products/apprehension-engine-three-volume-bundle"
+claim = "three volumes, 821 samples, 96 kHz/24-bit, metadata tags"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/apprehension-engine-sample-library-software"
+claim = "800+ samples across three volumes, royalty-free (census)"

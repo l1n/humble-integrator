@@ -1,0 +1,51 @@
+schema = 1
+name = "CorelDRAW Graphics Suite 2025"
+vendor = "corel"
+kind = "app"
+machine_names = ["coreldrawgraphicssuite2025"]
+verified = false
+notes = "'Freedom to Create with CorelDRAW Graphics Suite 2025' bundle. Serial prefix DR26. Key only on Humble: download from coreldraw.com. Perpetual licence per community reports of the Humble deals (not a subscription). Download the online installer from https://www.coreldraw.com/en/pages/download/ (Windows: CorelDRAWGraphicsSuite<year>Installer_AM.exe; Mac: .dmg) or the Humble page, sign in to or create a Corel account, and enter the serial during install; internet is required. The serial prefix is the same for Windows and Mac, so on macOS use the native Mac build (inferred that one serial covers either; Corel counts machines per serial). Under Wine the online installer is known to stall (WineHQ bug 57627), so Linux has no known-good route. The suite also installs Corel PHOTO-PAINT, Font Manager and CAPTURE (listed by Humble as separate no-delivery items, see coreldraw-suite-components); PHOTO-PAINT deserves its own Steam shortcut."
+
+[install]
+source = "vendor"
+url = "https://www.coreldraw.com/en/pages/download/"
+file = "CorelDRAWGraphicsSuite2025Installer*"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/Corel/CorelDRAW Graphics Suite*/Programs64/CorelDRW.exe"
+notes = "Folder and exe (CorelDRW.exe; PHOTO-PAINT: CorelPP.exe) inferred from long-standing CorelDRAW layout, not verified for this version."
+
+[[launch.extra]]
+title = "Corel PHOTO-PAINT"
+find = "C:/Program Files*/Corel/CorelDRAW Graphics Suite*/Programs64/CorelPP.exe"
+
+[steam]
+shortcut = true
+title = "CorelDRAW 2025"
+steamgriddb = "CorelDRAW"
+
+[platforms.macos]
+runner = "native"
+file = "*.dmg"
+app_find = "/Applications/**/CorelDRAW*.app"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/52764568066971"
+claim = "CorelDRAW Graphics Suite 2025: download from coreldraw.com/download (Win or Mac), Corel account, serial during install, internet required"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/39109765648027"
+claim = "CorelDRAW Graphics Suite 2024 Mac requirements include Apple Silicon"
+
+[[sources]]
+url = "https://www.coreldraw.com/en/pages/download/"
+claim = "serial prefixes: Graphics Suite 2025 DR26, 2024 DR25 (Win+Mac), Standard 2024 JK25, Essentials 2021 JL23 (Win); installers CorelDRAWGraphicsSuite<year>Installer_AM.exe / .dmg"
+
+[[sources]]
+url = "https://kb.corel.com/127998"
+claim = "Corel enforces a machine count per serial plus sign-in"
+
+[[sources]]
+url = "https://list.winehq.org/hyperkitty/list/wine-bugs@list.winehq.org/thread/H4EHWKP44KFUAEJRHWMLKRYMHBZ55N6D/"
+claim = "WineHQ bug 57627: CorelDRAW 2024 online installer stalls downloading under Wine 9.20"

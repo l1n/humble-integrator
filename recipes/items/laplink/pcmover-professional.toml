@@ -1,0 +1,28 @@
+schema = 1
+name = "Laplink PCmover Professional (1 Use / 2 Use)"
+vendor = "laplink"
+kind = "app"
+machine_names = ["pcmoverpro1use", "laplinkpcmoverpro2uses"]
+verified = false
+skip = true
+skip_reason = "Windows-to-Windows PC migration tool (must run on both the old and the new Windows PC); useless inside Wine or on a Mac. Keep the key for a real Windows migration."
+notes = """
+Norton & Laplink Solid Security Flash Sale (Jul 2025). Perpetual licence:
+'1 Use' = one transfer from one source PC to one destination PC (unlimited
+attempts); '2 Use' = two such transfers. Installer from the download address
+on the Humble page; Windows 7-11. See vendors/laplink.
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/39034677574043-Norton-Laplink-Solid-Security-Flash-Sale-Redemption-Instructions"
+claim = "PCmover Pro 1 Use / 2 Use: download from the provided address, install on both PCs, migration guide; licence limits; Windows 7-11; perpetual"
+[[sources]]
+url = "https://dl.laplink.com/en/pro/guide"
+claim = "PCmover Professional migration guide"

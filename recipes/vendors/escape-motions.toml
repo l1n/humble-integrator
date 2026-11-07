@@ -1,0 +1,107 @@
+schema = 1
+name = "Escape Motions (Rebelle, Flame Painter, Amberlight, Inspirit)"
+kind = "route"
+notes = """
+Windows and native macOS painting apps; no Linux build (Escape Motions has no
+plans), so Linux runs the Windows build under Wine/Proton.
+Humble codes are not install keys: each one is redeemed on Escape Motions'
+site, which adds the product (or paper/brush/particle pack) to the user's
+free Community account, with downloads under My Account > Purchases.
+Activation then depends on the app: Rebelle and Flame Painter 4 activate by
+logging in with that Community account at first launch (online); Amberlight
+2 and Inspirit use a registration key that the site shows and emails after
+redeeming. Licences allow 3 devices, one in use at a time.
+In the 2023 bundle Humble also served the four apps as DRM-free downloads;
+whether those builds still need the Community login (and so a code) is
+unverified - in 2020 Humble's Rebelle build was the website build.
+"""
+
+[match]
+developers = ["Escape Motions", "Escape Motions s.r.o."]
+domains = ["escapemotions.com"]
+key_names = [
+  "rebelle",
+  "flame painter",
+  "amberlight",
+  "inspirit",
+  '\bpaper: ',
+  "particle system: ",
+  "brush pack: (flame|ribbon|follow|fuzzy|liner|elastic)",
+]
+
+[redeem]
+where = "https://www.escapemotions.com/community/humblebundle"
+account = true
+delivers = "products added to the Escape Motions Community account (downloads + login-based activation; registration keys for Amberlight/Inspirit)"
+expires = "none documented; a code works once"
+steps = [
+  "Create or log in to a free Escape Motions Community account (email verification).",
+  "Open https://www.escapemotions.com/community/humblebundle (the 2023 bundle's page; https://www.escapemotions.com/redeem is the generic form) and redeem each Humble code, one at a time.",
+  "Downloads appear under My Account > Purchases; Amberlight 2 / Inspirit registration keys are shown and emailed (lost keys: /products/amberlight/lost_reg_key.php, /products/inspirit/lost_reg_key.php).",
+  "Rebelle / Flame Painter: at first launch log in with the Community account (online). Under Wine, log in with the username rather than the email if the email fails.",
+]
+
+[install]
+source = "humble"
+serial = "account"
+silent = true
+driver = "inno"
+args = ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"]
+driver_notes = "Windows installers are Inno Setup (Rebelle 8: 6.1.0; Amberlight 2 / Inspirit: 5.5.6), named like 'Rebelle 5.exe'; standard Inno switches (/DIR= too). Rebelle's licence-type page (standalone/floating) presumably takes its default when silent (inferred). Mac: 'Rebelle 5.dmg' etc. with the .app inside."
+
+[platforms.macos]
+runner = "native"
+notes = "Native Mac builds. The Flame Painter 4, Amberlight 2 and Inspirit builds inspected (demos) are Intel-only: Rosetta 2 on Apple Silicon; Rebelle 5's architecture unverified."
+
+[platforms.linux]
+runner = "proton"
+fallback = "wine"
+windows = "win10"
+notes = "No native build. Rebelle (7) is reported working under Wine, Bottles, Lutris and Proton as a non-Steam game. Pen pressure/tilt: copy the community XWinTab files (wintab32.dll, XWinTabHelper.dll.so) next to the exe, set WINEDLLOVERRIDES=\"wintab32=n,b\" in the shortcut, and pick 'Wacom Device (WinTab)' in Rebelle's tablet settings."
+
+[platforms.linux.env]
+WINEDLLOVERRIDES = "wintab32=n,b"
+
+[[sources]]
+url = "https://www.escapemotions.com/community/humblebundle"
+claim = "Humble redeem page ('Humble Software Bundle: Become a Painting Pro'): one code at a time, email verification"
+
+[[sources]]
+url = "https://www.escapemotions.com/redeem"
+claim = "generic redeem form (email + code)"
+
+[[sources]]
+url = "https://www.escapemotions.com/community/forum/t/719/humble-bundle-activation-code-no-longer-valid"
+claim = "staff: Humble codes register products on the site and are not install keys; a used code can't be reused"
+
+[[sources]]
+url = "https://www.escapemotions.com/community/forum/t/702/unable-to-download-products-i-bought-from-humble-bundle"
+claim = "redeemed Humble purchases appear under My Account > Purchases with downloads"
+
+[[sources]]
+url = "https://www.escapemotions.com/community/forum/t/39346/will-uninstalling-rebelle-delete-its-license"
+claim = "licence on 3 Win/Mac devices, one at a time; particle systems also limited to 3 devices"
+
+[[sources]]
+url = "https://www.escapemotions.com/products/flamepainter/documents/Flame_Manual_v.4.1.pdf"
+claim = "Flame Painter 4: log in with the Community account on first launch; brushes via Brushes panel or library folder"
+
+[[sources]]
+url = "https://www.escapemotions.com/community/forum/t/700/rebelle-318-or-319-humble-bundle"
+claim = "2020: Humble's Rebelle build was the same as the website build"
+
+[[sources]]
+url = "https://www.escapemotions.com/products/amberlight/download.php"
+claim = "internet needed for activation; 'Apple M1 with Rosetta 2'"
+
+[[sources]]
+url = "https://www.escapemotions.com/products/rebelle/manual/latest/getting-started/installing/"
+claim = "installers 'Rebelle N.exe/.dmg'; installs to Program Files"
+
+[[sources]]
+url = "https://www.escapemotions.com/community/forum/t/41630/rebelle-7-on-linux/4"
+claim = "Rebelle runs under Wine/Bottles/Lutris/Proton; pen pressure needs the XWinTab wintab32 override; no native Linux plans"
+
+[[sources]]
+url = "https://jrsoftware.org/ishelp/topic_setupcmdline.htm"
+claim = "Inno Setup silent switches"

@@ -1,0 +1,57 @@
+schema = 1
+name = "Pegonthetrack (ElvGames music packs)"
+kind = "route"
+notes = """
+Pegonthetrack composes the royalty-free game-music packs that ElvGames
+sells (8-bit/16-bit RPG, fantasy, harp, sci-fi, visual-novel, Christmas,
+Viking, tavern music...). ElvGames sells them together as the "Mega Music
+Bundle" on itch.io (500+ tracks in 70+ packs). Humble's Mega Music Bundle
+Royalty Free (May 2026, publisher ElvGames) gives a single key for the
+whole bundle; Humble names no redemption site and no help article exists.
+Most likely (inference) the key unlocks ElvGames' own Mega Music Bundle,
+either on itch.io or on elvgames.com, as in the ElvGames route; follow the
+key's own Humble instructions. One pack (Magic and Wizardry 2) also shows a
+direct Humble download.
+
+Note on ElvGames' itch.io Mega Music Bundle: buyers can claim packs added
+later only within 24 hours of each release, so download everything once
+redeemed.
+"""
+
+[match]
+bundle_slugs = ['^mega-music-bundle-royalty-free', '^megamusicbundleroyaltyfree']
+key_names = ['pegonthetrack']
+
+[redeem]
+where = "the redemption link that comes with the Humble key (ElvGames: itch.io or elvgames.com; unverified)"
+account = true
+delivers = "the bundle's music packs (WAV/OGG/MP3 per ElvGames' usual packs; unverified) for download"
+steps = [
+  "Reveal the single bundle key on the Humble download page and follow the redemption link or text that comes with it.",
+  "If it is an itch.io download key, claim it into an itch.io account (the bundle then stays in the itch.io library); if it is an elvgames.com code, see vendors/elvgames for the store flow.",
+  "Download every pack into audio/pegonthetrack/<pack>; also fetch any direct Humble download (Magic and Wizardry 2).",
+]
+
+[download]
+scriptable = false
+how = "itch.io or elvgames.com account downloads (unverified)"
+
+[library]
+files = "music tracks per pack (loops and full tracks): audio/pegonthetrack/<pack>"
+licence = "ElvGames' licence: personal and commercial projects allowed; no resale; no use in crypto/NFT projects"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[platforms.macos]
+runner = "native"
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/mega-music-bundle-royalty-free-software"
+claim = "Pegonthetrack packs published by ElvGames; 'A single key will be provided to redeem content in your bundle'; one pack also hb-drmfree (census)"
+[[sources]]
+url = "https://itch.io/s/87704/mega-music-bundle-sale"
+claim = "ElvGames' Mega Music Bundle on itch.io: 500+ soundtracks in 70+ packs by ElvGames and Pegonthetrack; later packs claimable for 24 hours after release; personal/commercial use, no resale, no crypto/NFT (via web search summary)"

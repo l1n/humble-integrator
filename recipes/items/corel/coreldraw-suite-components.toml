@@ -1,0 +1,15 @@
+schema = 1
+name = "CorelDRAW Graphics Suite component apps (CorelDRAW, PHOTO-PAINT, Font Manager, CAPTURE)"
+vendor = "corel"
+kind = "addon"
+machine_names = ["coreldraw", "corelphoto-paint", "corelfontmanager", "corelcapture"]
+recommends = ["corel/coreldraw-graphics-suite-2024", "corel/coreldraw-graphics-suite-2025"]
+verified = false
+notes = "Humble lists the suite's component programs as separate items with no download or key; they are installed by CorelDRAW Graphics Suite 2024/2025 and need nothing of their own. The suite recipes carry the shortcuts (CorelDRAW, PHOTO-PAINT)."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/52764568066971"
+claim = "CorelDRAW Graphics Suite 2025: download from coreldraw.com/download (Win or Mac), Corel account, serial during install, internet required"

@@ -1,0 +1,29 @@
+schema = 1
+name = "WordPerfect Office Standard 2021"
+vendor = "corel"
+kind = "app"
+machine_names = ["wordperfectstandard2021"]
+verified = false
+notes = "2024 'Corel Productivity & Creativity Essentials' bundle. Windows-only office suite (WordPerfect, Quattro Pro, Presentations); Humble download, choose 'WordPerfect Office 2021' in the installer's product chooser, paste the serial. One Steam shortcut for WordPerfect itself."
+
+[install]
+source = "humble"
+file = "*WordPerfect*"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/Corel/WordPerfect Office 2021/Programs/wpwin*.exe"
+notes = "wpwin<ver>.exe is WordPerfect's traditional exe name (inferred for 2021)."
+
+[steam]
+shortcut = true
+title = "WordPerfect 2021"
+steamgriddb = "WordPerfect"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/25292816582811"
+claim = "WordPerfect: choose 'WordPerfect Office 2021' in the product chooser; serial at the prompt"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/25293457176731"
+claim = "2024 bundle requirements: Painter Essentials 8 on Windows 10 and macOS 10.15-14 (Intel/M1); others Windows-only"

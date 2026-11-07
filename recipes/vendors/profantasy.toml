@@ -1,0 +1,148 @@
+schema = 1
+name = "ProFantasy Software"
+kind = "route"
+notes = """
+Windows-only. Every product's Humble key is a ProFantasy serial number
+(one per product, despite Humble's "a single key" wording). All products
+share one Windows prefix: add-ons only find CC3+ when they install into the
+same prefix. In mid-2026 ProFantasy moved its shop to Shopify; the old
+*.asp pages on www/secure.profantasy.com are gone and the account portal is
+service.profantasy.com/registry/. Campaign Cartographer 4 is not out yet
+(Kickstarter pre-launch, Oct 2026) and is a separate install; no Humble
+licence here includes it.
+"""
+
+[match]
+developers = ["ProFantasy Software", "ProFantasy"]
+domains = ["profantasy.com"]
+key_names = ["profantasy", "campaign cartographer", "cartographer's annual"]
+
+[redeem]
+where = "https://service.profantasy.com/registry/"
+account = true
+delivers = "each serial adds its product, with download links, to the ProFantasy account"
+steps = [
+  "Create a ProFantasy account at https://service.profantasy.com/registry/register.asp (email + password); Humble purchases are not registered automatically.",
+  "Log in at https://service.profantasy.com/registry/registry.asp (form fields txtUser / txtPassword).",
+  "On the Downloads ('Products and Updates') tab, use 'Add a product [Serial Number] [Add]' once per extracted serial.",
+  "Each product then lists its serial and installers. Where a product offers two installers (e.g. SS1SetupforCC3Plus and SS1Setup), use only the ...ForCC3Plus one; the other is for old CC3 and fails.",
+  "Do not use Humble's own 'Direct Download' installers for ProFantasy products: some were misnamed or wrong (a Temples download that was Castles).",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+driver = "installaware"
+driver_notes = """
+Serial page is InstallAware's 'User Information' dialog: Name (USERNAME),
+Company (USERCOMPANY) and 'Product key' as five uppercase boxes Serial1..5;
+Next stays disabled until they are filled. Pages: Welcome, License Check,
+User Information (products with their own serial), Target Folder, Start
+Installation, Finish. Content installers (e.g. Annual issues) have no serial
+page: they read CC3+'s SerialNum and AppPath from
+HKCU\\Software\\EvolutionComputing\\CampaignCartographer3Plus and stop with
+'CC3+ Not Found' unless CC3+ is installed and registered. Afterwards they run
+CC3MenuConfig.exe and fetch secure.profantasy.com/admin/menuconfigplus.txt.
+(Static analysis of CA203_CityUnderSiege.exe, 2023; not yet run end to end.)
+"""
+notes = """
+Installers are InstallAware, shipped as 7-Zip self-extractors; a few
+Annuals are .zip files that need `7z x` (Linux `unzip` fails on CA2023).
+Each installer asks for its serial and validates it online; offline it shows
+a request code to submit at ProFantasy's validate page and paste a reply code
+back. Under Wine that reply-code step sometimes loops; a fresh prefix fixed it.
+InstallAware documents /s and TARGETDIR:..., but the serial step means a
+person types each serial; no unattended install is known to work.
+Never run an installer while CC3+ is open; untick "launch" at the end of each.
+"""
+order = [
+  "profantasy/cc3plus: install, then run fcw32.exe once, save the map it opens, and close it (creates the registry data add-on installers look for)",
+  "CC3+ update (CC3PlusUpdate28 = 3.98, cumulative; asks for the CC3+ serial)",
+  "add-ons: DD3, CD3, Cosmographer 3, Perspectives 3, Dioramas 3, Character Artist 3",
+  "everything else: symbol sets, Source Maps, Token Treasury, Annuals, documents",
+  "CC3+ update again (it also updates the add-ons)",
+  "Fractal Terrains 3+ is independent and can go at any point",
+]
+update = "CC3PlusUpdate*.exe"
+unpack = "7z"
+
+[prefix]
+name = "profantasy"
+arch = "win64"
+windows = "win10"
+winetricks = ["corefonts"]
+registry_serial = 'HKCU\SOFTWARE\EvolutionComputing\CampaignCartographer3Plus\SerialNum'
+
+[platforms.macos]
+runner = "crossover"
+min_version = "26"
+windows = "win10"
+avoid = ["whisky"]
+notes = """
+CrossOver 26 (Wine 11) installs CC3+ cleanly in a Windows 10/11 bottle.
+On CrossOver 25.x: 'Install an unlisted application', WinXP 64-bit bottle
+with Core Fonts, never change the bottle OS mid-install, except switch to
+Windows 10 only while installing FT3+, then back. 25.x Win10/11 bottles hit
+the installer's 'Access violation at 004055FB'. Whisky hangs at the first
+installer screen and is unmaintained. Kegworks/Sikarugir is reported working
+with the right engine (WineskinCX 21.2.0 / wine-6.0.2) but unproven.
+"""
+
+[platforms.linux]
+runner = "umu"
+fallback = "wine"
+launch_via = "wrapper"
+notes = """
+Untested under Proton anywhere. Steam gives each non-Steam shortcut its own
+Proton prefix, which would split CC3+ from its add-ons, so the Steam
+shortcuts launch a wrapper script that runs umu-run with the one fixed
+prefix (WINEPREFIX=<data>/prefixes/profantasy) and the same prefix is used
+for every installer. Plain Wine with a default 64-bit prefix is reported to
+work with no extra verbs. On WoW64-mode Wine builds (e.g. Fedora's Wine 11)
+the installer can hit an access violation: use a WINEARCH=win32 prefix and
+copy wldap32.dll from the i386-windows Wine dir into system32; FT3+ then
+needs its own win64 prefix. Printing needs cups-pdf and 32-bit libcups.
+"""
+
+[usage]
+notes = """
+Map text rendering at the wrong size under Wine: untick 'Use New Metrics' in
+Text Properties. Redraw glitches: Ctrl+R. Add-on menus missing: run
+CC3MenuConfig.exe from the CC3+ data directory. CC3+ doesn't use the GPU, so
+D3D/DXVK settings don't matter.
+"""
+
+[[sources]]
+url = "https://forum.profantasy.com/discussion/15314/humble-bundle-keys-temporarily-exhausted-problem"
+claim = "ProFantasy supplies Humble with serial numbers; Encore buyers saw per-product keys"
+[[sources]]
+url = "https://service.profantasy.com/registry/"
+claim = "registry portal: register.asp, registry.asp, Add a product by serial"
+[[sources]]
+url = "https://forum.profantasy.com/discussion/15300/executables"
+claim = "one installer per product; use the ...ForCC3Plus variant"
+[[sources]]
+url = "https://forum.profantasy.com/discussion/15750/latest-humble-bundle-and-installing-cartographers-annuals"
+claim = "official install order (staff, Oct 2026)"
+[[sources]]
+url = "https://forum.profantasy.com/discussion/15429/weird-behavior-while-installing-via-wine"
+claim = "serial validated online; reply-code loop under Wine; Annual zips need 7z"
+[[sources]]
+url = "https://www.installaware.com/flashhelp/setupcommandlineparameters.htm"
+claim = "InstallAware /s, /l=log, VAR:VALUE switches"
+[[sources]]
+url = "https://www.codeweavers.com/compatibility/crossover/tips/campaign-cartographer-374-plus/installation-2025"
+claim = "CrossOver 25.x: WinXP 64-bit bottle, Core Fonts; Win10 only for FT3+"
+[[sources]]
+url = "https://forum.profantasy.com/discussion/13577/current-state-of-cc3-on-macos"
+claim = "CrossOver 26 + Win11 bottle works; Whisky hangs; Sikarugir works with the right engine"
+[[sources]]
+url = "https://forum.profantasy.com/discussion/14047/wine-installer-error-any-ideas"
+claim = "InstallAware access violation; win32 prefix + wldap32.dll workaround on Fedora Wine 11"
+[[sources]]
+url = "https://forum.profantasy.com/discussion/9358/linux-options"
+claim = "add-ons must share CC3+'s prefix; printing via cups-pdf + 32-bit libcups; Use New Metrics"
+[[sources]]
+url = "https://rpgmaps.profantasy.com/cc4-crowdfunding-pre-launch/"
+claim = "CC4 is a new install; existing users get a discount, not a free upgrade"

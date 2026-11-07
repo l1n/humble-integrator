@@ -1,0 +1,28 @@
+schema = 1
+name = "Graphixly comic asset packs (Speech Bubbles, Panel Frames, Storyboard Assets)"
+vendor = "clip-studio"
+kind = "content"
+machine_names = ["speechbubblespack", "comicandmangapanelframespack", "storyboardassetspack"]
+requires = ["clip-studio/clip-studio-paint-pro-12-month"]
+verified = false
+notes = "Perpetual Graphixly packs from the Clip Studio bundles; redeemed at a Graphixly checkout. Speech bubbles are PNGs; panel-frame and storyboard formats are undocumented (inferred: PNG/materials). Images can be registered as CSP materials via Edit > Register Material > Image, or just kept in the library folder. Grouped because they install the same way."
+
+[install]
+source = "vendor"
+file = "*.zip"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/52327069996443"
+claim = "Humble code is a 100%-off discount code at a Graphixly product page checkout; confirmation email with download/activation instructions"
+
+[[sources]]
+url = "https://help.clip-studio.com/en-us/manual_en/630_material/Creating_your_own_materials.htm"
+claim = "images can be registered as materials via Edit > Register Material > Image"
+
+[[sources]]
+url = "https://graphixly.com/pages/addons"
+claim = "each speech bubble is a PNG"

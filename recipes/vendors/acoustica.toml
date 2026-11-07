@@ -1,0 +1,93 @@
+schema = 1
+name = "Acoustica (Mixcraft, Pianissimo)"
+kind = "route"
+notes = """
+Maker of the Windows DAW Mixcraft and the Pianissimo virtual grand piano
+(its store runs on the same platform as Cherry Audio's). Humble bundles 2020-2026 include Mixcraft 8
+Home Studio, Mixcraft 9 Recording Studio, Mixcraft 10.6 Home Studio and
+Pianissimo alongside Soundtrack Loops and Cherry Audio items. Every Acoustica
+item is a code, never a Humble download (Make Music, Change Lives shows an
+audio icon too, for demo MP3s).
+
+Two activation schemes. Mixcraft 8/9 and Pianissimo use a Registration ID +
+Registration Code typed into the program (Help > Enter Registration Code);
+Humble's codes were retrieval codes that emailed those, at a page that now
+redirects to the Acoustica store's Redeem Code page. Mixcraft 10 needs no
+registration code: the program signs in to the Acoustica account (File >
+Preferences > Account).
+
+Mixcraft is Windows-only (64-bit Windows 7 SP1 to 11; Mixcraft 8/9 also
+32-bit). Pianissimo is a Windows VST plus standalone. Under Wine on both
+macOS and Linux (untested).
+"""
+
+[match]
+# Acoustica items are always codes.
+developers = ["Acoustica", "Acoustica Inc.", "Acoustica, Inc."]
+domains = ["acoustica.com"]
+key_names = ['acoustica', 'mixcraft', 'pianissimo']
+
+[redeem]
+where = "https://store.acoustica.com/redeem"
+account = true
+delivers = "the product in the Acoustica store account, with its installer on the order details page; for Mixcraft 8/9 and Pianissimo a Registration ID and Code (by email)"
+steps = [
+  "Create an account at https://store.acoustica.com/register (or log in).",
+  "Enter the Humble code at https://store.acoustica.com/redeem (the old code-retrieval pages old.acoustica.com/cgi/coderetrieval.php and acoustica.com/rc now redirect here) and press Redeem Product.",
+  "Download the installer from the order details page (or the download link in the email).",
+  "Mixcraft 10: start it and log in under File > Preferences > Account.",
+  "Mixcraft 8/9: during installation or at Help > Enter Registration Code, enter the Registration ID and Registration Code from the email. Pianissimo: run the standalone, Help > Enter Registration Code (or the yin-yang button), same two values.",
+  "Lost codes: Acoustica's Lost Codes page re-sends them by email.",
+]
+
+[download]
+scriptable = false
+how = "installers from the order details page of the Acoustica store account"
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+notes = "Windows .exe installers; installer framework and silent switches not documented. Run interactively in the prefix."
+
+[prefix]
+name = "acoustica"
+arch = "win64"
+windows = "win10"
+winetricks = []
+
+[platforms.macos]
+runner = "crossover"
+notes = "No macOS build of Mixcraft or Pianissimo. Untested under CrossOver."
+
+[platforms.linux]
+runner = "wine"
+notes = "No Linux build. Untested under Wine; Pianissimo as a plug-in belongs in the shared audio-plugins prefix with yabridge (see its item recipe)."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360053665093-Mixcraft-9-Recording-Studio-instructions"
+claim = "enter email + code at old.acoustica.com/cgi/coderetrieval.php; email gives registration instructions and download link; enter code and ID during installation"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360053665053-Mixcraft-8-Home-Studio-instructions"
+claim = "same retrieval flow for Mixcraft 8 Home Studio"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360052885894-Pianissimo-Grand-Piano-VST-instructions"
+claim = "Pianissimo: retrieval page, email with ID and code, install, Help > Register, enter ID and code"
+[[sources]]
+url = "https://store.acoustica.com/redeem"
+claim = "log in or create an account, enter the purchase code, Redeem Product adds it to the account; downloads on the order details page; acoustica.com/rc and /cgi/coderetrieval.php redirect here (checked Oct 2026)"
+[[sources]]
+url = "https://acoustica.kayako.com/article/479-retrieval-code-questions-and-answers-rc-code"
+claim = "retrieval codes (RC...) are used once to have the registration code emailed; Lost Codes page re-sends codes"
+[[sources]]
+url = "https://acoustica.kayako.com/article/673-do-i-need-a-registration-code-for-mixcraft-10"
+claim = "Mixcraft 10 needs no registration code: log in under File > Preferences > account with an Acoustica account"
+[[sources]]
+url = "https://acoustica.kayako.com/article/438-how-do-i-register-mixcraft"
+claim = "Mixcraft registration: Help > Enter Registration Code, Registration ID and Code"
+[[sources]]
+url = "https://acoustica.kayako.com/article/453-how-do-i-register-pianissimo"
+claim = "Pianissimo: standalone Help > Enter Registration Code (or yin-yang symbol), Registration ID + 20-character code"
+[[sources]]
+url = "https://acoustica.com/products/mixcraft"
+claim = "Mixcraft is DAW software for Windows; 10.6 requires 64-bit Windows 7 SP1/8/10/11"

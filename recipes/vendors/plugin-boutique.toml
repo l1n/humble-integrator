@@ -1,0 +1,55 @@
+schema = 1
+name = "Plugin Boutique"
+kind = "route"
+notes = """
+Plugin Boutique (pluginboutique.com) is a plug-in and sample store. Its
+Humble bundle (Plugin Boutique Music Production Bundle, 2024) gives one code
+that is a 100% coupon on the bundle's products at Plugin Boutique; the
+products are then downloaded from the Plugin Boutique account, each with its
+maker's own serial or licence (third-party developers; each needs its own
+activation). Matched by bundle, not by developer, because the items are made
+by many companies.
+
+Licence (Humble): perpetual, 3 users/devices, 3 reinstalls per machine,
+upgrades allowed, single redemption, redeem within 1 year.
+"""
+
+[match]
+redeem_text = ['Plugin Boutique']
+bundle_slugs = ['^plugin-boutique', '^pluginboutique']
+domains = ["pluginboutique.com"]
+key_names = ['plugin ?boutique']
+
+[redeem]
+where = "the redemption URL on the Humble download page (pluginboutique.com)"
+account = true
+expires = "redeem within 1 year of purchase (Humble)"
+delivers = "the bundle's products in the Plugin Boutique account with their downloads and serials"
+steps = [
+  "Reveal the code on the Humble download page and follow the redemption URL shown there.",
+  "Create or log into a Plugin Boutique account, add the bundled items to the cart.",
+  "Enter the code as a coupon at checkout; the total must drop to $0. Complete the order without paying.",
+  "Download each product and its serial from My Products in the Plugin Boutique account; install and activate each with its maker's method.",
+]
+
+[download]
+scriptable = false
+how = "per-product downloads under My Products on pluginboutique.com"
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = "Depends on each product's maker; untested Windows plug-ins under yabridge in the shared audio-plugins prefix."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/30319892975259-Plugin-Boutique-Music-Production-Bundle-Redemption-Instructions"
+claim = "perpetual; 3 users/devices; 3 reinstalls; upgradable; single redemption; 1-year deadline; follow the redemption URL, add items to cart, coupon to $0, products in the Plugin Boutique account"

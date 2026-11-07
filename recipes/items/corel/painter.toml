@@ -1,0 +1,49 @@
+schema = 1
+name = "Corel Painter (2021 / 2022 / 2023)"
+vendor = "corel"
+kind = "app"
+machine_names = ["corelpainter2021", "corelpainter2022", "corelpainter2023", "painter2023"]
+verified = false
+notes = "Painter 2021 ('Create with Visual Impact', 2021), 2022 ('Anything but Ordinary Painter Bundle' + Encore, 2022) and 2023 ('Create and Elevate' + Encore, 'Design with CorelDRAW', 2023-24). Each version is its own serial and Humble download (Windows + Mac); install only the newest one owned. One licence covers Mac or PC (inferred from Corel's 'we support both platforms with licensing'), so macOS uses the native build. In the 'Create and Elevate' bundles the item ('painter2023') shows only a download icon; its serial may be shown on the download page (unverified)."
+
+[install]
+source = "humble"
+file = "*Painter*20*"
+serial = "per-product"
+args = []
+notes = "Windows: serial in the installer's 'Serial Number' box. Corel's deployment properties (Setup.exe /qn SERIALNUMBER=<serial> INSTALLDIR=... ALLOW_PRODUCTUPDATES=2 REBOOT=ReallySuppress) are documented for volume-licence server images; unverified with retail Humble serials."
+
+[launch]
+find = "C:/Program Files*/Corel/Corel Painter 20*/*Painter*.exe"
+notes = "Exe name not documented (inferred Painter*.exe)."
+
+[steam]
+shortcut = true
+title = "Corel Painter"
+steamgriddb = "Corel Painter"
+
+[platforms.macos]
+runner = "native"
+file = "*.dmg"
+app_find = "/Applications/**/Corel Painter 20*.app"
+notes = "e.g. CorelPainter2022.dmg containing 'Corel Painter 2022.pkg'; serial and Corel sign-in at first launch. Painter 2022: macOS 10.15/11, Intel or Apple M1."
+
+[[sources]]
+url = "http://apps.corel.com/redirect?_redirect=command&function=pdf&subfunction=userguide&app=painter&version=2022&lang=EN"
+claim = "Painter 2022 User Guide: serial typed during install; activation needs internet + registration; brush/paper library import"
+
+[[sources]]
+url = "http://product.corel.com/help/Painter/540111155/Corel-Painter-en/Deployment-Guide-Corel-Painter-2022.pdf"
+claim = "Setup.exe wraps MSI; switches /a /q[n|b|r|f] /L /x /f; public properties SERIALNUMBER, INSTALLDIR, USERNAME, ALLOW_PRODUCTUPDATES, PROFILEID, REBOOT; macOS 10.15/11, Intel or M1"
+
+[[sources]]
+url = "https://kb.corel.com/128613"
+claim = "Mac: Corel Painter 2022.pkg inside CorelPainter2022.dmg; sign-in prompt at launch is normal"
+
+[[sources]]
+url = "https://www.painterartist.com/en/product/painter/"
+claim = "Painter licensing supports both Mac and PC"
+
+[[sources]]
+url = "https://www.codeweavers.com/compatibility/search?name=corel"
+claim = "CodeWeavers: entries only up to Painter 2019, VideoStudio X3, PaintShop Pro 2023; none for the 2022 versions"

@@ -1,0 +1,42 @@
+schema = 1
+name = "Moho Debut 12.5"
+vendor = "lost-marble-moho"
+kind = "app"
+machine_names = ["mohodebut125"]
+verified = false
+notes = "Beginner edition of Moho 12.5, sold in Graphixly's Clip Studio bundles ('Create, Paint and Animate'; 'Clip Studio Creativity Collection: Paint, Draw, Animate', redeem before 2027-07-22 via the Graphixly website). Separate product and serial from Moho Pro; if both are owned, Pro is the one to install. Redemption: apply its own Humble code as a 100%-off discount code at https://graphixly.com/products/moho-debut-12-5; the download page then gives the installer and the serial/activation code (Humble support articles 52327069996443, 35794830138267). Perpetual licence."
+
+[install]
+source = "vendor"
+file = "Moho*Debut*"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/**/Moho*.exe"
+notes = "Exe name for Debut not verified (Pro installs 'Moho x64.exe')."
+
+[steam]
+shortcut = true
+title = "Moho Debut 12"
+steamgriddb = "Moho"
+
+[platforms.macos]
+runner = "native"
+file = "*.pkg"
+app_find = "/Applications/Moho*.app"
+
+[[sources]]
+url = "https://lostmarble.net/Moho125/index.html"
+claim = "Moho 12.5 manual: serial + email at install; manual (offline) activation; deactivation via support"
+
+[[sources]]
+url = "https://lostmarble.com/support/kb/faq.php?id=3"
+claim = "'no activations available': install the final 12.5 patch (my.smithmicro.com)"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/35794830138267"
+claim = "Moho Debut 12.5: second code redeemed on graphixly.com/products/moho-debut-12-5; serial on the download page"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/27353366165915"
+claim = "Moho Debut 12.5 is a perpetual licence"

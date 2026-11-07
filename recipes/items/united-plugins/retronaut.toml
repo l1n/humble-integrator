@@ -1,0 +1,38 @@
+schema = 1
+name = "Retronaut (United Plugins)"
+vendor = "united-plugins"
+kind = "addon"
+machine_names = ["retronaut"]
+verified = false
+notes = """
+Multi-voice vibrato and chorus with lo-fi effects modelled on bucket-brigade chips, tape, vinyl and VCOs. Brand: United Plugins. Effect plugin (Windows/macOS) hosted by a DAW; no Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = """
+Redeem on unitedplugins.com, download the installer and licence file from My licenses, install, then activate in the plugin (online login or drag the licence file).
+"""
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = """
+No Linux build. Untested: Windows version in the shared audio-plugins prefix (with core fonts), bridged by yabridge; activate offline with the licence file.
+"""
+
+[[sources]]
+url = "https://www.humblebundle.com/software/fl-studio-uvi-friends-hitmaking-bundle-software"
+claim = "item description in the FL Studio, UVI & Friends Hitmaking Bundle (census)"
+
+[[sources]]
+url = "https://unitedplugins.com/plugin-activation"
+claim = "activation steps"

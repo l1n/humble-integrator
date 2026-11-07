@@ -1,0 +1,88 @@
+schema = 1
+name = "Eldamar Studio"
+kind = "route"
+notes = """
+Eldamar Studio sells its own graphics and game-dev packs (photo overlays,
+LUTs, Lightroom presets incl. its "Lumin Presets" line, Photoshop actions and
+brushes, backgrounds/textures, VFX, UI, low-poly and audio packs, Blender
+courses) on its own shop, eldamar-studio.com, and every Humble bundle of
+theirs in the census is redeemed there, so this recipe matches by developer
+(no Eldamar item has been seen in a Unity or Fab bundle).
+
+How redemption works: each Humble bundle has its own redemption page
+(serial code + email address -> Submit); with an account, the downloads are
+linked to it (My account > Downloads), otherwise they are tied to the email
+entered, which can't be changed later. Pages seen in the site's sitemap:
+  allinone-game-dev-bundle-software (2025)   -> /all-in-one-game-dev-bundle/
+  biggest-graphics-bundle-2025-software      -> /biggest-graphics-2025-redemption/
+  biggest-graphics-ever-2-software (2021)    -> /biggest-graphics-bundle-ever-2-redemption/
+  biggest-graphics-bundle-ever-2-remix (2023)-> /biggest-graphics-bundle-ever-2-relaunch-redemption/ (inferred: "relaunch")
+  blender-3d-modeling-course-bundle-software -> /redeem-courses/ (course serials; account required)
+  Biggest Graphics Ever 1                    -> /hb-biggest-graphics-ever-1-redemption/
+  Humble VFX / mystery bundles               -> /hb-vfx-redemption/, /hb-mystery-products-redemption/, /hb-vfx-mystery-products-redemption/
+  anything else                              -> /redemption/ ("Enter your serial code to download the product")
+Whether one serial covers a whole tier or each item has its own is not
+documented; Humble shows one key per item.
+
+What the download is: plain archives (images, .cube LUTs, .xmp/.dng
+presets, .atn/.abr, video VFX, Unity/Unreal-ready textures and models,
+audio). The tool can fetch them into the library folder from the account's
+downloads page (WooCommerce, logged-in session; inference).
+The 2021 Biggest Graphics Ever 2 items carry no delivery icon in the census;
+if Humble serves them as direct downloads, take those instead.
+The course bundle's "Materials Pack" is a Humble direct download; the rest is
+redeemed here. "Bonus Coupon - 50% Discount Code" items have their own item
+recipe (items/eldamar-studio/discount-code-50).
+"""
+
+[match]
+developers = ["Eldamar Studio", "Lumin Presets (Eldamar Studio)"]
+redeem_text = ['\bredeem\w*[^.]{0,60}\bEldamar\b']
+domains = ["eldamar-studio.com"]
+key_names = ['\beldamar\b']
+
+[redeem]
+where = "https://eldamar-studio.com/redemption/"
+account = true
+delivers = "the bundle's packs as downloads linked to the Eldamar account (or to the email entered)"
+steps = [
+  "Create an account at https://eldamar-studio.com/my-account/ first (the redemption pages say 'Create an account to link all these downloads to your account'; courses require one).",
+  "Open the bundle's own redemption page (see notes; fall back to https://eldamar-studio.com/redemption/).",
+  "Enter the serial code and the account's email address, Submit. Use the same email every time: it can't be changed afterwards.",
+  "Repeat for every serial.",
+  "Download from My account > Downloads into the library folder.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer: archives of presets/overlays/assets, used by hand in Photoshop, Lightroom, Affinity, DaVinci Resolve, Premiere, Unity, Unreal, Blender, etc."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://eldamar-studio.com/all-in-one-game-dev-bundle/"
+claim = "All-in-One Game Dev Bundle Redemption: 'Create an account to link all these downloads to your account. Enter the Serial Code and Email Address and click Submit'"
+[[sources]]
+url = "https://eldamar-studio.com/biggest-graphics-2025-redemption/"
+claim = "Biggest Graphics Bundle 2025 Redemption page (serial + email)"
+[[sources]]
+url = "https://eldamar-studio.com/biggest-graphics-bundle-ever-2-redemption/"
+claim = "Biggest Graphics Bundle Ever 2 Redemption page; a separate 'Relaunch' page exists"
+[[sources]]
+url = "https://eldamar-studio.com/redeem-courses/"
+claim = "Course Redemption: serial code; account required"
+[[sources]]
+url = "https://eldamar-studio.com/redemption/"
+claim = "generic page: 'Enter your serial code to download the product'"
+[[sources]]
+url = "https://support.fanatical.com/hc/en-us/articles/4414089832209"
+claim = "Eldamar keys are redeemed on per-bundle pages on eldamar-studio.com; the email entered can't be changed later (Fanatical's guide)"
+[[sources]]
+url = "https://www.humblebundle.com/software/allinone-game-dev-bundle-software"
+claim = "'All keys are redeemable on the Eldamar Studio website'"

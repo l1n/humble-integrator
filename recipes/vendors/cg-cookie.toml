@@ -1,0 +1,56 @@
+schema = 1
+name = "CG Cookie (Blender video courses)"
+kind = "route"
+service = true        # course content: nothing to install, no Steam entry
+notes = """
+Humble's CG Cookie bundles ("Blender Core Skills: The Ultimate Blender
+Basics Bundle" 2024 and its Remix) are Blender video courses sold as
+downloadable products on cgcookie.com. The Humble key is a redemption code
+applied at a $0 checkout. After the order the success page and the account's
+Orders page list download links for the bundle files. Fetch them into the
+library folder.
+
+Matching is by bundle text, not developer. CG Cookie courses also appear in
+Blender Market's "Essential Game Modding Toolkit" bundles (developer "CG
+Cookie", publisher "Blender Market"). Those come with the Blender Market
+bundle's single coupon and download from Superhive, so a developer rule here
+would misroute them. In CG Cookie's own bundles the developer is either "CG
+Cookie" or an instructor name with publisher "CG Cookie", and the bundle
+text always says "redeemable on the CG Cookie website".
+"""
+
+[match]
+domains = ["cgcookie.com"]
+key_names = ["cg ?cookie"]
+bundle_slugs = ["^blender-core-skills"]
+redeem_text = [
+  "redeem\\w*[^.]{0,60}\\bcg ?cookie\\b",       # "redeemable on the CG Cookie website", "Keys will be redeemed on the CG Cookie website"
+  "cgcookie\\.com",
+]
+
+[redeem]
+where = "https://cgcookie.com/downloads/core-unlock-the-heart-of-blender-and-elevate-your-craft"
+account = true
+delivers = "a $0 order on cgcookie.com whose page lists download links for the bundle's course files"
+expires = "check the Humble download page. Key.is_expired from Humble is authoritative."
+expiry_text = "(?i)redeem (?:your keys )?before ([A-Z][a-z]+ \\d{1,2}(?:st|nd|rd|th)?,? \\d{4})"
+steps = [
+  "Reveal the redemption code on Humble and click 'Redeem Here' (or open the CG Cookie bundle product page) and 'Add to Cart'.",
+  "Create or log in to a CG Cookie account. The cart shows the full price until the code is applied.",
+  "Enter the Humble redemption code. The total drops to $0 and no payment details are needed. Complete the order.",
+  "Download the files from the success page, or later from https://cgcookie.com/account/orders > View order > the orange download links, into the library folder.",
+]
+
+[library]
+videos = true                  # delivered as downloadable files on the order page
+files = "https://cgcookie.com/account/orders > View order > download links"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/24390737301403-CGCookie-Redemption-Instructions"
+claim = "Redeem Here, Add to Cart, create account, enter code (no payment info), success screen with download links; also account/orders > View order > orange links (updated 2025-01)"
+[[sources]]
+url = "https://www.humblebundle.com/software/blender-core-skills-ultimate-blender-basics-bundle-remix-software"
+claim = "'All of the software in this bundle is redeemable on the CG Cookie website'; publisher 'CG Cookie', instructor names as developers (census)"
+[[sources]]
+url = "https://www.humblebundle.com/software/blender-core-skillsthe-ultimate-blender-basics-bundle-software"
+claim = "'Keys will be redeemed on the CG Cookie website' (census)"

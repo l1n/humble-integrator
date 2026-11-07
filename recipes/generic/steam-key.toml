@@ -1,0 +1,42 @@
+schema = 1
+name = "Steam key"
+kind = "route"
+priority = 10
+notes = """
+The item becomes a real Steam game: nothing to install or wrap.
+Extraction: humble.py extract (reveals only with --reveal; 'needed' skips
+apps the Steam account already owns, so those keys stay giftable).
+Redemption, two modes:
+  click   open https://store.steampowered.com/account/registerkey?key=<KEY>
+          (key prefilled; the user confirms in their logged-in browser)
+  auto    POST https://store.steampowered.com/account/ajaxregisterkey/
+          form product_key=<KEY>, sessionid=<steam sessionid cookie>;
+          needs a logged-in Steam web session.
+Steam rate-limits activations: result 53 means wait (back off ~1h) and retry.
+"""
+
+[match]
+delivery = ["hb-steam"]   # TODO confirm icon name against the census
+key_types = ["steam"]
+steam_app_id = true
+
+[redeem]
+where = "https://store.steampowered.com/account/registerkey"
+account = true
+steps = [
+  "Reveal the key on Humble (skipped for games already owned on Steam).",
+  "Activate it on Steam: prefilled registerkey page, or ajaxregisterkey with a web session.",
+]
+
+[redeem.result_codes]   # purchase_result_details from ajaxregisterkey
+9 = "already owned by this Steam account: keep the key, mark done"
+13 = "not available in this region"
+14 = "invalid key"
+15 = "already activated by another Steam account"
+24 = "requires the base game first: redeem the base game, then retry"
+50 = "this is a wallet code: https://store.steampowered.com/account/redeemwalletcode"
+53 = "too many activation attempts: back off and retry later"
+
+[[sources]]
+url = "https://github.com/FailSpy/humble-steam-key-redeemer/blob/main/humblesteamkeysredeemer.py"
+claim = "Humble reveal endpoint /humbler/redeemkey; Steam ajaxregisterkey endpoint and its result codes"

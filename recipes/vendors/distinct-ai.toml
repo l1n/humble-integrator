@@ -1,0 +1,64 @@
+schema = 1
+name = "Distinct AI (Vision FX, HDR FX, Render FX, Vector FX)"
+kind = "route"
+notes = """
+Local generative-AI tools sold inside Corel's Humble bundles ('Design
+Unlimited', 'Design with CorelDRAW, Perfect with AI'). Vision FX and HDR FX
+are plug-ins for PaintShop Pro / Painter / CorelDRAW / PHOTO-PAINT (and
+Photoshop/Affinity for Vision FX 2.0); Render FX (text-to-image) and Vector
+FX (text-to-SVG) are standalone apps. Windows 10/11 64-bit only, and they
+run the AI models on the local GPU/NPU (16 GB RAM, 8 GB VRAM recommended;
+Intel OpenVINO / AMD acceleration), which makes Wine/Proton very unlikely to
+work: treat macOS/Linux installs as experimental. Vision FX is delivered as
+an ISO containing Setup.exe. How the Humble key is redeemed is in a Humble
+instructions page linked from the bundle ('Check the complete redeem
+instructions here') that was not readable; inferred: key entered at install
+or first run.
+"""
+
+[match]
+developers = ["Distinct AI"]
+domains = ["distinctai.com", "distinct.ai"]
+key_names = ["(vision|hdr|render|vector) fx"]
+
+[redeem]
+where = "the product installer / first run (inferred); see the Humble bundle's redeem-instructions page"
+account = false
+delivers = "a licence for the plug-in or app"
+expires = "unknown"
+steps = [
+  "Reveal the Humble key and follow the Humble bundle's linked redeem instructions to download the installer (Vision FX ships as an ISO: mount it and run Setup.exe).",
+  "Install into the same Windows prefix as the host app for the plug-ins (Vision FX, HDR FX), then restart the host and open Effects > Plugins (Bitmaps > Plug-ins in CorelDRAW).",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+driver = "unknown"
+driver_notes = "Vision FX: ISO image with Setup.exe; other products' installers not documented."
+
+[platforms.macos]
+runner = "crossover"
+notes = "Windows-only; local AI inference on the GPU will almost certainly not work under CrossOver."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Windows-only; no reports; GPU/NPU inference under Wine unlikely to work."
+
+[[sources]]
+url = "https://learn.corel.com/wp-content/uploads/2023/08/AI-Vision-FX-Installation-instructions.pdf"
+claim = "Vision FX: delivered as an ISO with Setup.exe; plugin under Effects > Plugins (Bitmaps in CorelDRAW) of PaintShop Pro, Painter, CorelDRAW, PHOTO-PAINT; Windows 10/11 64-bit, 16 GB RAM, 8 GB GPU recommended"
+
+[[sources]]
+url = "https://www.amd.com/en/ecosystem/isv/consumer-partners/distinct-ai.html"
+claim = "Render FX and Vector FX are local, on-device generative-AI apps (no cloud credits)"
+
+[[sources]]
+url = "https://www.intel.com/content/www/us/en/content-details/846041/distinct-ai-vector-fx-transforming-professional-vector-graphics-with-local-generative-ai.html"
+claim = "Vector FX: local text-to-vector app, accelerated with OpenVINO on Intel AI PCs"
+
+[[sources]]
+url = "https://creativebloq.com/ai/how-to-get-the-most-from-vision-fx-20-the-newest-ai-art-plugin-on-the-block"
+claim = "Vision FX 2.0 is a plugin needing a host such as Photoshop or Affinity Photo"

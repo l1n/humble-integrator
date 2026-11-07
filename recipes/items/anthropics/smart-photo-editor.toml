@@ -1,0 +1,39 @@
+schema = 1
+name = "Smart Photo Editor (Standard / Studio)"
+vendor = "anthropics"
+kind = "app"
+machine_names = ["smartphotoeditor", "smartphotoeditorstudio"]
+verified = false
+notes = "Both Anthropics bundles (2023, 2024) used these machine names. Community effects library: needs an internet connection to run. Separate token and installer per edition."
+
+[install]
+source = "vendor"
+file = "SmartPhotoEditor*Setup*.exe"
+args = ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"]
+serial = "per-product"
+notes = "Pick the installer whose edition matches the token (Standard / Studio / Studio Max). The token is typed into the app at first launch, not the installer."
+
+[launch]
+find = "C:/Program Files*/Smart Photo Editor*/*.exe"
+
+[steam]
+shortcut = true
+title = "Smart Photo Editor"
+steamgriddb = "Smart Photo Editor"
+
+[platforms.macos]
+runner = "native"
+file = "*.pkg"
+app_find = "/Applications/Smart Photo Editor*.app"
+
+[[sources]]
+url = "https://www.anthropics.com/portraitpro/redeem/"
+claim = "redeem form: activation token + name + email; download links are emailed"
+
+[[sources]]
+url = "https://www.anthropics.com/support/activating/"
+claim = "token entered in the app on first launch; online activation, or manual activation via fingerprint + key file"
+
+[[sources]]
+url = "https://www.anthropics.com/support/smartphotoeditor/"
+claim = "needs internet; macOS 11+; folder Smart Photo Editor"

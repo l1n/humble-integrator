@@ -1,0 +1,33 @@
+schema = 1
+name = "Godot Audio Occlusion Plugin"
+vendor = "ovani-sound"
+kind = "content"
+machine_names = ["godotaudioocclusionplugin"]
+verified = false
+notes = """
+Voxel-based audio occlusion for Godot: activate the included plugin.gd; example scene res://addons/ovani_ao/example_scene/example.tscn; Voxel Preview in the Inspector. A game-engine add-on, not a system install: it goes into a Godot 4 project (Requires Godot 4.1.1+), by hand, per project; no Steam entry. Humble lists Windows/macOS/Linux icons on some bundles; the plugin is engine code and presumably runs wherever the engine runs (inference).
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = """
+Download from the Ovani order after redeeming the Humble coupon, keep the archive in the library (audio/ovani-sound/plugins/), then: Copy the addon into the project's res://addons/ folder and enable it under Project > Project Settings > Plugins (inference from the addon layout). Package format not checked.
+"""
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://ovanisound.com/products/godot-audio-occlusion-plugin"
+claim = "product page: Godot Audio Occlusion Plugin features and engine requirement"
+
+[[sources]]
+url = "https://ovanisound.com/products/humble-bundle-audio-arcade-tier-1"
+claim = "delivered through the Humble tier coupon on Ovani's store"

@@ -1,0 +1,44 @@
+schema = 1
+name = "Cosmos Discount Code (50% / 75%)"
+vendor = "leartes-cosmos"
+kind = "service"
+service = true
+machine_names = [
+  "cosmos50discountcode",          # Big Bang, Best Core, Best Leartes Gigantic, Gigantic, Godot Ultimate, Black Friday, Mega Game Dev, Legendary, Flash Sale
+  "cosmos50discountcoupon",        # Unreal & Unity Assets Giga Bundle (+ encores)
+  "70discountcode_leartesstudios", # GameMasters Toolkit: "75% Discount Code" for Cosmos
+]
+verified = false
+notes = """
+A percentage discount code for Leartes Studios products on Cosmos (50%; the
+GameMasters Toolkit one is 75% - its machine name says 70). Big Bang's
+version: Leartes and StylArts products, not on sale items, bundles or other
+publishers; the Godot Ultimate one covers "Eligible Publishers on Cosmos".
+Valid for 3 months after the bundle purchase in recent bundles; the 2024
+Mega Flash Sale code was "valid until 30th November 2024" (expired). Nothing
+to download; the tool only shows the code and the deadline. In GameMasters
+Toolkit (whose assets redeem on Leartes' Gumroad store) this is the one
+Cosmos item. The Unreal & Unity Giga bundles' coupon text: "The code is
+valid for the brand new Leartes website Cosmos".
+"""
+
+[redeem]
+where = "https://cosmos.leartesstudios.com/"
+expiry_text = "'The Redemption period only valid for 3 month' (most bundles); Mega Flash Sale 2024: 'valid until 30th November 2024'"
+steps = ["Log in to Cosmos, add an eligible product to the cart and apply the code at checkout (the code is case-sensitive) within its validity period."]
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/big-bang-unreal-unity-asset-packs-bundle-75-products-software"
+claim = "'50% Discount code valid for all Leartes Studios Products ... Valid only for products that are not currently part of an active sale'; 'The Redemption period only valid for 3 month'"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/23833471638043-Leartes-Store-Coupon-Redemption-Instructions"
+claim = "Leartes Store Coupon: select an item on cosmos.leartesstudios.com, input the unique code and apply, Purchase; the coupon code is case-sensitive; name/email/phone/country/address required; email must be validated"
+[[sources]]
+url = "https://www.humblebundle.com/software/gamemasters-toolkit-assets-tutorials-bundle-software"
+claim = "'75% Discount Code ... valid for all Leartes Studios Product. The code is valid for the brand new Leartes website Cosmos'"
+[[sources]]
+url = "https://www.humblebundle.com/software/leartes-unreal-unity-godot-mega-flash-sale-software"
+claim = "'Discount code for Cosmos Valid for all environments. Discount code is valid until 30th November 2024'"

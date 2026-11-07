@@ -1,0 +1,141 @@
+schema = 1
+name = "KitBash3D"
+kind = "route"
+notes = """
+KitBash3D kits (Enchanted, Outlaw/Wild West, Wars and Wastelands, Realm
+Giants, ...) are sold and redeemed on kitbash3d.com. Humble lists every
+model of a kit as its own item (121 or 200 per bundle), but redemption is a
+coupon code applied to the bundle's product on kitbash3d.com; the article
+doesn't say whether that is one code per bundle/tier or more. Matched by
+bundle (slug, redemption text), not by developer, in case KitBash3D items
+ever appear in a Fab or Unity bundle.
+
+What it unlocks: the kits, Individual License, in the KitBash3D account
+(Profile > My Assets / My Kits), downloadable in any offered format at any
+time: Blender, Unreal Engine, Unity (kits; not layout scenes), Cinema 4D,
+Maya, 3ds Max, Houdini, FBX, OpenUSD/MaterialX, with Arnold, Cycles, Karma,
+Octane, Redshift and V-Ray materials. The tool can download the chosen
+format into the library folder from the account (logged-in session; no
+public API - inference). KitBash3D's Cargo desktop app is the alternative
+(1-click import into DCC apps); its OS support isn't stated on the help
+page (Windows/macOS assumed, no Linux build known - unconfirmed).
+Codes have per-bundle deadlines and DO expire (2025 Enchanted encore: by
+January 21, 2026); the deadline is on the Humble purchase page.
+
+Newer bundles don't name KitBash3D in the slug or the redemption text
+("Please redeem your keys before December 2, 2026", "Please find here the
+Redemption instructions"): Game Dev Mega Cities (October 2026; Soviet
+Blocks, Future Slums, Sci-Fi Industrial, Work Zone, ship models and their
+material packs) and Industrial Lands (September 2026; Industrial, Iron
+Forge, Arch Vogue, Diesel Punk, Armored Hulls, mechs and construction
+vehicles). Both are matched by slug; Humble's articles say each is one
+coupon code applied to a single "Kits bundle" product on kitbash3d.com
+(redeem.tier_products below). The same articles exist for Urban Warfare,
+Vast Fantasy Worlds, Uncharted Frontiers and Urban Life (not in the census
+yet): their slugs may not say KitBash3D either.
+"""
+
+[match]
+bundle_slugs = [
+  'kitbash3d',
+  '^game-dev-mega-cities',
+  '^industrial-lands(?:-software)?$',
+  '^urban-warfare-flash-bundle',
+  '^vast-fantasy-worlds',
+  '^uncharted-frontiers',
+  '^wars-(?:and-|&-)?wastelands',
+  '^urban-life-collection',
+]
+redeem_text = ['\bKitBash3D\W*s website\b', '\bredeem\w*[^.]{0,60}\bKitBash3D\b']
+domains = ["kitbash3d.com"]
+key_names = ['\bkitbash3d\b']
+
+[redeem]
+where = "https://kitbash3d.com/"
+account = true
+delivers = "the bundle's kits (Individual License) in the KitBash3D account, downloadable per format"
+expiry_text = "per bundle, shown on the Humble purchase page; codes stop working after it (Cyber Streets: September 31st 2023; Enchanted 2023-24: April 16 2024; Urban Life: October 31 2025; Enchanted encore 2025: January 21 2026; Game Dev Mega Cities: December 2 2026)"
+steps = [
+  "Log in to https://kitbash3d.com/ with the email the kits should belong to. Do not use express checkout (Shop Pay, PayPal, Venmo): the order then goes to that service's email.",
+  "Copy the code from the Humble purchase page and open the KitBash3D redemption link shown there (each bundle has its own product page, e.g. kitbash3d.com/products/humble-bundle-wars-and-wastelands).",
+  "Add the bundle product to the cart; at checkout enter the code, Apply, and complete the order only when the total is $0.00.",
+  "Downloads: Profile > My Assets (My Kits); pick a format per kit. Or install Cargo (kitbash3d.com/pages/cargo-download) for 1-click import.",
+  "'This discount has reached its usage limit' means the code was already used, often under another email: contact KitBash3D support with the code and the Humble order number.",
+]
+
+[redeem.tier_products]
+# Humble bundle (census slug prefix) -> kitbash3d.com/products/<handle> the code is applied on,
+# lowest tier first, from Humble's redemption articles (Oct 2026).
+"game-dev-mega-cities" = ["game-dev-mega-cities-humble-bundle"]
+"industrial-lands" = ["industrial-lands-humble-bundle"]
+"urban-warfare-flash-bundle" = ["urban-warfare-flash-bundle"]
+"vast-fantasy-worlds" = ["vast-fantasy-worlds-humble-bundle"]
+"uncharted-frontiers" = ["uncharted-frontiers-environment-pack"]
+"wars-and-wastelands" = ["mobile-rocket-launch-system-3d-model", "humble-bundle-wars-and-wastelands-vehicles", "humble-bundle-wars-and-wastelands"]
+"build-your-wild-west-with-outlaw-from-kitbash3d" = ["outlaw"]
+"build-your-fantasy-world-with-kitbash3ds-enchanted-collection" = ["enchanted"]
+"cyber-streets-kitbash3d-flash-sale" = ["props-cyber-streets"]
+
+[download]
+scriptable = false
+how = "kitbash3d.com > Profile > My Assets (My Kits): pick a format per kit and download, in a logged-in browser session; or Cargo"
+notes = "No public API (inference). The tool could drive the logged-in session to fetch the chosen format per kit (untested)."
+
+[library]
+files = "one archive per kit and chosen format (e.g. Blender, Unreal, Unity, FBX, USD) plus the separate material packs"
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer: per-format archives, or Cargo."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+notes = "Website downloads work anywhere; Cargo on Linux is not known to exist."
+
+[[sources]]
+url = "https://help.kitbash3d.com/en/articles/17506144-humble-bundle-how-to-redeem-your-kitbash3d-kits"
+claim = "steps: log in first, avoid express checkout, code at checkout with $0.00 total, per-bundle pages and deadlines, Profile > My Assets, usage-limit error, Individual License, Cargo link"
+[[sources]]
+url = "https://kitbash3d.com/products/humble-bundle-wars-and-wastelands"
+claim = "'Add the product to your cart and enter your unique coupon code when prompted during check-out'; formats and supported software; download any format from My Kits"
+[[sources]]
+url = "https://help.kitbash3d.com/en/articles/12883826-2025-humble-bundle"
+claim = "2025 Enchanted codes had to be used by January 21, 2026 11:59pm PST (seen in search results; the article returned 404 in Oct 2026)"
+[[sources]]
+url = "https://help.kitbash3d.com/en/articles/7893839-what-is-cargo"
+claim = "Cargo is the desktop app for the KitBash3D library; purchased kits unlock in Cargo automatically"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/56365594925467-Redemption-Instruction-for-Game-Dev-Mega-Cities"
+claim = "Game Dev Mega Cities: unique coupon code; kitbash3d.com/products/game-dev-mega-cities-humble-bundle; add the Kits bundle to the cart; enter the code at checkout; express pay sets the login email; download from the account; Cargo"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/54702866464283-Redemption-instructions-and-System-requirements-for-Industrial-Lands-KitBash3D"
+claim = "Industrial Lands: same flow on kitbash3d.com/products/industrial-lands-humble-bundle; supported software Unreal Engine 5.0-5.6, Blender, Unity (Built-In & HDRP), Houdini, Cinema 4D, Maya, 3ds Max; 15 GB per kit"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/54080046959003-Urban-Warfare-Flash-Bundle-Redemption-Instructions"
+claim = "Urban Warfare: kitbash3d.com/products/urban-warfare-flash-bundle"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/51297097426331-Vast-Fantasy-Worlds-Game-Dev-Bundle-Redemption-Instructions"
+claim = "Vast Fantasy Worlds: kitbash3d.com/products/vast-fantasy-worlds-humble-bundle"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/48824986069531-Wars-Wastelands-Game-Dev-Bundle-Redemption-Instructions"
+claim = "Wars & Wastelands: per-tier product pages ($5 mobile-rocket-launch-system-3d-model, $15 humble-bundle-wars-and-wastelands-vehicles, $30 humble-bundle-wars-and-wastelands)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/52949399930779-Uncharted-Frontiers-Environment-Pack-from-KitBash3D-Redemption-Instructions"
+claim = "Uncharted Frontiers: kitbash3d.com/products/uncharted-frontiers-environment-pack"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/46547374441371-Build-your-Wild-West-with-Outlaw-from-KitBash3D-Redemption-Instructions"
+claim = "Outlaw: kitbash3d.com/products/outlaw"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/22708662161051-KitBash3D-s-Enchanted-Collection-Redemption-Instructions"
+claim = "Enchanted (2023-24): kitbash3d.com/products/enchanted; codes expire April 16, 2024"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/18051672409883-Cyber-Streets-by-KitBash3D-Flash-Sale-Redemption-Instructions"
+claim = "Cyber Streets: kitbash3d.com/products/props-cyber-streets; codes expire September 31st, 2023"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/39587340050459-Urban-Life-Collection-from-KitBash3D-Redemption-Instructions"
+claim = "Urban Life Collection: codes expire October 31, 2025"

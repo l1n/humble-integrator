@@ -1,0 +1,98 @@
+schema = 1
+name = "Applied Acoustics Systems (AAS)"
+kind = "route"
+notes = """
+Physical-modelling instruments and effects (Lounge Lizard, Strum, Ultra
+Analog, String Studio, Chromaphone, Objeq Delay) and the sound packs that
+play in them or in the free AAS Player. Humble bundles: Music Producer
+(2020), Get Into Music Variety Pack (2023, one key for all its AAS items),
+Music Producer Pro Pack (2024), Sound Designer (2026); every AAS item is a
+key redeemed on applied-acoustics.com, even where Humble shows an audio or
+download icon. Humble lists the 2026 bundle's publisher as Richdale
+Ventures; the products, accounts and licences are AAS's.
+
+Mac (macOS 10.13+, Intel and Apple Silicon native) and Windows 10+ 64-bit
+only; formats VST3, AU, AAX Native, and standalone for the Player and the
+full instruments. There is no Linux build. On Linux the Windows plugins can
+in principle be bridged into a Linux DAW with yabridge (Wine), but no report
+of AAS plugins under yabridge was found; AAS's offline challenge/response
+unlock (below) is the fallback if the in-plugin online authorization fails
+under Wine. No Steam entries: plugins and sound packs live inside a DAW.
+
+Copy protection is AAS's own challenge/response scheme; the installers
+downloaded from the AAS account embed the licence and authorize silently
+when the computer is online. Personal-use licences cover every computer the
+owner owns; commercial/studio use is one computer per licence.
+"""
+
+[match]
+developers = ["Applied Acoustics", "Applied Acoustics Systems", "Applied Acoustics Systems DVM Inc.", "AAS"]
+redeem_text = ['Applied Acoustics website']
+# URL slugs (census) and, for the all-key Sound Designer bundle, its machine name (extracted keys).
+bundle_slugs = ['^applied-acoustics-', '^appliedacousticssounddesignerbundle', '^music-producer-pro-pack-synths', '^music-producer-software$']
+domains = ["applied-acoustics.com"]
+key_names = ['applied acoustics', '\baas\b']
+
+[redeem]
+where = "https://www.applied-acoustics.com/package/"
+account = true
+delivers = "the products appear on the AAS account's Registered Products page with their serial numbers and per-user installers (Mac and Windows) that carry the licence"
+steps = [
+  "Humble's AAS keys are, by AAS's description of third-party purchases, 8-letter package keys (inference: not stated by Humble). Enter each one at https://www.applied-acoustics.com/package/ with your email, first and last name, then Register.",
+  "If you have never set a password for that email, do it at https://www.applied-acoustics.com/portal/register/ (an AAS account can exist from a registration without a password).",
+  "Log in at https://www.applied-acoustics.com/portal/login/ and open Registered Products: each product lists its serial number and installers. Use the custom 'All' installer to install or update everything at once.",
+  "Install the free AAS Player first (it plays every sound pack); the account installers authorize automatically when online.",
+  "Offline or if authorization fails (e.g. under Wine): start the program, copy the challenge code it shows, enter serial + challenge at https://www.applied-acoustics.com/unlock/ from any online device, and paste the response code back.",
+  "Lost a serial: https://www.applied-acoustics.com/dl/ looks up downloads by serial.",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+notes = """
+Account installers come as one zip per product per OS (e.g.
+lounge-lizard-session-4-v445-mac.zip / -win.zip on the support page). macOS:
+the zip holds an installer package that writes AU/VST3/AAX into
+/Library/Audio/Plug-Ins (installer contents inferred, not inspected). No
+silent switches are documented; run each installer interactively. Sound
+packs install their presets for the AAS Player and the matching instrument.
+"""
+
+[platforms.macos]
+runner = "native"
+notes = "Native Universal builds; the AAS Player and every sound pack run natively on Apple Silicon (AAS M-series page)."
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = "No native Linux build. Untested: install the Windows versions into one Wine prefix shared by all audio plugins and bridge them with yabridge; authorize offline via the Unlock page if online authorization fails."
+
+[[sources]]
+url = "https://www.applied-acoustics.com/package/"
+claim = "package keys are 8 letters, sent when bought from a third-party web store; registered with email and name"
+[[sources]]
+url = "https://www.applied-acoustics.com/support/"
+claim = "account gives serials and personalised installers that authorize in the background; latest versions, Mac/Windows only; /dl/ and /unlock/"
+[[sources]]
+url = "https://www.applied-acoustics.com/unlock/"
+claim = "offline authorization: serial number + challenge code -> response code"
+[[sources]]
+url = "https://www.applied-acoustics.com/sales-faq/"
+claim = "challenge/response copy protection; installers include the licence; personal use on all owned computers, commercial use one per licence"
+[[sources]]
+url = "https://www.applied-acoustics.com/aas-player/"
+claim = "AAS Player: free, plays AAS sound packs without the synth; Windows/macOS 64-bit, VST3, AU, AAX, standalone; macOS 10.13+, Windows 10+"
+[[sources]]
+url = "https://www.applied-acoustics.com/support/apple-m1-compatibility/"
+claim = "AAS Player, Swatches and all sound packs run natively on Apple M-series; 'All' installer on the Registered Products page"
+[[sources]]
+url = "https://bedroomproducersblog.com/2020/04/02/humble-software-bundle-music-producer/"
+claim = "Humble Software Bundle: Music Producer (2020) was AAS instruments and sound libraries"
+[[sources]]
+url = "https://rekkerd.org/tag/humble-bundle/"
+claim = "Humble Music Producer Pro Pack (Jun 2024) and Sound Designer Bundle (Jan 2026) are AAS bundles"
+[[sources]]
+url = "https://github.com/robbert-vdh/yabridge"
+claim = "yabridge runs Windows VST2/VST3/CLAP plugins in Linux DAWs through Wine"

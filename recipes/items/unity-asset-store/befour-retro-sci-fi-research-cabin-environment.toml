@@ -1,0 +1,24 @@
+schema = 1
+name = "Retro Sci-Fi Research Cabin Environment ( Unity )"
+vendor = "unity-asset-store"
+kind = "content"
+machine_names = ["retrosci-firesearchcabinenvironmentunity"]
+publisher = "Befour Studios"
+verified = false
+notes = "Unity Asset Store voucher (item text: \"*Professional License redeeming from Unity Asset Store!\") inside the All-in-One Unreal & Unity GameDev Bundle, whose other keys are Fab codes: redeem this one on Unity, not on Fab. The Unreal/Fab edition of the same pack, where the bundle has one, is a separate Humble item on the Fab route. Expiry: redeem before June 30th, 2027 (bundle page)."
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "Redeem the voucher at id.unity.com, then download and import in the Unity Editor: Package Manager > My Assets."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/allinone-unreal-unity-gamedev-bundle-software"
+claim = "bundle keys are 'available ... at the Fab and Unity asset stores'; Unity keys to be redeemed before June 30th, 2027"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/allinone-unreal-unity-gamedev-bundle-software"
+claim = "item description begins: *Professional License redeeming from Unity Asset Store!"

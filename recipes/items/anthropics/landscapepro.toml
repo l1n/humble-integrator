@@ -1,0 +1,39 @@
+schema = 1
+name = "LandscapePro (2024 bundle: Standard / Studio / Studio Max)"
+vendor = "anthropics"
+kind = "app"
+machine_names = ["landscapepro", "landscapeprostudio", "landscapeprostudiomax"]
+verified = false
+notes = "2024 Humble bundle. The bundle text says LandscapePro 2 but the Standard item's description says LandscapePro 3: the token decides which version the redeem email links to. Separate token and installer per edition. Installs to C:\\Program Files\\LandscapePro."
+
+[install]
+source = "vendor"
+file = "LandscapePro*Setup*.exe"
+args = ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"]
+serial = "per-product"
+notes = "Pick the installer whose edition matches the token (Standard / Studio / Studio Max). The token is typed into the app at first launch, not the installer."
+
+[launch]
+find = "C:/Program Files*/LandscapePro*/*.exe"
+
+[steam]
+shortcut = true
+title = "LandscapePro"
+steamgriddb = "LandscapePro"
+
+[platforms.macos]
+runner = "native"
+file = "*.pkg"
+app_find = "/Applications/LandscapePro*.app"
+
+[[sources]]
+url = "https://www.anthropics.com/portraitpro/redeem/"
+claim = "redeem form: activation token + name + email; download links are emailed"
+
+[[sources]]
+url = "https://www.anthropics.com/support/activating/"
+claim = "token entered in the app on first launch; online activation, or manual activation via fingerprint + key file"
+
+[[sources]]
+url = "https://help.landscapepro.pics/v3-installing/"
+claim = "v3 install folder and Windows/Mac links"

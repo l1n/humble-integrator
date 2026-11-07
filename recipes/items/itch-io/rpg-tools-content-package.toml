@@ -1,0 +1,89 @@
+schema = 1
+name = "Rpg Tools + Content Package (Nightmare_82 / Martin Mais)"
+vendor = "itch-io"
+kind = "app"
+machine_names = [
+  "rpgtools",                 # Grand Game Dev Toolbox (Apr 2022), developer "Nightmare_82"
+  "rpgtoolscontentpackage",   # Game Creator MEGA Bundle (+ Encore, 2024), Isometric Assets Galore (2026), developer "Martin Mais"
+]
+verified = false
+notes = """
+Rpg Tools is a Windows-only 2D isometric RPG engine with Character Editor
+(PVGames characters), Level Editor (exports e.g. to RPG Maker) and no-code /
+Lua game logic. Its author, Martin Mais, publishes as Nightmare_82 on itch.io:
+the engine itself is name-your-own-price (nightmare-82.itch.io/rpg-tools) and
+the 'Rpg Tools Content Package' (characters, creatures, level art, music,
+SFX, voice packs, UI kit, demo project; ~4.5 GB, 30 EUR) is a separate paid
+itch.io asset pack. Humble sold the content-package version in every bundle
+(the author asks Humble buyers whether they have 'the version from Humble
+Bundle with the content package'). Humble delivered it as a key; Humble has no
+article for it, so the key is taken to be an itch.io download key / claim
+link for nightmare-82.itch.io (inference; the Isometric Assets Galore text
+adds 'Keys for RPG Tools Content Package expire. Please redeem before August
+26th, 2027').
+
+Install: download the Windows build ('Rpg Tools (64 bit)', ~950 MB) and the
+content package from the itch.io library; the content package's initial
+setup is shown in the author's installation-tutorial devlog/video (not
+transcribed here). Runs in Wine according to an itch.io commenter ('works
+under wine very good'); the author has no Mac or Linux build planned.
+Exe name not documented: launch.find is a glob, unconfirmed.
+"""
+
+[redeem]
+where = "the item's link on the Humble download page (expected: itch.io claim page for nightmare-82.itch.io), then https://itch.io/my-collections"
+account = true
+delivers = "Rpg Tools and the Rpg Tools Content Package in the itch.io library, with updates"
+expires = "Isometric Assets Galore (2026): 'Please redeem before August 26th, 2027'; other bundles: check the download page. Key.is_expired from Humble is authoritative."
+expiry_text = "(?i)redeem before ([A-Z][a-z]+ \\d{1,2}(?:st|nd|rd|th)?,? \\d{4})"
+steps = [
+  "Log in to itch.io (see vendors/itch-io).",
+  "Open the RPG Tools link from the Humble download page and claim it to the account.",
+  "From My Library download 'Rpg Tools (64 bit)' and the content package (~4.5 GB) into the library folder.",
+  "Follow the author's 'Rpg Tools Content Package - Installation tutorial' devlog for the first setup.",
+]
+
+[install]
+source = "vendor"
+url = "https://nightmare-82.itch.io/rpg-tools-content-package"
+serial = "none"
+notes = "Archive/installer format of the itch.io uploads not checked; unpack or install inside the rpg-tools prefix's drive_c."
+
+[launch]
+find = "C:/**/[Rr]pg*[Tt]ools*.exe"
+notes = "Glob only; exe name unconfirmed."
+
+[steam]
+shortcut = true
+title = "Rpg Tools"
+steamgriddb = "Rpg Tools"
+
+[prefix]
+name = "rpg-tools"
+arch = "win64"
+windows = "win10"
+
+[platforms.macos]
+runner = "crossover"
+notes = "Windows-only (author: 'currently it only works on Windows'). No CrossOver report found; a Wine user reports it works well on Linux, so CrossOver/Kegworks is plausible (unverified)."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "itch.io commenter: 'works under wine very good'."
+
+[[sources]]
+url = "https://nightmare-82.itch.io/rpg-tools"
+claim = "Windows-only (64-bit, ~950 MB, name your own price); Character/Level editor, Lua; commenter got it from Humble and says it works under Wine; author asks about 'the version from Humble Bundle with the content package'; no Mac/Linux build planned"
+[[sources]]
+url = "https://nightmare-82.itch.io/rpg-tools-content-package"
+claim = "Rpg Tools Content Package: Windows asset pack, 30 EUR minimum, ~4.5 GB, contents list, installation tutorial devlog (Apr 2022)"
+[[sources]]
+url = "https://nightmare-82.itch.io/"
+claim = "Nightmare_82's itch.io page lists Rpg Tools and Rpg Tools Content Package"
+[[sources]]
+url = "https://www.humblebundle.com/software/isometric-assets-galore-software"
+claim = "'Keys for RPG Tools Content Package expire. Please redeem before August 26th, 2027'; developer Martin Mais, publisher PVGames (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/5151074706715-Grand-Game-Dev-Toolbox-System-Requirements"
+claim = "RPG Tools: Windows, 64-bit processor"

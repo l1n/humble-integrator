@@ -1,0 +1,8 @@
+schema = 1
+name = "Audio, music or soundtrack"
+kind = "route"
+priority = 30
+notes = "Download (FLAC, then MP3) into the library folder; no Steam entry."
+
+[match]
+delivery = ["hb-audio"]

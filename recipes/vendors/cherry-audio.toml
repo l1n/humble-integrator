@@ -1,0 +1,81 @@
+schema = 1
+name = "Cherry Audio"
+kind = "route"
+notes = """
+Virtual synths and effects (Voltage Modular, PS-20, DCO-106, Polymode,
+Mercury-4, Eight Voice, Memorymode, CA2600, Quadra, Elka-X, Harmonia,
+Blue3 Organ, Stardust 201, Galactic Reverb, Filtomika, ...). On Humble they
+ride along in sound bundles (Mega Sound Designer Loop Crate 2/3, LEVEL UP!
+Music Creators Power Pack, Level Up Remix, Music Creators Studio Essentials,
+Make Music, Change Lives). Every Cherry Audio item is a single-use code
+redeemed into a Cherry Audio account ("Cherry Audio products are redeemed
+by keys"), even in DRM-free bundles and where Humble shows an audio icon
+(Make Music, Change Lives lists MP3 demos beside the key).
+
+Licence is account-based: after installing, the plug-in signs in to the
+Cherry Audio account (Settings > Account) and activates online; up to four
+computers at once, managed under Devices in the account. Formats AU, VST,
+VST3, AAX and standalone; Windows 7+ 64-bit and macOS 10.13+ (Apple
+Silicon native). Older Humble pages list some items as Windows-only; the
+current installers cover both. No Linux build. No Steam entries.
+"""
+
+[match]
+# Cherry Audio never sells DRM-free Humble downloads: every item is a code.
+developers = ["Cherry Audio", "Cherry Audio LLC"]
+domains = ["cherryaudio.com"]
+key_names = ['cherry ?audio', 'voltage modular']
+
+[redeem]
+where = "https://store.cherryaudio.com/redeem"
+account = true
+delivers = "the product in the Cherry Audio account (Orders & Demos) with its Mac/Windows installers on the confirmation page and the account's download page"
+steps = [
+  "Create an account at https://store.cherryaudio.com/register and verify its email address (or log in).",
+  "Open https://store.cherryaudio.com/redeem, enter the Humble code and click Redeem Product. Each code works once.",
+  "Download the installer for this OS from the confirmation page (later: the account's download page) and install it.",
+  "Start the plug-in (or standalone) and sign in under Settings > Account with the same Cherry Audio account; it activates online. If it stays in demo mode, check the account in Settings > Account and restart it.",
+]
+
+[download]
+scriptable = false
+how = "installers from the redemption confirmation page and the account's download page (cherryaudio.com/my-account downloads); no documented API"
+
+[library]
+files = "presets ship inside the installers; extra preset packs install from the product's own preset browser (Cherry Audio FAQ)"
+licence = "per Cherry Audio account; up to 4 activated computers; licences are not transferable without Cherry Audio's help"
+
+[install]
+source = "vendor"
+serial = "account"
+silent = false
+notes = "Installers are the vendor's Mac .pkg / Windows .exe from the account; installer framework and silent switches are not documented."
+
+[platforms.macos]
+runner = "native"
+notes = "Native macOS 10.13+ builds, Apple Silicon native (AU/VST/VST3/AAX/standalone)."
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = "No Linux build. Untested: Windows installers in the shared audio-plugins Wine prefix, yabridge for the DAW; activation is an in-plugin account login over the internet, which should not need anything Wine lacks (unverified)."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360052885994-Cherry-Audio-Key-Redemption-Instructions"
+claim = "visit store.cherryaudio.com/redeem, create or log into a Cherry Audio account, enter the code, Redeem Product, download from the confirmation page"
+[[sources]]
+url = "https://cherryaudio.kayako.com/article/659-how-do-i-get-something-i-purchased-from-an-authorized-reseller-in-my-cherry-audio-account"
+claim = "reseller codes are single-use; register and verify the account email; redeem at store.cherryaudio.com/redeem; relaunch an installed demo to update the licence"
+[[sources]]
+url = "https://cherryaudio.kayako.com/article/657-how-many-computers-can-i-activate-my-cherry-audio-products-on-at-one-time"
+claim = "products can be activated on up to four computers at a time; remove activations under Devices in the account"
+[[sources]]
+url = "https://cherryaudio.kayako.com/article/660-why-is-my-software-still-in-demo-mode-after-purchasing-it"
+claim = "software uses the account set in Settings > Account; Update Login Info; licence cache under ~/Library/Application Support/CherryAudio/<product>/Plugin or %appdata%\\CherryAudio\\<product>\\Plugin"
+[[sources]]
+url = "https://cherryaudio.com/products/ps-20"
+claim = "AU, VST, VST3, AAX and standalone; macOS 10.13+ Apple Silicon native; Windows 7+ 64-bit; internet required for activation"
+[[sources]]
+url = "https://www.humblebundle.com/software/level-up-music-creators-power-pack-software"
+claim = "'Cherry Audio products are redeemed by keys' in an otherwise DRM-free bundle (census)"

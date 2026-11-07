@@ -1,0 +1,59 @@
+schema = 1
+name = "The Gem Dev GDevelop game templates (Boat Game, Air Hockey, Advanced Platformer, Knife Hit, Chrome Dinosaur)"
+vendor = "itch-io"
+kind = "content"
+machine_names = [
+  "boatgame",
+  "hockeygame",
+  "advancedplatformertemplate",
+  "knifehit",
+  "chromedinosaur",
+]
+verified = false
+notes = """
+The No-Code GameDev Bundle (Dec 2022). Five small editable GDevelop
+projects by The Gem Dev ('Download and open in GDevelop'). Humble delivered
+them as keys, not downloads. The Gem Dev sells these templates on itch.io
+(thegemdev.itch.io: e.g. 'GDevelop boat game Template', 'Air Hockey
+Template'), so the keys are taken to be itch.io download keys/claim links and
+the files come from the itch.io library (inference: Humble's GDevelop article
+covers only the subscription codes). If the download page instead shows a
+plain link, follow it and save the zip.
+
+What lands in the library folder: one zip per template (a GDevelop project:
+game.json plus assets; tens of kB). Open it in the free GDevelop editor
+(vendors/gdevelop). No Steam entry. One file for the five because they are
+handled identically.
+"""
+
+[redeem]
+where = "the item's link on the Humble download page (expected: an itch.io claim/download-key page), then https://itch.io/my-collections"
+account = true
+delivers = "the template project zip in the itch.io library"
+steps = [
+  "Log in to itch.io (see vendors/itch-io).",
+  "Open the item's link from the Humble download page and claim it to the account; if it is a direct download link instead, just download.",
+  "Download the template zip into the library folder; unzip and open the project in GDevelop (File > Open).",
+]
+
+[install]
+source = "vendor"
+file = "*.zip"
+serial = "none"
+notes = "Nothing to install; open the project in GDevelop."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/no-code-gamedev-bundle-software"
+claim = "five 'Game Template' items by The Gem Dev, hb-key, 'Download and open in GDevelop' (census)"
+[[sources]]
+url = "https://thegemdev.itch.io/gdevelop-boat-game"
+claim = "The Gem Dev sells the GDevelop boat game template on itch.io (boat game.zip, ~25 kB)"
+[[sources]]
+url = "https://thegemdev.itch.io/air-hockey-template"
+claim = "Air Hockey template on itch.io (~63 kB)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/10611633952411-GDevelop-Humble-Bundle-Subscription-Code-Redemption-Instructions"
+claim = "Humble's GDevelop article covers only the subscription codes"

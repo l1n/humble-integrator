@@ -1,0 +1,35 @@
+schema = 1
+name = "ArchiMaster 3D Kitchen & Bath"
+vendor = "cadsoft"
+kind = "app"
+machine_names = ["archimaster3dkitchenandbath"]
+verified = false
+notes = "Humble 'ArchiMaster and Cadsoft Complete' (2026). Kitchen and bath edition. With v3 the same installer as Expert; the key selects the edition. Whether one v3 install accepts several edition keys at once is unknown."
+
+[install]
+source = "vendor"
+url = "https://www.archimaster3d.com/downloads"
+file = "ArchiMaster 3D_V3_English*.exe"
+serial = "per-product"
+notes = "Download after signing in at archimaster3d.com. v2 installers (ArchiMaster 3D_English_v2*.exe, 7-Zip SFX + MSI) create one desktop program per edition instead."
+
+[launch]
+find = "C:/Program Files*/**/ArchiMaster 3D*.exe"
+notes = "v2's main program is 'ArchiMaster 3D_2.exe'; v3's name is inferred to follow the pattern."
+
+[steam]
+shortcut = true
+title = "ArchiMaster 3D Kitchen & Bath"
+steamgriddb = "ArchiMaster 3D"
+
+[[sources]]
+url = "https://www.archimaster3d.com/downloads"
+claim = "v3: one installer (ArchiMaster 3D_V3_English.exe) for all editions; the key picks the edition; download after signing in"
+
+[[sources]]
+url = "https://support.fanatical.com/api/v2/help_center/en-us/articles/21633794963474.json"
+claim = "v2: one installer creates 'AM2 Kitchen and Bath', 'AM2 Landscape and Deck', 'AM2 Ultimate Home Design', each activated with its own key"
+
+[[sources]]
+url = "https://archimaster.s3.eu-central-1.amazonaws.com/ArchiMaster+3D_English_v2.0C1_Multi_1.exe"
+claim = "v2 installer: 7-Zip SFX with an .msi, Cadsoft Cs*.dll modules and Envisioneer fonts; main program 'ArchiMaster 3D_2.exe' (file list inspected)"

@@ -1,0 +1,47 @@
+schema = 1
+name = "AudioHero download plans (Starter / Prodigy / Action Hero / Tier 1-3)"
+vendor = "audio-hero"
+kind = "service"
+machine_names = [
+  "starterplan_audiohero", "prodigyplan_audiohero", "actionheroplan_audiohero",
+  "tier1audiohero", "tier2audiohero",
+  "tier1_gameaudiocollectionaccesstoover300000musictracksandsoundeffects",
+  "tier2_gameaudiocollectionaccesstoover300000musictracksandsoundeffects",
+  "tier3_gameaudiocollectionaccesstoover300000musictracksandsoundeffects",
+]
+verified = false
+notes = """
+Coupon codes for AudioHero download credits, chosen from the whole
+~300,000-track music and SFX catalogue: Starter = 1 track, Prodigy = 50
+downloads, Action Hero = 100 downloads (+ the Cinematic Immersion pack in
+the 2025 bundle); the 2026 DRM-free bundle's Tier 1 = 1 track + The Final
+Level SFX pack and Tier 2 = 25 downloads (Humble's text says "fifty (25)")
++ 10 packs; the 2026 Game Audio Collection's Tier 1/2/3 = 1 track / 10 / 1000
+downloads. Humble's plan descriptions say "Licensed in perpetuity" and
+AudioHero staff confirm Humble credits need no ongoing subscription.
+Nothing to install; spend the credits before closing the account (credits
+are lost on unsubscribe). Redeem as in vendors/audio-hero.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/become-an-audio-hero-with-royalty-free-music-and-sound-effects-bundle-software"
+claim = "plan sizes (1 / 50 / 100 downloads) and 'Licensed in perpetuity' (census item descriptions)"
+[[sources]]
+url = "https://www.humblebundle.com/software/complete-cinematic-game-audio-bundle-software"
+claim = "Tier 1 / Tier 2 plan items and their contents (census item descriptions)"
+[[sources]]
+url = "https://www.humblebundle.com/software/game-audio-collection-access-to-over-300000-music-tracks-and-sound-effects-software"
+claim = "Tier 1/2/3 = 1 track / 10 / 1000 downloads; keys redeemed at www.audiohero.com (census)"
+[[sources]]
+url = "https://www.audiohero.com/faq"
+claim = "one credit per music or SFX track; credits lost on unsubscribe"
+[[sources]]
+url = "https://ie.trustpilot.com/review/audiohero.com"
+claim = "AudioHero: Humble Bundle credits carry a perpetual licence"

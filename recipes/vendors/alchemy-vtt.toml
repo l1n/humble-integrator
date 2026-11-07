@@ -1,0 +1,70 @@
+schema = 1
+name = "Alchemy VTT"
+kind = "route"
+notes = """
+Service: Alchemy (alchemyrpg.com) is a browser-based virtual tabletop with a
+marketplace of game modules. Its Humble bundles sell publishers' TTRPG lines
+as Alchemy content: Call of Cthulhu Keeper's Collection (Chaosium, 2025),
+City of Mist Mythos Awakened Collection (Son of Oak, 2025), and on Humble's
+support pages also Vampire: The Masquerade, Fallout, Free League and
+CZEPEKU collections. Although Humble lists every module with a key, the
+whole collection is redeemed with a single code, for one Alchemy account.
+The modules then appear under Content Universes and are played in the web
+(or native) app; nothing installs and there is no Steam entry.
+
+Files: City of Mist modules come with PDFs (right-click the module, Download
+PDF); the Call of Cthulhu collection has no PDFs. Individual assets (maps,
+tokens, art) of any module can be downloaded by right-clicking them in the
+module's assets tab. Only these downloads belong in the library folder.
+"""
+
+[match]
+developers = ["Alchemy VTT", "Alchemy RPG", "AlchemyVTT", "Alchemy RPG, Inc."]
+domains = ["alchemyrpg.com"]
+key_names = ['\balchemy ?(vtt|rpg)\b']
+# "Keys redeemable on the AlchemyVTT website", "redeemable on the Alchemy website".
+# Strict on purpose: Ovani's "Audio Alchemy" bundles must not match.
+redeem_text = ['redeem\w*[^.]{0,40}\b(on|through|via|at)\s+(the\s+)?alchemy\s*(vtt|rpg)?(\s|&nbsp;)*(website|site|app)\b']
+bundle_slugs = ['for-?alchemy-?vtt']
+
+[redeem]
+where = "https://app.alchemyrpg.com/marketplace?showRedemptionModal=1"
+account = true
+delivers = "the whole collection's modules (and PDFs where offered) in the Alchemy account's Content Universes"
+expires = "not stated in the bundle text"
+steps = [
+  "Create or sign in to an account at https://app.alchemyrpg.com.",
+  "Open the Marketplace (shop icon, left navigation bar) and click REDEEM CODE at the top right (alchemyrpg.com/redeem opens the same dialog).",
+  "Type or paste the code and click REDEEM, then CLAIM on the next page. One code covers the whole collection.",
+  "The modules are under Content Universes (globe icon). For City of Mist, right-click a module > Download PDF for each book.",
+]
+
+[download]
+scriptable = false
+how = "modules play in the web app; PDFs and assets are saved from the app by right-click (browser asks where; the native app saves to Downloads)"
+notes = "No public API for a user's library is known; scripting the PDF downloads would need the logged-in session (inference, untested)."
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "Nothing to install."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/42837181739163-Humble-VTT-Bundle-City-of-Mist-Mythos-Awakened-Collection-for-Alchemy-VTT-Redemption-Instructions"
+claim = "REDEEM CODE, REDEEM, CLAIM; Content Universes; all games redeemed through a single code for one account; PDFs via right-click > Download PDF; assets downloadable by right-click"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/39651786127899-Humble-VTT-Bundle-Call-of-Cthulhu-Keeper-s-Collection-for-Alchemy-VTT-Redemption-Instructions"
+claim = "same steps; single code for the collection; 'No, what's being offered are Alchemy modules only' (no PDFs)"
+[[sources]]
+url = "https://help.alchemyrpg.com/en/articles/10291946-how-to-redeem-alchemy-redemption-codes"
+claim = "sign in at app.alchemyrpg.com, Marketplace, REDEEM CODE, enter code, REDEEM, then claim the content"
+[[sources]]
+url = "https://alchemyrpg.com/redeem"
+claim = "redirects to app.alchemyrpg.com/marketplace?showRedemptionModal=1"
+[[sources]]
+url = "https://www.humblebundle.com/software/call-cthulhu-keepers-collection-for-alchemy-vtt-software"
+claim = "'Keys redeemable on the AlchemyVTT website'"
+[[sources]]
+url = "https://www.humblebundle.com/software/city-mist-mythos-awakened-collection-for-alchemy-vtt-software"
+claim = "'The content in this bundle are redeemable on the Alchemy website ... PDF versions of the books are downloadable on the Alchemy app'"

@@ -1,0 +1,32 @@
+schema = 1
+name = "Graphixly brush packs for Clip Studio Paint (Ultimate, Comic, Superhero)"
+vendor = "clip-studio"
+kind = "content"
+machine_names = ["ultimatebrushpack", "comicbrushpack", "superherobrushpack"]
+requires = ["clip-studio/clip-studio-paint-pro-12-month"]
+verified = false
+notes = "Perpetual Graphixly packs from the Clip Studio bundles (developer 'Graphixly'); each Humble code is redeemed at a Graphixly checkout like the CSP licence. The Ultimate pack is 100 CSP brushes plus the same 100 as Photoshop brushes. CSP brushes are .sut files (inferred for these packs): unzip, then drag onto the Sub Tool palette or Sub Tool menu > Import sub tool (not possible in CSP DEBUT). Grouped because they install the same way."
+
+[install]
+source = "vendor"
+file = "*.zip"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/52327069996443"
+claim = "Humble code is a 100%-off discount code at a Graphixly product page checkout; confirmation email with download/activation instructions"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/27353366165915"
+claim = "CSP is a 12-month licence; all packs (incl. Moho Debut 12.5) are perpetual"
+
+[[sources]]
+url = "https://help.clip-studio.com/en-us/manual_en/150_tools/Importing_tools.htm"
+claim = "import .sut brushes: drag onto the Sub Tool palette or Sub Tool menu > Import sub tool"
+
+[[sources]]
+url = "https://graphixly.com/products/ultimate-brush-pack"
+claim = "100 CSP + 100 Photoshop brushes"

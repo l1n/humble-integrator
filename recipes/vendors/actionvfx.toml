@@ -1,0 +1,58 @@
+schema = 1
+name = "ActionVFX"
+kind = "route"
+notes = """
+Stock VFX marketplace (explosions, fire, muzzle flashes, blood, debris as
+4K/2K video elements with alpha) at actionvfx.com, sold per collection and
+by subscription. Humble items: in "The Battle Box" (ActionVFX x Corridor
+Digital, 2022) the collections and Mini VFX Packs were plain Humble
+downloads (hb-drmfree, generic/files) and only the 1/2/3-month Starter
+Subscription items were keys (items/actionvfx/starter-subscription). In The
+Ultimate 3D Creator's Bundle (2024) ActionVFX's part was redeemed at
+actionvfx.com/redeem with no expiry.
+
+Census items reach this route only through item recipes; extracted keys
+through their instructions (actionvfx.com) or name.
+"""
+
+[match]
+# No developers or redeem_text rules: ActionVFX's DRM-free items must stay on
+# generic/files, and its 2024 bundle mixed ActionVFX with MattePaint and
+# DoubleJump Academy, whose items a bundle-level rule would wrongly sweep in.
+domains = ["actionvfx.com"]
+key_names = ['\bactionvfx\b']
+
+[redeem]
+where = "https://www.actionvfx.com/redeem"
+account = true
+delivers = "the redeemed collections, or subscription time, on the ActionVFX account; elements downloaded from the account"
+expires = "The Ultimate 3D Creator's Bundle: no expiration date on any tier; others per bundle"
+steps = [
+  "Create or log in to an ActionVFX account.",
+  "Open https://www.actionvfx.com/redeem and enter the Humble code.",
+  "Download the elements from the account (subscription credits/time are spent there before they run out).",
+]
+
+[download]
+scriptable = false
+how = "from the ActionVFX account in the browser"
+notes = "actionvfx.com sits behind a Vercel bot checkpoint (plain HTTP clients get 429, Oct 2026): downloads go through the user's browser."
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer: video elements (MOV/PNG sequences) for compositing in Resolve, After Effects, Nuke, Blender, etc."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/27352814688539-The-Ultimate-3D-Creator-s-Bundle-3D-Assets-HDRIs-and-Training-Terms-and-Redemption-Instructions"
+claim = "ActionVFX: no expiration date on any tier; redemption link https://www.actionvfx.com/redeem; EULA actionvfx.com/license"
+[[sources]]
+url = "https://www.humblebundle.com/software/battle-box-actionvfx-and-corridor-digital-software"
+claim = "collections and Mini VFX Packs delivered as Humble downloads; 1/2/3-month Starter Subscription items as keys"

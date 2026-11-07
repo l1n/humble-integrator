@@ -1,0 +1,39 @@
+schema = 1
+name = "PortraitPro 23 (Standard / Studio / Studio Max)"
+vendor = "anthropics"
+kind = "app"
+machine_names = ["portraitpro", "portraitprostudio", "portraitprostudiomax"]
+verified = false
+notes = "2024 Humble bundle ('PortraitPro 23' in the bundle text; Humble's machine names carry no version, and one description says 22). Three editions, each its own token and installer; install only the highest edition owned. The CDN still serves 23.0.3: PortraitProSetup64.exe / PortraitProStudioSetup64.exe / PortraitProStudioMaxSetup64.exe."
+
+[install]
+source = "vendor"
+file = "PortraitPro*Setup64.exe"
+args = ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"]
+serial = "per-product"
+notes = "Pick the installer whose edition matches the token (Standard / Studio / Studio Max). The token is typed into the app at first launch, not the installer."
+
+[launch]
+find = "C:/Program Files*/PortraitPro*/PortraitPro*.exe"
+
+[steam]
+shortcut = true
+title = "PortraitPro 23"
+steamgriddb = "PortraitPro 23"
+
+[platforms.macos]
+runner = "native"
+file = "*.pkg"
+app_find = "/Applications/PortraitPro*.app"
+
+[[sources]]
+url = "https://www.anthropics.com/portraitpro/redeem/"
+claim = "redeem form: activation token + name + email; download links are emailed"
+
+[[sources]]
+url = "https://www.anthropics.com/support/activating/"
+claim = "token entered in the app on first launch; online activation, or manual activation via fingerprint + key file"
+
+[[sources]]
+url = "https://www.photographynews.co.uk/news/the-new-and-improved-portraitpro-23-is-here/"
+claim = "PortraitPro 23 runs natively on Apple Silicon"

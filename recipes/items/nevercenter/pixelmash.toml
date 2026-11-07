@@ -1,0 +1,51 @@
+schema = 1
+name = "Pixelmash"
+vendor = "nevercenter"
+kind = "app"
+machine_names = ["pixelmash"]
+verified = false
+notes = """
+Grand Game Dev Toolbox (Apr 2022). Pixel-art and sprite-animation editor
+(non-destructive pixelation of hi-res art, layer rigs, effects). Native macOS
+build (Intel and Apple Silicon); Windows build under Wine on Linux (no
+reports found). The Humble key is entered in the registration step (see
+vendors/nevercenter). A 2022 key may only unlock versions released during its
+update period; if the current build refuses it, use the matching legacy
+installer from the download page (inference from Nevercenter's wording).
+Exe/app names are globs, not confirmed.
+"""
+
+[install]
+source = "humble"
+url = "https://nevercenter.com/pixelmash/download/"
+file = "*ixelmash*.exe"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/**/Pixelmash*.exe"
+
+[steam]
+shortcut = true
+title = "Pixelmash"
+steamgriddb = "Pixelmash"
+
+[platforms.macos]
+runner = "native"
+file = "*ixelmash*.dmg"
+app_find = "/Applications/Pixelmash*.app"
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+windows = "win10"
+notes = "Windows 10+ 64-bit build; untested under Wine/Proton."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360051747273-Pixelmash-Instructions"
+claim = "installer via the green link, product key entered then Register; 3 device installations"
+[[sources]]
+url = "https://nevercenter.com/pixelmash/download/"
+claim = "macOS 13+ (Intel or M1) and Windows 10+ 64-bit; legacy installers; no Linux build"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/5151074706715-Grand-Game-Dev-Toolbox-System-Requirements"
+claim = "Pixelmash: Windows 10+, macOS 10.15+ (2022)"

@@ -1,0 +1,31 @@
+schema = 1
+name = "Pinnacle MultiCam Capture"
+vendor = "corel"
+kind = "app"
+machine_names = ["multicamcapture"]
+verified = false
+notes = "'Create with Visual Impact' (2021) + Encore. Webcam/screen multi-camera recorder; Windows 10/11 64-bit only, licence for 3 users/devices. Installer from the Humble page, serial during setup. Under Wine it can only record Wine windows and needs webcam passthrough, so it is of little use on macOS/Linux."
+
+[install]
+source = "humble"
+file = "*MultiCam*"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/**/MultiCam*.exe"
+notes = "Exe name not documented."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/1260801375569"
+claim = "MultiCam Capture: installer from the bundle page, serial during setup"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/8893955275163"
+claim = "MultiCam Capture: Windows 10/11 64-bit; limited to 3 users/devices"
+
+[[sources]]
+url = "https://www.pinnaclesys.com/en/products/multicam-capture/"
+claim = "product page"

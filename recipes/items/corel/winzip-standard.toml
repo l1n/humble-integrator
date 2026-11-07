@@ -1,0 +1,11 @@
+schema = 1
+name = "WinZip Standard (1-year subscription)"
+vendor = "corel"
+kind = "service"
+machine_names = ["winzipstandardsingle-user1yearsubscription"]
+verified = false
+notes = "Time-limited WinZip licence from the 2022 Painter bundles. Redemption path unconfirmed: possibly Corel's 'Redeem your Corel product' form, which e-mails a serial. A Windows/Mac zip utility does not belong in Steam and macOS/Linux have native archive tools, so this is documented as a service only; the 2022 code has most likely lapsed."
+
+[[sources]]
+url = "https://www.winzip.com/en/pages/redeem/"
+claim = "'Redeem your Corel product' form e-mails a serial"

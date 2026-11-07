@@ -1,0 +1,24 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Unit tests
+        run: for t in tests/test_*.py; do python3 -I "$t" || exit 1; done
+      - name: Recipe book is consistent
+        run: python3 -I humble_integrator/recipes.py check
+      - name: Census coverage (informational)
+        run: python3 -I humble_integrator/recipes.py cover --census data/census.jsonl --top 20

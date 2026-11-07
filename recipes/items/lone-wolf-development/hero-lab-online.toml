@@ -1,0 +1,32 @@
+schema = 1
+name = "Hero Lab Online access and service time"
+vendor = "lone-wolf-development"
+kind = "service"
+machine_names = [
+  "herolabonlineaccess",
+  "3monthsofstandardservicetime",          # 3 Months of Standard Service Time - New Users Only
+  "3additionalmonthsofstandardservicetime", # 3 Standard Months of Service Time - Current Users Only
+]
+verified = false
+notes = """
+The account-level codes from Hero Lab X Pathfinder. 'Hero Lab Online Access'
+unlocks the browser app; the service-time codes add 3 months of Standard
+service (character creation and editing). One service-time code is for new
+users only and the other for current users only, so redeem the one that fits
+the account, and redeem these before the content codes. Service time starts
+counting when redeemed (inference).
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/hero-lab-x-pathfinder-software"
+claim = "Hero Lab Online Access; 3 Months of Standard Service Time - New Users Only; 3 Standard Months of Service Time - Current Users Only (census)"
+[[sources]]
+url = "https://www.wolflair.com/hero-lab-online/"
+claim = "server fee keeps character creation/editing active; content stays bought"

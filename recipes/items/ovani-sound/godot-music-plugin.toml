@@ -1,0 +1,33 @@
+schema = 1
+name = "Godot Music Plugin"
+vendor = "ovani-sound"
+kind = "content"
+machine_names = ["godotmusicplugin", "godotaudioplugin"]
+verified = false
+notes = """
+Music integration for Godot 4.1.1+: intensity changes, song selection, random play, seamless loops. Includes Music Sampler Mixtape Vol. 1 and a video tutorial. 'Godot Audio Plugin' (2023 bundles) is the old name. A game-engine add-on, not a system install: it goes into a Godot 4 project (Requires Godot 4.1.1+), by hand, per project; no Steam entry. Humble lists Windows/macOS/Linux icons on some bundles; the plugin is engine code and presumably runs wherever the engine runs (inference).
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = """
+Download from the Ovani order after redeeming the Humble coupon, keep the archive in the library (audio/ovani-sound/plugins/), then: Copy the addon into the project's res://addons/ folder and enable it under Project > Project Settings > Plugins (inference from the addon layout). Package format not checked.
+"""
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://ovanisound.com/products/godot-audio-plugin"
+claim = "product page: Godot Music Plugin features and engine requirement"
+
+[[sources]]
+url = "https://ovanisound.com/products/humble-bundle-audio-arcade-tier-1"
+claim = "delivered through the Humble tier coupon on Ovani's store"

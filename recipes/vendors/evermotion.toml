@@ -1,0 +1,54 @@
+schema = 1
+name = "Evermotion"
+kind = "route"
+notes = """
+3D model and scene store for visualisation artists (evermotion.org; file
+formats per product, mostly 3ds Max/Cinema 4D scenes). Humble bundle: Evermotion Creators Bundle (2024): three items
+(Full Bundle vol. 01, Art Gallery, Art and Home Bundle), one key each.
+Each key is a discount code for one product in the Evermotion Shop; the
+product then sits in the account's Customer Zone for download. The bundle
+text names no site, so this route matches the bundle by name and extracted
+keys by evermotion.org; there is no developers rule.
+"""
+
+[match]
+domains = ["evermotion.org"]
+key_names = ['\bevermotion\b']
+redeem_text = ['redeem\w*[^.]{0,60}\bevermotion\b']
+bundle_slugs = ['evermotion']
+
+[redeem]
+where = "https://evermotion.org/"
+account = true
+delivers = "each code makes one product a $0 order, downloadable from the Customer Zone"
+expires = "not stated"
+steps = [
+  "Log in to (or create) an Evermotion account.",
+  "Add the product the key is for to the cart in the Evermotion Shop.",
+  "At checkout click 'Do you have a discount code?', enter the key, check that the discount applied, click 'Continue' to complete the order.",
+  "Download the product from the Customer Zone.",
+]
+
+[download]
+scriptable = false
+how = "Customer Zone on evermotion.org, per product"
+notes = "No API; a logged-in session could fetch the archives into the library folder (inference, untested)."
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer: model/scene archives used by hand in 3ds Max, Cinema 4D, Blender, etc."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/22984027440667-Evermotion-Key-Redemption-Steps"
+claim = "add the product to the cart in the Evermotion Shop; code at checkout via 'Do you have a discount code?'; 'Continue'; product available in the Customer Zone; support at evermotion.org/contact"
+[[sources]]
+url = "https://www.humblebundle.com/software/evermotion-creators-bundle-software"
+claim = "three Evermotion items, one key each; 'available for Windows and Mac'; no redemption site named"

@@ -1,0 +1,30 @@
+schema = 1
+name = "Corel ParticleShop (plug-in)"
+vendor = "corel"
+kind = "addon"
+machine_names = ["corelphotobrush_particleshop"]
+recommends = [
+  "corel/paintshop-pro",
+  "corel/coreldraw-graphics-suite-2024",
+  "corel/coreldraw-graphics-suite-2025",
+  "corel/aftershot-pro-3",
+]
+verified = false
+notes = "Painter-powered brush plug-in (ParticlePlugin.8bf, in Program Files\\Corel\\ParticleShop\\PhotoshopPlugin) for Photoshop, PaintShop Pro (Effects > Plugins), PHOTO-PAINT/CorelDRAW (Bitmaps > Plug-ins), Lightroom and AfterShot (external editor 'ParticleShopEditor'). Serial at install; licence for 2 systems. Install into the same prefix as its host app; a Mac installer existed in 2019. No Steam entry."
+
+[install]
+source = "vendor"
+file = "*ParticleShop*"
+serial = "per-product"
+notes = "Hosts other than Photoshop need a shortcut to ParticlePlugin.8bf in their plug-in folder."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360056020013"
+claim = "ParticleShop is a plug-in; serial entered at install"
+
+[[sources]]
+url = "http://product.corel.com/help/ParticleShop/540244958/Main/EN/Documentation/ParticleShop-faq.html"
+claim = 'ParticlePlugin.8bf in Program Files\Corel\ParticleShop\PhotoshopPlugin; hosts: Photoshop, PaintShop Pro, PHOTO-PAINT, CorelDRAW, Lightroom, AfterShot'

@@ -1,0 +1,72 @@
+schema = 1
+name = "FastTrackTutorials (3D art video courses)"
+kind = "route"
+service = true        # course platform: nothing to install, no Steam entry
+notes = """
+Humble's FastTrackTutorials bundles ("Become a 3D Artist Mega Tutorial
+Bundle", "Become a 3D Environment/Prop Artist", "Character Art Tutorial
+Bundle Flash Sale") are 3D-art video courses on fasttracktutorials.com
+(FastTrack Studio, Netherlands). The Humble key is a partner code, claimed
+under Account settings > Partnerships on the FastTrack site, not at a shop
+checkout. Claimed content then appears in a "Humble Bundle" section of the
+account's Downloads page.
+
+Exceptions with their own item recipes: the two FastTrack courses inside
+Blender Market's "Essential Game Modding Toolkit" bundles
+(fullenvironmentcreationinue5andblender_in-depthcourse,
+heroassetcreation_in-depthtutorialcourse). Those come with the Blender
+Market bundle's single coupon and are downloaded from Superhive (formerly
+Blender Market), not FastTrack.
+
+Offline use: a course bought directly on fasttracktutorials.com offers
+"Source Files" and "Video Files" downloads ("Download Course Files"). The
+Humble article for FastTrack content only promises streaming plus source-file
+download ("Watch now ... stream and also download the source files"). Fetch
+the source files into the library folder. Fetch video files too when the
+Downloads page offers them for Humble content (unverified).
+"""
+
+[match]
+developers = ["FastTrackTutorials", "FastTrack Tutorials", "FastTrack Studio", "Fast Track Tutorials"]
+domains = ["fasttracktutorials.com"]
+key_names = ["fast ?track ?tutorials?"]
+redeem_text = [
+  # "Keys are redeemable on the FastTrack Tutorial's website", "redeemable on the
+  # FastTrack website", "Redeem your keys on the FastTrack Tutorials website"
+  "redeem\\w*[^.]{0,60}\\bfast ?track",
+  "fasttracktutorials\\.com",
+]
+
+[redeem]
+where = "https://fasttracktutorials.com/"
+account = true
+delivers = "the bundle's courses in the FastTrack account: Downloads > 'Humble Bundle' section (stream + source files)"
+expires = "per bundle: check the Humble download page. Key.is_expired from Humble is authoritative."
+expiry_text = "(?i)redeem (?:your keys )?before ([A-Z][a-z]+ \\d{1,2}(?:st|nd|rd|th)?,? \\d{4})"
+steps = [
+  "Reveal the FastTrackTutorials code on Humble.",
+  "Create an account or log in at https://fasttracktutorials.com. Use one account for every FastTrack code.",
+  "Hover over the account icon (top right) > 'Account settings' > 'Partnerships'. Enter the Humble code and press 'Claim'. Repeat for each code.",
+  "Open 'Downloads' (top of the account pages). The Humble content is in the 'Humble Bundle' section.",
+  "'Watch now' opens the video streamer. From there, download the source files (and video files, where offered) into the library folder.",
+]
+
+[library]
+videos = "unverified"          # direct purchases list 'Video Files'; Humble article mentions streaming + source files only
+files = "Downloads page > Humble Bundle section > Watch now: source files (project/scene files, textures)"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/42239690466715-Ultimate-3D-VR-Sculpting-Character-Game-Asset-Creation-Mega-Bundle-Redemption-Instructions"
+claim = "FastTrackTutorials titles: account at fasttracktutorials.com > Account settings > Partnerships > enter code > Claim; Downloads > Humble Bundle section; Watch now streams and lets you download the source files (2025-10)"
+[[sources]]
+url = "https://fasttracktutorials.com/tutorial_single/1881"
+claim = "course pages list 'Source Files' and 'Video Files' under 'Download Course Files'"
+[[sources]]
+url = "https://fasttracktutorials.com/terms"
+claim = "FastTrack Studio (NL); individual courses for purchase plus a streaming membership; users download purchased files from the site"
+[[sources]]
+url = "https://www.humblebundle.com/software/become-3d-artist-mega-tutorial-bundle-software"
+claim = "'Keys are redeemable on the FastTrack Tutorial's website' (census redeem_text)"
+[[sources]]
+url = "https://www.humblebundle.com/software/character-art-tutorial-bundle-flash-sale-software"
+claim = "'Redeem your keys on the FastTrack Tutorials website' (census redeem_text)"

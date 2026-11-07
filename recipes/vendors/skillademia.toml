@@ -1,0 +1,57 @@
+schema = 1
+name = "Skillademia (digital-art video courses)"
+kind = "route"
+service = true        # course platform: nothing to install, no Steam entry
+notes = """
+"Learn Digital Art and Illustration" (learn-digital-art-and-illustration-software,
+Sept 2025): Skillademia video courses (Adobe Illustrator, Procreate, Clip Studio
+Paint, Pixel Art, Character Design, Comic Book Creation, Canva). Each Humble code
+is a coupon for a tier's course-bundle product ('HB Digital Art and Illustration
+Bundle (n Course Bundle)') on Skillademia's checkout at app.skillademia.com: the
+'Click here to redeem' link opens the checkout, the coupon makes it $0. Courses
+are then watched at app.skillademia.com.
+
+The hosting platform looks like Kajabi (app.<domain>/offers/<id> checkout URLs;
+inference). Whether lessons can be downloaded is not documented.
+"""
+
+[match]
+developers = ["Skillademia"]
+domains = ["skillademia.com"]
+key_names = ['skillademia']
+# "All of the software in this bundle is available to redeem on Skillademia"
+redeem_text = ['redeem\w*[^.]{0,40}\bskillademia\b']
+
+[redeem]
+where = "the 'Click here to redeem' link below the code on the Humble download page (a Skillademia checkout at app.skillademia.com)"
+account = true
+delivers = "the tier's Skillademia course bundle in the Skillademia account"
+expires = "not stated in the bundle text or Humble's article"
+steps = [
+  "Reveal the code on the Humble download page.",
+  "Click 'Click here to redeem' below the code; Skillademia's checkout for the tier's course bundle opens.",
+  "Enter the code in the 'Coupon Code' field and click Apply; the price should drop to $0.",
+  "Log in (or enter the email for a new account) and click 'Complete my purchase'.",
+  "Watch the courses after logging in at https://app.skillademia.com/login.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download: streamed lessons at app.skillademia.com"
+
+[library]
+videos = false
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/40378966119579-Learn-Digital-Art-and-Illustration-Key-Redemption-Instructions"
+claim = "grab the code, 'Click here to redeem' link, enter it in 'Coupon Code', Apply; screenshot shows 'HB Digital Art and Illustration Bundle (2 Course Bundle)' checkout with Log in / Email / 'Complete my purchase'"
+[[sources]]
+url = "https://www.humblebundle.com/software/learn-digital-art-and-illustration-software"
+claim = "'All of the software in this bundle is available to redeem on Skillademia' (census redeem_text)"
+[[sources]]
+url = "https://www.skillademia.com/"
+claim = "course library at app.skillademia.com (login, /offers/<id> checkout links)"

@@ -1,0 +1,30 @@
+schema = 1
+name = "VEGAS Movie Studio 2024 Suite"
+vendor = "magix"
+kind = "app"
+machine_names = ["moviestudio2024suite"]
+verified = false
+notes = "Consumer video editor, from the 2025 VEGAS bundle. Same activation pattern as VEGAS Pro."
+
+[install]
+source = "humble"
+file = "*"
+serial = "per-product"
+notes = "Installer from the Humble bundle page (a MAGIX download manager); serial + MAGIX account at setup/first start."
+
+[launch]
+find = "C:/Program Files*/**/*Movie Studio*/*.exe"
+notes = "Exe name not documented; pick the main program after install."
+
+[steam]
+shortcut = true
+title = "VEGAS Movie Studio 2024 Suite"
+steamgriddb = "VEGAS Movie Studio 2024 Suite"
+
+[[sources]]
+url = "https://www.magix.com/us/support/technical-support"
+claim = "activation needs serial + email + internet; P3 serials bind to a device (changeable monthly); online re-validation at least monthly; installers/serials under Service Center > My products"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/10769136503195"
+claim = "Movie Studio: same pattern as VEGAS Pro"

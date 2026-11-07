@@ -1,0 +1,29 @@
+schema = 1
+name = "Noise Alchemy platform access (1 day / 1 month / 1 year / lifetime)"
+vendor = "noise-alchemy"
+kind = "service"
+machine_names = ["noisealchemy1daytry_lifetimeaccesscreator", "noisealchemy1monthtry_lifetimeaccesscreator", "noisealchemylifetimeaccessplusallpacksfromtiers1-2_lifetimeaccesscreator", "noisealchemy1daytry_darkfantasystudio", "noisealchemy1monthtry_darkfantasystudio", "noisealchemy1yearaccess_darkfantasystudio"]
+verified = false
+notes = """
+Access codes for the Noise Alchemy web platform (sound library plus browser sound-generation tools): 24-hour and 30-day trials, one year, or lifetime with all future packs. A web service: nothing to install, no Steam entry. The trial clock presumably starts at redemption, so redeem the short ones only when they can be used. The bundles' sound packs themselves are Humble downloads (generic route).
+"""
+
+[install]
+source = "vendor"
+serial = "account"
+notes = "Create an account and enter the code at https://noisealchemy.com/Redeem (inference: no published instructions)."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/lifetime-access-creator-software"
+claim = "tiers: 24 hours, 30 days, lifetime ('permanent, unlimited access to the entire platform') (census)"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/noise-alchemy-sfx-bundle-software"
+claim = "1 day, 1 month, 1 year access codes (census)"
+
+[[sources]]
+url = "https://noisealchemy.com/"
+claim = "site has Register and Redeem pages"

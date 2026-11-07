@@ -1,0 +1,28 @@
+schema = 1
+name = "EaseUS OS2Go"
+vendor = "easeus"
+kind = "app"
+machine_names = ["os2go"]
+verified = false
+skip = true
+skip_reason = "Windows system tool with no purpose inside a Wine prefix; keep the key for a real Windows PC."
+notes = "2025 'EaseUS x Ashampoo Windows Powerhouse' bundle (publisher listed as Ashampoo; Ashampoo sells it as a lifetime licence for up to 2 devices). Builds a portable Windows-To-Go USB drive from the running Windows: needs real Windows and raw disk access."
+
+[install]
+source = "vendor"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.ashampoo.com/hc/en-us/articles/13675666721810"
+claim = "EaseUS products sold by Ashampoo: activation window at startup with a licence-key field"
+
+[[sources]]
+url = "https://kb.easeus.com/art.php?id=10001"
+claim = "25-character codes, activation window at first launch; offline activation at activation.easeus.com/alloffline.php"
+
+[[sources]]
+url = "https://www.ashampoo.com/en-us/easeus-os2go"
+claim = "Ashampoo store: lifetime licence, up to 2 devices"

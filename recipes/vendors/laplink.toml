@@ -1,0 +1,61 @@
+schema = 1
+name = "Laplink (PCmover, DiskImage, SafeErase)"
+kind = "route"
+notes = """
+Laplink's Windows PC utilities. Humble sold them in an earlier Laplink
+bundle (Humble article from about 2023, not in the census: DiskImage
+32/64-bit, PCmover Professional, SafeErase 32/64-bit) and in the Norton &
+Laplink Solid Security Flash Sale (Jul 2025, publisher of record Richdale
+Ventures: PCmover Pro 1 Use and 2 Use, DiskImage 64-bit, SafeErase). Each item is a perpetual licence (serial on the Humble download
+page) plus a download address for the installer.
+
+All three are Windows system tools: PCmover migrates applications, files,
+settings and user profiles between two Windows PCs (it must be installed on
+both); DiskImage images and restores a whole Windows PC; SafeErase wipes
+disks. Inside a Wine prefix they could only see the prefix, so the item
+recipes mark them skip = true on both macOS and Linux: keep the key for a
+real Windows PC. No Steam entries.
+
+Matched by developer: every Laplink item seen is a key with a Laplink
+download. Publisher "Richdale Ventures" is not matched (see
+vendors/richdale-ventures).
+"""
+
+[match]
+developers = ["Laplink", "Laplink Software", "Laplink Software, Inc."]
+domains = ["laplink.com"]
+key_names = ['laplink', 'pcmover', 'diskimage', 'safeerase']
+
+[redeem]
+where = "the download address and serial shown for the item on the Humble download page"
+account = false
+delivers = "a perpetual licence (serial) and the Windows installer"
+expires = "licence perpetual; key/download deadline: check the Humble download page"
+steps = [
+  "Reveal the item on the Humble download page and download the installer from the address given (DiskImage and SafeErase: pick 32- or 64-bit to match Windows).",
+  "Run the installer on a Windows PC and follow the prompts; enter the serial when asked (inferred: the installer or first start asks for it).",
+  "PCmover: install on both the old and the new PC, then follow the migration guide (https://dl.laplink.com/en/pro/guide). '1 Use' = one source-to-destination transfer (unlimited attempts); '2 Use' = two such transfers.",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+
+[platforms.macos]
+runner = "none"
+notes = "Windows system tools; nothing useful to do on a Mac."
+
+[platforms.linux]
+runner = "none"
+notes = "Windows system tools; nothing useful to do inside Wine."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/39034677574043-Norton-Laplink-Solid-Security-Flash-Sale-Redemption-Instructions"
+claim = "download PCmover/DiskImage/SafeErase from the provided web address and run the installer; PCmover on both PCs + migration guide dl.laplink.com/en/pro/guide; Windows 7-11; perpetual licences; PCmover 1 Use = one source-to-destination transfer, 2 Use = two"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/11981306689307-Laplink-Software-Redemption-Instructions"
+claim = "earlier Laplink bundle: DiskImage 32/64-bit, PCmover Professional, SafeErase 32/64-bit downloaded from the bundle page; user guides on dl.laplink.com"
+[[sources]]
+url = "https://www.humblebundle.com/software/norton-laplink-solid-security-flash-sale-software"
+claim = "developer Laplink, publisher Richdale Ventures, Windows only (census)"

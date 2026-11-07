@@ -1,0 +1,80 @@
+schema = 1
+name = "Leartes Studios on Gumroad"
+kind = "route"
+notes = """
+Leartes Studios' Gumroad store (leartesstudios.gumroad.com), where the
+GameMasters Toolkit: Assets & Tutorials bundle (Mar-Apr 2024) is redeemed.
+Humble's text says "All of the content in this bundle is redeemable through
+Leartes's website" and "a single key will be provided to redeem all the
+content in your bundle", but Humble's own redemption article for the bundle
+shows Gumroad's checkout: each asset has a "Click here to redeem" link on the
+Humble download page that opens the Gumroad product with the bundle's 100%-off
+code applied ("100% off will be applied at checkout"), "I want this!", email,
+"Get", then the product's Gumroad content page with the files (e.g. a
+.unitypackage) and an optional account. GameFromScratch's write-up says Cosmos
+instead; Humble's screenshots are taken as authoritative. The bundle's "75%
+Discount Code" is for Cosmos (items/leartes-cosmos/cosmos-discount-50).
+
+The same steps as vendors/gumroad (a generic Gumroad route); this file exists
+so Leartes' Gumroad bundles and Leartes Gumroad discount codes (Cosmos Eclipse,
+Extreme Game Dev, Godot Ultimate: items/leartes-gumroad/) have a route without
+matching every Gumroad store. Extracted keys with a gumroad.com link resolve to
+vendors/gumroad, which redeems the same way. Legendary Game Dev Environments
+("redeemed on the Cosmos site and the Gumroad site") stays with vendors/gumroad.
+
+Contents: Unreal/Unity environments and props (Leartes, Stylarts, Cosmos by
+Leartes), Leartes' Unreal tools, and video tutorials made with partners
+(Awesome Tuts, CGdealers, Unreal Sensei, Raja Biswas; their descriptions say
+"This Product will be removed/hidden after the Bundle ends", so redeem them
+before relying on the store page).
+"""
+
+[match]
+redeem_text = [
+  # "All of the content in this bundle is redeemable through Leartes's website." (GameMasters Toolkit)
+  "\\bredeemable(?:\\s|&nbsp;|\\u00a0)+through(?:\\s|&nbsp;|\\u00a0)+Leartes(?:'|\\u2019)s(?:\\s|&nbsp;|\\u00a0)+website\\b",
+]
+bundle_slugs = ['^gamemasters-toolkit']
+
+[redeem]
+where = "https://leartesstudios.gumroad.com/"
+account = false
+delivers = "a $0 Gumroad purchase per asset (Personal licence), downloadable from its Gumroad content page and, with an account, the Gumroad Library"
+steps = [
+  "Optional but recommended: create a Gumroad account (https://gumroad.com/signup) with the email to use below, so every redemption lands in one Library.",
+  "On the Humble download page, click 'Click here to redeem' for an asset; the Leartes Gumroad page opens with the code applied ('100% off will be applied at checkout').",
+  "Choose the licence (Personal), press 'I want this!', check that the total is $0, enter the email for delivery, press 'Get'. Never pay: a non-zero total means the code didn't apply.",
+  "On the content page, Download the files; optionally set a password to create the account.",
+  "Repeat for every asset and tutorial in the bundle.",
+]
+
+[download]
+scriptable = false
+how = "per product from its Gumroad content page (receipt 'View content' link, or Library > product)"
+notes = "No buyer API; the tool should open each Humble 'Click here to redeem' link in the user's browser rather than check out itself. Saving files from the content pages with the user's browser session is possible in principle (inference, untested)."
+
+[library]
+files = "per asset: zip/.unitypackage downloads (Unreal projects, Unity packages, icons as .png), as the Gumroad content page lists them"
+videos = "tutorials: Gumroad video files or links on the content page (not documented per product)"
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer: Unreal content is migrated into a project, Unity packages imported, tutorials watched."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/23831123482779-GameMasters-Toolkit-Assets-Redemption-Instructions"
+claim = "for each asset click 'Click here to redeem'; the coupon applies automatically; choose licence, 'I want this!'; enter email, 'Get' (no payment); Download; optionally set a password to create an account. Screenshots: Leartes Studios Gumroad page for '500+ Fantasy Icons (Unity)', '100% off will be applied at checkout', .unitypackage download"
+[[sources]]
+url = "https://www.humblebundle.com/software/gamemasters-toolkit-assets-tutorials-bundle-software"
+claim = "'All of the content in this bundle is redeemable through Leartes's website'; 'a single key will be provided to redeem all the content in your bundle'"
+[[sources]]
+url = "https://gamefromscratch.com/gamemasters-toolkit-unreal-unity-godot-engine-humble-bundle/"
+claim = "GameFromScratch: the bundle 'is redeemed on their new Cosmos store' (contradicted by Humble's article)"

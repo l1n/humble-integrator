@@ -1,0 +1,9 @@
+schema = 1
+name = "Ebook or comic"
+kind = "route"
+priority = 30
+notes = "Download the preferred format (epub, then pdf, then the rest) into the library folder; no Steam entry."
+
+[match]
+delivery = ["hb-drmfree"]
+content_types = ["ebook", "comic"]

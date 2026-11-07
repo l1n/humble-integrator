@@ -1,0 +1,36 @@
+schema = 1
+name = "Roblox Music Plugin"
+vendor = "ovani-sound"
+kind = "content"
+machine_names = ["robloxmusicplugin"]
+verified = false
+notes = """
+Music integration for Roblox experiences (intensity layers, song selection, seamless loops), used inside Roblox Studio. A project add-on, imported by hand; no Steam entry. Roblox Studio itself runs on Windows and macOS only.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = """
+Download from the Ovani order after redeeming the Humble coupon and import it in Roblox Studio (format not checked).
+"""
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "none"
+notes = """
+Roblox Studio has no Linux build; the files can still be kept in the library.
+"""
+
+[[sources]]
+url = "https://ovanisound.com/products/roblox-music-plugin"
+claim = "product page"
+
+[[sources]]
+url = "https://ovanisound.com/products/humble-bundle-audio-arcade-tier-1"
+claim = "delivered through the Humble tier coupon on Ovani's store"

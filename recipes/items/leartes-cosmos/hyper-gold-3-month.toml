@@ -1,0 +1,28 @@
+schema = 1
+name = "Hyper Gold Tier 3-month Subscription"
+vendor = "leartes-cosmos"
+kind = "service"
+service = true
+machine_names = ["hypergoldtier3monthsubscription"]
+verified = false
+notes = """
+Three months of Games by Hyper's "Hyper Gold" membership: 90 monthly credits
+for Hyper modules, bundle discounts, loyalty store, Discord access. Listed
+under "Cosmos by Leartes" (developer) in Best Core Game Dev Assets & Tools,
+whose text says every key redeems through Cosmos; Mega Game Dev's
+comparable "Games by Hyper 3 Month Subscription" is credited to Games by
+Hyper and goes to gamesbyhyper.com (items/games-by-hyper/). Where this code
+is entered is not stated: try Cosmos first, then gamesbyhyper.com
+(unconfirmed). Redeem only when the user asks (it starts a clock).
+"""
+
+[redeem]
+where = "https://cosmos.leartesstudios.com/redeem"
+steps = ["Redeem when ready to use it; if Cosmos rejects it, try the Games by Hyper site (https://gamesbyhyper.com/subscription/)."]
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/best-core-game-dev-assets-tools-megabundle-software"
+claim = "'Get 3 months of Hyper Gold membership ... 90 Monthly Credits to spend on Hyper modules'; bundle: 'Redeem your keys through Cosmos by Leartes website'"

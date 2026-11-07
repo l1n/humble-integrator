@@ -1,0 +1,30 @@
+schema = 1
+name = "Abelssoft YouTube Song Downloader"
+vendor = "abelssoft"
+kind = "app"
+machine_names = ["youtubesongdownloader"]
+verified = false
+notes = "2022 'Entertainment, Privacy & PC Health' bundle (Humble installer + key). Downloads audio from YouTube etc. Likely to break as sites change; native tools (yt-dlp) do the same. Exe name inferred."
+
+[install]
+source = "humble"
+file = "*.exe"
+args = ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"]
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/*/Program/YouTubeSongDownloader.exe"
+notes = "{commonpf}\\<Product>\\Program\\<exe> per the current installer's Inno header; the 2022 Humble build may differ."
+
+[steam]
+shortcut = true
+title = "YouTube Song Downloader"
+steamgriddb = "Abelssoft YouTube Song Downloader"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/5873424950427"
+claim = "Abelssoft: install from the Humble download; first launch asks for the 20-digit key, then name + email, 'Get free unlock mail now', click the e-mailed link"
+
+[[sources]]
+url = "https://www.abelssoft.de/YouTubeSongDownloader-setup.exe"
+claim = "current installer (Inno header inspected)"

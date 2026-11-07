@@ -1,0 +1,43 @@
+schema = 1
+name = "AAS Player (+ Sound Pack Swatches)"
+vendor = "applied-acoustics"
+kind = "app"
+machine_names = ["asplayerfreepluspackswatches", "aasplayer"]
+verified = false
+notes = """
+AAS's free player: plays any AAS sound pack without the synth it was made for, plus 650-720+ free 'Swatches' starter presets from the whole sound-pack series. Plugin (VST3, AU, AAX) and standalone app; macOS 10.13+ (Apple Silicon native) and Windows 10+ 64-bit. Install it before any sound pack. Standalone is an instrument host, so no Steam shortcut.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+file = "aas-player*"
+notes = """
+Free; download it from the AAS account (Registered Products) or the AAS Player page. Current version 2.0.0 (Oct 2026).
+"""
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = """
+No Linux build; untested under Wine/yabridge.
+"""
+
+[[sources]]
+url = "https://www.applied-acoustics.com/aas-player/"
+claim = "free; plays AAS sound packs; formats, OS requirements, 650+ starter presets"
+
+[[sources]]
+url = "https://www.applied-acoustics.com/support/apple-m1-compatibility/"
+claim = "AAS Player, Swatches and sound packs native on Apple Silicon"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/applied-acoustics-sound-designer-bundle-software"
+claim = "'AS Player Free + PACK SWATCHES: 720+ high quality sounds' (census)"

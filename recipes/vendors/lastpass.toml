@@ -1,0 +1,40 @@
+schema = 1
+name = "LastPass (password manager subscription)"
+kind = "route"
+service = true        # online subscription: nothing to install from Humble, no Steam entry
+notes = """
+"Exclusive LastPass Families Sale" (July-Aug 2023): 12 months of LastPass
+Families for a LastPass account that has never been a paid subscriber. The
+Humble item is a claim link; LastPass itself runs as browser extensions and
+mobile/desktop apps from lastpass.com, which the user installs as usual - not
+something to put in Steam. The term starts at redemption.
+"""
+
+[match]
+developers = ["LastPass"]
+domains = ["lastpass.com"]
+key_names = ['lastpass']
+
+[redeem]
+where = "the claim link on the Humble download page (log in to LastPass to apply)"
+account = true
+delivers = "a 12-month LastPass Families subscription on the LastPass account"
+expires = "not stated"
+steps = [
+  "Create a LastPass account if needed (https://lastpass.com/create_account.php) - the offer excludes current and previous LastPass subscribers.",
+  "Install the LastPass extension in the browser.",
+  "Click the link on the Humble download page to claim the LastPass key, then log in to (or create) the LastPass account when asked.",
+  "LastPass confirms that Families is active; the expiry date is under My Account in the vault.",
+  "Support: https://lastpass.com/support.php.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/17227967345051-LastPass-Families-Redemption-Instructions"
+claim = "not for current or previous subscribers; create account, install extension, click the download-page link, log in; confirmation; expiry under My Account; LastPass support link"
+[[sources]]
+url = "https://www.humblebundle.com/software/exclusive-lastpass-families-sale-software"
+claim = "12 months of LastPass Families (census)"

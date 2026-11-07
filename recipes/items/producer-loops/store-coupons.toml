@@ -1,0 +1,25 @@
+schema = 1
+name = "Producer Loops discount coupons"
+vendor = "producer-loops"
+kind = "service"
+machine_names = ["producerloops50percentoffcoupon", "producerloops5dollarsoffcoupon", "mysteryholidaycouponcode_producerloops"]
+verified = false
+notes = """
+Discount codes for producerloops.com from 2022-2023 Humble music bundles (50% off, $5/GBP5 off, a 'mystery holiday' code). Optional, cost money to use, and probably expired. Nothing to install.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "Enter the code at producerloops.com checkout (inference: Humble gives no instructions)."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/music-producer-2023-plugins-software-essentials-software"
+claim = "Producer Loops 50% Off and $5/GBP5 coupons (census)"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/music-creators-spectacular-holiday-special-software"
+claim = "'4 exclusive coupon codes', incl. a Mystery Holiday Coupon Code (census)"

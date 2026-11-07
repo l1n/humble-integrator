@@ -1,0 +1,51 @@
+schema = 1
+name = "Luminar Neo LUTs: Street Vibe"
+vendor = "skylum"
+kind = "addon"
+machine_names = ["luts_streetvibelutssollection"]
+requires = ["skylum/luminar-neo"]
+verified = false
+notes = """
+Neon & Noir - Elite Photos with Luminar Neo (Oct 2025). Ten urban-photo
+LUTs by Team Skylum. Unlike the bundle's other LUT packs (DRM-free files on
+the generic route) Humble lists this one as a key. Where that key goes is
+not documented: Skylum says activation codes are for the app itself and that
+purchased add-ons are listed under 'My Add-ons' in the Skylum account and
+installable from Extras > Marketplace, so the key is probably a link or code
+for Skylum's marketplace (inference). If the Humble page offers a file
+instead, download it. LUT files (.cube) are loaded in Luminar Neo via Edit >
+Creative > Mood > Choose LUT > Load Custom LUT file; installed marketplace
+LUTs appear under Mood > Choose LUT > Purchased. macOS only in practice
+(Luminar Neo has no Linux build).
+"""
+
+[redeem]
+where = "the item's key or link on the Humble download page; then the Skylum account (My Add-ons) or Luminar Neo's Extras > Marketplace (inference)"
+account = true
+delivers = "the Street Vibe LUT pack (10 LUTs) for Luminar Neo"
+steps = [
+  "Reveal the item on the Humble download page and follow its link/instructions (not documented by Humble).",
+  "If it lands in the Skylum account: Luminar Neo > Extras > Marketplace > LUTs > Street Vibe > Install, or download it from My Add-ons.",
+  "If it is a file: save it in the library folder and load it in Luminar Neo via Edit > Creative > Mood > Choose LUT > Load Custom LUT file.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+file = "*.cube"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/20278358380059-Luminar-Neo-LUTs-Overlays-Presets-and-Skies-Installation-Instructions"
+claim = "LUTs: Edit tab > Creative > Mood > Choose LUT > Load Custom LUT file"
+[[sources]]
+url = "https://support.skylum.com/luminar-neo-tips/how-to-install-and-remove-luts"
+claim = "purchased LUTs in the Skylum account's My Add-ons; install via Extras > Marketplace; shown under Mood > Choose LUT > Purchased"
+[[sources]]
+url = "https://support.skylum.com/getting-started/activation-process"
+claim = "activation codes activate the app (account-based activation)"
+[[sources]]
+url = "https://www.humblebundle.com/software/neon-noir-elite-photos-with-luminar-neo-software"
+claim = "'LUTs: Street Vibe' is the only LUT item delivered as hb-key; 10 LUTs by Team Skylum (census)"

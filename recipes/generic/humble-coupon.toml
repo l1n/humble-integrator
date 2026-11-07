@@ -1,0 +1,15 @@
+schema = 1
+name = "Humble store / Choice coupon"
+kind = "route"
+priority = 5
+before_vendors = true
+notes = """
+Humble's own discount coupons that ride along in bundles ("10% off Humble
+Choice", "25% off ..."). Nothing to install or redeem elsewhere: the coupon
+shows in the Humble library and applies at Humble's checkout. Listed by `hi plan`
+as a service so it isn't swept onto the bundle's vendor route.
+"""
+
+[match]
+machine_names = ["^humblemonthly_", "humblechoice", "^humble_?choice"]
+developers = ["Humble Choice"]

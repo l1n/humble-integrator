@@ -1,0 +1,50 @@
+schema = 1
+name = "Pathfinder 2E content for Hero Lab Online (rulebooks and adventure character content)"
+vendor = "lone-wolf-development"
+kind = "service"
+requires = ["lone-wolf-development/hero-lab-online"]
+machine_names = [
+  "pathfindersecondeditioncorerules_lonewolf",
+  "pathfindersecondeditiongamemasteryguide_lonewolf",
+  "pathfindersecondeditionbeginnerbox_lonewolf",
+  "pathfinderremasteredplayercore",
+  "pathfidnerremasteredgmcore",
+  "pathfinder2emonstercore",
+  "pathfinder2ehowlofthewild",
+  "lostomens_divinemysteries",
+  "troublesinotari",
+  "sevendoomsforsandpoint",
+  "pathfinder2ecrownofthekoboldkingcharactercontent",
+  "pathfinder2eseasonofghostslettheleavesfallcharactercontent",
+  "pathfinder2eseasonofghosts_thesummerthatneverwascharactercontent",
+  "pathfinder2eseasonofghosts_nobreathtocrycharactercontent",
+  "pathfinder2eseasonofghosts_tobloombelowthewebcharactercontent",
+  "pathfinder2ecurtaincall_stagefrightcharactercontent",
+  "pathfinder2ecurtaincall_bringthehousedowncharactercontent",
+  "pathfinder2ecurtaincall_singerstalkerskinsawmancharactercontent",
+  "pathfinder2ewardensofwildwood_severedattherootcharactercontent",
+  "pathfinder2ewardensofwildwood_shepherdofdecaycharactercontent",
+  "pathfinder2ewardensofwildwood_pactbreakercharactercontent",
+]
+verified = false
+notes = """
+Content unlocks (rules data, not books to read) for the Pathfinder Second
+Edition game system in Hero Lab Online. Each code is redeemed at
+herolab.online/redeem on the same account as the access/service-time codes.
+Bought content stays on the account even when service time lapses, but
+building or editing characters needs active service.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/hero-lab-x-pathfinder-software"
+claim = "Pathfinder 2E rulebook, adventure and character-content codes by Lone Wolf Development (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/17589620619931-Hero-Lab-Redemption-Instructions"
+claim = "every Hero Lab code is redeemed at herolab.online/redeem"

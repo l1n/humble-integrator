@@ -1,0 +1,20 @@
+schema = 1
+name = "Laplink SafeErase (32 & 64-bit)"
+vendor = "laplink"
+kind = "app"
+machine_names = ["safeerase32and64bit"]
+verified = false
+skip = true
+skip_reason = "Secure disk/file wiping for Windows; inside Wine it cannot reach the real disks. Keep the key for a real Windows PC."
+notes = "Norton & Laplink Solid Security Flash Sale (Jul 2025). Perpetual, 1 device, Windows XP-10, internet needed for download and registration; user guide at dl.laplink.com (SafeErase 8). See vendors/laplink."
+
+[install]
+source = "vendor"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/39034677574043-Norton-Laplink-Solid-Security-Flash-Sale-Redemption-Instructions"
+claim = "SafeErase 32 & 64 bit: download, choose 32/64-bit installer; Windows 10/8.1/8/7/Vista/XP; perpetual, 1 device; guide dl.laplink.com/documentation/pdf/safeerase/8/SafeErase_8_UG_ENG.pdf"

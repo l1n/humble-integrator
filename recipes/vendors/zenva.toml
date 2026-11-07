@@ -1,0 +1,351 @@
+schema = 1
+name = "Zenva Academy (online courses)"
+kind = "route"
+service = true        # course platform: nothing to install, no Steam entry
+notes = """
+Humble's Zenva bundles are online courses on Zenva Academy
+(academy.zenva.com). The Humble "key" is a Zenva coupon. It is not
+per course: Humble gives a coupon for the tier bought, and Zenva sells a $0
+"N Item Bundle" product per tier that already includes every lower tier.
+Redeem only the product for the highest tier you bought, one bundle per
+checkout. Zenva's help centre keeps the definitive list of those products
+(add-to-cart links); [[redeem.products]] below copies it (Oct 2026).
+
+Safety: the coupon is applied at a real shop checkout. Never press Checkout
+unless the order total shows $0. A non-zero total means the wrong product or
+other items are in the cart: empty https://academy.zenva.com/cart/ and
+start again. Zenva never asks for a subscription for Humble redemptions.
+A coupon works once, for one Zenva account.
+
+Offline use: Zenva does not allow course videos to be downloaded ("due to
+copyright protection"). The tool can fetch, after login, each course's
+"Files" (project source, assets, presentation material and text "lesson
+notes" summarising every video) into the library folder, from the course or
+lesson page's Files button. Zenva *ebooks* bought on academy.zenva.com are
+PDFs under My Account > Downloads. Zenva's mobile app was withdrawn in Feb
+2023; courses stream in any browser.
+
+Not Zenva redemptions: Zenva's Humble *ebook* bundles (Godot Game
+Development Book Bundle, The Claude Code Mastery Bundle, The Unity Game
+Development Mastery Bundle, The Codex Mastery Bundle) are PDF/EPUB downloads
+on Humble itself. If their items name Zenva as developer/publisher, this
+recipe's developer rule would claim them. Their files must still be fetched
+from Humble like any ebook. None are in the census yet (Oct 2026).
+"""
+
+[match]
+developers = ["Zenva", "Zenva Academy", "Zenva Pty Ltd"]
+domains = ["zenva.com", "zenva.zendesk.com"]
+key_names = ["zenva"]
+bundle_slugs = ["zenva.*software"]
+# Both patterns refuse ebook bundles (leading guard): Zenva's Humble ebook
+# bundles are Humble downloads, and Zenva's publisher blurb ("Zenva
+# https://academy.zenva.com Trusted by ...") would otherwise claim them.
+redeem_text = [
+  # "redeemed on the Zenva Academy website", "available on the Zenva Academy website", "Please redeem
+  # your keys on Zenva.com", "https://academy.zenva.com", "from the experts at Zenva Academy"
+  '^(?!.*\b(?:book bundle|bundle of (?:e-?)?books|(?:e-?)?books (?:from|by) zenva)).*?(?:\bzenva(?:\.com| academy)? website|redeem[^.]{0,80}\bzenva|\bzenva\.com\b|\bexperts at zenva\b)',
+  # "bundle of courses from Zenva", "instructor-led courses by Zenva", "lessons by Zenva", unless the
+  # keys are redeemed on another named website
+  '^(?!.*\b(?:book bundle|bundle of (?:e-?)?books|(?:e-?)?books (?:from|by) zenva))(?!.*\bredeem\w*\s+(?:on|through|via|at)\s+(?:the\s+)?(?!zenva)[\w.-]+(?:\s+academy)?\s+website).*\b(?:courses?|lessons)\s+(?:from|by)\s+zenva\b',
+]
+
+[redeem]
+where = "https://helpza.zenva.com/portal/en/kb/articles/i-purchased-courses-through-humble-bundle-how-do-i-access-them"
+cart = "https://academy.zenva.com/cart/?add-to-cart={product}"
+account = true
+delivers = "the tier's courses on the Zenva account's Purchased Courses page (https://academy.zenva.com/purchased-courses/); lifetime access, as-is"
+expires = "Zenva: redeem within one year of the Humble purchase. Recent bundle pages give a date (e.g. 'Keys Expire. Please redeem before September 23, 2027')."
+expiry_text = "(?i)redeem (?:your keys )?before ([A-Z][a-z]+ \\d{1,2}(?:st|nd|rd|th)?,? \\d{4})"
+steps = [
+  "Reveal the Zenva coupon on Humble (one per bundle tier bought). If Humble says 'Please try redeeming again later' or gives a lower tier's code, that is Humble's to fix: https://support.humblebundle.com/hc/en-us/requests/new",
+  "Sign up or log in at https://academy.zenva.com/ (email, Google, Facebook or LinkedIn). Use one account for every coupon: accounts are per email.",
+  "Empty the cart (https://academy.zenva.com/cart/), then open the add-to-cart link for the bundle and tier bought (see redeem.products, or Zenva's help article). Use the highest tier only: it includes the lower tiers.",
+  "Proceed to Checkout; on the checkout page enter the coupon in the Redemption Code / Coupon Code field and apply it.",
+  "Continue only if the order total is $0. Then tick the confirmation box if shown and click Checkout. No payment details are needed.",
+  "The courses appear under Purchased Courses (https://academy.zenva.com/purchased-courses/). If checkout errored, look there first: it may have gone through.",
+  "Redeem several bundles one at a time (one coupon per order).",
+  "'Coupon does not exist' or a non-zero total means the wrong product is in the cart: empty it and retry with the link for the exact bundle and tier.",
+]
+special = [
+  "The Complete Godot Software Bundle - ENCORE, Tier 3 (20 items): redeem two products separately, 3269281 (16 items) and 3339174 (4-item expansion).",
+  "Stand with Ukraine Bundle (product 2668809) and Build Roblox Games 1-item (product 2892563): add to cart, then follow Zenva's general coupon steps (Coupon Code button above 'Your Order', Apply Coupon, check the deduction).",
+  "The Humble Full-Stack Web Development / 2021-era bundles used a 'Click Here to Redeem your Zenva Code' link on the Humble page and a BUY NOW button on Zenva. The add-to-cart links below replace them.",
+]
+
+# Zenva's $0 redemption products, one per Humble tier (Tier 1, 2, 3); each
+# includes the lower tiers. From Zenva's help article (modified 2026-10-16).
+# `slug` is the Humble census slug where one is known. Otherwise match on the
+# bundle name, which Zenva words slightly differently from Humble.
+[[redeem.products]]
+bundle = "Software Engineering 2026"
+slug = "software-engineering-2026-software"
+tiers = [3776306, 3776308, 3776310]
+items = [2, 4, 33]
+[[redeem.products]]
+bundle = "Learn to Make Games in Godot 2026"
+tiers = [3771992, 3771994, 3771996]
+items = [2, 4, 34]
+[[redeem.products]]
+bundle = "The All-Inclusive Codex, Claude Code & Python Automation Bundle"
+slug = "allinclusive-codex-claude-code-python-automation-bundle-software"
+tiers = [3765802, 3765812, 3765816]
+items = [2, 4, 25]
+[[redeem.products]]
+bundle = "Complete Homeschooling Coding, AI & Game Dev Bundle"
+tiers = [3760463, 3760465, 3760475]
+items = [2, 4, 33]
+[[redeem.products]]
+bundle = "Excel Automation 2026 Mastery Bundle"
+tiers = [3758610, 3758613, 3758615]
+items = [2, 4, 21]
+[[redeem.products]]
+bundle = "The 2026 AWS, Azure, CompTIA Cloud Certification & Practice Exam Bundle"
+slug = "2026-aws-azure-comptia-cloud-certification-practice-exam-bundle-software"
+tiers = [3750494, 3750500, 3750505]
+items = [2, 4, 22]
+[[redeem.products]]
+bundle = "Learn to Make Games in Unity Software Bundle [2026]"
+tiers = [3749250, 3749268, 3749273]
+items = [2, 5, 35]
+[[redeem.products]]
+bundle = "Professional Developer Pathways Course Bundle [2026]"
+tiers = [3742588, 3742591, 3742594]
+items = [3, 5, 40]
+[[redeem.products]]
+bundle = "Learn Unreal 2026 Course Bundle"
+tiers = [3724418, 3724423, 3724426]
+items = [2, 4, 25]
+[[redeem.products]]
+bundle = "Build & Launch AI Apps Bundle (2026)"
+slug = "build-launch-ai-apps-bundle-software"
+tiers = [3719320, 3719323, 3719327]
+items = [2, 4, 20]
+[[redeem.products]]
+bundle = "Learn Intermediate Godot Complete Course Bundle (2026)"
+tiers = [3713472, 3713477, 3713479]
+items = [2, 5, 25]
+[[redeem.products]]
+bundle = "Zero to Game Dev Hero Course/Learning Bundle (2026)"
+tiers = [3700231, 3700234, 3700236]
+items = [3, 6, 40]
+[[redeem.products]]
+bundle = "Python: Build and Ship 2026 Bundle"
+tiers = [3690344, 3690347, 3690351]
+items = [2, 5, 30]
+[[redeem.products]]
+bundle = "Learn Godot in 2026 Complete Course Bundle"
+tiers = [3686433, 3686436, 3686439]
+items = [2, 5, 30]
+[[redeem.products]]
+bundle = "Learn Claude Code and AI Development in 2026 Bundle"
+tiers = [3687148, 3687155, 3687159]
+items = [2, 4, 16]
+[[redeem.products]]
+bundle = "Learn Godot in 2025 Complete Course Bundle - Holiday Rebundle Encore"
+tiers = [3632323]
+items = [30]
+[[redeem.products]]
+bundle = "Learn Unity in 2025 Complete Course Bundle"
+tiers = [3637655, 3637660, 3637662]
+items = [2, 4, 30]
+[[redeem.products]]
+bundle = "Learn Unreal in 2025 Complete Course Bundle"
+tiers = [3660484, 3660487, 3660489]
+items = [2, 5, 26]
+[[redeem.products]]
+bundle = "Learn Godot in 2025 Complete Course Bundle"
+tiers = [3632313, 3632320, 3632323]
+items = [2, 5, 30]
+[[redeem.products]]
+bundle = "Learn Programming 2025 Software Bundle"
+tiers = [3621434, 3621444, 3621447]
+items = [3, 6, 40]
+[[redeem.products]]
+bundle = "The Complete Defold Course Bundle"
+slug = "complete-defold-course-bundle-software"
+tiers = [3611438, 3611441, 3611443]
+items = [1, 3, 12]
+[[redeem.products]]
+bundle = "Learn Game Dev: Unity, Godot, Unreal, GameMaker, Blender & C# Bundle"
+tiers = [3608791, 3608808, 3608810]
+items = [2, 5, 35]
+[[redeem.products]]
+bundle = "Learn Python Development"
+tiers = [3580696, 3580699, 3580701]
+items = [3, 6, 25]
+[[redeem.products]]
+bundle = "The Complete Godot 2025 Course Bundle"
+tiers = [3564647, 3564651, 3564653]
+items = [2, 4, 24]
+[[redeem.products]]
+bundle = "The Black Friday Rust Bundle"
+slug = "black-friday-rust-bundle-software"
+tiers = [3544937, 3544940, 3544942]
+items = [1, 3, 10]
+[[redeem.products]]
+bundle = "Learn Godot 4.3 Complete Course Bundle"
+tiers = [3513765, 3513780, 3513782]
+items = [2, 5, 30]
+[[redeem.products]]
+bundle = "Learn Game Dev: Godot, Unreal, Unity, & GameMaker Bundle"
+tiers = [3478095, 3478113, 3478115]
+items = [2, 5, 35]
+[[redeem.products]]
+bundle = "The Complete 2024 Python Programming Bundle"
+slug = "complete-2024-python-programming-bundle-software"
+tiers = [3454124, 3454130, 3454132]
+items = [2, 5, 50]
+[[redeem.products]]
+bundle = "Unity RPG Beginners Collection"
+tiers = [3243623, 3243626, 3243628]
+items = [1, 3, 22]
+[[redeem.products]]
+bundle = "Black Friday Python Generative AI Software Bundle"
+slug = "black-friday-python-generative-ai-bundle-software"
+tiers = [3383160, 3383206, 3383218]
+items = [2, 4, 30]
+[[redeem.products]]
+bundle = "The Complete Godot Software Bundle - ENCORE"
+tiers = [3269269, 3269277, 3269281]
+items = [1, 3, 16]
+tier3_also = 3339174      # 4-item expansion: Tier 3 (20 items) = 3269281 + 3339174, redeemed separately
+[[redeem.products]]
+bundle = "The Complete Learn Coding Mega Bundle"
+tiers = [3286062, 3286067, 3286071]
+items = [2, 5, 30]
+[[redeem.products]]
+bundle = "The Complete Godot Software Bundle"
+tiers = [3269269, 3269277, 3269281]
+items = [1, 3, 16]
+[[redeem.products]]
+bundle = "The Complete Python Programming Mega Bundle"
+tiers = [3230133, 3230136, 3230139]
+items = [2, 4, 20]
+[[redeem.products]]
+bundle = "Learn to Make Survival Games with Unity Bundle"
+tiers = [3222191, 3222194, 3222197]
+items = [2, 4, 20]
+[[redeem.products]]
+bundle = "The Complete Unity Game Development Bundle"
+tiers = [3201890, 3202731, 3202734]
+items = [2, 4, 20]
+[[redeem.products]]
+bundle = "The Complete Unreal Engine Bundle (2022)"
+tiers = [3182769, 3182774, 3182778]
+items = [2, 6, 10]
+[[redeem.products]]
+bundle = "Coding for Kids Bundle (2022)"
+slug = "coding-for-kids-software"
+tiers = [3157764, 3157770, 3157772]
+items = [4, 8, 16]
+[[redeem.products]]
+bundle = "Intro to Coding Software Bundle (2022)"
+tiers = [3127222, 3127224, 3127226]
+items = [4, 9, 16]
+[[redeem.products]]
+bundle = "Stand with Ukraine Bundle"
+tiers = [2668809]
+items = [1]
+coupon_flow = true        # add to cart, then Zenva's general coupon steps
+[[redeem.products]]
+bundle = "Create 2D and 3D game art with Blender and Photoshop Software Bundle"
+tiers = [3058006, 3058022, 3058025]
+items = [2, 6, 12]
+[[redeem.products]]
+bundle = "Supercharge Your Microsoft Excel Skills Software Bundle"
+tiers = [3037668, 3037669, 3037670]
+items = [3, 7, 12]
+[[redeem.products]]
+bundle = "Build Roblox Games Software Bundle"
+slug = "build-roblox-games-software"
+tiers = [2892563, 3005318]
+items = [1, 4]
+coupon_flow = true        # the 1-item product uses Zenva's general coupon steps
+[[redeem.products]]
+bundle = "JavaScript & Web Development 2021 Software Bundle"
+tiers = [2979249, 2979256, 2979254]
+items = [4, 9, 14]
+[[redeem.products]]
+bundle = "Unity Fantasy Games & Game Dev Assets"
+tiers = [2919705]
+items = [1]
+[[redeem.products]]
+bundle = "Humble Learn Coding to Build Games 2021 Bundle"
+tiers = [2877002, 2877003, 2877004]
+[[redeem.products]]
+bundle = "Humble Intro to Coding 2021 Bundle"
+tiers = [2788811, 2788813, 2788812]
+[[redeem.products]]
+bundle = "Humble Mobile App and Game Bundle"
+tiers = [2684505, 2684506, 2684508]
+[[redeem.products]]
+bundle = "Humble JavaScript Bundle"
+tiers = [2623069, 2623098, 2623099]
+[[redeem.products]]
+bundle = "Humble Game Development Bundle"
+tiers = [2340275, 2340325, 2340330]
+[[redeem.products]]
+bundle = "Humble Intro to Coding Bundle 2020"
+tiers = [1624531, 1624540, 1624541]
+[[redeem.products]]
+bundle = "Humble VR & AR Bundle"
+tiers = [1276338, 1276339, 1276340]
+[[redeem.products]]
+bundle = "Humble Web Development Bundle"
+tiers = [1013653, 1013674, 1013697]
+[[redeem.products]]
+bundle = "Humble Intro to Code Bundle"
+tiers = [736142, 736140, 736099]
+[[redeem.products]]
+bundle = "Humble Unity Bundle - Zenva Courses"
+tiers = [114983]
+items = [1]
+
+[library]
+videos = false                 # no offline video download
+files = "course Files panel (source, assets, slides, lesson-notes PDFs) on each course/lesson page, after login"
+ebooks = "https://academy.zenva.com/my-account/downloads/"
+
+[[sources]]
+url = "https://helpza.zenva.com/portal/en/kb/articles/i-purchased-courses-through-humble-bundle-how-do-i-access-them"
+claim = "Zenva's definitive Humble redemption steps and the per-bundle, per-tier add-to-cart product list; redeem within one year; ebook bundles are Humble downloads (modified 2026-10-16; fetched via the help centre's articleByPermalink API)"
+[[sources]]
+url = "https://helpza.zenva.com/portal/en/kb/articles/i-purchased-a-humble-bundle-do-i-need-to-redeem-all-product-tiers"
+claim = "each tier product includes the lower tiers; redeem only the tier bought"
+[[sources]]
+url = "https://helpza.zenva.com/portal/en/kb/articles/my-humble-bundle-code-doesn-t-work-anymore-what-do-i-do"
+claim = "clear the cart, redeem bundles one at a time, check Purchased Courses after an error, one code per account, accounts tied to email"
+[[sources]]
+url = "https://helpza.zenva.com/portal/en/kb/articles/my-humble-bundle-code-tells-me-that-the-coupon-does-not-exist-what-do-i-do"
+claim = "'Coupon does not exist' means the wrong product is in the cart"
+[[sources]]
+url = "https://helpza.zenva.com/portal/en/kb/articles/if-i-buy-a-bundle-from-humble-bundle-do-i-get-lifetime-access"
+claim = "Humble purchases have lifetime access, as-is; never require a subscription"
+[[sources]]
+url = "https://helpza.zenva.com/portal/en/kb/articles/humble-bundle-gave-me-the-wrong-code-what-should-i-do"
+claim = "wrong-tier codes and missing codes are Humble's to fix"
+[[sources]]
+url = "https://helpza.zenva.com/portal/en/kb/articles/how-do-i-use-my-coupon-code"
+claim = "general coupon flow (Coupon Code button above 'Your Order', Apply Coupon), used for the Stand with Ukraine and 1-item Roblox products"
+[[sources]]
+url = "https://helpza.zenva.com/portal/en/kb/articles/can-i-download-the-videos-to-my-courses"
+claim = "no video download for offline viewing; lesson notes and course files can be downloaded"
+[[sources]]
+url = "https://helpza.zenva.com/portal/en/kb/articles/how-can-i-download-the-source-code-or-asset-files-for-my-course"
+claim = "course Files button on the course and lesson pages (project files, assets, lesson-note summaries, slides)"
+[[sources]]
+url = "https://helpza.zenva.com/portal/en/kb/articles/how-can-i-download-ebooks-that-i-ve-purchased-on-the-zenva-website"
+claim = "Zenva ebooks: My Account > Downloads, PDF"
+[[sources]]
+url = "https://helpza.zenva.com/portal/en/kb/articles/where-is-the-zenva-mobile-app"
+claim = "mobile app delisted Feb 2023; the site works in mobile browsers"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/55816997383835-Redemption-instructions-for-your-Zenva-courses"
+claim = "Humble's version of the flow: log in, open one tier link, enter code, total must be $0, tick the box, Checkout, Access Content (2026-09)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360016444354-Humble-Software-Bundle-ZENVA-Code-instructions"
+claim = "Zenva codes must be redeemed to a Zenva Academy account; deadlines on the bundle page; older 'Click Here to Redeem your Zenva Code' flow"
+[[sources]]
+url = "https://www.humblebundle.com/software/software-engineering-2026-software"
+claim = "'Please redeem your keys on Zenva.com. Crucial Note: You ONLY get the coupon for the specific tier you purchased'; 'Please redeem your keys before November 02, 2027' (census redeem_text)"

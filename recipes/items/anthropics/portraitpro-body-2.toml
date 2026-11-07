@@ -1,0 +1,35 @@
+schema = 1
+name = "PortraitPro Body 2 (Standard / Studio)"
+vendor = "anthropics"
+kind = "app"
+machine_names = ["portraitprobody2", "portraitprobodystudio2"]
+verified = false
+notes = "2023 Humble bundle. Full-length portrait retouching; Studio adds RAW and plug-ins. Separate token and installer per edition."
+
+[install]
+source = "vendor"
+file = "PortraitPro*Body*Setup*.exe"
+args = ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"]
+serial = "per-product"
+notes = "Pick the installer whose edition matches the token (Standard / Studio / Studio Max). The token is typed into the app at first launch, not the installer."
+
+[launch]
+find = "C:/Program Files*/PortraitPro Body*/*.exe"
+
+[steam]
+shortcut = true
+title = "PortraitPro Body 2"
+steamgriddb = "PortraitPro Body 2"
+
+[platforms.macos]
+runner = "native"
+file = "*.pkg"
+app_find = "/Applications/PortraitPro Body*.app"
+
+[[sources]]
+url = "https://www.anthropics.com/portraitpro/redeem/"
+claim = "redeem form: activation token + name + email; download links are emailed"
+
+[[sources]]
+url = "https://www.anthropics.com/support/activating/"
+claim = "token entered in the app on first launch; online activation, or manual activation via fingerprint + key file"

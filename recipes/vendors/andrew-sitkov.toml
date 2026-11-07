@@ -1,0 +1,38 @@
+schema = 1
+name = "Andrew (Andrey) Sitkov / Muzstation Game Music"
+kind = "route"
+notes = """
+Composer selling royalty-free game music packs (previews on the
+"muzstation-game-music" SoundCloud). Humble's Big Music Bundle for Games,
+Films, and Content Creators (2020, and 2 in Dec 2021) lists his packs with
+no delivery icon at all, so the census cannot place them; the later Big
+Blast'n Sounds bundle (2026, as "Andrey Sitkov") is marked DRM-free. These
+are Humble-hosted downloads (inference from the bundles having no
+redemption instructions and no other vendor), so this recipe claims only
+those census rows, by slug, and leaves real account downloads to the
+generic download routes.
+"""
+
+[match]
+bundle_slugs = ['^big-music-bundle-for-games-films-and-content-creators']
+
+[redeem]
+where = "https://www.humblebundle.com/home/library"
+account = false
+delivers = "music-pack zips (WAV/MP3) on the bundle's Humble download page"
+steps = [
+  "Nothing to redeem: download each pack from the bundle's Humble download page into audio/andrew-sitkov/<pack>.",
+]
+
+[install]
+source = "humble"
+serial = "none"
+
+[platforms.macos]
+runner = "native"
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/big-music-bundle-for-games-films-and-content-creators-2-software"
+claim = "24 Andrew Sitkov packs with no delivery icon; redemption text has only licence information (census)"

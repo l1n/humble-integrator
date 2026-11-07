@@ -1,0 +1,46 @@
+schema = 1
+name = "Movavi Video Editor Plus 2020 effect packs (non-Steam)"
+vendor = "movavi"
+kind = "content"
+machine_names = [
+  "movavivideoeditorplus2021effects_vhsintropack",
+  "movavivideoeditorplus2020effects-pixelagepack",
+  "movavivideoeditorplus2020effects-mysticalgalaxypack",
+  "movavivideoeditorplus2020effects_spacejourneypack",
+]
+verified = false
+notes = """
+2023 Movavi Video Editing Bundle. Humble delivered these four sets as
+Windows DRM-free downloads (VHS Intro, Pixel Age, Mystical Galaxy) or with no
+delivery at all (Space Journey), while the editor itself and the other sets
+(Cinematic, Technology) came as Steam keys. Movavi says standalone effect
+packs are not supported in Steam builds, so these files probably cannot be
+used with the Steam copy of Video Editor Plus 2020 (inferred); they need a
+non-Steam Video Editor Plus 2020/20 install. What the Humble download
+contains (an .mpack plus key, or a pre-activated pack) is unverified.
+Recommended handling: download the files into the library folder and tell
+the user; don't install anything. All four also exist as Steam DLC for app
+1182920 (Space Journey 1253753, Mystical Galaxy 1253751, Pixel Age 1253752,
+VHS Intro 1253755) if the user wants them inside the Steam build.
+"""
+
+[install]
+source = "humble"
+file = "*"
+serial = "none"
+notes = "If it is an .mpack: open it with a non-Steam Movavi Video Editor (<=20) and enter its key if asked."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://help.movavi.com/kb/license-recovery/activate-an-effects-pack"
+claim = "packs for Video Editor <=20 are .mpack files opened/dragged into the editor, then a key in 'Activating Package'; effects are not supported in App Store or Steam versions"
+
+[[sources]]
+url = "https://store.steampowered.com/app/1182920/"
+claim = "Video Editor Plus 2020 on Steam (Windows + macOS), with the effect sets as DLC (e.g. Space Journey 1253753)"
+
+[[sources]]
+url = "https://store.steampowered.com/app/1253753/"
+claim = "Space Journey Pack is Steam DLC 1253753 for app 1182920"

@@ -1,0 +1,169 @@
+schema = 1
+name = "Unity Asset Store"
+kind = "route"
+notes = """
+Redemption route, not a publisher: every Humble item whose key is a Unity
+Asset Store voucher, whoever made the asset (Synty, Hivemind, Meshingun,
+Leartes, ARTnGAME, PolySquid, Befour, Gabriel Aguiar, QuadArt, Procedural
+Worlds, ...). Bundles say so in their redemption text ("Redeemable on Unity
+Asset Store website", "Keys are redeemed through Unity Store website",
+"The remaining items are redeemed on Unity") or link to
+assetstore.unity.com/humble-bundle-redemption.
+
+What the voucher unlocks: an Asset Store licence (entitlement) in the Unity
+organization chosen at redemption. Nothing is downloaded from Humble and
+nothing is installed system-wide. The assets appear under "My Assets" on
+assetstore.unity.com and in the Unity Editor (Window > Package Manager >
+My Assets), where they are downloaded and imported per project. Unity's
+help page says one code activates all of that code's content; Humble's
+newer bundles show one key per item, so expect anything from one code per
+bundle/tier to one per asset.
+
+Library folder: the tool cannot fetch Asset Store packages itself (there is
+no public download API; downloads happen inside the Editor). Once the user
+has downloaded them in the Editor, the .unitypackage files sit in the
+Editor's asset cache (macOS ~/Library/Unity/Asset Store-5.x, Linux
+~/.local/share/unity3d/Asset Store-5.x, one subfolder per publisher,
+overridable with ASSETSTORE_CACHE_PATH); the tool could link or copy them
+from there into the library folder (inference, untested).
+
+Mixed bundles: a few bundles mix Unity vouchers with Fab codes. Where the
+bundle as a whole routes to Fab (vendors/fab), the Unity items have item
+recipes under items/unity-asset-store/ that point here. The developer list
+below exists only for "Arcade Paradise: Game Dev Treasure Chest", whose
+bundle also holds a Steam game, so the bundle itself can't be matched
+without pulling the game off the Steam route.
+
+Wave 2 additions (engine-asset residue):
+  * Holiday Encore: Unity Art / Unity Tools (December 2022) say "A single
+    key will be provided to redeem all of your content from Unity": one
+    voucher for the whole bundle. The guarded "from Unity" rule below
+    skips course bundles, because Humble pasted the same sentence into a
+    Mammoth Interactive course bundle (complete-unity-unreal-engine-online-
+    course) whose keys go to Mammoth. Cafofo's Footsteps Sound Pack in Unity
+    Art is also a Humble direct download (hb-drmfree): fetch that file too.
+  * Extreme Environment and Monster Unity Bundle (NatureManufacture + Magic
+    Pig Games, 2026; text: "Please read here", redeem before June 1st, 2027)
+    and Game Dev's Guide to Fantasy Character Assets (Infinity PBR, 2023;
+    a bundle "curated for Unity game developers" that also holds an Asset
+    Store 10%-off coupon): the text names no store; both are taken to be
+    Asset Store vouchers like the earlier NatureManufacture and Infinity PBR
+    / NatureManufacture Crown Collection bundles, which said so (inference).
+  * Unity editions inside bundles routed to Fab have item recipes here:
+    Meshingun's Gothic Megapack, Gothic Interior Megapack and Medieval
+    Village Megapack "(Unity)" (Deluxe Dev Dream), Apocalyptic Hospital
+    "(Unity)" (Level Up: 5K World Building Assets), and Freshcan3D's four
+    "- UNITY" environments (Epic Environments Mega Bundle). The Asset Store
+    10%-off coupons are items/unity-asset-store/asset-store-10-off-coupon
+    (a checkout coupon, not a product voucher).
+NatureManufacture, Infinity PBR / Magic Pig Games and Meshingun have no
+redemption site of their own for Humble keys: their Unity items come here,
+their Unreal items go to vendors/fab.
+"""
+
+[match]
+# Unity-only Asset Store publishers from arcade-paradise-game-dev-treasure-chest
+# (the bundle's Steam game, Arcade Paradise by Nosebleed Interactive, stays on
+# generic/steam-key).
+developers = [
+  "A-ravlik", "Arcade Bridge", "PolySquid", "Tank & Healer Studio",
+  "Target Studio", "JustCreate", "VAIZZ", "Kronnect", "Infinity Code",
+  "Perfect Games", "StarryMoMo Studio", "Dunno", "Mena", "Reinforce Games",
+  "gamevanilla", "Dustyroom", "FImpossible Creations", "M STUDIO HUB",
+  "polyperfect", "SoftLeitner", "Cainos", "Kyeoms", "Layer Lab", "Ash Dev",
+]
+bundle_slugs = [
+  "^asset-store-mega",          # "Asset Store Mega Bundle" series
+  "^unity-powerhouse-bundle",   # text only says "instructions here" -> assetstore.unity.com/humble-bundle-redemption
+  "-unity-exclusive-",          # bad-asset-bundle-unity-exclusive (Meshingun)
+  "^holiday-encore-unity-",     # Holiday Encore: Unity Art / Unity Tools (one voucher per bundle)
+  "^extreme-environment-and-monster-unity-bundle",   # text: "Please read here" (inference)
+  "game-dev-?s-guide-to-fantasy-character-assets",   # Infinity PBR, Unity-only (inference)
+]
+# "... redeemable on the Unity website", "Redeemable on Unity Asset Store website",
+# "Keys are redeemed through Unity Store website". The lookahead skips bundles
+# that also contain a Steam game, so the game is not pulled onto this route.
+redeem_text = [
+  '(?s)^(?!.*\bon Steam\b).*\bredeem\w*(?:\s|&nbsp;|\u00a0)+(?:on|via|through|at|from)(?:\s|&nbsp;|\u00a0)+(?:the(?:\s|&nbsp;|\u00a0)+)?Unity\b',
+  # Not in Cosmos (Leartes) bundles: Big Bang says "provides Unity Asset Store keys directly with
+  # your purchase" but every item is a Cosmos code (vendors/leartes-cosmos); the extra Unity keys
+  # resolve here at key level (key_names / domains).
+  '(?s)^(?!.*\bon Steam\b)(?!.*\bCosmos\b).*\bUnity Asset Store (?:vouchers?|keys?|codes?)\b',
+  # "A single key will be provided to redeem all of your content from Unity." (not in course bundles)
+  '(?s)^(?!.*\bon Steam\b)(?!.*\bcourses?\b).*\bredeem\w*[^.]{0,60}\bfrom(?:\s|&nbsp;| )+(?:the(?:\s|&nbsp;| )+)?Unity\b',
+]
+domains = ["assetstore.unity.com", "id.unity.com"]
+key_names = ['unity asset store', '\(\s*unity\s*\)', 'unity voucher']
+
+[redeem]
+where = "https://id.unity.com/en/redeem_products/new"
+account = true
+delivers = "Asset Store licences in a Unity organization; assets then appear under My Assets (web) and Package Manager > My Assets (Unity Editor)"
+expiry_text = "Unity: Humble Bundle vouchers must be redeemed within 12 months of purchase; many bundle pages give an earlier or later 'redeem before' date (e.g. Asset Store Mega 15: April 1st 2027; Unity Powerhouse: October 31 2027; Extreme Environment and Monster Unity Bundle: June 1st 2027) - treat the earlier date as the deadline"
+steps = [
+  "Sign in to (or create) a Unity ID at https://id.unity.com/.",
+  "Open Redeem code (https://id.unity.com/en/redeem_products/new; 'My Account' > 'Redeem a product code'), paste one Humble key, click Redeem.",
+  "Choose the product and the organization to receive the licences (Unity's help article says Humble vouchers can only be redeemed under the default organization), accept the terms, Confirm.",
+  "Repeat for every key; each code is one redemption.",
+  "Check https://assetstore.unity.com/ > My Assets. Entitlements can take a few hours. If an asset is missing: id.unity.com > Organizations > (the organization used) > Asset Management; if it is listed there, revoke and re-assign your seat (Manage Seats). Still missing after 48 h: contact Unity Customer Experience with the bundle name, asset name and organization.",
+  "In the Unity Editor: Window > Package Manager > My Assets > Download, then Import into a project.",
+]
+
+[download]
+scriptable = false
+how = "inside the Unity Editor: Window > Package Manager > My Assets > Download"
+notes = "No public download API for Asset Store packages. After the Editor has downloaded them, the .unitypackage files are in the Editor's asset cache (platforms.*.asset_cache), which the tool could link or copy into the library folder (inference, untested)."
+
+[library]
+files = ".unitypackage files from the Editor's asset cache, one per asset, once the user has downloaded them in the Editor"
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer. Assets are downloaded and imported per project inside the Unity Editor (Unity Hub + Editor run natively on macOS and Linux). The tool's job ends at redemption; optionally it links the Editor's cached .unitypackage files into the library folder."
+
+[platforms.macos]
+runner = "native"
+asset_cache = "~/Library/Unity/Asset Store-5.x"
+
+[platforms.linux]
+runner = "native"
+asset_cache = "~/.local/share/unity3d/Asset Store-5.x"
+
+[[sources]]
+url = "https://assetstore.unity.com/humble-bundle-redemption"
+claim = "redeem at id.unity.com/en/redeem_products/new; choose organization; 'One code will activate all of the content included in the bundle'; repeat per code; assets under My Assets; assign seats if missing"
+[[sources]]
+url = "https://support.unity.com/hc/en-us/articles/18897719279764"
+claim = "steps via id.unity.com 'Redeem a product code'; Humble vouchers only under the default organization; must be redeemed within 12 months of purchase"
+[[sources]]
+url = "https://support.unity.com/hc/en-us/articles/4406292591892-I-redeemed-my-Humble-Bundle-voucher-but-I-can-t-see-my-assets"
+claim = "entitlements can take hours; check Asset Management; revoke and re-assign seats; contact support after 48 h"
+[[sources]]
+url = "https://docs.unity3d.com/Manual/AssetStorePackages.html"
+claim = "asset package cache: macOS ~/Library/Unity/Asset Store-5.x, Linux ~/.local/share/unity3d/Asset Store-5.x, per-publisher subfolders"
+[[sources]]
+url = "https://docs.unity3d.com/Manual/upm-config-cache-as.html"
+claim = "ASSETSTORE_CACHE_PATH overrides the asset package cache location"
+[[sources]]
+url = "https://www.humblebundle.com/software/unity-powerhouse-bundle-software"
+claim = "'Redeem your keys and access all the instructions here' links to assetstore.unity.com/humble-bundle-redemption; keys expire October 31, 2027"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360008549494-Unity-Assets-Redemption-Instructions"
+claim = "Humble: sign in with a Unity ID, Redeem code at id.unity.com/en/redeem_products/new; one code activates all of the bundle's content, repeat for multiple codes; choose the organization; assign seats under Organizations > Asset management if a per-seat asset is missing"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/7529317957915-Unity-Bundle-Redemption-Instructions"
+claim = "Humble: assetstore.unity.com/humble-bundle-redemption > Redeem Code; all assets are added at once; fallback id.unity.com/en/redeem_products/new"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/50227631575835-How-do-I-redeem-an-Asset-Store-voucher"
+claim = "Humble/Unity: Asset Store voucher types; continuous-string vouchers are applied in the coupon box at Asset Store checkout; Humble Bundle vouchers use the Humble redemption steps"
+[[sources]]
+url = "https://gamefromscratch.com/nature-manufacture-asset-bundle-on-humble/"
+claim = "Nature Manufacture Asset Bundle (October 2022) 'is redeemed on the Unity Asset Store using a single product key' (precedent for the 2026 Extreme Environment and Monster Unity Bundle)"
+[[sources]]
+url = "https://gamefromscratch.com/game-devs-guide-to-fantasy-creatures-assets-bundle/"
+claim = "Game Dev's Guide to Fantasy Creatures/Character Assets (July 2023): 'a bundle for the Unity game engine', Infinity PBR characters; redemption store not stated"
+[[sources]]
+url = "https://www.humblebundle.com/software/holiday-encore-unity-art-software"
+claim = "census redeem_text (Holiday Encore Unity Art / Unity Tools): 'A single key will be provided to redeem all of your content from Unity.'"

@@ -1,0 +1,18 @@
+schema = 1
+name = "Dragonsan 90% Discount Coupon"
+vendor = "dragonsan"
+kind = "service"
+machine_names = ["dragonsan90percentdiscountcoupon"]
+verified = false
+notes = "A 90%-off coupon for the Dragonsan Studios store (assets and the Atavism MMO framework), applied at atavismonline.com checkout. It expired on 12/31/24, so there is nothing left to do with it; nothing to download or install."
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/fantasy-realms-bundle-dragonsan-software"
+claim = "'GET 90% OFF VARIOUS ASSETS! ... Dragonsan Studios Store ... Coupon will expire on 12/31/24.' (census description)"

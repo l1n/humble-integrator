@@ -1,0 +1,42 @@
+schema = 1
+name = "Phat Phrog Studio"
+kind = "route"
+notes = """
+Royalty-free game music, sound effects and voice packs. Its Humble bundles
+(Big Phat Music, Audio Ascension, Big Phat Bangers, Audio Forge, Santa's
+Phat Sack ...) are Humble-hosted DRM-free downloads and go through the
+generic download routes; this recipe deliberately does not match the
+developer name. The only Phat Phrog keys on Humble are store discount codes
+(70% off the next order on the Phat Phrog Studio store), handled by the
+item recipe phat-phrog-studio/store-discount-code. The store is a Wix site.
+"""
+
+[match]
+domains = ["phatphrogstudio.com"]
+key_names = ['phat\s?phrog']
+
+[redeem]
+where = "https://www.phatphrogstudio.com/gamedevassets"
+account = true
+delivers = "a percentage discount at checkout on the Phat Phrog Studio store"
+steps = [
+  "Optional and costs money: the code is a discount, not a product. Use it only if you want to buy more from the store.",
+  "Log in on https://www.phatphrogstudio.com, add the packs you want to the cart, and enter the Humble code in the checkout's coupon/promo field.",
+  "Download the purchase from the store account and save it into audio/phat-phrog-studio/<pack>.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[platforms.macos]
+runner = "native"
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://www.phatphrogstudio.com/"
+claim = "Phat Phrog Studio store (Wix), store/bundles/FAQ pages"
+[[sources]]
+url = "https://www.humblebundle.com/software/audio-ascension-game-music-character-voices-mega-bundle-software"
+claim = "'70% Phat Phrog Store Discount Code: 70% off your entire next order on Phat Phrog Studio Store'; bundle otherwise 'Redeem DRM-Free' (census)"

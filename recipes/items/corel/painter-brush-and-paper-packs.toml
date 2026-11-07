@@ -1,0 +1,89 @@
+schema = 1
+name = "Corel Painter brush packs and paper packs"
+vendor = "corel"
+kind = "content"
+machine_names = [
+  "1889post-impressionism",
+  "animalspots",
+  "brushpack_abstract",
+  "brushpack_alien",
+  "brushpack_allthatglitters",
+  "brushpack_animation",
+  "brushpack_boldstrokes",
+  "brushpack_buildings",
+  "brushpack_burnt",
+  "brushpack_calligraphy_artisan",
+  "brushpack_charcoal_artisan",
+  "brushpack_chunkypaint",
+  "brushpack_conceptart",
+  "brushpack_cracked",
+  "brushpack_creepers",
+  "brushpack_desert",
+  "brushpack_expressive",
+  "brushpack_fantasy",
+  "brushpack_fashionillustration",
+  "brushpack_freshrainwatercolor",
+  "brushpack_fur",
+  "brushpack_grunge",
+  "brushpack_lightitup",
+  "brushpack_lightningstrikes",
+  "brushpack_love",
+  "brushpack_magical",
+  "brushpack_markers_artisan",
+  "brushpack_mosaic",
+  "brushpack_neonlights",
+  "brushpack_perfectpets",
+  "brushpack_photoportrait",
+  "brushpack_rain",
+  "brushpack_rock",
+  "brushpack_skin",
+  "brushpack_smokeandsteam",
+  "brushpack_spacedout",
+  "brushpack_splatter",
+  "brushpack_stain",
+  "brushpack_storm",
+  "brushpack_traditionalbrushtips",
+  "brushpack_treesandfoliage",
+  "brushpack_wedding",
+  "brushpack_wizard",
+  "paperpack_barkandwood",
+  "paperpack_dramatic",
+  "paperpack_geometry",
+  "paperpack_hideandskin",
+  "paperpack_natural",
+  "paperpack_organic",
+  "paperpack_rough",
+  "paperpack_sci-fi",
+  "paperpack_texturedandwatercolor",
+  "thickpaintencaustic",
+]
+recommends = ["corel/painter", "corel/painter-essentials-8"]
+verified = false
+notes = """
+Painter Brush Packs and Paper Packs from every Corel bundle (DRM-free Win/Mac
+downloads, or keys in the 2023 'Create and Elevate' bundles). Grouped because
+they all install the same way: run the pack's installer (or import the
+library) and relaunch Painter; brush libraries can also be imported via
+Brushes > Import > Brush Library (or double-clicking the library file), paper
+libraries via Papers panel > Manage Libraries > Import Paper Library.
+Install into the same prefix (or Mac) as Painter. Some bundles used bare
+machine names for the same packs (abstract, animation, creepers, desert,
+expressive, fantasy, magical, photoportrait, rain, stain, wedding, wizard);
+those are too generic to claim here and fall to the Corel vendor recipe.
+"""
+
+[install]
+source = "humble"
+file = "*"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "http://apps.corel.com/redirect?_redirect=command&function=pdf&subfunction=userguide&app=painter&version=2022&lang=EN"
+claim = "Painter 2022 User Guide: serial typed during install; activation needs internet + registration; brush/paper library import"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/19689934327835"
+claim = "Corel brush packs: run the installer, relaunch Painter"

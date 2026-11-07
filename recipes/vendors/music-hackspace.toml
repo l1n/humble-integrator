@@ -1,0 +1,44 @@
+schema = 1
+name = "Music Hackspace"
+kind = "route"
+notes = """
+Online music-technology courses and tutorials (Ableton Live, Max/MSP,
+Audacity, instrument masterclasses) at musichackspace.org. Humble's
+Definitive Beginner's Guide to Music Production (Aug 2024) delivered a
+single key for all its courses. Courses are watched on the website (video
+downloads are offered for offline viewing), so every item is a service with
+nothing to install and no Steam entry. Where the key is entered on
+musichackspace.org is not documented publicly (inference: a coupon at
+course checkout or a redeem field in the account).
+"""
+
+[match]
+developers = ["Music Hackspace"]
+domains = ["musichackspace.org"]
+key_names = ['music\s?hackspace']
+
+[redeem]
+where = "https://musichackspace.org/"
+account = true
+delivers = "access to the bundle's courses in the Music Hackspace account"
+steps = [
+  "Create or log into an account on https://musichackspace.org/.",
+  "Follow the instructions that come with the Humble key (one key covers the whole bundle) to apply it; if none are given, contact Music Hackspace via the site.",
+  "Watch online, or download lesson videos for offline viewing into courses/music-hackspace/<course> where the site offers it.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[platforms.macos]
+runner = "native"
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://musichackspace.org/FAQ"
+claim = "recordings stay accessible to enrolled students and can be downloaded for offline viewing"
+[[sources]]
+url = "https://www.humblebundle.com/software/definitive-beginners-guide-to-music-production"
+claim = "Music Hackspace bundle, single key for all content (census preview)"

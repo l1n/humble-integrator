@@ -1,0 +1,20 @@
+schema = 1
+name = "Monstercat Gold membership (1/3/6 months)"
+vendor = "monstercat"
+kind = "service"
+machine_names = ["monstercatgold_1month", "monstercatgold_3month", "monstercat6month"]
+verified = false
+notes = """
+Creator licence for Monstercat's catalogue (use in streams and videos without claims), new users only, sold in Humble's Get Into Streaming bundle (Jan 2023). Time-limited service; nothing to download; very likely lapsed.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/getintostreaming-bundle-software"
+claim = "1/3/6-month Gold memberships, new users only (census)"

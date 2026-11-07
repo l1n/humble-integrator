@@ -1,0 +1,74 @@
+schema = 1
+name = "YoYo Games (GameMaker)"
+kind = "route"
+notes = """
+GameMaker licences are tied to a GameMaker account (formerly 'YoYo Account';
+sign-in can be linked to an Opera account). Humble's "GameMaker Studio 2"
+bundle (Dec 2021) sold 1-year GameMaker Studio 2 Creator or Indie licences as
+codes redeemed on that account; the bundle's games were ordinary Steam keys
+(generic/steam-key). An older "Humble Gamemaker Bundle" (GameMaker: Studio
+Professional + modules, 2015) used the same account redemption.
+
+Since November 2023 GameMaker is free for non-commercial use on all
+non-console platforms and the Creator/Indie subscriptions were replaced by a
+one-time commercial licence, so a 12-month Creator/Indie code from 2021 mainly
+matters for commercial export rights during its term; YoYo said existing
+subscribers might get a free or discounted commercial licence. Whether an
+unredeemed 2021 code still redeems is unknown.
+
+The program itself is free to download: native Windows, macOS and (beta)
+Ubuntu builds from gamemaker.io, or the free 'GameMaker' app on Steam
+(Windows/macOS; sign in with the GameMaker account; linked accounts can use
+either version). See item yoyo-games/gamemaker.
+"""
+
+[match]
+developers = ["YoYo Games Ltd.", "YoYo Games"]
+domains = ["yoyogames.com", "gamemaker.io"]
+key_names = ['gamemaker(?::)? ?studio', 'yoyo ?games']
+# "All software in this bundle is available on the YoYo Games website."
+redeem_text = ['\byoyo ?games website']
+
+[redeem]
+where = "https://gamemaker.io/ (Account > Upgrade Licenses > Redeem Code); in 2021 https://accounts.yoyogames.com/redeem"
+account = true
+delivers = "a licence on the GameMaker account (Humble 2021: GameMaker Studio 2 Creator or Indie for 12 months)"
+expires = "not stated; the licence term is 12 months from redemption (Humble's article). Key.is_expired from Humble is authoritative."
+steps = [
+  "Reveal the code on the Humble download page.",
+  "Create or log in to a GameMaker account at https://gamemaker.io (an Opera account can be linked for sign-in).",
+  "On the account page use 'Redeem Code' (Upgrade Licenses card), enter the code, confirm, tick the terms box; older flow: accounts.yoyogames.com/redeem, Redeem, then Redeem again on the confirmation screen.",
+  "The licence shows in the account overview / Products. In GameMaker, use 'Update License' in Version & Account Details (or log out and in) to load it.",
+  "If a pasted code is 'invalid', check for extra hyphens or spaces. Support: https://help.yoyogames.com / gamemaker.io/help.",
+]
+
+[install]
+source = "vendor"
+serial = "account"
+notes = "No serial in the installer: the IDE signs in to the GameMaker account and reads the licence from it."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+notes = "Ubuntu (Beta) IDE from gamemaker.io; other distributions unsupported."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4412565775259-GameMaker-Studio-2-instructions"
+claim = "2021 bundle: log into a YoYo account; accounts.yoyogames.com/redeem; Redeem twice; 12-month GameMaker Studio 2 Indie or Creator licence shown under Products; support help.yoyogames.com"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/226583968-Humble-Gamemaker-Bundle-How-to-Redeem-GameMaker-Studio-Pro-and-Modules"
+claim = "older bundle: YoYo account, Add Licenses section, redeem Pro first then modules; copy-paste can add stray hyphens/spaces"
+[[sources]]
+url = "https://gamemaker.io/en/help/articles/redeeming-a-gamemaker-code"
+claim = "current flow: log in at gamemaker.io, Redeem Code on the Upgrade Licenses card, confirm and accept terms; licence appears in Account Overview"
+[[sources]]
+url = "https://manual.gamemaker.io/beta/en/Setting_Up_And_Version_Information/Licencing_Information.htm"
+claim = "licence tied to the account; Opera single sign-in must be linked; 'Update License' after buying a licence"
+[[sources]]
+url = "https://gamemaker.io/en/blog/gamemaker-free-platforms"
+claim = "Nov 2023: free for non-commercial use on non-console platforms; one-time commercial licence replaces Creator/Indie; existing subscribers may get a free or discounted licence"
+[[sources]]
+url = "https://www.humblebundle.com/software/gamemaker-studio-2-software"
+claim = "'All software in this bundle is available on the YoYo Games website'; games are Steam keys (census)"

@@ -1,0 +1,7 @@
+result
+result-*
+__pycache__/
+*.pyc
+*.tmp
+# Working extracts for recipe-writing agents; rebuild with humble_integrator/clusters.py
+data/clusters/

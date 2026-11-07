@@ -1,0 +1,50 @@
+schema = 1
+name = "Pluralsight (online courses, time-limited)"
+kind = "route"
+service = true        # course platform: nothing to install, no Steam entry
+notes = """
+Humble's Pluralsight bundles (e.g. "Complete AWS Training", 2022, one key
+for the whole bundle) unlock a set of courses in a Pluralsight account for
+one year from redemption. It is not permanent: the expiry shows under
+Account Settings > Subscription and Billing. Each item names the instructor
+as developer and "Pluralsight" as publisher.
+
+Offline use: streaming in the Pluralsight library. No file download is
+documented for these redemptions.
+"""
+
+[match]
+developers = ["Pluralsight", "Pluralsight LLC"]
+domains = ["pluralsight.com"]
+key_names = ["pluralsight"]
+redeem_text = [
+  "redeem\\w*[^.]{0,60}\\bpluralsight\\b",       # "All of the content in this bundle is available to redeem on Pluralsight.com"
+]
+
+[redeem]
+where = "the bundle's unique Pluralsight link on the Humble download page"
+account = true
+delivers = "the bundle's courses in the Pluralsight library (https://app.pluralsight.com/library/), good for one year"
+expires = "redeem by the date on the Humble bundle page; access then lasts one year (Account Settings > Subscription and Billing)"
+expiry_text = "(?i)redeem (?:your keys )?before ([A-Z][a-z]+ \\d{1,2}(?:st|nd|rd|th)?,? \\d{4})"
+steps = [
+  "Reveal the key on Humble and open the bundle's unique Pluralsight link.",
+  "On the redemption page enter your details and click Redeem. With an existing account, re-enter its details. A new account needs a password.",
+  "Log in and confirm the email address.",
+  "Courses are in the Pluralsight Library: https://app.pluralsight.com/library/. Check the expiry under Account Settings > Subscription and Billing.",
+  "Support: https://help.pluralsight.com/help.",
+]
+
+[library]
+videos = false                 # streaming only, as far as documented
+files = "none documented"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4406234968987-Pluralsight-Redemption-Instructions"
+claim = "unique link, redemption page, account, library; the key redeems a set of courses good for one year; check Subscription & Billing for expiry (updated 2022-11)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4410086872475-Cyber-Security-for-Hackers-and-Developers-Redemption-instructions"
+claim = "course availability expires one year from redemption (another Pluralsight bundle)"
+[[sources]]
+url = "https://www.humblebundle.com/software/complete-aws-training-software"
+claim = "'All of the content in this bundle is available to redeem on Pluralsight.com'; single key; publisher 'Pluralsight' (census)"

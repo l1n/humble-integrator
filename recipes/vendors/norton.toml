@@ -1,0 +1,60 @@
+schema = 1
+name = "Norton (Gen Digital: Norton AntiVirus Plus, Norton VPN)"
+kind = "route"
+notes = """
+Norton & Laplink Solid Security Flash Sale (Jul 2025, publisher of record
+Richdale Ventures): Norton AntiVirus (Plus) and Norton VPN Standard, each a
+1-year, 1-device subscription key (25 characters) activated at
+norton.com/setup in a Norton account. Activation REQUIRES entering a renewal
+payment method: the subscription auto-renews at Norton's renewal price after
+the first year unless auto-renewal is cancelled in the account (Humble's
+article quotes Norton's terms). The tool must say this before redeeming.
+
+Platforms: Windows and macOS clients for AntiVirus; VPN also Android/iOS.
+No Linux client for either, and running Windows security software inside a
+Wine prefix protects nothing, so: macOS native; Linux none (the key can be
+used on a Mac, Windows PC or phone instead). No Steam entries: these are
+background services, not something to launch from Steam.
+
+Matched by developer ("NORTON" in the census) since every Norton item seen is
+a key; the publisher "Richdale Ventures" is deliberately not matched (see
+vendors/richdale-ventures).
+"""
+
+[match]
+developers = ["NORTON", "Norton", "NortonLifeLock", "Gen Digital"]
+domains = ["norton.com"]
+key_names = ['\bnorton\b']
+
+[redeem]
+where = "https://www.norton.com/setup"
+account = true
+delivers = "a 1-year, 1-device Norton subscription in the Norton account, with client downloads"
+expires = "subscription: 1 year from activation, then auto-renews (paid) unless cancelled; key redemption deadline: check the Humble download page"
+steps = [
+  "Go to https://www.norton.com/setup.",
+  "Create a Norton account or sign in.",
+  "Enter the 25-character licence key from the Humble download page.",
+  "Enter a renewal payment method (required; no charge at activation). To avoid a charge after a year, turn off automatic renewal in the Norton account afterwards.",
+  "Click Next and follow the prompts to download the client for this device.",
+]
+
+[install]
+source = "vendor"
+serial = "account"
+silent = false
+
+[platforms.macos]
+runner = "native"
+notes = "Install the macOS client from the Norton account after activation (macOS current and previous two versions)."
+
+[platforms.linux]
+runner = "none"
+notes = "No Linux client; use the subscription on a Mac, Windows PC or phone."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/39034677574043-Norton-Laplink-Solid-Security-Flash-Sale-Redemption-Instructions"
+claim = "norton.com/setup, create/sign in, 25-character key, renewal payment method required (no charge at activation), download client; AntiVirus: Windows or macOS (current + previous two); VPN: Windows, macOS, Android 10+, iOS; 1 device, 1-year auto-renewing subscription"
+[[sources]]
+url = "https://www.humblebundle.com/software/norton-laplink-solid-security-flash-sale-software"
+claim = "developer NORTON, publisher Richdale Ventures; Windows/Mac platforms (census)"

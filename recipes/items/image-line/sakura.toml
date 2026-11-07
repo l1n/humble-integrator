@@ -1,0 +1,36 @@
+schema = 1
+name = "Sakura (FL Studio)"
+vendor = "image-line"
+kind = "addon"
+machine_names = ["sakura_flstudio"]
+verified = false
+notes = """
+Physically modelled string/piano instrument plugin for FL Studio. Needs FL Studio (not part of the bundle); unlock it with the Image-Line account, then load it in FL Studio. No Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "account"
+notes = """
+Redeem the 20-digit code on the Image-Line account; FL Studio downloads/unlocks it after logging in (FLEX packs from the FLEX browser).
+"""
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+notes = """
+FL Studio has no Linux build; under Wine unverified.
+"""
+
+[[sources]]
+url = "https://www.humblebundle.com/software/fl-studio-uvi-friends-hitmaking-bundle-software"
+claim = "item description in the FL Studio, UVI & Friends Hitmaking Bundle (census)"
+
+[[sources]]
+url = "https://support.image-line.com/redirect/redeem_code"
+claim = "Image-Line account redeem-code page"

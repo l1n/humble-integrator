@@ -1,0 +1,62 @@
+schema = 1
+name = "Anything World"
+kind = "route"
+notes = """
+Service, not files: Anything World (anything.world, run by Everything
+Universe Ltd; the marketing site now redirects to everythinguniver.se, the
+app stays at app.anything.world) is an AI 3D-model generation, rigging and
+animation platform with Unity and Unreal SDKs. The one Humble bundle
+("Animate Everything 3D", Dec 2024) sold a 1-year Pro Tier subscription for
+the SDKs, 6 months without API usage fees (up to 500,000 calls), monthly
+free generations and riggings, the "Top 100" animated models, exclusive
+environments ("Ready Made Environments", Unity/Unreal) and Unity tutorials
+(platformer, racing, isometric games).
+
+All of it lives in the Anything World account: the key goes into the
+Humble Bundle box under Keys on the account dashboard (the bundle text says
+during sign-up for the free Individual tier) and upgrades the account to
+Pro. The subscription items are kind=service and expire on their own terms
+(1 year / 6 months from activation), so a key redeemed in Dec 2024 has run out by
+Dec 2025; whether an unredeemed key still activates is unknown. How the
+tutorials and environments are delivered (in-app, SDK download, or files)
+is not documented; assume in-app/SDK until a redemption shows otherwise.
+"""
+
+[match]
+developers = ["Anything World", "Anything World Ltd", "Everything Universe", "Everything Universe Ltd"]
+domains = ["anything.world", "everythinguniver.se"]
+key_names = ['\banything ?world\b']
+redeem_text = ['redeem\w*[^.]{0,60}\banything ?world\b']
+bundle_slugs = ['anything-?world']
+
+[redeem]
+where = "https://app.anything.world/profile"
+account = true
+delivers = "Pro Tier upgrade and bundle perks on the Anything World account"
+expires = "subscription 1 year and no-usage-fees 6 months from activation; key redemption deadline not stated"
+steps = [
+  "Create a free 'Individual' account at https://app.anything.world/signup (Humble's article starts from https://anything.world/).",
+  "Open the Dashboard (user profile, top right), scroll down to Keys and enter the Humble key in the Humble Bundle section: the account is upgraded to the 'Pro Tier' and the bundle's benefits unlock.",
+  "Use the Unity or Unreal SDK with the account (see anything.world/game-ready-sdks).",
+]
+
+[download]
+scriptable = false
+how = "in the Anything World web app and SDKs; nothing to put in the library folder"
+notes = "Generated or animated models can be exported from the app per model; there is no bulk download of the bundle's content."
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "Nothing to install system-wide; the SDKs are engine packages added per project."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/animate-everything-3d-with-anything-world-software"
+claim = "'Keys are redeemed through Anything World's website. Sign up for the free Individual Tier and input your unique key in the signup process to automatically upgrade to the Pro Tier'; 1-year Pro Tier, no usage fees for 6 months, up to 500,000 API calls"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/19550517988891-Anything-World-Key-Redemption-Instructions"
+claim = "create an account at anything.world; Dashboard (user profile, top right); scroll to Keys and enter the key in the Humble Bundle section"
+[[sources]]
+url = "https://everythinguniver.se/pricing"
+claim = "tiers Individual ($0), Micro, Pro, Enterprise; sign-up at app.anything.world; footer Everything Universe Ltd; anything.world redirects here"

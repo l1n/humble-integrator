@@ -1,0 +1,38 @@
+schema = 1
+name = "Eight Voice Synthesizer (Cherry Audio)"
+vendor = "cherry-audio"
+kind = "addon"
+machine_names = ["eightvoicesynthesizer"]
+verified = false
+notes = """
+Emulation of the Oberheim Eight Voice. Plug-in (AU, VST, VST3, AAX) and standalone; hosted by any DAW, so no Steam entry. Older Humble pages list some Cherry items as Windows-only; Cherry's current installers are Mac and Windows (checked on the PS-20 page; inference for the rest).
+"""
+
+[install]
+source = "vendor"
+serial = "account"
+notes = "Redeem at store.cherryaudio.com/redeem, download the installer for this OS from the account, install, then sign in to the Cherry Audio account in the plug-in (Settings > Account) to activate online (up to 4 computers)."
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = "No Linux build. Untested: Windows installer into the shared audio-plugins Wine prefix, bridged into a Linux DAW with yabridge."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/level-up-remix-software"
+claim = "item and description (census)"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360052885994-Cherry-Audio-Key-Redemption-Instructions"
+claim = "redeem the code at store.cherryaudio.com/redeem into a Cherry Audio account; download from the confirmation page"
+
+[[sources]]
+url = "https://cherryaudio.com/products/ps-20"
+claim = "formats AU/VST/VST3/AAX/standalone; macOS 10.13+ (Apple Silicon native) and Windows 7+ 64-bit; internet needed to activate"

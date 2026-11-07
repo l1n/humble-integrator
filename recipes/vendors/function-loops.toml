@@ -1,0 +1,49 @@
+schema = 1
+name = "Function Loops"
+kind = "route"
+notes = """
+Sample-pack label (functionloops.com; sub-labels SHARP, Oxygen Samples,
+Everest Sounds). All its Humble bundles are Humble-hosted DRM-free
+downloads: the Beat Builders bundles (2024-2026) say "Redeem DRM-Free", and
+Bedroom to Billboards (2023) says "the tracks for each respective tier will
+be available for direct download". Bedroom to Billboards' page nonetheless
+marks about 46 of its 65 packs with Humble's key icon; by the bundle's own
+text that is a labelling quirk, not a Function Loops key (inference; no
+Function Loops redemption page for Humble exists). So this recipe only
+claims that one bundle's census rows, by slug, and does not match the
+developer name: real downloads from a Humble account keep going through the
+generic download routes, which fetch them into the library folder.
+
+Contents are WAV loops and one-shots, MIDI, synth presets and DAW
+templates, royalty-free.
+"""
+
+[match]
+bundle_slugs = ['^bedroom-to-billboards-']
+domains = ["functionloops.com"]
+key_names = ['function\s?loops']
+
+[redeem]
+where = "https://www.humblebundle.com/home/library"
+account = false
+delivers = "zip downloads on the Humble download page for the bundle"
+steps = [
+  "Nothing to redeem: download each pack from the bundle's Humble download page (the generic download route does this) into audio/function-loops/<pack>.",
+  "If a Bedroom to Billboards pack shows only a key instead of a download, report it: no Function Loops redemption flow for Humble keys is known.",
+]
+
+[install]
+source = "humble"
+serial = "none"
+
+[platforms.macos]
+runner = "native"
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/bedroom-to-billboards-your-complete-music-bundle-software"
+claim = "'Once purchased, the tracks for each respective tier will be available for direct download' (census redemption text; Humble blanks ended bundle pages)"
+[[sources]]
+url = "https://rekkerd.org/tag/humble-bundle/"
+claim = "Function Loops Beat Builders 3 on Humble (Mar 2026), 60 sound packs"

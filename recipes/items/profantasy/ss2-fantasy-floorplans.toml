@@ -1,0 +1,24 @@
+schema = 1
+name = "Symbol Set 2: Fantasy Floorplans"
+vendor = "profantasy"
+kind = "content"
+machine_names = ["symbolset2fantasyfloorplans"]
+requires = ["profantasy/cc3plus"]
+verified = false
+notes = "Adds symbols, catalogs and drawing tools to CC3+."
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = "Use the ...ForCC3Plus installer; install with CC3+ closed."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://forum.profantasy.com/discussion/15300/executables"
+claim = "use the ...ForCC3Plus installer"
+
+[[sources]]
+url = "https://web.archive.org/web/2022/https://www.profantasy.com/products/"
+claim = "installer sizes and requirements"

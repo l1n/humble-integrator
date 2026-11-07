@@ -1,0 +1,48 @@
+schema = 1
+name = "Candela Obscura Demiplane Editions (Core Rulebook, Quickstart Guide, Horrors of the Fairelands)"
+vendor = "demiplane"
+kind = "service"
+machine_names = [
+  "candelaobscuracorerulebookdemiplaneedition",
+  "candelaobscuraquickstartguidedemiplaneedition",
+  "candelaobscurahorrorsofthefairelandsdemiplaneedition",
+]
+verified = false
+notes = """
+Humble RPG Bundle: Candela Obscura by Darrington Press & Friends (Oct-Nov
+2026). Three online editions on Demiplane's Candela Obscura Nexus (the core
+rulebook, the free quickstart and Beadle & Grimm's Horrors of the Fairelands),
+next to the PDF editions of the same books in the same bundle (those go to
+vendors/drivethrurpg). The bundle text says every key is redeemed through
+DriveThruRPG; how the Demiplane edition then shows up on Demiplane is
+inferred (see vendors/demiplane). Nothing to download; read at
+app.demiplane.com. One file for the three because they are handled
+identically.
+"""
+
+[redeem]
+where = "the item's unique DriveThruRPG URL on the Humble download page, then the Demiplane library"
+account = true
+delivers = "the Demiplane edition in the Demiplane library (online)"
+steps = [
+  "Log in to DriveThruRPG and to Demiplane (app.demiplane.com), and link the accounts if Demiplane offers it (Demiplane/Roll20 account integration).",
+  "Open the item's unique URL from the Humble download page and complete the $0 DriveThruRPG checkout (Humble's DriveThruRPG article).",
+  "Check the Demiplane library for the edition; if the product page or order says how to claim it on Demiplane, follow that. If it does not appear, contact Demiplane support with the Humble and DriveThruRPG order details (inference: undocumented step).",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/books/candela-obscura-darrington-press-friends-books"
+claim = "items published by Demiplane; 'Keys are redeemable through DriveThruRPG' (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/27109631575067-DriveThruRPG-Redemption-Instructions"
+claim = "DriveThruRPG account first, unique URL from the download page, $0 checkout"
+[[sources]]
+url = "https://www.demiplane.com/candela-obscura-coming-november-14th"
+claim = "Candela Obscura Nexus on Demiplane with the Quickstart Guide and Core Rulebook (launched Nov 2023)"

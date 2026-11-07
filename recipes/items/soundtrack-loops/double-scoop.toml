@@ -1,0 +1,38 @@
+schema = 1
+name = "Double Scoop (Soundtrack Loops / Array Sounds)"
+vendor = "soundtrack-loops"
+kind = "addon"
+machine_names = ["doublescoopplugin", "doublescoopauandvst"]
+verified = false
+notes = """
+Two-voice rompler with FM, four built-in effects (incl. a freeze reverb), MIDI-mappable; made by Array Sounds, sold by Soundtrack Loops. VST/AU, Windows and macOS (Apple Silicon native). Level Up Remix delivered it as a Humble download; in Music Creators Studio Essentials it is a voucher that takes the product to $0 at soundtrackloops.com. No Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "Humble download (Level Up Remix), or: open soundtrackloops.com/double-scoop/, add to cart, check out with the Humble key as coupon, download from the store account. Installer type not documented."
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = "No Linux build. Untested: Windows installer into the shared audio-plugins Wine prefix, bridged into a Linux DAW with yabridge."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/25794986638619-Double-Scoop-Plug-In-Redemption-Instructions"
+claim = "reveal the voucher, open soundtrackloops.com/double-scoop/, add to cart, enter the key at checkout"
+
+[[sources]]
+url = "https://soundtrackloops.com/double-scoop/"
+claim = "'Double Scoop 1.0 VST / AU', '100% native compatibility on PC, Mac, & M1 Mac' (Wayback, Feb 2026)"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/music-creators-studio-essentials-software"
+claim = "developer Array Sounds, publisher Soundtrack Loops; 'two voice rompler with FM synth capabilities' (census)"

@@ -1,0 +1,26 @@
+schema = 1
+name = "Abelssoft Easy PDF"
+vendor = "abelssoft"
+kind = "app"
+machine_names = ["easypdf"]
+verified = false
+notes = "2022 'Entertainment, Privacy & PC Health' bundle (Humble installer + key). PDF converter/editor. Abelssoft's own download and product page are gone (500/404), so only the Humble installer remains. Exe name inferred."
+
+[install]
+source = "humble"
+file = "*.exe"
+args = ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/SP-"]
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/*/Program/EasyPDF.exe"
+notes = "{commonpf}\\<Product>\\Program\\<exe> per the current installer's Inno header; the 2022 Humble build may differ."
+
+[steam]
+shortcut = true
+title = "Easy PDF"
+steamgriddb = "Abelssoft Easy PDF"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/5873424950427"
+claim = "Abelssoft: install from the Humble download; first launch asks for the 20-digit key, then name + email, 'Get free unlock mail now', click the e-mailed link"

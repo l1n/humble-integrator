@@ -1,0 +1,74 @@
+schema = 1
+name = "A Bard's Tale (3D-print STL miniatures and terrain)"
+kind = "route"
+item_kind = "content"   # STL / Lychee / OBJ files for a library folder; nothing to install, no Steam entry
+notes = """
+A Bard's Tale makes pre-supported fantasy miniatures, busts and terrain.
+Its Humble bundle, "Fantasy 3D Miniatures: The Complete Bundle" (ended
+2023-07-06; machine bardstale3dprintablebundle_softwarebundle), holds 104
+items, each published as "A Bard's Tale". Every item is "Pre-Supported
+for 28mm - 75mm" and ships as supported STL, unsupported STL, a Lychee
+file and an OBJ file. Humble's payee split is named "A Bard's Tale" with
+the class hivemind_ltd, so the studio is paid through Hivemind Ltd.
+
+DRM-free, nothing to redeem. The page as captured on 2023-07-06 says
+"Redeem your content. All files in this bunde [sic] are available for
+download DRM-free for use with a 3D printer", and gives an item the
+hb-drmfree "DRM-free download" icon. The census row comes from an earlier
+capture (2023-06-15) that lacks that line, and the census pattern would not
+match its wording anyway. So the census marks the bundle drm_free = false,
+and without this recipe its items show as uncovered.
+
+This recipe claims the bundle by URL slug and by the order machine_name an
+account reports. `hi apply` still fetches a vendor-route item's Humble
+downloads, into <library>/vendors/a-bards-tale/<item>/. The order slug also
+matters for another reason: an account may report these subproducts with
+their payee (Hivemind) as developer, and this slug rule outranks any
+developers rule for Hivemind. No developers rule here: if A Bard's Tale
+items turn up in another DRM-free bundle, generic/files handles them.
+"""
+
+[match]
+key_names = ["a bard'?s tale", "bardstale"]
+bundle_slugs = [
+  '^fantasy-3d-miniatures-the-complete-bundle',  # URL slug (census)
+  '^bardstale3dprintablebundle',                 # order machine_name, as an account reports it
+]
+
+[redeem]
+where = "https://www.humblebundle.com/home/library"
+account = false   # Humble account only
+delivers = "Humble downloads: per model a supported (pre-supported) STL, an unsupported STL, a Lychee scene and an OBJ, scaled for 28 mm to 75 mm"
+steps = [
+  "Nothing to redeem: open the bundle in your Humble library; `hi apply` fetches every item's files into <library>/vendors/a-bards-tale/<item>/.",
+  "Unpack each item's archive(s) with 7z next to the download.",
+  "Use the supported STL or the Lychee file for resin printing; the unsupported STL is for adding your own supports.",
+]
+
+[install]
+source = "humble"
+serial = "none"
+unpack = "7z"
+notes = "Files only, no installer. Archive names and layout per item are not confirmed: nobody has opened a download for this recipe yet."
+
+[download]
+scriptable = true
+how = "Humble order downloads (signed URLs from Humble's order API), fetched by `hi apply`"
+
+[library]
+files = "per model: pre-supported STL, unsupported STL, Lychee scene (.lys), OBJ"
+
+[platforms.macos]
+runner = "native"
+notes = "Files only, nothing to run. STL and OBJ open in any slicer; the Lychee file needs Lychee Slicer."
+
+[platforms.linux]
+runner = "native"
+notes = "Files only, nothing to run. STL and OBJ open in any slicer; the Lychee file needs Lychee Slicer."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/fantasy-3d-miniatures-the-complete-bundle-software"
+claim = "archived capture 2023-07-06 (web.archive.org/web/20230706145837/...): 'Redeem your content. All files in this bunde are available for download DRM-free for use with a 3D printer'; Dwarf Paladin carries the hb-drmfree 'DRM-free download' icon; split 'A Bard's Tale', class hivemind_ltd"
+[[sources]]
+url = "https://www.humblebundle.com/software/fantasy-3d-miniatures-the-complete-bundle-software"
+claim = "archived capture 2023-06-15 (census): 104 items with publisher 'A Bard's Tale'; descriptions 'Pre-Supported for 28mm - 75mm Includes - Supported STL - Non-Supported STL - Lychee File - OBJ File'; no redemption wording in that capture"

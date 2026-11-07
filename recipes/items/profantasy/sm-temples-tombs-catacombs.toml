@@ -1,0 +1,25 @@
+schema = 1
+name = "Source Maps: Temples, Tombs and Catacombs!"
+vendor = "profantasy"
+kind = "content"
+machine_names = ["sourcemapstemplestombsandcatacombs"]
+recommends = ["profantasy/cc3plus"]
+verified = false
+notes = "Maps as FCW, PNG and PDF plus a stand-alone viewer (exe name unconfirmed); adds drawing tools to CC3+ when it is installed."
+
+[install]
+source = "vendor"
+serial = "per-product"
+file = "SMTemplesSetupForCC3Plus.exe"
+notes = "Serial-validated installer. Humble's direct download for Temples was really Castles; use ProFantasy's."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://forum.profantasy.com/discussion/comment/119845"
+claim = "installer names; Humble's Temples download was Castles"
+
+[[sources]]
+url = "https://www.profantasy.com/products/"
+claim = "contents: FCW/PNG/PDF plus viewer"

@@ -1,0 +1,39 @@
+schema = 1
+name = "BeckerCAD 2D (14 / 15)"
+vendor = "markt-technik"
+kind = "app"
+machine_names = ["beckercad2d", "beckercad15_2d"]
+verified = false
+notes = """
+2D drafting edition.
+2023 bundle: BeckerCAD 14, key only; installer from the Markt+Technik portal
+after redeeming. 2025 bundle: BeckerCAD 15, also a Humble download (hb-drmfree)
+next to the Richdale key: install the Humble download (or the portal's) and
+activate with the portal's licence key. Each edition has its own key; if
+several editions are owned, install the highest one (inference).
+"""
+
+[install]
+source = "vendor"
+file = "*BeckerCAD*"
+serial = "per-product"
+notes = "File name not checked (portal download may be a ZIP containing the setup .exe). Licence key entered at the program's activation prompt."
+
+[launch]
+find = "C:/Program Files*/**/*BeckerCAD*/*.exe"
+notes = "Install folder and exe name not checked; the glob may also match helper exes or an uninstaller."
+
+[steam]
+shortcut = true
+title = "BeckerCAD 2D"
+steamgriddb = "BeckerCAD"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/everything-you-need-to-know-about-cad-software"
+claim = "BeckerCAD 14 edition by Markt + Technik, hb-key, Windows (census)"
+[[sources]]
+url = "https://www.humblebundle.com/software/become-architect-cad-software-tutorials-software"
+claim = "BeckerCAD 15 edition by MUT / Richdale Ventures, hb-drmfree + hb-key, Windows (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/35631023293595-Become-The-Architect-CAD-Software-Tutorials-Redemption-Instructions"
+claim = "portal returns a download link and the licence key; key entered when prompted"

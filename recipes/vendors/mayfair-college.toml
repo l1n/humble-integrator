@@ -1,0 +1,65 @@
+schema = 1
+name = "Mayfair College / Academy for Health & Fitness (UK e-learning courses)"
+kind = "route"
+service = true        # course platform: nothing to install, no Steam entry
+notes = """
+Mayfair College Ltd (UK company 12389626) sells its courses through the
+"Academy for Health & Fitness" site, uk.hfonline.org. Its own domain
+mayfaircollege.co.uk is a parked page. Several census machine names end in
+"hfonline" (e.g. learnaiwithpythonhfonline). Each Humble key is a
+single-course voucher. It is redeemed with a form, not a shop checkout,
+and the login details arrive by email.
+
+Access period: for Fanatical purchases, Fanatical says lifetime access, kept
+by asking Mayfair College support for a free one-year extension each year.
+Humble's article says nothing either way (unverified for Humble purchases).
+
+Offline use: not documented. The platform is a course LMS like Janets'.
+Assume streaming video and downloadable course materials where offered
+(inference).
+"""
+
+[match]
+developers = ["Mayfair College", "Mayfair College Ltd", "Academy for Health & Fitness", "Academy for Health and Fitness"]
+domains = ["hfonline.org"]
+key_names = ["mayfair college", "hfonline", "academy for health"]
+redeem_text = [
+  "hfonline\\.org",                                         # "Go to our voucher redemption page: https://uk.hfonline.org/redeem-voucher-automation/"
+  "redeem\\w*[^.]{0,60}\\b(?:mayfair college|academy for health)",
+  "\\b(?:from|by) (?:the [a-z ]{0,20} at )?mayfair college\\b",   # "bundle from the bright minds at Mayfair College"
+]
+
+[redeem]
+where = "https://uk.hfonline.org/redeem-voucher-automation/"
+account = true
+delivers = "the course in 'My Courses' on uk.hfonline.org; username and password by email"
+expires = "per bundle: e.g. 'Please redeem your keys before November 3rd, 2027'. Key.is_expired from Humble is authoritative."
+expiry_text = "(?i)redeem (?:your keys )?before ([A-Z][a-z]+ \\d{1,2}(?:st|nd|rd|th)?,? \\d{4})"
+steps = [
+  "Reveal the voucher on Humble (one per course).",
+  "Open https://uk.hfonline.org/redeem-voucher-automation/ and fill in: Student Name, Student Email Address, Phone Number (optional), Voucher Code (exactly as given), Purchased Course Name. Solve the CAPTCHA and Submit. Use the same email for every voucher.",
+  "Repeat for each code.",
+  "Within about two hours an email '[Academy for Health & Fitness] Your username and password' arrives. Check spam.",
+  "Log in at https://uk.hfonline.org/ (Login, top right) > My Courses.",
+  "Problems: info@hfonline.org, +44 20 3744 6845.",
+]
+
+[library]
+videos = "unverified"          # not documented; assume streamed
+files = "course materials from the course page where offered (unverified)"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/57156490247707-Modern-A-I-Game-Dev-Crash-Course-Key-Redemption"
+claim = "voucher page uk.hfonline.org/redeem-voucher-automation; one submission per code; email '[Academy for Health & Fitness] Your username and password'; info@hfonline.org (2026-10)"
+[[sources]]
+url = "https://uk.hfonline.org/faq/"
+claim = "Redeem Voucher steps; login email within two hours; My Courses; 'Academy for Health & Fitness is a trading entity of Mayfair College Ltd. (Company Number: 12389626)'"
+[[sources]]
+url = "https://uk.hfonline.org/redeem-voucher-automation/"
+claim = "form fields: Student Name*, Student Email Address*, Phone Number, Voucher Code*, Purchased Course Name*, CAPTCHA"
+[[sources]]
+url = "https://support.fanatical.com/hc/en-us/articles/18190673265425-How-to-redeem-my-Mayfair-College-eLearning-Bundle-keys"
+claim = "Fanatical: same voucher page; lifetime access via free yearly extensions from Mayfair College Ltd support; phone 02037446845 (read via the Zendesk API)"
+[[sources]]
+url = "https://www.humblebundle.com/software/modern-ai-game-dev-crash-course-software"
+claim = "'from the bright minds at Mayfair College'; 'Please redeem your keys before November 3rd, 2027' (census redeem_text)"

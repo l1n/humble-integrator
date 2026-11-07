@@ -1,0 +1,29 @@
+schema = 1
+name = "Krotos Studio (3-month subscription)"
+vendor = "krotos"
+kind = "service"
+machine_names = ["krotosstudio3monthssubscription"]
+verified = false
+notes = """
+Three months of Krotos Studio (procedural preset app for whooshes, transitions, ambiences, footsteps, Foley; standalone and VST/AU/AAX plug-in). The key is a coupon for the subscription at krotos.studio: the checkout takes card details even at 100% off and the plan renews unless cancelled from the account page before the free period ends. Redeem only when it can be used. The app itself is downloaded from krotos.studio after subscribing; no Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "account"
+notes = "Log in at krotos.studio, choose the plan the coupon is for, apply the coupon, check out (card required), download Krotos Studio from the downloads page. Cancel at krotos.studio/profile before renewal."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/7480413269275-Krotos-Audio-Redemption-Instructions"
+claim = "Humble redemption URL prefills the licence deposit code on krotosaudio.com; downloads and licence keys in the account dashboard"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/24674181589275-KROTOS-SFX-PLUGINS-FOR-SOUND-DESIGN-System-Requirements"
+claim = "Windows 10 1909+, macOS 10.13+; VST/VST3/AU/AAX 64-bit; no iLok; 2 activations; internet needed to activate"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/krotos-cinematic-sound-suite-software"
+claim = "'This bundle includes a 3-month subscription' (census)"

@@ -1,0 +1,60 @@
+schema = 1
+name = "Nevercenter (Pixelmash, CameraBag, Silo)"
+kind = "route"
+notes = """
+Nevercenter's desktop apps ship for Windows and macOS only. Humble's Grand
+Game Dev Toolbox (Apr 2022) had Pixelmash as a key (item recipe
+nevercenter/pixelmash) and CameraBag Photo as a DRM-free download plus key
+(left on generic/drm-free-app, which already fetches its installer; its key
+registers it the same way). A product key is entered when the installed app
+asks to register; a Pixelmash licence covers up to 3 device installations
+(reinstalls after reformatting count). Licences cover the versions released
+during the licence's update period (Nevercenter download page); legacy
+installers stay downloadable.
+
+No developers rule: that would pull CameraBag Photo off its generic DRM-free
+route. Extracted keys are matched by product name and domain.
+"""
+
+[match]
+domains = ["nevercenter.com"]
+key_names = ['pixelmash', 'camerabag', 'nevercenter']
+
+[redeem]
+where = "the installed app's registration dialog (enter the product key, then Register)"
+account = false
+delivers = "a registered copy for up to 3 device installations"
+expires = "none documented for the licence; update period limits which versions it unlocks"
+steps = [
+  "On the Humble download page click the green link to the installer (Pixelmash) and pick the macOS or Windows build; or use https://nevercenter.com/pixelmash/download/ (current and legacy installers).",
+  "Run the installer, enter the product key from the Humble page and click Register.",
+  "Support: https://nevercenter.com/pixelmash/support/.",
+]
+
+[install]
+source = "humble"
+serial = "per-product"
+silent = false
+
+[prefix]                   # Linux only (macOS uses the native builds)
+name = "nevercenter"
+arch = "win64"
+windows = "win10"
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "No Linux build; no Wine/Proton reports found for Nevercenter apps (untested)."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360051747273-Pixelmash-Instructions"
+claim = "green link on the bundle page to the installer, choose version, run installer, enter the product key, Register; up to 3 device installations, reinstalls after reformatting count; support nevercenter.com/pixelmash/support"
+[[sources]]
+url = "https://nevercenter.com/pixelmash/download/"
+claim = "macOS (13+, Intel or Apple Silicon) and Windows 10+ 64-bit installers, legacy installers back to 1.0; no Linux; licence covers versions released during the update period"
+[[sources]]
+url = "https://www.humblebundle.com/software/grand-game-dev-toolbox-software"
+claim = "Pixelmash hb-key (Windows, Mac); CameraBag Photo hb-drmfree + hb-key (census)"

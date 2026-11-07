@@ -1,0 +1,106 @@
+schema = 1
+name = "Superhive (formerly Blender Market)"
+kind = "route"
+notes = """
+Redemption route, not a publisher: Superhive (superhivemarket.com, renamed
+from Blender Market; blendermarket.com redirects there) is the Blender
+add-on and asset marketplace. Its Humble bundles list each creator as
+developer and "Blender Market" or "Superhive" as publisher: Blender Market
+Best of 2024 (+ Encore), Blender Market's Essential Game Modding Toolkit
+(+ Encore), Backrooms and Liminal World Builder (2026), Creature and
+Character Creation (Oct 2026).
+
+What a key is: one coupon for the whole tier, not one per item, even though
+Humble lists every item with a key icon. Each Humble bundle has a matching
+"bundle product" on Superhive with one variant per tier; the coupon takes
+that tier to $0 at checkout. Codes are case-sensitive and break when pasted
+with stray formatting: type them. Redeem by the date on the Humble download
+page.
+
+Contents: Blender add-ons/extensions (Hard Ops/Boxcutter, Retopoflow, True
+Terrain, Flora Paint, VHS Generator, Extra Lights, ...), asset packs (.blend,
+textures, HDRIs) and video courses (CG Cookie, FastTrack and others).
+Add-ons are zips installed into Blender (Preferences > Add-ons/Extensions >
+Install from Disk); Superhive also offers itself as a Blender extensions
+remote repository. Assets and courses go to the library folder. No Steam
+entry: Blender itself is not in these bundles. The Game Modding Toolkit
+versions were tested against Blender 4.1 and carry no free updates; Best of
+2024 and later bundles don't say.
+
+FastTrack's two courses in the Game Modding Toolkit have item recipes under
+items/fasttrack-tutorials/ (*-superhive) with these same Superhive steps.
+CG Cookie's courses in that bundle resolve here through the "Blender Market"
+publisher; a future CG Cookie vendor matched by developer would need the
+same item-recipe pinning.
+"""
+
+[match]
+developers = ["Superhive", "Blender Market", "BlenderMarket", "Superhive Market", "Superhive (formerly Blender Market)"]
+domains = ["superhivemarket.com", "blendermarket.com"]
+key_names = ['\bsuperhive\b', '\bblender ?market\b']
+# "can be redeemed on Blender Market website"
+redeem_text = ['redeem\w*[^.]{0,60}\b(superhive|blender ?market)\b']
+bundle_slugs = [
+  'blender-?markets?',                              # blender-market-best-2024, blender-markets-essential-game-modding-toolkit
+  'superhive',
+  '^backrooms-?and-?liminal-?world-?builder',
+  '^creature-?and-?character-?creation',            # not Learn Squared's character-and-creature-megabundle
+]
+
+[redeem]
+where = "https://superhivemarket.com/bundles"
+account = true
+delivers = "the purchased tier of the bundle product as one $0 Superhive order; all its files downloadable any time from Orders"
+expires = "per bundle: 'Keys must be redeemed by the date listed on your bundle download page'"
+steps = [
+  "Create or log in to a Superhive account at https://superhivemarket.com/ (guest orders are only reachable through expiring receipt links until an account with the same email exists).",
+  "Open the bundle's product page (e.g. superhivemarket.com/bundles/backrooms--liminal-world-builder, superhivemarket.com/bundles/creature-and-character-creation, blendermarket.com/products/blender-market-best-of-2024, blendermarket.com/products/blender-markets-essential-game-modding-toolkit) and add the tier that was bought to the cart. Only the highest tier bought; it includes the lower ones.",
+  "At checkout click 'Have a discount code? Click to enter it' (or 'You may enter it now'), type the Humble key exactly (case-sensitive), press 'Apply Coupon': the total must drop to $0.",
+  "Complete the order. Download everything from Orders (account menu, top right); add-ons can instead be installed through Superhive's Blender remote repository.",
+  "If a code fails: retype it, try a private window, then support@superhivemarket.com with the code.",
+]
+
+[download]
+scriptable = false
+how = "Orders page > the bundle order's receipt page > file links; unlimited downloads"
+notes = """
+No documented buyer API. Receipt links expire; the Orders page always has
+fresh ones. For add-ons, Blender 4.2+'s extensions system can use Superhive
+as a remote repository (offered from the order), the scriptable path for
+keeping add-ons installed. Saving the asset/course files into the library
+folder needs the user's logged-in session (inference, untested).
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "Add-ons: install the zip into Blender (Preferences > Add-ons > Install from Disk) or via the Superhive remote repository; each product's documentation has its own steps. Assets and courses: unpack into the library folder."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/29104895266587-Blender-Market-Best-of-2024-Redemption-Instructions"
+claim = "open blendermarket.com/products/blender-market-best-of-2024, add the correct tier, 'Have a discount code? Click to enter it', type the key, Apply coupon; redeem by the date on the download page"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/26912354384411-Blender-Market-s-Essential-Game-Modding-Toolkit-License-and-Bundle-Information"
+claim = "product link, choose variant, coupon code, checkout; lifetime licence, no future updates; tested with Blender 4.1"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/43406947501339-Backrooms-and-Liminal-World-Builder-Bundle-Superhive-Keys-Redemption-Instructions"
+claim = "superhivemarket.com/bundles/backrooms--liminal-world-builder; coupon to $0; codes case-sensitive, type them; per-item licences (GPL, CC-BY, royalty-free)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/51303757621659-Creature-and-Character-Creation-Bundle-Redemption-Instructions"
+claim = "coupon gives 100% off the bundle product's tier on Superhive; files downloadable any time from the Orders page"
+[[sources]]
+url = "https://www.humblebundle.com/software/blender-market-best-2024-software"
+claim = "'can be redeemed on Blender Market website'"
+[[sources]]
+url = "https://support.superhivemarket.com/article/16-how-to-find-retrieve-purchases"
+claim = "Orders menu has downloads and receipts; add-ons can be dragged into Blender and Superhive added as a remote repository; receipt links expire; guest orders link to a new account with the same email; unlimited downloads"
+[[sources]]
+url = "https://support.superhivemarket.com/article/234-how-to-redeem-coupon-codes-for-discounts"
+claim = "codes are applied at checkout via 'Have a discount code? Click to enter it' and 'Apply Coupon'"

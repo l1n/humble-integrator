@@ -1,0 +1,56 @@
+schema = 1
+name = "Native Instruments"
+kind = "route"
+notes = """
+Native Instruments (Kontakt, Komplete, Maschine expansions, Reaktor,
+Massive). Humble: Native Instruments Presents: Lo-fi Flash Sale (2024) and
+later NI bundles. Every NI item is a serial registered in Native Access,
+NI's installer and licence manager; Kontakt-format sample libraries then
+load in the free Kontakt 8 Player (or full Kontakt). Licence: perpetual,
+one user account, up to 3 devices, unlimited reinstalls.
+
+Windows and macOS only. No source found that Native Access 2 runs under
+Wine, so Linux has no route here (inference; untested). No Steam entries.
+"""
+
+[match]
+developers = ["Native Instruments", "Native Instruments GmbH"]
+redeem_text = ['Native Access', 'redeem\w*\W+(on|through|via|at|in)\W+(the\W+)?Native Instruments']
+bundle_slugs = ['^native-instruments', '^nativeinstruments']
+domains = ["native-instruments.com"]
+key_names = ['native instruments', '\bkontakt\b', '\bkomplete\b', 'native access']
+
+[redeem]
+where = "Native Access (https://www.native-instruments.com/en/specials/native-access-2/)"
+account = true
+delivers = "the products in the NI account, downloaded and installed by Native Access"
+steps = [
+  "Install Native Access 2 and log in (or create a Native Instruments account).",
+  "Reveal the serial on the Humble download page; in Native Access click Add Serial (lower left) and enter it.",
+  "Install Kontakt 8 Player (free) and then the bundle's products from Native Access.",
+  "Load the library in Kontakt's Library view, or drag its WAV files from the library folder Native Access installed (e.g. /Users/Shared/<Library> on a Mac) into a DAW.",
+]
+
+[download]
+scriptable = false
+how = "Native Access downloads and installs; no public API"
+
+[library]
+files = "Kontakt libraries and their WAV samples where Native Access installs them (user-chosen content folder)"
+licence = "perpetual; one user account, max 3 devices; unlimited reinstalls (Humble)"
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "none"
+notes = "No Linux build; Native Access 2 under Wine is unverified (untested), so no route is offered."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/30100067097115-Native-Instruments-Redemption-and-License-Information"
+claim = "one user account, max 3 devices, perpetual, unlimited reinstalls; download Native Access, reveal serial, Add Serial, install Kontakt 8 Player and the products; sample locations /Users/Shared/... and C:\\Users\\Public\\Documents"

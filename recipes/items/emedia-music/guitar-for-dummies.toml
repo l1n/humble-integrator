@@ -1,0 +1,31 @@
+schema = 1
+name = "eMedia Guitar For Dummies"
+vendor = "emedia-music"
+kind = "app"
+machine_names = ["emediaguitarfordummies", "emediaguitarfordummieslevel1windownload"]
+verified = false
+notes = """
+Beginner guitar lessons (tuning, chords, strumming). Windows lesson program from Humble's Music for Dummies bundles (2025 and/or 2026); the serial is typed at first start. A standalone app, so it gets a Steam shortcut.
+"""
+
+[install]
+source = "humble"
+serial = "per-product"
+notes = "Windows installer from the Humble download page; it also installs QuickTime and offers a restart. Enter the Humble key as the serial number when the program first starts."
+
+[launch]
+find = "C:/Program Files*/eMedia Guitar For Dummies*/*.exe"
+notes = "Exe name not documented; the folder follows the installer default (Humble). Pick the program, not the uninstaller."
+
+[steam]
+shortcut = true
+title = "eMedia Guitar For Dummies"
+steamgriddb = "eMedia Guitar For Dummies"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/34961162564123-Humble-Software-Bundle-Music-for-Dummies-Redemption-Instructions"
+claim = "all eMedia products install the same way: setup wizard, default C:/Program Files (x86)/eMedia <Title>, QuickTime install, restart, serial at first launch"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/music-for-dummies-2026-software"
+claim = "item in the bundle (census)"

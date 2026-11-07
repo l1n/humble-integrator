@@ -1,0 +1,41 @@
+schema = 1
+name = "Ashampoo Home Design 8"
+vendor = "ashampoo"
+kind = "app"
+machine_names = ["ashampoohomedesign8"]
+verified = false
+notes = "2023 'Dream it, design it, build it' Humble bundle. Redirector resolves to cdn1.ashampoo.net/ashampoo/0867/ashampoo_home_design_8_8.0.1_sm.exe. Owning several versions of the same line: the newest is enough, the older keys can stay unrevealed."
+
+[install]
+source = "vendor"
+url = "https://www.ashampoo.com/ashampoo_home_design_8_sm.exe"
+file = "ashampoo_home_design_8*.exe"
+args = []
+serial = "per-product"
+notes = "Key goes into the installer's key page ('Activate now!') or the program's 'Enter key manually' dialog. Redirector URL observed working Oct 2026 (undocumented)."
+
+[launch]
+exe = 'C:\Program Files\Ashampoo\Ashampoo Home Design 8\program\CAD.exe'
+find = "C:/Program Files*/Ashampoo/Ashampoo Home Design 8/program/CAD.exe"
+notes = "Path read from the installer's Inno header (DefaultDirName + program\\CAD.exe); not yet seen on disk."
+
+[steam]
+shortcut = true
+title = "Ashampoo Home Design 8"
+steamgriddb = "Ashampoo Home Design 8"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/5626237932059"
+claim = "Humble: 3D CAD keys are entered in setup / the activation dialog ('Enter key manually')"
+
+[[sources]]
+url = "https://support.ashampoo.com/hc/en-us/articles/360007143653"
+claim = "programs can be activated without logging in to an Ashampoo account"
+
+[[sources]]
+url = "https://support.ashampoo.com/hc/en-us/articles/360010046794"
+claim = "'already activated' / error 157 after reinstall: reset the licence under Licenses at ashampoo.com/loc/login"
+
+[[sources]]
+url = "https://www.ashampoo.com/en-us/3d-cad-professional-12"
+claim = "download redirector pattern ashampoo.com/<product>.exe -> cdn1.ashampoo.net"

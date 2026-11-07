@@ -1,0 +1,47 @@
+schema = 1
+name = "Mixcraft 9 Recording Studio"
+vendor = "acoustica"
+kind = "app"
+machine_names = ["mixcraft9recordingstudio"]
+verified = false
+notes = """
+Acoustica's Windows DAW. Mixcraft 9 Recording Studio DAW. Windows 7 SP1-10, 32 or 64-bit; licence for 3 users/devices (Humble). A standalone app, so it gets a Steam shortcut. Install only the newest Mixcraft you own.
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = "Redeem at store.acoustica.com/redeem, download the Windows installer from the order details page. Registration ID + code from the redemption e-mail, entered during installation or at Help > Enter Registration Code. Installer framework and silent switches not documented."
+
+[launch]
+find = "C:/Program Files*/*Mixcraft*/*.exe"
+notes = "Install folder and exe name not documented; the glob assumes a folder named after Mixcraft. Pick the main program, not the uninstaller."
+
+[steam]
+shortcut = true
+title = "Mixcraft 9 Recording Studio"
+steamgriddb = "Mixcraft"
+
+[platforms.macos]
+runner = "crossover"
+notes = "No macOS build; untested under CrossOver."
+
+[platforms.linux]
+runner = "wine"
+notes = "No Linux build; untested under Wine."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360053665093-Mixcraft-9-Recording-Studio-instructions"
+claim = "redemption and registration steps"
+
+[[sources]]
+url = "https://store.acoustica.com/redeem"
+claim = "redeem the code into an Acoustica account; download from the order details page"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/level-up-remix-software"
+claim = "item in the bundle (census)"
+
+[[sources]]
+url = "https://acoustica.com/products/mixcraft"
+claim = "Mixcraft is DAW software for Windows"

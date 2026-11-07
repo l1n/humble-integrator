@@ -1,0 +1,74 @@
+schema = 1
+name = "AudioHero (Audio Hero Inc.)"
+kind = "route"
+notes = """
+Royalty-free stock music and sound effects from audiohero.com (the library
+itself is served by a SourceAudio-hosted site, download.audiohero.com).
+Humble bundles: Become an Audio Hero (2024), AudioHero's Largest Cinematic
+Creator Bundle (2025), Game Audio Collection (2026, keys); The Complete
+Cinematic Game Audio Bundle (2026, mostly DRM-free). Humble has sold two kinds of AudioHero item: music/SFX packs, and download
+"plans" (Starter: 1 track, Prodigy: 50 downloads, Action Hero: 100
+downloads, and in 2026 "Tier 1/Tier 2" plans) that let you pick tracks from
+the 300,000-track catalogue. Both are coupon codes used on AudioHero's site
+(item recipe audio-hero/plan-credits for the plans). Some AudioHero bundles
+are plain Humble DRM-free downloads instead (The Complete Cinematic Game
+Audio Bundle, 2026: "Redeem DRM-Free"); those stay on the generic download
+routes, which is why this recipe matches the key bundles' redemption text
+rather than the developer name.
+
+Formats: 16-bit/44.1 kHz Broadcast WAV or 320 kbps MP3, either or both per
+track, re-downloadable while the account is active; a 100-downloads-per-day
+cap applies. Licence: AudioHero's FAQ ties use to an active subscription,
+but AudioHero staff state (Trustpilot replies, 2025-2026) that Humble
+bundle purchases and credits are licensed in perpetuity with no subscription
+needed; the Humble plan descriptions also say "Licensed in perpetuity".
+Download everything you want while the plan is active: credits are lost if
+the account is closed, and one user reports a Humble code that had expired.
+"""
+
+[match]
+developers = ["Audio Hero"]
+redeem_text = ['redeem(ed|able) on\W+(the\W+)?Audio\W?Hero', 'downloads from the Audio\W?Hero website', 'Redeem your keys at\W+(www\.)?audiohero\.com']
+# The all-key AudioHero bundles by machine name and URL/name slug (extracted keys).
+bundle_slugs = [
+  '^audioheroslargestcinematiccreatorbundle', '^audio-?hero-?s?-largest-cinematic',
+  '^becomeanaudioherowithroyaltyfree', '^become-an-audio-hero',
+  '^gameaudiocollectionaccesstoover300000', '^game-audio-collection-access-to-over-300-?000',
+]
+domains = ["audiohero.com"]
+key_names = ['audio\W?hero']
+
+[redeem]
+where = "https://download.audiohero.com/signup.php"
+account = true
+expires = "codes can expire (user report); redeem promptly"
+delivers = "plan credits or the pack's tracks on the AudioHero account, downloadable as WAV or MP3"
+steps = [
+  "New to AudioHero: sign up at https://download.audiohero.com/signup.php, enter the Humble code in the coupon field during sign-up, then confirm the email address.",
+  "Existing account: log in at https://download.audiohero.com/login.php, open Pricing (https://download.audiohero.com/subscriptions), use 'Have a Coupon?' and apply the code.",
+  "Use one code per Humble item; plan codes add download credits, pack codes add the pack's tracks.",
+  "Download the tracks (choose WAV and/or MP3) into the library folder (audio/audio-hero/<pack>); keep the order/licence page for YouTube Content ID disputes.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "Nothing to install; files are WAV/MP3."
+
+[platforms.macos]
+runner = "native"
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://support.fanatical.com/hc/en-us/articles/21325978940690-How-to-activate-your-AudioHero-Coupon"
+claim = "coupon redemption: new users enter it at sign-up and confirm email; existing users Pricing > Have a Coupon? (read via search summary; page blocks bots)"
+[[sources]]
+url = "https://www.audiohero.com/faq"
+claim = "16-bit/44.1 kHz Broadcast WAV or 320 kbps MP3, re-downloadable; 100 downloads/day; credits lost on unsubscribe; bundle purchases carry a perpetual licence"
+[[sources]]
+url = "https://ie.trustpilot.com/review/audiohero.com"
+claim = "AudioHero staff: Humble Bundle credits are licensed in perpetuity, no subscription needed; one user's Humble code had expired"
+[[sources]]
+url = "https://www.humblebundle.com/software/become-an-audio-hero-with-royalty-free-music-and-sound-effects-bundle-software"
+claim = "plan items redeemable on the Audio Hero page; music packs downloadable from the Audio Hero website; plan sizes 1/50/100 downloads (census redemption text and item descriptions)"

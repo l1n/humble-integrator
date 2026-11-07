@@ -1,0 +1,58 @@
+schema = 1
+name = "Sample Logic"
+kind = "route"
+notes = """
+Sample Logic (cinematic instruments and effect plug-ins). Humble: Sample
+Logic Creative Tools Bundle (2026) with per-product keys. Humble documents
+two flows: Animation Station 2.0 is redeemed on Sample Logic's licence site
+(a per-user link licenses.samplelogic.com/redeem/humble-bundle/?code=<key>),
+installed from licenses.samplelogic.com and activated in the plug-in with
+the Sample Logic account e-mail and password; Realms is redeemed in the
+Pulse Downloader app (audio-plugin-deals route), which installs it. A bundle
+whose Humble text names Pulse goes to that route; otherwise follow the
+key's own instructions, which name one of the two.
+"""
+
+[match]
+developers = ["Sample Logic"]
+redeem_text = ['licenses\.samplelogic\.com', 'Sample Logic website']
+bundle_slugs = ['^sample-logic', '^samplelogic']
+domains = ["samplelogic.com"]
+key_names = ['sample ?logic']
+
+[redeem]
+where = "https://licenses.samplelogic.com/redeem/humble-bundle/?code=<key> (or Pulse Downloader, per the key's instructions)"
+account = true
+delivers = "a licence on the Sample Logic account and installers from licenses.samplelogic.com"
+steps = [
+  "Open https://licenses.samplelogic.com/redeem/humble-bundle/?code=<your key> (replace <your key> with the Humble key) and create or log into the Sample Logic account it asks for.",
+  "Confirm the account through its activation e-mail (check spam).",
+  "Download the Mac or Windows installer from licenses.samplelogic.com/products/<product>/<mac|windows>/master/latest/ and run it.",
+  "Load the plug-in in a DAW and activate it with the account's e-mail and password.",
+  "If the key's instructions say Pulse instead: see vendors/audio-plugin-deals.",
+]
+
+[download]
+scriptable = true
+how = "installer URLs per product and OS under licenses.samplelogic.com/products/<product>/<os>/master/latest/ (login may be required)"
+
+[install]
+source = "vendor"
+serial = "account"
+silent = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = "No Linux build. Untested: Windows installer in the shared audio-plugins prefix with yabridge; account activation from inside the plug-in."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/47289213227163-Sample-Logic-Creative-Tools-Bundle-Animation-Station-2-0-Redemption-Instructions"
+claim = "redeem via licenses.samplelogic.com/redeem/humble-bundle/?code=<code>; installers at licenses.samplelogic.com/products/animation-station/{mac,windows}/master/latest/; activate with account e-mail and password; account activation e-mail"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/47288763112731-Sample-Logic-Creative-Tools-Bundle-Realms-Redemption-Instructions"
+claim = "Realms: download Pulse, sign up/log in, Add a Product, enter the key, Install; support@audioplugin.deals"

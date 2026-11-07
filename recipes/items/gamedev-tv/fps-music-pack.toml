@@ -1,0 +1,32 @@
+schema = 1
+name = "FPS Music Asset Pack"
+vendor = "gamedev-tv"
+kind = "content"
+machine_names = ["fpsmusicassetpack"]
+verified = false
+notes = """
+GameDev.tv asset pack, not a course: 15 action music tracks by Jorge Velasco, as MP3 and WAV (census description).
+It is redeemed like every GameDev.tv coupon (see vendors/gamedev-tv). It then
+appears in My Library, and its page lists the downloadable files. Download
+them into the library folder. Nothing to install and no Steam entry: the
+files are imported by hand into any engine or editor (audio files).
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+file = "*"
+notes = "MP3 and high-quality WAV files (census description). Archive layout not confirmed."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/learn-to-make-games-in-unreal-engine-5-encore-software"
+claim = "item in this GameDev.tv bundle, keyed (hb-key); contents from the census description"
+[[sources]]
+url = "https://gamedev.tv/assets/scifi-starships"
+claim = "GameDev.tv asset pack pages list a Downloads section of per-engine files plus a licence .txt (pattern for the older packs; inference)"
+[[sources]]
+url = "https://gamedev.tv/p/help"
+claim = "lifetime access; products in My Library; course assets usable in your own (commercial) projects"

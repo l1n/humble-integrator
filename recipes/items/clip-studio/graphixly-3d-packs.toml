@@ -1,0 +1,28 @@
+schema = 1
+name = "Graphixly 3D Models and 3D Poses packs for Clip Studio Paint"
+vendor = "clip-studio"
+kind = "content"
+machine_names = ["3dmodelspack", "3dposespack"]
+requires = ["clip-studio/clip-studio-paint-pro-12-month"]
+verified = false
+notes = "Perpetual Graphixly packs from the Clip Studio bundles; redeemed at a Graphixly checkout. Import with File > Import > 3D data or drag onto the canvas; registering models in the Material palette goes through Clip Studio Modeler. Grouped because they install the same way."
+
+[install]
+source = "vendor"
+file = "*.zip"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/52327069996443"
+claim = "Humble code is a 100%-off discount code at a Graphixly product page checkout; confirmation email with download/activation instructions"
+
+[[sources]]
+url = "https://help.clip-studio.com/en-us/manual_en/660_3d/Importing_3D_Files.htm"
+claim = "File > Import > 3D data (cs3c/cs3o/cs3s, FBX, OBJ, GLB/glTF, VRM, ...)"
+
+[[sources]]
+url = "https://graphixly.com/blogs/news/importing-3d-models-to-csp"
+claim = "Graphixly's 3D import guide"

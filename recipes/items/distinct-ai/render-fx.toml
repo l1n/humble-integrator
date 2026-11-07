@@ -1,0 +1,28 @@
+schema = 1
+name = "Render FX"
+vendor = "distinct-ai"
+kind = "app"
+machine_names = ["renderfx"]
+verified = false
+notes = "Standalone local text-to-image generator. Windows-only, GPU-heavy local AI: expect it not to run under Wine/CrossOver."
+
+[install]
+source = "vendor"
+serial = "per-product"
+
+[steam]
+shortcut = true
+title = "Render FX"
+steamgriddb = "Render FX"
+
+[launch]
+find = "C:/Program Files*/**/RenderFX*.exe"
+notes = "Exe name not documented."
+
+[[sources]]
+url = "https://www.amd.com/en/ecosystem/isv/consumer-partners/distinct-ai.html"
+claim = "Render FX and Vector FX are local, on-device generative-AI apps (no cloud credits)"
+
+[[sources]]
+url = "https://www.intel.com/content/www/us/en/content-details/846041/distinct-ai-vector-fx-transforming-professional-vector-graphics-with-local-generative-ai.html"
+claim = "Vector FX: local text-to-vector app, accelerated with OpenVINO on Intel AI PCs"

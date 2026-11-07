@@ -1,0 +1,28 @@
+schema = 1
+name = "EaseUS Todo PCTrans Pro"
+vendor = "easeus"
+kind = "app"
+machine_names = ["todopctrans"]
+verified = false
+skip = true
+skip_reason = "Windows system tool with no purpose inside a Wine prefix; keep the key for a real Windows PC."
+notes = "2025 'EaseUS x Ashampoo Windows Powerhouse' bundle (publisher listed as Ashampoo; Ashampoo sells it as a lifetime licence for up to 2 devices). Migrates programs and files between Windows PCs: needs real Windows."
+
+[install]
+source = "vendor"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.ashampoo.com/hc/en-us/articles/13675666721810"
+claim = "EaseUS products sold by Ashampoo: activation window at startup with a licence-key field"
+
+[[sources]]
+url = "https://kb.easeus.com/art.php?id=10001"
+claim = "25-character codes, activation window at first launch; offline activation at activation.easeus.com/alloffline.php"
+
+[[sources]]
+url = "https://www.ashampoo.com/en-us/easeus-todo-pctrans-pro"
+claim = "Ashampoo store: lifetime licence, up to 2 devices"

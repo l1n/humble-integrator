@@ -1,0 +1,38 @@
+schema = 1
+name = "Concept 2 (Krotos)"
+vendor = "krotos"
+kind = "addon"
+machine_names = ["concept2_krotosaudio"]
+verified = false
+notes = """
+Synth plug-in for designing ambiences and sci-fi/game textures. Krotos' own copy protection: paste the licence key from the Krotos dashboard into the plug-in and press Activate (online; 2 activations; deactivate to move). VST/VST3/AU/AAX; no Steam entry.
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = "Redeem via the Humble redemption URL (krotosaudio.com), download the installer from the account dashboard, activate inside the plug-in with the licence key."
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = "No Linux build. Untested: Windows installer into the shared audio-plugins Wine prefix, bridged into a Linux DAW with yabridge."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/7480413269275-Krotos-Audio-Redemption-Instructions"
+claim = "Humble redemption URL prefills the licence deposit code on krotosaudio.com; downloads and licence keys in the account dashboard"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/24674181589275-KROTOS-SFX-PLUGINS-FOR-SOUND-DESIGN-System-Requirements"
+claim = "Windows 10 1909+, macOS 10.13+; VST/VST3/AU/AAX 64-bit; no iLok; 2 activations; internet needed to activate"
+
+[[sources]]
+url = "https://www.krotosaudio.com/support/faq/how-do-i-start-my-demo-or-activate-my-license-of-concept/"
+claim = "licence key + Activate in the plug-in; no iLok; can deactivate and move"

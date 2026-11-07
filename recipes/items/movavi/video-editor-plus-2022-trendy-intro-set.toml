@@ -1,0 +1,53 @@
+schema = 1
+name = "Movavi Video Editor Plus 2022 Effects: Trendy Intro Set"
+vendor = "movavi"
+kind = "content"
+machine_names = ["movavivideoeditorplus2022effects_trendyintroset"]
+verified = false
+notes = """
+Humble Software Bundle: Multimedia (Apr 2022; 'Assets are redeemable via the
+Movavi Store'). 31 intros (VHS, Stylish Vlog, TV Shows, Lava). The bundle's
+other effect sets came as a DRM-free download plus key (generic route); this
+one is listed as a key only. The key activates the pack inside a non-Steam
+Movavi Video Editor 2022 (the bundle's own Video Editor Plus 2022, generic
+DRM-free route), which then downloads it: Effect packages > key icon > enter
+code > Activate. Standalone packs don't work in Steam/App Store builds of
+the editor. macOS: native Movavi editor. Linux: the editor is Windows/macOS
+only; Wine untested. Nothing of its own to install; no Steam entry.
+"""
+
+[redeem]
+where = "inside Movavi Video Editor (Plus) 2022: import panel > Effect packages > key icon"
+account = false
+delivers = "the Trendy Intro set inside the activated editor (downloaded by the editor)"
+steps = [
+  "Install and activate the non-Steam Movavi Video Editor Plus 2022 from the same bundle.",
+  "In the editor's import panel choose 'Effect packages', find 'Trendy Intro' (search box), press the key icon.",
+  "Enter the code from the Humble download page and click Activate; the editor downloads and installs the pack.",
+  "If Humble also offers a pack file, it can instead be dragged onto the timeline.",
+  "Support: https://www.movavi.com/support/.",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+notes = "Only if the Windows Movavi Video Editor 2022 itself runs in Wine (untested)."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/5026326131355-Movavi-Video-Editor-Plus-Effects-instructions"
+claim = "launch Video Editor 2022, Effect packages, key icon, enter the code, Activate, the pack downloads; or drag the downloaded pack file onto the timeline"
+[[sources]]
+url = "https://help.movavi.com/kb/license-recovery/activate-an-effects-pack"
+claim = "effects packs are not supported in App Store or Steam versions"
+[[sources]]
+url = "https://www.humblebundle.com/software/multimedia-software"
+claim = "'Assets are redeemable via the Movavi Store'; Trendy Intro set is hb-key only, Windows/Mac (census)"

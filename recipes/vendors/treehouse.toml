@@ -1,0 +1,47 @@
+schema = 1
+name = "Treehouse (online coding courses)"
+kind = "route"
+service = true        # course platform: nothing to install, no Steam entry
+notes = """
+Humble's Treehouse bundle ("The Complete Data Science Developer Bundle",
+2025) lists 58 Treehouse courses as items. Humble's article describes a
+single "Treehouse key" link that applies the code itself, after which the
+account is "Currently on Track" with a subscription shown on the account
+page. Access may therefore be a time-limited Treehouse subscription rather
+than permanent course ownership. Its length is not documented (unverified).
+
+Offline use: streamed on teamtreehouse.com. No file download is documented.
+"""
+
+[match]
+developers = ["Treehouse", "Team Treehouse", "Treehouse Island"]
+domains = ["teamtreehouse.com"]
+key_names = ["\\btreehouse key\\b", "team ?treehouse"]   # not bare "treehouse": a game title could contain it
+redeem_text = [
+  "redeem\\w*[^.]{0,60}\\btreehouse\\b",           # "Keys redeemable on Treehouse site"
+  "teamtreehouse\\.com",
+]
+
+[redeem]
+where = "the 'Treehouse key' link on the Humble download page (applies the code on teamtreehouse.com)"
+account = true
+delivers = "a Treehouse track (Library > Tracks) and a subscription shown on the account page"
+expires = "check the Humble download page. Key.is_expired from Humble is authoritative."
+expiry_text = "(?i)redeem (?:your keys )?before ([A-Z][a-z]+ \\d{1,2}(?:st|nd|rd|th)?,? \\d{4})"
+steps = [
+  "Click the 'Treehouse key' on the Humble download page. The code is applied automatically.",
+  "Sign up or log in to Treehouse to finish the redemption.",
+  "The confirmation page says 'Currently on Track'. 'Start Track' begins the courses.",
+  "The account page shows the subscription and its end date. Courses: Library > Tracks.",
+]
+
+[library]
+videos = false                 # streaming only, as far as documented
+files = "none documented"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/28311335157531-Treehouse-Key-Redemption-Instructions"
+claim = "click the Treehouse key (auto-applies), sign up/log in, 'Currently on Track', Start Track, subscription on account page, Library > Tracks (2024)"
+[[sources]]
+url = "https://www.humblebundle.com/software/complete-data-science-developer-bundle-software"
+claim = "'Keys redeemable on Treehouse site'; 58 Treehouse items (census)"

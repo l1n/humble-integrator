@@ -1,0 +1,94 @@
+schema = 1
+name = "Paintstorm Studio and Realistic Paint Studio"
+kind = "route"
+notes = """
+Two painting apps by the same developer (Aleksandr Komarov), sold on Humble
+in 2024 with publisher Graphixly LLC ('Keys are redeemed through Paintstorm
+Studio website'). Neither app takes a serial: you register inside the app
+with the email of your Paintstorm / Realistic Paint account, which binds the
+licence to the machine's Hardware ID (one machine at a time; moving it means
+deactivating the Hardware ID in the account, at most once a week).
+How a Humble key becomes that account licence is not documented (inferred:
+the key is redeemed/attached on the Paintstorm site, otherwise email
+license@paintstormstudio.com with the key).
+Paintstorm Studio has native Windows, macOS AND Linux builds - use the native
+one everywhere. Realistic Paint Studio is Windows/macOS only (Linux: Wine).
+A Wine prefix or a fresh install counts as a new Hardware ID.
+"""
+
+[match]
+developers = ["Paintstorm Studio", "Realistic Paint Studio"]
+domains = ["paintstormstudio.com", "realisticpaint.com"]
+key_names = ["paintstorm", "realistic paint studio"]
+
+[redeem]
+where = "https://www.paintstormstudio.com/login.html"
+account = true
+delivers = "a perpetual one-machine licence tied to the account email"
+expires = "none documented"
+steps = [
+  "Log in at https://www.paintstormstudio.com/login.html ('First time login' emails a password for the address) and attach the Humble key to the account; the exact Humble redemption page was not found - if there is none, email license@paintstormstudio.com with the key.",
+  "Download the build for this OS from https://www.paintstormstudio.com/download.html.",
+  "Start Paintstorm (v1.41+), enter the account email and press Register (internet needed once; works offline after).",
+  "Realistic Paint Studio: same scheme on realisticpaint.com (support: info@realisticpaint.com); register in the app by email.",
+  "To move a licence: deactivate the Hardware ID in the account (once a week at most).",
+]
+
+[install]
+source = "vendor"
+serial = "account"
+silent = false
+driver = "unknown"
+driver_notes = "Windows installer framework not verified (the site blocks scripted downloads). Linux: Paintstorm_linux_v*.run.tar.gz, officially installed with `sudo sh ./Paintstorm_linux_vX.run` into /usr/share/paintstorm; the tool should ask before running anything as root (whether the .run can be extracted to a user directory instead is untested)."
+
+[platforms.macos]
+runner = "native"
+notes = "Native .pkg for both apps; Gatekeeper override needed for Paintstorm. .app names not verified."
+
+[platforms.linux]
+runner = "native"
+notes = "Paintstorm: native x64 build (needs Wacom drivers for pressure). Realistic Paint Studio: no Linux build, use Wine (no reports found)."
+
+[[sources]]
+url = "https://www.paintstormstudio.com/help/registrationfaq/"
+claim = "no serial: register in the app (v1.41+) with the account email; internet once, then offline; account at login.html"
+
+[[sources]]
+url = "https://www.paintstormstudio.com/help/registrationfaq/transfer/"
+claim = "one machine at a time; deactivate the Hardware ID in the account (max once a week)"
+
+[[sources]]
+url = "https://www.paintstormstudio.com/buy.html"
+claim = "perpetual licence for 1 PC; Windows, macOS, Linux"
+
+[[sources]]
+url = "https://paintstormstudio.com/license.html"
+claim = "older key-by-email + Hardware ID flow; license@paintstormstudio.com"
+
+[[sources]]
+url = "https://www.paintstormstudio.com/download.html"
+claim = "v2.50: PaintstormSetup_v2.50_x64.exe, PaintstormStudio-v2.50.pkg, Paintstorm_linux_v2.50.run.tar.gz"
+
+[[sources]]
+url = "https://paintstormstudio.com/help/installation-and-files"
+claim = 'Linux: extract, sudo sh ./Paintstorm_linux_vX.run, installs to /usr/share/paintstorm, work folder ~/Paintstorm; Windows C:\Program Files\Paintstorm Studio; Mac Gatekeeper override'
+
+[[sources]]
+url = "https://www.paintstormstudio.com/help/panels/brushes/"
+claim = "brushes are .pstbrushes: brush panel cogwheel > Import brushes (also .ABR)"
+
+[[sources]]
+url = "https://realisticpaint.com/support/?page_id=106"
+claim = "Realistic Paint Studio: register by email in the app, Hardware ID, deactivate in the account once a week; info@realisticpaint.com"
+
+[[sources]]
+url = "https://www.realisticpaint.com/downloads.html"
+claim = "RealisticSetup_v2.00_x64.exe, RealisticPaintStudio_v2.00.pkg, iPad; no Linux"
+
+[[sources]]
+url = "https://www.windowscentral.com/realistic-paint-studio-review"
+claim = "Realistic Paint Studio is by the Paintstorm developer (Aleksandr Komarov)"
+
+[[sources]]
+url = "https://apps.apple.com/app/id1529593385"
+claim = "Realistic Paint Studio developer listing"

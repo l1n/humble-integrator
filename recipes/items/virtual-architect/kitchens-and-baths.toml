@@ -1,0 +1,29 @@
+schema = 1
+name = "Virtual Architect Kitchens & Baths (Windows)"
+vendor = "virtual-architect"
+kind = "app"
+machine_names = ["virtualarchitectkitchensandbaths"]
+verified = false
+notes = "Windows: kitchen and bathroom remodelling planner."
+
+[install]
+source = "vendor"
+file = "*.exe"
+serial = "per-product"
+notes = "Installer and serial come from the instructions attached to the Humble key (see vendors/virtual-architect)."
+
+[launch]
+find = "C:/Program Files*/**/*Kitchens*/*.exe"
+notes = "Folder and exe name not checked; Nova installs under Program Files (inferred)."
+
+[steam]
+shortcut = true
+title = "Virtual Architect Kitchens & Baths"
+steamgriddb = "Virtual Architect"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/home-and-landscape-design-made-easy-software"
+claim = "Windows-only hb-key item (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/16132283283867-Home-and-Landscape-Design-System-Requirements"
+claim = "system requirements for this product"

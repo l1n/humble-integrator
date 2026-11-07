@@ -1,0 +1,26 @@
+schema = 1
+name = "Cartographer's Annual Vol 17"
+vendor = "profantasy"
+kind = "content"
+machine_names = ["cartographersannualvol17"]
+requires = ["profantasy/cc3plus"]
+recommends = ["profantasy/dd3", "profantasy/cd3"]
+verified = false
+notes = "The 2023 Annual: twelve or thirteen issues of styles, symbols and map packs for CC3+. Some issues use DD3/CD3 content (with PDF/PNG fallbacks)."
+
+[install]
+source = "vendor"
+serial = "per-product"
+file = "CA2023_Setup.zip"
+notes = "One full-setup file per volume contains every issue; ignore the per-issue installers. This volume is a .zip: extract with 7z x (unzip fails), then run the exe in the same prefix."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://forum.profantasy.com/discussion/13136/which-files-to-install-on-cartographer-annual"
+claim = "full setup contains all issues"
+
+[[sources]]
+url = "https://forum.profantasy.com/discussion/comment/124261"
+claim = "CA2023_Setup.zip needs 7z"

@@ -1,0 +1,29 @@
+schema = 1
+name = "Cosmos 3-month Premium Individual Subscription"
+vendor = "leartes-cosmos"
+kind = "service"
+service = true
+machine_names = ["cosmos3-monthpremiumindividualsubscription"]
+verified = false
+notes = """
+Three months of Cosmos Premium (Individual plan): 1 Premium Credit a month
+for eligible premium environments/tools/bundles, unlimited 3D assets, VFX,
+sounds, materials and tutorials, 5% cashback in Cosmos credits. Products
+claimed with the credits stay in the account after it ends. Redeem only
+when the user asks (it starts a clock); cancel auto-renewal in Xsolla if a
+renewing subscription is created.
+"""
+
+[redeem]
+where = "https://cosmos.leartesstudios.com/redeem"
+steps = ["Redeem on Cosmos; spend the monthly Premium Credit each month; cancel renewal in Xsolla if asked."]
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/best-core-game-dev-assets-tools-megabundle-software"
+claim = "item text: 1 Premium Credit every month, unlimited access to 3D Assets, VFX, Sounds, Materials and Tutorials, 5% cashback"
+[[sources]]
+url = "https://cosmos.leartesstudios.com/frequently-asked-questions"
+claim = "Individual Premium gets 1 credit a month; products received through a premium subscription remain yours; cancel via Xsolla"

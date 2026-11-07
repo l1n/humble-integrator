@@ -1,0 +1,81 @@
+schema = 1
+name = "Audio Plugin Deals / Pulse Downloader"
+kind = "route"
+notes = """
+Audio Plugin Deals (audioplugin.deals) runs Pulse (pulsedownloader.com), a
+download manager used by 60+ sample-library and plug-in brands. Humble
+bundles fulfilled through Pulse: 30,000 Loops for $30 (Nine Volt Audio, Oct
+2025), SampleTraxx Everything Bundle, London Symphonic Strings Soloists
+Bundle (Aria Sounds, 2026; "Redeemable on Pulse Downloader"), and Sample
+Logic's Realms. Each Humble key is a Pulse redemption key: add it in the
+Pulse app and the product stays in the Pulse library for re-download;
+Pulse downloads, checksums, extracts and installs it and offers updates.
+
+Pulse itself runs on macOS 10.13+ (Intel and Apple Silicon), Windows 7+
+and Linux. What gets installed varies: loop libraries are plain WAV/REX2
+files (native everywhere); Kontakt libraries such as London Symphonic
+Strings need the full Kontakt (not the free Player), which has no Linux
+build.
+
+Support for these Humble keys is APD's: support@audioplugin.deals.
+"""
+
+[match]
+developers = ["Nine Volt Audio", "Audio Plugin Deals", "Aria Sounds", "SampleTraxx"]
+redeem_text = ['Pulse Downloader', 'redeem\w*\W+(on|in|via|with|through)\W+(the\W+)?Pulse\b']
+bundle_slugs = ['^30-?000-?loops-?for-?30', '^london-symphonic-strings', '^londonsymphonicstrings', '^sampletraxx']
+domains = ["audioplugin.deals", "pulsedownloader.com", "pulse.audio"]
+key_names = ['nine\s?volt', 'audio\s?plugin\s?deals', '30,?000 loops', 'pulse ?downloader', 'sampletraxx', 'aria sounds', 'london symphonic']
+
+[redeem]
+where = "the Pulse app (https://pulsedownloader.com/)"
+account = true
+delivers = "the product in the Pulse library, downloadable and installable from the app at any time"
+steps = [
+  "Download and install Pulse from https://pulsedownloader.com/ (macOS, Windows or Linux).",
+  "Sign up or log in inside Pulse.",
+  "Click 'Add a Product', enter the Humble key and press Redeem; the product is added to the Pulse library.",
+  "Click Install when ready and choose where the content goes (library folder for loops: audio/<brand>/<product>).",
+  "Problems with a Humble key: support@audioplugin.deals.",
+]
+
+[download]
+scriptable = false
+how = "the Pulse desktop app downloads (CDN, checksum-validated) and auto-extracts; no documented public API"
+
+[library]
+files = "loop libraries as WAV and REX2 with key/tempo in file names (30,000 Loops: 30 libraries, ~60 GB); Kontakt sample libraries (London Symphonic Strings Soloists: violin, viola, cello, double bass, 4 mic positions, 24-bit/48 kHz, ~16 GB)"
+licence = "loops royalty-free (Humble); sample libraries under each brand's licence"
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "Pulse installs; nothing else to run for loop libraries. Kontakt libraries are added to full Kontakt by hand (Files/Library browser)."
+
+[platforms.macos]
+runner = "native"
+[platforms.linux]
+runner = "native"
+notes = "Pulse has a Linux build, so redemption and download work natively; Kontakt libraries still need a Kontakt host, which has no Linux build."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/41498622463899-Humble-Software-Bundle-30-000-Loops-for-30-Redemption-Instructions"
+claim = "download Pulse, sign up or log in, Add a Product, enter the key, Install; support@audioplugin.deals; all loops royalty-free"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/48987205836699-London-Symphonic-Strings-Soloists-Bundle-Redemption-Instructions"
+claim = "London Symphonic Strings Soloists Bundle redeemed in Pulse the same way (2026)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/42470445093019-SampleTraxx-Everything-Bundle-Redemption-Instructions"
+claim = "SampleTraxx Everything Bundle redeemed in Pulse; loops royalty-free"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/47288763112731-Sample-Logic-Creative-Tools-Bundle-Realms-Redemption-Instructions"
+claim = "Sample Logic Realms redeemed in Pulse"
+[[sources]]
+url = "https://pulsedownloader.com/"
+claim = "Pulse for macOS 10.13+ (Intel/Apple Silicon), Windows 7+, Linux; 60+ companies; Add a Product > redemption key > Redeem; checksum-validated CDN downloads, auto-extraction, updates, permanent re-download"
+[[sources]]
+url = "https://audioplugin.deals/product/the-ultimate-30k-loop-bundle/"
+claim = "30 packs, 30,000+ loops, ~60 GB, WAV and REX2, key/tempo in file names, DAW-agnostic"
+[[sources]]
+url = "https://bedroomproducersblog.com/2024/02/12/london-symphonic-strings/"
+claim = "Aria Sounds' London Symphonic Strings needs the full version of Kontakt, not the free Kontakt Player (via web search summary)"

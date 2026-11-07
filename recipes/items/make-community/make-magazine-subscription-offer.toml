@@ -1,0 +1,37 @@
+schema = 1
+name = "Make: magazine subscription offer (55% off)"
+vendor = "make-community"
+kind = "service"
+machine_names = ["subscriptionoffer"]
+verified = false
+notes = """
+DIY Electronics Gadgets, Games and More bundle by Make: (Oct-Nov 2026): a
+discount on a Make: magazine subscription ('Get 55% Off Make: Magazine'), not
+a product. No delivery icon in the census: the offer link and code are shown
+on the Humble download page. Optional; nothing to download. The machine name
+is generic: if another publisher's bundle ever reuses 'subscriptionoffer', it
+needs its own recipe (this one assumes Make:).
+"""
+
+[redeem]
+where = "the offer link on the Humble download page (Make: subscription checkout)"
+account = false
+delivers = "a Make: magazine subscription at 55% off (print/digital per Make:'s offer)"
+steps = [
+  "Open the subscription offer on the Humble download page and follow its link to Make:'s subscription checkout.",
+  "Apply the code if one is shown (inference: same coupon-at-checkout pattern as Make:'s other Humble offers) and pay the discounted price.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/books/diy-electronics-gadgets-games-and-more-make-books"
+claim = "'Subscription Offer': 'Master Tech on Your Own Time: Get 55% Off Make: Magazine'; developer Makershed, publisher Make; no delivery (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/54932422888091-Redemption-Instructions-Microcontroller-Classics-and-More-by-Make"
+claim = "Make:'s other Humble offer: product page, cart, coupon at checkout"

@@ -1,0 +1,77 @@
+schema = 1
+name = "Synty Studios (Synty Store)"
+kind = "route"
+notes = """
+Covers bundles redeemed on Synty's own shop, syntystore.com ("Best of Synty"
+/ "Best POLYGON" bundles). Synty assets in other bundles are NOT this route:
+in the Asset Store Mega bundles they are Unity vouchers (vendors/unity-
+asset-store), so this recipe matches by bundle (slug and redemption text),
+never by developer name.
+
+How redemption works: each bundle has its own product page on syntystore.com
+(linked from the Humble purchase page and Synty's blog post for the bundle,
+e.g. /products/humble-bundle-the-best-of-synty-game-dev-assets-5-tier-1);
+there is one page per Humble tier where tiers exist. Log in, press the page's
+redeem button (it opens the cart), and enter the Humble code at checkout so
+the total is $0. The packs then sit under Account > My Downloads.
+
+What the download is: per-pack archives with a Unity package, an Unreal
+project and FBX source files (some packs also have Godot versions). These
+are ordinary files the tool can download into the library folder once the
+user is logged in (Shopify customer session; no public API - inference).
+
+Bundles also include a "$10 Synty Store voucher" (items/synty/store-voucher):
+a discount code with its own expiry, nothing to download.
+Some 2023 remix items also list a Humble direct download (hb-drmfree): fetch
+that file from Humble too.
+Humble Choice coupons ("10% off your first month of Humble Choice") sit in
+two of these bundles and are swept onto this route by the bundle match;
+they are Humble's own, not Synty's.
+"""
+
+[match]
+bundle_slugs = ['synty', '^best-polygon-game-dev-assets']
+redeem_text = [
+  '\bSynty Store\b',
+  '\bredeem\w*(?:\s|&nbsp;|\u00a0)+(?:on|via|through|at)(?:\s|&nbsp;|\u00a0)+(?:the(?:\s|&nbsp;|\u00a0)+)?Synty\b',
+]
+domains = ["syntystore.com"]
+key_names = ['\bbest of synty\b', '\bsynty\b.*\b(bundle|tier)\b']
+
+[redeem]
+where = "https://syntystore.com/"
+account = true
+delivers = "the tier's packs added to the Synty Store account (My Downloads): Unity, Unreal and FBX (sometimes Godot) archives"
+expires = "per bundle page, e.g. Best of Synty 6: keys before October 31 2027; Best of Synty 2 Remix Encore: keys and coupon by April 30th 2025; vouchers carry their own dates"
+steps = [
+  "Create or log in to an account on https://syntystore.com/ (account icon, top right).",
+  "Open the bundle's redemption page linked from the Humble purchase page (one page per tier; e.g. https://syntystore.com/products/humble-bundle-the-best-of-synty-game-dev-assets-5-tier-1).",
+  "Press the redeem button for the tier you bought; it adds the bundle product to the cart.",
+  "At checkout, enter the Humble code; complete the order only when the total is $0.00. Repeat per tier code.",
+  "Downloads: Account Settings > My Downloads.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer: download the archive for the engine wanted and import it (Unity package / Unreal project / FBX)."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://syntystore.com/products/humble-bundle-the-best-of-synty-game-dev-assets-5-tier-1"
+claim = "'click the button below that corresponds with the tier you purchased on the Humble Bundle website, and then add your code(s) at check out'; log in to download; files under My Downloads"
+[[sources]]
+url = "https://syntystore.com/blogs/blog/humble-bundle-best-of-synty-5"
+claim = "Synty's bundle post links to the per-bundle redemption page"
+[[sources]]
+url = "https://syntystore.com/products/humble-bundle-synty-sci-fi-bundle"
+claim = "2026 Synty Sci-Fi bundle redeemed the same way; includes a $10 Synty Store voucher"
+[[sources]]
+url = "https://syntystore.com/products/polygon-starter-pack"
+claim = "Synty packs ship as an Unreal project, a Unity package and FBX source files"

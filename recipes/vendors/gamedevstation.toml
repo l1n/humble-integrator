@@ -1,0 +1,58 @@
+schema = 1
+name = "GamedevStation (The Game Assembly's online courses)"
+kind = "route"
+service = true        # course platform: nothing to install, no Steam entry
+notes = """
+GamedevStation (gamedevstation.com) is the online-course arm of The Game
+Assembly, the Swedish/UK game-development school. Humble's "Game Dev Station
+presents The Mega Game Dev Education Bundle" (Jan 2026) sold six on-demand
+courses (getting hired, effective meetings, narrative design, procedural worlds
+with Houdini, automated testing, Jira for producers). The redeem link opens
+GamedevStation's WooCommerce shop: put the courses you bought in the basket and
+apply the coupon(s) under 'Add Coupons'. GamedevStation then emails
+instructions to activate the account on the course platform
+(courses.gamedevstation.com).
+
+The census snapshot shows these items without a delivery icon; they are matched
+by developer/publisher (The Game Assembly / GamedevStation) and by bundle slug.
+"""
+
+[match]
+developers = ["The Game Assembly", "GamedevStation", "Game Dev Station"]
+domains = ["gamedevstation.com", "thegameassembly.com"]
+key_names = ['game ?dev ?station', 'game assembly']
+bundle_slugs = ['^game-dev-station-']
+
+[redeem]
+where = "'Click here to redeem' on the Humble download page (gamedevstation.com shop)"
+account = true
+delivers = "the courses on courses.gamedevstation.com, after activating the account from GamedevStation's email"
+expires = "not stated in the bundle text"
+steps = [
+  "On the Humble download page, reveal the coupon(s) and click 'Click here to redeem'.",
+  "In the GamedevStation shop, add the courses you purchased to the basket.",
+  "Open the 'Add Coupons' drop-down in the basket/checkout and apply the coupon; the total should be 0.",
+  "Complete checkout. GamedevStation emails instructions to activate your account on the course platform.",
+  "Log in at https://courses.gamedevstation.com to watch the courses.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download: courses stream on courses.gamedevstation.com"
+
+[library]
+videos = false
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/45459749132571-The-Mega-Game-Dev-Education-Bundle-Redemption-Instructions"
+claim = "'Click here to redeem'; select purchased courses and add to basket; 'Add Coupons' drop-down; apply coupon; email with instructions to activate the platform account (screenshot shows gamedevstation.com course cards with 'ADD TO BASKET')"
+[[sources]]
+url = "https://gamedevstation.com/"
+claim = "GamedevStation is The Game Assembly's online-course shop (WooCommerce basket/checkout); course login at courses.gamedevstation.com"
+[[sources]]
+url = "https://www.humblebundle.com/software/game-dev-station-presents-mega-game-dev-education-bundle-software"
+claim = "six The Game Assembly courses published by GamedevStation, no delivery icon in the snapshot (census)"

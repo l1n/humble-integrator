@@ -1,0 +1,31 @@
+schema = 1
+name = "Leartes Gumroad 50% Discount Code"
+vendor = "leartes-gumroad"
+kind = "service"
+service = true
+machine_names = [
+  "gumroad50discountcode_cosmoseclipsegamedevassetstoolsbundleunrealunitygodot",   # Cosmos Eclipse
+  "gumroaddiscountcode_50off_extremegamedevbundle",                               # Extreme Game Dev
+  "gumroaddiscountcode_50off",                                                    # Godot Ultimate Asset Bundle
+]
+verified = false
+notes = """
+A 50% discount code for Leartes Studios' Gumroad store
+(leartesstudios.gumroad.com: "Valid for All Leartes Gumroad Assets"), in
+bundles whose other keys redeem on Cosmos. Nothing to download; the tool only
+shows the code. No expiry stated.
+"""
+
+[redeem]
+where = "https://leartesstudios.gumroad.com/"
+steps = ["Open a Leartes product on Gumroad, enter the code in the discount-code field (or append it to the product URL), check the reduced price, buy."]
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/cosmos-eclipse-game-dev-assets-tools-bundle-unreal-unity-godot-software"
+claim = "'Gumroad 50% Discount Code': 'Gumroad Discount Coupon Valid for All Leartes Gumroad Assets'; item links leartesstudios.gumroad.com"
+[[sources]]
+url = "https://www.humblebundle.com/software/godot-ultimate-asset-bundle-software"
+claim = "'Gumroad Discount Code - 50% off': '50% Discount Code - Valid for Leartes Gumroad Account'"

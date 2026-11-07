@@ -1,0 +1,47 @@
+schema = 1
+name = "Mixcraft 10.6 Home Studio"
+vendor = "acoustica"
+kind = "app"
+machine_names = ["mixcraft106homestudioforwindows"]
+verified = false
+notes = """
+Acoustica's Windows DAW. Entry-level Mixcraft 10.6. 64-bit Windows 7 SP1 to 11. A standalone app, so it gets a Steam shortcut. Install only the newest Mixcraft you own.
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = "Redeem at store.acoustica.com/redeem, download the Windows installer from the order details page. No registration code: Mixcraft 10 signs in to the Acoustica account (File > Preferences > Account). Installer framework and silent switches not documented."
+
+[launch]
+find = "C:/Program Files*/*Mixcraft*/*.exe"
+notes = "Install folder and exe name not documented; the glob assumes a folder named after Mixcraft. Pick the main program, not the uninstaller."
+
+[steam]
+shortcut = true
+title = "Mixcraft 10.6 Home Studio"
+steamgriddb = "Mixcraft"
+
+[platforms.macos]
+runner = "crossover"
+notes = "No macOS build; untested under CrossOver."
+
+[platforms.linux]
+runner = "wine"
+notes = "No Linux build; untested under Wine."
+
+[[sources]]
+url = "https://acoustica.kayako.com/article/673-do-i-need-a-registration-code-for-mixcraft-10"
+claim = "redemption and registration steps"
+
+[[sources]]
+url = "https://store.acoustica.com/redeem"
+claim = "redeem the code into an Acoustica account; download from the order details page"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/make-music-change-lives-software"
+claim = "item in the bundle (census)"
+
+[[sources]]
+url = "https://acoustica.com/products/mixcraft"
+claim = "Mixcraft is DAW software for Windows"

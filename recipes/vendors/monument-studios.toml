@@ -1,0 +1,76 @@
+schema = 1
+name = "Monument Studios"
+kind = "route"
+notes = """
+Monument Studios sells TTRPG and game audio (fantasy/sci-fi music,
+ambiences, sound design, one-shot SFX) on its own Shopify store,
+monumentstudios.net, and delivers the files through SendOwl; Fantasy+ is
+its subscription app (fantasyplus.app). Humble bundle: Monument Studios:
+TTRPG Audio Compendium (November 2024): "All of the software in this bundle
+is available through Monument Studios website. A single key will be
+provided to redeem all the content in your bundle." So the bundle's audio
+packs (Fantasy Music Vol 1/2, Battle Music, Cinematic Hits, Hollywood
+Horror, Sounds of Nature, Magic Spells, ...) come from one key, used as a
+coupon on a hidden "Humble Bundle: Tier N" product in Monument's store that
+the Humble download page links to; the $0 order then sends a SendOwl email
+with the download links. The Fantasy+ subscription months in the same
+bundle are separate keys (items/monument-studios/fantasy-plus-subscription).
+
+Downloads: SendOwl allows three download attempts per product, so the tool
+must download each archive once, completely, and keep it (no retries that
+burn attempts without asking). The archives are ZIP files of 0.2-7.6 GB
+each (sizes are in the Humble item names).
+Matched by bundle (slug, redemption text), not by developer, so Monument
+items in someone else's DRM-free audio bundle stay on the generic download
+routes.
+"""
+
+[match]
+bundle_slugs = ['^monument-studios']
+redeem_text = ['\b(?:through|on|via|at)(?:\s|&nbsp;| )+(?:the(?:\s|&nbsp;| )+)?Monument Studios\b']
+domains = ["monumentstudios.net"]
+key_names = ['\bmonument studios\b']
+
+[redeem]
+where = "https://www.monumentstudios.net/"
+account = false
+delivers = "a $0 order on monumentstudios.net and an email with SendOwl download links for the tier's audio packs"
+expiry_text = "not stated on the bundle page or in Humble's article"
+steps = [
+  "Open the Monument Studios link on the Humble download page: a hidden 'Humble Bundle: Tier N' product on monumentstudios.net (e.g. /products/humble-bundle-tier-4 is 'Tier 1'). Use the one for the tier bought.",
+  "Add it to the cart; at checkout put the Humble key in the coupon code field so the total drops to $0, and finish the order with your email.",
+  "Open the order email from Monument Studios and follow its download URL to SendOwl.",
+  "On SendOwl click Download next to each product. Each product allows only three download attempts: save every ZIP completely and keep it.",
+  "Unzip the archives. Problems: https://www.monumentstudios.net/pages/contact-us.",
+]
+
+[download]
+scriptable = false
+how = "SendOwl download links from the order email (the user hands the email's URL to the tool)"
+auth = "the SendOwl link itself; no account"
+notes = "Three download attempts per product: fetch each file once with resume support and verify it before unpacking. Whether the SendOwl page can be fetched by script without a browser is untested (inference)."
+
+[library]
+audio = "ZIP archives per pack (music scores, ambiences, sound design, one-shot SFX), unpacked"
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer: audio files."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/30744569864731-Monument-Studios-Redemption-Instructions"
+claim = "after the order an email gives a unique download URL to Monument Studios' SendOwl page; Download per product; three download attempts per product; unzip; support at monumentstudios.net/pages/contact-us"
+[[sources]]
+url = "https://www.monumentstudios.net/products/humble-bundle-tier-4"
+claim = "'Humble Bundle: Tier 1' product: add it to the cart and apply your unique key in the coupon code field during checkout to take the total down to $0; the key is in the Humble order confirmation email; after checkout an email directs you to download via SendOwl"
+[[sources]]
+url = "https://www.humblebundle.com/software/monument-studios-ttrpg-audio-compendium-software"
+claim = "census redeem_text: 'All of the software in this bundle is available through Monument Studios website'; 'A single key will be provided to redeem all the content in your bundle'"

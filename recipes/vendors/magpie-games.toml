@@ -1,0 +1,59 @@
+schema = 1
+name = "Magpie Games (physical RPG goods via magpiegames.com)"
+kind = "route"
+service = true        # physical goods shipped by post: nothing to download or install
+notes = """
+Humble Physical RPG Bundle: Urban Shadows Physical Collection by Magpie
+Games (Oct-Nov 2026; 'Physical item with limited quantity'). The items are
+physical products: Urban Shadows 2nd Edition (printed core book), MC Screen +
+Campaign Notepads, Dice Pack and Dice Tray. The Humble keys are coupon codes
+for magpiegames.com that zero the product price at checkout; shipping is paid
+separately there. Kind is 'service' because nothing digital arrives: the
+tool can only show the steps (and the user must enter a postal address and
+pay shipping themselves).
+
+Matched by this bundle's slug only: Magpie Games also publishes DRM-free
+ebook bundles on Humble that must stay on the generic download routes, and
+the item machine names (e.g. urbanshadows2ndedition) could recur as ebooks.
+Humble's 'Magpie Games Classic Indie RPG Physical Book Bundle' (May 2026,
+not in the census) used the same coupon flow; its keys would reach this
+recipe through the magpiegames.com domain.
+"""
+
+[match]
+# URL slug (urban-shadows-physical-collection-books) or a key's bundle machine name (hyphen-free)
+bundle_slugs = ['^urban-?shadows-?physical-?collection']
+domains = ["magpiegames.com"]
+
+[redeem]
+where = "the product page for the tier bought on magpiegames.com, then its checkout"
+account = false
+delivers = "the physical items, shipped by Magpie Games (shipping paid by the buyer)"
+expires = "not stated; physical stock is limited, so redeem promptly"
+tier_products = [
+  "$39 tier: https://magpiegames.com/collections/urban-shadows/products/core-book-urban-shadows-1",
+  "$59 tier: https://magpiegames.com/products/urban-shadows-physical-collection-humble-bundle",
+]
+steps = [
+  "Open the product page for the tier bought (see tier_products) and add the item to the cart.",
+  "At checkout enter the coupon code from the Humble download page; it only works with that product in the cart.",
+  "The discount removes the product cost; pay the remaining shipping cost and enter the postal address.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download: physical goods"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/57279074942235-Humble-Physical-RPG-Bundle-Urban-Shadows-Physical-Collection-by-Magpie-Games"
+claim = "shipping paid separately; add the tier's product ($39: core-book-urban-shadows-1, $59: urban-shadows-physical-collection-humble-bundle) to the cart, enter the coupon at checkout, only shipping remains (2026-10-16)"
+[[sources]]
+url = "https://www.humblebundle.com/books/urban-shadows-physical-collection-books"
+claim = "'Physical item with limited quantity'; four hb-key items by Magpie Games / Mark Diaz Truman (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/49922338822683-Humble-Physical-Book-Bundle-Magpie-Games-Classic-Indie-RPG-Physical-Book-Bundle"
+claim = "same flow for the Classic Indie RPG Physical Book Bundle (2026-05): magpiegames.com/products/classic-indie-bundle to cart, coupon at checkout, shipping paid separately"

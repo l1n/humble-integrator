@@ -1,0 +1,77 @@
+schema = 1
+name = "ScansMatter"
+kind = "route"
+notes = """
+Photoscanned 3D models, PBR materials (2K-8K), reference kits and Unreal
+Engine environment projects from ScansMatter B.V. (sister of FastTrack
+Tutorials and BundleFoundry). Humble bundles: AAA Realities Asset Bundle
+(2025, 52 items named by ScansMatter product code, e.g. WM00221, MT00590,
+MM00368) and Ultimate World Building Asset Bundle (2025, kits plus 50/100/150
+"Free Commercial Credits on ScansMatter.com"). One key per item.
+
+Where keys go (inference, unverified): neither bundle's text names a
+redemption site, but both are ScansMatter-only, every item links to its
+scansmatter.com page, the credit items are spent on scansmatter.com, and
+ScansMatter requires an account to download anything. So keys are assumed
+to be redeemed in a scansmatter.com account; no public redeem page was found
+(logged out). If a key's Humble instructions point to Fab instead (ScansMatter
+and BundleFoundry also sell through Fab), extracted keys reach vendors/fab
+through its domains rule first.
+
+Kinds: models and materials are content (FBX/OBJ plus texture sets, usable
+in any DCC or engine); the environment kits are Unreal Engine 5.1+ projects;
+credits are a service balance (spend them on more assets, then download).
+"""
+
+[match]
+developers = ["ScansMatter", "Scans Matter", "ScansMatter B.V."]
+domains = ["scansmatter.com"]
+key_names = ['\bscans ?matter\b']
+redeem_text = ['redeem\w*[^.]{0,60}\bscans ?matter\b']
+bundle_slugs = [
+  '^aaa-?realities-asset-bundle',
+  '^aaarealitiesassetbundle',
+  '^ultimate-world-building-asset-bundle',
+  '^ultimateworldbuildingassetbundle',
+]
+
+[redeem]
+where = "https://scansmatter.com/signin"
+account = true
+delivers = "assets (and credit balances) in the ScansMatter account, downloaded from each product page (inferred)"
+expires = "not stated in either bundle's text"
+steps = [
+  "Create a ScansMatter account at https://scansmatter.com/signup (an account is required to download anything).",
+  "Redeem each key in the account (location unconfirmed: check the key's Humble instructions; see notes).",
+  "Download each asset from its product page; credit items add a balance that is spent on further downloads.",
+]
+
+[download]
+scriptable = false
+how = "per product page while logged in (the site posts to a download_product endpoint)"
+notes = "No public API. A logged-in browser session could fetch each product's files into the library folder (inference, untested). Resolution choice (2K/4K/8K) matters for size."
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer: unpack models/materials into the library folder; environment kits are opened as Unreal Engine 5.1+ projects."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/aaa-realities-asset-bundle-software"
+claim = "ScansMatter-only bundle for Unreal Engine and Unity; 'Redeem your keys'; available for Windows, Mac and Linux; no redemption site named"
+[[sources]]
+url = "https://www.humblebundle.com/software/ultimate-world-building-asset-bundle-software"
+claim = "every item links to a scansmatter.com page; '50/100/150 Free Commercial Credits on ScansMatter.com'; environments set up in Unreal Engine 5.1+"
+[[sources]]
+url = "https://gamefromscratch.com/godot-4-course-ultimate-world-building-assets-humble-bundle/"
+claim = "Ultimate World Building Asset Bundle by ScansMatter (May 2025), credits tier"
+[[sources]]
+url = "https://scansmatter.com/faq"
+claim = "an account is needed to access, purchase and download content; credits system; licences perpetual once downloaded"

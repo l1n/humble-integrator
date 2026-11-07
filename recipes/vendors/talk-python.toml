@@ -1,0 +1,70 @@
+schema = 1
+name = "Talk Python Training (and the 'Next Level Python' partner bundle)"
+kind = "route"
+service = true        # course platform: nothing to install, no Steam entry
+notes = """
+"Next Level Python - From Talk Python and Friends" (Sept 2024) is a single-key
+bundle: "A single key will be provided to redeem all the content in your
+bundle". Its 29 items come from Talk Python (Effective PyCharm, Rock Solid
+Python with Typing, NLP and spaCy, Shiny dashboards, VS Code for Python,
+Getting Started with pytest) and partners: Real Python, PyBites, Metasnake (Matt
+Harrison), Reuven Lerner (LernerPython, Bamboo Weekly), Brian Okken
+(pythontest.com, The Complete pytest Course) and JetBrains (PyCharm/WebStorm
+2-6 month codes). This route claims the whole bundle because there is only one
+key to redeem.
+
+Talk Python's own courses are added to a Talk Python Training account through
+the green link on the Humble download page (a course access code page:
+training.talkpython.fm/purchase/access_code/<code>). How the partners' items are
+handed over from that single key was not found: presumably the Talk Python page
+reached with the key lists each partner's code or link (inference, unverified).
+Check the download page and the Talk Python account after redeeming, and redeem
+each partner item on its own site (realpython.com, pybit.es, store.metasnake.com,
+lernerpython.com, pythontest.com, jetbrains.com/store/redeem).
+
+Bundle text gives no redemption deadline; partner subscriptions (JetBrains,
+Bamboo Weekly, LernerPython month, PythonTest Community year) start when
+redeemed.
+"""
+
+[match]
+developers = ["Talk Python", "Talk Python Training"]
+domains = ["talkpython.fm"]
+key_names = ['talk ?python']
+bundle_slugs = ['^next-level-python-from-talk-python']
+
+[redeem]
+where = "the green 'Click here to redeem your TalkPython key' link on the Humble download page (training.talkpython.fm access-code page)"
+account = true
+delivers = "Talk Python Training courses in the account (lifetime); partner items via their own sites"
+expires = "not stated in the bundle text"
+steps = [
+  "Reveal the single bundle key on the Humble download page and click the green redeem link.",
+  "Create or log in to a Talk Python Training account (https://training.talkpython.fm).",
+  "New accounts see a 'Join course' button on the 'Apply a course access code' page; existing accounts get the course(s) added directly.",
+  "For the partner items (Real Python, PyBites, Metasnake, Reuven Lerner, Brian Okken, JetBrains), follow the codes or links shown with the key or on the Talk Python page (unverified) and redeem each on its own site.",
+  "Support: contact@talkpython.fm.",
+]
+
+[download]
+scriptable = false
+how = "courses stream at training.talkpython.fm and in the Talk Python Training apps"
+notes = "Offline viewing in Talk Python's mobile apps is a platform feature; no bulk download for desktop was found (unverified)."
+
+[library]
+videos = false
+files = "course code/exercise repositories are linked from each course page (GitHub)"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360050848393-TalkPython-Key-Redemption-instructions"
+claim = "click the green link on the bundle page; create or log into a TalkPython account; new accounts click 'Join course', existing users get the course added; contact@talkpython.fm (updated 2024-09-05)"
+[[sources]]
+url = "https://www.humblebundle.com/software/next-level-python-from-talk-python-and-friends-software"
+claim = "'A single key will be provided to redeem all the content in your bundle'; 29 items from Talk Python and partners (census)"
+[[sources]]
+url = "https://training.talkpython.fm/purchase/access_code/humble-bundle-pythonic-4df7b5d3-45cd-4796"
+claim = "Humble codes are Talk Python course access codes (login required; each code has a licence limit)"

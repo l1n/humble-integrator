@@ -1,0 +1,51 @@
+schema = 1
+name = "Khron Studio"
+kind = "route"
+notes = """
+Game-audio studio (sound-effect libraries for monsters, spells,
+weapons, UI, puzzle games, survival). Its own Humble bundle, Indie Game SFX
+(Oct 2022): Monster Library Vol 1 and 2, Puzzle Games Vol 1, Fantasy Magic
+Weapons Vol 1, Elemental Spells Vol 1. Humble's page says nothing about
+keys or redemption and gives the items no delivery icon; they were
+presumably plain Humble downloads (inference, unverified). Khron Studio
+libraries also appear in GameDev Market bundles as "KhronStudio"; those are
+redeemed on GameDev Market (its own recipe), so this route matches only the
+Indie Game SFX bundle.
+"""
+
+[match]
+# No developers rule: KhronStudio packs in GameDev Market bundles belong to that route.
+bundle_slugs = ['^indie-game-sfx', '^indiegamesfx']
+domains = ["khronstudio.com"]
+key_names = ['khron ?studio']
+
+[redeem]
+where = "https://www.humblebundle.com/home/library"
+account = false
+delivers = "sound-effect library zips on the bundle's Humble download page (inferred)"
+steps = [
+  "Nothing to redeem (inferred): download each library from the bundle's Humble download page into audio/khron-studio/<library>.",
+  "If a library shows a key instead, follow the key's own Humble instructions and report it: no Khron Studio redemption flow for Humble keys is documented.",
+]
+
+[download]
+scriptable = true
+how = "Humble download page (inferred)"
+
+[library]
+files = "WAV sound effects per library (e.g. Monster Library Vol 1: 141 sounds; Puzzle Games Vol 1: 148): audio/khron-studio/<library>"
+licence = "royalty-free game SFX (Humble's descriptions)"
+
+[install]
+source = "humble"
+serial = "none"
+notes = "Nothing to install: unzip into the library folder."
+
+[platforms.macos]
+runner = "native"
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/indie-game-sfx-software"
+claim = "five Khron Studio SFX libraries; bundle text mentions no keys or redemption; items have no delivery icons (Wayback snapshot 2022-10-03)"

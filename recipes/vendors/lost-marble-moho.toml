@@ -1,0 +1,104 @@
+schema = 1
+name = "Lost Marble (Moho)"
+kind = "route"
+notes = """
+Moho (formerly Anime Studio, sold by Smith Micro until 2021) is Lost Marble's
+2D animation suite, native on Windows and macOS. Humble's 2026 bundle
+(publisher Graphixly LLC) sold Moho Pro 12.5 with content packs and a $125
+upgrade credit; 'All keys can be redeemed on the Moho website'. The Moho
+Pro 12.5 key is the serial typed into the installer/first launch; Lost
+Marble's Humble page links the 12.5 installers. Smith Micro's old
+activation servers are gone: use the final 12.5 build (12.5.1 on Mac).
+Moho 12 allows 3 activations, one in use at a time (forum); deactivation is
+by support ticket, so don't burn activations on throwaway prefixes.
+Linux has no native build; under Wine 12.5 crashes at launch unless the
+prefix has vcrun2013.
+"""
+
+[match]
+developers = ["Lost Marble", "Lost Marble LLC"]
+domains = ["lostmarble.com", "mohoanimation.com", "lostmarble.net"]
+key_names = ["moho"]
+
+[redeem]
+where = "https://moho.lostmarble.com/pages/humblebundle"
+account = false
+delivers = "Moho Pro 12.5 serial (the Humble key) + installer links; content-pack downloads by email link; an upgrade credit for moho.lostmarble.com"
+expires = "unknown (the $125 credit's expiry was not found)"
+steps = [
+  "Reveal the Moho Pro 12.5 key: it is the serial (uppercase, dashes; 0 is zero, never the letter O).",
+  "Download Moho-Windows.exe or Moho-Mac.pkg from the links on https://moho.lostmarble.com/pages/humblebundle and install.",
+  "Enter the serial and an email when Moho asks (online activation; offline: manual activation per the 12.5 manual).",
+  "'No activations available': install the final 12.5 patch (Moho-12.5-Windows.exe / Moho-12.5.1-Mac.pkg) and retry, or open a ticket with Lost Marble.",
+  "Content packs and the upgrade credit: redeem on the Moho website (exact page for pack codes not found); packs arrive as download links.",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+driver = "inno"
+driver_notes = "Windows: Inno Setup 5.5.7 ('Moho 12.5', 6 languages) installing 'Moho x64.exe' (or 'Moho Win32.exe') plus MohoRT, data in ProgramData\\Smith Micro\\Moho\\12, VC++ runtimes bundled. Standard Inno switches exist, but the serial/email step makes it interactive; untested silent. Mac: Moho-Mac.pkg installs /Applications/Moho.app (com.smithmicro.MohoApp 12.5, min macOS 10.10) and creates /Users/Shared/Library/Application Support/Smith Micro/Moho/12."
+
+[prefix]
+name = "moho"
+arch = "win64"
+windows = "win10"
+winetricks = ["vcrun2013"]
+
+[platforms.macos]
+runner = "native"
+notes = "Native Moho.app; the 12.5 build is from 2018 (Intel, so Rosetta on Apple Silicon - Lost Marble says it works on M1 and newer macOS)."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "No native build. Wine 10.20: 12.5 crashes right after launch (bug 59204, dup of 48217: missing msvcr120 function); winetricks vcrun2013 fixes it. Older Anime Studio versions had activation trouble under Wine."
+
+[[sources]]
+url = "https://moho.lostmarble.com/pages/humblebundle"
+claim = "Lost Marble's Humble page: download Moho Pro 12.5 (Moho-Windows.exe / Moho-Mac.pkg), install, enter the serial; works on Apple Silicon"
+
+[[sources]]
+url = "https://lostmarble.net/Moho125/index.html"
+claim = "Moho 12.5 manual: serial + email at install; manual (offline) activation; deactivation via support"
+
+[[sources]]
+url = "https://lostmarble.com/support/kb/faq.php?id=5"
+claim = "serials: uppercase, dashes, zeros not letter O"
+
+[[sources]]
+url = "https://lostmarble.com/support/kb/faq.php?id=3"
+claim = "'no activations available': install the final 12.5 patch (my.smithmicro.com)"
+
+[[sources]]
+url = "https://lostmarble.net/forum/viewtopic.php?t=35949"
+claim = "Moho 12: 3 activations, one in use at a time (forum)"
+
+[[sources]]
+url = "https://www.lostmarble.net/forum/viewtopic.php?t=38097"
+claim = "Smith Micro activation servers gone; use the final installer"
+
+[[sources]]
+url = "https://my.smithmicro.com/"
+claim = "final 12.5 patches"
+
+[[sources]]
+url = "https://moho.lostmarble.com/upgrade"
+claim = "upgrade checkout takes a Moho Pro 12 serial in 'DISCOUNT CODE/SERIAL NUMBER'; 12 to 14 is $349.99"
+
+[[sources]]
+url = "https://bugs.winehq.org/show_bug.cgi?id=59204"
+claim = "Moho Pro 12.5 crashes at launch under Wine 10.20; duplicate of 48217 (msvcr120); winetricks vcrun2013"
+
+[[sources]]
+url = "https://bugs.winehq.org/show_bug.cgi?id=48217"
+claim = "msvcr120 missing function (open)"
+
+[[sources]]
+url = "https://moho.lostmarble.com/products/characters-content-pack"
+claim = "Characters pack: 8 .moho files; product page lists Moho 13.5+"
+
+[[sources]]
+url = "https://lostmarble.net/forum/viewtopic.php?p=217828"
+claim = "brushes: copy .mohobrush/.png into Custom Content/Brushes, reload with Ctrl+Alt+Shift+L"

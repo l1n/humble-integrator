@@ -1,0 +1,24 @@
+schema = 1
+name = "Token Treasury: Monsters 1"
+vendor = "profantasy"
+kind = "content"
+machine_names = ["tokentreasury_monsters1"]
+recommends = ["profantasy/cc3plus"]
+verified = false
+notes = "Installer about 330 MB. Tokens are PNGs usable in any virtual tabletop; CC3+ gets catalogs and tools. Adds symbols, catalogs and drawing tools to CC3+."
+
+[install]
+source = "vendor"
+serial = "per-product"
+notes = "Use the ...ForCC3Plus installer; install with CC3+ closed."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://forum.profantasy.com/discussion/15300/executables"
+claim = "use the ...ForCC3Plus installer"
+
+[[sources]]
+url = "https://web.archive.org/web/2022/https://www.profantasy.com/products/"
+claim = "installer sizes and requirements"

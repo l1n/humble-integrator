@@ -1,0 +1,39 @@
+schema = 1
+name = "Strum Session"
+vendor = "applied-acoustics"
+kind = "addon"
+machine_names = ["strumsession"]
+verified = false
+notes = """
+Acoustic and electric guitar instrument with chord recognition, automatic voicing, strumming/picking engines and a MIDI riff library; Session series. Current version: Strum Session 2 (v2.4.5). Plugin (VST, AU, AAX) hosted by any DAW; no Steam entry. AAS also sells the three Session instruments together as the Session Bundle (one installer).
+"""
+
+[install]
+source = "vendor"
+serial = "per-product"
+file = "strum-session-2-v*"
+notes = """
+Use the account's personalised installer (it carries and activates the licence); otherwise authorize at first launch, or offline via applied-acoustics.com/unlock. Mac and Windows zips; no silent install documented.
+"""
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+bridge = "yabridge"
+prefix = "audio-plugins"
+notes = """
+No Linux build. Untested: Windows installer into the shared audio-plugins prefix, yabridge for the DAW, offline unlock if needed.
+"""
+
+[[sources]]
+url = "https://www.applied-acoustics.com/strum-session-2/"
+claim = "Session series instrument, VST/AU/AAX, Mac/Windows installers"
+
+[[sources]]
+url = "https://www.applied-acoustics.com/support/"
+claim = "latest installers per product, Mac and Windows only"

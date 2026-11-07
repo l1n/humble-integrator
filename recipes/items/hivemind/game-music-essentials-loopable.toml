@@ -1,0 +1,37 @@
+schema = 1
+name = "Game Music Essentials (Loopable)"
+vendor = "hivemind"
+kind = "content"
+publisher = "Hivemind"
+machine_names = [
+  "gamemusicessentialsloopable_hivemind",
+]
+verified = false
+notes = """
+A Hivemind sound pack for games (5 Loopable Tracks),
+in both Hivemind mixed bundles. The Massive bundle's text says it is
+"available DRM-Free"; the Game Dev Asset Mega Bundle lists it as a DRM-free
+download, while the Massive bundle's item data shows a key (census delivery:
+gamedev:hb-drmfree, massive:hb-key). Fetch the Humble download into the
+library folder; if Humble also shows a key, it is a Fab code (inference) and
+redeems like the bundle's other keys.
+"""
+
+[install]
+source = "humble"
+serial = "none"
+notes = "Audio files (loops / sound effects) for use in any engine; nothing to install."
+
+[library]
+files = "the pack's audio files as Humble delivers them (format not stated on the bundle pages)"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/massive-unreal-engine-unity-asset-bundle-hivemind-software"
+claim = "'Rain & Wind Sounds (Loopable), Game Music Essentials (Loopable), Horror Ambient Loops (Loopable), and Monster Sounds are available DRM-Free'"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/gamedev-asset-mega-bundle-unreal-engine-unity-software"
+claim = "the four Hivemind sound packs are DRM-free downloads (delivery hb-drmfree)"

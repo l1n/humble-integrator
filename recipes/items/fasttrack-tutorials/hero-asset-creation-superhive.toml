@@ -1,0 +1,45 @@
+schema = 1
+name = "Hero Asset Creation - In-Depth Tutorial Course (Blender Market bundle copy)"
+vendor = "fasttrack-tutorials"
+kind = "document"
+machine_names = ["heroassetcreation_in-depthtutorialcourse"]
+verified = false
+notes = """
+This FastTrackTutorials course came only in Blender Market's "Essential Game
+Modding Toolkit" bundle and its Encore (publisher "Blender Market"). It is
+not redeemed on fasttracktutorials.com. The bundle has ONE coupon for
+everything, used at a $0 checkout of the bundle product on Blender Market,
+now Superhive (superhivemarket.com). The course files are then downloaded
+from the Superhive account's Orders page into the library folder. No Steam
+entry. See full-environment-creation-ue5-blender-superhive.toml for why this
+item recipe exists.
+"""
+
+[redeem]
+where = "https://blendermarket.com/products/blender-markets-essential-game-modding-toolkit"
+account = true
+steps = [
+  "Reveal the bundle's single coupon on Humble.",
+  "Open the bundle product on Blender Market (now superhivemarket.com) and choose the variant/tier that was bought.",
+  "Enter the coupon at checkout (type it rather than paste it if it fails) and check out at $0.",
+  "Download the course files from the Superhive account's Orders page.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+file = "*"
+notes = "Superhive order downloads (zip archives of lessons and project files; layout not confirmed)."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/26912354384411-Blender-Market-s-Essential-Game-Modding-Toolkit-License-and-Bundle-Information"
+claim = "bundle redemption: product link, choose variant, coupon code, checkout; this course listed with the bundle's licences"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/51303757621659-Creature-and-Character-Creation-Bundle-Redemption-Instructions"
+claim = "Superhive bundles: product files downloadable any time from the Superhive account Orders page"
+[[sources]]
+url = "https://www.humblebundle.com/software/blender-markets-essential-game-modding-toolkit-software-encore"
+claim = "item developer FastTrackTutorials, publisher Blender Market; single key for the bundle (census)"

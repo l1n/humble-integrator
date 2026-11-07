@@ -1,0 +1,20 @@
+schema = 1
+name = "DRM-free app or game"
+kind = "route"
+priority = 20
+notes = """
+Download the build for this OS from the Humble order (md5-checked), install it
+without root, and add a Steam shortcut. Preference: native build for this OS,
+then the Windows build under Wine (macOS: wrapper; Linux: Proton/umu with a
+per-item prefix). Installers handled generically by signature: Inno Setup
+(/VERYSILENT /SUPPRESSMSGBOXES /DIR=), NSIS (/S /D=), MSI (msiexec /qn),
+plain archives; macOS .dmg/.zip/.app; Linux tar/zip, .deb (extracted, not
+installed), .sh (makeself --noexec --target / MojoSetup), AppImage.
+Software bundles also label asset packs (sample libraries, textures) as
+downloadable "software": if an unpacked download has nothing to launch, it is
+moved to <library>/files/<machine_name> instead and gets no Steam entry.
+"""
+
+[match]
+delivery = ["hb-drmfree"]
+content_types = ["game", "software"]

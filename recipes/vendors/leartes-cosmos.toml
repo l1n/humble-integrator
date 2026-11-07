@@ -1,0 +1,169 @@
+schema = 1
+name = "Cosmos by Leartes (Leartes Studios)"
+kind = "route"
+notes = """
+Leartes Studios' own store, Cosmos (cosmos.leartesstudios.com), is where the
+keys of almost every Leartes Humble bundle are redeemed: one Cosmos code
+(xxxx-xxxx-xxxx-xxxx) per item, entered on Cosmos's Redeem page; the product
+then sits in the account's Inventory with permanent download links.
+
+Bundles routed here (census 2024-2026):
+  * text names Cosmos: Big Bang Unreal & Unity Asset Packs (2025), Best Core
+    Game Dev Assets & Tools (2026), Extreme Game Dev (2026), Unreal & Unity
+    Assets Giga Bundle Encore (Dec 2024), Cosmos Eclipse (Unreal + Unity +
+    Godot, 2026: "Keys are redeemable on the Cosmos and Unity Store website"),
+    Mega Game Dev Assets & Tools (2025/26: "Keys redeemable on the Leartes
+    website" - GameFromScratch: Cosmos, Unity assets can also be redeemed on
+    the Unity Asset Store, Fab keys generated from Cosmos).
+  * text names no store, routed by slug: the "leartes-..." bundles (Unreal &
+    Unity Assets Giga Bundle, Apr 2024, and its Sep 2024 encore; Unreal |
+    Unity | Godot Mega Flash Sale, Jul 2024; Black Friday Mega Game Dev,
+    Nov 2025), Gigantic Game Dev Assets & Tools Megabundle (Sep 2025) and
+    Godot Ultimate Asset Bundle (Oct 2025). Evidence: GameFromScratch says the
+    Godot bundle "redeemed on the Cosmos asset store" and the Giga bundle
+    "majority ... redeemed on their Cosmos Store, although some are hosted on
+    Gumroad"; the archived Humble pages of Black Friday and Gigantic 2025 link
+    almost every item to a Cosmos product page and name no other store. For
+    the 2024 Giga bundles and the flash sale this is inference, and so is
+    Gigantic 2025: its 2026 rerun, "Best Leartes Gigantic", says
+    "Professional Fab Marketplace keys provided" and goes to vendors/fab,
+    while the 2025 page says nothing about Fab.
+  * not here: GameMasters Toolkit (2024; "redeemable through Leartes's
+    website", but Humble's help article shows Leartes' Gumroad store ->
+    vendors/leartes-gumroad); Legendary Game Dev Environments (2025; "All keys
+    can be redeemed on the Cosmos site and the Gumroad site" -> vendors/gumroad
+    by its text; most of its items link to Cosmos product pages, so expect
+    Cosmos codes for most of them - the key's own instructions decide).
+No developers rule: Leartes, Cosmos By Leartes, StylArts/Stylarts, Akairo,
+Switchboard Studios, No Mad Studios, Ursa.Animation, Barrel Bark Interactive,
+Games by Hyper, Stylescape, Pennyguins and Leartes Learning items also come in
+bundles that hand out Fab codes (Best Leartes Gigantic -> vendors/fab) or
+Unity vouchers.
+
+Several keys per product, several engines. Leartes products exist for Unreal,
+Unity and Godot. Older bundles give one item per product (one Cosmos code; the
+Cosmos download holds the engine folders the product has). Cosmos Eclipse and
+Black Friday list one item per engine ("(Unreal Engine)", "(Unity)",
+"(Godot)"); those "(Unity)" items are routed here too because their Humble
+pages link them to Cosmos product pages, but Cosmos Eclipse's text also names
+the Unity Store, so some may be Unity Asset Store vouchers (open question):
+the key itself decides - a key whose instructions point at the Unity Asset
+Store resolves to vendors/unity-asset-store. Big Bang: "This bundle provides
+Unity Asset Store keys directly with your purchase, and FAB keys via
+redemption through Cosmos, if the product is available on those platforms" -
+every item is a Cosmos code; a product that is also on the Unity Asset Store
+may carry an extra Unity key on the download page (redeem that at Unity), and
+the Fab key for Unreal products is generated from Cosmos after redemption
+(how exactly is not documented; GameFromScratch: assets redeemed on Cosmos
+"can also be used on the Fab marketplace via generated keys").
+
+Discount codes and subscriptions in these bundles are item recipes:
+items/leartes-cosmos/ (Cosmos 50%/75% codes, Cosmos 1-month and Premium
+subscriptions, Hyper Gold), items/games-by-hyper/ (codes for
+gamesbyhyper.com), items/leartes-gumroad/ (Leartes Gumroad 50% codes).
+Humble bundles are licensed under Cosmos's Studio License.
+"""
+
+[match]
+redeem_text = [
+  '\bCosmos by Leartes\b',
+  'cosmos\.leartesstudios\.com',
+  # "Keys are redeemable on the Cosmos and Unity Store website" (Cosmos Eclipse). Not when the
+  # same sentence also names Gumroad ("redeemed on the Cosmos site and the Gumroad site").
+  '\bredeem\w*(?:\s|&nbsp;| )+(?:on|via|through|at|from)(?:\s|&nbsp;| )+(?:the(?:\s|&nbsp;| )+)?Cosmos\b(?![^.]*\bGumroad\b)',
+  # "Keys redeemable on the Leartes website" (Mega Game Dev Assets & Tools); not GameMasters
+  # Toolkit's "redeemable through Leartes's website" (Gumroad -> vendors/leartes-gumroad).
+  '\bredeem\w*(?:\s|&nbsp;| )+on(?:\s|&nbsp;| )+the(?:\s|&nbsp;| )+Leartes(?:\s|&nbsp;| )+website\b',
+]
+bundle_slugs = [
+  '^leartes-',                                    # Leartes-named bundles (Giga, Giga Encore, Mega Flash Sale, Black Friday Mega)
+  '^gigantic-game-dev-assets-tools-megabundle',   # Sep 2025 (not the 2026 best-leartes-gigantic rerun: Fab keys)
+  '^godot-ultimate-asset-bundle',                 # Oct 2025
+]
+domains = ["cosmos.leartesstudios.com", "leartesstudios.com"]
+# Not bare "cosmos" (Azure Cosmos DB courses); not a Leartes key whose text points at Unity,
+# Fab or Gumroad (those vendors redeem it).
+key_names = [
+  '(?s)^(?!.*(?:assetstore\.unity\.com|unity asset store|\(\s*unity\s*\)|\bfab\b|gumroad\.com)).*\bleartes\b',
+  '\bcosmos\b.{0,30}\b(subscription|discount|premium)\b',
+]
+
+[redeem]
+where = "https://cosmos.leartesstudios.com/redeem"
+account = true
+delivers = "each code adds its product (or subscription) to the Cosmos account's Inventory, with permanent download links"
+expiry_text = "per bundle: Extreme Game Dev 'redemption deadline is February 26, 2027'; Cosmos Eclipse 'redeem before July 1st, 2027'; none stated for the others. Cosmos discount codes: 'The Redemption period only valid for 3 month'."
+steps = [
+  "Open https://cosmos.leartesstudios.com/ and sign up (https://cosmos.leartesstudios.com/signup) or log in.",
+  "Click Redeem (left sidebar, lower left; or https://cosmos.leartesstudios.com/redeem), enter one code in the xxxx-xxxx-xxxx-xxxx format, click Redeem.",
+  "Repeat for every code Humble shows (one per item, or per tier).",
+  "Open the account menu > Inventory: the redeemed products are there with their download links.",
+  "Download each product (zip). Unreal: extract and copy the Rocket folder from the Unreal folder into a project's Content folder, or Migrate a full environment; Unity: copy the Rocket folder from the Unity folder into Assets; Godot: open/copy the project.",
+  "If Humble also shows a Unity Asset Store key for the item, redeem that at Unity (vendors/unity-asset-store); for a Fab copy of an Unreal product, generate the Fab key from Cosmos (inference) and redeem it on Fab (vendors/fab).",
+]
+
+[download]
+scriptable = false
+how = "per product from Cosmos > Inventory in a logged-in browser; Unreal Engine 5 users can also pull Cosmos assets into a project with Leartes' Rocket plugin (drag and drop)"
+notes = """
+No public API. With the user's logged-in browser session the Inventory could
+be walked and each zip saved into the library folder (inference, untested).
+The Rocket plugin (cosmos.leartesstudios.com/rocket) is an Unreal Engine 5
+editor plugin installed per project (Plugins/Rocket) that imports Cosmos
+environments, VFX, tools, sounds and materials by drag and drop - an
+alternative to downloading for Unreal users, not a way for the tool to fetch
+files.
+"""
+
+[library]
+files = "one zip per product: an Unreal folder (.uasset content, a Rocket folder to copy into Content), a Unity folder (Rocket folder for Assets, or .unitypackage), Godot projects (.tscn), plus .fbx/.obj meshes, .png/.jpeg textures, .sbsar materials and .wav/.mp3 sounds, depending on the product"
+videos = "Leartes Learning tutorials (Cosmos /tutorials): whether they download or only stream is not documented"
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer: zip archives per product, added to an Unreal/Unity/Godot project by hand (or Rocket for Unreal)."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/23830071628955-Cosmos-by-Leartes-Redemption-Instructions"
+claim = "Humble: open cosmos.leartesstudios.com, sign up at /signup, click the redeem button at the lower left, enter the code in xxxx-xxxx-xxxx-xxxx format, then click Inventory (article updated 2026-08-25; screenshots show Redeem in the left sidebar and Inventory in the account menu)"
+[[sources]]
+url = "https://cosmos.leartesstudios.com/redeem"
+claim = "redeem page: 'Enter your Redeem Code below to claim your intergalactic loot'"
+[[sources]]
+url = "https://cosmos.leartesstudios.com/frequently-asked-questions"
+claim = "download links are added to the account; file formats (.obj/.fbx, .png/.jpeg, .sbsar, .unitypackage/.uasset, .mp3/.wav); Unreal: copy the Rocket folder into Content or Migrate; Unity: copy the Rocket folder into Assets; Humble Bundle bundles are licensed under the Studio License"
+[[sources]]
+url = "https://cosmos.leartesstudios.com/rocket"
+claim = "Rocket is an Unreal Engine 5 plugin for drag-and-drop import of environments, VFX, tools, sounds and materials; installed by copying the Rocket folder into the project's Plugins folder"
+[[sources]]
+url = "https://www.humblebundle.com/software/big-bang-unreal-unity-asset-packs-bundle-75-products-software"
+claim = "'This bundle provides Unity Asset Store keys directly with your purchase, and FAB keys via redemption through Cosmos, if the product is available on those platforms'; 'Keys redeemable on the Cosmos by Leartes website, with some available on Unity as well' (archived 2025-06-02)"
+[[sources]]
+url = "https://www.humblebundle.com/software/cosmos-eclipse-game-dev-assets-tools-bundle-unreal-unity-godot-software"
+claim = "'Keys are redeemable on the Cosmos and Unity Store website. Keys expire. Please redeem before July 1st, 2027'; separate (Unreal Engine)/(Unity)/(Godot) items whose pages link to Cosmos product pages (archived 2026-07-12)"
+[[sources]]
+url = "https://www.humblebundle.com/software/extreme-game-dev-bundle-software"
+claim = "'Keys redeemable on the Cosmos by Leartes website, with some available on Unity. The redemption deadline is February 26, 2027'"
+[[sources]]
+url = "https://gamefromscratch.com/mega-game-dev-asset-tools-humble-bundle/"
+claim = "Mega Game Dev Asset & Tools: redeemable on the Cosmos Asset Store, Unity assets can also be redeemed on the Unity Asset Store; assets redeemed on Cosmos can be used on Fab via generated keys"
+[[sources]]
+url = "https://gamefromscratch.com/the-godot-ultimate-asset-humble-bundle/"
+claim = "Godot Ultimate Asset bundle: assets are redeemed on the Cosmos asset store and downloaded as Godot-ready projects (.tscn)"
+[[sources]]
+url = "https://gamefromscratch.com/leartes-studios-unreal-and-unity-assets-giga-bundle-returns/"
+claim = "Giga bundle: majority redeemed on the Cosmos Store, some hosted on Gumroad; Unreal Engine assets can generate a key for the Unreal/Fab marketplace"
+[[sources]]
+url = "https://www.humblebundle.com/software/leartes-black-friday-mega-game-dev-bundle-software"
+claim = "no store named; 82 of 97 item pages link to cosmos.leartesstudios.com product pages (archived 2025-11-25) - Cosmos route is inference"
+[[sources]]
+url = "https://www.humblebundle.com/software/gigantic-game-dev-assets-tools-megabundle-software"
+claim = "Sep 2025: no store named and no Fab mention; item pages link to Cosmos (39), Fab (20) and Gumroad (8) listings (archived 2025-09-08) - Cosmos route is inference"

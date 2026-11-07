@@ -1,0 +1,82 @@
+schema = 1
+name = "FlippedNormals (3D art tutorials; 'Movie Maestros' bundles)"
+kind = "route"
+notes = """
+Two kinds of FlippedNormals Humble bundle:
+
+1. "Become a 3D Artist - Complete Tutorial Bundle by Movie Maestros" (2024)
+   and its Encore. These are DRM-free direct downloads from Humble itself:
+   "All content is available as a direct download". There is no key and
+   nothing to redeem. Each item is one video course (MP4 lessons plus
+   project files) to fetch from the Humble order into the library folder,
+   like generic/files. The census marks most items hb-drmfree. In the first
+   bundle 15 items have no delivery icon at all, but the bundle is DRM-free,
+   so treat them the same way. "Movie Maestros" appears only in the bundle
+   name. The items name FlippedNormals as publisher.
+
+2. Keyed bundles, e.g. "FlippedNormals Extreme Add-ons Bundle for Blender &
+   ZBrush" (May 2025, not in the census yet). Each key is a 100% discount
+   code applied at checkout on flippednormals.com.
+
+FlippedNormals closed its old multi-creator Marketplace. It went offline on
+2026-03-31, and purchased files could be downloaded until 2026-04-30 only.
+The new flippednormals.com is a smaller Shopify store (FlippedNormals
+Exclusives, FlipBoxes, courses, toolkits) with a My Library page and video
+streaming. FlippedNormals Exclusives and FlipBoxes bought on the old
+Marketplace can be moved to the new site: email support@flippednormals.com
+for a 100% promo code. Third-party creators' products cannot be moved.
+So a key from an older keyed bundle, redeemed on the old Marketplace, may
+no longer give downloadable files (unverified).
+
+No Steam entries: these are tutorials and add-on/asset files.
+"""
+
+[match]
+developers = ["FlippedNormals", "Flipped Normals", "Movie Maestros"]
+domains = ["flippednormals.com"]
+key_names = ["flipped ?normals"]
+bundle_slugs = ["movie-maestros", "flippednormals", "flipped-normals"]
+redeem_text = [
+  "flippednormals\\.com",
+  "(?:courses|tutorials|add-?ons)\\s+from\\s+flipped ?normals?\\b",   # "bundle of video courses from FlippedNormal!" (sic)
+]
+
+[redeem]
+where = "https://flippednormals.com/"
+account = true
+delivers = "direct-download bundles: files on the Humble order page (no redemption). Keyed bundles: the product in the flippednormals.com My Library"
+expires = "keyed bundles: check the Humble download page. Direct downloads stay on the Humble order."
+expiry_text = "(?i)redeem (?:your keys )?before ([A-Z][a-z]+ \\d{1,2}(?:st|nd|rd|th)?,? \\d{4})"
+steps = [
+  "Items with Humble's DRM-free download (Movie Maestros bundles): nothing to redeem. Download every file of the item from the Humble order into the library folder. Expect large video archives, so use Humble's md5 checks.",
+  "Keyed items: open the product link from the Humble download page, add the product to the cart, paste the Humble key into the discount code field, apply it and check out at $0.",
+  "The product then appears under My Library on flippednormals.com (https://flippednormals.com/my-library/). Download its files from there.",
+  "Do not use a download manager on FlippedNormals: per-file download limits are counted per connection.",
+  "Problems: support@flippednormals.com.",
+]
+
+[library]
+videos = true                  # Humble direct downloads are the course files themselves
+files = "Humble order page (direct-download bundles); flippednormals.com My Library (keyed bundles)"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/become-3d-artist-complete-tutorial-bundle-movie-maestros-software"
+claim = "'video courses from FlippedNormal'; 'All content is available as a direct download'; 19 courses; items list FlippedNormals as publisher (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/37270554394267-FlippedNormals-Extreme-Add-ons-Bundle-for-Blender-ZBrush-Redemption-instructions"
+claim = "keyed bundle: link, add to cart, paste key as discount code, checkout; support@flippednormals.com (2025-05)"
+[[sources]]
+url = "https://help.flippednormals.com/article/130-flippednormals-marketplace-closing-down-faq"
+claim = "Marketplace closed 2026-03-31; downloads until 2026-04-30; new site with streaming; Exclusives/FlipBoxes ported via a 100% promo code from support"
+[[sources]]
+url = "https://help.flippednormals.com/article/40-how-do-i-access-my-purchases"
+claim = "purchases are downloaded from My Library"
+[[sources]]
+url = "https://help.flippednormals.com/article/56-why-you-shouldnt-use-a-download-manager"
+claim = "download limits; download managers use them up"
+[[sources]]
+url = "https://flippednormals.com/"
+claim = "current store (Oct 2026): FlipBox, Courses, Toolkits, My Library, Shopify checkout"
+[[sources]]
+url = "https://docs.daz3d.com/_export/xhtml/public/read_me/index/81902/file_list"
+claim = "a FlippedNormals course package (Retopology in Blender) is a folder of MP4 videos, Blender project files and a PDF (shape of the Humble downloads; inference)"

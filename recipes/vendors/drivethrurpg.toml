@@ -1,0 +1,64 @@
+schema = 1
+name = "DriveThruRPG (tabletop RPG ebook store)"
+kind = "route"
+notes = """
+Humble RPG book bundles whose ebooks are not Humble downloads but DriveThruRPG
+products. Each Humble "key" is a unique DriveThruRPG URL; opening it while
+logged in puts the product in the DriveThruRPG cart at $0, and after the $0
+checkout the PDFs sit in the DriveThruRPG library for download. In the census
+so far: "Humble RPG Bundle: Candela Obscura by Darrington Press & Friends"
+(Oct-Nov 2026; "Keys are redeemable through DriveThruRPG"), whose items are
+the Candela Obscura core book and third-party assignments by Darrington Press,
+Beadle & Grimm, La Lionne Publishing, Nostromo's Reliquary, Aetherworks,
+MargoMods and Shaeomar. Its three "(Demiplane Edition)" items are web-only
+books read on Demiplane; they have item recipes under items/demiplane/.
+
+Matched only by redemption text (and keys by domain): DRM-free RPG ebook
+bundles that are ordinary Humble downloads must stay on the generic ebook
+route, and the publishers above also sell through other channels, so there is
+no developers rule.
+
+Library: DriveThruRPG keeps every purchase in the account's library with
+re-downloads (and publisher updates). No public download API was found, so
+fetching is by hand from the library page (not scriptable as far as known).
+"""
+
+[match]
+domains = ["drivethrurpg.com"]
+key_names = ['drivethru ?rpg']
+# "Keys are redeemable through DriveThruRPG."
+redeem_text = ['redeem\w*[^.]{0,60}\bdrive ?thru ?rpg\b']
+# For extracted keys, whose instructions may not name the site: this bundle's
+# URL slug or order machine name (candelaobscuradarringtonpressfriends_bookbundle).
+bundle_slugs = ['^candela-?obscura-?darrington-?press-?friends']
+
+[redeem]
+where = "the unique DriveThruRPG URL shown for each item on the Humble download page"
+account = true
+delivers = "the ebooks (PDF) in the DriveThruRPG library, re-downloadable"
+expires = "not stated in the bundle text or Humble's article; check the Humble download page. Key.is_expired from Humble is authoritative."
+steps = [
+  "Create or log in to a DriveThruRPG account first: https://www.drivethrurpg.com/login.php (use one account for every key).",
+  "Open the unique URL for the item from the Humble download page.",
+  "Proceed to checkout; the total should be $0. Complete it.",
+  "The products are on the order page and in the account library; download the PDFs from there into the library folder.",
+]
+
+[download]
+scriptable = false
+how = "by hand from the DriveThruRPG library page after login"
+notes = "No documented API for library downloads was found (not researched further)."
+
+[library]
+ebooks = "PDF (some products add print-friendly or form-fillable variants) per DriveThruRPG product"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/27109631575067-DriveThruRPG-Redemption-Instructions"
+claim = "make a DriveThruRPG account before redemption (drivethrurpg.com/login.php); use the unique URL from the Humble download page; checkout total 0; items on a page and in the account (updated 2026-09-25)"
+[[sources]]
+url = "https://www.humblebundle.com/books/candela-obscura-darrington-press-friends-books"
+claim = "'Keys are redeemable through DriveThruRPG'; items are hb-key ebooks (census redeem_text and items)"

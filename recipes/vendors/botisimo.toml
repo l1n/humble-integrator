@@ -1,0 +1,38 @@
+schema = 1
+name = "Botisimo (streaming chatbot service)"
+kind = "route"
+service = true        # web service: nothing to install, no Steam entry
+notes = """
+Botisimo is a multi-platform stream chatbot and community tool (web service).
+Humble's "Get Into Streaming" bundle (Jan 2023) sold 1-, 3- and 6-month
+Botisimo Pro codes for new subscribers only, one user. Each code comes as a
+unique URL ('Click here to redeem your Botisimo key') that opens Botisimo's
+sign-up page with the code pre-filled. Nothing to install or download.
+"""
+
+[match]
+developers = ["Botisimo"]
+domains = ["botisimo.com"]
+key_names = ['botisimo']
+
+[redeem]
+where = "the 'Click here to redeem your Botisimo key' link on the Humble download page (botisimo.com sign-up with the code pre-filled)"
+account = true
+delivers = "1, 3 or 6 months of Botisimo Pro on a new account"
+expires = "not stated (bundle ended January 2023; new subscribers only)"
+steps = [
+  "On the Humble download page click 'Click here to redeem your Botisimo key'.",
+  "Botisimo's sign-up page opens with the key pre-filled; complete the sign-up (new subscribers only).",
+  "Support: support@botisimo.com or live chat when logged in.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/11433171083803-Botisimo-Key-Redemption-Instructions"
+claim = "unique URL on the download page; key pre-filled on the Botisimo sign-up page; new subscribers only; 1 redemption, 1 user; support@botisimo.com"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/11334856127259-Get-Into-Streaming-Bundle-System-Requirements"
+claim = "Botisimo Pro 1/3/6-month keys by tier, new users only"

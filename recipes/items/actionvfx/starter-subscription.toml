@@ -1,0 +1,32 @@
+schema = 1
+name = "ActionVFX Starter Subscription (1, 2 or 3 months)"
+vendor = "actionvfx"
+kind = "service"
+machine_names = [
+  "actionvfx_1-monthoftheactionvfxstartersubscription",
+  "actionvfx_2-monthsoftheactionvfxstartersubscription",
+  "actionvfx_3-monthsoftheactionvfxstartersubscription",
+]
+verified = false
+notes = """
+Subscription time on ActionVFX ("Access to 5,000+ VFX assets, new elements
+monthly, lifetime licence for commercial use" per Humble's item text), from
+The Battle Box bundle (Feb 2022). Redeem on the ActionVFX account; elements
+downloaded during the subscription keep their licence. Whether a 2022 code
+still redeems is unknown (inference: the 2024 bundle's ActionVFX codes have
+no expiry, this one may differ).
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/battle-box-actionvfx-and-corridor-digital-software"
+claim = "'Access to 5,000+ High-Quality VFX Assets, New Elements Added Monthly, No Contract, Cancel Anytime, Lifetime License For Commercial Use'"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/27352814688539-The-Ultimate-3D-Creator-s-Bundle-3D-Assets-HDRIs-and-Training-Terms-and-Redemption-Instructions"
+claim = "ActionVFX codes redeem at https://www.actionvfx.com/redeem"

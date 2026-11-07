@@ -1,0 +1,37 @@
+schema = 1
+name = "VEGAS Pro 22"
+vendor = "magix"
+kind = "app"
+machine_names = ["vegaspro22"]
+verified = false
+notes = "Video editor, from the 2025 'Cinematic Magic with VEGAS Pro 22 and SOUND FORGE Pro 17' bundle. Installer asks for serial + email in setup (VEGAS 18/19 precedent). Now a Boris FX product, but this licence stays with MAGIX. Under Wine/Proton expect failure (see vendor)."
+
+[install]
+source = "humble"
+file = "*"
+serial = "per-product"
+notes = "Installer from the Humble bundle page (a MAGIX download manager); serial + MAGIX account at setup/first start."
+
+[launch]
+exe = 'C:\Program Files\VEGAS\VEGAS Pro 22.0\vegas220.exe'
+
+[steam]
+shortcut = true
+title = "VEGAS Pro 22"
+steamgriddb = "VEGAS Pro 22"
+
+[[sources]]
+url = "https://www.magix.com/us/support/technical-support"
+claim = "activation needs serial + email + internet; P3 serials bind to a device (changeable monthly); online re-validation at least monthly; installers/serials under Service Center > My products"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/10769238721947"
+claim = "VEGAS Pro 18/19: light installer asks for serial + email during setup; may need a MAGIX account login"
+
+[[sources]]
+url = "https://support.borisfx.com/hc/en-us/articles/43421008790541"
+claim = "VEGAS installs on 2 PCs, runs on 1 at a time; deactivate under My Products"
+
+[[sources]]
+url = "https://www.vegascreativesoftware.info/us/forum/where-is-my-vegas-pro-22-located--147262"
+claim = 'install path ...\VEGAS Pro 22.0\vegas220.exe (search snippet)'

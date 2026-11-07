@@ -1,0 +1,24 @@
+schema = 1
+name = "Paintstorm Studio VIP Brushes"
+vendor = "paintstorm"
+kind = "content"
+machine_names = ["paintstormstudiovipbrushes"]
+requires = ["paintstorm/paintstorm-studio"]
+verified = false
+notes = "65+ brushes for Paintstorm Studio (Humble lists Graphixly LLC as developer). Delivery after redeeming is undocumented; brush sets are .pstbrushes files (inferred for VIP): unpack any archive, then brush panel cogwheel > Import brushes > Add."
+
+[install]
+source = "vendor"
+file = "*.pstbrushes"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.paintstormstudio.com/help/panels/brushes/"
+claim = "brushes are .pstbrushes: brush panel cogwheel > Import brushes (also .ABR)"
+
+[[sources]]
+url = "https://www.paintstormstudio.com/forum/viewtopic.php?p=9051"
+claim = "import .pstbrushes via the brush panel"

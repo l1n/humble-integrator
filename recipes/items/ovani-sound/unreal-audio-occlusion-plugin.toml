@@ -1,0 +1,33 @@
+schema = 1
+name = "Unreal Audio Occlusion Plugin"
+vendor = "ovani-sound"
+kind = "content"
+machine_names = ["unrealaudioocclusionplugin"]
+verified = false
+notes = """
+Audio occlusion for Unreal Engine with embedded text and video setup docs. A game-engine add-on, not a system install: it goes into an Unreal Engine 5 project (Requires Unreal Engine 5+ for the music plugin), by hand, per project; no Steam entry. Humble lists Windows/macOS/Linux icons on some bundles; the plugin is engine code and presumably runs wherever the engine runs (inference).
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = """
+Download from the Ovani order after redeeming the Humble coupon, keep the archive in the library (audio/ovani-sound/plugins/), then: Copy the plugin into the project's Plugins/ folder (or the engine's Plugins/Marketplace) and enable it in Edit > Plugins (inference). Package format not checked.
+"""
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://ovanisound.com/products/unreal-audio-occlusion-plugin"
+claim = "product page: Unreal Audio Occlusion Plugin features and engine requirement"
+
+[[sources]]
+url = "https://ovanisound.com/products/humble-bundle-audio-arcade-tier-1"
+claim = "delivered through the Humble tier coupon on Ovani's store"
