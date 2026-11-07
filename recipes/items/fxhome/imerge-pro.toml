@@ -1,0 +1,44 @@
+schema = 1
+name = "Imerge Pro"
+vendor = "fxhome"
+kind = "app"
+machine_names = ["imergepro"]
+verified = false
+notes = """
+Professional Photography bundle (Dec 2018). Non-destructive RAW image
+compositor with keying. Native macOS and Windows builds. Installer from the
+Humble download page; 'Activate & Unlock', FXhome (Imerge) account, serial;
+licence for two devices. Discontinued by Artlist in Jan 2025 with the FXhome
+website taken down, so activation of an unused serial may no longer work
+(unverified). Exe/app names are globs.
+"""
+
+[install]
+source = "humble"
+file = "*Imerge*.exe"
+serial = "account"
+
+[launch]
+find = "C:/Program Files*/FXhome/Imerge*/*.exe"
+
+[steam]
+shortcut = true
+title = "Imerge Pro"
+steamgriddb = "Imerge Pro"
+
+[platforms.macos]
+runner = "native"
+file = "*Imerge*.dmg"
+app_find = "/Applications/Imerge*.app"
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Windows build only; no Wine/Proton reports found (untested)."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360014168094-Professional-Photography-Imerge-Pro-instructions"
+claim = "download and install from the bundle page; Activate & Unlock; create or log into an Imerge account; enter the serial; two devices"
+[[sources]]
+url = "https://cgchannel.com/2025/02/artlist-discontinues-the-fxhome-apps-hitfilm-and-imerge-dead"
+claim = "Imerge officially discontinued (Jan 2025), no further updates or support"

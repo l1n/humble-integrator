@@ -1,0 +1,29 @@
+schema = 1
+name = "ACDSee Photo Studio Ultimate 2018"
+vendor = "acd-systems"
+kind = "app"
+machine_names = ["acdseephotostudioultimate2018"]
+verified = false
+notes = """
+Professional Photography (Dec 2018). Photo manager + RAW editor with
+adjustment layers. One-year licence from redemption (see vendors/acd-systems),
+so it has lapsed for anyone who redeemed it; no Steam shortcut by default
+for that reason. 64-bit Windows program; exe name is a glob.
+"""
+
+[install]
+source = "humble"
+file = "*ACDSee*Ultimate*.exe"
+serial = "account"
+
+[launch]
+find = "C:/Program Files/ACD Systems/**/ACDSee*Ultimate*.exe"
+
+[steam]
+shortcut = false
+title = "ACDSee Photo Studio Ultimate 2018"
+steamgriddb = "ACDSee Photo Studio"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360014168154-Professional-Photography-ACDSee-Photo-Studio-Ultimate-2018-instructions"
+claim = "install from the bundle page, sign in, enter the licence key; one-year licence, two devices"

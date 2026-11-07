@@ -1,0 +1,28 @@
+schema = 1
+name = "Modular Industrial Factory Megapack (Unity)"
+vendor = "unity-asset-store"
+kind = "content"
+publisher = "Hivemind"
+machine_names = [
+  "modularindustrialfactorymegapackunity",
+]
+verified = false
+notes = """
+Unity Asset Store voucher for Hivemind's Modular Industrial Factory Megapack (Unity edition), in Ultimate Unreal & Unity Assets Galore & More (2026).
+That bundle routes to Fab (vendors/fab) because its '(Unreal Engine)' items
+are Fab / Unreal Marketplace codes; this '(Unity)' item is redeemed on Unity
+instead. The Unreal edition of the same kit, where the bundle has one, is a
+separate Humble item on the Fab route.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "Redeem the voucher at id.unity.com, then download and import in the Unity Editor: Package Manager > My Assets."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/ultimate-unreal-unity-assets-galore-more-software"
+claim = "'Professional Fab Marketplace keys and Unity Asset Store keys provided. Keys are redeemed through Fab and Unity Store website'; item text: '*Unity Asset Store Key Is Provided!'"

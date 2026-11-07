@@ -45,8 +45,9 @@ bundle_slugs = [
   '^uncharted-frontiers',
   '^wars-(?:and-|&-)?wastelands',
   '^urban-life-collection',
+  '^realm-giants',              # Realm Giants Bundle by KitBash3D (May 2026): "Keys are redeemed through Kitbash"
 ]
-redeem_text = ['\bKitBash3D\W*s website\b', '\bredeem\w*[^.]{0,60}\bKitBash3D\b']
+redeem_text = ['\bKitBash3D\W*s website\b', '\bredeem\w*[^.]{0,60}\bKitBash(?:3D)?\b']   # also "Keys are redeemed through Kitbash" (Realm Giants)
 domains = ["kitbash3d.com"]
 key_names = ['\bkitbash3d\b']
 
@@ -54,7 +55,7 @@ key_names = ['\bkitbash3d\b']
 where = "https://kitbash3d.com/"
 account = true
 delivers = "the bundle's kits (Individual License) in the KitBash3D account, downloadable per format"
-expiry_text = "per bundle, shown on the Humble purchase page; codes stop working after it (Cyber Streets: September 31st 2023; Enchanted 2023-24: April 16 2024; Urban Life: October 31 2025; Enchanted encore 2025: January 21 2026; Game Dev Mega Cities: December 2 2026)"
+expiry_text = "per bundle, shown on the Humble purchase page; codes stop working after it (Cyber Streets: September 31st 2023; Enchanted 2023-24: April 16 2024; Urban Life: October 31 2025; Enchanted encore 2025: January 21 2026; Game Dev Mega Cities: December 2 2026; Realm Giants: May 25th 2027)"
 steps = [
   "Log in to https://kitbash3d.com/ with the email the kits should belong to. Do not use express checkout (Shop Pay, PayPal, Venmo): the order then goes to that service's email.",
   "Copy the code from the Humble purchase page and open the KitBash3D redemption link shown there (each bundle has its own product page, e.g. kitbash3d.com/products/humble-bundle-wars-and-wastelands).",
@@ -139,3 +140,6 @@ claim = "Cyber Streets: kitbash3d.com/products/props-cyber-streets; codes expire
 [[sources]]
 url = "https://support.humblebundle.com/hc/en-us/articles/39587340050459-Urban-Life-Collection-from-KitBash3D-Redemption-Instructions"
 claim = "Urban Life Collection: codes expire October 31, 2025"
+[[sources]]
+url = "https://www.humblebundle.com/software/realm-giants-software"
+claim = "census text (May 2026): 'Keys are redeemed through Kitbash. Keys expire. Please redeem before May 25th, 2027'; Unreal, Unity and Blender-compatible kits (Heavy Metal, Neo NYC, Colonial, Ancients, Shangrila, Enchanted Vehicles, Military Ops Materials); no Humble article or KitBash3D product handle found for its tier pages"

@@ -1,0 +1,25 @@
+schema = 1
+name = "Avast Mobile Security Premium (1 Android, 1 year)"
+vendor = "avast"
+kind = "service"
+machine_names = ["avastmobilesecuritypremium_android_1year"]
+verified = false
+skip = true
+skip_reason = "Android-only subscription; nothing to install on macOS or Linux."
+notes = "Cybersecurity with Avast (2021) and PC Utility and Security Tools with Avast & Laplink (2023). Install Avast Mobile Security from Google Play (Android 5/6+) and enter the activation code in the app; 1 year from activation. The 2023 census lists Windows/Mac platforms for it, but Humble's requirement articles say Android only."
+
+[redeem]
+where = "the Avast Mobile Security Android app (enter activation code)"
+account = true
+delivers = "1 year of Mobile Security Premium on one Android device"
+steps = [
+  "Install Avast Mobile Security from Google Play on the Android device.",
+  "Open the app's upgrade/activation screen and enter the activation code from the Humble download page (unverified wording).",
+]
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/1260803015170-Humble-Software-Bundle-Cybersecurity-Threat-Protection-with-Avast-System-Requirements"
+claim = "Mobile Security Premium: Android 5.0+, downloaded from Google Play, 1-year licence from activation"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/11978319972123-PC-Utility-and-Security-Tools-with-Avast-Laplink-System-Requirements"
+claim = "Mobile Security Premium (1 year - 1 Android): Android 6.0+"

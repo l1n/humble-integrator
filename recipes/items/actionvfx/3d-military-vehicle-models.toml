@@ -1,0 +1,49 @@
+schema = 1
+name = "ActionVFX 3D models (military vehicles, aircraft, weapons)"
+vendor = "actionvfx"
+kind = "content"
+machine_names = [
+  "panzeriiigermantank",
+  "m-1a1abramsusarmytank",
+  "uh-60lblackhawkhelicopter",
+  "ah-64apachehelicopter",
+  "bell407helicopter",
+  "belluh-1chueyhelicopter",
+  "f-16fighterjet",
+  "f-15estrikeeaglefighterjet",
+  "mig-29fulcrumfighterjet",
+  "boeing747-400airplane",
+  "harpoonmissile",
+  "m67fraggrenade",
+  "combatknife",
+]
+verified = false
+notes = """
+ActionVFX's 3D models in The Ultimate 3D Creator's Bundle (July 2024; tiers
+initial / bt20 / bt30): high-poly, real-world-scale tanks, helicopters, jets,
+an airliner, a missile, a grenade and a knife with 4K textures and pivoted
+moving parts. The bundle's other publishers (MattePaint, DoubleJump Academy)
+redeem elsewhere, so these have item recipes instead of a bundle rule.
+Redeemed at actionvfx.com/redeem with no expiry (Humble's article); the
+bundle's single-key wording suggests one ActionVFX code covers the tier's
+models (inference). Files download from the ActionVFX account; formats are
+not stated on the bundle page.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "No installer: model files for Blender, Maya, Unreal, etc."
+
+[library]
+files = "per model: the 3D model archive(s) ActionVFX offers (formats not stated on the bundle page)"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/27352814688539-The-Ultimate-3D-Creator-s-Bundle-3D-Assets-HDRIs-and-Training-Terms-and-Redemption-Instructions"
+claim = "ActionVFX: no expiration date on any tier; redemption link https://www.actionvfx.com/redeem"
+[[sources]]
+url = "https://www.humblebundle.com/software/ultimate-3d-creators-bundle-3d-assets-hdris-and-training-software"
+claim = "item text: high-poly models with 4K textures, real-world scale, pivot points for animation; 'A single key will be provided to redeem all the content in your bundle'"

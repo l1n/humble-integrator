@@ -1,0 +1,39 @@
+schema = 1
+name = "Aurora HDR 2018"
+vendor = "skylum"
+kind = "app"
+machine_names = ["aurorahdr2018"]
+verified = false
+notes = """
+Professional Photography bundle (Dec 2018) and Photography and Photo Filters
+bundle (Dec 2019; there also DRM-free). Install from the Humble download page,
+launch, 'Activate', enter e-mail and key. The licence allows up to five device
+activations. Native macOS and Windows. Linux: nothing installed.
+"""
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/Skylum/Aurora HDR 2018/*.exe"
+
+[steam]
+shortcut = true
+title = "Aurora HDR 2018"
+steamgriddb = "Aurora HDR"
+
+[platforms.macos]
+runner = "native"
+file = "*Aurora*HDR*2018*.dmg"
+app_find = "/Applications/Aurora HDR 2018*.app"
+
+[platforms.linux]
+runner = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360014273773-Professional-Photography-Aurora-HDR-2018-instructions"
+claim = "download and install from the bundle page; Activate; e-mail + key; up to five device activations"
+[[sources]]
+url = "https://www.humblebundle.com/software/photography-and-photo-filters"
+claim = "'Aurora HDR 2018 is also available DRM-Free' (census redeem_text)"

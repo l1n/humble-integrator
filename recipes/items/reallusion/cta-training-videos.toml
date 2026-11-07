@@ -1,0 +1,25 @@
+schema = 1
+name = "CrazyTalk Animator training videos (Fundamentals, Essential)"
+vendor = "reallusion"
+kind = "document"
+machine_names = [
+  "crazytalkanimator_fundamentalstrainingvideos",
+  "crazytalkanimator_essentialtrainingvideo",
+]
+verified = false
+notes = "2D Animation bundle, tier 2, part of 'CrazyTalk Animator Complete Training Videos' (7 h + 6 h). After voucher activation, download from Order History into the library folder if offered as files; otherwise they are watched online (format not confirmed)."
+
+[install]
+source = "vendor"
+url = "https://www.reallusion.com/member/#/en/order-history"
+serial = "none"
+
+[library]
+videos = "training videos, if Order History offers them as downloads (unverified)"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/2d-animation-software"
+claim = "7 hours (Fundamentals) and 6 hours (Essential) of CTA training, hb-key (census descriptions)"

@@ -1,0 +1,19 @@
+schema = 1
+name = "Preset: Cinematic Color Looks (Lightroom + Luminar 4/AI)"
+vendor = "skylum"
+kind = "content"
+machine_names = ["preset_cinematiccolorlookslightroompluslumiar4ai"]
+recommends = ["skylum/luminar-ai"]
+verified = false
+notes = "Cyber bundle (Nov 2022). Presets for Adobe Lightroom and Luminar 4/AI; Humble lists it as a key for Windows/Mac (delivery not documented; inference: a download). Keep the files in the library folder and import them into Lightroom or Luminar."
+
+[install]
+source = "humble"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/photo-editing-cyber-bundle-with-luminar-ai-software"
+claim = "preset item for Lightroom + Luminar 4/AI, hb-key (census)"

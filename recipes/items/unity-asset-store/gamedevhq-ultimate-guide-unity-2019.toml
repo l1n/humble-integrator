@@ -1,0 +1,31 @@
+schema = 1
+name = "The Ultimate Guide to Game Development with Unity 2019 (GameDevHQ course)"
+kind = "service"
+service = true
+machine_names = ["ultimateguidetogamedevelopmentwithunity2019"]   # Humble Unity Bundle 2019
+verified = false
+notes = """
+Jonathan Weinberger's GameDevHQ course (made with Unity Technologies) in the
+Humble Unity Bundle 2019, whose other items route to vendors/unity-asset-store
+by bundle. Its key is a GameDevHQ checkout coupon, not a Unity voucher, so
+this item carries its own redemption and no vendor (GameDevHQ has no other
+Humble item in the census). Humble's article: redeem before September 24th,
+2020 - historical. Online course, nothing to download.
+"""
+
+[redeem]
+where = "https://unity.gamedevhq.com/humble-bundle-2019/"
+account = true
+expires = "2020-09-24"
+steps = [
+  "Open https://unity.gamedevhq.com/humble-bundle-2019/ (the green link on the Humble download page) and click 'Sign me up!'.",
+  "At checkout click 'Click here to enter your discount code', enter the Humble code, Apply; the price drops to $0.00.",
+  "Enter your details and 'Submit and Checkout'; the membership confirmation follows. Help: support@gamedevhq.com.",
+]
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360035672734-Humble-Unity-Bundle-2019-The-Ultimate-Guide-to-Game-Development-with-Unity-2019-instructions"
+claim = "unity.gamedevhq.com/humble-bundle-2019/ > Sign me up! > discount code > $0.00 > Submit and Checkout; redeem before September 24th, 2020; support@gamedevhq.com"

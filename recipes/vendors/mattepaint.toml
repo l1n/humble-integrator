@@ -1,0 +1,70 @@
+schema = 1
+name = "MattePaint"
+kind = "route"
+notes = """
+MattePaint (mattepaint.com) sells high-resolution reference photography,
+photo collections and HDRIs (up to 16K) for matte painting, environment
+art and lighting, by subscription ("Artist Plus") and per collection. One
+Humble bundle so far: The Ultimate 3D Creator's Bundle: 3D Assets, HDRIs, and
+Training (July 2024), shared with ActionVFX (3D military models,
+items/actionvfx/) and DoubleJump Academy (Houdini courses). The bundle page
+says "A single key will be provided to redeem all the content in your
+bundle", but Humble's article lists each publisher's redemption separately,
+so expect one MattePaint code per purchase covering its tier's collections
+(inference).
+
+Humble's article gives MattePaint no redemption link, only: expires 12
+months after purchase (so codes from the 2024 bundle lapsed in July 2025),
+terms of service, and support@mattepaint.com. The redemption link is
+presumably on the Humble download page next to the code (inference); there
+is no public /redeem page on mattepaint.com (404, Nov 2026).
+
+Matched by developer: MattePaint has no other Humble presence.
+"""
+
+[match]
+developers = ["MattePaint"]
+domains = ["mattepaint.com"]
+key_names = ['\bmattepaint\b']
+
+[redeem]
+where = "https://mattepaint.com/login/"
+account = true
+delivers = "the tier's MattePaint collections / HDRIs (and, in the top tier, one year of Artist Plus) on the MattePaint account"
+expiry_text = "12 months after purchase (Humble's article)"
+steps = [
+  "Reveal the MattePaint code on the Humble download page and follow the redemption link shown with it (Humble's article gives none).",
+  "Log in to or create a MattePaint account at https://mattepaint.com/login/ and apply the code.",
+  "Download the collections and HDRIs from the MattePaint gallery while logged in.",
+  "Problems: support@mattepaint.com with the Humble order number.",
+]
+
+[download]
+scriptable = false
+how = "from the MattePaint gallery in a logged-in browser"
+notes = "No public API; MattePaint downloads use a credit system on the account (mattepaint.com/legal/credit-policy, inference that Humble collections bypass it)."
+
+[library]
+files = "HDRIs (EXR/HDR, 4K-16K) and high-resolution photo collections (JPG/RAW/EXR per the subscription text)"
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer: image and HDRI files for any 3D/compositing app."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/27352814688539-The-Ultimate-3D-Creator-s-Bundle-3D-Assets-HDRIs-and-Training-Terms-and-Redemption-Instructions"
+claim = "MattePaint: expiration 12 months after purchase; terms of service storage.googleapis.com/mattepaint/tos.pdf; support@mattepaint.com; no redemption link given (ActionVFX: actionvfx.com/redeem; DoubleJump: tier checkout coupons)"
+[[sources]]
+url = "https://www.humblebundle.com/software/ultimate-3d-creators-bundle-3d-assets-hdris-and-training-software"
+claim = "census: 'ATTENTION: A single key will be provided to redeem all the content in your bundle'; MattePaint items are HDRIs, photo collections and '1yr Artist Plus Subscription'"
+[[sources]]
+url = "https://mattepaint.com/"
+claim = "site has /login/, /plans/, /hdris, /gallery and a credit policy; /redeem returns 404 (Nov 2026)"

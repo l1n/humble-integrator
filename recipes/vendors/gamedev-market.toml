@@ -24,6 +24,15 @@ stay at the version uploaded then. That is why this route matches on the
 bundle's redemption text and named key bundles, not on the "GameDev Market"
 publisher: publisher matching would pull those DRM-free downloads off
 generic/files. If an hb-drmfree item does land here, fetch it from Humble.
+The keyless 2018-2022 GDM bundles whose packs carry no delivery icon at all
+are placed by vendors/gamedev-market-legacy.
+
+Some later GDM bundles name no redemption site ("Redeem your keys." only),
+e.g. Ultimate Fantasy 2D & Audio (Jul-Aug 2025): its Humble page names
+GameDev Market as the bundle's author and revenue partner, the item links
+go to gamedevmarket.net and it carries the GDM 15% coupon, so it is matched
+by slug.
+
 Sellers' own itch.io pages are not unlocked by a Humble purchase.
 
 Caveat: the redeem_text rule claims every item in a matching bundle, which
@@ -49,6 +58,7 @@ bundle_slugs = [
   '^ultimate2dgamecreationbundle',                   # its Humble machine name
   '^all-?in-?one-2d-game-dev-level-creation-pack',
   '^allinone2dgamedevlevelcreationpack',
+  '^ultimate-?fantasy-?2d-?(and-?)?audio-?bundle',      # URL slug and machine name ultimatefantasy2daudiobundle_softwarebundle (2025)
 ]
 
 [redeem]
@@ -113,3 +123,6 @@ claim = "seller (Saito Interactive / unTied Games): some Humble assets are redee
 [[sources]]
 url = "https://itch.io/post/7743606"
 claim = "seller GuttyKreum: a Humble purchase does not unlock the packs on the seller's itch.io page"
+[[sources]]
+url = "https://www.humblebundle.com/software/ultimate-fantasy-2d-audio-bundle-software"
+claim = "'Pay $5 or more to access keys. Redeem your keys.'; author and revenue partner 'GameDev Market'; 54 item links to gamedevmarket.net; GDM 15%-off coupon item (Wayback, Jul 2025)"

@@ -1,0 +1,70 @@
+schema = 1
+name = "Pathfinder 2E rulesets, adventures and maps for Fantasy Grounds"
+vendor = "smiteworks"
+kind = "addon"
+requires = ["smiteworks/fantasy-grounds-vtt"]
+machine_names = [
+  "pathfinderrpg_pathfinderflip-mat_shipwrecks_bundle_fantasygrounds",  # Pathfinder RPG - Pathfinder Flip-Mat: Shipwrecks
+  "pathfinderrpg_gamemasteryguide_bundle_fantasygrounds",  # Pathfinder RPG - GameMastery Guide
+  "pathfinderrpg_pathfinderflip-mat_classicswamp_bundle_fantasygrounds",  # Pathfinder RPG - Pathfinder Flip-Mat - Classic Swamp
+  "pathfinder2rpg_pathfinderlostomenscharacterguide_bundle_fantasygrounds",  # Pathfinder 2 RPG - Pathfinder Lost Omens Character Guide
+  "pathfinderrpg_pathfinderflip-mat_troublesinotari_bundle_fantasygrounds",  # Pathfinder RPG - Pathfinder Flip-Mat: Troubles in Otari
+  "pathfinder2rpg_pathfindersocietyintro_issue1_thesecondconfirmation_bundle_fantasygrounds",  # Pathfinder 2 RPG - Pathfinder Society Intro #1: The Second Confirmation
+  "pathfinder2rpg_pathfinderadventure_troublesinotari_bundle_fantasygrounds",  # Pathfinder 2 RPG - Pathfinder Adventure: Troubles in Otari
+  "pathfinder2rpg_pathfindersecretsofmagic_bundle_fantasygrounds",  # Pathfinder 2 RPG - Pathfinder Secrets of Magic
+  "pathfinder2rpg_abominationvaults_bundle_fantasygrounds",  # Pathfinder 2 RPG - Abomination Vaults
+  "pathfinderrpg_pathfinderflip-mat_arcanelibrary_bundle_fantasygrounds",  # Pathfinder RPG - Pathfinder Flip-Mat - Arcane Library
+  "pathfinder2rpg_beginnerbox_bundle_fantasygrounds",  # Pathfinder 2 RPG - Beginner Box
+  "pathfinder2rpg_corerules_bundle_fantasygrounds",  # Pathfinder 2 RPG - Core Rules
+  "pathfinderrpg_flip-tiles_darklandsstarterset_bundle_fantasygrounds",  # Pathfinder RPG - Flip-Tiles - Darklands Starter Set
+  "pathfinderrpg_pathfinderflip-mat_classictheater_bundle_fantasygrounds",  # Pathfinder RPG - Pathfinder Flip-Mat - Classic Theater
+  "pathfinderrpg_pathfinderflip-mat_citysitesmulti-pack_bundle_fantasygrounds",  # Pathfinder RPG - Pathfinder Flip-Mat: City Sites Multi-Pack
+  "pathfinder2rpg_pathfinderlostomensworldguide_bundle_fantasygrounds",  # Pathfinder 2 RPG - Pathfinder Lost Omens World Guide
+  "pathfinder2rpg_lostomens_ancestryguide_bundle_fantasygrounds",  # Pathfinder 2 RPG - Lost Omens: Ancestry Guide
+  "pathfinderrpg_gamemasterymappack_foresttrails_bundle_fantasygrounds",  # Pathfinder RPG - GameMastery Map Pack: Forest Trails
+  "pathfinder2rpg_bestiary2_bundle_fantasygrounds",  # Pathfinder 2 RPG - Bestiary 2
+  "pathfinderrpg_gamemasterymappack_evilruins_bundle_fantasygrounds",  # Pathfinder RPG - GameMastery Map Pack: Evil Ruins
+  "pathfinderrpg_pathfinderflip-mat_nightofthegraydeath_bundle_fantasygrounds",  # Pathfinder RPG - Pathfinder Flip-Mat: Night of the Gray Death
+  "pathfinder2rpg_sunderedwaves_bundle_fantasygrounds",  # Pathfinder 2 RPG - Sundered Waves
+  "pathfinder2rpg_bestiary",  # Pathfinder 2 RPG - Bestiary
+  "pathfinder2rpg_littletroubleinbigabsalom_bundle_fantasygrounds",  # Pathfinder 2 RPG - Little Trouble in Big Absalom
+  "pathfinderrpg_pathfinderflip-tiles_campsite_bundle_fantasygrounds",  # Pathfinder RPG - Pathfinder Flip-Tiles - Campsite
+  "pathfinderrpg_pathfinderflip-mat_classichamlet_bundle_fantasygrounds",  # Pathfinder RPG - Pathfinder Flip-Mat - Classic Hamlet
+]
+verified = false
+notes = """
+26 Fantasy Grounds products from 'Pathfinder's Finest: 2e Fantasy Grounds
+Experience' (2024): the Pathfinder 2E Core Rules ruleset, Bestiary 1 and 2,
+GameMastery Guide, Secrets of Magic, Lost Omens World / Character / Ancestry
+guides, the Beginner Box, adventures (Abomination Vaults, Troubles in Otari,
+Sundered Waves, Little Trouble in Big Absalom, Society Intro #1), and
+Flip-Mat / Flip-Tile / Map Pack battle maps. One Humble key per product,
+activated on the Fantasy Grounds website (vendors/smiteworks). Nothing to
+run per product: after activation, the app's updater downloads the modules
+into its data folder, and they appear in the app's Library for any campaign
+using the Pathfinder 2E ruleset. They can also be read in the browser in
+My Library's Online Reader (beta).
+
+Optional extra: syncing the Fantasy Grounds account with paizo.com and
+sending purchase info can unlock the matching Paizo PDFs where Paizo allows
+it. Those PDFs then download from paizo.com into the library folder by hand
+(inference from the FG wiki; which of these 26 qualify is not documented).
+"""
+
+[install]
+source = "vendor"
+serial = "account"
+notes = "Activate each key at https://www.fantasygrounds.com/store/activateKey.php, then click Update in Fantasy Grounds VTT (or restart it) while logged in to the same account."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/pathfinders-finest-2e-fantasy-grounds-experience-software"
+claim = "26 Pathfinder 2E Fantasy Grounds products, hb-key each; e.g. Core Rules 'Add the Pathfinder 2E RPG ruleset to your Fantasy Grounds Unity application'; Abomination Vaults 'adapted for play on Fantasy Grounds Unity ... dynamic line of sight' (census)"
+[[sources]]
+url = "https://fantasygroundsunity.atlassian.net/wiki/spaces/FGCP/pages/996639303"
+claim = "the updater installs purchased products from the Fantasy Grounds website account on Update"
+[[sources]]
+url = "https://fantasygroundsunity.atlassian.net/wiki/spaces/FGCP/pages/996639425"
+claim = "Paizo sync: 'Send Purchase Info to paizo.com' for items bought on fantasygrounds.com or added via Humble Bundle, to enable PDF access for eligible products"

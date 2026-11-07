@@ -1,0 +1,15 @@
+schema = 1
+name = "GameDev Mastery Course (Parts 1-3)"
+vendor = "game-courses"
+kind = "service"
+machine_names = [
+  "gamedevmasterycourse_part12dsidescroller",
+  "gamedevmasterycourse_part2topdown",
+  "gamedevmasterycourse_part3fps",
+]
+verified = false
+notes = "Ultimate Unity Fantasy RPG Developer bundle (2022), developer Jason Weimann. Each part's key is a coupon on game.courses (see vendors/game-courses)."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/7529152658459-GameDev-Mastery-Course-Redemption-Instructions"
+claim = "coupon at game.courses checkout"

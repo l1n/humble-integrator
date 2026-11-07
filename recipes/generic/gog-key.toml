@@ -1,0 +1,32 @@
+schema = 1
+name = "GOG key"
+kind = "route"
+priority = 15
+verified = false
+notes = """
+Humble's hb-gog delivery: a key for GOG.com (DRM-free games). Redeem it on
+gog.com, then install with GOG Galaxy (Windows, macOS), Heroic Games Launcher
+(Linux, macOS) or Minigalaxy (Linux). Heroic's "Add to Steam" puts the game
+in the Steam library as a non-Steam shortcut; GOG's offline installers can
+also be downloaded and handled like any DRM-free build.
+"""
+
+[match]
+delivery = ["hb-gog"]
+key_types = ["gog"]
+
+[redeem]
+where = "https://www.gog.com/redeem"
+account = true
+steps = [
+  "Sign in to GOG and open https://www.gog.com/redeem; enter the key.",
+  "Install via Heroic Games Launcher (Linux/macOS), GOG Galaxy (macOS) or Minigalaxy (Linux), or download the offline installer from the GOG library.",
+  "Heroic: use 'Add to Steam' for a Steam library entry.",
+]
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/204969217"
+claim = "Humble GOG keys are redeemed on gog.com/redeem"
+[[sources]]
+url = "https://heroicgameslauncher.com/"
+claim = "Heroic supports GOG on Linux/macOS with Add to Steam"

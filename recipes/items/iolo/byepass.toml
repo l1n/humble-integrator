@@ -1,0 +1,25 @@
+schema = 1
+name = "ByePass Password Manager"
+vendor = "iolo"
+kind = "service"
+machine_names = ["byepasspasswordmanager"]
+verified = false
+skip = true
+skip_reason = "Activated through the Windows System Mechanic installer (Humble) and documented only for Windows browsers; no macOS/Linux route found."
+notes = "iolo's browser-based password manager (Edge/Chrome/Firefox extensions). Humble: 'Activate through System Mechanic installer by entering the code', then install the browser extension per iolo's articles. Whether the extension works without the Windows suite (e.g. Firefox on Linux) is undocumented."
+
+[redeem]
+where = "the System Mechanic (Ultimate Defense) installer/activation on Windows, then the ByePass browser extension"
+account = false
+delivers = "ByePass premium (term not stated; the bundle's other iolo keys are 1 year)"
+steps = [
+  "Install System Mechanic Ultimate Defense from https://smu.iolo.com on Windows and enter the ByePass code during activation.",
+  "Install the ByePass extension: Edge https://support.iolo.com/support/solutions/articles/44000825648 ; Firefox https://support.iolo.com/support/solutions/articles/44002343177 .",
+]
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/6471506857883-ByePass-Password-Manager-Redemption-Instructions"
+claim = "activate through System Mechanic installer by entering the code; browser-based; per-browser install articles for Edge and Firefox"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/13001369423515-Total-Performance-Protection-and-Privacy-System-Requirements"
+claim = "ByePass: browser with an internet connection required"

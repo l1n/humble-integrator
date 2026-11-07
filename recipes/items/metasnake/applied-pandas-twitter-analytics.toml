@@ -1,0 +1,11 @@
+schema = 1
+name = "Applied Pandas: Twitter Analytics"
+vendor = "metasnake"
+kind = "service"
+machine_names = ["appliedpandas_twitteranalytics"]
+verified = false
+notes = "Python 2021 (Aug-Sep 2021). MetaSnake course: the Humble link opens a $0 checkout ('Buy for Free'), then log in/register (see vendors/metasnake)."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4405393039771-Humble-Software-Bundle-Python-Superpowers-Applied-Pandas-Twitter-Analytics-instructions"
+claim = "redemption: link from the Humble download page, 'Buy for Free', MetaSnake account"

@@ -1,10 +1,10 @@
 schema = 1
-name = "Corel Painter (2021 / 2022 / 2023)"
+name = "Corel Painter (2019 / 2020 / 2021 / 2022 / 2023)"
 vendor = "corel"
 kind = "app"
-machine_names = ["corelpainter2021", "corelpainter2022", "corelpainter2023", "painter2023"]
+machine_names = ["corelpainter2019", "corelpainter2020", "corelpainter2021", "corelpainter2022", "corelpainter2023", "painter2023"]
 verified = false
-notes = "Painter 2021 ('Create with Visual Impact', 2021), 2022 ('Anything but Ordinary Painter Bundle' + Encore, 2022) and 2023 ('Create and Elevate' + Encore, 'Design with CorelDRAW', 2023-24). Each version is its own serial and Humble download (Windows + Mac); install only the newest one owned. One licence covers Mac or PC (inferred from Corel's 'we support both platforms with licensing'), so macOS uses the native build. In the 'Create and Elevate' bundles the item ('painter2023') shows only a download icon; its serial may be shown on the download page (unverified)."
+notes = "Painter 2019 ('Painter - Create With Confidence' + Encore, 2019: serial during install, e-mail registration, perpetual for two devices) and Painter 2020 ('Be a Creative Superhero!' 2020, 'Design & Expression Powerhouse' 2021: serial during install, e-mail registration at first launch). Painter 2021 ('Create with Visual Impact', 2021), 2022 ('Anything but Ordinary Painter Bundle' + Encore, 2022) and 2023 ('Create and Elevate' + Encore, 'Design with CorelDRAW', 2023-24). Each version is its own serial and Humble download (Windows + Mac); install only the newest one owned. One licence covers Mac or PC (inferred from Corel's 'we support both platforms with licensing'), so macOS uses the native build. In the 'Create and Elevate' bundles the item ('painter2023') shows only a download icon; its serial may be shown on the download page (unverified)."
 
 [install]
 source = "humble"
@@ -47,3 +47,9 @@ claim = "Painter licensing supports both Mac and PC"
 [[sources]]
 url = "https://www.codeweavers.com/compatibility/search?name=corel"
 claim = "CodeWeavers: entries only up to Painter 2019, VideoStudio X3, PaintShop Pro 2023; none for the 2022 versions"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360035495154-Humble-Software-Bundle-Painter-Corel-Painter-2019-instructions"
+claim = "Painter 2019: install from the download page, serial during installation, e-mail registration; perpetual licence for up to two devices"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360056020693-Humble-Software-Bundle-Be-a-Creative-Superhero-Corel-Painter-2020-instructions"
+claim = "Painter 2020: download from the bundle page, serial in the installer, e-mail registration on first launch"

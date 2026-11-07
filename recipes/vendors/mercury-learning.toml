@@ -1,0 +1,47 @@
+schema = 1
+name = "Mercury Learning and Information (STEM ebooks)"
+kind = "route"
+notes = """
+"Humble Book Bundle: STEM Productivity Library by Mercury" (Oct 2020): 30
+Mercury Learning titles (physics, engineering, AI, Python, AutoCAD, data
+analysis ...). It is a Humble Book Bundle (order machine name ..._bookbundle)
+that the census lists under software and whose items, from the older page
+layout, have no delivery icons, so the generic ebook route cannot see them.
+Humble Book Bundles of that era were DRM-free ebooks downloaded from the
+Humble page (PDF/EPUB, sometimes MOBI); nothing to redeem (inference: the
+census bundle has no redemption text at all). Some Mercury titles ship
+companion files (code, figures) as separate downloads; keep them too.
+
+Matched by the bundle slug only, so any future Mercury titles with normal
+DRM-free delivery data stay on generic/ebook. This recipe is a stopgap for a
+census gap; a generic rule for no-icon items in *_bookbundle orders would be
+the cleaner fix.
+"""
+
+[match]
+bundle_slugs = ["^stem-productivity-library-mercury"]
+domains = ["merclearning.com"]
+
+[redeem]
+where = "nothing to redeem: the Humble download page"
+account = false
+delivers = "DRM-free ebooks from the Humble download page"
+steps = ["Download every format offered for each title (and any companion files) into the library folder."]
+
+[download]
+scriptable = true
+how = "Humble's own download links (as for generic/ebook)"
+
+[library]
+ebooks = "PDF/EPUB per title as offered; companion files where offered"
+
+[install]
+source = "humble"
+serial = "none"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/stem-productivity-library-mercury-books"
+claim = "30 Mercury Learning titles, order machine name stemproductivitylibrarymercury_bookbundle, no delivery icons and no redemption text (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/202712300-Viewing-Your-eBook-Files-On-Your-Reading-Device"
+claim = "Humble ebooks are downloaded from the download page and read on any device (general)"

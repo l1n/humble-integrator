@@ -1,0 +1,38 @@
+schema = 1
+name = "$25 Pelgrane Press store voucher (13th Age print books)"
+vendor = "pelgrane-press"
+kind = "service"
+machine_names = ["pelgranepressvoucher"]
+verified = false
+skip = true
+skip_reason = "Expired 2021-12-31."
+notes = """
+From the 2021 13th Age bundle: $25 off a 13th Age print order of more than
+$35 in the Pelgrane Press webstore. It could not be combined with other
+vouchers and did not cover shipping. Expired on December 31st, 2021; kept so
+the item is accounted for.
+"""
+
+[redeem]
+where = "https://www.pelgranepress.com/shop/"
+account = false
+delivers = "nothing any more (was $25 off 13th Age print books)"
+expires = "2021-12-31"
+steps = [
+  "Nothing to do: the voucher expired on 2021-12-31.",
+  "Historical flow: add a 13th Age print book to the cart at the Pelgrane Press store, enter the voucher code from the Humble download page at checkout, see $25 deducted.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4403944829467-Humble-13th-Age-Bundle-Treasures-Maps-Adventures-25-Pelgrane-Press-Voucher-instructions"
+claim = "vouchers expire December 31st, 2021; 13th Age print cart of $35 or more; not combinable; not for shipping; enter the code at checkout; support at site.pelgranepress.com/index.php/customer-service/"
+[[sources]]
+url = "https://www.humblebundle.com/software/treasure-maps-adventures-software"
+claim = "item text: 'Get $25 off your next 13th Age print purchase at the Pelgrane Press webstore ... Expires on December 31st, 2021' (archived 2021-07-22)"

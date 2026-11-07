@@ -1,0 +1,11 @@
+schema = 1
+name = "GameModules Course"
+vendor = "game-courses"
+kind = "service"
+machine_names = ["gamemodulescourse"]
+verified = false
+notes = "Ultimate Unity Fantasy RPG Developer bundle (2022), developer Jason Weimann (the course for Infinity PBR's Game Modules asset). Presumably redeemed like GameDev Mastery: the key as a coupon at the course's game.courses checkout (inference)."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/7529152658459-GameDev-Mastery-Course-Redemption-Instructions"
+claim = "game.courses coupon redemption flow (documented for GameDev Mastery)"

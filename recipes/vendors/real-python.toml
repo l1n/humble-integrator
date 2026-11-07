@@ -1,0 +1,56 @@
+schema = 1
+name = "Real Python (courses, Dan Bader's Python Tricks)"
+kind = "route"
+service = true        # course platform: nothing to install, no Steam entry
+notes = """
+Real Python (realpython.com) video courses and Dan Bader's products sold in
+Humble Python bundles: "Learn Python Programming with PyCharm" (Jul 2020:
+Python Tricks Book and Videos, Functional Programming in Python, Managing
+Python Dependencies) and "Python 2021" (Cool New Features in Python 3.8 &
+3.9, OOP in Python, Writing Beautiful Pythonic Code With PEP 8). Each key is a
+course access-key URL; opening it after signing in to Real Python adds the
+course to the account permanently. Humble's article dates from 2024; that the
+2020-2021 keys worked the same way is an inference.
+
+Real Python items in "Next Level Python" (2024) stay with vendors/talk-python,
+whose bundle rule outranks this developers rule.
+
+The Python Tricks book is an ebook (PDF/EPUB) available from the Real Python
+account after redemption (inference); save it into the library folder.
+"""
+
+[match]
+developers = ["Real Python", "RealPython"]
+domains = ["realpython.com"]
+key_names = ["real ?python"]
+
+[redeem]
+where = "the access-code URL on the Humble download page (realpython.com)"
+account = true
+delivers = "permanent access to the course(s) in the Real Python account (avatar > Purchases)"
+expires = "check the Humble download page"
+steps = [
+  "Reveal the key and open its access-code URL from the Humble download page.",
+  "Register or sign in to Real Python; you are sent back to the page and can join the course.",
+  "Find everything under the avatar menu > Purchases (https://realpython.com/account/purchases/).",
+  "Save downloadable items (e.g. the Python Tricks ebook) into the library folder.",
+]
+
+[download]
+scriptable = false
+how = "courses stream on realpython.com"
+
+[library]
+videos = false
+ebooks = "Python Tricks book (PDF/EPUB) where included (inference)"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/28944221591323-Real-Python-Key-Redemption-Instructions"
+claim = "course access keys give permanent access; open the access-code URL; register/sign in; join the course; Purchases under the avatar menu (2024-11-21)"
+[[sources]]
+url = "https://www.humblebundle.com/software/python-programming-software"
+claim = "Real Python / Dan Bader items, hb-key; 'All of the courses in this bundle are available on most desktop and mobile web browsers' (census)"

@@ -98,6 +98,8 @@ class Book:
             if g.data.get("before_vendors"):
                 continue
             m = g.data.get("match", {})
+            if any(re.search(p, item.get("machine_name", "")) for p in m.get("machine_names", [])):
+                return g, "generic"
             if m.get("delivery") and not delivery & set(m["delivery"]):
                 continue
             if m.get("content_types") and content not in m["content_types"]:
@@ -122,36 +124,61 @@ class Book:
     # bundle-level rules outrank developer rules; ties go to file order.
     RULE_RANK = {"redeem_text": 0, "bundle_slugs": 1, "developers": 2}
 
+    def _index(self):
+        """Compiled match rules, a developer -> vendors index, and a per-bundle cache.
+
+        Bundle-level rules depend only on the bundle, so they run once per bundle
+        instead of once per item (the census has ~30k items over ~1k bundles)."""
+        if getattr(self, "_idx", None) is None:
+            rules, by_dev = [], {}
+            for i, v in enumerate(self.vendors):
+                m = v.data.get("match", {})
+                rules.append(([re.compile(p, re.I) for p in m.get("redeem_text", [])],
+                              [re.compile(p) for p in m.get("bundle_slugs", [])]))
+                for n in m.get("developers", []):
+                    by_dev.setdefault(n.lower(), set()).add(i)
+            self._idx = (rules, by_dev, {})
+        return self._idx
+
+    def _bundle_hits(self, bundle):
+        rules, _, cache = self._index()
+        slug = (bundle or {}).get("slug", "")
+        text = (bundle or {}).get("redeem_text", "")
+        key = (slug, text)
+        if key not in cache:
+            hits = {}
+            for i, (text_res, slug_res) in enumerate(rules):
+                if text and any(r.search(text) for r in text_res):
+                    hits[i] = "redeem_text"
+                elif slug and any(r.search(slug) for r in slug_res):
+                    hits[i] = "bundle_slugs"
+            cache[key] = hits
+        return cache[key]
+
+    def _claims(self, item, bundle):
+        """[(vendor index, rule, developer also matches)], strongest first."""
+        _, by_dev, _ = self._index()
+        people = {n.lower() for n in item.get("developers", []) + item.get("publishers", []) if n}
+        devs = set().union(*(by_dev.get(n, ()) for n in people)) if people else set()
+        hits = self._bundle_hits(bundle)
+        claims = [(i, rule, i in devs) for i, rule in hits.items()]
+        claims += [(i, "developers", True) for i in devs if i not in hits]
+        # Ties go to the vendor whose developer rule also names the item's maker,
+        # then to file order (vendor index).
+        claims.sort(key=lambda c: (self.RULE_RANK[c[1]], not c[2], c[0]))
+        return claims
+
     def vendor_claims(self, item, bundle=None):
         """Every (vendor recipe, strongest rule) that claims this item, strongest first.
 
         Ties on the same bundle-level rule (a bundle "redeemable through A and B
         websites") go to the vendor whose developer rule also names the item's maker."""
-        people = {n.lower() for n in item.get("developers", []) + item.get("publishers", []) if n}
-        slug = (bundle or {}).get("slug", "")
-        text = (bundle or {}).get("redeem_text", "")
-        claims = []
-        for v in self.vendors:
-            m = v.data.get("match", {})
-            by_dev = bool(people & {n.lower() for n in m.get("developers", [])})
-            if text and any(re.search(p, text, re.I) for p in m.get("redeem_text", [])):
-                claims.append((v, "redeem_text", by_dev))
-            elif slug and any(re.search(p, slug) for p in m.get("bundle_slugs", [])):
-                claims.append((v, "bundle_slugs", by_dev))
-            elif by_dev:
-                claims.append((v, "developers", True))
-        claims.sort(key=lambda c: (self.RULE_RANK[c[1]], not c[2]))
-        return [(v, rule) for v, rule, _ in claims]
+        return [(self.vendors[i], rule) for i, rule, _ in self._claims(item, bundle)]
 
     def claims_tied(self, item, bundle=None):
         """True when the two strongest vendor claims can't be told apart."""
-        people = {n.lower() for n in item.get("developers", []) + item.get("publishers", []) if n}
-        claims = self.vendor_claims(item, bundle)
-        if len(claims) < 2:
-            return False
-        dev = lambda v: bool(people & {n.lower() for n in v.data.get("match", {}).get("developers", [])})
-        (a, ra), (b, rb) = claims[:2]
-        return ra == rb and dev(a) == dev(b)
+        claims = self._claims(item, bundle)
+        return len(claims) >= 2 and claims[0][1:] == claims[1][1:]
 
     def resolve_key(self, key):
         """Return (recipe, layer) for an extracted Humble key (humble.Key or its dict)."""

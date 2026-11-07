@@ -7,13 +7,20 @@ Hayland Terrain sells 28 mm STL terrain, scatter and miniatures from its
 Shopify store (haylandterrain.com, prices in GBP, products typed
 "3d Digital Download"). Licence on every Humble item: personal,
 non-commercial use; commercial licences from Haylandgames@gmail.com.
-Its first two Humble bundles also carried AlbinoRavenMini, a sculptor of
+Its first three Humble bundles also carried AlbinoRavenMini, a sculptor of
 32 mm fantasy and modern/sci-fi soldiers who sells on MyMiniFactory and
 CGTrader (the 2022 bundle links each AlbinoRaven item to one of those
-store pages).
+store pages). Later Hayland bundles carry AlbinoRaven too, all DRM-free.
 
-This recipe claims only those first two bundles, by URL slug and by the
+This recipe claims only those first bundles, by URL slug and by the
 order machine_name an account reports:
+- "Humble Fantasy 3D Printable Models Bundle" (Aug 2020; machine
+  fantasy3dprintablemodels_softwarebundle): 36 Hayland items, 13
+  AlbinoRavenMini minis, and a Humble Choice coupon (generic/humble-coupon).
+  Page text: "Print them anywhere. These 3D models come in STL file format
+  to support many devices. Printing instructions and recommendations are
+  included with each model." No key or redemption wording and no item icons
+  ("s-no-platform-icons").
 - "Humble Dungeons & Monsters 3D Printable Tabletop Bundle" (ended
   2021-11-18; machine dungeonsmonsters3dprintabletabletop_softwarebundle):
   80 Hayland items (one, jungleruins_plants, typed "ebook" by Humble) and
@@ -22,7 +29,7 @@ order machine_name an account reports:
   (ended 2022-06-16; machine modernscifiwasteland_softwarebundle): 48
   Hayland items, 44 AlbinoRavenMini items, and a Humble Choice coupon
   (that one goes to generic/humble-coupon).
-Neither page, in any archived capture during the sale, says how the files
+None of these pages, in any archived capture during the sale, says how the files
 are delivered: no "Redeem your keys", no single-key notice, no DRM-free
 line, no delivery icons on items. The Help Centre has no article for
 either creator.
@@ -33,7 +40,7 @@ is available DRM-Free", so they resolve to generic/files. This recipe
 therefore has NO developers rule: Hayland and AlbinoRaven items in those
 bundles must stay on the files route.
 
-Inference, unconfirmed: these two bundles were Humble downloads as well.
+Inference, unconfirmed: these three bundles were Humble downloads as well.
 Same creators, same store-page links, no key wording. And Humble's own
 pages of that era show the same lack of icons on bundles later confirmed
 DRM-free (see vendors/a-bards-tale). If so, nothing is lost by routing
@@ -46,6 +53,7 @@ steps cover a key, if one turns up instead.
 domains = ["haylandterrain.com"]
 key_names = ["hayland", "albino ?raven"]
 bundle_slugs = [
+  '^fantasy-?3d-?printable-?models-?software',          # 2020: URL slug and order machine_name (fantasy3dprintablemodels_softwarebundle)
   '^dungeons-monsters-3d-printable-tabletop-software',  # URL slug (census)
   '^dungeonsmonsters3dprintabletabletop',               # order machine_name, as an account reports it
   '^modernscifiwasteland',                              # URL slug and order machine_name
@@ -85,6 +93,9 @@ notes = "Files only, nothing to run. STL and OBJ open in any slicer (PrusaSlicer
 runner = "native"
 notes = "Files only, nothing to run. STL and OBJ open in any slicer (PrusaSlicer, Cura, Lychee)."
 
+[[sources]]
+url = "https://www.humblebundle.com/software/fantasy-3d-printable-models-software"
+claim = "archived capture 2020-08-22 (web.archive.org/web/20200822091253/...): 'Print them anywhere. These 3D models come in STL file format to support many devices. Printing instructions and recommendations are included with each model.'; no redemption or key wording; item tiles marked s-no-platform-icons; publishers Hayland Terrain and AlbinoRavenMini (census)"
 [[sources]]
 url = "https://www.humblebundle.com/software/dungeons-monsters-3d-printable-tabletop-software"
 claim = "archived captures 2021-10-28, 2021-11-15 and 2022-01-28 (web.archive.org/web/20211115192942/...): no delivery wording or item icons; Hayland developer-urls on haylandterrain.com; item text 'STLS - NON - Commercial ... Contact us at Haylandgames@gmail.com', 'Digital Download Only'; AlbinoRavenMini '32 mm scale ready for 3d printing'"

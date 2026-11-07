@@ -1,0 +1,37 @@
+schema = 1
+name = "Aurora HDR"
+vendor = "skylum"
+kind = "app"
+machine_names = ["aurorahdr", "software_aurorahdr"]
+verified = false
+notes = """
+AI-Powered Photo Editor with Luminar 4 (2020), Photo Editing to the MAX (2021)
+and Cyber (2022) bundles: Aurora HDR (2019+ edition). Installer from the
+Humble download page; install the trial, enter e-mail and activation key,
+then optionally register it to a Skylum account (Skylum Account menu >
+Register/Log-in). Native macOS and Windows. Linux: nothing installed.
+"""
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/Skylum/Aurora HDR*/*.exe"
+
+[steam]
+shortcut = true
+title = "Aurora HDR"
+steamgriddb = "Aurora HDR"
+
+[platforms.macos]
+runner = "native"
+file = "*Aurora*HDR*.dmg"
+app_find = "/Applications/Aurora HDR*.app"
+
+[platforms.linux]
+runner = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360058830693-Aurora-HDR-instructions"
+claim = "download from the bundle page; install trial; e-mail + activation key; Activate; register to a Skylum account via the Skylum Account tab"

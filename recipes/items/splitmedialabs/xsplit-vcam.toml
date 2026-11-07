@@ -1,0 +1,16 @@
+schema = 1
+name = "XSplit VCam (lifetime)"
+vendor = "splitmedialabs"
+kind = "service"
+machine_names = ["xsplitpremium_vcam"]
+verified = false
+skip = true
+skip_reason = "Redemption deadline passed (2019-12-31); VCam is a Windows virtual-webcam driver that cannot work from a Wine prefix."
+notes = "Streaming 2019 ($1 tier). Webcam background removal/blur as a virtual camera; see vendors/splitmedialabs."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360023994753-Humble-Software-Bundle-Streaming-2019-XSplit-VCAM-XSplit-Premium-instructions"
+claim = "lifetime XSplit VCam key; redeem at xsplit.com/redeem by 2019-12-31"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360023925913-Humble-Software-Bundle-Streaming-2019-System-Requirements"
+claim = "XSplit VCam requires Windows 10"

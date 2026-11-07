@@ -1,0 +1,20 @@
+schema = 1
+name = "Screen Recorder 3 Deluxe"
+vendor = "cyberlink"
+kind = "app"
+machine_names = ["cyberlinkscreenrecorder3deluxe"]
+verified = false
+skip = true
+skip_reason = "Screen capture/streaming tool: inside a Wine prefix it can only capture Wine's own windows; macOS and Linux have native recorders (OBS). Keep the key for a real Windows PC."
+notes = "Video & Photo Editing 2018 by CyberLink (top tier). Game/desktop recording and streaming with PowerDirector-style editing."
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/video-photo-editing-2018-software"
+claim = "Screen Recorder 3 Deluxe: recording/streaming gameplay and screen content; hb-key, Windows (census)"

@@ -1,0 +1,20 @@
+schema = 1
+name = "VIPRE Antivirus Plus for Home 2020"
+vendor = "vipre"
+kind = "app"
+machine_names = ["vipreantivirusplus"]
+verified = false
+skip = true
+skip_reason = "Windows antivirus; protects nothing inside a Wine prefix."
+notes = "Humble Software Bundle: PC Essentials (Feb 2020). Redeemed through VIPRE's promotion page linked from the Humble download page (see vendors/vipre)."
+
+[install]
+source = "vendor"
+serial = "account"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360042238014-Humble-Software-Bundle-PC-Essentials-Vipre-Antivirus-Plus"
+claim = "green link > VIPRE promotion page > email > Register > download, install, register"

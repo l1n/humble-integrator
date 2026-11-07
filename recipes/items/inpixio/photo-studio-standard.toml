@@ -1,0 +1,26 @@
+schema = 1
+name = "inPixio Photo Studio Standard"
+vendor = "inpixio"
+kind = "app"
+machine_names = ["inpixiophotostudiostandard"]
+verified = false
+notes = "Transform your photos into Art (Feb 2023). Beginner one-click photo editor (erase tool, montages). Windows; '(1 year)' licence. On macOS prefer inpixio/photo-studio-mac. Under Wine untested. Exe path is a glob."
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/inPixio/Photo Studio*/*.exe"
+
+[steam]
+shortcut = true
+title = "inPixio Photo Studio Standard"
+steamgriddb = "inPixio Photo Studio"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/12727249817627-Transform-your-photos-into-Art-Redemption-Instructions"
+claim = "install from the download page, enter serial, Activate; two computers per serial"
+[[sources]]
+url = "https://www.humblebundle.com/software/transform-your-photos-into-art-software"
+claim = "inPixio Photo Studio Standard (1 year): hb-key, Windows (census)"

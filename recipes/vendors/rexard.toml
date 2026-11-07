@@ -1,0 +1,60 @@
+schema = 1
+name = "REXARD (Humble Fantasy Game Dev Bundle, 2019)"
+kind = "route"
+notes = """
+REXARD is a 2D game-art studio: hand-drawn fantasy/RPG icon packs, GUI kits,
+badges, TCG card frames, avatars. Humble's Fantasy Game Dev Bundle (Feb
+2019) was all REXARD and had no keys at all (page data has_any_keys = false;
+its text: "Download game assets. Download DRM-free asset packs and get
+started immediately"). The items' "Unity Asset Store" / "Unreal Marketplace"
+publisher names are only links to REXARD's store listings: nothing is added
+to a Unity or Epic/Fab account. Each pack is a zip on the bundle's Humble
+download page (PNG icons, some packs with layered PSD), frozen at the 2019
+version. Licence: Humble's "Rexard Game Dev Assets EULA" (use in unlimited
+end products, commercial included; no redistribution of the assets
+themselves).
+
+REXARD packs in other bundles are not this route: in GameDev Market bundles
+they follow the bundle (vendors/gamedev-market, vendors/gamedev-market-legacy),
+so this recipe matches by bundle, never by the REXARD name. Real account
+downloads are hb-drmfree at runtime and go to the generic download routes;
+the slug rule places the census rows.
+"""
+
+[match]
+bundle_slugs = ['^fantasy-game-dev-bundle$']   # fantasygamedev_bundle, Feb 2019
+
+[redeem]
+where = "https://www.humblebundle.com/home/library"
+account = false
+delivers = "one zip per icon/GUI pack on the bundle's Humble download page"
+steps = [
+  "Nothing to redeem: download each pack from the bundle's Humble download page into the library folder.",
+  "Licence: https://support.humblebundle.com/hc/en-us/articles/360046217533-Rexard-Game-Dev-Assets-EULA",
+]
+
+[download]
+scriptable = true
+how = "Humble library API, like generic/files"
+
+[library]
+files = "zips of PNG icons/badges/GUI elements (some with layered PSD), typically 256x256 to 1024x1024 px"
+
+[install]
+source = "humble"
+serial = "none"
+silent = false
+notes = "No installer: unzip into the library folder; used by hand in any engine."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/fantasy-game-dev-bundle"
+claim = "30 REXARD packs, no delivery icons; 'Download game assets. Download DRM-free asset packs and get started immediately.'; page data has_any_keys false; publisher links to Unity Asset Store / Unreal Marketplace listings (Wayback, Feb 2019)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360046217533-Rexard-Game-Dev-Assets-EULA"
+claim = "REXARD licence on Humble: perpetual non-exclusive licence for unlimited end products; no resale/redistribution of the assets"

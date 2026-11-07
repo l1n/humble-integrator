@@ -1,0 +1,27 @@
+schema = 1
+name = "Entroverse Lab Gumroad 50% discount code"
+vendor = "gumroad"
+kind = "service"
+service = true
+publisher = "Entroverse Lab"
+machine_names = ["gumroadcode_entroverselab"]
+verified = false
+notes = """
+"With this code, you will be able to purchase all current and upcoming
+Enroverse Lab packages on Gumroad with a 50% discount for one year." A bonus
+item in the Supreme 2 and Supreme 3 Unreal & Unity bundles, which otherwise
+route to vendors/fab; sent to vendors/gumroad. Nothing to download; the tool
+only shows the code. The store is taken to be entroverse.gumroad.com
+(inference: Gumroad profile "entroverse").
+"""
+
+[redeem]
+where = "https://entroverse.gumroad.com/"
+steps = ["Open an Entroverse Lab product on Gumroad, enter the code in the discount-code field, check the 50% reduction, buy."]
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/supreme-3-best-unity-and-unreal-assets-software"
+claim = "'Gumroad 50% Discount Code - Entroverse Lab': 'purchase all current and upcoming Enroverse Lab packages on Gumroad with a 50% discount for one year'"

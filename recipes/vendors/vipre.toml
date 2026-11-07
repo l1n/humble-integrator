@@ -1,0 +1,42 @@
+schema = 1
+name = "VIPRE Security (VIPRE Antivirus Plus)"
+kind = "route"
+notes = """
+Humble Software Bundle: PC Essentials (Feb 2020): VIPRE Antivirus Plus for
+Home 2020. Not a plain key: the Humble download page has a green link to a
+VIPRE promotion page; register an email address there, then download,
+install and register the program as that page instructs (Humble).
+
+Windows antivirus: protects nothing inside a Wine prefix, so the item is
+skip = true; the 2020 promotion is long over. No Steam entry.
+"""
+
+[match]
+developers = ["VIPRE Security", "VIPRE"]
+domains = ["vipre.com"]
+key_names = ['\bvipre\b']
+
+[redeem]
+where = "the green VIPRE link on the Humble download page (a VIPRE promotion page)"
+account = true
+delivers = "VIPRE Antivirus Plus for Home 2020 registered to the email address given (term not stated)"
+expires = "bundle ended in Feb 2020; the promotion page is presumably gone (unverified)"
+steps = [
+  "Click the green link for VIPRE Antivirus Plus on the Humble download page.",
+  "On VIPRE's promotion page enter an email address and click Register.",
+  "Download and install VIPRE Antivirus Plus and register it as the promotion page instructs.",
+  "Support: https://homesupport.vipre.com/support/tickets/new",
+]
+
+[install]
+source = "vendor"
+serial = "account"
+
+[platforms.macos]
+runner = "none"
+[platforms.linux]
+runner = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360042238014-Humble-Software-Bundle-PC-Essentials-Vipre-Antivirus-Plus"
+claim = "green link to a VIPRE promotion page; enter email, Register; download, install and register per the page; support homesupport.vipre.com"

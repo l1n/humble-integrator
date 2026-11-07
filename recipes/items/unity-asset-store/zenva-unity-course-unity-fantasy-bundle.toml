@@ -1,0 +1,27 @@
+schema = 1
+name = "Zenva Unity Course (Unity Fantasy Games & Game Dev Assets bundle)"
+vendor = "zenva"
+kind = "service"
+service = true
+machine_names = ["zenvaunityminidegree"]
+verified = false
+notes = """
+A Zenva Unity course in Humble's Unity Fantasy Games & Game Dev Assets
+bundle (Sep 2021, publisher shown as "Unity"). The bundle's assets share one
+Unity Asset Store voucher (vendors/unity-asset-store, by bundle slug), but
+this item is a Zenva Academy coupon (inference from Humble's Zenva coupon
+instructions; the Unity voucher text covers "the Unity assets" only), so it
+goes to vendors/zenva. Kept beside the Unity recipes because only this
+bundle has it. Zenva coupons must be redeemed within a year of purchase, so
+it has most likely lapsed.
+"""
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/unity-fantasy-games-dev-assets-software"
+claim = "'All of the assets in this bundle can be redeemed on the Unity website'; 'A single key will be provided to redeem all the Unity assets in your bundle'; item 'Zenva Unity Course' ('Explore in-demand skills ... making games with Unity')"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360016444354"
+claim = "Humble Software Bundle - ZENVA Code instructions (Zenva coupons redeemed at academy.zenva.com checkout)"

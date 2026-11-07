@@ -1,0 +1,63 @@
+schema = 1
+name = "Existence Studio sea creatures (Unity editions)"
+vendor = "unity-asset-store"
+kind = "content"
+publisher = "Existence Studio"
+machine_names = [
+  "acidspiderunityengine",
+  "acidwormunityengine",
+  "alligatorturtleunityengine",
+  "anglerfish2unityengine",
+  "anglerfishunityengine",
+  "carideanshrimpunityengine",
+  "coconutcrabsnappyunityengine",
+  "crayfishspidercrabunityengine",
+  "dolphinandremoraunityengine",
+  "fantasyfish01unityengine",
+  "fantasyfish02unityengine",
+  "fantasyfish03unityengine",
+  "fantasyfish04unityengine",
+  "fantasyfish05unityengine",
+  "fantasyfish06unityengine",
+  "fantasyfish07unityengine",
+  "fantasyfish08unityengine",
+  "fantasyfish09unityengine",
+  "hammerheadsharkunityengine",
+  "horseshoecrabunityengine",
+  "mantisshrimprexunityengine",
+  "marlinsailfishunityengine",
+  "megalodonsharkunityengine",
+  "morayeelunityengine",
+  "mounttortillaandryderunityengine",
+  "nautiluspompiliusunityengine",
+  "piranhaunityengine",
+  "porcupinefishdiodonunityengine",
+  "royalcrabsebastianunityengine",
+  "seaturtleunityengine",
+  "sharkgoblinunityengine",
+  "stingrayunityengine",
+  "walrussealunityengine",
+  "whaleandwhalecalfunityengine",
+]
+verified = false
+notes = """
+The 34 "(Unity Engine)" items of the Underwater Creatures Mega Bundle (Unreal
+Engine & Unity) by Existence Studio (Oct 2026): one Unity Asset Store voucher
+per creature (sharks, crabs, fish, whale, turtles, ... from its Underwater
+Creatures, Aqua Life and Detailed Oceanic Life collections). Grouped in one
+recipe because every one redeems the same way. The bundle ("Keys are
+redeemable through Unity and FAB website") routes to vendors/fab, where each
+creature's "(Unreal Engine)" twin is a Fab code; these go to Unity instead.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "Redeem each voucher at id.unity.com, then download and import in the Unity Editor: Package Manager > My Assets."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/underwater-creatures-mega-bundle-unreal-engine-unity-software"
+claim = "'Keys are redeemable through Unity and FAB website'; every creature listed twice, '(Unity Engine)' and '(Unreal Engine)'"

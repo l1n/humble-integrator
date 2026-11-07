@@ -1,0 +1,13 @@
+schema = 1
+name = "Restream Standard plan (3 months / 1 year)"
+vendor = "restream"
+kind = "service"
+machine_names = ["restream_3month", "restream_1year"]
+verified = false
+skip = true
+skip_reason = "Redemption deadline passed (2019-08-25)."
+notes = "Streaming 2019 (beat-the-average and top tiers); no delivery icon in the census. See vendors/restream."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360023810154-Humble-Software-Bundle-Streaming-2019-Restream-Instructions"
+claim = "3-month or 1-year Standard plan; keys must be redeemed by August 25th, 2019"

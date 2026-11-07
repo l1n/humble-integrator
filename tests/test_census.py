@@ -56,6 +56,13 @@ class ParseTest(unittest.TestCase):
         self.assertIn("redeemable on the Example website", rec["redeem_text"])
         self.assertNotIn("MSRP", rec["redeem_text"])
 
+    def test_has_any_keys_false_means_drm_free(self):
+        bundle = census.extract_bundle_data(self.LEGACY)
+        rec = census.bundle_record("software", "old", "2019", bundle, self.LEGACY + '"has_any_keys": false')
+        self.assertEqual((rec["has_keys"], rec["drm_free"]), (False, True))
+        rec = census.bundle_record("software", "old", "2019", bundle, '"has_any_keys": true')
+        self.assertEqual((rec["has_keys"], rec["drm_free"]), (True, False))
+
     def test_parse_merges_cache_into_existing_census(self):
         import gzip
         import tempfile

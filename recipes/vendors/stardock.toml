@@ -1,0 +1,80 @@
+schema = 1
+name = "Stardock Software (Object Desktop utilities: Fences, Start11, WindowBlinds, DeskScapes, ...)"
+kind = "route"
+notes = """
+Stardock's Windows desktop utilities, sold on Humble in "Humble Software
+Bundle: Stardock" (Nov 2018), "Best of Stardock" (Mar 2020), "Organize Your
+PC" (Dec 2020) and "Stardock Desktop Essentials" (Aug 2023). Some items in
+the older bundles (Fences, Multiplicity, Start10) were Steam keys; those stay
+on generic/steam-key. The rest are product keys: the installer is a Humble
+download, and the key plus an email address is entered in the program's
+'Enter Product Key' dialog after installing. Humble's articles say each
+licence works on up to five devices; the 2023 bundle text says the licences
+are perpetual and keys are redeemed during installation.
+
+Almost all of these programs customise the Windows shell itself (start menu,
+taskbar, window frames, cursors, icons, desktop wallpaper, desktop icon
+groups, tabbed windows). Inside a Wine prefix there is no Windows shell to
+customise and they cannot reach the host desktop, so they are marked skip:
+keep the key unrevealed for a real Windows PC. SpaceMonger (a disk-usage
+treemap) is an ordinary windowed program and is the only one given a Steam
+shortcut; Multiplicity KM (keyboard/mouse sharing between PCs) needs
+system-wide input hooks and is skipped too.
+"""
+
+[match]
+developers = ["Stardock", "Stardock Software"]
+domains = ["stardock.com", "stardock.net"]
+key_names = ['\b(fences|start ?(8|10|11)|windowblinds|deskscapes|iconpackager|cursorfx|windowfx|spacemonger|touchtasks|groupy|multiplicity)\b']
+
+[redeem]
+where = "the program itself: 'Enter Product Key' after installing (key + email address)"
+account = false
+delivers = "an activated perpetual licence for one product, usable on up to five devices"
+expires = "none documented for the product keys; Humble may still show a redemption deadline on the download page"
+steps = [
+  "Download the product's installer from the Humble download page and run it.",
+  "When the activation pop-up appears, click 'Enter Product Key' (CursorFX: apply a cursor first, then 'Register').",
+  "Enter the key from the Humble download page and your email address, then 'Activate'.",
+  "Support: https://support.stardock.com/.",
+]
+
+[install]
+source = "humble"
+serial = "per-product"
+silent = false
+notes = "Activation is online (Fences 4: 'The program license is verified repeatedly at regular intervals'). No silent-install switches documented for the Humble builds."
+
+[prefix]
+name = "stardock"
+arch = "win64"
+windows = "win10"
+
+[platforms.macos]
+runner = "crossover"
+windows = "win10"
+notes = "Windows-only. Only SpaceMonger is worth installing; the shell customisers are skipped."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Windows-only; no Wine reports looked up (WineHQ AppDB was not reachable by script). Only SpaceMonger is worth installing."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/18267608519195-Stardock-Software-Redemption-Instructions"
+claim = "download the installer from the bundle page, install, 'Enter the Product Key', enter key and email, Activate; support.stardock.com (2024-11)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360012371793-Iconpackager-instructions"
+claim = "same flow for IconPackager; licence usable on up to five devices"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360044471114-Humble-Software-Bundle-Best-of-Stardock-2020-CursorFX-instructions"
+claim = "CursorFX: apply a setting, then the registration prompt takes email + key; five devices"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/18267421322139-Stardock-Desktop-Essentials-System-Requirements"
+claim = "2023 bundle requirements: Windows 7-11; Fences 4 needs admin rights and re-verifies its licence online at regular intervals"
+[[sources]]
+url = "https://www.humblebundle.com/software/stardock-desktop-essentials-software"
+claim = "'All keys are redeemed during software installation. Licenses are perpetual.' (census redeem_text)"
+[[sources]]
+url = "https://www.humblebundle.com/software/stardock-software-bundle"
+claim = "'Fences, Multiplicity, and Start10 will be redeemed on Steam'; other keys per download-page instructions (census redeem_text)"

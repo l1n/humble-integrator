@@ -1,0 +1,43 @@
+schema = 1
+name = "Poser 12"
+vendor = "poser"
+kind = "app"
+machine_names = ["poser12"]
+verified = false
+notes = """
+3D figure posing, rendering and animation (Graphixly bundles 2024-2025).
+Redeemed together with the content library via one Graphixly checkout
+(see vendors/poser); installers come from posersoftware.com after serial
+validation. Native macOS and Windows builds. Exe/app names are globs.
+"""
+
+[install]
+source = "vendor"
+url = "https://www.posersoftware.com/downloads/12"
+file = "*Poser*12*.exe"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/**/Poser*.exe"
+
+[steam]
+shortcut = true
+title = "Poser 12"
+steamgriddb = "Poser"
+
+[platforms.macos]
+runner = "native"
+file = "*Poser*12*.dmg"
+app_find = "/Applications/**/Poser*.app"
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Windows build only; untested."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/27353872001051-Poser-12-3D-Character-Design-Pack-Redemption-Instructions"
+claim = "perpetual licence; Graphixly checkout with the redemption code"
+[[sources]]
+url = "https://www.posersoftware.com/downloads/12"
+claim = "Poser 12 installers behind serial-number validation"

@@ -1,0 +1,96 @@
+schema = 1
+name = "Reallusion (CrazyTalk 8, CrazyTalk Animator 3, FaceFilter 3 and content packs)"
+kind = "route"
+notes = """
+Humble Software Bundle: 2D Animation (Nov-Dec 2019) was all Reallusion:
+tier 0 FaceFilter 3 Standard + Makeup PRO; tier 1 CrazyTalk 8 Standard and
+its content (Dress Up packs, Stylized Classic Avatars actor pack, Garry Pye's
+Comic Faces); tier 2 CrazyTalk Animator 3 PRO with G3 Power Tools content
+(Smooth Moves, Come & Go elastic motions, Dogs, Fun Stuff props) and two CTA
+training-video sets. Every item is a voucher key; the bundle text's "available
+DRM-Free" means no DRM after activation, not Humble downloads.
+
+A voucher is activated on Reallusion's voucher page, which adds the product
+to the Reallusion account's Order History. Installers and bonus downloads are
+listed there under 'View details' > 'Download'. The product serial is shown on
+the member Registration page ('Resend' under Serial Number, after re-entering
+the account password) and is typed into the installer. Some products instead
+need a key file from Order History during installation (the voucher page says
+so when it applies). Content packs (.RLD and similar installers) need their
+host program installed first; Makeup PRO needs FaceFilter 3.
+
+Platform: Humble listed every item as Windows. CrazyTalk 8 and CTA 3 are
+Windows desktop apps (Reallusion's current pages: Windows 64-bit); a Mac
+edition of CTA 3 Pro was sold elsewhere, so check Order History for a Mac
+installer (unverified). FaceFilter was discontinued on 5 July 2019. No Wine
+reports were found for CT8/CTA3/FaceFilter 3 (only old CrazyTalk 7 reports),
+so the Windows builds under Wine are untested. Activation needs internet.
+
+CrazyTalk Animator was later renamed Cartoon Animator (CTA 4/5); the Humble
+licence is for CTA 3 only.
+"""
+
+[match]
+developers = ["Reallusion"]
+domains = ["reallusion.com"]
+key_names = ["reallusion", "crazytalk", "facefilter", "makeup ?pro"]
+
+[redeem]
+where = "https://www.reallusion.com/voucher/default.html?type=1"
+account = true
+delivers = "the product in the Reallusion account's Order History (installers, bonus downloads), and its serial number on the member Registration page"
+expires = "check the Humble download page (not stated in the bundle text)"
+steps = [
+  "Sign in to (or create and activate by e-mail) a Reallusion account. One account should hold every voucher.",
+  "Open https://www.reallusion.com/voucher/default.html?type=1, paste the Humble key, tick the EULA box and click 'Activate'. Repeat with 'Redeem Another Code' / 'Input Another Code' for each key.",
+  "'Download Now' (or 'View Redemption Record') opens Order History: 'View details' > 'Download' shows the installer, bonus downloads and any serial or key file.",
+  "Get the serial: https://www.reallusion.com/member/#/en/registration > bottom of the page > 'Resend' under Serial Number > re-enter the account password.",
+  "Install the host program first (FaceFilter 3 before Makeup PRO; CrazyTalk 8 / CrazyTalk Animator 3 before their content packs) and type the serial when the installer asks.",
+  "Support: https://www.reallusion.com/CustomerSupport/User/FAQList.html.",
+]
+
+[download]
+scriptable = false
+how = "Reallusion member Order History > View details > Download (logged-in web session)"
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+notes = "Installer framework and silent switches not documented; installers ask for the serial (or a key file) during setup."
+
+[prefix]
+name = "reallusion"
+arch = "win64"
+windows = "win10"
+winetricks = ["d3dx9", "corefonts"]
+notes = "One shared prefix so content packs find their host apps. d3dx9/corefonts are guesses for these DirectX 9-era apps (inference)."
+
+[platforms.macos]
+runner = "crossover"
+windows = "win10"
+notes = "Windows builds under CrossOver, untested. A native Mac CTA 3 build may be offered in Order History (unverified)."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Untested; only CrazyTalk 7-era Wine reports exist."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360038790114-Humble-Software-Bundle-2D-Animation-Redemption-Instructions"
+claim = "voucher page reallusion.com/voucher/default.html?type=1; account activation e-mail; Activate after EULA; Download Now -> Order History > View details > Download (installer, bonus links, serials); serials via member registration page 'Resend' + password; Makeup PRO needs FaceFilter 3 first; most .RLD files need their software installed first"
+[[sources]]
+url = "https://www.reallusion.com/voucher/default.html?type=1"
+claim = "voucher activation page: sign in, EULA acknowledgement, 'Activate'; 'This product requires a Key file during installation ... download the Key file from your Order History'; 'Redeem Another Code'"
+[[sources]]
+url = "https://www.reallusion.com/facefilter/requirements.aspx"
+claim = "'FaceFilter has been discontinued from July 5th, 2019'; Windows 10/8/7/Vista/XP, DirectX 9, internet for online activation"
+[[sources]]
+url = "https://www.reallusion.com/crazytalk/download.html"
+claim = "current CrazyTalk/Cartoon Animator downloads: Windows 64-bit; internet needed to install and activate"
+[[sources]]
+url = "https://www.humblebundle.com/software/2d-animation-software"
+claim = "14 Reallusion items, all hb-key, Windows; tiers 0-2; 'Redeem your keys. All of the software in this bundle is available DRM-Free.' (census)"
+[[sources]]
+url = "https://forum.reallusion.com/Attachment4946.aspx"
+claim = "only Wine report found is for CrazyTalk 7.3 (PlayOnLinux); nothing for CT8/CTA3"

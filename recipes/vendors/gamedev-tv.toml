@@ -45,7 +45,7 @@ redeem_text = [
 ]
 # GameDev.tv's own bundles whose text never says where keys go (e.g. the Game
 # Jam Bundle: assets at gamedev.tv/assets/game-jam-assets-bundle).
-bundle_slugs = ["^gamedevtvs-"]
+bundle_slugs = ["^gamedevtvs-", "^learn-unity-game-development"]  # Learn Unity bundles: every key redeems on GameDev.tv (GameFromScratch), incl. polygoncitypack
 
 [redeem]
 where = "https://gamedev.tv/"

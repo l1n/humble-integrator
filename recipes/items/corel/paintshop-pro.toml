@@ -1,10 +1,10 @@
 schema = 1
-name = "Corel PaintShop Pro (2021 / 2022 / 2023)"
+name = "Corel PaintShop Pro (2019 / 2020 / 2021 / 2022 / 2023)"
 vendor = "corel"
 kind = "app"
-machine_names = ["paintshoppro2021", "paintshoppro2022", "paintshoppro2023"]
+machine_names = ["paintshoppro", "paintshoppro2020", "paintshoppro2021", "paintshoppro2022", "paintshoppro2023"]
 verified = false
-notes = "Windows-only photo editor; each version is a Humble download + its own serial; install only the newest owned. No Mac/Linux build; CrossOver rates PaintShop Pro 2023 'Will Not Install' on Mac (24.0.7) and nothing newer is rated, so expect trouble under Wine."
+notes = "Older editions: 'paintshoppro' is PaintShop Pro 2019 (Professional Photography 2018: trial installer from paintshoppro.com + serial; Painter - Create With Confidence 2019 + Encore: PaintShop Pro Ultimate, one download whose Autorun installs PSP, AfterShot 3, Painter Essentials 6, GRFX Studio and PhotoMirage Express, each with its own serial from the download page); 'paintshoppro2020' is PSP 2020 (Be a Creative Superhero!, 2020: serial + user name in the installer, Corel account registration at first launch). Perpetual, two devices. Windows-only photo editor; each version is a Humble download + its own serial; install only the newest owned. No Mac/Linux build; CrossOver rates PaintShop Pro 2023 'Will Not Install' on Mac (24.0.7) and nothing newer is rated, so expect trouble under Wine."
 
 [install]
 source = "humble"
@@ -28,3 +28,12 @@ claim = "CodeWeavers: entries only up to Painter 2019, VideoStudio X3, PaintShop
 [[sources]]
 url = "https://www.codeweavers.com/compatibility/crossover/corel-paintshop-pro-2023"
 claim = "PaintShop Pro 2023: 'Will Not Install' on CrossOver 24.0.7 Mac (search snippet)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360035496234-Humble-Software-Bundle-Painter-Paintshop-Pro-Ultimate-instructions"
+claim = "PSP Ultimate download contains PSP, AfterShot 3, Painter Essentials 6, GRFX Studio, PhotoMirage Express; Autorun.exe; each needs its own serial; perpetual, two devices"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360014169394-Professional-Photography-PaintShop-Pro-instructions"
+claim = "2018 bundle: free trial of PaintShop Pro 2019 from paintshoppro.com, serial when prompted; two devices"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360054229534-Humble-Software-Bundle-Be-a-Creative-Superhero-Paintshop-Pro-2020-instructions"
+claim = "PSP 2020: installer from the bundle page; serial + user name during install; register with a Corel account at first launch"

@@ -12,7 +12,18 @@ separately there. Kind is 'service' because nothing digital arrives: the
 tool can only show the steps (and the user must enter a postal address and
 pay shipping themselves).
 
-Matched by this bundle's slug only: Magpie Games also publishes DRM-free
+Humble Physical Tabletop Game Bundle: Avatar Legends 20th Anniversary
+Physical RPG Bundle (Oct-Nov 2025, games category, $49 minimum, ACLU): six
+hb-key items (Starter Set, GM Screen, Dice Pack, Journal Pack, Cloth Map &
+Pai Sho Tile, Deluxe Dice Bag), all physical. "Keys are redeemable through
+Magpie Games' website. Shipping is paid on Magpie Games' website upon
+redemption" (estimates US $15, UK $19, CAN $25, EU $29). Humble's article
+puts one product, accessories-bundle-avatar-legends, in the cart and the
+coupon zeroes it. So the six keys are most likely one coupon for the whole
+set; the article does not say whether each item has its own code
+(inference).
+
+Matched by these bundles' slugs only: Magpie Games also publishes DRM-free
 ebook bundles on Humble that must stay on the generic download routes, and
 the item machine names (e.g. urbanshadows2ndedition) could recur as ebooks.
 Humble's 'Magpie Games Classic Indie RPG Physical Book Bundle' (May 2026,
@@ -22,7 +33,10 @@ recipe through the magpiegames.com domain.
 
 [match]
 # URL slug (urban-shadows-physical-collection-books) or a key's bundle machine name (hyphen-free)
-bundle_slugs = ['^urban-?shadows-?physical-?collection']
+bundle_slugs = [
+  '^urban-?shadows-?physical-?collection',
+  '^avatar-?legends-?20th-?anniversary-?physical',   # URL slug and order machine_name (avatarlegends20thanniversaryphysicalrpgbundle_bundle)
+]
 domains = ["magpiegames.com"]
 
 [redeem]
@@ -31,11 +45,12 @@ account = false
 delivers = "the physical items, shipped by Magpie Games (shipping paid by the buyer)"
 expires = "not stated; physical stock is limited, so redeem promptly"
 tier_products = [
-  "$39 tier: https://magpiegames.com/collections/urban-shadows/products/core-book-urban-shadows-1",
-  "$59 tier: https://magpiegames.com/products/urban-shadows-physical-collection-humble-bundle",
+  "Urban Shadows $39 tier: https://magpiegames.com/collections/urban-shadows/products/core-book-urban-shadows-1",
+  "Urban Shadows $59 tier: https://magpiegames.com/products/urban-shadows-physical-collection-humble-bundle",
+  "Avatar Legends 20th Anniversary ($49): https://magpiegames.com/products/accessories-bundle-avatar-legends",
 ]
 steps = [
-  "Open the product page for the tier bought (see tier_products) and add the item to the cart.",
+  "Open the product page for the bundle and tier bought (see tier_products) and add the item to the cart.",
   "At checkout enter the coupon code from the Humble download page; it only works with that product in the cart.",
   "The discount removes the product cost; pay the remaining shipping cost and enter the postal address.",
 ]
@@ -57,3 +72,12 @@ claim = "'Physical item with limited quantity'; four hb-key items by Magpie Game
 [[sources]]
 url = "https://support.humblebundle.com/hc/en-us/articles/49922338822683-Humble-Physical-Book-Bundle-Magpie-Games-Classic-Indie-RPG-Physical-Book-Bundle"
 claim = "same flow for the Classic Indie RPG Physical Book Bundle (2026-05): magpiegames.com/products/classic-indie-bundle to cart, coupon at checkout, shipping paid separately"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/41718775586203-Avatar-Legends-20th-Anniversary-Physical-RPG-Bundle-Redemption-Instructions"
+claim = "Avatar Legends 20th Anniversary: shipping estimates US $15 / UK $19 / CAN $25 / EU $29 paid separately; add https://magpiegames.com/products/accessories-bundle-avatar-legends to the cart, enter the Humble coupon at checkout, only shipping remains (updated 2026-04-01; duplicate article 41718747207323)"
+[[sources]]
+url = "https://www.humblebundle.com/games/avatar-legends-20th-anniversary-physical-rpg-bundle"
+claim = "'Keys are redeemable through Magpie Games' website'; 'Shipping is paid on Magpie Games' website upon redemption'; six hb-key items by Magpie Games (census, capture 2025-10-11)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/23872732261275-Avatar-Legends-Starter-Set-Redemption-Instructions"
+claim = "an earlier Avatar Legends Starter Set offer (not in the census) used the same coupon flow with magpiegames.com/products/avatar-legends-the-roleplaying-game-starter-set"

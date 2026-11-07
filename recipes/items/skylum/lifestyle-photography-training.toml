@@ -1,0 +1,21 @@
+schema = 1
+name = "Training: Learn Lifestyle Photography with Dan & Chelle"
+vendor = "skylum"
+kind = "document"
+machine_names = ["training_learnlifestylephotographywithdanpluschelle"]
+verified = false
+notes = "Photo Editing to the MAX with Luminar AI (Dec 2021). Video training delivered as a Humble download (no delivery icon in the census; inference from the bundle's other file items). Save into the library folder."
+
+[install]
+source = "humble"
+serial = "none"
+
+[library]
+videos = "training videos from the Humble download page"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/photo-editing-to-max-with-luminar-ai-software"
+claim = "training item by Skylum with no delivery icon (census)"

@@ -1,0 +1,68 @@
+schema = 1
+name = "USM / United Soft Media (Redshift astronomy software)"
+kind = "route"
+notes = """
+"The Night Sky Navigators Bundle" (Redshift 9, Sep-Oct 2023, published on
+Humble by Richdale Ventures): Redshift 9 Premium and Redshift 8 Premium for
+Windows, plus two Android apps (Redshift Sky Pro, Solar Eclipse by Redshift)
+as APK downloads. Humble's Redshift article: the Windows installer is a
+download at the bottom of the Humble download page; after installing,
+Redshift asks for the activation key from the download page and offers
+automatic (online) or manual activation. The Android apps are APK files for
+sideloading on an Android device.
+
+Redshift 9 also exists for macOS (10.13+) but as a separate product in USM's
+shop; the Humble keys are listed for Windows only, so on a Mac the Windows
+build runs under CrossOver (untested; it needs OpenGL). No Wine reports were
+found.
+"""
+
+[match]
+developers = ["USM"]
+domains = ["usm.de", "redshift-live.com", "redshiftsky.com"]
+key_names = ['\bredshift (8|9)\b', 'solar eclipse by redshift']
+
+[redeem]
+where = "the Redshift program's activation dialog after installing (key from the Humble download page)"
+account = false
+delivers = "an activated Redshift 8 or 9 Premium for Windows"
+expires = "not stated"
+steps = [
+  "Download the Redshift installer from the bottom of the Humble download page and run it.",
+  "When Redshift asks for activation, enter the key from the Humble download page and choose 'automatic activation' (needs internet) or 'Manual Activation'.",
+  "Android apps: download the .apk from the Humble download page, copy it to the phone's Downloads folder and tap it to install (allow installs from unknown sources).",
+  "Help: https://help.usm.de/hc/en-us/categories/8763204662940-Redshift.",
+]
+
+[install]
+source = "humble"
+serial = "per-product"
+silent = false
+
+[prefix]
+name = "usm-redshift"
+arch = "win64"
+windows = "win10"
+
+[platforms.macos]
+runner = "crossover"
+windows = "win10"
+notes = "Humble keys are for the Windows build; USM's native Mac Redshift 9 is a separate purchase (inference: the Windows key is not documented to activate it)."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Windows build under Wine; needs a working OpenGL driver. Untested."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/19069589409819-Redshift-Redemption-Instructions"
+claim = "Redshift 9/8 installer at the bottom of the bundle download page; activation key from the download page; automatic or manual activation; Android .apk downloads and sideloading steps (2023-10)"
+[[sources]]
+url = "https://help.usm.de/hc/en-us/articles/8781551366428-What-are-the-system-requirements-for-Redshift-9"
+claim = "Redshift 9: Windows 10/11 32/64-bit, OpenGL graphics; Mac: macOS 10.13, 8 GB RAM"
+[[sources]]
+url = "https://www.redshift-live.com/ext/en/"
+claim = "Redshift 9 sold for PC and separately 'For Mac' in USM's shop"
+[[sources]]
+url = "https://www.humblebundle.com/software/red-shift-9-software"
+claim = "'All of the software in this bundle is available for Windows'; developer USM, publisher Richdale Ventures; Android items hb-android (census)"

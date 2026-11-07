@@ -1,0 +1,24 @@
+schema = 1
+name = "Soda PDF 11 Premium"
+vendor = "soda-pdf"
+kind = "app"
+machine_names = ["sodapdf11premium"]
+verified = false
+notes = "Humble Software Bundle: PC Essentials (Feb 2020). Windows PDF editor/converter; activation key entered in the program (see vendors/soda-pdf). Untested under Wine/CrossOver; the exe name is a glob, not confirmed. If it does not run, a native PDF editor is the better choice on macOS/Linux."
+
+[install]
+source = "vendor"
+url = "https://www.sodapdf.com/"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/Soda PDF*/*.exe"
+
+[steam]
+shortcut = true
+title = "Soda PDF 11 Premium"
+steamgriddb = "Soda PDF"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/115008894908-Humble-Software-Bundle-Soda-PDF-Home-instructions"
+claim = "Soda PDF activation: 'Activate' tab, enter key, 'Validate'"

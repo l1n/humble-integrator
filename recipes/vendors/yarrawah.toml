@@ -5,9 +5,22 @@ notes = """
 Small asset seller (Unreal Engine and Unity props, vehicles, effects,
 animations; Shopify store at yarrawah.com with a "My Downloads" area).
 Humble bundles redeemed on its store: Post-Apocalyptic Asset Bundle and The
-Ultimate FPS & TPS Animation Collection (2024). Neither is in the census yet;
-this route is matched by redemption text, bundle names and extracted-key
-instructions.
+Ultimate FPS & TPS Animation Collection (2024), Unreal Military Game Assets
+and Unreal Post-Apocalyptic Assets (2023), and - wave 3 - Unreal Fantasy
+(Apr 2023) and Unreal Essentials #1 (Jun 2023). This route is matched by
+redemption text, bundle names and extracted-key instructions.
+
+Unreal Fantasy and Unreal Essentials #1 name no store on their pages, but
+Humble's articles send them here: tier links yarrawah.com/fantasy-bundle-t1..3
+and /ue-essentials-t1..3. In Unreal Essentials #1 the Dekogon, Freshcan3D and
+Games by Hyper items are delivered through yarrawah.com as well ("for bundle
+purchases only"), but its MoCap Online packs are redeemed on MoCap Online's
+own store (vendors/mocap-online, reached by key instructions; in the census
+they stay on this route because their machine names recur in the Yarrawah
+tier bundles, where MoCap packs do come through Yarrawah).
+"All Yarrawah assets are redeemable on the Unreal Marketplace": after the
+yarrawah.com order, the form at yarrawah.com/pages/request-epic-access adds
+the products to the buyer's Epic (now Fab) library within 24-48 hours.
 
 What a key is: one licence key per tier, used on a tier-specific link that
 opens a pre-filled cart on yarrawah.com. Only the highest tier bought needs
@@ -27,6 +40,8 @@ redeem_text = ['redeem\w*[^.]{0,60}\byarrawah\b']
 bundle_slugs = [
   '^post-?apocalyptic-?asset-?bundle',
   '^(the-?)?ultimate-?fps-?(and-?|&-?)?tps-?animation-?collection',
+  '^unreal-fantasy(?:-software)?$',   # Humble article: yarrawah.com/fantasy-bundle-t1..t3
+  '^unreal-essentials-\d',            # Unreal Essentials #1: yarrawah.com/ue-essentials-t1..t3
 ]
 
 [redeem]
@@ -35,10 +50,11 @@ account = false
 delivers = "the tier's assets as a $0 Shopify order: download links by email, and in My Downloads once the store account is activated"
 expires = "not stated on Humble's instructions"
 steps = [
-  "Pick the link for the highest tier bought. Post-Apocalyptic Asset Bundle: https://www.yarrawah.com/hb-tier-3 (Beat the $25), /hb-tier-2 (Beat the Average), /hb-tier-1 (Beat the $1). FPS & TPS Animation Collection: https://www.yarrawah.com/anim-bundle-t3, /anim-bundle-t2, /anim-bundle-t1. A key used on the wrong tier link cannot be used again.",
+  "Pick the link for the highest tier bought. Post-Apocalyptic Asset Bundle: https://www.yarrawah.com/hb-tier-3 (Beat the $25), /hb-tier-2 (Beat the Average), /hb-tier-1 (Beat the $1). FPS & TPS Animation Collection: https://www.yarrawah.com/anim-bundle-t3, /anim-bundle-t2, /anim-bundle-t1. Unreal Fantasy: https://www.yarrawah.com/fantasy-bundle-t3 (Beat the $35), /fantasy-bundle-t2, /fantasy-bundle-t1. Unreal Essentials #1: https://www.yarrawah.com/ue-essentials-t3, /ue-essentials-t2, /ue-essentials-t1. A key used on the wrong tier link cannot be used again.",
   "The link opens a pre-filled cart; at the bottom enter the licence key from the Humble download page and press apply.",
   "Enter the required details and click 'Continue to payment' (no payment information is needed) to finish.",
   "Download from the emailed links; optionally activate the store account for My Downloads and future updates.",
+  "Optional: to get the same products in the Epic/Fab library, fill in https://www.yarrawah.com/pages/request-epic-access; they are added to the Epic account within 24-48 hours.",
 ]
 
 [download]
@@ -67,3 +83,9 @@ claim = "tier links yarrawah.com/anim-bundle-t1..t3, same flow"
 [[sources]]
 url = "https://www.yarrawah.com/hb-tier-1"
 claim = "redirects to a pre-filled Shopify cart on Yarrawah Interactive's store (Oct 2026); store has My Downloads and Log in"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/14325363915931-Humble-Software-Bundle-Unreal-Fantasy-Redemption-Instructions"
+claim = "Unreal Fantasy: tier links yarrawah.com/fantasy-bundle-t1..t3; redeem only the highest tier; wrong tier link spends the code; pre-filled cart, key at the bottom, no payment, links emailed"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/16471369810843-Unreal-Essentials-Bundle-Redemption-Instructions"
+claim = "Unreal Essentials #1: yarrawah.com/ue-essentials-t1..t3; Dekogon, Freshcan3D and Games by Hyper items also provided through yarrawah.com; 'All Yarrawah assets are redeemable on the Unreal Marketplace' via yarrawah.com/pages/request-epic-access (24-48 h)"

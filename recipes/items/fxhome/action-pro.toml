@@ -1,0 +1,43 @@
+schema = 1
+name = "Action Pro"
+vendor = "fxhome"
+kind = "app"
+machine_names = ["actionpro"]
+recommends = ["fxhome/hitfilm-pro"]
+verified = false
+notes = """
+Professional Filmmaking Tools bundle (Dec 2019). FXhome's motion-recording
+tool: records mouse/trackpad (or Leap Motion) movement as 2D/3D motion paths
+for use in HitFilm Pro (After Effects export was announced). Native macOS
+and Windows builds. Reported discontinued in 2019. Activation as for the
+other FXhome products (inference). A small companion tool, so no Steam
+shortcut by default. Exe/app names are globs.
+"""
+
+[install]
+source = "humble"
+file = "*Action*Pro*.exe"
+serial = "account"
+
+[launch]
+find = "C:/Program Files*/FXhome/Action*/*.exe"
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+file = "*Action*Pro*.dmg"
+app_find = "/Applications/Action*Pro*.app"
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Windows build only; untested."
+
+[[sources]]
+url = "https://www.manula.com/manuals/fxhome/action-pro?l=en"
+claim = "FXhome Action Pro manual: records motion from mouse, joypad or Leap Motion into 2D/3D animation paths (via search summary)"
+[[sources]]
+url = "https://www.humblebundle.com/software/professional-filmmaking-tools-software"
+claim = "Action Pro: hb-key, Windows and Mac, publisher FXhome (census)"

@@ -1,0 +1,26 @@
+schema = 1
+name = "Leartes Gumroad 30% Discount Code"
+vendor = "leartes-gumroad"
+kind = "service"
+service = true
+machine_names = ["discount_30Gumroad"]   # The Mini but Mighty Fantasy Unreal Engine Environments (Oct 2023)
+verified = false
+notes = """
+"A 30% off discount for all Gumroad content! Discount code is valid until
+November 17th, 2023" - a Leartes Studios Gumroad code (the bundle is three
+Leartes environments; Humble lists the item under "Leartes Studios
+Gumroad"), in a bundle whose environments are Epic/Fab codes (vendors/fab).
+Expired; nothing to download.
+"""
+
+[redeem]
+where = "https://leartesstudios.gumroad.com/"
+expires = "2023-11-17"
+steps = ["Before the expiry: open a Leartes product on Gumroad, enter the code in the discount-code field, check the reduced price, buy."]
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/the-mini-but-mighty-fantasy-unreal-engine-environments-software"
+claim = "'30% Off Gumroad Content' (publisher 'Leartes Studios Gumroad'): 'A 30% off discount for all Gumroad content! Discount code is valid until November 17th, 2023'"

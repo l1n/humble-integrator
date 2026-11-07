@@ -1,0 +1,42 @@
+schema = 1
+name = "Python Morsels (weekly Python exercises; Truthful Technology)"
+kind = "route"
+service = true
+notes = """
+Trey Hunner's Python Morsels exercise service. "Learn Python Programming with
+PyCharm" (Jul 2020) gave one key per tier for 10, 15 or 25 weeks of
+exercises. The green link applies the code to a Python Morsels account; one
+exercise is assigned per week. Humble warns that the credits expire, so
+these 2020 codes are almost certainly spent or void now.
+"""
+
+[match]
+developers = ["Python Morsels", "Truthful Technology"]
+domains = ["pythonmorsels.com"]
+key_names = ["python ?morsels"]
+
+[redeem]
+where = "the green Python Morsels link on the Humble download page"
+account = true
+delivers = "10/15/25 weekly exercise credits on the Python Morsels account (credits expire)"
+expires = "credits expire (see https://www.pythonmorsels.com/billing/subscription/)"
+steps = [
+  "Click the green Python Morsels link on the Humble download page.",
+  "Sign up or log in; the code is applied and one exercise per week is assigned.",
+  "Check remaining credits at https://www.pythonmorsels.com/billing/subscription/. Support: help@pythonmorsels.com.",
+]
+
+[download]
+scriptable = false
+how = "exercises are delivered by e-mail/web on pythonmorsels.com"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360050222874-Humble-Software-Bundle-Learn-Python-Programming-with-PyCharm-10-15-25-weeks-of-Python-Morsels-exercises"
+claim = "single key per tier for 10/15/25 weeks; green link; sign up/log in; one exercise per week; credits expire; help@pythonmorsels.com"
+[[sources]]
+url = "https://pythonmorsels.helpscoutdocs.com/article/20-humble-bundle"
+claim = "Python Morsels help article on Humble Bundle codes"

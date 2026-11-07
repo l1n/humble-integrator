@@ -10,6 +10,13 @@ one key per course. Each key is a 'Digital Product Voucher' code entered on the
 InformIT account page; the course then appears under Digital Purchases with
 lifetime access.
 
+"Pearson Programming Sampler" (pearson-programming-sampler-software, Oct
+2024) sold 15 short 'Humble Bundle Sampler' video courses (Python, Java, Rust,
+Go, C++, SQL, React, TypeScript, Bash, PowerShell, F#/C#; developer = the
+instructor, publisher Pearson) whose keys are "reedemable through Pearson's
+website". Humble's only Pearson video article is the InformIT one, so those
+keys are taken to be InformIT vouchers too (inference, unverified).
+
 Matched by the bundle's redemption text only. Pearson (Addison-Wesley, Que,
 Cisco Press, ...) is also the publisher of DRM-free Humble Book Bundles, so
 "Pearson" must not become a developers rule here.
@@ -23,7 +30,12 @@ video downloads from Digital Purchases. Which ones do is not documented.
 domains = ["informit.com"]
 key_names = ['informit', 'pearson video']
 # "All of the video courses in this bundle can be redeemed on the InformIT website."
-redeem_text = ['redeem\w*[^.]{0,60}\binformit\b']
+redeem_text = [
+  'redeem\w*[^.]{0,60}\binformit\b',
+  # "Keys are reedemable through Pearson's website." (Pearson Programming Sampler, Oct 2024;
+  # Humble's typo). Taken to mean InformIT, Pearson's video-course store (inference).
+  "\\b(?:redeem|reedem)\\w*[^.]{0,40}\\bpearson\\W{0,2}s website",
+]
 
 [redeem]
 where = "https://www.informit.com/join (then the account page's 'Digital Product Voucher' box)"

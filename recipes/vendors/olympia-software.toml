@@ -1,0 +1,51 @@
+schema = 1
+name = "Olympia Software (Olympia Art Collection clip art)"
+kind = "route"
+notes = """
+Learn Instruments and Design (Nov 2019) included "Olympia Art Collection
+Standard": about 5,900 royalty-free clip-art images and backgrounds for
+Windows, as a key. Nothing about the publisher could be found: its old domain
+(olympiasoftware.com) is parked for sale, and Humble has no article for it.
+Treat it like the Summitsoft collections in the same bundle: download the
+installer from the Humble download page, enter the key if asked, and keep the
+unpacked images in the library folder (inference, unverified). If the
+installer needs an online activation server that no longer exists, the item
+cannot be used.
+"""
+
+[match]
+developers = ["Olympia Software"]
+key_names = ['olympia art']
+
+[redeem]
+where = "the installer from the Humble download page (key entered during installation; inference)"
+account = false
+delivers = "a clip-art collection (images and backgrounds)"
+expires = "unknown"
+steps = [
+  "Download the installer from the Humble download page and run it in a Windows prefix.",
+  "Enter the key from the Humble download page if asked.",
+  "Copy the installed images into the library folder.",
+]
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[prefix]
+name = "olympia-software"
+arch = "win64"
+windows = "win10"
+
+[platforms.macos]
+runner = "crossover"
+
+[platforms.linux]
+runner = "wine"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/learn-instruments-and-design-software"
+claim = "Olympia Art Collection Standard: 5,900 royalty-free clip-art images and backgrounds; hb-key, Windows; publisher Olympia Software (census)"
+[[sources]]
+url = "https://www.hugedomains.com/domain_profile.cfm?d=olympiasoftware.com"
+claim = "olympiasoftware.com redirects to a domain-for-sale page (checked Nov 2026)"

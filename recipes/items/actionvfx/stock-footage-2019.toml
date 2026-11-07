@@ -1,0 +1,40 @@
+schema = 1
+name = "ActionVFX Stock Footage packs (2019)"
+vendor = "actionvfx"
+kind = "content"
+machine_names = [
+  "theactionvfxstockfootage_fire",
+  "theactionvfxstockfootage_explosions",
+  "theactionvfxstockfootage_gunfx",
+  "theactionvfxstockfootage_particles",
+  "theactionvfxstockfootage_smoke",
+  "theactionvfxstockfootage_debrisandimpact",
+  "theactionvfxstockfootage_bloodandgore",
+]
+verified = false
+notes = """
+Seven small ActionVFX element packs (4-12 clips each, 2K/3K, shot on RED,
+some with PNGs) in Humble's Professional Filmmaking Tools bundle (Dec 2019).
+On the bundle page the software items carry a key icon and these carry no
+delivery icon at all, so they were Humble direct downloads, like ActionVFX's
+collections in The Battle Box (inference; no Humble article). Nothing to
+redeem: fetch the Humble downloads into the library folder.
+"""
+
+[install]
+source = "humble"
+serial = "none"
+notes = "Video elements (MOV / image sequences, PNGs) for compositing in Resolve, After Effects, Nuke, Blender."
+
+[library]
+files = "per pack: the clips as Humble delivers them"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://web.archive.org/web/20191211190724/https://www.humblebundle.com/software/professional-filmmaking-tools-software"
+claim = "the HitFilm/Ignite/Action Pro/Ukramedia/Filmstro items show an hb-key availability icon; the ActionVFX Stock Footage items show none"
+[[sources]]
+url = "https://www.humblebundle.com/software/professional-filmmaking-tools-software"
+claim = "item text: '9 total clips delivered in 2K resolution, Shot on RED' (Fire); Gun FX '12 total clips and 42 PNGs delivered in 3K resolution'"

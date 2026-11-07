@@ -1,0 +1,74 @@
+schema = 1
+name = "MoCap Online"
+kind = "route"
+notes = """
+Motion-capture animation packs for Unreal Engine, Unity, Blender, iClone
+and FBX (mocaponline.com). Sold on its own store and on Fab / the old Unreal
+Engine Marketplace; Humble's MoCap Online article says products redeemed on
+its store are also added to the buyer's Epic account within 24-48 hours.
+
+Where a MoCap Online key is redeemed depends on the bundle:
+  * Unreal Essentials #1 (Jun 2023) and Unreal Engine Asset Bonanza (Oct
+    2023): separate hb-key items per pack, redeemed on MoCap Online's store
+    with the link and code from the Humble download page (Humble's MoCap
+    Online article, published with the Unreal Essentials one; inference for
+    Asset Bonanza).
+  * Yarrawah's tier bundles (Post-Apocalyptic Assets, Ultimate FPS & TPS
+    Animation Collection): the packs come through Yarrawah's tier cart
+    (vendors/yarrawah).
+  * Unreal Engine Spring Utility Essentials (2024): hb-epic Epic codes
+    (generic/epic-key).
+  * Super Weapons Pack from Superhive: Superhive coupons (vendors/superhive).
+The same Humble machine names (scared_mocappack, parklife_mocappack, ...)
+recur across these bundles, so no census rule here: in the census the packs
+follow their bundle's route (Unreal Essentials #1 -> vendors/yarrawah, Asset
+Bonanza -> vendors/fab). An extracted key reaches this route by its
+instructions (a mocaponline.com link) or its name ("... - MoCap Pack"), unless
+it is an Epic/Fab code.
+"""
+
+[match]
+domains = ["mocaponline.com"]
+# "Park Life - MoCap Pack"; not Epic/Fab codes for the same packs (Spring Utility Essentials).
+key_names = ['(?s)^(?!.*\b(?:epic|fab|superhive|yarrawah)\b).*\bmocap\b']
+
+[redeem]
+where = "https://mocaponline.com/"
+account = true
+delivers = "the pack(s) in the MoCap Online account (downloads per engine/format), and in the Epic account within 24-48 hours"
+expiry_text = "not stated in Humble's article"
+steps = [
+  "Follow the link shown with the key on the Humble download page (it opens the pack(s) on MoCap Online's store).",
+  "Create or log in to a MoCap Online account (needed to reach checkout).",
+  "Enter the Humble code in the discount field, Apply, and complete the $0 order.",
+  "Download the packs from the MoCap Online account; the Unreal versions may also appear in the Epic (Fab) library within 24-48 hours.",
+]
+
+[download]
+scriptable = false
+how = "from the MoCap Online account in a logged-in browser; Unreal versions also via the Epic Games Launcher / Fab plugin"
+
+[library]
+files = "per pack: animation files in the formats MoCap Online offers (Unreal, Unity, FBX, Blender, iClone)"
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer: animation packs imported per project."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/16471716338459-Mocap-Online-Redemption-Instructions"
+claim = "follow the link provided by Humble and use the code from the download page; a Mocap account is needed for checkout; enter the code in the discount field; products granted to the account; 24-48 hours to appear in the Epic account"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/16471369810843-Unreal-Essentials-Bundle-Redemption-Instructions"
+claim = "Unreal Essentials #1: Yarrawah, Dekogon, Freshcan3D and Games by Hyper content through yarrawah.com; MoCap Online not among them"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/12165160456347-Post-Apocalyptic-Asset-Bundle-Redemption-Instructions"
+claim = "Post-Apocalyptic Asset Bundle (with MoCap Online packs) redeemed only through yarrawah.com tier links"

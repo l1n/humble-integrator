@@ -1,0 +1,74 @@
+schema = 1
+name = "Tiny Tales: Character Gen EX (Mega Tiles)"
+vendor = "itch-io"
+kind = "app"
+machine_names = [
+  "tinytales_charactergenex",   # Tiny Tales Treasure Trove (Sep 2024): hb-key; Game Creator Mega Bundle Vol. 2 (Nov 2025): hb-drmfree
+]
+verified = false
+notes = """
+A 16-bit RPG character generator (battlers, sprites and portraits from the
+Tiny Tales parts; exports with 8 facial expressions). Mega Tiles sells it on
+itch.io as a downloadable tool for Windows and Linux (no macOS build).
+
+In the Tiny Tales Treasure Trove bundle every asset pack is a Humble download
+but the generator is a key, and the item links to
+megatiles.itch.io/tiny-tales-pixel-2d-character-gen-ex, so the key is taken
+to be an itch.io download key / claim link (inference; Humble has no article
+for this bundle, and Mega Tiles already used itch.io keys for its Fresh
+Start packs). In the Game Creator Mega Bundle Vol. 2 it is a plain Humble
+download instead, installed like any DRM-free app.
+
+Linux: use the native Linux build. macOS: the Windows build under
+CrossOver/Wine (untested). Exe names are not documented: launch.find and
+exe_find are globs, unconfirmed.
+"""
+
+[redeem]
+where = "the item's link on the Humble download page (expected: an itch.io claim page for megatiles.itch.io), then https://itch.io/my-collections"
+account = true
+delivers = "Tiny Tales: Character Generator EX (Windows and Linux builds) in the itch.io library, with updates"
+steps = [
+  "Log in to itch.io (see vendors/itch-io).",
+  "Open the Character Gen EX link from the Humble download page and claim it to the account; if it is a plain download link instead, just download.",
+  "From My Library download the build for this system (Linux build on Linux; Windows build for CrossOver on macOS).",
+]
+
+[install]
+source = "vendor"
+url = "https://megatiles.itch.io/tiny-tales-pixel-2d-character-gen-ex"
+serial = "none"
+notes = "itch.io uploads 'Tiny Tales: Character Generator EX 1.2 (Win)' and '(Linux)'; archive format not checked."
+
+[launch]
+find = "C:/**/*[Cc]haracter*[Gg]en*.exe"
+notes = "Glob only; exe name unconfirmed (Windows build)."
+
+[steam]
+shortcut = true
+title = "Tiny Tales: Character Gen EX"
+steamgriddb = "Tiny Tales Character Generator EX"
+
+[prefix]
+name = "tiny-tales-character-gen-ex"
+arch = "win64"
+windows = "win10"
+
+[platforms.macos]
+runner = "crossover"
+notes = "No macOS build; Windows build under CrossOver/Kegworks, untested."
+
+[platforms.linux]
+runner = "native"
+exe_find = "**/*[Cc]haracter*[Gg]en*"
+notes = "Native Linux build from itch.io; executable name unconfirmed."
+
+[[sources]]
+url = "https://megatiles.itch.io/tiny-tales-pixel-2d-character-gen-ex"
+claim = "'A downloadable character generator for Windows and Linux'; uploads Character Generator EX 1.2 (Win) and (Linux)"
+[[sources]]
+url = "https://www.humblebundle.com/software/tiny-tales-treasure-trove-ultimate-pixel-art-rpg-toolkit-software"
+claim = "Character Gen EX is the bundle's only key (hb-key, developer link megatiles.itch.io/tiny-tales-pixel-2d-character-gen-ex); the other Tiny Tales packs are Humble downloads (Wayback, Sep 2024)"
+[[sources]]
+url = "https://megatiles.itch.io/tiny-tales-overworld-2d-tileset-asset-pack/devlog/227788/itchio-keys-notice-gab-fresh-start-hb"
+claim = "Mega Tiles' earlier Humble bundle (Fresh Start) was meant to come with itch.io keys"

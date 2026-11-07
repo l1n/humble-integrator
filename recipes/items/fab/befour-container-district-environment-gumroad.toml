@@ -1,0 +1,29 @@
+schema = 1
+name = "Container District Environment (Unreal Engine - Unity), Gumroad code"
+vendor = "gumroad"
+kind = "content"
+publisher = "Befour Studios"
+machine_names = ["containerdistrictenvironmentunrealengineunity"]
+verified = false
+notes = """
+Supreme 2 Unreal & Unity Game Dev Bundle (Nov 2025): "By using this code on
+Gumroad, you can download both the Unreal Engine and Unity versions of the
+Container District Environment package." A Gumroad code for Befour Studios'
+store (befourstudios.gumroad.com), unlike the bundle's other keys (Fab /
+Unity), so it leaves the bundle's vendors/fab route.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "No installer: an Unreal project and a Unity package, added per project."
+
+[library]
+files = "the Unreal Engine and Unity versions of the package as Gumroad delivers them"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/supreme-2-unreal-and-unity-game-dev-bundle-software"
+claim = "'By using this code on Gumroad, you can download both the Unreal Engine and Unity versions of the Container District Environment package'"

@@ -1,0 +1,65 @@
+schema = 1
+name = "Fantasy Grounds VTT (formerly Fantasy Grounds Unity)"
+vendor = "smiteworks"
+kind = "app"
+machine_names = [
+  "fantasygroundsunitystandardlicensenonsubscription",
+  "fantasygroundsunityultimate3-monthfreetrial_bundle_fantasygrounds",
+]
+verified = false
+notes = """
+The Humble items are a Fantasy Grounds Unity Standard licence key and an
+Ultimate 3-month trial. Both are moot since November 2025: Fantasy Grounds
+VTT is free to host and join games with, no licence needed. Activating them
+does no harm but adds nothing. What matters is the Fantasy Grounds account
+that the bundle's content keys were activated on (vendors/smiteworks).
+
+Best route into Steam: the free 'Fantasy Grounds VTT' Steam app (1196310),
+with native Windows, macOS and Linux builds. On first start it runs
+SmiteWorks' updater: pick a data folder, log in with the Fantasy Grounds
+account (case-sensitive username), Update. It is a real Steam app, so no
+shortcut is added. The standalone web installers work as well (see
+platforms.*.url and the vendor notes) but would then need a shortcut.
+"""
+
+[install]
+source = "steam"
+steam_app_id = 1196310
+serial = "account"
+notes = "First start: FGUpdaterEngine asks for the data directory (Check Directory), then the Fantasy Grounds login, then Update downloads the program and all purchased modules. Licence keys are not needed any more; the Linux Steam guide says Steam may disregard an old one."
+
+[launch]
+notes = "Launched by Steam. Standalone installs: macOS /Applications/SmiteWorks/Fantasy Grounds/FantasyGrounds.app; Linux ~/.smiteworks/fantasygrounds/FantasyGrounds.x86_64 (FG wiki paths for the default locations)."
+
+[steam]
+shortcut = false
+title = "Fantasy Grounds VTT"
+steamgriddb = "Fantasy Grounds VTT"
+notes = "Steam app 1196310 is free; install it rather than adding a non-Steam shortcut."
+
+[platforms.macos]
+runner = "native"
+app = "/Applications/SmiteWorks/Fantasy Grounds/FantasyGrounds.app"
+file = "FGUWebInstall.pkg"
+url = "https://www.fantasygrounds.com/filelibrary/FGUWebInstall.pkg"   # standalone alternative to Steam
+notes = "Steam build or the standalone .pkg; both native (Metal, macOS 10.14+)."
+
+[platforms.linux]
+runner = "native"
+file = "FGUWebInstall.bin"
+url = "https://www.fantasygrounds.com/filelibrary/FGUWebInstall.bin"   # standalone alternative to Steam; chmod +x, run, accept the EULA
+exe_find = "~/.smiteworks/fantasygrounds/FantasyGrounds.x86_64"
+notes = "Steam build is native Linux. If it crashes at launch under Wayland, set the launch option GDK_BACKEND=x11 %command% (SmiteWorks documents the env var for the standalone build; the Steam launch option is inferred)."
+
+[[sources]]
+url = "https://store.steampowered.com/app/1196310/"
+claim = "Fantasy Grounds VTT: free, Windows/Mac/Linux (Steam appdetails, 2026-11-07)"
+[[sources]]
+url = "https://fantasygroundsunity.atlassian.net/wiki/spaces/FGCP/pages/996638950/License+Keys+F.A.Q"
+claim = "Fantasy Grounds VTT now completely free, no licence or subscription required (FG wiki, 2025-11-25)"
+[[sources]]
+url = "https://fantasygroundsunity.atlassian.net/wiki/spaces/FGCP/pages/996639529"
+claim = "Steam install: Play, updater login, Update; old licence keys on Steam may be disregarded"
+[[sources]]
+url = "https://www.humblebundle.com/software/pathfinders-finest-2e-fantasy-grounds-experience-software"
+claim = "'a key for the standard edition of Fantasy Grounds Unity ... (plus a 3-month trial for its feature-packed Ultimate version)' (census)"

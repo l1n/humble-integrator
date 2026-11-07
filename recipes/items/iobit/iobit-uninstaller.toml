@@ -1,0 +1,21 @@
+schema = 1
+name = "IObit Uninstaller 8 PRO"
+vendor = "iobit"
+kind = "app"
+machine_names = ['iobituninstaller_pro']
+verified = false
+skip = true
+skip_reason = "Windows system utility with no purpose inside a Wine prefix; keep the code for a real Windows PC."
+notes = "Humble Software Bundle: Computer Care (Oct 2018). Uninstaller / bundleware remover for Windows programs; Wine has its own uninstaller. Licence code entered in the program (see vendors/iobit); PRO licences are time-limited and the 2018 codes are probably expired."
+
+[install]
+source = "vendor"
+url = "https://www.iobit.com/"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/computer-care-software"
+claim = "IObit Uninstaller 8 PRO: IObit, Windows key (census)"

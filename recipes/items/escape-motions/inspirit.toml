@@ -2,9 +2,9 @@ schema = 1
 name = "Inspirit"
 vendor = "escape-motions"
 kind = "app"
-machine_names = ["inspirit"]
+machine_names = ["inspirit", "inspirit115"]   # "inspirit115" = Inspirit 1.1.5 in the 2021 Paint and Draw bundle
 verified = false
-notes = "2023 'Become a Painting Pro with Rebelle 5' bundle: Humble serves Windows and Mac DRM-free builds. Mandala/kaleidoscope painting toy. Activates with a registration key from the Escape Motions site (internet needed)."
+notes = "Also in 'Natural Digital Painting Kit' (2020, activation code only) and 'Paint and Draw' (2021): redeem the Humble code at escapemotions.com/community/humblebundle and download Inspirit from the Escape Motions account (as Humble documents for Flame Painter 4; inference for this product). 2023 'Become a Painting Pro with Rebelle 5' bundle: Humble serves Windows and Mac DRM-free builds. Mandala/kaleidoscope painting toy. Activates with a registration key from the Escape Motions site (internet needed)."
 
 [install]
 source = "humble"

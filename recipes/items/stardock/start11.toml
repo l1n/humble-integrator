@@ -1,0 +1,23 @@
+schema = 1
+name = "Start11"
+vendor = "stardock"
+kind = "app"
+machine_names = ["start11"]
+verified = false
+skip = true
+skip_reason = "Windows-shell customiser: inside a Wine prefix there is no Windows shell to change and it cannot touch the macOS/Linux desktop. Keep the key unrevealed for a real Windows PC."
+notes = "Stardock Desktop Essentials (2023). Start-menu and taskbar replacement for Windows 10/11. Installer from the Humble download page; key + email in the 'Enter Product Key' dialog (see vendors/stardock)."
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/18267608519195-Stardock-Software-Redemption-Instructions"
+claim = "generic Stardock flow: install, Enter the Product Key, key + email, Activate"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/18267421322139-Stardock-Desktop-Essentials-System-Requirements"
+claim = "Desktop Essentials 2023 contents and Windows requirements (IconPackager 10.03, CursorFX4, SpaceMonger 3.0, Start11, Fences 4, Multiplicity KM)"

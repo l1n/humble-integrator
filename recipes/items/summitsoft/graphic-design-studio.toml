@@ -1,0 +1,26 @@
+schema = 1
+name = "Graphic Design Studio"
+vendor = "summitsoft"
+kind = "app"
+machine_names = ["graphicdesignstudio"]
+verified = false
+notes = "Learn Instruments and Design (Nov 2019, tier 2). Vector shape/illustration editor. Windows app; under Wine untested. Exe path is a glob, not confirmed."
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/Summitsoft/Graphic Design Studio*/*.exe"
+
+[steam]
+shortcut = true
+title = "Graphic Design Studio"
+steamgriddb = "Graphic Design Studio"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/learn-instruments-and-design-software"
+claim = "Graphic Design Studio: hb-key, Windows, tier 2 (census)"
+[[sources]]
+url = "https://www.summitsoft.com/content/1317-installation-process"
+claim = "licence key entered on the installer's registration form"

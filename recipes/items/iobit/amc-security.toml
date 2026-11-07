@@ -1,0 +1,25 @@
+schema = 1
+name = "AMC Security (Advanced Mobile Care, Android)"
+vendor = "iobit"
+kind = "service"
+machine_names = ["amcsecurity"]
+verified = false
+skip = true
+skip_reason = "Android-only app; nothing to install on macOS or Linux."
+notes = "Humble Software Bundle: Computer Care (Oct 2018), delivered as an Android item (hb-android). Android antivirus/optimiser; the PRO unlock presumably works like AppLock's (code in the app's menu, 12 months; inference, no Humble article found). The 2018 offer is almost certainly expired."
+
+[redeem]
+where = "inside the AMC Security Android app (inference: as for IObit AppLock)"
+account = false
+delivers = "AMC Security PRO on one Android device (unverified)"
+steps = [
+  "Install AMC Security on the Android device from the Humble download page or Google Play.",
+  "Enter the code from the Humble download page in the app's registration/upgrade screen (unverified).",
+]
+
+[[sources]]
+url = "https://www.humblebundle.com/software/computer-care-software"
+claim = "AMC Security (Android) by IObit, hb-android delivery (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360010363273-Humble-Software-Bundle-Computer-Care-IObit-AppLock-instructions"
+claim = "the sibling Android item (AppLock) is unlocked with a code inside the app, 12 months, deadline 2018-11-30"

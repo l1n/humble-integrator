@@ -1,0 +1,30 @@
+schema = 1
+name = "FaceFilter 3 Standard"
+vendor = "reallusion"
+kind = "app"
+machine_names = ["facefilter3standard"]
+verified = false
+notes = """
+2D Animation bundle, tier 0. Photo retouching/makeup tool. Windows only
+(XP-10, DirectX 9). Discontinued by Reallusion on 5 July 2019, a few months
+before the bundle; the installer still comes from Order History. Exe
+name/folder are guesses.
+"""
+
+[install]
+source = "vendor"
+url = "https://www.reallusion.com/member/#/en/order-history"
+file = "*FaceFilter*3*.exe"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/Reallusion/FaceFilter*3*/*FaceFilter*.exe"
+
+[steam]
+shortcut = true
+title = "FaceFilter 3"
+steamgriddb = "FaceFilter"
+
+[[sources]]
+url = "https://www.reallusion.com/facefilter/requirements.aspx"
+claim = "discontinued 5 July 2019; Windows 10/8/7/Vista/XP; DirectX 9; online activation"

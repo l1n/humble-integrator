@@ -1,0 +1,20 @@
+schema = 1
+name = "Makeup PRO (FaceFilter 3 template pack)"
+vendor = "reallusion"
+kind = "addon"
+machine_names = ["makeuppro"]
+requires = ["reallusion/facefilter-3"]
+verified = false
+notes = "2D Animation bundle, tier 0. 33 makeup templates and ~200 makeup elements for FaceFilter 3; Humble says FaceFilter 3 Standard must be installed first."
+
+[install]
+source = "vendor"
+url = "https://www.reallusion.com/member/#/en/order-history"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360038790114-Humble-Software-Bundle-2D-Animation-Redemption-Instructions"
+claim = "'Makeup PRO requires FaceFilter3 Standard to be installed first'"

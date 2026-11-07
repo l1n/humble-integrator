@@ -1,0 +1,23 @@
+schema = 1
+name = "WindowBlinds"
+vendor = "stardock"
+kind = "app"
+machine_names = ["windowblinds"]
+verified = false
+skip = true
+skip_reason = "Windows-shell customiser: inside a Wine prefix there is no Windows shell to change and it cannot touch the macOS/Linux desktop. Keep the key unrevealed for a real Windows PC."
+notes = "Stardock Software Bundle (2018), Best of Stardock (2020), Organize Your PC (2020). Skins the Windows title bars, taskbar and start menu (WindowBlinds 10/11). Installer from the Humble download page; key + email in the 'Enter Product Key' dialog (see vendors/stardock)."
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360012253374-WindowBlinds-instructions"
+claim = "Enter Product Key pop-up after install; key + email; five devices"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360012257414-Humble-Software-Bundle-Best-of-Stardock-System-Requirements"
+claim = "2018 Stardock bundle requirements; Start8 'Can only be installed on Windows 8 or Windows Server 2012'"

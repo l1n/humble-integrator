@@ -1,0 +1,33 @@
+schema = 1
+name = "SoftWeir game-design worksheets"
+vendor = "softweir"
+kind = "document"
+machine_names = [
+  "softweircharacterandanimationdesignworksheet",
+  "softweirstoryandstoryboarddesignworksheet",
+  "softweirweaponandarmourdesignworksheet",
+  "softweiruser-interfacedesignworksheet",
+  "softweirprojectmanagementdocumentation",
+  "softweirmapanddungeondesignworksheet",
+  "softweirscriptandlogicdesignworksheet",
+  "softweiritemdesignworksheet",
+  "softweirgamedesigndocumentationbuilder",
+  "softweirworlddesignworksheet",
+]
+verified = false
+notes = "Printable PDF worksheets for planning a game. DRM-free PDF downloads from the Humble page (as in the 2024 STEM bundle; the 2020 Game Dev STEM page shows no delivery icon). Save into the library folder."
+
+[install]
+source = "humble"
+file = "*.pdf"
+serial = "none"
+
+[library]
+ebooks = "PDF worksheets"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/royaltyfree-001-game-creator-stem-bundle-software"
+claim = "same machine names delivered as hb-drmfree PDFs in 2024 (census)"

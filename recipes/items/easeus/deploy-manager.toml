@@ -1,0 +1,20 @@
+schema = 1
+name = "EaseUS Deploy Manager"
+vendor = "easeus"
+kind = "app"
+machine_names = ["easeusdeploymanager"]
+verified = false
+skip = true
+skip_reason = "Windows system-deployment tool (images Windows onto other PCs); meaningless inside a Wine prefix."
+notes = "Windows 11 Migration bundle (Jan-Feb 2022). Install from the Humble download page, then License tab > Add License > activation code > OK (Humble). Term not stated (the bundle's other EaseUS keys are one-year). See vendors/easeus."
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4416034985243-Windows-11-Migration-EaseUS-Deploy-Manager"
+claim = "download and install from the bundle page; License tab > Add License; activation code; OK; support easeus.com/support"

@@ -1,0 +1,21 @@
+schema = 1
+name = "Privacy Guardian"
+vendor = "iolo"
+kind = "app"
+machine_names = ['privacyguardian']
+verified = false
+skip = true
+skip_reason = "Windows system utility; useless or harmful inside a Wine prefix. Keep the key for a real Windows PC."
+notes = "iolo technologies. Browser-tracking and privacy protection for Windows. Activated with the Humble key inside System Mechanic / System Mechanic Ultimate Defense (see vendors/iolo); one year of premium access per key (Humble 2022). In the Feb 2022 'PC Utilities, VPN and More' bundle Humble also hosted the Windows installer (DRM-free download next to the key)."
+
+[install]
+source = "vendor"
+url = "https://smu.iolo.com/"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4428790231195-Privacy-Guardian-Redemption-Instructions"
+claim = "installer from the bundle page (2022); with System Mechanic installed use the key icon; one year of premium access"

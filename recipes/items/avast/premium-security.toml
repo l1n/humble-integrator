@@ -1,0 +1,30 @@
+schema = 1
+name = "Avast Premium Security (Multi-Device, 1 year)"
+vendor = "avast"
+kind = "app"
+machine_names = ["avastpremiumsecuritymulti-device_1year"]
+verified = false
+notes = "Cybersecurity with Avast (2021) and PC Utility and Security Tools with Avast & Laplink (2023). Antivirus suite. 'Multi-Device': Windows, Mac and Android on one code (Humble 2021). macOS: install the native Avast Security app and enter the code under Menu > My subscriptions. Linux: no client. Windows: pointless under Wine. A background service, not something to launch from Steam. App bundle name is a glob, not confirmed."
+
+[install]
+source = "vendor"
+url = "https://www.avast.com/premium-security"
+serial = "account"
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+app_find = "/Applications/Avast*.app"
+
+[platforms.linux]
+runner = "none"
+notes = "No Linux client; use the subscription on a Mac, Windows PC or phone."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/1260803015170-Humble-Software-Bundle-Cybersecurity-Threat-Protection-with-Avast-System-Requirements"
+claim = "Premium Security: Windows 7+, Mac OS X 10.10+, Android 6+; 1-year licence from activation"
+[[sources]]
+url = "https://support.avast.com/en-us/article/activate-premium-security/"
+claim = "activation code: Windows Menu > Enter activation code; Mac Menu > My subscriptions > Activate"

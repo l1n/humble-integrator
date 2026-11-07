@@ -1,0 +1,53 @@
+schema = 1
+name = "Wiley Efficient Learning (Sybex CompTIA review courses, test banks, flashcards)"
+kind = "route"
+service = true
+notes = """
+"Humble Sybex CompTIA Exam Prep Bundle" (Jan 2020): twelve keys for Sybex
+CompTIA A+ (Core 1/2), Network+ and Security+ study tools from Wiley
+Efficient Learning: Silver Exam Review Courses, Test Banks with flashcards,
+and flashcard sets. These were online products on Wiley's Efficient Learning
+platform (efficientlearning.com, IT section); a Humble key was presumably an
+access/activation code entered there (inference: the bundle text only says
+"Redeem your keys", and Humble has no article for it).
+
+Status: efficientlearning.com is now UWorld's accounting/finance review site
+(CPA, CMA, CIA, CFA) and no longer lists the IT/CompTIA products, so these
+2020 codes are very likely dead. The CompTIA exam objectives they covered
+(220-1001/1002, N10-007, SY0-501) have also been retired. Sybex book test
+banks are separately redeemed on Wiley's test-bank page, which may or may not
+accept these codes (untested). Nothing to install.
+"""
+
+[match]
+developers = ["Wiley Efficient Learning"]
+domains = ["efficientlearning.com", "testbanks.wiley.com"]
+key_names = ["efficient ?learning", "sybex"]
+
+[redeem]
+where = "historically efficientlearning.com (Wiley Efficient Learning IT courses); possibly https://testbanks.wiley.com for the test banks (unverified)"
+account = true
+delivers = "online review course / test bank / flashcards access (time-limited; product line discontinued)"
+expires = "unknown; product line no longer sold"
+steps = [
+  "Reveal the keys on the Humble download page and follow any link or instructions shown with them.",
+  "Try the test-bank keys at https://testbanks.wiley.com (Wiley education login, 'test-bank-redemption'); this is unverified for Humble codes.",
+  "Efficient Learning's IT catalogue is gone (the site is now UWorld accounting review), so expect the codes to fail; contact Wiley support (info@efficientlearning.com was the listed address) if needed.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/sybex-comptia-exam-prep-software"
+claim = "12 CompTIA A+/Network+/Security+ items (review courses, test banks, flashcards), publisher Wiley Efficient Learning, hb-key; text only 'Redeem your keys' (census)"
+[[sources]]
+url = "https://www.efficientlearning.com/"
+claim = "now 'UWorld Accounting & Finance Exam Review - CPA, CIA, CMA, CFA, CMT'; no IT/CompTIA products (fetched Nov 2026)"
+[[sources]]
+url = "https://www.efficientlearning.com/?p=6190"
+claim = "Efficient Learning formerly sold CompTIA A+ Core 1 and Core 2 Gold Exam Review Courses (search index)"
+[[sources]]
+url = "https://testbanks.wiley.com/"
+claim = "redirects to login.education.wiley.com with return URL checkout.education.wiley.com/test-bank-redemption"

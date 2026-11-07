@@ -1,0 +1,29 @@
+schema = 1
+name = "PV Games (PVGames)"
+kind = "route"
+notes = """
+2D/2.5D sprite and tile artist (Medieval, 2.5D Character Pieces, Mythos,
+Sci-Fi lines; many packs formatted for RPG Maker MV) selling on itch.io
+(pvgames.itch.io). On Humble its packs only ever come inside other people's
+bundles, and the bundle decides delivery: GAB's Game Creator and Fresh Start
+bundles (vendors/game-asset-bundle), Degica's RPG Maker Resurgence (Steam
+keys and downloads, vendors/rpg-maker), the Game Creator Mega Bundles
+(Humble downloads). So this recipe deliberately matches nothing; it exists
+for the item recipes in items/pv-games/. A Humble purchase does not unlock
+the packs on pvgames.itch.io.
+"""
+
+[install]
+source = "humble"
+serial = "none"
+notes = "Asset packs: unzip into the library folder."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://pvgames.itch.io/medieval-dungeons"
+claim = "PV Games' itch.io store page for Medieval: Dungeons (the developer link on every Humble listing of it)"

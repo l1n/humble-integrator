@@ -1,0 +1,67 @@
+schema = 1
+name = "RPG Maker Resurgence: resource-pack DLC delivered as Steam keys"
+vendor = "rpg-maker"
+kind = "content"
+machine_names = [
+  # Humble showed these with no delivery icon at all (launch to end, Jun-Aug 2022):
+  "darkherocharacterpack",                    # RPG Maker VX Ace - Dark Hero Character Pack (T1)
+  "rpgmakervxace_wildwesttilespack",          # RPG Maker VX Ace - Wild West Tiles Pack (T2)
+  "rpgmakervxace_fantasticbuildings_modern",  # RPG Maker VX Ace - Fantastic Buildings: Modern (T2)
+  "wonderlandmusicpack",                      # RPG Maker VX Ace - Wonderland Music Pack (T2)
+  "moderndaymusicmega-pack",                  # RPG Maker MV - Modern Day Music Mega-Pack (T3)
+  "rpgmakermv_seraphcircle_monsterpack1",     # RPG Maker MV - Seraph Circle: Monster Pack 1 (T3)
+  "paranormalmonsters",                       # RPG Maker MV - Paranormal Monsters (T3)
+  "rpgmaker_tylerwarrensrpgbattlerpack_monsterevolution",  # Tyler Warren RPG Battlers: Monster Evolution (T3)
+  "rpgmakermv_dsresourcepack",                # DS Resource Pack (T3; a Steam key with icon in UNITEd Together)
+  "rpgmakermv_pophorrorcity_characterpack1",  # RPG Maker MV - POP! Horror City: Character Pack 1 (T4)
+  "rpgmakermv_pophorrorcity_characterpack2",  # RPG Maker MV - POP! Horror City: Character Pack 2 (T4)
+  "rpgmakermv_dsplusresourcepack",            # RPG Maker MV - DS+ Resource Pack (T4; Steam key with icon elsewhere)
+  # Shown as DRM-free downloads but, per Barter.vg, delivered as Steam keys:
+  "rpgmakermv-medieval_interiors",            # RPG Maker MV - Medieval: Interiors (T4)
+  "rpgmakermv-fsm_woodsandcave",              # RPG Maker MV - FSM: Woods and Cave (T4)
+  "rpgmakermv_fsm_townofbeginningstiles",     # RPG Maker MV - FSM: Town of Beginnings Tiles (T4; Steam key with icon in the Degica bundle)
+]
+verified = false
+notes = """
+Humble Software Bundle: RPG Maker Resurgence (30 Jun - 30 Jul 2022, Degica):
+"Most titles in this bundle can be redeemed on Steam and some items come
+DRM-free." Its page listed a dozen resource packs with no delivery icon
+throughout the sale, and Barter.vg's bundle record (from buyers' reports)
+says the bundle page was wrong in places: "A lot of items are advertised as
+DRM-Free, but are actually delivered as Steam keys" - the packs above. One
+file for all of them because they are handled identically.
+
+Each is Steam DLC of RPG Maker VX Ace or RPG Maker MV (both in the same
+bundle as Steam keys): redeem the key on Steam, and Steam installs the pack
+alongside the base program (a dlc folder inside the program's install
+directory, from which resources are imported into a project: inference, not
+checked here). Nothing goes to the library folder and there is no Steam
+entry of its own. Extracted keys of type steam reach Steam whatever this
+recipe says; the recipe exists so the census rows (and any key Humble files
+under these machine names) are placed.
+"""
+
+[redeem]
+where = "https://store.steampowered.com/account/registerkey"
+account = true
+delivers = "the DLC on the Steam account, installed with RPG Maker VX Ace or RPG Maker MV"
+steps = [
+  "Reveal the key on the Humble download page and activate it on Steam (Games > Activate a Product on Steam, or https://store.steampowered.com/account/registerkey).",
+  "Own and install the base program the pack is for (VX Ace or MV; both come with this bundle as Steam keys).",
+  "Steam downloads the DLC with the base program; import its resources into a project from there.",
+]
+
+[install]
+source = "steam"
+serial = "none"
+notes = "Steam DLC; no separate installer."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://barter.vg/bundle/6264/"
+claim = "RPG Maker Resurgence: 'A lot of items are advertised as DRM-Free, but are actually delivered as Steam keys' (lists Dark Hero, Wild West Tiles, Fantastic Buildings: Modern, Wonderland Music, Modern Music Mega-Pack, Seraph Circle 1, Paranormal Monsters, Monster Evolution, DS Resource Pack, Medieval: Interiors, FSM Woods and Cave, FSM Town of Beginnings, POP! Horror City 1 and 2, DS+ Resource Pack) (Wayback, May 2023)"
+[[sources]]
+url = "https://www.humblebundle.com/software/rpg-maker-resurgence-software"
+claim = "'Most titles in this bundle can be redeemed on Steam and some items come DRM-free'; the packs above with availability_icons null on 30 Jun, 18 Jul and 3 Aug 2022 (Wayback)"

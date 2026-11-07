@@ -1,0 +1,46 @@
+schema = 1
+name = "Luminar 4"
+vendor = "skylum"
+kind = "app"
+machine_names = ["luminar4", "software_luminar4"]
+verified = false
+notes = """
+AI-Powered Photo Editor with Luminar 4 (Nov 2020) and Photo Editing to the
+MAX with Luminar AI (Dec 2021). Unlike Luminar Neo, the installer is a Humble
+download: install the trial, click Activate and enter the e-mail and the
+Humble activation key. Native macOS and Windows builds. In the MAX bundle
+Luminar 4 is mainly the route for importing Looks into Luminar AI (see
+luminar-ai-templates). Linux: no build and no Wine reports, so nothing is
+installed there. App/exe names are globs, not confirmed.
+"""
+
+[install]
+source = "humble"
+serial = "per-product"
+notes = "Activation dialog asks for e-mail + key; no documented silent install."
+
+[launch]
+find = "C:/Program Files*/Skylum/Luminar 4/*.exe"
+
+[steam]
+shortcut = true
+title = "Luminar 4"
+steamgriddb = "Luminar 4"
+
+[platforms.macos]
+runner = "native"
+file = "*Luminar*4*.dmg"
+app_find = "/Applications/Luminar 4*.app"
+
+[platforms.linux]
+runner = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360056942454-Luminar-4-instructions"
+claim = "download the Luminar 4 installer from the bundle page; install the trial; Activate; e-mail + activation key; support skylum.com/support"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360058408633-Humble-Software-Bundle-AI-Powered-Photo-Editor-with-Luminar-4-System-Requirements"
+claim = "Luminar 4: Windows 7+ and macOS 10.12+, 8 GB RAM, 10 GB disk"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4412318025499-Photo-Editing-to-the-MAX-with-Luminar-AI-File-instructions"
+claim = "MAX bundle: install and register Luminar 4, install Looks into it, then register Luminar AI to import them"

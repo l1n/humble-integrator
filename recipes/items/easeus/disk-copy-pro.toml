@@ -1,0 +1,20 @@
+schema = 1
+name = "EaseUS Disk Copy Pro"
+vendor = "easeus"
+kind = "app"
+machine_names = ["diskcopy"]
+verified = false
+skip = true
+skip_reason = "Disk-cloning tool for real disks; inside a Wine prefix it cannot see or clone physical drives. Keep the key for a real Windows PC."
+notes = "Windows 11 Migration bundle (Jan-Feb 2022). Install from the Humble download page, enter the licence code, 'Activate now'; one-year licence (Humble). See vendors/easeus."
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4416027876507-Windows-11-Migration-Disk-Copy-instructions"
+claim = "download and install from the bundle page; enter licence code; Activate now; good for one year"

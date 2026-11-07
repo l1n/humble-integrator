@@ -1,0 +1,27 @@
+schema = 1
+name = "Cinematic LUTs V4"
+vendor = "film-riot"
+kind = "content"
+machine_names = ["cinematicluts_v4"]
+verified = false
+notes = """
+Professional Filmmaking Tools (Dec 2019). 35 film-inspired LUTs in log
+variants (Alexa, REDLog, Blackmagic, C-Log, V-Log L, S-Log2/3, standard log,
+Rec.709) as .CUBE, .3DL, .XMP, .LOOK, .VLT and .COSTYLE, with a PDF guide;
+for Photoshop, Lightroom, Premiere, Resolve and similar. Humble download
+(inference, see vendors/film-riot). No Steam entry.
+"""
+
+[install]
+source = "humble"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[library]
+files = "LUT files (.cube/.3dl/.xmp/.look/.vlt/.costyle) and a PDF install guide"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/professional-filmmaking-tools-software"
+claim = "35 movie-inspired LUTs, log variants, .CUBE .3DL .XMP .LOOK .VLT .COSTYLE, PDF guide; compatible with Photoshop and Lightroom (census)"

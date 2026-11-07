@@ -1,0 +1,11 @@
+schema = 1
+name = "Any one (15-week) cohort of Weekly Python Exercise"
+vendor = "reuven-lerner"
+kind = "service"
+machine_names = ["anyone15weekcohortofweeklypythonexercise"]
+verified = false
+notes = "In both 'Learn Python Programming with PyCharm' (2020; form hb-python-2020) and 'Python 2021' (form hb-python-2021). After the form, a separate e-mail lets you choose one 15-week cohort."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360050051534-Reuven-Lerner-Python-Training-Any-one-15-week-cohort-of-Weekly-Python-Exercises"
+claim = "WPE cohort delivered in a separate e-mail; select an exercise set"

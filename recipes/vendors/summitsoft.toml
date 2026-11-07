@@ -1,0 +1,78 @@
+schema = 1
+name = "Summitsoft (Logo Design Studio Pro, Graphic Design Studio, fonts and clip art)"
+kind = "route"
+notes = """
+"Humble Software Bundle: Learn Instruments and Design" (Nov 2019) paired
+eMedia music courses with Summitsoft's Windows design programs: Logo Design
+Studio Pro, Graphic Design Studio, Business Card Studio, Comic Creator Studio,
+Creative Fonts Wonderful Collection and CLIP ART Collection 1. Summitsoft
+products are now sold and supported by Encore Software (support@encore.com).
+
+Summitsoft's installers ask for name, email and the licence key (serial) on a
+form during installation and need an internet connection to activate; fonts
+are copied to Documents\\Summitsoft Fonts rather than installed. Summitsoft
+says licence keys longer than 16 characters (or starting LDSV) from older
+versions must be exchanged for a new key by emailing sales@encore.com with
+the old key and the order number; 2019 Humble keys may be of that kind
+(unverified). Where the Humble download page has no installer, Summitsoft's
+own downloads are tied to its order history, so a Humble buyer would need to
+ask Encore support for one (inference).
+
+The design programs are ordinary windowed Windows apps; under Wine they are
+untested. The font and clip-art collections are content: keep them in the
+library folder (fonts can be installed natively on macOS/Linux).
+"""
+
+[match]
+developers = ["Summitsoft"]
+domains = ["summitsoft.com", "encore.com"]
+key_names = ['summitsoft', 'logo design studio', 'graphic design studio', 'business card studio', 'comic creator studio']
+
+[redeem]
+where = "the product's installer (licence key field on the installer's registration form)"
+account = false
+delivers = "an activated licence for one Summitsoft program or collection"
+expires = "none documented"
+steps = [
+  "Download the installer from the Humble download page.",
+  "Run it; on the registration form give a valid email address and paste the licence key from the Humble download page (watch for 0/O and 1/I typos). An internet connection is required.",
+  "If the key is rejected as an old-format key (more than 16 characters, or starting LDSV), email sales@encore.com with the key and the Humble order number to get a new one.",
+  "Support: support@encore.com (Summitsoft products are sold and supported by Encore Software).",
+]
+
+[install]
+source = "humble"
+serial = "per-product"
+silent = false
+notes = "The serial is typed into the installer wizard's registration form (step 3 of Summitsoft's installation process); installer framework not identified."
+
+[prefix]
+name = "summitsoft"
+arch = "win64"
+windows = "win10"
+
+[platforms.macos]
+runner = "crossover"
+windows = "win10"
+notes = "Humble's items are Windows builds (Summitsoft also sells some Mac versions separately; the Humble keys are not known to work for them)."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Windows-only builds; Wine untested."
+
+[[sources]]
+url = "https://www.summitsoft.com/content/1317-installation-process"
+claim = "installer form asks for a valid email and the licence key (serial); fonts are copied to Documents\\Summitsoft Fonts; installers need internet"
+[[sources]]
+url = "https://www.summitsoft.com/content/1316-installation-and-activation"
+claim = "common activation problems: typos (0/O, 1/I), no internet connection; per-product activation pages"
+[[sources]]
+url = "https://www.summitsoft.com/content/1318-logo-design-studio-pro-1-7-activation"
+claim = "keys longer than 16 digits or starting LDSV: email the old key and receipt/order number to get a new key (address is Cloudflare-obfuscated; decodes to sales@encore.com)"
+[[sources]]
+url = "https://www.summitsoft.com/content/1309-logo-design-studio"
+claim = "Summitsoft products are sold and supported by Encore Software, LLC; contact support (decodes to support@encore.com)"
+[[sources]]
+url = "https://www.humblebundle.com/software/learn-instruments-and-design-software"
+claim = "Summitsoft items: hb-key, Windows; publisher 'Summitsoft' (census)"

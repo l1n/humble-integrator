@@ -1,0 +1,31 @@
+schema = 1
+name = "Lonely Planet Phrasebooks (Japanese, Italian, French, Mandarin, Spanish)"
+vendor = "lonely-planet"
+kind = "document"
+machine_names = [
+  "japanese_phrasebook",
+  "italian_phrasebook",
+  "french_phrasebook",
+  "mandarin_phrasebook",
+  "spanish_phrasebook",
+]
+verified = false
+notes = "The same machine names came back in 'Learn a New Language and Travel the World' (Jun 2022), there with Humble's DRM-free ebook delivery, which confirms the format. Humble Learn a New Language Bundle (Mar 2019), top tier. DRM-free ebooks (PDF/EPUB/MOBI) from the Humble download page; the census shows no delivery icons because of the older page layout. Sold as 'Phrasebook & Audio': keep any audio files Humble offers too (unverified)."
+
+[install]
+source = "humble"
+serial = "none"
+
+[library]
+ebooks = "PDF, EPUB, MOBI"
+audio = "phrasebook audio, if included in the download (unverified)"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/learn-a-new-language-software"
+claim = "ebooks in PDF, MOBI and ePub, DRM-free (archived bundle page, 2019-03-20); 'Phrasebook & Audio' descriptions (census)"
+[[sources]]
+url = "https://www.humblebundle.com/software/learn-new-language-and-travel-world-software"
+claim = "the same machine names reappear in Jun 2022 as hb-drmfree ebooks (census), confirming the format"

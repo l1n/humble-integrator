@@ -1,0 +1,23 @@
+schema = 1
+name = "Redshift 8 Premium"
+vendor = "usm"
+kind = "app"
+machine_names = ["redshift8_theplanetariumsoftware"]
+verified = false
+notes = "The Night Sky Navigators Bundle (Redshift 9, 2023). Planetarium / astronomy program (sky simulation, telescope control). Windows build; under Wine untested (needs OpenGL). Exe path is a glob, not confirmed."
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/*Redshift*8*/*Redshift*.exe"
+
+[steam]
+shortcut = true
+title = "Redshift 8 Premium"
+steamgriddb = "Redshift 8"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/19069589409819-Redshift-Redemption-Instructions"
+claim = "installer from the bottom of the download page; activation key; automatic or manual activation"

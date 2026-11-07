@@ -2,9 +2,9 @@ schema = 1
 name = "Amberlight 2"
 vendor = "escape-motions"
 kind = "app"
-machine_names = ["amberlight2"]
+machine_names = ["amberlight2", "amberlight"]   # "amberlight" = Amberlight 2 in the 2020 Natural Digital Painting Kit and 2021 Paint and Draw bundles
 verified = false
-notes = "2023 'Become a Painting Pro with Rebelle 5' bundle: Humble serves Windows and Mac DRM-free builds. Fractal light-art generator. Activates with a registration key from the Escape Motions site (internet needed). Humble's description for this item is a copy of Inspirit's."
+notes = "Also in 'Natural Digital Painting Kit' (2020, activation code only) and 'Paint and Draw' (2021): redeem the Humble code at escapemotions.com/community/humblebundle and download Amberlight 2 from the Escape Motions account (as Humble documents for Flame Painter 4; inference for this product). 2023 'Become a Painting Pro with Rebelle 5' bundle: Humble serves Windows and Mac DRM-free builds. Fractal light-art generator. Activates with a registration key from the Escape Motions site (internet needed). Humble's description for this item is a copy of Inspirit's."
 
 [install]
 source = "humble"

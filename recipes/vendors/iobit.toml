@@ -1,0 +1,69 @@
+schema = 1
+name = "IObit (Advanced SystemCare, Driver Booster, Uninstaller, Malware Fighter, ...)"
+kind = "route"
+notes = """
+Humble Software Bundle: Computer Care (Oct 2018) sold IObit's Windows
+utilities as 'PRO' licence codes (Advanced SystemCare 11, Smart Defrag 6,
+IObit Uninstaller 8, Driver Booster 6, Malware Fighter 6, Start Menu 8,
+IOTransfer 3, Protected Folder) plus two Android apps (AppLock, AMC
+Security). Each code is entered in the program itself ('Enter Code' /
+'Register' -> 'Register Now' / 'Activate Now'); no account. IObit PRO
+licences are time-limited (Humble's Protected Folder and AppLock articles:
+one device, 12 months, then the program reverts to the free/trial
+version), and Humble gave AppLock a hard redemption deadline of
+2018-11-30, so codes from this bundle are almost certainly expired today
+(inference for the items without their own article).
+
+Every Windows item is a system optimiser, cleaner, defragmenter, driver
+updater, anti-malware tool, Start-menu replacement or folder locker: inside
+a Wine prefix they can only see (and 'fix') the prefix, so all are
+skip = true on macOS and Linux. IOTransfer needs an iPhone over USB via
+Apple's Windows drivers, which Wine does not provide. The Android apps are
+installed on a phone. No Steam entries.
+
+Matched by developer: IObit appears in the census only in this bundle and
+every IObit item is a key (or an Android app).
+"""
+
+[match]
+developers = ["IObit"]
+domains = ["iobit.com"]
+key_names = ['\biobit\b', 'advanced ?systemcare', 'driver ?booster', 'smart ?defrag', 'malware ?fighter', 'iotransfer']
+
+[redeem]
+where = "the installed program's registration box ('Enter Code' / 'Register', then 'Register Now' / 'Activate Now')"
+account = false
+delivers = "a PRO licence for one PC, time-limited (12 months for the items Humble documents)"
+expires = "AppLock key had to be redeemed before 2018-11-30 (Humble); the other Computer Care codes are of the same 2018 bundle and presumably expired too (inference)"
+steps = [
+  "Reveal the code on the Humble download page.",
+  "Download the program from iobit.com (Protected Folder: https://update.iobit.com/dl/PF-Setup.exe per Humble) and install it on a Windows PC.",
+  "Click 'Enter Code' (bottom left of the main window) or 'Register', paste the code and click 'Register Now' / 'Activate Now'.",
+  "The licence covers one device; reinstalling or reformatting the same PC counts as another use (Humble, Protected Folder). Support: tickets@iobit.com.",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+
+[platforms.macos]
+runner = "none"
+notes = "Windows-only system utilities; nothing useful to run under Wine/CrossOver."
+
+[platforms.linux]
+runner = "none"
+notes = "Windows-only system utilities; nothing useful to run under Wine/Proton."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360010248054-Humble-Software-Bundle-Computer-Care-Protected-Folder-instructions"
+claim = "Protected Folder: download update.iobit.com/dl/PF-Setup.exe, Register, enter key, Activate Now; one device (reformatting counts as a new use); reverts to trial when the licence expires; tickets@iobit.com"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360010363273-Humble-Software-Bundle-Computer-Care-IObit-AppLock-instructions"
+claim = "AppLock: key must be redeemed before November 30th, 2018; code entered in the app's sidebar menu; 12-month PRO licence; APK at mobilecarecdn.iobit.com/IObitApplock.apk"
+[[sources]]
+url = "https://www.iobit.com/product-manuals/asc-help"
+claim = "Advanced SystemCare: click 'Enter Code' at the bottom left, enter the licence code, click 'Register Now' to activate Pro"
+[[sources]]
+url = "https://www.humblebundle.com/software/computer-care-software"
+claim = "'Software keys can be redeemed according to the individual instructions on your download page'; IObit items are Windows keys plus two Android apps (census)"

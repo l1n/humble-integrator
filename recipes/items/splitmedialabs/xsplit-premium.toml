@@ -1,0 +1,13 @@
+schema = 1
+name = "XSplit Premium (3 months / 1 year, includes VCam)"
+vendor = "splitmedialabs"
+kind = "service"
+machine_names = ["xsplitpremium_3monthsubscription", "xsplitpremium_1yearsubscription"]
+verified = false
+skip = true
+skip_reason = "Redemption deadline passed (2019-12-31), and XSplit is Windows-only."
+notes = "Streaming 2019 (beat-the-average and top tiers). Time-limited XSplit Premium licence on the XSplit account; see vendors/splitmedialabs."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360023994753-Humble-Software-Bundle-Streaming-2019-XSplit-VCAM-XSplit-Premium-instructions"
+claim = "3-month / 1-year XSplit Premium keys include VCam; redeem by 2019-12-31"

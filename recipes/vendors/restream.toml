@@ -1,0 +1,32 @@
+schema = 1
+name = "Restream (multistreaming service)"
+kind = "route"
+service = true
+notes = """
+Streaming 2019 (Jun 2019): 3 months or 1 year of Restream's Standard plan,
+one code per tier, redeemed on restream.io's billing page. Restream is a web
+service (stream once, restream to many platforms), so nothing is installed.
+Humble's article says keys had to be redeemed by 2019-08-25: unredeemed codes
+are almost certainly dead.
+"""
+
+[match]
+developers = ["Restream"]
+domains = ["restream.io"]
+key_names = ['\brestream\b']
+
+[redeem]
+where = "https://restream.io/plans/billing?humble-bundle-upgrade"
+account = true
+delivers = "3 months or 1 year of the Restream Standard plan"
+expires = "2019-08-25"
+expiry_text = "Keys must be redeemed by August 25th, 2019"
+steps = [
+  "Open https://restream.io/plans/billing?humble-bundle-upgrade and log in to or create a Restream account.",
+  "Enter the code; the plan shows under the Payments tab.",
+  "Support: https://support.restream.io/.",
+]
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360023810154-Humble-Software-Bundle-Streaming-2019-Restream-Instructions"
+claim = "one key for 3 months or 1 year by tier; redeem by August 25th, 2019; restream.io/plans/billing?humble-bundle-upgrade; Standard plan; Payments tab"

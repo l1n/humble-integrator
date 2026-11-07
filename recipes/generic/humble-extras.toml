@@ -1,0 +1,20 @@
+schema = 1
+name = "Humble extras: promos, wallet credit, placeholders, charities"
+kind = "route"
+priority = 6
+before_vendors = true
+skip = true
+skip_reason = "Not a product to install or redeem elsewhere."
+notes = """
+Tiles Humble shows alongside a bundle's products that aren't products:
+free-to-play promo packs (codes shown on the Humble download page, redeemed
+in that game), Humble Wallet credit for subscribers, "more content coming
+soon" placeholders caught before a mid-sale reveal, and charity tiles.
+`hi plan` lists them; `hi apply` does nothing with them.
+"""
+
+[match]
+machine_names = ["_freepromo", "^walletcredit", "^mysterybox", "^giving_fund$", "^roomtoread$",
+  "^littlekidsrock$", "^girlsmakegames$", "^youthmusicuk$", "^bethematch$", "^stopaapihate$",
+  "^americancancersociety$"]
+developers = ["Room to Read", "www.girlsmakegames.com", "PayPal Giving Fund"]

@@ -1,0 +1,37 @@
+schema = 1
+name = "Shapelab (yearly edition licence)"
+vendor = "shapelab"
+kind = "app"
+machine_names = [
+  "shapelab2024license",   # Shapelab Creator's Kit (Nov 2024)
+  "shapelab2025license",   # Ultimate 3D & VR Sculpting ... Mega Bundle (Oct 2025)
+]
+verified = false
+notes = """
+Perpetual licence for one yearly edition of Shapelab, redeemed on
+account.shapelabvr.com and installed with the Shapelab Launcher (log in,
+select the product and licence, Install). Windows only; works without a
+headset in desktop mode, or in VR through SteamVR. Exe name and install path
+not documented: launch.find is a guess at the Launcher's install location.
+"""
+
+[install]
+source = "vendor"
+serial = "account"
+notes = "Shapelab Launcher from the Shapelab account after redeeming; the Launcher downloads and installs the edition."
+
+[launch]
+find = "C:/Program Files*/**/Shapelab*.exe"
+notes = "Unverified glob; the Launcher may be the better Steam target if it is what starts Shapelab."
+
+[steam]
+shortcut = true
+title = "Shapelab"
+steamgriddb = "Shapelab"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/30744127879835-Shapelab-Bundle-Redemption-Instructions"
+claim = "redeem on account.shapelabvr.com; install via the Shapelab Launcher; perpetual, 1 user, 2 devices"
+[[sources]]
+url = "https://www.humblebundle.com/software/shapelab-creators-kit-software"
+claim = "'a Shapelab 2024 license, a voucher for the 2025 edition'; 'All of the software in this bundle is available for Windows'"

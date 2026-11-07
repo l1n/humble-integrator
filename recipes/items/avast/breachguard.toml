@@ -1,0 +1,20 @@
+schema = 1
+name = "Avast BreachGuard (3 PC, 1 year)"
+vendor = "avast"
+kind = "app"
+machine_names = ["avastbreachguard3pc_1year"]
+verified = false
+skip = true
+skip_reason = "Windows-only system/security tool; useless inside a Wine prefix. Activate it on a real Windows PC instead."
+notes = "Cybersecurity with Avast (2021) and PC Utility and Security Tools with Avast & Laplink (2023). Data-breach monitoring and privacy cleaner for Windows; nothing for it to do in a Wine prefix. Activation code entered in the app (see vendors/avast)."
+
+[install]
+source = "vendor"
+serial = "account"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/1260803015170-Humble-Software-Bundle-Cybersecurity-Threat-Protection-with-Avast-System-Requirements"
+claim = "BreachGuard: Windows 7+, 1-year licence from activation"

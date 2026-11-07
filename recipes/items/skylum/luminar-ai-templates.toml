@@ -1,0 +1,49 @@
+schema = 1
+name = "Luminar AI Templates and Looks (MAX and Cyber bundles)"
+vendor = "skylum"
+kind = "addon"
+machine_names = [
+  "templates_bwportrait",
+  "templates_greatamericanlandscapes",
+  "templates_colorgradientportraits",
+  "templates_vangoghartisticcollection",
+  "templates_postcardtravelpack",
+  "signaturetemplatesandlooks_extraordinarylandscapes",
+  "luminarailooks_analogfilm",
+  "luminarailooks_urbanjungle",
+  "luminarailooks_neonportraits",
+  "luminarailooks_vangoghartisticcollection",
+  "luminarailooks_moviecolorgrading",
+]
+requires = ["skylum/luminar-ai"]
+verified = false
+notes = """
+Template collections (.ltc) and Looks for Luminar AI. In the MAX bundle (Dec
+2021) these are zip downloads with no delivery icon in the census; Humble's
+file instructions: rename/extract to .ltc and double-click (or File > Add
+Luminar AI Template Collection); templates appear under Templates >
+Purchased. Legacy Looks (.mplumpack) are installed into Luminar 4 first and
+imported when Luminar AI is registered (Templates > Legacy). In the Cyber
+bundle (Nov 2022) Humble lists the Looks as keys for Windows/Mac; how those
+are delivered is not documented (a download or a Skylum marketplace code;
+inference). Keep the downloaded files in the library folder.
+"""
+
+[install]
+source = "humble"
+file = "*.zip"
+serial = "none"
+notes = "Some zips hold an extensionless file that must be renamed to .ltc / .mplumpack (Humble's MAX-bundle file instructions)."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4412318025499-Photo-Editing-to-the-MAX-with-Luminar-AI-File-instructions"
+claim = "extract/rename to .ltc or .mplumpack; Looks via Luminar 4 then imported on Luminar AI registration; templates under Templates/Purchased, Looks under Templates/Legacy"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4411477043227-Installing-Templates-in-Luminar-AI"
+claim = "File > Add Luminar AI Template Collection; .ltc; Templates tab > Purchased"
+[[sources]]
+url = "https://www.humblebundle.com/software/photo-editing-cyber-bundle-with-luminar-ai-software"
+claim = "Luminar AI Looks items are hb-key for Windows/Mac (census)"

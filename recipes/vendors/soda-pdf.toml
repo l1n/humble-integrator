@@ -1,0 +1,58 @@
+schema = 1
+name = "Soda PDF (LULU Software)"
+kind = "route"
+notes = """
+Humble Software Bundle: PC Essentials (Feb 2020) included Soda PDF 11
+Premium as a Windows licence key (publisher 'SODAPDF'). Humble's article
+for the earlier Soda PDF Home key (2017 bundle, not in the census) says:
+download the installer, launch it, open the 'Activate' tab at the far right
+and enter the activation key, then 'Validate'. Soda PDF 11 presumably
+activates the same way (inference).
+
+Windows desktop PDF editor/converter. No Wine/CrossOver reports were found
+for Soda PDF (CodeWeavers' compatibility search has none). macOS and Linux
+have native PDF tools, so this is low priority: install under Wine only if
+wanted, untested.
+"""
+
+[match]
+developers = ["SODAPDF", "Soda PDF", "LULU Software"]
+domains = ["sodapdf.com"]
+key_names = ['soda ?pdf']
+
+[redeem]
+where = "the installed Soda PDF program: 'Activate' tab > activation key > 'Validate' (Humble, Soda PDF Home)"
+account = false
+delivers = "an activated Soda PDF 11 Premium desktop licence (term not stated)"
+expires = "bundle ended in Feb 2020; key deadline unknown"
+steps = [
+  "Reveal the activation key on the Humble download page.",
+  "Download Soda PDF from the Humble download page or https://www.sodapdf.com/ and install it on Windows.",
+  "Launch it, open the 'Activate' tab (far right), enter the key and click 'Validate' (Humble's Soda PDF Home steps; Soda PDF 11 wording may differ).",
+  "Support: https://www.sodapdf.com/support/center",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+silent = false
+
+[platforms.macos]
+runner = "crossover"
+windows = "win10"
+notes = "Windows-only; untested under CrossOver."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Windows-only; untested under Wine."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/115008894908-Humble-Software-Bundle-Soda-PDF-Home-instructions"
+claim = "Soda PDF Home: download from the bundle page, launch, 'Activate' tab at the far right, enter key, 'Validate'; support sodapdf.com/support/center"
+[[sources]]
+url = "https://www.humblebundle.com/software/pc-essentials-software"
+claim = "SODA PDF 11 Premium: Windows key, publisher SODAPDF (census)"
+[[sources]]
+url = "https://www.codeweavers.com/compatibility?name=soda+pdf"
+claim = "no CrossOver compatibility entries for Soda PDF"

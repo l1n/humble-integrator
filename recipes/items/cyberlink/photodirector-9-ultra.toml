@@ -1,0 +1,24 @@
+schema = 1
+name = "PhotoDirector 9 Ultra"
+vendor = "cyberlink"
+kind = "app"
+machine_names = ["cyberlinkphotodirector9ultra"]
+verified = false
+notes = "Video & Photo Editing 2018 by CyberLink (top tier). Photo editor/organiser (Windows). Under Wine: untested. Exe path is a glob."
+
+[install]
+source = "humble"
+file = "*PhotoDirector*.exe"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/CyberLink/PhotoDirector*/PhotoDirector*.exe"
+
+[steam]
+shortcut = true
+title = "PhotoDirector 9"
+steamgriddb = "PhotoDirector"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/video-photo-editing-2018-software"
+claim = "PhotoDirector 9 Ultra, hb-key, Windows, tier2 (census)"

@@ -1,0 +1,38 @@
+schema = 1
+name = "Filmstro (dynamic royalty-free music)"
+kind = "route"
+service = true
+notes = """
+Filmstro sells a library of adaptive music (momentum/depth/power sliders)
+used in its web app, macOS app and Premiere Pro extension. Humble's
+'Professional Filmmaking Tools' bundle (Dec 2019) had a one-year Filmstro
+Pro subscription key: redeemed under My Account > License on filmstro.com,
+it lasts one year from redemption, replaces (does not extend) an existing
+licence, one key per person - and had to be redeemed by 2 February 2020.
+So every such key has either expired or can no longer be redeemed. Nothing
+to install; music downloaded during the subscription stays licensed per
+Filmstro's terms (not checked).
+"""
+
+[match]
+domains = ["filmstro.com"]
+key_names = ['filmstro']
+
+[redeem]
+where = "https://filmstro.com/ (My Account > License)"
+account = true
+delivers = "one year of Filmstro Pro from the redemption date"
+expires = "2020-02-02"
+expiry_text = "(?i)expiration date to use the key for Filmstro Pro is ([A-Z][a-z]+ \\d{1,2}(?:st|nd|rd|th)?,? \\d{4})"
+steps = [
+  "Reveal the key on the Humble download page (deadline was 2 February 2020).",
+  "Sign in to or create an account on https://filmstro.com/, open My Account > License and redeem the key.",
+  "Use Filmstro in the browser, the macOS app or the Premiere Pro extension, signed in with that account.",
+]
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360039493334-Humble-Software-Bundle-Filmmakers-Filmstro-Pro-Redemption-Instructions"
+claim = "one year from redemption; key expiry February 2nd, 2020; replaces existing licences; one key per person; redeem under My Account > License on filmstro.com; then download the app and sign in"
+[[sources]]
+url = "https://filmstro.com/"
+claim = "Filmstro now: web app, Filmstro PRO for Mac, Premiere Pro extension; sign in with the filmstro.com account to use the licence"

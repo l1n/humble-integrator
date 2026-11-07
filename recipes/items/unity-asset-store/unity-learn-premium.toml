@@ -1,0 +1,29 @@
+schema = 1
+name = "Unity Learn Premium (12 months)"
+vendor = "unity-asset-store"
+kind = "service"
+service = true
+machine_names = ["unitylearnpremium"]   # Humble Unity Bundle 2019
+verified = false
+notes = """
+A year of Unity Learn Premium (Unity's official course platform), from the
+Humble Unity Bundle 2019. Redeemed on the same Unity ID page as Asset Store
+vouchers, then a Learn Premium seat is assigned to the account. Humble's
+article: unredeemed codes expired September 24th, 2020, and Unity has since
+folded Learn Premium into free Unity Learn - so this item is historical.
+"""
+
+[redeem]
+where = "https://id.unity.com/en/redeem_products/new"
+expires = "2020-09-24"
+steps = [
+  "Sign in with a Unity ID at https://id.unity.com/en/redeem_products/new, enter the code, 'Redeem a product code', tick the boxes, Confirm.",
+  "Assign the Learn Premium seat to yourself (Unity support: 'How do I assign a Learn Premium seat').",
+]
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360035352994-Humble-Unity-Bundle-2019-Unity-Learn-Premium-Instructions"
+claim = "redeem at id.unity.com/en/redeem_products/new with a Unity ID; one year from redemption; assign a seat; unredeemed codes expire September 24th, 2020"

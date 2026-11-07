@@ -1,0 +1,38 @@
+schema = 1
+name = "Self-Taught Programmer (Cory Althoff; Triangle Connections, LLC)"
+kind = "route"
+service = true
+notes = """
+Cory Althoff's Self-Taught Programmer courses (publisher "Triangle
+Connections, LLC") in "Learn Python Programming with PyCharm" (Jul 2020):
+'Self Taught Programmer Course' and 'Self Taught Programmer Definitive
+Programming Professionally'. The green link opens the course page with an
+'Enroll in Course for FREE' button; sign up there. Courses are streamed.
+The second course is presumably redeemed the same way (inference).
+"""
+
+[match]
+developers = ["Triangle Connections, LLC", "Triangle Connections"]
+key_names = ["self.?taught programmer"]
+
+[redeem]
+where = "the green link on the Humble download page"
+account = true
+delivers = "enrolment in the course"
+expires = "check the Humble download page"
+steps = [
+  "Click the green link for the course on the Humble download page.",
+  "Click 'Enroll in Course for FREE', enter your details and sign up.",
+]
+
+[download]
+scriptable = false
+how = "course streams on the course site"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360050846573-Humble-Software-Bundle-Learn-Python-Programming-with-PyCharm-Self-Taught-Programmer-Course"
+claim = "green link; 'Enroll in Course for FREE'; enter information and sign up"

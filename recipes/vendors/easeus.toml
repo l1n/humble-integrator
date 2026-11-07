@@ -7,7 +7,12 @@ cross-platform apps (Video Downloader, RecExperts, Data Recovery Wizard have
 Mac editions). A Humble EaseUS key is a 25-character licence code typed into
 the activation window at first launch; no account. Term varies: 2022 Humble
 OS2Go / Todo PCTrans keys were one-year; the 2025 'EaseUS x Ashampoo' items
-match Ashampoo's lifetime, 2-device SKUs (inferred). The 2025 bundle lists
+match Ashampoo's lifetime, 2-device SKUs (inferred).
+The 2022 'Windows 11 Migration' bundle (developer spelled 'CHENGDU Yiwo®
+Tech Development Co.') sold one-year keys for Data Recovery Wizard Pro,
+Partition Master Pro, Todo Backup Home, Todo PCTrans Pro, OS2Go, Disk Copy
+Pro and Deploy Manager; Humble's per-product articles say 'activation code
+from your bundle page', and Disk Copy is 'good for one year'. The 2025 bundle lists
 Ashampoo as publisher; the item recipes claim those items by machine name.
 Most EaseUS tools manage the Windows installation or disks they run on,
 which is meaningless (or risky) inside a Wine prefix: those items are
@@ -15,7 +20,7 @@ marked skip. Only Video Downloader-type apps make sense, natively on Mac.
 """
 
 [match]
-developers = ["EaseUS", "EaseUS Software", "CHENGDU YIWO Tech Development Co., Ltd"]
+developers = ["EaseUS", "EaseUS Software", "CHENGDU YIWO Tech Development Co., Ltd", "CHENGDU Yiwo® Tech Development Co."]
 domains = ["easeus.com"]
 key_names = ["easeus"]
 
@@ -72,3 +77,11 @@ claim = "2022 Humble Todo PCTrans key good for one year"
 [[sources]]
 url = "https://github.com/microsoft/winget-pkgs/tree/master/manifests/e/EaseUS"
 claim = 'full installers are Inno Setup into %ProgramFiles%\EaseUS'
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4416027876507-Windows-11-Migration-Disk-Copy-instructions"
+claim = "2022 Disk Copy: install from the bundle page, enter licence code, Activate now; good for one year"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4416034985243-Windows-11-Migration-EaseUS-Deploy-Manager"
+claim = "2022 Deploy Manager: install from the bundle page, License tab > Add License > activation code > OK"

@@ -1,0 +1,27 @@
+schema = 1
+name = "Redshift Sky Pro and Solar Eclipse by Redshift (Android APKs)"
+vendor = "usm"
+kind = "content"
+machine_names = ["redshiftskyproandroid", "solareclipsebyredshift"]
+verified = false
+notes = """
+The Night Sky Navigators Bundle (Redshift 9, 2023). Android apps delivered as
+.apk downloads on the Humble download page. Nothing runs on macOS/Linux:
+keep the APKs in the library folder and sideload them on an Android device
+(copy to Downloads, tap to install, allow unknown sources). No Steam entry.
+"""
+
+[install]
+source = "humble"
+file = "*.apk"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[library]
+files = "Android .apk installers"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/19069589409819-Redshift-Redemption-Instructions"
+claim = "Android programs Redshift Sky Pro and Solar Eclipse: APK download near the bottom of the download page; copy to the device's Downloads folder and tap to install"

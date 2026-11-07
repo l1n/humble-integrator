@@ -1,0 +1,47 @@
+schema = 1
+name = "NetProtect (Encrypt.me VPN)"
+kind = "route"
+service = true        # VPN account; clients are free downloads
+notes = """
+Humble Software Bundle: Work Remote (Apr-May 2020): Encrypt.me 1-Year
+Subscription, new users only (bundle text). A code for an Encrypt.me
+account (app.encrypt.me). Encrypt.me has since been folded into StrongVPN:
+its site now says existing customers can still log in, new users go to
+StrongVPN. A 2020 one-year subscription has long run out. Native apps were
+for Windows, macOS and mobile; a VPN is a system service, nothing for Steam.
+"""
+
+[match]
+developers = ["NetProtect", "Encrypt.me"]
+domains = ["encrypt.me", "netprotect.com"]
+key_names = ['encrypt\.?me']
+
+[redeem]
+where = "an Encrypt.me account (https://app.encrypt.me/); exact code page undocumented"
+account = true
+delivers = "one year of Encrypt.me (new users only)"
+expires = "bundle ended May 2020; the service is being merged into StrongVPN"
+steps = [
+  "Reveal the code on the Humble download page and follow its link/instructions (no Humble article found).",
+  "Create an Encrypt.me account at https://app.encrypt.me/ and apply the code (unverified).",
+]
+
+[download]
+scriptable = false
+how = "nothing to download from the code"
+
+[install]
+source = "vendor"
+serial = "account"
+
+[platforms.macos]
+runner = "native"
+[platforms.linux]
+runner = "none"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/work-remote-software"
+claim = "'Encrypt.me 1-Year Subscription For New Users Only'; developer NetProtect; Windows/Mac/Android (census)"
+[[sources]]
+url = "https://encrypt.me/"
+claim = "'Encrypt.me is becoming StrongVPN'; existing customers can still log in at app.encrypt.me"

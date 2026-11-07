@@ -6,6 +6,9 @@ machine_names = ["luts_streetvibelutssollection"]
 requires = ["skylum/luminar-neo"]
 verified = false
 notes = """
+Also in Photo Editing to the MAX with Luminar AI (Dec 2021, a zip download
+with no delivery icon; Humble's file instructions put its LUT folder into
+Luminar AI's LutFiles) and the Cyber bundle (Nov 2022, a key).
 Neon & Noir - Elite Photos with Luminar Neo (Oct 2025). Ten urban-photo
 LUTs by Team Skylum. Unlike the bundle's other LUT packs (DRM-free files on
 the generic route) Humble lists this one as a key. Where that key goes is

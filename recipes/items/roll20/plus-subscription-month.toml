@@ -1,0 +1,40 @@
+schema = 1
+name = "Roll20 Plus subscription, 1 free month"
+vendor = "roll20"
+kind = "service"
+machine_names = ["freemonth-plussubscription_roll20"]
+verified = false
+notes = """
+'Free Month - Plus Subscription' from the 2023 Roll20 Bundle: a Roll20
+subscription code. Roll20 says subscription codes work ONLY for accounts that
+have never held a subscription. After claiming it on the Redeem a Code page,
+choose the matching subscription on app.roll20.net/why-subscribe-to-roll20
+and fill in payment details. That makes it a free first month of a paid
+subscription, so the tool must not redeem it unasked. Cancel before renewal
+if the subscription is not wanted. Optional; nothing to install.
+"""
+
+[redeem]
+where = "https://marketplace.roll20.net/coupon/"
+account = true
+delivers = "one month of Roll20 Plus (3 GB storage, dynamic lighting, compendium sharing, character vault) for a new subscriber"
+steps = [
+  "Only for a Roll20 account that has never had a subscription.",
+  "Redeem a Code page: paste the code, Validate Code, Claim Code.",
+  "Go to https://app.roll20.net/why-subscribe-to-roll20, pick the Plus subscription, enter payment details and Submit Payment. The first month is covered by the code.",
+  "Cancel in the account's subscription settings before the month ends if you do not want to keep paying.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://help.roll20.net/hc/en-us/articles/360037773173-Redemption-Codes"
+claim = "subscription codes are only for new users (no current or past subscription); after Claim Code, select the subscription on the Subscription page, fill out payment information and Submit Payment"
+[[sources]]
+url = "https://www.humblebundle.com/software/roll20-bundle-software"
+claim = "'Free Month - Plus Subscription' (bt10 and up): 3 GB upload storage, compendium sharing, dynamic lighting, All Access Character Vault; links app.roll20.net/why-subscribe-to-roll20 (census; archived 2023-11-09)"

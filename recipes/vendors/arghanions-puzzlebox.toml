@@ -1,0 +1,63 @@
+schema = 1
+name = "Arghanion's Puzzlebox (3D Project Masters, Cosmic Forge)"
+kind = "route"
+notes = """
+Arghanion's Puzzlebox sells Unreal Engine 5 space projects ("Cosmic Forge":
+planets, nebulas, black holes, Dyson sphere, skyboxes, asteroid fields) on
+its own Shopify store, 3dprojectmasters.com. One Humble bundle: Unreal Engine
+Space & Sci-Fi Mastery Kit (Dec 2023; minimum $10, tiers initial / bt15 /
+bt20). Only some items carry a key icon in the census; the keys are per tier,
+not per project.
+
+What a key is: a Shopify discount code for one tier product on
+3dprojectmasters.com (tier-1/2/3-cosmic-forge-unreal-engine-5). Every tier
+bought has its own code and its own product page, so a top-tier buyer
+redeems all three (add each tier to the cart, then enter each code).
+Delivery is the store's digital download (Unreal Engine 5.3 projects;
+Nebula Generator also bridges Blender), not Fab.
+"""
+
+[match]
+bundle_slugs = ['^unreal-engine-space-and-sci-fi-mastery-kit']
+domains = ["3dprojectmasters.com"]
+key_names = ["\\barghanion", '\bcosmic forge\b']
+
+[redeem]
+where = "https://3dprojectmasters.com/"
+account = false
+delivers = "each tier's Cosmic Forge projects as a $0 Shopify order with download links"
+expiry_text = "not stated in Humble's article"
+steps = [
+  "Reveal and copy the key for each tier bought on the Humble download page.",
+  "Click 'Click here to claim your $XX Tier Content' under each key; it opens the tier product: https://3dprojectmasters.com/products/tier-1-cosmic-forge-unreal-engine-5, .../tier-2-cosmic-forge-unreal-engine-5, .../tier-3-cosmic-forge-unreal-engine-5.",
+  "Add to Cart for every tier bought, then Check Out from the cart pop-up.",
+  "Enter each code in the 'Discount code' box and Apply until the total is $0; complete the order.",
+  "If the combined order fails, redeem each tier separately; still stuck: https://3dprojectmasters.com/pages/contact.",
+]
+
+[download]
+scriptable = false
+how = "Shopify order / digital-download links from 3dprojectmasters.com (emailed and on the order page)"
+notes = "No API; the download links can be fetched into the library folder once the user hands them to the tool (inference, untested). The store returns HTTP 429 to plain clients (Nov 2026)."
+
+[library]
+files = "Unreal Engine 5.3 project archives per Cosmic Forge item; 16K skyboxes"
+
+[install]
+source = "vendor"
+serial = "none"
+silent = false
+notes = "No installer: open or migrate the UE 5.3 projects in Unreal Editor (native on macOS and Linux)."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/21286210986139-ARGHANION-S-PUZZLEBOX-Redemption-Instructions"
+claim = "per-tier keys; 'Click here to claim your $XX Tier Content' links to 3dprojectmasters.com tier-1/2/3-cosmic-forge-unreal-engine-5; add all tiers to the cart; enter each code in 'Discount code'; redeem tiers separately if it fails; support at 3dprojectmasters.com/pages/contact"
+[[sources]]
+url = "https://www.humblebundle.com/software/unreal-engine-space-and-sci-fi-mastery-kit-software"
+claim = "census: items 'for Unreal Engine 5.3' (Space Station, Nebula Generator 'a bridge between Blender and Unreal Engine 5.3', Skybox Collection '16k resolution skyboxes'); tiers initial/bt15/bt20; minimum $10"

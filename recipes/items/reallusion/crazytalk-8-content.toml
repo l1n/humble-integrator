@@ -1,0 +1,33 @@
+schema = 1
+name = "CrazyTalk 8 content packs (Starter Kit 1, actor pack, Comic Faces)"
+vendor = "reallusion"
+kind = "addon"
+machine_names = [
+  "dressup_showtime",                          # Dress Up - Showtime (Starter Kit 1)
+  "dressup2_workwear",                         # Dress Up 2 - Work Wear (Starter Kit 1)
+  "crazytalkactorpack_stylizedclassicavatars", # CrazyTalk Actor Pack - Stylized Classic Avatars
+  "garrypyes_comicfaces",                      # Garry Pye's Comic Faces
+]
+requires = ["reallusion/crazytalk-8"]
+verified = false
+notes = """
+2D Animation bundle, tier 1. Clothing/body libraries, stylized talking actors
+(need CrazyTalk 8.1+) and 3D comic heads for CrazyTalk 8. Delivered through
+Order History like the app (often .RLD content installers); install
+CrazyTalk 8 first. File type and install location not confirmed.
+"""
+
+[install]
+source = "vendor"
+url = "https://www.reallusion.com/member/#/en/order-history"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360038790114-Humble-Software-Bundle-2D-Animation-Redemption-Instructions"
+claim = "'most .RLD files ... require the download and installation of another piece of software first'"
+[[sources]]
+url = "https://www.humblebundle.com/software/2d-animation-software"
+claim = "Dress Up packs 'Included as part of Starter Kit 1' for CrazyTalk 8; actor pack uses the CrazyTalk 8.1 clothing function (census descriptions)"

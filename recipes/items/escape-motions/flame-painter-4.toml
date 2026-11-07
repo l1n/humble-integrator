@@ -2,9 +2,9 @@ schema = 1
 name = "Flame Painter 4"
 vendor = "escape-motions"
 kind = "app"
-machine_names = ["flamepainter4"]
+machine_names = ["flamepainter4", "flamepainter4nowincludesjapanese"]   # 2020 Natural Digital Painting Kit (key), 2021 Paint and Draw (key + DRM-free)
 verified = false
-notes = "2023 'Become a Painting Pro with Rebelle 5' bundle: Humble serves Windows and Mac DRM-free builds. Particle-brush painting. Activates by Community-account login at first launch."
+notes = "Also in 'Natural Digital Painting Kit' (2020, activation code only) and 'Paint and Draw' (2021): there the Humble code is redeemed at escapemotions.com/community/humblebundle, the build downloads from the Escape Motions account, and the installer asks for e-mail + registration key. 2023 'Become a Painting Pro with Rebelle 5' bundle: Humble serves Windows and Mac DRM-free builds. Particle-brush painting. Activates by Community-account login at first launch."
 
 [install]
 source = "humble"
@@ -38,3 +38,6 @@ claim = "Flame Painter 4: log in with the Community account on first launch; bru
 [[sources]]
 url = "https://www.escapemotions.com/products/rebelle/manual/latest/getting-started/installing/"
 claim = "installers 'Rebelle N.exe/.dmg'; installs to Program Files"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360043631833-Flame-Painter-4-instructions"
+claim = "older bundles: redeem the activation code at escapemotions.com/community/humblebundle, log in/create an account, download, enter e-mail + registration key during install"

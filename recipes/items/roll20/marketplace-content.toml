@@ -1,0 +1,88 @@
+schema = 1
+name = "Roll20 Marketplace content from the 2023 Roll20 Bundle"
+vendor = "roll20"
+kind = "service"
+machine_names = [
+  "alienarchive_roll20",  # Alien Archive (Paizo)
+  "cyberpunkmapbundle_roll20",  # CyberPunk Map Bundle (Loke BattleMats)
+  "cyberpunkred_roll20",  # Cyberpunk RED (R. Talsorian Games)
+  "deepmagic_roll20",  # Deep Magic (Kobold Press)
+  "dragonbane_roll20",  # Dragonbane Core Set (Free League)
+  "dune_adventuresintheimperium_roll20",  # Dune: Adventures in the Imperium (Modiphius Entertainment)
+  "dynamicforestbundlei_roll20",  # Dynamic Forest Bundle I (MrValor)
+  "fallout_theroleplayinggame_roll20",  # Fallout: The Roleplaying Game (Modiphius Entertainment)
+  "fatestarterbundle_roll20",  # Fate Starter Bundle (Evil Hat Productions)
+  "junkersdelight_roll20",  # Junker's Delight (Paizo)
+  "lokebattlematsmegabundle_roll20",  # Loke Battle Mats Mega Bundle (Loke BattleMats)
+  "pathfindersecondeditionbeginnerbox_roll20",  # Pathfinder Second Edition Beginner Box (Paizo)
+  "sidequestruins1_roll20",  # Side Quest Ruins 1 (Brave New Worlds)
+  "starfindercorerulebook_roll20",  # Starfinder Core Rulebook (Paizo)
+  "startertownmapbundle01_roll20",  # Starter Town Map Bundle 01 (Tom Cartos)
+  "startertownmapbundle02_roll20",  # Starter Town Map Bundle 02 (Tom Cartos)
+  "startertownmapbundle03_roll20",  # Starter Town Map Bundle 03 (Tom Cartos)
+  "startertownmapbundle04_roll20",  # Starter Town Map Bundle 04 (Tom Cartos)
+  "startrekadventurescorerulebook_roll20",  # Star Trek Adventures Core Rulebook (Modiphius Entertainment)
+  "talesfromtheloop_roll20",  # Tales from the Loop (Free League)
+  "templatesandassetsforevery5espell_roll20",  # Templates and Assets for every 5E Spell (Eugene's Workshop)
+  "thefablemakersanimatedtarot-deckandtokenaddon_roll20",  # The Fablemaker's Animated Tarot - Deck & Token Addon (Hit Point Press)
+  "tomeofbeasts_roll20",  # Tome of Beasts (Kobold Press)
+  "troublesinotari_roll20",  # Troubles in Otari (Paizo)
+]
+verified = false
+notes = """
+Roll20 Marketplace products from third-party publishers: compendiums
+(Pathfinder 2E Beginner Box, Starfinder Core Rulebook and Alien Archive,
+Dune, Fallout, Star Trek Adventures, Cyberpunk RED, Dragonbane, Tales from
+the Loop, Fate), compendium expansions (Deep Magic, Tome of Beasts),
+adventure modules (Troubles in Otari, Junker's Delight), an add-on (The
+Fablemaker's Animated Tarot) and map/token packs (Loke Battle Mats, Tom
+Cartos Starter Towns, Brave New Worlds, MrValor, Eugene's Workshop). One
+Roll20 code each, redeemed on Roll20's Redeem a Code page (vendors/roll20).
+The census capture predates the Nov 2 content drop and lists 13 of these
+24; the rest come from a later capture of the same page.
+
+They are used inside Roll20 in the browser. Nothing installs. A map/token
+pack's Marketplace page (see [marketplace_pages]) may offer 'Download
+Complete Set' as a ZIP once owned; save those by hand into the library
+folder if you want local copies. Not checked for these packs.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[marketplace_pages]   # Humble machine_name -> Roll20 Marketplace listing Humble linked
+"alienarchive_roll20" = "https://marketplace.roll20.net/browse/bundle/3842/starfinder-alien-archive"
+"cyberpunkmapbundle_roll20" = "https://marketplace.roll20.net/browse/bundle/14293/cyberpunk-map-bundle"
+"cyberpunkred_roll20" = "https://marketplace.roll20.net/browse/bundle/13881/cyberpunk-red"
+"deepmagic_roll20" = "https://marketplace.roll20.net/browse/compendiumexpansion/5764/deep-magic"
+"dragonbane_roll20" = "https://marketplace.roll20.net/browse/bundle/25542/dragonbane-core-set"
+"dune_adventuresintheimperium_roll20" = "https://marketplace.roll20.net/browse/bundle/11479/dune-adventures-in-the-imperium"
+"dynamicforestbundlei_roll20" = "https://marketplace.roll20.net/browse/bundle/20979/dynamic-forest-bundle-i"
+"fallout_theroleplayinggame_roll20" = "https://marketplace.roll20.net/browse/bundle/16138/fallout-the-roleplaying-game"
+"fatestarterbundle_roll20" = "https://marketplace.roll20.net/browse/bundle/4793/fate-starter-bundle"
+"junkersdelight_roll20" = "https://marketplace.roll20.net/browse/bundle/12045/starfinder-adventure-junkers-delight"
+"lokebattlematsmegabundle_roll20" = "https://marketplace.roll20.net/browse/bundle/16241/loke-battle-mats-mega-bundle"
+"pathfindersecondeditionbeginnerbox_roll20" = "https://marketplace.roll20.net/browse/bundle/8453/pathfinder-second-edition-beginner-box"
+"sidequestruins1_roll20" = "https://marketplace.roll20.net/browse/set/22465/side-quest-ruins-1"
+"starfindercorerulebook_roll20" = "https://marketplace.roll20.net/browse/bundle/4004/starfinder-core-rulebook"
+"startertownmapbundle01_roll20" = "https://marketplace.roll20.net/browse/set/4660/starter-town-map-bundle-01"
+"startertownmapbundle02_roll20" = "https://marketplace.roll20.net/browse/set/4694/starter-town-map-bundle-02"
+"startertownmapbundle03_roll20" = "https://marketplace.roll20.net/browse/set/4695/starter-town-map-bundle-03"
+"startertownmapbundle04_roll20" = "https://marketplace.roll20.net/browse/set/4704/starter-town-map-bundle-04"
+"startrekadventurescorerulebook_roll20" = "https://marketplace.roll20.net/browse/bundle/22442/star-trek-adventures-core-rulebook"
+"talesfromtheloop_roll20" = "https://marketplace.roll20.net/browse/bundle/5978/tales-from-the-loop"
+"templatesandassetsforevery5espell_roll20" = "https://marketplace.roll20.net/browse/set/5894/templates-and-assets-for-every-5e-spell"
+"thefablemakersanimatedtarot-deckandtokenaddon_roll20" = "https://marketplace.roll20.net/browse/gameaddon/15357/the-fablemakers-animated-tarot-deck-and-token-addon"
+"tomeofbeasts_roll20" = "https://marketplace.roll20.net/browse/compendiumexpansion/3/tome-of-beasts"
+"troublesinotari_roll20" = "https://marketplace.roll20.net/browse/bundle/10665/pathfinder-adventure-troubles-in-otari"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/roll20-bundle-software"
+claim = "archived capture 2023-11-09 (web.archive.org/web/20231109070437/...): these 24 hb-key items with their publishers and marketplace.roll20.net listing URLs; the census capture (2023-10-19) has 13 of them"
+[[sources]]
+url = "https://help.roll20.net/hc/en-us/articles/360048923734"
+claim = "art packs: optional 'Download Complete Set' ZIP when the artist enables it"

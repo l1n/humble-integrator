@@ -1,0 +1,24 @@
+schema = 1
+name = "ActionDirector 3"
+vendor = "cyberlink"
+kind = "app"
+machine_names = ["cyberlinkactiondirector3"]
+verified = false
+notes = "Video & Photo Editing 2018 by CyberLink. Simple editor for action-camera footage (Windows). Under Wine: untested. Exe path is a glob."
+
+[install]
+source = "humble"
+file = "*ActionDirector*.exe"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/CyberLink/ActionDirector*/*.exe"
+
+[steam]
+shortcut = true
+title = "ActionDirector 3"
+steamgriddb = "CyberLink ActionDirector"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/video-photo-editing-2018-software"
+claim = "ActionDirector 3, hb-key, Windows, tier1 (census)"

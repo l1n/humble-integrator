@@ -1,0 +1,29 @@
+schema = 1
+name = "Comic Creator Studio"
+vendor = "summitsoft"
+kind = "app"
+machine_names = ["comiccreatorstudio"]
+verified = false
+notes = "Learn Instruments and Design (Nov 2019, tier 2). Comic page layout tool (Summitsoft's FAQ names the program file Comic.exe). Windows app; under Wine untested. Exe path is a glob, not confirmed."
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/Summitsoft/Comic*/Comic*.exe"
+
+[steam]
+shortcut = true
+title = "Comic Creator Studio"
+steamgriddb = "Comic Creator Studio"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/learn-instruments-and-design-software"
+claim = "Comic Creator Studio: hb-key, Windows, tier 2 (census)"
+[[sources]]
+url = "https://www.summitsoft.com/content/1317-installation-process"
+claim = "licence key entered on the installer's registration form"
+[[sources]]
+url = "https://www.summitsoft.com/content/1321-comic-creator-studio"
+claim = "if Comic Creator sticks on the welcome screen, start Comic.exe from the install folder directly"

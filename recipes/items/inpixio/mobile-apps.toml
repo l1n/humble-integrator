@@ -1,0 +1,17 @@
+schema = 1
+name = "inPixio mobile apps (Photo Studio for iOS, Remove Background for Android)"
+vendor = "inpixio"
+kind = "service"
+machine_names = ["inpixiophotostudioforios", "inpixioremovebackgroundforandroid"]
+verified = false
+notes = """
+Transform your photos into Art (Feb 2023). Phone apps: Photo Studio for iOS
+(a key on Humble) and Remove Background for Android (no delivery icon in the
+census). How they are redeemed (App Store promo code, in-app code, or a
+link) is not documented; follow the Humble download page. Nothing to install
+on macOS/Linux and no Steam entry.
+"""
+
+[[sources]]
+url = "https://www.humblebundle.com/software/transform-your-photos-into-art-software"
+claim = "Photo Studio for iOS: hb-key, no desktop platform; Remove Background for Android: no delivery (census)"

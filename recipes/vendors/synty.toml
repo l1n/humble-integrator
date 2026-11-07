@@ -27,6 +27,14 @@ that file from Humble too.
 Humble Choice coupons ("10% off your first month of Humble Choice") sit in
 two of these bundles and are swept onto this route by the bundle match;
 they are Humble's own, not Synty's.
+
+Best of POLYGON Game Dev Bundle (Feb 2020) is not this route: its packs were
+Humble downloads (census drm_free; generic/files) and only its $10 voucher
+(10dollarvoucherforsyntystore) is a Synty Store code (items/synty/
+store-voucher). The POLYGON City Pack in Learn to Create Games in Unity
+(Jan 2021) came with GameDev.tv keys ("a series of keys you redeem on the
+GameDev.tv website", GameFromScratch); its machine name polygoncitypack is
+shared with the Best of Synty Remix bundles, so no item recipe here.
 """
 
 [match]

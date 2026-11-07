@@ -25,10 +25,19 @@ lernerpython.com, pythontest.com, jetbrains.com/store/redeem).
 Bundle text gives no redemption deadline; partner subscriptions (JetBrains,
 Bamboo Weekly, LernerPython month, PythonTest Community year) start when
 redeemed.
+
+Older Talk Python items (developer spelled "TalkPython") were single courses
+in "Learn Python Programming with PyCharm" (Jul 2020: Python for Absolute
+Beginners, Data-driven web apps with Flask and SQLAlchemy, Adding a CMS to
+Your Flask Web App) and "Python 2021" (Modern Python Projects, Modern APIs
+with FastAPI, Effective PyCharm 2021): one access code per course, same green
+link and access-code page. The other partners in those two bundles have their
+own vendors (real-python, pybites, python-morsels, metasnake, reuven-lerner,
+jetbrains, sourcery, self-taught-programmer).
 """
 
 [match]
-developers = ["Talk Python", "Talk Python Training"]
+developers = ["Talk Python", "Talk Python Training", "TalkPython"]   # "TalkPython": 2020 PyCharm bundle
 domains = ["talkpython.fm"]
 key_names = ['talk ?python']
 bundle_slugs = ['^next-level-python-from-talk-python']
@@ -68,3 +77,6 @@ claim = "'A single key will be provided to redeem all the content in your bundle
 [[sources]]
 url = "https://training.talkpython.fm/purchase/access_code/humble-bundle-pythonic-4df7b5d3-45cd-4796"
 claim = "Humble codes are Talk Python course access codes (login required; each code has a licence limit)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360050847013-Humble-Software-Bundle-Learn-Python-Programming-with-PyCharm-Data-driven-web-apps-with-Flask-and-SQLAlchemy"
+claim = "2020 bundle: Talk Python course redeemed from the green link on the bundle page"

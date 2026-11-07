@@ -13,6 +13,10 @@ and most of its items are redeemed with their real developer:
   Lonely Planet, Sourcecad ebooks (PDF)   -> generic ebook route (DRM-free)
   BeckerCAD 2D / 3D / 3D PRO (MUT)        -> generic DRM-free download + a
                                              "Richdale Key" redeemed below
+  USM Redshift 8 / 9 Premium, Android apps -> vendors/usm (items/usm/)
+  Franzis projects programs and presets   -> vendors/franzis (key-only items)
+                                             or generic DRM-free download
+  inPixio Photo Studio (Win/Mac/mobile)   -> vendors/inpixio (items/inpixio/)
 
 So this recipe deliberately does NOT match census items by the publisher
 name. A vendor rule wins over the generic routes, and matching

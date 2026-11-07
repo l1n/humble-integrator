@@ -1,0 +1,103 @@
+schema = 1
+name = "RPG Maker (Gotcha Gotcha Games / Degica / KADOKAWA)"
+kind = "route"
+notes = """
+RPG Maker's Humble bundles are mostly Steam keys: RPG Maker XP, 2003, VX, VX
+Ace, MV, Pixel Game Maker MV and their DLC/resource packs go through
+generic/steam-key, and DRM-free packs through the generic download routes.
+This vendor adds only what those cannot place:
+- RPG Maker Unite and its add-ons, which are Epic Games Store products (this
+  route's [match] and [redeem], below);
+- items Humble listed without any delivery icon in the RPG Maker Resurgence
+  bundle (Jun-Jul 2022), placed by item recipes in items/rpg-maker/ using
+  Barter.vg's record of what each actually delivered (most were Steam keys).
+
+RPG MAKER UNITE (Gotcha Gotcha Games / KADOKAWA) first shipped on the Unity
+Asset Store (May 2023); its Epic Games Store version followed on 29 Feb 2024,
+with the add-ons (GREEN FIELDS' Default Character Facial Expression Assets
+1-3 and Single-picture Map Collections 1-4, ponApp's 3D Dungeon add-on, ...)
+sold there as DLC. Humble's RPG Maker Beyond Expectations Bundle (Mar 2025)
+and its Holiday Encore (Dec 2025) say "Redeem on Steam ... Redeem on Epic.
+Some of the software in this bundle are available on Epic for Windows" and
+require Steam and Epic (keyless) account links. The RPG Maker MV/VX Ace/Pixel
+Game Maker items are Steam keys (generic/steam-key). Unite and its add-ons
+are Epic: Unite and the 3D Dungeon add-on are hb-key in the first run and
+keyless Epic claims (hb-epic) in the Encore; the GREEN FIELDS add-ons stay
+hb-key in both. These hb-key items are taken to be Epic product codes, the
+form Humble's Epic article describes for "some assets from Software
+bundles" (inference: the codes are not documented per item). The same GREEN
+FIELDS add-ons are keyless Epic claims in UNITEd Together (Aug 2025), which
+generic/epic-key already handles.
+
+This route matches only the Beyond Expectations bundles (by slug, both the
+URL and the Humble machine-name form, so extracted keys from them land here
+too); it never matches by developer, so Steam keys and other bundles are
+untouched.
+
+Unite is a Windows 10/11 64-bit program; the add-ons install into it from
+the Epic library. On macOS and Linux that means the Epic Windows build
+through Heroic Games Launcher (Wine/Proton) or CrossOver: untested. (Of the
+Steam editions, MV is listed for Windows, macOS and Linux - Humble's
+requirements exclude macOS Big Sur and later; XP, 2003, VX and VX Ace are
+Windows-only and run through Proton.)
+"""
+
+[match]
+bundle_slugs = ['^rpg-?maker-?beyond-?exc?pectations']   # URL slug and machine name rpgmakerbeyondexcpectationsbundle_* (sic)
+
+[redeem]
+where = "https://www.epicgames.com/account/code-redemption"
+account = true
+delivers = "RPG Maker Unite and/or its add-ons in the Epic Games library"
+expires = "not stated in the bundle text"
+steps = [
+  "Create or sign in to an Epic Games account; link it to Humble in Humble's account settings (the bundle requires the link).",
+  "Items marked as Epic claims (hb-epic): press 'Claim to your Epic Games Account' on the Humble download page.",
+  "Items given as keys: press 'Redeem your Epic Games key' on the Humble download page, copy the code and redeem it at https://www.epicgames.com/account/code-redemption (or Redeem Code in the Epic Games Launcher).",
+  "Install RPG Maker Unite from the Epic library first; the add-ons are then installed into it from the same library.",
+]
+
+[download]
+scriptable = false
+how = "Epic Games Launcher or Heroic Games Launcher (legendary) from the Epic library"
+
+[install]
+source = "vendor"
+serial = "account"
+silent = false
+notes = "Epic delivers the program; add-ons are DLC of the Epic product 'RPG MAKER UNITE'. Exe name and DLC install path not documented here."
+
+[prefix]
+name = "rpg-maker-unite"
+arch = "win64"
+windows = "win10"
+
+[platforms.macos]
+runner = "crossover"
+notes = "Windows-only on Epic; Heroic Games Launcher (with Wine/CrossOver) can install Epic Windows titles on macOS. No report of Unite under Wine found."
+
+[platforms.linux]
+runner = "proton"
+notes = "Heroic Games Launcher (Proton/Wine) for the Epic Windows build; untested."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/rpg-maker-beyond-expectations-bundle-software"
+claim = "'Redeem on Epic. Some of the software in this bundle are available on Epic for Windows.'; Unite, 3D Dungeon add-on and seven GREEN FIELDS add-ons as hb-key, Windows; account links steam + epic_keyless (census, Mar 2025)"
+[[sources]]
+url = "https://www.humblebundle.com/software/rpg-maker-beyond-expectations-bundle-software-encore"
+claim = "Encore (Dec 2025): Unite and 3D Dungeon add-on hb-epic, GREEN FIELDS add-ons hb-key (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360020257973-How-to-Redeem-on-Epic-Games"
+claim = "Epic titles are mostly keyless claims after linking accounts; 'some assets from Software bundles will continue to provide keys', redeemed at Epic's redemption page or Redeem Code in the launcher"
+[[sources]]
+url = "https://gamebiz.jp/news/382529"
+claim = "Gotcha Gotcha Games released the Epic Games Store version of RPG MAKER UNITE (29 Feb 2024; earlier on the Unity Asset Store)"
+[[sources]]
+url = "https://store.epicgames.com/all-dlc/rpgunite-819421"
+claim = "Epic lists DLC & add-ons for RPG MAKER UNITE, e.g. 'RPG Maker Unite Default Character Facial Expression Assets1'; minimum OS Windows 10/11 64-bit (via search results)"
+[[sources]]
+url = "https://barter.vg/bundle/6264/"
+claim = "RPG Maker Resurgence: which icon-less / mislabelled items were really Steam keys or DRM-free downloads; Medieval: Dungeons first an itch.io key that led to the wrong page, then DRM-free (Wayback, May 2023)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/6952765762459-Humble-Software-Bundle-RPG-Maker-Resurgence-System-Requirements"
+claim = "RPG Maker VX Ace, XP and 2003: Windows only; RPG Maker MV: Windows, Mac (not Big Sur 11.0 and later), Linux"

@@ -1,0 +1,75 @@
+schema = 1
+name = "Skillet / Skillet Academy (online courses and ebooks; skillet.academy)"
+kind = "route"
+service = true        # course platform: nothing to install, no Steam entry
+notes = """
+Skillet Academy (skillet.academy) sells hobby and skills courses: electronics
+(Arduino, ESP32, Raspberry Pi, home automation), woodworking and DIY,
+SketchUp, Chinese language and culture, drawing and music. Humble sold three
+of its bundles, every item a key:
+- "Learn Chinese: From Zero To Chinese Hero" (Jan-Feb 2024; developer
+  "Skillet Academy"): six HSK 1-3 course parts and eleven culture courses;
+- "Woodworking 101: From Stump to Stunning" (May 2024; "Skillet"): courses
+  plus PDF ebooks (nightstand/birdhouse/patio-table plans, gardening);
+  "Content in this bundle is redeemable via key on the Skillet Academy
+  website";
+- "Ultimate Electronics Bundle: Arduino, AI, ESP32, IoT, Robotics & More"
+  (May 2025; "Skillet"): "Keys are redeemed through Skillet's website".
+
+Until mid-2025 skillet.academy was a Teachable school (courses/<id>/lectures
+URLs in the Web Archive); a key was presumably a Teachable coupon for the
+course page (inference: no Humble article documents it). The site has since
+been replaced by a support page, "Humble Bundle & Fanatical Course Access":
+buyers e-mail hi@skillet.academy with the bundle name, the Humble order /
+receipt number and the e-mail address to enrol, and Skillet grants access by
+hand. So today redemption is a support request, not a key form.
+
+The bundle ebooks are delivered through Skillet too (keys, not Humble
+downloads); save any PDF Skillet provides into the library folder.
+"""
+
+[match]
+developers = ["Skillet", "Skillet Academy"]
+domains = ["skillet.academy", "skilletacademy.com"]
+key_names = ["skillet"]
+redeem_text = ["\\bskillet(?:'s| academy)? website\\b", "\\bby skillet\\b"]
+
+[redeem]
+where = "e-mail hi@skillet.academy (see https://skillet.academy/); originally the key on the Skillet Academy website"
+account = true
+delivers = "enrolment in the bundle's courses (and the ebook PDFs) in a Skillet Academy account"
+expires = "not stated in the bundle texts"
+steps = [
+  "Reveal the keys on the Humble download page and note the bundle name and the Humble order / receipt number (purchase e-mail or Humble purchase history).",
+  "If a key is a link to skillet.academy, open it, sign in or create the account and complete the $0 enrolment (Teachable-style coupon; inference).",
+  "Otherwise (the current process): e-mail hi@skillet.academy with the bundle name, that it was bought on Humble Bundle, the order/receipt number and the e-mail address to enrol with. Skillet verifies the purchase and sends access instructions.",
+  "Watch the courses on skillet.academy; save ebook PDFs into the library folder.",
+]
+
+[download]
+scriptable = false
+how = "courses stream on skillet.academy after enrolment"
+
+[library]
+videos = false
+ebooks = "PDF plans/ebooks in the woodworking bundle, as provided by Skillet"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://skillet.academy/"
+claim = "support page 'Humble Bundle & Fanatical Course Access': e-mail hi@skillet.academy with bundle name, order/receipt number and enrolment e-mail; Skillet verifies and sends access instructions (fetched Nov 2026)"
+[[sources]]
+url = "https://web.archive.org/web/2025/https://skillet.academy/"
+claim = "until mid-2025 skillet.academy was a Teachable school ('Homepage | Skillet Academy', teachablecdn assets, courses/<id>/lectures/<id> URLs)"
+[[sources]]
+url = "https://www.humblebundle.com/software/ultimate-electronics-bundle-arduino-ai-esp32-iot-robotics-more-software"
+claim = "'The Ultimate Electronics Bundle by Skillet'; 'Keys are redeemed through Skillet's website' (census redeem_text)"
+[[sources]]
+url = "https://www.humblebundle.com/software/woodworking-101-from-stump-to-stunning-software"
+claim = "'online courses and ebooks from Skillet'; 'Content in this bundle is redeemable via key on the Skillet Academy website' (census redeem_text)"
+[[sources]]
+url = "https://www.humblebundle.com/software/skillet-learn-chinese-software"
+claim = "17 online courses by Skillet Academy, all keys (census)"

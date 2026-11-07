@@ -1,0 +1,80 @@
+schema = 1
+name = "Mammoth Templates (Godot game templates; mammothtemplates.com)"
+kind = "route"
+notes = """
+Mammoth Templates is Mammoth Interactive's template store (mammothtemplates.com):
+complete, commercially licensed project templates (Godot 4 games, Unreal kits,
+web/AI starter kits, prompt packs). It is a different site from the Mammoth
+Club course school (vendors/mammoth-interactive), but sign-in uses the same
+Mammoth Club email and password, per the site's redeem guide.
+
+Humble sold one bundle of it: "Godot Game Development Mega Bundle: 20 Complete
+Game Templates" (Oct-Nov 2026), whose text says "Redeem your content via
+https://mammothtemplates.com/" and "Keys Expire. Please redeem before November
+8, 2027". Each Humble key is a link mammothtemplates.com/redeem/XXXX-XXXX-XXXX
+for the tier bought (one code adds every template in the tier). The items are
+Godot 4 projects (Hungry Snake, Vertical Journey, TriPeaks Solitaire, Tower
+Defense, ...); Godot itself is free and needs no key.
+
+What lands in the library: the template project archives downloaded from the
+site's library (one per template). They are source projects to open in Godot,
+not apps, so there is no Steam shortcut. Downloads need the logged-in session
+(Supabase-backed SPA with signed URLs); no public API (unverified).
+
+The bundle's Humble Choice coupon item is not a Mammoth item; the generic
+humble-coupon route handles it (it sorts before vendors).
+"""
+
+[match]
+developers = ["Mammoth Templates"]
+domains = ["mammothtemplates.com"]
+key_names = ["mammoth ?templates"]
+redeem_text = ["mammothtemplates\\.com"]
+
+[redeem]
+where = "https://mammothtemplates.com/redeem/<code> (the link Humble reveals)"
+prefill = "https://mammothtemplates.com/redeem/{key}"
+account = true
+delivers = "every template in the purchased tier, added to the Mammoth Templates account for life (no membership needed); downloads from My library / dashboard"
+expires = "2027-11-08"
+expiry_text = "(?i)redeem (?:your keys )?before ([A-Z][a-z]+ \\d{1,2}(?:st|nd|rd|th)?,? \\d{4})"
+steps = [
+  "Reveal the Mammoth Templates key on the Humble download page. It is a link like mammothtemplates.com/redeem/XXXX-XXXX-XXXX; the code is the last part.",
+  "Open the link. It shows the private bundle page for the tier with the code filled in.",
+  "Sign in with the Mammoth Club email and password, or 'Create account to redeem' (same box).",
+  "Tick the Mammoth Standard License agreement and press 'Redeem bundle'. Each code works once and is tied to the account; 'This code has already been used' means it was redeemed before.",
+  "Ignore the membership upsell that follows; the templates are already owned.",
+  "Open My library (https://mammothtemplates.com/library) or the dashboard and download each template into the library folder. Open the project in Godot 4.",
+  "Support: https://mammothtemplates.com/contact (Humble's Mammoth article names support@mammothinteractive.com).",
+]
+
+[download]
+scriptable = false
+how = "per-template Download buttons in My library / dashboard on mammothtemplates.com"
+notes = "Files come from signed Supabase storage URLs after login; a logged-in browser session could fetch them (inference, untested)."
+
+[library]
+files = "one project archive per template (Godot 4 projects for this bundle), plus any docs/prompts shipped with a template"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/godot-game-development-mega-bundle-20-complete-game-templates-software"
+claim = "'Redeem your content via https://mammothtemplates.com/'; 'Keys Expire. Please redeem before November 8, 2027'; 20 Godot templates by Mammoth Templates (census redeem_text)"
+[[sources]]
+url = "https://mammothtemplates.com/redeem-guide"
+claim = "redeem guide (rendered by the site's JS bundle redeem-guide-*.js): Humble 'Reveal key' gives mammothtemplates.com/redeem/XXXX-XXXX-XXXX; sign in with Mammoth Club email/password or create an account; press Redeem; templates in the tier added for life without a membership; each code works once; download from My library or dashboard"
+[[sources]]
+url = "https://mammothtemplates.com/redeem/"
+claim = "redeem page (JS redeem._code-*.js): checks the code, 'Create account to redeem' / 'Sign in', licence checkbox, 'Redeem bundle', 'N templates were added to your account', 'This code has already been used'"
+[[sources]]
+url = "https://mammothtemplates.com/templates/hungry-snake"
+claim = "Hungry Snake: 'A complete gravity puzzle-platformer for Godot 4'; Mammoth Standard License; downloads via library"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/50395682646043-Mammoth-Interactive-Key-Redemption"
+claim = "Humble's Mammoth key article; support@mammothinteractive.com (updated 2026-10-26)"

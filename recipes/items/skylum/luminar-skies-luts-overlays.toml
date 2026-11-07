@@ -1,0 +1,51 @@
+schema = 1
+name = "Luminar skies, LUTs and overlays (Luminar AI / Neo Lite bundles)"
+vendor = "skylum"
+kind = "content"
+machine_names = [
+  "skies_tropicalskies",
+  "skies_milkywaygalaxy",
+  "skies_freedomskies",
+  "skies_animeskies",
+  "skies_soulfulpanoramas",
+  "luts_trendystylelutspack",
+  "luts_happytogetherlutssollection",
+  "overlay_motionblur",
+  "overlay_filmgrain",
+  "overlay_lightreflections",
+  "overlay_filmburn",
+]
+recommends = ["skylum/luminar-ai", "skylum/luminar-neo"]
+verified = false
+notes = """
+Image/LUT add-ons from the MAX (2021, zip downloads, no delivery icon in the
+census), Cyber (2022, listed as keys) and Cinematic/Neo Lite (2023, two
+overlays listed as keys while the rest of that bundle is DRM-free) bundles.
+Skies are JPEG/TIFF folders loaded via Sky AI > Sky Selection > Custom (or
+copied into the SkyTextures folder); LUTs via Edit > Creative > Mood > Choose
+LUT > Load Custom LUT file; overlays/textures as layers or Neo's Overlays tool.
+Where Humble shows a key instead of a file, how it is redeemed is not
+documented (inference: a download link or Skylum marketplace code). Keep the
+files in the library folder; they work with Luminar AI or Luminar Neo.
+"""
+
+[install]
+source = "humble"
+file = "*.zip"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4411466806299-Installing-Skies-in-Luminar-AI"
+claim = "custom skies: Sky AI > Sky Selection > Custom > +; JPEG/PNG/TIFF; Show Custom Skies folder"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4411476961947-Installing-Luminar-Add-ons-LUTs"
+claim = "LUTs: Edit > Creative > Mood > Choose LUT > Load Custom LUT file"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/20278358380059-Luminar-Neo-LUTs-Overlays-Presets-and-Skies-Installation-Instructions"
+claim = "how LUTs, overlays and skies load into Luminar Neo"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4412318025499-Photo-Editing-to-the-MAX-with-Luminar-AI-File-instructions"
+claim = "MAX bundle skies/LUT zips and where to put them (SkyTextures, LutFiles)"

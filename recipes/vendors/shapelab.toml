@@ -1,0 +1,84 @@
+schema = 1
+name = "Shapelab (Leopoly)"
+kind = "route"
+notes = """
+Shapelab is Leopoly's VR / desktop / pen polygon-sculpting app (Windows 10+;
+PCVR through SteamVR-compatible headsets, or desktop mode without a
+headset). Humble bundles: Shapelab Creator's Kit (Nov 2024: Shapelab 2024
+licence, a voucher for Shapelab 2025, three 3D asset packs) and Ultimate 3D &
+VR Sculpting, Character & Game Asset Creation Mega Bundle (Oct 2025, with
+FastTrack Tutorials: Shapelab 2025 licence, a Shapelab 2026 voucher, six
+asset packs; the FastTrack courses are vendors/fasttrack-tutorials).
+
+What a key is: a code redeemed on Shapelab's own account site
+(account.shapelabvr.com), not a Steam key, even though Shapelab is also sold
+on Steam and the Meta store. Licence: perpetual, 1 user, 2 devices,
+unlimited reinstalls on the same machine (Humble's 2024 article). The app is
+installed and activated through the Shapelab Launcher, logged in with the
+same account. Voucher items are discount codes for the next yearly version
+("Get a 50% discount on the next version of Shapelab, Shapelab 2026").
+Asset packs are FBX + SL3D (Shapelab project) files for personal use.
+
+Matched by developer: the census credits every Shapelab item to "Shapelab"
+and "(Leopoly Kft)", and Shapelab sells nothing through another store on
+Humble.
+"""
+
+[match]
+developers = ["Shapelab", "(Leopoly Kft)", "Leopoly", "Leopoly Kft"]
+domains = ["shapelabvr.com"]
+key_names = ['\bshapelab\b']
+
+[redeem]
+where = "https://account.shapelabvr.com/account/profile"
+account = true
+delivers = "the licence (or asset pack) on the Shapelab account; the app is installed and activated through the Shapelab Launcher"
+expiry_text = "none stated on Humble's articles"
+steps = [
+  "Go to https://account.shapelabvr.com/login and create an account or log in.",
+  "Open the Profile page, scroll to 'Redeem Humble Bundle Codes', click 'Redeem' and enter the code in the popup (2025 bundle article: alternatively open the Shapelab perpetual licence checkout, choose 'Add discount code', enter the code; no card number needed).",
+  "Press 'Complete Checkout'.",
+  "Download the Shapelab installer (the Shapelab Launcher) from the next page; install and launch it.",
+  "Log in to the Launcher, select the product and licence, press Install, then launch Shapelab.",
+  "Asset packs: download their files from the Shapelab account after redeeming (inference: same checkout flow as the licence).",
+]
+
+[download]
+scriptable = false
+how = "Shapelab Launcher (app); Shapelab account downloads (asset packs, inference)"
+
+[library]
+files = "asset packs: FBX models, PBR textures and SL3D project files; the dragon workflow pack adds 4 stages of the model alongside Shapelab's video tutorial series"
+
+[install]
+source = "vendor"
+serial = "account"
+silent = false
+notes = "The Launcher installs Shapelab after an account login; no documented silent install."
+
+[prefix]
+name = "shapelab"
+arch = "win64"
+windows = "win10"
+winetricks = []
+
+[platforms.macos]
+runner = "crossover"
+notes = "Windows-only app. Desktop mode under CrossOver is untested; VR needs SteamVR on Windows (no PCVR on macOS)."
+
+[platforms.linux]
+runner = "proton"
+notes = "Windows-only app. Desktop mode under Proton/Wine is untested; PCVR under Proton with Linux SteamVR is unverified."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/30744127879835-Shapelab-Bundle-Redemption-Instructions"
+claim = "perpetual licence, 1 user and 2 devices, unlimited reinstalls; account.shapelabvr.com > Profile > 'Redeem Humble Bundle Codes' > Redeem > code > 'Complete Checkout' > download installer > Shapelab Launcher > log in > select product and licence > Install"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/42239690466715-Ultimate-3D-VR-Sculpting-Character-Game-Asset-Creation-Mega-Bundle-Redemption-Instructions"
+claim = "Shapelab titles: perpetual licence checkout page, register, 'Add discount code', enter the code (no card), 'Complete checkout', download Shapelab in the Shapelab account"
+[[sources]]
+url = "https://leopoly.atlassian.net/servicedesk/customer/portal/3/article/4096023"
+claim = "Shapelab PCVR minimum: Windows 10 or later, i5-4590 / FX 8350, 8 GB RAM, GTX 1060 / RX 480; HTC Vive, Index, Rift, Quest via Link, WMR; any SteamVR headset should work"
+[[sources]]
+url = "https://shapelabvr.com/"
+claim = "VR and desktop dual mode on PC; one-time purchase on Shapelab's website, Steam or Meta store gives the same version"

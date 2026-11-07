@@ -1,0 +1,78 @@
+schema = 1
+name = "Game Asset Bundle (GAB) creators' Humble bundles (2020-2021)"
+kind = "route"
+notes = """
+GAB ("Game Asset Bundle", gameassetbundle.com) is a team of itch.io
+asset makers: PV Games, Gutty Kreum, JDB Artist, Joel Steudler, Tyler
+Warren, Vexed Enigma, Galefire RPG, Joseph Seraph, Dreams Circle, Archeia
+(VisuStella), Dragoonwys, Rayane FLX / Mega Tiles, finalbossblues. They sold
+two Humble bundles of 2D art and game music:
+- Humble Game Creator Bundle (Jul 2020; with 001 Game Creator and Pixelmash),
+- Humble Software Bundle: Fresh Start Game Dev Assets Bundle (Feb-Mar 2021;
+  "GAB has teamed up with Humble to bring you the Fresh Start Game Dev Assets
+  Bundle").
+The asset packs show no delivery icon. Buyers report Humble gave them as
+direct downloads ("most came as a single download"; only three items came
+with a key for another site), stuck at the bundled version; a Humble
+purchase does not unlock the creators' itch.io pages. Mega Tiles meant to
+include itch.io keys for its Tiny Tales packs; they were not issued, so
+Mega Tiles hands them out on request (proof of purchase to
+megatilescs@gmail.com) - optional, for updates only. The Game Creator Bundle
+is taken to work the same way (same creators and page layout; inference).
+
+Keys that do exist in these bundles go elsewhere first: 001 Game Creator and
+its Retro Fantasy Music Pack are Steam keys, Pixelmash is
+items/nevercenter/pixelmash, the Humble Choice coupon is generic/humble-coupon.
+Matched by bundle URL slug (census rows); real account downloads are
+hb-drmfree at runtime and go to the generic download routes.
+"""
+
+[match]
+bundle_slugs = [
+  '^game-creator-software$',                  # makeyourowngame_softwarebundle, Jul 2020
+  '^fresh-start-game-dev-assets-software$',   # freshstartgamedevassets_softwarebundle, Feb 2021
+]
+
+[redeem]
+where = "https://www.humblebundle.com/home/library"
+account = false
+delivers = "one zip per pack (sprites, tilesets, battlers, animations, music/SFX) on the bundle's Humble download page"
+steps = [
+  "Nothing to redeem: download each pack from the bundle's Humble download page into the library folder.",
+  "Optional, Tiny Tales packs (Fresh Start) only: for itch.io keys with later updates, email proof of purchase (screenshot of the Humble library or the receipt) to megatilescs@gmail.com.",
+]
+
+[download]
+scriptable = true
+how = "Humble library API, like generic/files"
+
+[library]
+files = "zips of 2D art (PNG sprite sheets, tilesets, battlers, animation sheets; many formatted for RPG Maker) and music/SFX packs (WAV/OGG/MP3)"
+
+[install]
+source = "humble"
+serial = "none"
+silent = false
+notes = "No installer: unzip into the library folder; used by hand in any engine or RPG Maker."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://itch.io/jam/gab-jam-fresh-start"
+claim = "GAB = Game Asset Bundle, a team of creators; 'GAB has teamed up with Humble to bring you the Fresh Start Game Dev Assets Bundle'"
+[[sources]]
+url = "https://itch.io/post/2721766"
+claim = "Fresh Start buyers: itch.io keys not included; Humble provided direct downloads, only three items with a key for another site"
+[[sources]]
+url = "https://megatiles.itch.io/tiny-tales-overworld-2d-tileset-asset-pack/devlog/227788/itchio-keys-notice-gab-fresh-start-hb"
+claim = "itch.io keys were meant to come with every Fresh Start purchase but were not included; Mega Tiles issues them on proof of purchase sent to megatilescs@gmail.com"
+[[sources]]
+url = "https://www.humblebundle.com/software/fresh-start-game-dev-assets-software"
+claim = "asset packs without delivery icons, developer links to the creators' itch.io pages (Wayback, Feb 2021)"
+[[sources]]
+url = "https://www.humblebundle.com/software/game-creator-software"
+claim = "same creators' packs without delivery icons; JDB Artist's link is gameassetbundle.com; 001 Game Creator (Steam) and Pixelmash (key) alongside (Wayback, Jul 2020)"

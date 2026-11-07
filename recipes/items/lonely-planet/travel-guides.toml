@@ -1,0 +1,35 @@
+schema = 1
+name = "Lonely Planet Country and Pocket guides (Learn a New Language Bundle)"
+vendor = "lonely-planet"
+kind = "document"
+machine_names = [
+  "italy_countryguide",
+  "spain_countryguide",
+  "japan_countryguide",
+  "china_countryguide",
+  "france_countryguide",
+  "pocket_rome",
+  "pocket_tokyo",
+  "pocket_beijing",
+  "pocket_barcelona",
+  "pocket_paris",
+]
+verified = false
+notes = "Several of these machine names came back in 'Learn a New Language and Travel the World' (Jun 2022) and Pocket Tokyo in 'Wanderlust Summer Travel' (Jun 2025), there with Humble's DRM-free ebook delivery, which confirms the format. Humble Learn a New Language Bundle (Mar 2019): Pocket guides in tier 0, country guides in tier 1. DRM-free ebooks (PDF/EPUB/MOBI) from the Humble download page; no delivery icons in the census because of the older page layout."
+
+[install]
+source = "humble"
+serial = "none"
+
+[library]
+ebooks = "PDF, EPUB, MOBI"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/learn-a-new-language-software"
+claim = "ebooks in PDF, MOBI and ePub, DRM-free (archived bundle page, 2019-03-20)"
+[[sources]]
+url = "https://www.humblebundle.com/software/learn-new-language-and-travel-world-software"
+claim = "the same machine names reappear in Jun 2022 as hb-drmfree ebooks (census), confirming the format"

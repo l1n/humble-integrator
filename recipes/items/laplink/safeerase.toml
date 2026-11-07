@@ -2,11 +2,11 @@ schema = 1
 name = "Laplink SafeErase (32 & 64-bit)"
 vendor = "laplink"
 kind = "app"
-machine_names = ["safeerase32and64bit"]
+machine_names = ["safeerase32and64bit", "laplinksafeerase32and64bit"]
 verified = false
 skip = true
 skip_reason = "Secure disk/file wiping for Windows; inside Wine it cannot reach the real disks. Keep the key for a real Windows PC."
-notes = "Norton & Laplink Solid Security Flash Sale (Jul 2025). Perpetual, 1 device, Windows XP-10, internet needed for download and registration; user guide at dl.laplink.com (SafeErase 8). See vendors/laplink."
+notes = "Norton & Laplink Solid Security Flash Sale (Jul 2025); also PC Utility and Security Tools with Avast & Laplink (Jan-Feb 2023, laplinksafeerase32and64bit). Perpetual, 1 device, Windows XP-10, internet needed for download and registration; user guide at dl.laplink.com (SafeErase 8). See vendors/laplink."
 
 [install]
 source = "vendor"

@@ -10,6 +10,16 @@ the Luminar Neo software (activation code) and the 'Street Vibe' LUT
 collection. Both have item recipes under items/skylum/. Earlier Humble
 bundles sold Luminar 4, Luminar AI, Luminar Neo Lite and Aurora HDR.
 
+Older bundles (wave 3): Professional Photography (Dec 2018: Aurora HDR 2018,
+Photolemur 2), Photography and Photo Filters (Dec 2019: Luminar 3, Photolemur
+3, Aurora HDR 2018), AI-Powered Photo Editor with Luminar 4 (Nov 2020), Photo
+Editing to the MAX with Luminar AI (Dec 2021) and Photo Editing Cyber Bundle
+with Luminar AI (Nov 2022). In those the apps were activation keys for
+installers downloaded from the Humble page (Luminar 4/AI, Aurora HDR,
+Photolemur: install the trial, Activate, e-mail + key); add-ons (templates,
+looks, skies, LUTs, overlays) were zip downloads or, in the Cyber bundle,
+keys. Each has an item recipe under items/skylum/.
+
 No developers rule: 'Skylum Software' is also the developer of the DRM-free
 add-on files. Extracted keys are matched by domain and product name.
 
@@ -18,8 +28,8 @@ Neo (untested; it is a GPU-heavy AI editor, so expect trouble).
 """
 
 [match]
-domains = ["skylum.com", "macphun.com"]
-key_names = ['luminar', 'aurora ?hdr', 'skylum']
+domains = ["skylum.com", "macphun.com", "photolemur.com"]
+key_names = ['luminar', 'aurora ?hdr', 'skylum', 'photolemur']
 
 [redeem]
 where = "the installed app's 'Use Activation Code' step (Luminar Neo); purchases then live in the Skylum account (My Add-ons)"

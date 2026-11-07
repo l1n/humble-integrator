@@ -1,0 +1,33 @@
+schema = 1
+name = "Unique Lasers Volume 1 (Unity)"
+vendor = "unity-asset-store"
+kind = "content"
+publisher = "Gabriel Aguiar Prod."
+machine_names = [
+  "uniquelasersvolume1unity",
+]
+verified = false
+notes = """
+Unity Asset Store voucher for Gabriel Aguiar Prod.'s Unique Lasers Volume 1 (Unity edition), in Supreme Unreal & Unity Game Dev Bundle, Supreme 3 Best of Unity and Unreal Assets.
+Those bundles route to vendors/fab because their '(Unreal Engine)' items are
+Fab codes; this '(Unity)' item is redeemed on Unity instead (Supreme 3's item
+text: "*Professional License redeeming from Unity Asset Store"). The Unreal
+edition of the same pack, where a bundle has one, is a separate Humble item
+on the Fab route.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "Redeem the voucher at id.unity.com, then download and import in the Unity Editor: Package Manager > My Assets."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/supreme-unreal-unity-game-dev-bundle-software"
+claim = "'All of the keys in this bundle can be redeemed on the FAB website or Unity website'; this item is the (Unity) edition"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/supreme-3-best-unity-and-unreal-assets-software"
+claim = "Unity items' text: '*Professional License redeeming from Unity Asset Store'; this item is the (Unity) edition"

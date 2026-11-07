@@ -1,0 +1,75 @@
+schema = 1
+name = "CyberLink (PowerDirector, PhotoDirector, ActionDirector, YouCam, ...)"
+kind = "route"
+notes = """
+"Humble Software Bundle: Video & Photo Editing 2018 by CyberLink" (Aug
+2018): PowerDirector 15 Ultra, PhotoDirector 9 Ultra, ActionDirector 3,
+MakeupDirector 2 Deluxe, Screen Recorder 3 Deluxe, YouCam 7 Deluxe,
+PerfectCam, Power Media Player (replaced by PowerDVD 18 Standard on
+2018-12-17) and template packs for PowerDirector/ActionDirector and YouCam.
+All Windows-only (Humble lists no Mac build; CyberLink's later Mac versions
+are separate 365 subscriptions the keys don't cover). The bundle text:
+'Software keys can be redeemed according to the individual instructions on
+your download page'. Humble's PowerDVD article shows the common pattern:
+download the installer from the Humble download page, install, enter the
+product key, Activate. The other products' articles are gone from the help
+centre, so the same flow is inferred for them.
+
+Under Wine: the editors (PowerDirector, PhotoDirector, ActionDirector,
+MakeupDirector) are ordinary windowed apps and get Steam shortcuts, with low
+expectations: CrossOver rates PowerDirector 8 'Limited Functionality' on
+Linux, and older Wine bug reports say PowerDirector 6 would not run. Webcam
+tools (YouCam, PerfectCam), Screen Recorder and the media player are skipped:
+they need a Windows camera/capture stack or are pointless next to native
+tools.
+"""
+
+[match]
+developers = ["CyberLink", "Cyberlink"]
+domains = ["cyberlink.com"]
+key_names = ['\bcyberlink\b', 'powerdirector', 'photodirector', 'actiondirector', 'makeupdirector', '\byoucam\b', 'perfectcam', 'powerdvd']
+
+[redeem]
+where = "the installed program's activation dialog (product key)"
+account = false
+delivers = "an activated perpetual licence for one CyberLink program (PerfectCam: a 1-year subscription activated through YouCam)"
+expires = "none documented; old 2018 keys may no longer activate (untested)"
+steps = [
+  "Download the program's installer from the Humble download page.",
+  "Install it and, when asked, enter the product key from the Humble download page and click Activate.",
+  "Template packs: run the pack's installer after the program it belongs to is installed and activated.",
+  "Support: https://www.cyberlink.com/support.",
+]
+
+[install]
+source = "humble"
+serial = "per-product"
+silent = false
+
+[prefix]
+name = "cyberlink"
+arch = "win64"
+windows = "win10"
+
+[platforms.macos]
+runner = "crossover"
+windows = "win10"
+notes = "Windows builds only. GPU-accelerated video editing under CrossOver is unproven; CrossOver's own rating for PowerDirector 8 is 'Limited Functionality'."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Windows builds only; expect problems (see notes)."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360014084094-Video-Photo-Editing-2018-by-Cyberlink-PowerDVD-18-instructions"
+claim = "PowerDVD 18 replaced Power Media Player on 12/17/18; download and install from the bundle, enter the product key, Activate"
+[[sources]]
+url = "https://www.humblebundle.com/software/video-photo-editing-2018-software"
+claim = "'Software keys can be redeemed according to the individual instructions on your download page'; items Windows hb-key (census)"
+[[sources]]
+url = "https://codeweavers.com/compatibility/crossover/cyberlink-power-director-8"
+claim = "CrossOver Linux rating for PowerDirector 8: Limited Functionality (tested with CrossOver 23.0.0), manual install"
+[[sources]]
+url = "https://manualmachine.com/cyberlink/powerdirector100/2842630-quick-start-guide"
+claim = "downloaded content packs are executables whose setup installs the templates into PowerDirector"

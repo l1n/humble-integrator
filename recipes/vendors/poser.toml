@@ -1,0 +1,77 @@
+schema = 1
+name = "Poser (Bondware / posersoftware.com, sold via Graphixly)"
+kind = "route"
+notes = """
+Poser 12 and its content library were in three Graphixly bundles: 'Poser 12
+- 3D Character Design Pack' (Jul 2024), 'Ultimate 2D and 3D Artist Bundle'
+(Dec 2024) and 'Paint like a Pro with Paintstorm, Realistic Paint Studio
+and Poser 12' (Sep 2025). Humble's redemption: the code is a 100%-off
+coupon for the 'Poser 12 + Content' product on graphixly.com (add to cart,
+check out, apply the code). What the Graphixly order then delivers is not
+documented; presumably a Poser 12 serial number (inference). Poser's own
+site validates a serial at posersoftware.com/downloads/12 to unlock the
+Poser 12 installers, and registering the serial unlocks the extra content
+downloads (posersoftware.com/downloads/content/12). Perpetual licence per
+Humble. Seats are limited and 'excessive content downloads' can
+temporarily disable the serial (Poser's downloads page).
+
+Poser 12 has Windows and macOS builds (Humble: Windows and Mac). Linux:
+Windows build under Wine, no reports found (untested).
+
+The developers rule is safe: only Poser items carry 'Bondware/Posersoftware'.
+The other items in those bundles (Paintstorm, Realistic Paint Studio, Moho)
+stay on their own recipes.
+"""
+
+[match]
+developers = ["Bondware/Posersoftware", "Posersoftware", "Poser Software"]
+domains = ["posersoftware.com"]
+key_names = ['\bposer\b']
+
+[redeem]
+where = "https://graphixly.com/products/poser-12-content (100%-off code at checkout), then posersoftware.com for installers and content"
+account = true
+delivers = "a perpetual Poser 12 licence (serial) plus the Poser 12 content library (inference for the serial)"
+expires = "not stated"
+steps = [
+  "Reveal the redemption code on the Humble download page.",
+  "Open https://graphixly.com/products/poser-12-content, add 'Poser 12 + Content' to the cart and check out with the code; continue only if it brings the total to 0.",
+  "Keep the Poser 12 serial number the Graphixly order provides (where it appears - email or order page - is not documented).",
+  "Validate the serial at https://www.posersoftware.com/downloads/12 to download the Windows or macOS installer; register it (posersoftware.com account) to unlock the content downloads at https://www.posersoftware.com/downloads/content/12.",
+  "Support: https://support.posersoftware.com (Poser), https://graphixly.com/pages/contact-us (redemption).",
+]
+
+[install]
+source = "vendor"
+url = "https://www.posersoftware.com/downloads/12"
+serial = "per-product"
+silent = false
+
+[prefix]                   # Linux only (macOS uses the native build)
+name = "poser"
+arch = "win64"
+windows = "win10"
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "No Linux build; no Wine/Proton reports found for Poser 12 (untested)."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/27353872001051-Poser-12-3D-Character-Design-Pack-Redemption-Instructions"
+claim = "perpetual licence; redeem at graphixly.com/products/poser-12-content: add to cart, check out, use the redemption code for 100% off"
+[[sources]]
+url = "https://www.posersoftware.com/downloads"
+claim = "serial number needed to register and download the additional content; usage beyond allowed seats or excessive content downloads may temporarily disable the software; Poser 12 installers and content pages"
+[[sources]]
+url = "https://www.posersoftware.com/downloads/12"
+claim = "Poser 12 installer page asks for License Validation (serial number)"
+[[sources]]
+url = "https://www.humblebundle.com/software/poser-12-3d-character-design-pack-software"
+claim = "'All of the software in this bundle is available for Windows and Mac. Keys are redeemed through Graphixly website' (census)"
+[[sources]]
+url = "https://www.humblebundle.com/software/paint-like-pro-with-paintstorm-realistic-paint-studio-and-poser-12"
+claim = "'Redeem your keys on the Graphixly website' (census)"

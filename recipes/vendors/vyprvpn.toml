@@ -1,0 +1,47 @@
+schema = 1
+name = "VyprVPN (VPN subscription)"
+kind = "route"
+service = true        # VPN account; clients are free downloads
+notes = """
+Humble Software Bundle: PC Essentials (Feb 2020): 'VyprVPN Premium' key
+(Windows/Mac/Linux per the census). No Humble article was found and the
+term is not stated in the census; presumably a promo code applied to a new
+VyprVPN account at vyprvpn.com (inference). VyprVPN has native clients for
+Windows, macOS and Linux (the census lists all three). A VPN is a system
+service, not something for Steam; inside Wine it would not route the
+system's traffic, so use the native clients. The 2020 code is presumably
+expired.
+"""
+
+[match]
+developers = ["VyprVPN", "Golden Frog"]
+domains = ["vyprvpn.com", "goldenfrog.com"]
+key_names = ['vypr ?vpn']
+
+[redeem]
+where = "a VyprVPN account at https://www.vyprvpn.com/ (exact redemption page unknown)"
+account = true
+delivers = "VyprVPN Premium on the account (term not stated)"
+expires = "bundle ended in Feb 2020; presumably expired"
+steps = [
+  "Reveal the key on the Humble download page and follow any link or instructions shown with it (no Humble article found).",
+  "Create or sign in to a VyprVPN account and apply the code where the account offers a promo/activation code (unverified).",
+  "Install the native client for macOS or Linux from vyprvpn.com.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download from the key; clients are free downloads"
+
+[install]
+source = "vendor"
+serial = "account"
+
+[platforms.macos]
+runner = "native"
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/pc-essentials-software"
+claim = "VyprVPN Premium: hb-key, Windows/Mac/Linux, publisher VyprVPN (census)"

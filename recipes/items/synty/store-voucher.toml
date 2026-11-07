@@ -6,6 +6,7 @@ machine_names = [
   "syntystore10usdvoucher",                                # Best POLYGON, Best of Synty 1/2 Remix/5 and encores
   "10dollarsoff_syntystore",                               # Best of Synty Remix + encore (2023)
   "10_voucher_bestsyntygamedevassetsbundle6_softwarebundle", # Best of Synty 6
+  "10dollarvoucherforsyntystore",                          # Best of POLYGON Game Dev Bundle (Feb 2020; its packs were Humble downloads, generic/files)
 ]
 verified = false
 notes = """
@@ -29,3 +30,9 @@ claim = "'This coupon will get you $10 USD off your next order from the Synty St
 [[sources]]
 url = "https://syntystore.com/products/humble-bundle-synty-sci-fi-bundle"
 claim = "Humble Synty bundles include a $10 Synty Store Voucher"
+[[sources]]
+url = "https://www.humblebundle.com/software/best-of-polygon-game-dev"
+claim = "Feb 2020: '$10 USD Discount on Synty Store' (hb-key) - 'This coupon will get you $10 USD off your next order from the Synty Store'; the POLYGON packs themselves were Humble downloads ('Download DRM-free asset packs')"
+[[sources]]
+url = "https://gamefromscratch.com/humble-low-polygon-assets-bundle-for-unity-and-unreal-engine/"
+claim = "Humble Best of POLYGON Game Dev Bundle (14 Feb 2020): tiers of Synty packs plus a $10 Synty discount code; later updated with a Source Files download on Humble"

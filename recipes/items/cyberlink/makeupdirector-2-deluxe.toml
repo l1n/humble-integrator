@@ -1,0 +1,24 @@
+schema = 1
+name = "MakeupDirector 2 Deluxe"
+vendor = "cyberlink"
+kind = "app"
+machine_names = ["makeupdirector2_deluxe"]
+verified = false
+notes = "Video & Photo Editing 2018 by CyberLink. Virtual-makeup photo retouching on still photos (Windows). An ordinary windowed editor; under Wine untested. Exe path is a glob."
+
+[install]
+source = "humble"
+file = "*MakeupDirector*.exe"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/CyberLink/MakeupDirector*/*.exe"
+
+[steam]
+shortcut = true
+title = "MakeupDirector 2"
+steamgriddb = "MakeupDirector"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/video-photo-editing-2018-software"
+claim = "MakeupDirector 2 Deluxe, hb-key, Windows, tier1 (census)"

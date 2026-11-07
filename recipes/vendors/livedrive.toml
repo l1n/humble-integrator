@@ -1,0 +1,50 @@
+schema = 1
+name = "Livedrive (online backup subscription)"
+kind = "route"
+service = true        # backup subscription; client downloaded from the account portal
+notes = """
+Humble Software Bundle: Work Remote (Apr-May 2020): Livedrive Backup,
+6 months, one user, unlimited backup of one Windows or Mac computer.
+Redeemed at signup.livedrive.com/activate?TID=HumbleBundle; Livedrive
+requires a payment card at activation (no charge then). Humble's deadline
+to redeem was 2021-05-06, so the code is expired. Native clients for
+Windows and macOS only; nothing for Linux or Steam.
+"""
+
+[match]
+developers = ["Livedrive"]
+domains = ["livedrive.com"]
+key_names = ['livedrive']
+
+[redeem]
+where = "https://signup.livedrive.com/activate?TID=HumbleBundle"
+account = true
+delivers = "6 months of Livedrive Backup (one user, one computer)"
+expires = "2021-05-06"
+steps = [
+  "Open https://signup.livedrive.com/activate?TID=HumbleBundle.",
+  "Enter your details and the code from the Humble download page, click 'Activate Product'.",
+  "Enter payment details to finish registration (required; not charged at this time). Cancel before the 6 months end to avoid renewal charges (inference).",
+  "Download the Livedrive client from the account portal.",
+]
+
+[download]
+scriptable = false
+how = "the backup client comes from the Livedrive account portal"
+
+[install]
+source = "vendor"
+serial = "account"
+
+[platforms.macos]
+runner = "native"
+[platforms.linux]
+runner = "none"
+notes = "No Linux client."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360046580873-Humble-Software-Bundle-Work-Remote-Livedrive-Backup-6-Month-Subscription-instructions"
+claim = "credit card activation required; redeem before May 6th, 2021; signup.livedrive.com/activate?TID=HumbleBundle; enter code, Activate Product; payment info, not charged; download from the account portal"
+[[sources]]
+url = "https://www.humblebundle.com/software/work-remote-software"
+claim = "Livedrive Backup 6-month subscription: one user login, one Windows or Mac computer (census)"

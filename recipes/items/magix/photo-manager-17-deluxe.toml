@@ -2,7 +2,7 @@ schema = 1
 name = "MAGIX Photo Manager 17 deluxe"
 vendor = "magix"
 kind = "app"
-machine_names = ["photomanager17deluxe"]
+machine_names = ["photomanager17deluxe", "photomanager_17deluxe"]   # 2018 MAGIX Ultimate Creative Design bundle ("Photo Manager Deluxe")
 verified = false
 notes = "Photo organiser, from the 2026 'Create Magic with MAGIX' bundle. On macOS/Linux the native photo managers make this of limited use."
 

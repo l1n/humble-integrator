@@ -1,0 +1,50 @@
+schema = 1
+name = "SplitmediaLabs (XSplit Broadcaster / XSplit VCam)"
+kind = "route"
+service = true
+notes = """
+"Humble Software Bundle: Streaming 2019" (Jun 2019): XSplit VCam (lifetime)
+or 3 months / 1 year of XSplit Premium (which includes VCam), one key per
+tier. Keys are redeemed on xsplit.com/redeem into an XSplit account and stack
+on existing subscriptions. Humble's article and requirements say codes had to
+be redeemed by 2019-12-31, so unredeemed codes are almost certainly dead.
+XSplit Broadcaster and VCam are Windows-only (VCam is a virtual webcam
+driver), so even a live code would be of no use on macOS/Linux; OBS is the
+native alternative.
+"""
+
+[match]
+developers = ["SplitmediaLabs", "SplitmediaLabs, Ltd."]
+domains = ["xsplit.com"]
+key_names = ['\bxsplit\b']
+
+[redeem]
+where = "https://www.xsplit.com/redeem"
+account = true
+delivers = "XSplit Premium time (3 months or 1 year, incl. VCam) or a lifetime XSplit VCam licence on the XSplit account"
+expires = "2019-12-31"
+expiry_text = "Codes must be redeemed by December 31st, 2019"
+steps = [
+  "Open https://www.xsplit.com/redeem, enter the key and click Verify.",
+  "Log in to or create an XSplit account, then 'Redeem Now'.",
+  "Support: https://www.xsplit.com/support.",
+]
+
+[install]
+source = "vendor"
+serial = "account"
+
+[platforms.macos]
+runner = "none"
+notes = "Windows-only; use OBS natively."
+
+[platforms.linux]
+runner = "none"
+notes = "Windows-only; use OBS natively."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360023994753-Humble-Software-Bundle-Streaming-2019-XSplit-VCAM-XSplit-Premium-instructions"
+claim = "one key per tier (VCam lifetime / Premium 3 months / 1 year, Premium includes VCam); keys stack; redeem by December 31st, 2019; xsplit.com/redeem, Verify, log in, Redeem Now"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360023925913-Humble-Software-Bundle-Streaming-2019-System-Requirements"
+claim = "XSplit VCam: Windows 10; XSplit Premium: Windows 7 SP1 64-bit; codes expire 12/31/2019"

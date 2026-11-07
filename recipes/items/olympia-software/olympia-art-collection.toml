@@ -1,0 +1,21 @@
+schema = 1
+name = "Olympia Art Collection Standard"
+vendor = "olympia-software"
+kind = "content"
+machine_names = ["olympiaartcollectionstandard"]
+verified = false
+notes = "Learn Instruments and Design (Nov 2019, tier 1). ~5,900 royalty-free clip-art images and backgrounds. See vendors/olympia-software (publisher defunct; handling inferred). No Steam entry."
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[library]
+files = "clip-art images and backgrounds unpacked by the installer"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/learn-instruments-and-design-software"
+claim = "5,900 clip art images and backgrounds, royalty free, commercial use; hb-key, Windows (census)"

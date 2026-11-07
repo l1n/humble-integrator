@@ -16,6 +16,18 @@ item recipe under items/hivemind/ that sends it to vendors/unity-asset-store;
 the four sound packs (Game Music Essentials, Horror Ambient Loops, Monster
 Sounds, Rain & Wind Sounds; "available DRM-Free") have item recipes too.
 
+Wave 3: the Unreal Engine & Unity Mega Bundle (June 2024; Nanite Series kits,
+megapacks; "Keys for this bundle are redeemed on either the Epic Games Store
+or Unity Asset Store, dependent on title") is matched by its own text rule.
+Its "(Unreal Engine)" keys were Unreal Engine Marketplace codes, now Fab
+(same Epic redemption page). Its ten "(Unity)" items have item recipes: eight
+reuse recipes from Battle-Hardened (items/unity-asset-store/hivemind-*), two
+are new (items/hivemind/modular-dungeon-building-kit-unity,
+modular-stylized-desert-town-unity). The four new "(Unity)" items of
+Ultimate Unreal & Unity Assets Galore (vendors/fab) are in items/hivemind/
+too (Duskbane, Modular Industrial Factory Megapack, Realistic Fire VFX,
+Realistic Gun VFX).
+
 Not here: Battle-Hardened (vendors/fab by slug, Unity items under
 items/unity-asset-store/), The Builder's Vault Unreal edition (vendors/fab)
 and Unity edition (vendors/unity-asset-store), whose texts name their store.
@@ -35,6 +47,10 @@ Unreal Editor 5.3+.
 [match]
 redeem_text = [
   '(?s)^(?!.*\b(?:Fab Marketplace keys?|redeem\w*(?:\s|&nbsp;| )+(?:through|on|via|at)(?:\s|&nbsp;| )+(?:the(?:\s|&nbsp;| )+)?(?:Fab|Unity)\b|battle-hardened game assets)).*\b(?:from|by)(?:\s|&nbsp;| )+Hivemind\b',
+  # Unreal Engine & Unity Mega Bundle (June 2024; every item by Hivemind, but the text never
+  # names Hivemind): "Keys for this bundle are redeemed on either the Epic Games Store or
+  # Unity Asset Store, dependent on title."
+  '\bredeemed(?:\s|&nbsp;| )+on(?:\s|&nbsp;| )+either(?:\s|&nbsp;| )+(?:the(?:\s|&nbsp;| )+)?Epic(?:\s|&nbsp;| )+Games(?:\s|&nbsp;| )+Store(?:\s|&nbsp;| )+or(?:\s|&nbsp;| )+(?:the(?:\s|&nbsp;| )+)?Unity(?:\s|&nbsp;| )+Asset(?:\s|&nbsp;| )+Store\b',
 ]
 # No bundle_slugs: at key level a slug rule would catch the bundle's Unity keys before
 # vendors/unity-asset-store sees them. No domains/key_names: Hivemind keys resolve by
@@ -94,3 +110,6 @@ claim = "codes redeem at epicgames.com/account/code-redemption; content then in 
 [[sources]]
 url = "https://forums.unrealengine.com/t/i-missclicked-to-the-uefn-licence-instead-of-unreal/2745558"
 claim = "a Humble pack redeemed with the UEFN licence by mistake could not be changed to the Unreal one"
+[[sources]]
+url = "https://www.humblebundle.com/software/unreal-engine-and-unity-mega-bundle-software"
+claim = "census text (June 2024): 'Keys for this bundle are redeemed on either the Epic Games Store or Unity Asset Store, dependent on title'; all items by Hivemind, named '(Unreal Engine)' or '(Unity)'"

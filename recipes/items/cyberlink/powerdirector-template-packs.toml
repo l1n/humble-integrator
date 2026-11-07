@@ -1,0 +1,40 @@
+schema = 1
+name = "PowerDirector / ActionDirector template packs (Action Pack 2, Wedding Pack, Travel Pack 6, Holiday Pack 9)"
+vendor = "cyberlink"
+kind = "addon"
+machine_names = [
+  "actionpack_v2_actiondirector_powerdirector",
+  "weddingpack_v1_powerdirector",
+  "travelpack_v6_powerdirector",
+  "holidaypack_v9_powerdirector",
+]
+requires = ["cyberlink/powerdirector-15-ultra"]
+verified = false
+notes = """
+Video & Photo Editing 2018 by CyberLink. Title, particle, PiP and
+Express-Project templates. Action Pack 2 is for PowerDirector 15+ and all
+ActionDirector versions; the others are for PowerDirector (12+). CyberLink
+content packs are setup executables that install templates into
+C:\\Program Files (x86)\\CyberLink\\Templates\\...; run them after
+PowerDirector is installed and activated. Whether Humble's key for each pack
+is asked for by the pack installer is not documented (inference: enter it if
+asked). No Steam entry.
+"""
+
+[install]
+source = "humble"
+file = "*.exe"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://manualmachine.com/cyberlink/powerdirector100/2842630-quick-start-guide"
+claim = "downloaded content packs are executables; their setup installs templates and effects into PowerDirector"
+[[sources]]
+url = "https://www.cyberlink.com/products/add-ons/travelpack-6_en_GB.html"
+claim = "Travel Pack 6 is a PowerDirector add-on (title/particle/PiP/Express Project templates)"
+[[sources]]
+url = "https://www.humblebundle.com/software/video-photo-editing-2018-software"
+claim = "pack descriptions: Action Pack 2 'Designed for: PowerDirector 15 and above; All versions of ActionDirector'; Wedding Pack for PowerDirector 12+ (census)"

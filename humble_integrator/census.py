@@ -257,6 +257,10 @@ def extract_legacy_bundle(html):
             continue
         bv = find_key(data, "slideout_data")
         items = ((bv or {}).get("slideout_data") or {}).get("display_items") or {}
+        # Older pages list the charities as tiles too; they carry no delivery icon.
+        items = {k: v for k, v in items.items()
+                 if not (v.get("availability_icons") is None and re.search(
+                     r"Giving Fund|501\(c\)\(3\)|charit|donation", v.get("description_text") or "", re.I))}
         if not items:
             continue
         # Tiers: each "Pay $X or more to unlock!" heading, then the item boxes under it.
@@ -302,14 +306,19 @@ def item_record(machine_name, item, tiers_by_item):
         "delivery_to_platform": {
             k: v.get("available", []) for k, v in (icons.get("delivery_to_platform") or {}).items()},
         # Newer pages spell these "developer-name", older ones "developer_name".
-        "developers": [d.get("developer-name") or d.get("developer_name") for d in item.get("developers") or []],
-        "publishers": [p.get("publisher-name") or p.get("publisher_name") for p in item.get("publishers") or []],
+        "developers": [n for d in item.get("developers") or []
+                       if (n := d.get("developer-name") or d.get("developer_name"))],
+        "publishers": [n for p in item.get("publishers") or []
+                       if (n := p.get("publisher-name") or p.get("publisher_name"))],
         "description": strip_html(item.get("description_text"))[:600],
     }
 
 
-def bundle_record(category, slug, ts, bundle):
+def bundle_record(category, slug, ts, bundle, html=""):
     basic = bundle.get("basic_data") or {}
+    # Pages carry "has_any_keys": false for bundles that are all Humble downloads.
+    m = re.search(r'"has_any_keys":\s*(true|false)', html)
+    has_keys = None if not m else m.group(1) == "true"
     tiers_by_item = {}
     for tier in bundle.get("tier_order") or []:
         for name in (bundle.get("tier_display_data") or {}).get(tier, {}).get("tier_item_machine_names") or []:
@@ -331,9 +340,11 @@ def bundle_record(category, slug, ts, bundle):
             "description", "detailed_marketing_blurb", "order_form_disclaimer")))[:2000],
         "account_links": basic.get("required_account_links") or [],
         # Packs whose parts carry no delivery icon say so at bundle level.
-        "drm_free": bool(re.search(r"Redeem DRM-Free|available (?:for download |as )?DRM-?free|DRM-?free download|direct download|Download assets",
-                                   " ".join(str(basic.get(k) or "") for k in ("description", "detailed_marketing_blurb")),
-                                   re.I)),
+        "has_keys": has_keys,
+        "drm_free": has_keys is False or bool(re.search(
+            r"Redeem DRM-Free|available (?:for download |as )?DRM-?free|DRM-?free (?:download|asset)|"
+            r"direct download|Download assets",
+            " ".join(str(basic.get(k) or "") for k in ("description", "detailed_marketing_blurb")), re.I)),
         "items": items,
     }
 
@@ -356,7 +367,7 @@ def cmd_parse(args):
         if not bundle:
             continue
         ts = path.with_name(f"{slug}.ts").read_text().strip()
-        records[(category, slug)] = bundle_record(category, slug, ts, bundle)
+        records[(category, slug)] = bundle_record(category, slug, ts, bundle, html)
         n += 1
     tmp = Path(args.out).with_suffix(".tmp")  # readers never see a half-written census
     with open(tmp, "w") as out:

@@ -1,0 +1,36 @@
+schema = 1
+name = "Sourcery (Sourcery Pro subscription codes)"
+kind = "route"
+service = true
+notes = """
+Sourcery, an AI code-review/refactoring tool for Python (IDE plugins and a
+GitHub app). "Python 2021" gave one coupon per tier for 2, 6 or 12 months of
+Sourcery Pro (machine names say 2/4/6 'monthsfree'; the item names say
+2/6/12 months). The coupon is applied at Sourcery's subscribe checkout,
+reducing it to $0. Nothing to install from Humble; the plugins come from the
+IDE marketplaces. The codes are from 2021 and have presumably expired.
+"""
+
+[match]
+developers = ["Sourcery"]
+domains = ["sourcery.ai"]
+key_names = ["sourcery"]
+
+[redeem]
+where = "https://sourcery.ai/dashboard/subscribe/?product=pro"
+account = true
+delivers = "a 2/6/12-month Sourcery Pro subscription"
+expires = "not stated; 2021 codes"
+steps = [
+  "Sign up or sign in at https://sourcery.ai/dashboard/subscribe/?product=pro (e-mail, GitHub or Google).",
+  "Click 'Click here' in the checkout, enter the Humble code in the coupon field and Apply; the price drops to $0.00.",
+  "Subscribe; check the Billing dashboard. Support: hello@sourcery.ai.",
+]
+
+[install]
+source = "vendor"
+serial = "account"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4405398178331-Humble-Software-Bundle-Python-Superpowers-Sourcery-Pro-2-month-6-month-12-month-subscription-instructions"
+claim = "sign up at sourcery.ai subscribe page; coupon field; $0.00 for 2/6/12 months; Billing dashboard; hello@sourcery.ai"

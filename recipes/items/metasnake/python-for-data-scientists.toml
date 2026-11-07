@@ -1,0 +1,11 @@
+schema = 1
+name = "Python for Data Scientists (course)"
+vendor = "metasnake"
+kind = "service"
+machine_names = ["pythonfordatascientists_course"]
+verified = false
+notes = "Learn Python Programming with PyCharm (Jul 2020). MetaSnake course: the Humble link opens a $0 checkout ('Buy for Free'), then log in/register (see vendors/metasnake)."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360050847493-Humble-Software-Bundle-Learn-Python-Programming-with-PyCharm-Python-for-Data-Scientists-course"
+claim = "redemption: link from the Humble download page, 'Buy for Free', MetaSnake account"

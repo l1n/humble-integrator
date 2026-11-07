@@ -1,0 +1,45 @@
+schema = 1
+name = "JetBrains (PyCharm Professional subscription codes)"
+kind = "route"
+service = true
+notes = """
+Humble Python bundles in 2020 ("Learn Python Programming with PyCharm") and
+2021 ("Python 2021") gave one PyCharm Professional code per tier: 2, 4 or 6
+months, for new users only, not stackable, with an expiry date on the bundle
+page. The code is redeemed on JetBrains' store and becomes a time-limited
+subscription in a JetBrains Account; no payment is taken unless the user sets
+up renewal. These codes have long expired.
+
+PyCharm itself is a native macOS/Linux/Windows app (the free Community
+edition, now the unified PyCharm, needs no code); this recipe only documents
+the code, so there is no install or Steam entry. JetBrains codes in "Next
+Level Python" (2024) stay with vendors/talk-python (bundle rule).
+"""
+
+[match]
+developers = ["JetBrains"]
+domains = ["jetbrains.com"]
+key_names = ["pycharm", "jetbrains", "webstorm"]
+
+[redeem]
+where = "https://www.jetbrains.com/store/redeem/?PC (2020-2021 codes); newer Humble codes are promo codes at jetbrains.com/store checkout"
+account = true
+delivers = "a 2/4/6-month PyCharm Professional subscription on the JetBrains Account"
+expires = "per bundle page (codes expired long ago)"
+steps = [
+  "Open https://www.jetbrains.com/store/redeem/?PC, enter the code and your details, Submit.",
+  "JetBrains Sales e-mails the licence and an activation link; follow it and create/sign in to a JetBrains Account.",
+  "The account shows the PyCharm licence with a billing date 2/4/6 months out; nothing is charged unless payment is added.",
+  "Download PyCharm from https://www.jetbrains.com/pycharm/download and log in to the JetBrains Account inside it.",
+]
+
+[install]
+source = "vendor"
+serial = "account"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360003527854-PyCharm-Professional-Edition-2-Month-4-month-6-month-subscription-instructions"
+claim = "one code each for 2/4/6 months, new users only, not stackable, expire; jetbrains.com/store/redeem/?PC; licence e-mailed; JetBrains Account; no charge unless payment set up"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/28944630005915-JetBrains-PyCharm-Professional-Redemption-Instructions"
+claim = "later codes: choose monthly PyCharm Professional in jetbrains.com/store, apply promo code at checkout; download from jetbrains.com/pycharm/download"

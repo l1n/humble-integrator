@@ -1,0 +1,41 @@
+schema = 1
+name = "Evernote (Premium subscription)"
+kind = "route"
+service = true        # online notes service; apps are free downloads
+notes = """
+Humble Software Bundle: Work Remote (Apr-May 2020): Evernote Premium
+3-Month Subscription (bundle text), for new and Basic users (press
+coverage). A code for an Evernote account; Evernote has native macOS
+and Windows apps and a web app, no Linux app and nothing for Steam.
+No Humble article was found; the 2020 code is presumably expired.
+"""
+
+[match]
+developers = ["Evernote"]
+domains = ["evernote.com"]
+key_names = ['evernote']
+
+[redeem]
+where = "the Evernote account (link or code from the Humble download page; https://www.evernote.com/Redeem.action leads to the Evernote login)"
+account = true
+delivers = "3 months of Evernote Premium"
+expires = "bundle ended May 2020; presumably expired"
+steps = [
+  "Reveal the code on the Humble download page and follow its link (no Humble article found).",
+  "Sign in to (or create) an Evernote account and enter the code on Evernote's redeem page (unverified path).",
+]
+
+[download]
+scriptable = false
+how = "nothing to download from the code"
+
+[install]
+source = "vendor"
+serial = "account"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/work-remote-software"
+claim = "'Evernote Premium 3-Month Subscription'; developer Evernote; Windows/Mac/Android (census)"
+[[sources]]
+url = "https://www.pcworld.com/article/399045/humbles-20-work-remote-bundle-mixes-must-have-productivity-software-with-must-play-games.html"
+claim = "Work Remote bundle (spring 2020) contents and tiers, incl. three months of Evernote Premium"

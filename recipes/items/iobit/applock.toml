@@ -1,0 +1,24 @@
+schema = 1
+name = "IObit AppLock PRO (Android)"
+vendor = "iobit"
+kind = "service"
+machine_names = ["iobitapplock"]
+verified = false
+skip = true
+skip_reason = "Android-only app; nothing to install on macOS or Linux."
+notes = "Humble Software Bundle: Computer Care (Oct 2018). Install the Android app (Google Play or the APK Humble links), set a password, open the sidebar menu, scroll down, tap the arrow and enter the code: 12 months of AppLock PRO. Humble's deadline to redeem was 2018-11-30, so the code is expired."
+
+[redeem]
+where = "inside the AppLock Android app (sidebar menu > code box)"
+account = false
+delivers = "12 months of AppLock PRO on one Android device"
+expires = "2018-11-30"
+steps = [
+  "Install IObit AppLock on the Android device (APK: http://mobilecarecdn.iobit.com/IObitApplock.apk).",
+  "Set a password, open the top-left sidebar menu, scroll down and tap the arrow.",
+  "Enter the code from the Humble download page.",
+]
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360010363273-Humble-Software-Bundle-Computer-Care-IObit-AppLock-instructions"
+claim = "key must be redeemed before November 30th, 2018; APK link; sidebar menu > arrow > code; 12-month PRO licence"

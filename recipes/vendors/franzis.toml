@@ -1,0 +1,67 @@
+schema = 1
+name = "Franzis (projects photo software: HDR / ANALOG / EMOTION projects, EASY Foto)"
+kind = "route"
+notes = """
+Franzis's Windows photo programs ("... projects") were sold on Humble in
+"Photography Projects" (Apr 2022), "Transform your photos into Art" (Feb 2023,
+published by Richdale) and "Picture Perfect Creations" (Dec 2025, Richdale
+Ventures). Humble gives a Windows installer download plus a serial number on
+the download page; the program asks for the serial on first start and
+activates online. One serial covers up to two computers.
+
+Most of these items carry both Humble's DRM-free and key icons and already
+reach generic/drm-free-app, which downloads the installer. This recipe has NO
+developers rule so it does not pull those away; item recipes under
+items/franzis/ claim the products that Humble listed as key-only in the 2023
+bundle (and, because item recipes match by machine name, the same products
+in the other bundles). Products without an item recipe still need their
+serial typed by hand from the Humble download page.
+
+Windows-only (Franzis' projects-software.com lists them as Windows
+software); 32-bit-era DirectX 9 programs, untested under Wine.
+"""
+
+[match]
+domains = ["franzis.de", "projects-software.com"]
+key_names = ['\b(hdr|analog|emotion|color|denoise|focus|neat|black & white) projects\b', 'easy ?foto', 'for hdr projects']
+
+[redeem]
+where = "the program's activation prompt on first start (serial from the Humble download page)"
+account = false
+delivers = "an activated licence for one Franzis program, usable on up to two computers"
+expires = "none documented"
+steps = [
+  "Download the program's installer from the Humble download page and install it.",
+  "On first start, enter the serial number from the Humble download page and click 'Activate'.",
+  "A second computer takes the same serial; just enter it again.",
+]
+
+[install]
+source = "humble"
+serial = "per-product"
+silent = false
+
+[prefix]
+name = "franzis"
+arch = "win64"
+windows = "win10"
+
+[platforms.macos]
+runner = "crossover"
+windows = "win10"
+notes = "Windows builds only on Humble; untested under CrossOver."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Windows builds only; untested under Wine."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/12727249817627-Transform-your-photos-into-Art-Redemption-Instructions"
+claim = "install from the bundle download page; enter the serial when prompted; Activate; up to two computers with the same serial (2023-02)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/5355315901211-Photography-Projects-Bundle-System-Requirements"
+claim = "Franzis projects programs: Windows 10/8/7, DirectX 9; HDR presets need HDR projects 3 or higher"
+[[sources]]
+url = "https://www.projects-software.com/"
+claim = "Franzis projects range listed as Windows software"

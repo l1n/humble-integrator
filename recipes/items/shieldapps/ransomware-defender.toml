@@ -1,0 +1,20 @@
+schema = 1
+name = "Ransomware Defender (ShieldApps)"
+vendor = "shieldapps"
+kind = "app"
+machine_names = ["ransomewaredefender"]
+verified = false
+skip = true
+skip_reason = "Windows-only security tool; protects nothing inside a Wine prefix."
+notes = "Humble Software Bundle: PC Essentials (Feb 2020). Real-time ransomware blocker for Windows. Licence key (see vendors/shieldapps)."
+
+[install]
+source = "vendor"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/pc-essentials-software"
+claim = "Ransomware Defender (ShieldApps): Windows key, publisher ShieldApps Software Innovations (census)"

@@ -47,26 +47,41 @@ WAVE2 = {
 }
 
 
+# Wave 3a: what's left in software after the legacy-format (2017-2020) bundles landed.
+WAVE3 = {
+    "w3-engine-assets": r"vrhinofx|dekogon|laya design|yarrawah|hivemind|befour|gabriel aguiar|infinity pbr|ragtarock|"
+                        r"entroverse|sics games|leartes|shapelab|mattepaint|actionvfx|unreal|\bunity\b|\bfab\b|epic",
+    "w3-2d-marketplaces": r"gamedev ?market|rexard|pv games|evilmind|green fields|rpg maker|mammoth templates|synty|"
+                          r"elvgames|itch\.io|pixel|godot|2d game",
+    "w3-learning-apps": r"skillet|royal open college|lonely planet|reallusion|skylum|luminar|course|academy|learn",
+    "w3-ttrpg-vtt": r"smiteworks|fantasy grounds|pelgrane|cal moore|treasure maps|hayland|albinoraven|3d.print|"
+                    r"pathfinder|\brpg\b|tabletop|dungeon",
+}
+
+
 def main(argv=None):
     p = argparse.ArgumentParser()
     p.add_argument("--census", required=True)
     p.add_argument("--out", required=True)
     p.add_argument("--wave", type=int, default=1)
+    p.add_argument("--category", choices=("software", "games", "books"))
     a = p.parse_args(argv)
-    clusters = WAVE2 if a.wave == 2 else CLUSTERS
+    clusters = {1: CLUSTERS, 2: WAVE2, 3: WAVE3}[a.wave]
     book = recipes.load()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     rows = {name: [] for name in clusters}
     for line in open(a.census):
         b = json.loads(line)
+        if a.category and b["category"] != a.category:
+            continue
         left = [it for it in b["items"] if book.resolve(it, b)[0] is None]
         if not left:
             continue
         hay_bundle = " ".join([b["slug"], b.get("redeem_text", "")])
         for name, pat in clusters.items():
             hits = [it for it in left if re.search(pat, hay_bundle + " " + " ".join(
-                (it.get("developers") or []) + (it.get("publishers") or [])), re.I)]
+                n for n in (it.get("developers") or []) + (it.get("publishers") or []) if n), re.I)]
             if hits:
                 rows[name].append(dict(b, items=hits))
     for name, bundles in rows.items():

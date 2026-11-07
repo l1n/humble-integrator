@@ -1,0 +1,26 @@
+schema = 1
+name = "Ukramedia Modular Lower Third Kit (Flat Style, Corporate Style)"
+vendor = "ukramedia"
+kind = "content"
+machine_names = ["modularlowerthirdkit_flatstyle", "modularlowerthirdkit_corporatestyle"]
+verified = false
+notes = """
+Professional Filmmaking Tools (Dec 2019). Modular, automated lower-third
+templates for After Effects and Premiere Pro (user's own Adobe install).
+Redemption is undocumented (see vendors/ukramedia); the product pages are
+still listed on ukramedia.com.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://ukramedia.com/product/modular-lower-third-kit-flat-style/"
+claim = "Modular Lower Third Kit - Flat Style product page on ukramedia.com (linked from the tools page)"
+[[sources]]
+url = "https://www.humblebundle.com/software/professional-filmmaking-tools-software"
+claim = "fully modular After Effects and Premiere Pro templates; hb-key, Windows and Mac (census)"

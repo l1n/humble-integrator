@@ -1,5 +1,5 @@
 schema = 1
-name = "Nevercenter (Pixelmash, CameraBag, Silo)"
+name = "Nevercenter (Pixelmash, CameraBag Photo/Pro, Silo)"
 kind = "route"
 notes = """
 Nevercenter's desktop apps ship for Windows and macOS only. Humble's Grand
@@ -11,6 +11,12 @@ asks to register; a Pixelmash licence covers up to 3 device installations
 (reinstalls after reformatting count). Licences cover the versions released
 during the licence's update period (Nevercenter download page); legacy
 installers stay downloadable.
+
+CameraBag Pro (Professional Photography bundle, Dec 2018 - Jan 2019) is a
+3.x-series key: Nevercenter points Humble Jan 2019 buyers to the v3
+downloads (nevercenter.com/camerabag/v_3/); item recipe
+nevercenter/camerabag-pro. CameraBag Pro licences cover up to three Mac or
+Windows devices.
 
 No developers rule: that would pull CameraBag Photo off its generic DRM-free
 route. Extracted keys are matched by product name and domain.
@@ -58,3 +64,6 @@ claim = "macOS (13+, Intel or Apple Silicon) and Windows 10+ 64-bit installers, 
 [[sources]]
 url = "https://www.humblebundle.com/software/grand-game-dev-toolbox-software"
 claim = "Pixelmash hb-key (Windows, Mac); CameraBag Photo hb-drmfree + hb-key (census)"
+[[sources]]
+url = "https://nevercenter.com/camerabag/download/"
+claim = "Humble licences from the Jan 2019 bundle sale: download the 3.x version at /camerabag/v_3/"

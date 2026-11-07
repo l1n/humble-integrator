@@ -1,0 +1,51 @@
+schema = 1
+name = "CameraBag Pro (3.x)"
+vendor = "nevercenter"
+kind = "app"
+machine_names = ["camerabagpro"]
+verified = false
+notes = """
+Professional Photography bundle (Dec 2018 - Jan 2019). Photo AND video
+filters/adjustments. Nevercenter's download page says Humble licences from
+the Jan 2019 sale belong to the 3.x series: use the v3 page
+(nevercenter.com/camerabag/v_3/, CameraBag Pro v3.1.1 for Mac and Windows,
+'works with all 3.x registration codes'), not the current 2026 builds.
+Enter the key in the registration pop-up on first launch; up to three Mac
+or Windows devices. v3.1.1 for Mac is 64-bit Intel (Rosetta 2 on Apple
+Silicon, inference). Exe/app names are globs.
+"""
+
+[install]
+source = "vendor"
+url = "https://nevercenter.com/camerabag/v_3/"
+file = "*CameraBag*Pro*.exe"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/**/CameraBag*Pro*.exe"
+
+[steam]
+shortcut = true
+title = "CameraBag Pro"
+steamgriddb = "CameraBag Pro"
+
+[platforms.macos]
+runner = "native"
+file = "*CameraBag*Pro*.dmg"
+app_find = "/Applications/CameraBag*Pro*.app"
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+windows = "win10"
+notes = "Windows 7+ 64-bit build; untested under Wine/Proton."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360014169714-Professional-Photography-CameraBag-Pro-instructions"
+claim = "download from nevercenter.com/camerabag/pro/download, enter the key and click Register; up to three Mac or Windows devices; support@nevercenter.com"
+[[sources]]
+url = "https://nevercenter.com/camerabag/download/"
+claim = "'Have a license from Humble Bundle purchased during the Jan 2019 bundle sale? Download this version' -> /camerabag/v_3/"
+[[sources]]
+url = "https://nevercenter.com/camerabag/v_3/"
+claim = "CameraBag Pro v3.1.1 (Mac, macOS 10.9+ 64-bit Intel; Windows 64-bit); 3.x downloads work with 3.x registration codes"

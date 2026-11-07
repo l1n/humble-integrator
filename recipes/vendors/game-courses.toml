@@ -1,0 +1,42 @@
+schema = 1
+name = "Jason Weimann's game.courses (GameDev Mastery, Game Modules)"
+kind = "route"
+service = true
+notes = """
+Jason Weimann's Unity courses (game.courses, a WooCommerce course shop):
+"Humble Software Bundle: Ultimate Unity Fantasy RPG Developer" (Jul-Aug 2022)
+had GameDev Mastery Course parts 1-3 (2D side scroller, top down, FPS) and the
+GameModules Course next to Infinity PBR assets. A key is a coupon: add the
+course to the cart, enter the code under 'Have a coupon?', Apply, Register.
+
+Matched only through item recipes (machine names): the bundle's assets belong
+to the engine-asset vendors, and a bundle-level rule there must not pull
+these courses along.
+"""
+
+[match]
+domains = ["game.courses"]
+key_names = ["gamedev mastery", "game ?modules course"]
+
+[redeem]
+where = "https://game.courses/product/gamedev-mastery-course/ (checkout with the Humble code as coupon)"
+account = true
+delivers = "enrolment in the course on game.courses"
+expires = "check the Humble download page"
+steps = [
+  "Open the course's product page (GameDev Mastery: https://game.courses/product/gamedev-mastery-course/) and add it to the cart.",
+  "At checkout click 'Have a coupon? Click here to enter your code', paste the Humble key, Apply.",
+  "With the total at $0, click Register to create the account and enrol.",
+]
+
+[download]
+scriptable = false
+how = "courses stream on game.courses"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/7529152658459-GameDev-Mastery-Course-Redemption-Instructions"
+claim = "checkout page game.courses/product/gamedev-mastery-course/; add to cart; 'Have a coupon? Click here to enter your code'; Apply; Register"

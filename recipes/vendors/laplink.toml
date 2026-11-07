@@ -2,9 +2,10 @@ schema = 1
 name = "Laplink (PCmover, DiskImage, SafeErase)"
 kind = "route"
 notes = """
-Laplink's Windows PC utilities. Humble sold them in an earlier Laplink
-bundle (Humble article from about 2023, not in the census: DiskImage
-32/64-bit, PCmover Professional, SafeErase 32/64-bit) and in the Norton &
+Laplink's Windows PC utilities. Humble sold them in 'PC Utility and
+Security Tools with Avast & Laplink' (Jan-Feb 2023, publisher of record
+Richdale: DiskImage 32/64-bit, PCmover Pro 2 uses, SafeErase 32/64-bit;
+its Avast items are on vendors/avast) and in the Norton &
 Laplink Solid Security Flash Sale (Jul 2025, publisher of record Richdale
 Ventures: PCmover Pro 1 Use and 2 Use, DiskImage 64-bit, SafeErase). Each item is a perpetual licence (serial on the Humble download
 page) plus a download address for the installer.

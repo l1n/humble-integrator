@@ -1,0 +1,49 @@
+schema = 1
+name = "HitFilm Pro"
+vendor = "fxhome"
+kind = "app"
+machine_names = ["hitfilmpro"]
+verified = false
+notes = """
+Professional Filmmaking Tools bundle (Dec 2019; the HitFilm Pro of that
+time, version 13/2019 era - inference from the date). Editor + VFX + 3D
+compositor; native macOS and Windows builds, no Linux build. Serial
+activated with 'Activate & Unlock' and an FXhome account (see
+vendors/fxhome); a HitFilm Pro licence allowed 3 concurrent activations
+(reported). Discontinued by Artlist in Jan 2025: no updates, and FXhome's
+download pages are gone, so the installer must come from the Humble page.
+Exe/app names are globs, not confirmed.
+"""
+
+[install]
+source = "humble"
+file = "*HitFilm*Pro*.exe"
+serial = "account"
+
+[launch]
+find = "C:/Program Files*/FXhome/HitFilm*/*.exe"
+
+[steam]
+shortcut = true
+title = "HitFilm Pro"
+steamgriddb = "HitFilm Pro"
+
+[platforms.macos]
+runner = "native"
+file = "*HitFilm*Pro*.dmg"
+app_find = "/Applications/HitFilm*.app"
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Windows build only; GPU-heavy (OpenGL/OpenCL); no Wine/Proton reports found (untested)."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/professional-filmmaking-tools-software"
+claim = "HitFilm Pro: hb-key, Windows and Mac, publisher FXhome (census)"
+[[sources]]
+url = "https://cgchannel.com/2025/02/artlist-discontinues-the-fxhome-apps-hitfilm-and-imerge-dead"
+claim = "HitFilm discontinued Jan 2025; older perpetual licences can still be activated and used, without updates or support"
+[[sources]]
+url = "https://www.manula.com/manuals/fxhome/hitfilm/2022.1/en/topic/activation-options"
+claim = "HitFilm manual: online and offline activation options; Pro licence 3 concurrent activations (via search summary; the page blocks scripted fetches)"

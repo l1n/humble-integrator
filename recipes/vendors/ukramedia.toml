@@ -1,0 +1,60 @@
+schema = 1
+name = "Ukramedia (After Effects / Premiere Pro scripts and templates)"
+kind = "route"
+notes = """
+Ukramedia makes After Effects scripts (smartREKT, Controlit) and modular
+lower-third templates for After Effects and Premiere Pro (smartL3RD,
+Modular Lower Third Kit - Flat and Corporate Style). Humble sold them as
+keys in 'Professional Filmmaking Tools' (Dec 2019). They run inside the
+user's own Adobe After Effects / Premiere Pro (native on macOS and Windows,
+not on Linux); nothing here gets a Steam shortcut.
+
+How a Humble key turns into the download is not documented anywhere found:
+Humble has no article. ukramedia.com is a WooCommerce shop; bought products
+are downloaded (ZIP) from My Account > Downloads, and upgrades are free
+there. The likely flow is a 100%-off coupon at checkout on ukramedia.com,
+after which the product appears under My Account > Downloads (inference,
+unverified; newer products are sold through a Lemon Squeezy checkout).
+smartREKT (now 'Smart Rekt' 4.x) and smartL3RD still have product pages;
+Controlit's URL now redirects to its successor 'Smart Controls', and the
+Modular Lower Third Kits are still listed.
+
+Install (Ukramedia's own steps): unzip and copy the script into After
+Effects' 'Scripts/ScriptUI Panels' folder, e.g.
+/Applications/Adobe After Effects <version>/Scripts/ScriptUI Panels.
+"""
+
+[match]
+domains = ["ukramedia.com"]
+key_names = ['ukramedia', 'smartl3rd', 'smartrekt', 'controlit', 'modular lower third']
+
+[redeem]
+where = "https://ukramedia.com/ (account + checkout; inference)"
+account = true
+delivers = "downloadable After Effects scripts / AE and Premiere templates under My Account (inference)"
+expires = "not stated; offer from Dec 2019"
+steps = [
+  "Reveal the key on Humble and follow any link or instructions shown with it (not documented).",
+  "Otherwise create an account at https://ukramedia.com/my-account/, add the product to the cart and try the key as a coupon code at checkout; continue only if the total is 0.",
+  "Download the ZIPs from My Account > Downloads (https://ukramedia.com/my-account/downloads/) into the library folder; unzip scripts into After Effects' Scripts/ScriptUI Panels folder and open templates in After Effects / Premiere Pro (user's own Adobe install).",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[library]
+files = "After Effects scripts (.jsx/.jsxbin), .aep / Premiere templates and PDFs/tutorial links (inference)"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/professional-filmmaking-tools-software"
+claim = "Ukramedia items are hb-key for Windows and Mac: smartL3RD (AE lower-third template made with smartREKT), smartREKT (AE rectangle tool), Controlit (AE script), Modular Lower Third Kits (AE + Premiere templates) (census)"
+[[sources]]
+url = "https://ukramedia.com/tools"
+claim = "Ukramedia shop (WooCommerce, My Account login); lists the Modular Lower Third Kit products"
+[[sources]]
+url = "https://ukramedia.com/product/smartrekt/"
+claim = "Smart Rekt 4.2 product page: download the ZIP, unzip into After Effects Scripts/ScriptUI Panels (Windows and macOS paths given); upgrades are free from My Account > Downloads"
+[[sources]]
+url = "https://ukramedia.com/product/controlit/"
+claim = "redirects to /product/smart-controls-ae-script/ (Controlit's successor), Nov 2026"

@@ -1,0 +1,70 @@
+schema = 1
+name = "iolo technologies (System Mechanic, System Shield, Privacy Guardian, ...)"
+kind = "route"
+notes = """
+iolo's Windows PC-care suite. Humble bundles: 'PC Utilities, VPN and More'
+(Feb 2022: System Mechanic, Privacy Guardian, Search and Recover, with
+Humble-hosted installers plus a key), 'PC Poweraid' (Jun 2022) and 'Total
+Performance, Protection and Privacy' (Feb-Mar 2023), the latter two keys
+only. Every key is an iolo activation key: install the program (iolo now
+ships one installer, System Mechanic Ultimate Defense, from
+https://smu.iolo.com; older articles point at sm.iolo.com / sr.iolo.com or
+the Humble download), enter an email address, 'Begin activation', then the
+key. Humble's 2022 articles say a key unlocks one year of premium access.
+The products are modules of the same suite: with System Mechanic already
+installed, further keys go in via the key icon ('Product information').
+
+All of them are Windows system tools (tune-up/registry repair, antivirus,
+anti-malware, disk wiper, undelete, privacy cleaner) or depend on the
+Windows suite (ByePass), so inside a Wine prefix they are useless or
+harmful: every item is skip = true on macOS and Linux. No Steam entries.
+
+Matched by developer ('iolo', 'Iolo', 'iolo technologies'): every iolo item
+in the census is a key; where Humble also hosted the installer (2022), the
+item recipe says so and the download is still fetched.
+"""
+
+[match]
+developers = ["iolo", "iolo technologies"]
+domains = ["iolo.com"]
+key_names = ['\biolo\b', 'system ?mechanic', 'system ?shield', 'drive ?scrubber', 'privacy ?guardian', 'search (and|&) recover', 'byepass']
+
+[redeem]
+where = "the installed program: email > 'Begin activation' > 'I have an Activation key' / 'Finish activation' (or the key icon > Product information when System Mechanic is already installed)"
+account = false
+delivers = "one year of premium access per key (Humble 2022 articles)"
+expires = "licence: 1 year from activation; key deadlines: check the Humble download page (bundles ended 2022-06-30 and 2023-03-16)"
+steps = [
+  "Reveal the activation key on the Humble download page.",
+  "Download System Mechanic Ultimate Defense from https://smu.iolo.com (or the item's installer on the Humble download page for the 2022 'PC Utilities, VPN and More' items) and install it on a Windows PC (admin account).",
+  "When the program starts, enter an email address if asked and choose 'Begin activation'.",
+  "Choose 'I have an Activation key', enter the key and 'Finish activation'. With System Mechanic already installed, use the key icon (upper right) > Product information to add another key.",
+  "Support: https://support.iolo.com/ or (801) 857-2345.",
+]
+
+[install]
+source = "vendor"
+url = "https://smu.iolo.com/"
+serial = "per-product"
+silent = false
+
+[platforms.macos]
+runner = "none"
+notes = "Windows-only system utilities."
+
+[platforms.linux]
+runner = "none"
+notes = "Windows-only system utilities."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/6471974036763-System-Mechanic-Redemption-Instructions"
+claim = "download via sm.iolo.com; install; Activate Now; enter purchase email; activation key; service time shown; key icon > Product information; iolo support (801) 857-2345"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/6470705608987-System-Shield-Redemption-Instructions"
+claim = "System Shield: download System Mechanic Ultimate Defense from smu.iolo.com; email; Begin activation; product key; Finish activation"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4428790074011-Humble-Software-Bundle-PC-Utilities-VPN-and-More-System-Mechanic-Instructions"
+claim = "2022: installer from the bundle page; email; Begin activation; 'I have an Activation key'; one year of premium access"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/13001369423515-Total-Performance-Protection-and-Privacy-System-Requirements"
+claim = "all iolo products Windows-only (admin account, internet for activation); ByePass needs a browser"

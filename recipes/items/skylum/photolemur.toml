@@ -1,0 +1,41 @@
+schema = 1
+name = "Photolemur (2 and 3)"
+vendor = "skylum"
+kind = "app"
+machine_names = ["photolemur3", "photolemur", "photolemur2"]
+verified = false
+notes = """
+One-click AI photo enhancer. Photolemur 2 (Professional Photography, Dec
+2018): serial + e-mail, lifetime licence for one device. Photolemur 3 (2019,
+2020 bundles; the unnumbered 'Photolemur' in the 2021-2022 Luminar AI bundles
+is presumably version 3): 'Activate with the Serial Number', perpetual licence
+for up to five devices. Installers from the Humble download page. Native
+macOS and Windows. Linux: nothing installed.
+"""
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/*Photolemur*/*.exe"
+
+[steam]
+shortcut = true
+title = "Photolemur"
+steamgriddb = "Photolemur"
+
+[platforms.macos]
+runner = "native"
+file = "*Photolemur*.dmg"
+app_find = "/Applications/Photolemur*.app"
+
+[platforms.linux]
+runner = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360040581913-Photolemur-3-Key-Redemption-Instructions"
+claim = "Photolemur 3: install from the bundle page; 'Activate with the Serial Number'; e-mail + key; perpetual licence, up to five devices; photolemur.com/support"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360014170354-Professional-Photography-Photolemur-2-instructions"
+claim = "Photolemur 2: serial + e-mail; lifetime perpetual licence for one device"

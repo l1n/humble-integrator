@@ -1,0 +1,10 @@
+schema = 1
+name = "Android-only item"
+kind = "route"
+priority = 25
+skip = true
+skip_reason = "Android build or Android store key: nothing to run on macOS or Linux."
+notes = "Humble's hb-android delivery (APKs or Android store keys). Listed by `hi plan`, never installed."
+
+[match]
+delivery = ["hb-android"]

@@ -1,0 +1,41 @@
+schema = 1
+name = "Medieval: Dungeons (PV Games)"
+vendor = "pv-games"
+kind = "content"
+machine_names = ["medievaldungeons"]
+verified = false
+notes = """
+PV Games' dungeon pack: two dozen monsters (movement sprite sheets, side-view
+battlers, front-view battlers, faces, busts), dungeon tiles that mix with the
+other Medieval packs, animated objects; formatted for RPG Maker MV and
+usable elsewhere. An asset pack, not an app.
+
+Humble bundles it in: RPG Maker Resurgence (2022; listed with no delivery
+icon; Barter.vg: at first "an itch.io key. Redeeming it doesn't work" - the
+link led to another seller's page - then "now delivered as a DRM-Free
+item"), Find a Cure (2021, no icon) and the Game Creator Mega Bundles (2024,
+2024 Encore, 2025 Vol. 2: hb-drmfree). In every case the files are a
+download on the Humble page: put the zip in the library folder. Any leftover
+itch.io key from the 2022 bundle is not needed.
+"""
+
+[redeem]
+where = "https://www.humblebundle.com/home/library"
+account = false
+delivers = "the pack as a download on the bundle's Humble page"
+steps = ["Nothing to redeem: download the pack from the bundle's Humble download page into the library folder."]
+
+[install]
+source = "humble"
+serial = "none"
+notes = "Unzip; no installer."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://barter.vg/bundle/6264/"
+claim = "RPG Maker Resurgence: 'T3: RPG Maker MV - Medieval: Dungeons is advertised as DRM-Free, but it's actually an itch.io key. Redeeming it doesn't work ... now delivered as a DRM-Free item' (Wayback, May 2023)"
+[[sources]]
+url = "https://www.humblebundle.com/software/game-creator-mega-bundle-software"
+claim = "Medieval: Dungeons by PV Games as hb-drmfree software (census, 2024; also the Encore and Vol. 2)"

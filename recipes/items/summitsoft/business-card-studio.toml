@@ -1,0 +1,26 @@
+schema = 1
+name = "Business Card Studio"
+vendor = "summitsoft"
+kind = "app"
+machine_names = ["businesscardstudio"]
+verified = false
+notes = "Learn Instruments and Design (Nov 2019, tier 0). Business card designer with 10,000+ templates. Windows app; under Wine untested. Exe path is a glob, not confirmed."
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/Summitsoft/Business Card Studio*/*.exe"
+
+[steam]
+shortcut = true
+title = "Business Card Studio"
+steamgriddb = "Business Card Studio"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/learn-instruments-and-design-software"
+claim = "Business Card Studio: hb-key, Windows, tier 0 (census)"
+[[sources]]
+url = "https://www.summitsoft.com/content/1317-installation-process"
+claim = "licence key entered on the installer's registration form"

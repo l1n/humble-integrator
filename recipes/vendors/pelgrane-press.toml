@@ -1,0 +1,76 @@
+schema = 1
+name = "Pelgrane Press (13th Age RPG)"
+kind = "route"
+item_kind = "document"   # DRM-free PDFs (and one soundtrack) for the library folder; nothing to install
+notes = """
+Pelgrane Press publishes 13th Age, GUMSHOE and DramaSystem tabletop RPGs.
+Its Humble bundle "Humble 13th Age Bundle: Treasures! Maps! Adventures!"
+(July-Aug 2021, Oceana charity; payee Pelgrane Press) sold 34 items: 13th
+Age, 13 True Ways, both Bestiaries, Book of Ages / Demons / Loot, Loot
+Harder, Eyes of the Stone Thief (13th Age and 5e), Shadows of Eldolan,
+Crown of Axis, the GM Screen and Resource Guide, the Quick Start & SRD, four
+"13th Age Monthly" collections, the Dragon Empire map by Lee Moyer, and
+eleven icon "Maps and Awesome Adventures" books by Cal Moore and Rob
+Heinsoo. Also a 13th Age Soundtrack album and a $25 Pelgrane store voucher
+(item pelgrane-press/store-voucher).
+
+DRM-free Humble downloads: the page says "Read them anywhere. The ebooks in
+this bundle are available in PDF format", Humble's wording for downloadable
+ebooks, and has no redemption site or key notice. The census does not
+recognise that wording and the old page has no item delivery icons, so the
+census marks the bundle drm_free = false. Without this recipe its items show
+as uncovered. Cal Moore, Rob Heinsoo, Wade Rockett, Lee Moyer and Gareth
+Ryder-Hanrahan are the books' authors (developers); the publisher is
+Pelgrane. They need no vendor of their own.
+
+This recipe claims the bundle only by URL slug and by the order
+machine_name an account reports. `hi apply` still fetches a vendor-route
+item's Humble downloads, into <library>/vendors/pelgrane-press/<item>/. No
+developers rule: Pelgrane titles in other (book) bundles are ordinary DRM-free
+ebooks for the generic routes.
+"""
+
+[match]
+domains = ["pelgranepress.com"]
+key_names = ['pelgrane']
+bundle_slugs = [
+  '^treasure-maps-adventures-software',   # URL slug (census)
+  '^treasuremapsadventures',              # order machine_name (treasuremapsadventures_softwarebundle)
+]
+
+[redeem]
+where = "https://www.humblebundle.com/home/library"
+account = false   # Humble account only (the voucher item is a code for pelgranepress.com)
+delivers = "Humble downloads: PDFs of each book (some with full-colour battle maps), the Dragon Empire map, and the 13th Age Soundtrack (30 tracks)"
+steps = [
+  "Nothing to redeem: open the bundle in your Humble library; `hi apply` fetches every item's files into <library>/vendors/pelgrane-press/<item>/.",
+  "The $25 voucher expired on 2021-12-31 (see pelgrane-press/store-voucher); nothing to do for it.",
+]
+
+[install]
+source = "humble"
+serial = "none"
+notes = "Files only. Formats per item beyond 'PDF' (and the soundtrack's audio format) are not confirmed."
+
+[download]
+scriptable = true
+how = "Humble order downloads (signed URLs from Humble's order API), fetched by `hi apply`"
+
+[library]
+ebooks = "PDF per book"
+audio = "13th Age Soundtrack - Original Music Album (30 tracks; format not confirmed)"
+
+[platforms.macos]
+runner = "native"
+notes = "Files only."
+
+[platforms.linux]
+runner = "native"
+notes = "Files only."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/treasure-maps-adventures-software"
+claim = "archived capture 2021-07-22 (web.archive.org/web/20210722180348/...): 'Read them anywhere. The ebooks in this bundle are available in PDF format ...' linking Humble's ebook-reading article 202712300; media_type 'mixed'; split Pelgrane Press / Oceana; publisher Pelgrane Press (publisher-url site.pelgranepress.com), developers Cal Moore, Rob Heinsoo et al.; no redemption site or key notice"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4403944829467-Humble-13th-Age-Bundle-Treasures-Maps-Adventures-25-Pelgrane-Press-Voucher-instructions"
+claim = "the bundle's only Humble redemption article is for the $25 Pelgrane Press voucher"

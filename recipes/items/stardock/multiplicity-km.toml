@@ -1,0 +1,23 @@
+schema = 1
+name = "Multiplicity KM"
+vendor = "stardock"
+kind = "app"
+machine_names = ["multiplicitykm"]
+verified = false
+skip = true
+skip_reason = "Needs system-wide keyboard/mouse hooks on real Windows PCs; useless inside a Wine prefix. Keep the key for a real Windows PC."
+notes = "Stardock Desktop Essentials (2023). Shares one keyboard and mouse across several Windows PCs over the network. It needs system-wide input hooks on each PC; inside a Wine prefix it would only see Wine's own windows (native alternatives on macOS/Linux: Input Leap, Barrier, Synergy). (Multiplicity 3 in the 2018/2020 bundles was a Steam key.) Installer from the Humble download page; key + email in the 'Enter Product Key' dialog (see vendors/stardock)."
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/18267608519195-Stardock-Software-Redemption-Instructions"
+claim = "generic Stardock flow: install, Enter the Product Key, key + email, Activate"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/18267421322139-Stardock-Desktop-Essentials-System-Requirements"
+claim = "Desktop Essentials 2023 contents and Windows requirements (IconPackager 10.03, CursorFX4, SpaceMonger 3.0, Start11, Fences 4, Multiplicity KM)"

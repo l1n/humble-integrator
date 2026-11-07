@@ -1,0 +1,53 @@
+schema = 1
+name = "Reuven Lerner Python Training (LernerPython, Weekly Python Exercise)"
+kind = "route"
+service = true
+notes = """
+Reuven Lerner's courses (lernerpython.com) and Weekly Python Exercise cohorts.
+Humble keys are not entered on his site directly: they go into a per-bundle
+SurveyMonkey form (hb-python-2020 for "Learn Python Programming with
+PyCharm", hb-python-2021 for "Python 2021"; later 2022/2024 forms exist), and
+the courses arrive by e-mail days later ('Complete your registration' >
+create an account). A Weekly Python Exercise cohort comes in a separate
+e-mail where you pick an exercise set. Item recipes list the machine names.
+
+No developers rule: Reuven Lerner is also the author of a DRM-free Humble
+ebook (Practice Makes Regexp in "Python 2021"), which belongs on
+generic/ebook. His items in "Next Level Python" (2024) stay with
+vendors/talk-python.
+"""
+
+[match]
+domains = ["lerner.co.il", "lernerpython.com"]
+key_names = ["reuven lerner", "weekly python exercise", "lernerpython"]
+
+[redeem]
+where = "the SurveyMonkey form for the bundle year: https://www.surveymonkey.com/r/hb-python-2020 or https://www.surveymonkey.com/r/hb-python-2021"
+account = true
+delivers = "course access on lernerpython.com (e-mailed registration link); Weekly Python Exercise cohort choice by separate e-mail"
+expires = "check the Humble download page"
+steps = [
+  "Open the form for your bundle (2020: https://www.surveymonkey.com/r/hb-python-2020; 2021: https://www.surveymonkey.com/r/hb-python-2021).",
+  "Enter your details and the Humble code, click REDEEM CODE.",
+  "Wait for the confirmation e-mail (can take days); click 'Complete your registration' and create the account.",
+  "For Weekly Python Exercise: in the 'Welcome to Weekly Python Exercise...almost!' e-mail, pick one cohort/exercise set.",
+  "Support: reuven@lerner.co.il.",
+]
+
+[download]
+scriptable = false
+how = "courses on lernerpython.com; exercises by e-mail"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360050051534-Reuven-Lerner-Python-Training-Any-one-15-week-cohort-of-Weekly-Python-Exercises"
+claim = "SurveyMonkey hb-python-2021 (older bundle hb-python-2020); REDEEM CODE; content by e-mail in the coming days; Complete your registration; WPE cohort e-mail separately; reuven@lerner.co.il"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/7101659384475-Reuven-Lerner-Python-Course-Redemption-Instructions"
+claim = "later bundles: hb-python-2022 and hb-python-2024 forms; same e-mail registration flow"
+[[sources]]
+url = "https://www.humblebundle.com/software/python-2021-software"
+claim = "Practice Makes Regexp book (Reuven Lerner) is an hb-drmfree ebook (census)"

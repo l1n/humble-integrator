@@ -1,0 +1,54 @@
+schema = 1
+name = "ShieldApps (Ransomware Defender, Webcam Blocker)"
+kind = "route"
+notes = """
+Humble Software Bundle: PC Essentials (Feb 2020) included two ShieldApps
+Software Innovations Windows security tools as licence keys: Ransomware
+Defender and Webcam Blocker. No Humble article exists for either; the
+licence key is presumably entered in the program's registration screen
+(inference; ShieldApps' site refuses scripted fetches). ShieldApps sells
+these as 1-year, 1-PC licences (reseller listings), so the 2020 keys are
+long expired as licences even if they once activated.
+
+Both are Windows-only background protectors (ransomware blocker; webcam and
+microphone blocker). Inside a Wine prefix they protect nothing, so both
+items are skip = true. No Steam entries.
+
+Matched by publisher name ('ShieldApps Software Innovations'), which
+appears in the census only in this bundle.
+"""
+
+[match]
+developers = ["ShieldApps Software Innovations", "ShieldApps"]
+domains = ["shieldapps.com"]
+key_names = ['shieldapps', 'ransomware defender', 'webcam blocker']
+
+[redeem]
+where = "the installed program's registration/activation screen (inference)"
+account = false
+delivers = "a licence for one Windows PC (term presumably 1 year; unverified)"
+expires = "bundle ended in Feb 2020; licences presumably 1 year (unverified)"
+steps = [
+  "Reveal the licence key on the Humble download page.",
+  "Download the program from shieldapps.com (or the link on the Humble page) and install it on a Windows PC.",
+  "Enter the key in the program's registration/activation screen (unverified; no Humble article).",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+
+[platforms.macos]
+runner = "none"
+notes = "Windows-only security tools."
+
+[platforms.linux]
+runner = "none"
+notes = "Windows-only security tools."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/pc-essentials-software"
+claim = "PC Essentials: 'Redeem with license keys and on Steam'; Ransomware Defender and ShieldApps Webcam Blocker, Windows keys, publisher ShieldApps Software Innovations (census)"
+[[sources]]
+url = "https://www.ecrater.com/p/46618821/shieldapps-randomware-defender-1-year-device"
+claim = "reseller listing: Ransomware Defender sold as a 1-year, 1-device activation key"

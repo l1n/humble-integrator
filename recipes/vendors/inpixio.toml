@@ -1,0 +1,62 @@
+schema = 1
+name = "inPixio (Avanquest): Photo Studio"
+kind = "route"
+notes = """
+inPixio is Avanquest's consumer photo-editing brand. "Transform your photos
+into Art" (Feb 2023, published by Richdale) included Photo Studio PRO and
+Photo Studio Standard for Windows (each a 1-year licence), Photo Studio for
+Mac, Photo Studio for iOS, Remove Background for Android, and Photo Maximizer
+(DRM-free + key, on the generic route). Humble's bundle article: download the
+installer from the Humble download page, enter the serial from the download
+page when the program asks, click Activate; up to two computers per serial.
+The 1-year licences presumably start at activation (inference), so activate
+only when the editor will be used.
+
+No developers rule: Photo Maximizer is already handled by
+generic/drm-free-app; item recipes claim the rest. The mobile items are codes
+or store links for phone apps: nothing to install on macOS/Linux.
+"""
+
+[match]
+domains = ["inpixio.com", "avanquest.com"]
+key_names = ['inpixio']
+
+[redeem]
+where = "the program's activation prompt (serial from the Humble download page)"
+account = false
+delivers = "an activated inPixio program (Photo Studio PRO/Standard: 1-year licence)"
+expires = "not stated"
+steps = [
+  "Download the installer from the Humble download page and install it.",
+  "On first start, enter the serial number from the Humble download page and click 'Activate'.",
+  "Mobile items: follow the link/code on the Humble download page in the App Store or Google Play (not documented).",
+]
+
+[install]
+source = "humble"
+serial = "per-product"
+silent = false
+
+[prefix]
+name = "inpixio"
+arch = "win64"
+windows = "win10"
+
+[platforms.macos]
+runner = "native"
+notes = "Use the native Photo Studio for Mac item; the Windows PRO/Standard keys would need CrossOver."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Windows builds only; untested under Wine (AI features may rely on GPU/online services)."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/12727249817627-Transform-your-photos-into-Art-Redemption-Instructions"
+claim = "programs from the bundle: install from the download page, enter serial, Activate; up to two computers per serial (2023-02)"
+[[sources]]
+url = "https://www.inpixio.com/"
+claim = "inPixio is a registered trademark of Avanquest Software"
+[[sources]]
+url = "https://www.humblebundle.com/software/transform-your-photos-into-art-software"
+claim = "inPixio items: Photo Studio PRO / Standard '(1 year)' Windows hb-key; Mac hb-key; iOS hb-key; Remove Background for Android without delivery; Photo Maximizer DRM-free + key (census)"

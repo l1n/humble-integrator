@@ -1,0 +1,81 @@
+schema = 1
+name = "FXhome (HitFilm, Imerge, Ignite, Action Pro) - discontinued by Artlist"
+kind = "route"
+notes = """
+FXhome's desktop apps and plugins reached Humble in the 2018-2022 creative
+bundles: HitFilm Pro, Ignite Pro and Action Pro ('Professional Filmmaking
+Tools', Dec 2019), Imerge Pro ('Professional Photography', Dec 2018),
+Ignite Keying & Flares (MAGIX 'Your Ticket to a New Creative Universe', Mar
+2022) and HitFilm Movie Essentials (MAGIX 'VEGAS Pro Even More', Dec 2018).
+Every one is a serial redeemed inside the installed program: install from
+the Humble download page, click 'Activate & Unlock', sign in to (or create)
+an FXhome account and enter the serial.
+
+Artlist bought FXhome in 2021, discontinued Ignite Pro in 2021, and on
+15 January 2025 discontinued HitFilm and Imerge and took the FXhome website
+down (fxhome.com, hitfilm.com and account.fxhome.com no longer answer).
+CG Channel reports that HitFilm, including older perpetual licences, can
+still be activated and used, with no updates or support and no guarantee on
+newer OSes. Whether a never-activated Humble serial from 2018-2019 can still
+be bound to an account is unknown (the account sign-up page is gone): the
+Humble download page's installer is now the only source of the programs.
+
+No developers rule: 'FxHome' is also the developer of FXhome Enhance Ultra
+in a VEGAS bundle that vendors/magix claims. Items are matched by machine
+name; extracted keys by product name.
+
+macOS: native builds for HitFilm, Imerge, Ignite and Action Pro (Intel-era
+builds; Apple Silicon via Rosetta 2, inference). Linux: no builds; the
+Windows builds are GPU/OpenGL-heavy video tools with no Wine reports found
+(untested, expect trouble).
+"""
+
+[match]
+domains = ["fxhome.com", "hitfilm.com"]
+key_names = ['hitfilm', 'imerge', 'fxhome', 'ignite (?:pro|keying)', 'action pro']
+
+[redeem]
+where = "the installed program's 'Activate & Unlock' dialog (FXhome account + serial)"
+account = true
+delivers = "an activated program or plugin tied to the FXhome account (Imerge Pro: two devices)"
+expires = "per bundle (FXhome Enhance Ultra: redeem before 29 July 2021); FXhome's activation service is no longer documented after the Jan 2025 shutdown"
+steps = [
+  "Download the installer for the product from the Humble download page and run it (fxhome.com is offline, so Humble is the only source).",
+  "Start the program (or, for a plugin, the installer's activation step) and click 'Activate & Unlock'.",
+  "Sign in to, or create, an FXhome account and enter the serial from the Humble page.",
+  "If online activation fails after the 2025 shutdown, there is no documented fallback; Artlist support is the only contact left (inference).",
+]
+
+[install]
+source = "humble"
+serial = "account"
+silent = false
+
+[prefix]                   # Linux only (macOS uses the native builds)
+name = "fxhome"
+arch = "win64"
+windows = "win10"
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "No Linux builds; no Wine/Proton reports found for HitFilm or Imerge (untested)."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360014168094-Professional-Photography-Imerge-Pro-instructions"
+claim = "Imerge Pro: install from the bundle page, 'Activate & Unlock', create/log into an Imerge (FXhome) account, enter the serial; two devices; support fxhome.com/getting-started"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4465467195163-Humble-Software-Bundle-Your-Ticket-to-a-New-Creative-Universe-FXhome-Ignite-instructions"
+claim = "Ignite plugin: installer from the bundle page, 'activate & unlock', create an account, enter the serial; used inside a compatible host"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/1260804318710-FXhome-Enhance-Ultra-instructions"
+claim = "same Activate & Unlock + account + serial flow for an FXhome plugin sold in a VEGAS bundle; keys to be redeemed before 29 July 2021"
+[[sources]]
+url = "https://cgchannel.com/2025/02/artlist-discontinues-the-fxhome-apps-hitfilm-and-imerge-dead"
+claim = "Artlist discontinued HitFilm and Imerge and took the FXhome website down on 15 Jan 2025; HitFilm incl. older perpetual licences can still be activated and used, no guarantee on new hardware/OSes; Ignite Pro discontinued in 2021"
+[[sources]]
+url = "https://www.cgchannel.com/?p=128601"
+claim = "Artlist acquired FXhome (2021)"

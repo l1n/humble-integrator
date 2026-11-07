@@ -1,0 +1,92 @@
+schema = 1
+name = "Roll20 (browser virtual tabletop)"
+kind = "route"
+service = true        # browser VTT content and subscriptions: nothing to install, no Steam entry
+notes = """
+Roll20 (roll20.net) is a browser-based virtual tabletop. Its Marketplace
+sells compendiums (rulebooks built into the VTT), adventure modules, add-ons,
+and art/map packs, all bought for a Roll20 account. Roll20 owns Demiplane
+(vendors/demiplane). It has no desktop or Steam app, so everything here is
+kind "service": redemption steps only.
+
+Census: "Roll20 Bundle" (Oct-Nov 2023, Extra Life charity; payee Roll20):
+hb-key items, one 15-digit Roll20 code each. "Codes distributed are redeemed
+directly through Roll20." The census capture (Oct 19) has 14 codes, including
+a 1-month Plus subscription (item roll20/plus-subscription-month). The
+Nov 2 content drop added 11 more: Starfinder Core Rulebook, Dragonbane,
+Star Trek Adventures, Cyberpunk RED, Tome of Beasts, Loke Battle Mats Mega
+Bundle, Starter Town Map Bundles 01-04, Dynamic Forest Bundle I. Each item
+is a third-party publisher's Roll20 product (Paizo, Modiphius, Free League,
+Kobold Press, Evil Hat ...); the publisher names are only labels here. The
+bundle decides that the code goes to Roll20, not to paizo.com or another
+store. The bundle's "More content coming soon!" placeholder
+(mysterybox_101x145) is claimed by an item recipe in
+another vendor, gdevelop/no-code-gamedev-mystery-box, because that
+machine name is shared across bundles.
+
+Matching: the bundle's exact redemption sentence, its URL slug / order
+machine name, the publisher "Roll20", and keys by roll20.net or a Roll20
+name. No rule on the item publishers, who also sell DRM-free PDFs on Humble.
+
+Files: Roll20 content lives in the account and is used in the browser.
+Some art/map packs offer a 'Download Complete Set' ZIP (PNG/JPG) on their
+Marketplace page, if the artist allows it. Those, and any PDF a product
+offers, are the only things that can go in the library folder, by hand.
+"""
+
+[match]
+developers = ["Roll20"]
+domains = ["roll20.net"]
+key_names = ['(?<![a-z])roll ?20\b']   # also machine names like talesfromtheloop_roll20; not 'scroll 20'
+# "Codes distributed are redeemed directly through Roll20."
+redeem_text = ['\bcodes?\b[^.]{0,30}\bredeem\w*\s+(directly\s+)?(through|on|via|at)\s+(the\s+)?roll ?20\b']
+# URL slug (roll20-bundle-software) and order machine name (roll20bundle_softwarebundle)
+bundle_slugs = ['^roll20-?bundle']
+
+[redeem]
+where = "https://marketplace.roll20.net/coupon/"
+account = true
+delivers = "each code adds one Marketplace product (compendium, module, add-on or art pack) to the Roll20 account, or a subscription discount"
+expires = "not stated on the bundle page or in Humble's article; Humble's terms (Dec 2024) expire unrevealed keys 3 years after purchase. Key.is_expired from Humble is authoritative."
+steps = [
+  "Sign in to, or create, a Roll20 account at https://roll20.net (one account for every code).",
+  "Open Marketplace > Redeem a Code (https://marketplace.roll20.net/coupon/).",
+  "Paste one 15-digit code, click Validate Code, check the product it names, then click Claim Code. Repeat per code.",
+  "Compendiums and expansions are then available in the account's Compendium and in new games; modules can start a new game; add-ons and art packs are in the Art Library and can be added to any game.",
+  "A code that does not work: Roll20 asks you to contact the publisher who issued it (here Humble support), then https://help.roll20.net/hc/requests/new.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download as a rule; optional 'Download Complete Set' ZIPs on art-pack Marketplace pages, saved by hand"
+
+[library]
+files = "none by default; optional art-pack ZIPs (PNG/JPG) where the artist enabled downloads"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[platforms.macos]
+runner = "native"
+notes = "Browser app; nothing to install."
+
+[platforms.linux]
+runner = "native"
+notes = "Browser app; nothing to install."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/19495281175963-Roll20-Code-Redemption-Instructions"
+claim = "Humble article: visit roll20.net, sign in or create an account, Marketplace > 'Redeem a Code' (https://marketplace.roll20.net/coupon/), enter the code"
+[[sources]]
+url = "https://help.roll20.net/hc/en-us/articles/360037773173-Redemption-Codes"
+claim = "Roll20: 15-digit code, Redeem a Code page, Validate Code then Claim Code; subscription codes are only for new users and need the subscription to be chosen with payment info afterwards; problems with a code go to the publisher who issued it"
+[[sources]]
+url = "https://help.roll20.net/hc/en-us/articles/360048923734"
+claim = "Roll20 Art Packs: an artist may enable a 'Download Complete Set' button that downloads the pack as one ZIP of PNG/JPG; downloadable sub-items of bundles are on the individual Marketplace pages"
+[[sources]]
+url = "https://help.roll20.net/hc/en-us/articles/360048927654-Marketplace-FAQ"
+claim = "purchased content is never taken back, even if the product is no longer for sale"
+[[sources]]
+url = "https://www.humblebundle.com/software/roll20-bundle-software"
+claim = "archived capture 2023-11-09 (web.archive.org/web/20231109070437/...): 'Codes distributed are redeemed directly through Roll20'; split Roll20 / Extra Life; 24 hb-key items, each publisher-url a marketplace.roll20.net listing; Free Month - Plus Subscription links app.roll20.net/why-subscribe-to-roll20"

@@ -1,0 +1,13 @@
+schema = 1
+name = "Pretzel Rocks Premium (1 month / 3 months / 1 year)"
+vendor = "pretzel"
+kind = "service"
+machine_names = ["pretzelmusic_1month", "pretzelmusic_3month", "pretzelmusic_12month"]
+verified = false
+skip = true
+skip_reason = "Redemption deadline passed (2021-06-01)."
+notes = "Streaming 2019; no delivery icon in the census. See vendors/pretzel."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360023995413-Humble-Software-Bundle-Streaming-2019-Pretzel-Rocks-Premium-instructions"
+claim = "keys must be redeemed before June 1st, 2021"

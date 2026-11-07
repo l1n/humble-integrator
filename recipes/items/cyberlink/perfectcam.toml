@@ -1,0 +1,21 @@
+schema = 1
+name = "PerfectCam (1-year subscription)"
+vendor = "cyberlink"
+kind = "addon"
+machine_names = ["perfectcam"]
+requires = ["cyberlink/youcam-7-deluxe"]
+verified = false
+skip = true
+skip_reason = "Video-call beautifier plugin that needs YouCam (itself skipped: Windows virtual-camera driver). The 1-year subscription starts on activation, so keep the key unrevealed unless it will be used on real Windows."
+notes = "Video & Photo Editing 2018 by CyberLink (all tiers). Census description: 'PerfectCam will require installation and activation of YouCam to activate the 1-year subscription.'"
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/video-photo-editing-2018-software"
+claim = "PerfectCam requires installation and activation of YouCam to activate the 1-year subscription (census description)"

@@ -1,0 +1,47 @@
+schema = 1
+name = "Dashlane (password manager subscription)"
+kind = "route"
+service = true        # account subscription; apps/extensions are free downloads
+notes = """
+Humble Software Bundle: PC Essentials (Feb 2020): 'Dashlane Premium', one
+year (machine name dashlane_1yearpremium). A promo code for a Dashlane
+account, redeemed at https://www.dashlane.com/redeem (email > verification
+> promo code). Dashlane runs in the browser extension and mobile apps
+(Dashlane moved away from its Windows/Mac desktop apps to the extension;
+from general knowledge, not checked here), so there is nothing to install
+for Steam; on Linux the browser extension
+works. The 2020 code is presumably expired (no deadline was published in
+the census).
+"""
+
+[match]
+developers = ["Dashlane"]
+domains = ["dashlane.com"]
+key_names = ['dashlane']
+
+[redeem]
+where = "https://www.dashlane.com/redeem"
+account = true
+delivers = "one year of Dashlane Premium on the Dashlane account"
+expires = "bundle ended in Feb 2020; code deadline unknown (presumably passed)"
+steps = [
+  "Open https://www.dashlane.com/redeem.",
+  "Enter the email address of a new or existing Dashlane account and verify it.",
+  "Enter the promo code from the Humble download page.",
+  "Use Dashlane through its browser extension or mobile apps.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download from the code"
+
+[install]
+source = "vendor"
+serial = "account"
+
+[[sources]]
+url = "https://www.dashlane.com/redeem"
+claim = "'Redeem your Dashlane Premium': 1 email, 2 verification, 3 enter your promo code"
+[[sources]]
+url = "https://www.humblebundle.com/software/pc-essentials-software"
+claim = "Dashlane Premium key (dashlane_1yearpremium), Windows/Mac/Linux, publisher Dashlane (census)"

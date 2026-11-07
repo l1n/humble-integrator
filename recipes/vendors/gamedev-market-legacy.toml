@@ -1,0 +1,90 @@
+schema = 1
+name = "GameDev Market bundles hosted by Humble (2018-2022)"
+kind = "route"
+notes = """
+GameDev Market (GDM) curated Humble's 2D game-asset bundles years before it
+could take redemptions itself: its dashboard section for redeeming an
+external (Humble/Fanatical) purchase arrived in August 2023, and the bundles
+since then are keys redeemed on GDM (vendors/gamedev-market). The older GDM
+bundles below carried no keys at all. Humble's page data says
+has_any_keys = false for every one of them, the bundle text says "Download
+game assets. Download DRM-free asset packs and get started immediately" (or
+says nothing about delivery), and the items show no delivery icon, which is
+why the census cannot route them by delivery. Each pack is a zip on the
+bundle's Humble download page, frozen at the version uploaded then. Buying
+the bundle does not put the packs in a GDM account or unlock them on the
+sellers' itch.io pages, so later seller updates are not included.
+
+Bundles: Humble RPG Game Dev Bundle (Nov 2018), Humble 2D Game Dev Bundle
+(Jul 2019), Humble Music and Sound Effects for Games, Films, and Content
+Creators (Nov 2019: "The audio packs in this bundle are available in WAV,
+OGG, and/or MP3 format"), Humble RPG Game Development Assets Bundle: 2D Art,
+Music and Sound Effects (May 2020), Game Dev Map & Level Creator (Dec 2020;
+its "Redeem your keys." is Humble boilerplate: the bundle has no keys),
+Royalty-Free RPG Game Development Assets (May 2021: "All of the assets in
+this bundle are available royalty-free") and RPG Game Dev RE-Bundle (Jul
+2022, a re-run of the 2018 bundle).
+
+Matched by the bundle's URL slug, so it places census rows. Real account
+downloads from these bundles are hb-drmfree at runtime (the order's bundle
+slug is its machine name) and land on the generic download routes: same
+files either way. Sellers are many small GDM members (Robert Brooks,
+GameArt2D, 7Soul, finalbossblues, EvilMind, wowsoundsg, REXARD, ...); this
+route never matches by their names.
+"""
+
+[match]
+bundle_slugs = [
+  '^rpg-game-dev-bundle$',                           # Nov 2018, rpggamedev_bundle
+  '^2d-game-dev-bundle$',                            # Jul 2019, 2dgamedev_bundle
+  '^sound-fx-software$',                             # Nov 2019, soundfx_softwarebundle
+  '^art-assets-music-and-sound-effects-software$',   # May 2020
+  '^game-dev-map-level-creator-software$',           # Dec 2020
+  '^royalty-free-rpg-game-dev-assets-software$',     # May 2021
+  '^rpg-game-dev-rebundle-software$',                # Jul 2022
+]
+
+[redeem]
+where = "https://www.humblebundle.com/home/library"
+account = false
+delivers = "one zip per asset pack on the bundle's Humble download page"
+steps = [
+  "Nothing to redeem: download each pack from the bundle's Humble download page into the library folder.",
+  "Licence: GameDev Market's standard (Pro) licence, https://static.gamedevmarket.net/terms-conditions/#pro-licence (commercial and non-commercial projects).",
+  "Support: the seller's contact details inside the pack's zip, otherwise support@gamedevmarket.net.",
+]
+
+[download]
+scriptable = true
+how = "Humble library API, like generic/files"
+
+[library]
+files = "zips of 2D art (PNG, often with PSD/AI/EPS/SVG sources: sprites, tilesets, GUI kits, icons, backgrounds) and audio packs (WAV/OGG/MP3 music, SFX, voice)"
+
+[install]
+source = "humble"
+serial = "none"
+silent = false
+notes = "No installer: unzip each pack into the library folder; used by hand in any engine."
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://www.gamedevmarket.net/news/latest-updates-at-gdm-august-2023"
+claim = "GDM's dashboard section for redeeming external Humble/Fanatical bundle purchases is new in August 2023"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360038364094-Humble-Sound-Effects-and-Music-for-Games-Films-and-Content-Creators-Bundle-GameDev-Market-EULA"
+claim = "Music & SFX bundle (2019): GDM standard licence; contact the asset creator via details 'within their asset zip folder' or support@gamedevmarket.net; no redemption step"
+[[sources]]
+url = "https://itch.io/post/7983366"
+claim = "a GDM seller: some Humble assets are redeemed on GDM, others were hosted by Humble and stay at the bundled version"
+[[sources]]
+url = "https://www.humblebundle.com/software/rpg-game-dev-bundle"
+claim = "'Download game assets. Download DRM-free asset packs and get started immediately.'; page data has_any_keys false (Wayback, Nov 2018); same wording on 2d-game-dev-bundle (Jul 2019) and rpg-game-dev-rebundle-software (Jul 2022)"
+[[sources]]
+url = "https://www.humblebundle.com/software/game-dev-map-level-creator-software"
+claim = "page data has_any_keys false, items without delivery icons (Wayback, Dec 2020); likewise sound-fx-software, art-assets-music-and-sound-effects-software and royalty-free-rpg-game-dev-assets-software"

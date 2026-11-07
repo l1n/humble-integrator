@@ -1,0 +1,34 @@
+schema = 1
+name = "Creative Fonts Wonderful Collection"
+vendor = "summitsoft"
+kind = "content"
+machine_names = ["creativefontswonderfulcollection"]
+verified = false
+notes = """
+Learn Instruments and Design (Nov 2019, tier 2). Commercially licensed
+OpenType fonts from Summitsoft's own foundry. The Windows installer only
+copies the fonts to Documents\\Summitsoft Fonts; it does not install them.
+Run it once in a Wine prefix (or on any Windows PC) to unpack the fonts, then
+copy the .otf files into the library folder and install them natively on
+macOS (Font Book) or Linux (~/.local/share/fonts). No Steam entry.
+"""
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[library]
+files = "OpenType font files copied out of Documents/Summitsoft Fonts in the prefix"
+
+[[sources]]
+url = "https://www.summitsoft.com/content/1320-where-will-my-fonts-be-installed"
+claim = "Summitsoft fonts are put in C:\\Users\\<user>\\Documents\\Summitsoft Fonts"
+[[sources]]
+url = "https://www.summitsoft.com/content/1317-installation-process"
+claim = "font installers only copy the fonts to Documents\\Summitsoft Fonts; they are not installed for use right away"
+[[sources]]
+url = "https://www.humblebundle.com/software/learn-instruments-and-design-software"
+claim = "OpenType fonts, commercially licensed, hand designed by Summitsoft's foundry; hb-key, Windows (census)"

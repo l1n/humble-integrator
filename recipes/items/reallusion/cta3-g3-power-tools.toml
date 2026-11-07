@@ -1,0 +1,28 @@
+schema = 1
+name = "CrazyTalk Animator 3 content (G3 Power Tools 1)"
+vendor = "reallusion"
+kind = "addon"
+machine_names = [
+  "g3humanmotions_smoothmoves",   # G3 Human Motions - Smooth Moves
+  "g2elasticmotions_comeandgo",   # G3 Elastic Motions - Come & Go
+  "g3animals_dogs",               # G3 Animals - Dogs
+  "g3animatedprops_funstuff",     # G3 Animated Props - Fun Stuff
+]
+requires = ["reallusion/crazytalk-animator-3"]
+verified = false
+notes = "2D Animation bundle, tier 2, 'Included as part of G3 Power Tools 1': motion, elastic-motion, animal and prop libraries for CTA 3 G3 characters. From Order History; install CTA 3 first."
+
+[install]
+source = "vendor"
+url = "https://www.reallusion.com/member/#/en/order-history"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/2d-animation-software"
+claim = "these four items are 'Included as part of G3 Power Tools 1' for CTA 3 (census descriptions)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360038790114-Humble-Software-Bundle-2D-Animation-Redemption-Instructions"
+claim = "content needs its host software installed first"

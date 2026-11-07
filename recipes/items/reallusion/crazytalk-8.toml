@@ -1,0 +1,33 @@
+schema = 1
+name = "CrazyTalk 8 Standard"
+vendor = "reallusion"
+kind = "app"
+machine_names = ["crazytalk8standard"]
+verified = false
+notes = """
+2D Animation bundle, tier 1. Facial animation from photos with voice/text
+lip-sync and a 3D head creator. Windows app; installer and serial come from
+the Reallusion account after voucher activation (see vendors/reallusion).
+The exe name and folder are guesses (launch.find).
+"""
+
+[install]
+source = "vendor"
+url = "https://www.reallusion.com/member/#/en/order-history"
+file = "*CrazyTalk*8*.exe"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/Reallusion/CrazyTalk*8*/CrazyTalk*.exe"
+
+[steam]
+shortcut = true
+title = "CrazyTalk 8"
+steamgriddb = "CrazyTalk"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360038790114-Humble-Software-Bundle-2D-Animation-Redemption-Instructions"
+claim = "installer in Order History; serial typed in during installation"
+[[sources]]
+url = "https://www.humblebundle.com/software/2d-animation-software"
+claim = "CrazyTalk 8 Standard: hb-key, Windows, tier 1 (census)"

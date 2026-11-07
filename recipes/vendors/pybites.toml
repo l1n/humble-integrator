@@ -1,0 +1,45 @@
+schema = 1
+name = "Pybites (Bites of Py exercises, Newbie Bites)"
+kind = "route"
+service = true
+notes = """
+Pybites code-challenge platform (codechalleng.es / pybit.es). In "Learn
+Python Programming with PyCharm" (Jul 2020): Newbie Bites and 40x / 60x
+Bites of Py token bundles. The green link on the Humble download page applies
+the code to a Pybites account: Newbie Bites appear in the left menu; Bite
+tokens are spent one per exercise in the Bite catalogue ('Unlock this
+Bite'). Pybites items in "Next Level Python" (2024) stay with
+vendors/talk-python (bundle rule).
+"""
+
+[match]
+developers = ["PyBites", "Pybites"]
+domains = ["pybit.es", "codechalleng.es"]
+key_names = ["py ?bites", "bites of py"]
+
+[redeem]
+where = "the green link on the Humble download page (codechalleng.es)"
+account = true
+delivers = "Newbie Bites access or N Bite tokens in the Pybites account"
+expires = "check the Humble download page"
+steps = [
+  "Click the green Pybites link on the Humble download page (or https://codechalleng.es/settings/register/MtSDl#registration).",
+  "Create or log in to a Pybites account (Google/GitHub sign-in works). New users verify the e-mail, then click the green link again.",
+  "Newbie Bites: open 'Newbie Bites' in the left menu. Token bundles: 'Bite Exercises' > choose a Bite > 'Unlock this Bite'.",
+  "Support: info@pybit.es.",
+]
+
+[download]
+scriptable = false
+how = "exercises are solved in the browser on the Pybites platform"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360050847353-How-to-Redeem-Bites-of-Py-PyBites"
+claim = "green link or codechalleng.es register URL; verify e-mail and click the link again; X tokens; Bite Exercises > Unlock this Bite; info@pybit.es"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360050849573-Humble-Software-Bundle-Learn-Python-Programming-with-PyCharm-Newbie-Bites"
+claim = "Newbie Bites: green link, Pybites account (Google/GitHub), Newbie Bites in the left menu"

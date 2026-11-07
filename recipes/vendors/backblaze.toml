@@ -1,0 +1,56 @@
+schema = 1
+name = "Backblaze (Computer Backup subscription)"
+kind = "route"
+service = true        # online backup subscription; the client is a free download
+notes = """
+Humble Software Bundle: PC Essentials (Feb 2020): 'Backblaze Online
+Backup', a 6-month subscription for new Backblaze customers only (census
+description). How Humble's code was applied is not documented; Backblaze's
+own route for prepaid/gift codes is the web console: Billing > Prepaid Code
+> nine-digit code > Apply (only for accounts without billing or within 30
+days of renewal). Whether the Humble code was such a prepaid code or an
+offer code (Billing > Offer Code) is unverified.
+
+The Backblaze Computer Backup client is native on Windows and macOS; there
+is no Linux client. Nothing for Steam. The 2020 offer has presumably
+expired.
+"""
+
+[match]
+developers = ["Backblaze"]
+domains = ["backblaze.com"]
+key_names = ['backblaze']
+
+[redeem]
+where = "https://secure.backblaze.com/user_signin.htm > Billing > Prepaid Code (or Offer Code) (unverified for the Humble code)"
+account = true
+delivers = "6 months of Backblaze Computer Backup for one computer (new customers only)"
+expires = "bundle ended in Feb 2020; code deadline unknown (presumably passed)"
+steps = [
+  "Create a Backblaze account and install the Computer Backup client (Windows or macOS) from https://www.backblaze.com/.",
+  "Sign in to the web console (https://secure.backblaze.com/user_signin.htm), open Billing from the user menu.",
+  "Under Payment Method choose Prepaid Code and enter the code, or enter it in the Offer Code field (unverified which applies).",
+]
+
+[download]
+scriptable = false
+how = "nothing to download from the code; the backup client is a free download"
+
+[install]
+source = "vendor"
+serial = "account"
+
+[platforms.macos]
+runner = "native"
+notes = "Native Backblaze client for macOS."
+
+[platforms.linux]
+runner = "none"
+notes = "No Linux client for Backblaze Computer Backup."
+
+[[sources]]
+url = "https://www.backblaze.com/computer-backup/docs/use-a-prepaid-code"
+claim = "prepaid codes: sign in to the web console, Billing, Prepaid Code, nine-digit code, Apply; only for accounts without billing or within 30 days of renewal and one-year plans; discount codes go in the Offer Code field"
+[[sources]]
+url = "https://www.humblebundle.com/software/pc-essentials-software"
+claim = "Backblaze Online Backup (backblaze_6monthsub), Windows/Mac; 'This offer is for new Backblaze customers only' (census)"

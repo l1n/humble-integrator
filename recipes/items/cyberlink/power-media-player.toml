@@ -1,0 +1,20 @@
+schema = 1
+name = "Power Media Player (replaced by PowerDVD 18 Standard)"
+vendor = "cyberlink"
+kind = "app"
+machine_names = ["powermediaplayer"]
+verified = false
+skip = true
+skip_reason = "A Windows media player; native players (IINA, VLC, mpv) do the same job on macOS/Linux without a Wine prefix. Keep the key for a real Windows PC."
+notes = "Video & Photo Editing 2018 by CyberLink (tier 1). Humble replaced Power Media Player with PowerDVD 18 Standard on 2018-12-17, so the download page probably offers PowerDVD 18: install it, enter the product key, Activate."
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360014084094-Video-Photo-Editing-2018-by-Cyberlink-PowerDVD-18-instructions"
+claim = "PowerDVD 18 replaced Power Media Player in the bundle as of 12/17/18; install, enter product key, Activate"

@@ -1,0 +1,19 @@
+schema = 1
+name = "Aurora HDR Looks: Halloween Looks by Ev Tchebotarev"
+vendor = "skylum"
+kind = "addon"
+machine_names = ["aurorahdrlooks_halloweenlooksbyevtchebotarev"]
+requires = ["skylum/aurora-hdr"]
+verified = false
+notes = "Cyber bundle (Nov 2022). Looks pack for Aurora HDR; Humble lists it as a key for Windows/Mac. Delivery not documented: if a file, double-click/import it in Aurora HDR's Looks panel; if a code, redeem in the Skylum account (inference)."
+
+[install]
+source = "humble"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/photo-editing-cyber-bundle-with-luminar-ai-software"
+claim = "Aurora HDR looks item, hb-key, Windows/Mac (census)"

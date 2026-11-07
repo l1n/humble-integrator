@@ -1,0 +1,40 @@
+schema = 1
+name = "inPixio Photo Studio for Mac"
+vendor = "inpixio"
+kind = "app"
+machine_names = ["inpixiophotostudioformac"]
+verified = false
+notes = """
+Transform your photos into Art (Feb 2023). Native macOS photo editor (object
+removal, background erase/replace). Inference: the Mac installer is a Humble
+download and the serial is entered on first start, as for the Windows
+programs; Humble lists the key as Mac-only. Not for Linux (use the Windows
+PRO/Standard items there). App name is a glob.
+"""
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[launch]
+find = "/Applications/*Photo Studio*.app"
+
+[steam]
+shortcut = true
+title = "inPixio Photo Studio"
+steamgriddb = "inPixio Photo Studio"
+
+[platforms.macos]
+runner = "native"
+app_find = "/Applications/*Photo Studio*.app"
+
+[platforms.linux]
+runner = "none"
+notes = "Mac-only item."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/transform-your-photos-into-art-software"
+claim = "Inpixio Photo Studio Mac: hb-key, platform Mac (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/12727249817627-Transform-your-photos-into-Art-Redemption-Instructions"
+claim = "bundle programs are installed from the download page and activated with the serial"

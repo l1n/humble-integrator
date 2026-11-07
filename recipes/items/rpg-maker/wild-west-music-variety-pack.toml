@@ -1,0 +1,36 @@
+schema = 1
+name = "RPG Maker VX Ace - Wild West Music Variety Pack (Joel Steudler)"
+vendor = "rpg-maker"
+kind = "content"
+machine_names = ["wildwestmusicvarietypack"]   # RPG Maker Resurgence (2022), tier 1
+verified = false
+notes = """
+Western-themed game music by Joel Steudler, sold by Degica as RPG Maker VX
+Ace resources. In the RPG Maker Resurgence bundle Humble showed it with no
+delivery icon; Barter.vg's record lists it among the bundle's DRM-free
+items, i.e. a download on the Humble page. Royalty-free music files for any
+engine; nothing to install.
+"""
+
+[redeem]
+where = "https://www.humblebundle.com/home/library"
+account = false
+delivers = "the music pack as a download on the bundle's Humble page"
+steps = ["Nothing to redeem: download the pack from the bundle's Humble download page into the library folder."]
+
+[install]
+source = "humble"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+
+[platforms.linux]
+runner = "native"
+
+[[sources]]
+url = "https://barter.vg/bundle/6264/"
+claim = "RPG Maker Resurgence DRM-free items include 'T1: RPG Maker VX Ace - Wild West Music Variety Pack' (Wayback, May 2023)"

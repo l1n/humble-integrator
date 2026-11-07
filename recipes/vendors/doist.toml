@@ -1,0 +1,46 @@
+schema = 1
+name = "Doist (Todoist, Twist)"
+kind = "route"
+service = true        # online services; apps are free downloads
+notes = """
+Humble Software Bundle: Work Remote (Apr-May 2020): Todoist Premium (term
+not stated in the census) and Twist Unlimited credit ('$150 credit for
+new, $100 credit for existing users' per the bundle text). Both are codes
+for online accounts; Todoist and Twist have native apps for macOS and web
+apps everywhere (Todoist also a Linux app), nothing for Steam.
+No Humble article was found. Todoist's help centre covers promo codes
+(a promo link opens checkout with the discount applied; one promo code per
+12 months); how the Twist credit was applied is undocumented. Both 2020
+codes are presumably expired.
+"""
+
+[match]
+developers = ["Doist", "Todoist"]
+domains = ["todoist.com", "twist.com", "doist.com"]
+key_names = ['todoist', '\btwist (unlimited|credit)']
+
+[redeem]
+where = "the Todoist / Twist account (link or promo code from the Humble download page)"
+account = true
+delivers = "Todoist Premium (term not stated); Twist Unlimited credit ($150 new / $100 existing users)"
+expires = "bundle ended May 2020; presumably expired"
+steps = [
+  "Reveal the code or link on the Humble download page.",
+  "Todoist: open the promo link (checkout opens with the discount applied) or apply the code in the account's subscription settings; only one promo code per 12 months.",
+  "Twist: sign in to (or create) a Twist workspace and apply the credit as the Humble page instructs (unverified).",
+]
+
+[download]
+scriptable = false
+how = "nothing to download"
+
+[install]
+source = "vendor"
+serial = "account"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/work-remote-software"
+claim = "Todoist Premium (Doist) and 'Twist Unlimited $150 credit: $150 credit for new, $100 credit for existing users' (census)"
+[[sources]]
+url = "https://todoist.com/help/articles/how-to-redeem-your-todoist-pro-promo-code"
+claim = "Todoist promo codes/links (summary seen via search: links open checkout with the discount; one promo code per 12 months)"

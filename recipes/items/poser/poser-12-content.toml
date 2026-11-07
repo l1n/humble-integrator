@@ -1,0 +1,30 @@
+schema = 1
+name = "Poser 12 Content"
+vendor = "poser"
+kind = "content"
+machine_names = ["posercontent"]
+requires = ["poser/poser-12"]
+verified = false
+notes = """
+Poser's bundled library (pre-rigged human and animal figures, poses,
+morphs, clothing, hair, materials). Same Graphixly checkout as Poser 12
+('Poser 12 + Content'); the content installers download from
+posersoftware.com once the Poser 12 serial is registered, and are installed
+into Poser's runtime library (no Steam entry). Download volume counts
+against the serial ('excessive content downloads' can disable it).
+"""
+
+[install]
+source = "vendor"
+url = "https://www.posersoftware.com/downloads/content/12"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.posersoftware.com/downloads"
+claim = "registering the serial unlocks the additional content downloads; excessive downloads may temporarily disable the software"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/27353872001051-Poser-12-3D-Character-Design-Pack-Redemption-Instructions"
+claim = "'Poser 12 + Content' bundle page on graphixly.com, 100% off with the code"

@@ -1,0 +1,61 @@
+schema = 1
+name = "Royal Open College (online courses; royalopencollege.org)"
+kind = "route"
+service = true        # course platform: nothing to install, no Steam entry
+notes = """
+Royal Open College is a UK online-course provider (WordPress + LearnPress
+school at royalopencollege.org). Humble sold "The Ultimate Python, Machine
+Learning & AI Engineering Bundle 2026 by Royal Open College" (Oct-Nov 2026):
+33 self-paced courses (Python fundamentals, pandas, SQL, scikit-learn,
+TensorFlow, RAG, LangGraph/MCP agents, MLOps ...), one key per course.
+
+Each key is a voucher entered on the college's redeem page together with the
+learner's name, e-mail and phone number; the site then e-mails a verification
+code ('Verify & Redeem') and adds the course to the learner account. The page
+also advertises a paid 'Lifetime Prime Plus Membership'; it is optional and
+not needed to redeem. Certificates/transcripts may be paid extras (the
+membership offer lists 'Unlimited PDF certificates'; inference).
+
+Courses are watched on the site; no offline download was found.
+"""
+
+[match]
+developers = ["Royal Open College"]
+domains = ["royalopencollege.org"]
+key_names = ["royal ?open ?college"]
+redeem_text = ["\\bby royal open college\\b"]
+
+[redeem]
+where = "https://royalopencollege.org/redeem-voucher/"
+account = true
+delivers = "the course in the Royal Open College learner account; immediate access"
+expires = "not stated in the bundle text; check the Humble download page"
+steps = [
+  "Reveal the key on the Humble download page (one voucher per course).",
+  "Open https://royalopencollege.org/redeem-voucher/.",
+  "Fill in Student Name, Student Email Address and Phone Number, paste the key into Voucher Code and press 'Redeem Voucher'. Use the same e-mail for every voucher so all courses land in one account.",
+  "Enter the verification code e-mailed to that address and press 'Verify & Redeem'.",
+  "Follow the e-mailed/on-screen instructions to log in; the course is in the account. Skip the optional paid membership offer.",
+  "Support: info@royalopencollege.org.",
+]
+
+[download]
+scriptable = false
+how = "courses stream on royalopencollege.org after login"
+
+[library]
+videos = false
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/57555470305435-Redemption-Instructions-for-The-Ultimate-Python-Machine-Learning-AI-Engineering-Bundle-2026"
+claim = "redeem at https://royalopencollege.org/redeem-voucher/; enter details, voucher code; course added with immediate access; support info@royalopencollege.org (2026-10-21)"
+[[sources]]
+url = "https://royalopencollege.org/redeem-voucher/"
+claim = "form fields Student Name, Student Email Address, Phone Number, Voucher Code; e-mailed Verification Code then 'Verify & Redeem'; 'No membership purchase is required to redeem your voucher'"
+[[sources]]
+url = "https://www.humblebundle.com/software/ultimate-python-machine-learning-ai-engineering-bundle-202-software"
+claim = "'... Bundle by Royal Open College'; 33 courses with developer Royal Open College; 'Redeem your keys. Please read here.' (census)"

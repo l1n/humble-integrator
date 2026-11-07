@@ -1,0 +1,48 @@
+schema = 1
+name = "Lonely Planet (travel guides and phrasebooks as DRM-free ebooks)"
+kind = "route"
+notes = """
+Lonely Planet guides reach Humble as DRM-free ebooks. The 2023 "... Travel &
+Language with Lonely Planet and uTalk" bundles carry Humble's DRM-free/ebook
+delivery data and already go to generic/ebook, so this vendor has no
+developers rule (it would pull those away from the generic route).
+
+The exception is the "Humble Learn a New Language Bundle" (Mar 2019), an
+older-layout page whose Lonely Planet items (5 phrasebooks, 5 country guides,
+5 Pocket city guides) have no delivery icons in the census. That bundle mixed
+Transparent Language keys with Lonely Planet ebooks; the page says "The ebooks
+in this bundle are available in PDF, MOBI, and ePub formats" and "DRM-free:
+Download the ebooks". So the Lonely Planet items are ordinary Humble
+downloads: nothing to redeem. The phrasebooks are sold as "Phrasebook &
+Audio"; whether Humble's download included the audio is not known. Item
+recipes under items/lonely-planet/ claim those 15 machine names.
+"""
+
+[match]
+domains = ["lonelyplanet.com"]
+
+[redeem]
+where = "nothing to redeem: the Humble download page"
+account = false
+delivers = "DRM-free ebooks (PDF, EPUB, MOBI) from the Humble download page"
+steps = [
+  "Download each ebook format from the Humble download page into the library folder.",
+]
+
+[download]
+scriptable = true
+how = "Humble's own download links (same as the generic ebook route)"
+
+[library]
+ebooks = "PDF, EPUB and MOBI per title"
+
+[install]
+source = "humble"
+serial = "none"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/learn-a-new-language-software"
+claim = "archived page (Wayback 2019-03-20): 'We've teamed up with Transparent Language and Lonely Planet'; 'The ebooks in this bundle are available in PDF, MOBI, and ePub formats'; 'DRM-free: Download the ebooks onto your favorite device'; 'Redeem keys to access content: ... language learning programs'"
+[[sources]]
+url = "https://www.humblebundle.com/software/english-language-travel-with-lonely-planet-and-utalk-software"
+claim = "2023 Lonely Planet items are hb-drmfree ebooks (census), handled by generic/ebook"

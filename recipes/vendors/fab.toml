@@ -101,6 +101,61 @@ so.
 A few Dekogon and Synty items also carry a Humble direct download
 (hb-drmfree) besides the key: fetch that file into the library folder as
 well.
+
+Wave 3 (bundles routed here by slug; see the comments in [match]):
+  * Mixed Fab + Unity bundles whose text names both stores ("Keys are
+    redeemed through Fab and Unity Store website" - Ultimate Unreal & Unity
+    Assets Galore (Hivemind); "Keys are redeemable through Unity and FAB
+    website" - Underwater Creatures Mega Bundle (Existence Studio)) come here
+    as a whole: vendors/unity-asset-store's text rules step aside when the
+    text names Fab. Their "(Unity)" / "(Unity Engine)" items have item
+    recipes under items/unity-asset-store/ and items/hivemind/; item text
+    says which store ("*Unity Asset Store Key Is Provided!").
+  * Supreme Unreal & Unity bundles 1-3 (Befour Studios, Gabriel Aguiar Prod.,
+    Entroverse Lab, RagTarock, Stone Mocap, VRhinoFX): item text says
+    "*Professional License redeeming from Fab" or "... from Unity Asset
+    Store". The Unity editions have item recipes (items/unity-asset-store/
+    befour-*, gabriel-aguiar-*, entroverse-lab-*); the Befour / Entroverse
+    "Gumroad 50% Discount Code" items and Supreme 2's two "(Unreal Engine -
+    Unity)" Gumroad codes have item recipes under items/fab/ that send them
+    to vendors/gumroad.
+  * Humble's hb-epic icon on asset items (Unreal Engine Asset Bonanza, Ultimate
+    Game Development Bundle and The Mini but Mighty Fantasy Unreal Engine
+    Environments, all 2023, from the Unreal Engine Marketplace era) is an Epic
+    code for an Unreal asset, now a Fab listing: those bundles are claimed
+    here rather than left to generic/epic-key (same redemption page, but this
+    recipe knows about the Fab library, rate limits and the UEFN licence
+    choice). Not claimed: Unreal Engine Spring Utility Essentials ("redeemable
+    on the Unreal Marketplace"), whose DRM-free audio packs a bundle rule
+    would sweep in; its hb-epic items stay on generic/epic-key, which redeems
+    at the same Epic page. RPG Maker Unite's hb-epic items are Epic Games
+    Store products, not assets, and also stay there.
+  * Ultimate Game Development Bundle (Leartes, Nov 2023): "can be redeemed in
+    the Epic Games Store, Unity Asset Store and the Leartes Studios Gumroad
+    Marketplace". hb-epic = Epic/Fab; "(Unity)" hb-key items = Unity (item
+    recipes, except the eight whose machine names Leartes reuses in Cosmos /
+    Fab bundles - medievalandvikingweaponsandshieldsset18piecesunity,
+    rallypointenvironment..., romantempleruinsunity, vintagebarinterior...,
+    stylizedwizardroomunity, stylizedfantasyenvironmentunity,
+    stylizedvikinghutunity, 500plusfantasyiconsunity - which follow this
+    bundle route in the census; their keys are named "(Unity)" and resolve
+    to vendors/unity-asset-store by key name); tutorials, SFX/VFX packs and
+    the 70% code = Leartes Gumroad (items/leartes-gumroad/).
+  * Unreal Engine Asset Bonanza (Oct 2023): Sidetrax "Music Pack 1-5" items
+    carry no delivery icon but read like Unreal Marketplace listings
+    ("Supports UE 4.20 - 5.3"; inference: Epic codes like the rest). The
+    four hb-key MoCap Online packs are probably MoCap Online store codes
+    (vendors/mocap-online; their machine names recur in Yarrawah bundles,
+    so they follow this bundle route in the census and reach MoCap Online
+    by key instructions); the hb-key Dekogon / Freshcan3D items are taken
+    to be Fab codes (inference).
+  * VFX Master-Bundle for Unreal (VRhinoFX, 2026): the page says "Redeem
+    DRM-Free" but every item is a key whose description links a fab.com
+    listing; "Keys expire. Please redeem your keys before June 5th, 2027".
+    If Humble also offers a download, fetch it as well.
+  * Not Fab although Unreal: Unreal Fantasy and Unreal Essentials #1 (2023)
+    were redeemed on yarrawah.com (vendors/yarrawah); Unreal Engine Space &
+    Sci-Fi Mastery Kit on 3dprojectmasters.com (vendors/arghanions-puzzlebox).
 """
 
 [match]
@@ -119,6 +174,16 @@ bundle_slugs = [
   "open-world-essentials",
   "mega-unreal-engine-bundle",
   "^unreal-nature-(?:and-)?fantasy-assets|^nature-manufacture-unreal",
+  # Wave 3 (texts name no store, or name it in a way the rules below don't catch):
+  "^supreme-(?:\\d+-)?(?:best-)?(?:unity|unreal)-",              # Supreme 1/2/3 (Befour, Gabriel Aguiar, Entroverse, RagTarock, Stone Mocap, VRhinoFX); Unity editions have item recipes
+  "^ultimate-environment-world-building-collection",            # Laya Design: "all with FAB Professional License Keys"
+  "^ultimate-survival-kit",                                     # Survival Kit Redux (Dekogon, Yarrawah, Freshcan, Bugrimov): item pages link fab.com listings
+  "^vfx-masterbundle-for-unreal",                               # VRhinoFX: item pages link fab.com listings (text wrongly says "Redeem DRM-Free")
+  "^unreal-environment-bundle",                                 # NatureManufacture: "Please read here" -> Humble's Unreal Engine key article
+  "^world-builders-horrors-and-haunts",                         # Dekogon: Humble article sends keys to fab.com
+  "^unreal-engine-asset-bonanza",                               # hb-epic Unreal Marketplace keys (Dekogon, Freshcan3D, Meshingun, ...); MoCap Online items have item recipes
+  "^ultimate-game-development-bundle(?:-software)?$",           # Leartes 2023: hb-epic Unreal items; "(Unity)" and Leartes Gumroad items have item recipes
+  "^the-mini-but-mighty-fantasy-unreal-engine-environments",    # Leartes 2023: "Your content is available through the Epic Game Store" (hb-epic)
 ]
 redeem_text = [
   '\bFab Marketplace keys?\b',
@@ -141,7 +206,7 @@ key_names = ['\bfab\b', '_fab\b', 'unreal engine marketplace', '\(\s*unreal engi
 where = "https://www.epicgames.com/account/code-redemption"
 account = true
 delivers = "one Fab listing (Professional licence) per code, in the Epic account's Fab library"
-expiry_text = "per bundle page, e.g. Blades, Blasters & Beasts: July 13 2028; Premium Assets Unreal: October 15th 2027; All-in-One Unreal & Unity: Fab keys July 6th 2027; Builder's Vault (Unreal): August 22th 2027; Mega Unreal Engine Bundle: September 21st 2027; Open World Essentials II: September 16th 2027. Deluxe Dev Dream (August 2024) asked buyers to redeem within 10 days because of the Marketplace-to-Fab switch; whether its unredeemed codes still work on Fab is unknown."
+expiry_text = "per bundle page, e.g. Blades, Blasters & Beasts: July 13 2028; Premium Assets Unreal: October 15th 2027; All-in-One Unreal & Unity: Fab keys July 6th 2027; Builder's Vault (Unreal): August 22th 2027; Mega Unreal Engine Bundle: September 21st 2027; Open World Essentials II: September 16th 2027; Ultimate Environment & World Building Collection (Laya Design): June 11th 2027; VFX Master-Bundle for Unreal: June 5th 2027; World Builders: Horrors and Haunts: December 31 2027. Deluxe Dev Dream (August 2024) asked buyers to redeem within 10 days because of the Marketplace-to-Fab switch; whether its unredeemed codes still work on Fab is unknown."
 steps = [
   "Reveal the key on Humble (one key per asset).",
   "Sign in to (or create) an Epic Games account and open https://www.epicgames.com/account/code-redemption (or, on fab.com, profile icon > Redeem Code; or the Epic Games Launcher: username > Redeem Code).",
@@ -220,3 +285,27 @@ claim = "Unreal Nature and Fantasy Assets (December 2022): assets from Nature Ma
 [[sources]]
 url = "https://www.humblebundle.com/software/dekogon-townscape-essentials-2000-unreal-engine-assets"
 claim = "census redeem_text: 'They can be redeemed on the Epic Games Marketplace' (the encore says 'on the FAB Marketplace'); Massive Game Dev Asset Collection 'redeemable via Epic Games'; Elites, Level Up 5K and Meshingun All-Stars 'can be redeemed via the Epic Games Store'; Epic Adventures 'Keys are redeemed through the Epic Games Store'; Unreal Nature & Fantasy 'Keys are redeemed through Epic Store'; Open World Essentials II 'Please redeem Fab keys on Epic Games'; Mega Unreal Engine Bundle 'Redeem your keys in FAB Redemption Instruction here'"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/56788396686235-Redemption-Instructions-for-World-Builders-Horrors-and-Haunts"
+claim = "World Builders: Horrors and Haunts (Dekogon): 'Visit the redemption site [fab.com], enter the key, and download the content via a ZIP file or Epic-compatible link'"
+[[sources]]
+url = "https://web.archive.org/web/20260611190248/https://www.humblebundle.com/software/unreal-environment-bundle-software"
+claim = "Unreal Environment Bundle (NatureManufacture): 'Redeem your keys. Please read here' linking Humble's Unreal Engine Key Redemption Instructions (360056175594)"
+[[sources]]
+url = "https://web.archive.org/web/20260704184519/https://www.humblebundle.com/software/vfx-masterbundle-for-unreal-software"
+claim = "VFX Master-Bundle for Unreal (VRhinoFX): item descriptions link fab.com/listings/...; page text 'Redeem DRM-Free' yet items are keys; 'redeem your keys before June 5th, 2027'"
+[[sources]]
+url = "https://web.archive.org/web/20260313002759/https://www.humblebundle.com/software/ultimate-survival-kit-redux-software"
+claim = "Ultimate Survival Kit Redux: item descriptions link fab.com/listings/... ('More Info', 'Supports UE 5.x')"
+[[sources]]
+url = "https://www.humblebundle.com/software/supreme-3-best-unity-and-unreal-assets-software"
+claim = "census item text: '*Professional License redeeming from Fab (Marketplace)!' on '(Unreal Engine)' items, '*Professional License redeeming from Unity Asset Store' on '(Unity)' items; Supreme 1: 'can be redeemed on the FAB website or Unity website'; Supreme 2: 'redeemable on the FAB and Unity websites'"
+[[sources]]
+url = "https://www.humblebundle.com/software/ultimate-environment-world-building-collection-software"
+claim = "census text: 'all with FAB Professional License Keys!'; 'Keys expire. Please redeem before June 11th, 2027'; machine names end in 'fabprofessionallicensekey'"
+[[sources]]
+url = "https://www.humblebundle.com/software/ultimate-game-development-bundle-software"
+claim = "census text: 'can be redeemed in the Epic Games Store, Unity Asset Store and the Leartes Studios Gumroad Marketplace'; Unreal items hb-epic, Unity/tutorial/SFX items hb-key"
+[[sources]]
+url = "https://www.humblebundle.com/software/the-mini-but-mighty-fantasy-unreal-engine-environments-software"
+claim = "census text: 'Your content is available through the Epic Game Store'; the three Leartes environments are hb-epic"

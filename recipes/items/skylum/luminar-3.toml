@@ -1,0 +1,40 @@
+schema = 1
+name = "Luminar 3"
+vendor = "skylum"
+kind = "app"
+machine_names = ["luminar3"]
+verified = false
+notes = """
+Photography and Photo Filters bundle (Dec 2019). Windows and macOS. Activation
+is presumably the same as Luminar 4 (install, Activate, e-mail + key; Humble
+has no Luminar 3 article, inference). The bundle text says the software is
+'available on other-key for Windows and Mac', i.e. a key; the installer is on
+the Humble download page or Skylum's site. Linux: nothing installed.
+"""
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/Skylum/Luminar 3/*.exe"
+
+[steam]
+shortcut = true
+title = "Luminar 3"
+steamgriddb = "Luminar 3"
+
+[platforms.macos]
+runner = "native"
+file = "*Luminar*3*.dmg"
+app_find = "/Applications/Luminar 3*.app"
+
+[platforms.linux]
+runner = "none"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/photography-and-photo-filters"
+claim = "Luminar 3: hb-key, Windows and Mac; 'available on other-key for Windows and Mac' (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360056942454-Luminar-4-instructions"
+claim = "Luminar 4 activation flow (assumed the same for Luminar 3)"

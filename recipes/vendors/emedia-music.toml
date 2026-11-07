@@ -22,7 +22,7 @@ verb quicktime76.
 
 [match]
 # eMedia titles are always installer + serial; the item recipes take precedence.
-developers = ["eMediaMusic", "eMedia Music", "eMedia"]
+developers = ["eMediaMusic", "eMedia Music", "eMedia", "eMedia Music Corp.", "eMedia Music Corp"]
 bundle_slugs = ['^music-for-dummies', '^musicfordummies']
 domains = ["emediamusic.com"]
 key_names = ['\bemedia\b']

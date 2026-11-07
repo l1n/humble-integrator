@@ -1,0 +1,46 @@
+schema = 1
+name = "Scavengers Studio (Darwin Project in-game content)"
+kind = "route"
+service = true
+notes = """
+Streaming 2019 (Jun 2019) included "Darwin Project: Hunter Pack", a code for
+cosmetic in-game content redeemed inside Darwin Project, a free-to-play game
+on Steam (app 544920; Windows). The game itself comes from Steam, not Humble,
+so there is nothing to install here beyond adding the free game to the Steam
+library; the code goes into the game's in-game redemption screen. Scavengers
+Studio's Steam games in other Humble bundles are Steam keys and stay on
+generic/steam-key. Whether a 2019 Hunter Pack code still works after the
+game's free-to-play relaunch is unknown.
+"""
+
+[match]
+developers = ["Scavengers Studio"]
+key_names = ['darwin project']
+
+[redeem]
+where = "inside Darwin Project (free on Steam, app 544920)"
+account = true
+delivers = "the Hunter Pack cosmetics on the player's Darwin Project (Steam) account"
+expires = "not stated"
+steps = [
+  "Install Darwin Project from Steam (free): steam://install/544920 or https://store.steampowered.com/app/544920/Darwin_Project/.",
+  "Start the game and enter the Humble code in its in-game code redemption screen (Humble's article shows it only as screenshots).",
+]
+
+[platforms.macos]
+runner = "none"
+notes = "Windows-only game; on macOS it would need CrossOver/Whisky running Steam for Windows (untested)."
+
+[platforms.linux]
+runner = "proton"
+notes = "Windows-only Steam game; run with Proton (no ProtonDB data looked up)."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360024062334-Humble-Software-Bundle-Streaming-2019-Darwin-Project-Hunter-Pack-in-game-redemption-instructions"
+claim = "Darwin Project is obtained from the Steam store (app 544920); the pack is redeemed in-game (screenshots)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360023925913-Humble-Software-Bundle-Streaming-2019-System-Requirements"
+claim = "Darwin Project: Windows 7+, 'Freemium content redeemed in-game. Game is obtainable from Steam Store'"
+[[sources]]
+url = "https://store.steampowered.com/api/appdetails?appids=544920"
+claim = "Darwin Project (544920) is free on Steam; patch notes still posted in 2026"

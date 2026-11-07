@@ -1,0 +1,11 @@
+schema = 1
+name = "Intermediate Python Programming (2nd Edition)"
+vendor = "metasnake"
+kind = "service"
+machine_names = ["intermediatepythonprogramming2ndedition"]
+verified = false
+notes = "Learn Python Programming with PyCharm (Jul 2020). MetaSnake course: the Humble link opens a $0 checkout ('Buy for Free'), then log in/register (see vendors/metasnake)."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360050849633-Humble-Software-Bundle-Learn-Python-Programming-with-PyCharm-Intermediate-Python-Programming-2nd-Edition"
+claim = "redemption: link from the Humble download page, 'Buy for Free', MetaSnake account"

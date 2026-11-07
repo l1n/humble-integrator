@@ -1,0 +1,29 @@
+schema = 1
+name = "Abandoned / Post-Apocalyptic Hospital Environment (Unity)"
+vendor = "unity-asset-store"
+kind = "content"
+publisher = "Leartes Studios"
+machine_names = [
+  "abandonedandpost-apocalyptichospitalenvironmentunity",
+]
+verified = false
+notes = """
+Unity Asset Store voucher for Leartes Studios's Abandoned / Post-Apocalyptic Hospital Environment (Unity edition), in the
+Ultimate Game Development Bundle (Leartes, Nov 2023). The bundle's text names
+three stores: its hb-epic Unreal items are Epic (now Fab) codes, so the
+bundle routes to vendors/fab; its '(Unity)' items are Unity Asset Store
+vouchers (inference from the text and the item names); tutorials, SFX/VFX
+packs and the 70% code belong to Leartes' Gumroad (vendors/leartes-gumroad).
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "Redeem the voucher at id.unity.com, then download and import in the Unity Editor: Package Manager > My Assets."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/ultimate-game-development-bundle-software"
+claim = "'All of the software in this bundle ... can be redeemed in the Epic Games Store, Unity Asset Store and the Leartes Studios Gumroad Marketplace'; Unity items are '(Unity)' hb-key items"

@@ -1,0 +1,27 @@
+schema = 1
+name = "EASY Foto"
+vendor = "franzis"
+kind = "app"
+machine_names = ["easyfoto"]
+verified = false
+notes = "Transform your photos into Art (Feb 2023; key-only there), also in Photography Projects (2022) and Picture Perfect Creations (2025) as DRM-free + key. One-click photo improvement suggestions. Windows; untested under Wine. Exe path is a glob."
+
+[install]
+source = "humble"
+serial = "per-product"
+notes = "Serial from the Humble download page, typed into the activation prompt on first start."
+
+[launch]
+find = "C:/Program Files*/*Franzis*/EASY Foto*/*.exe"
+
+[steam]
+shortcut = true
+title = "EASY Foto"
+steamgriddb = "EASY Foto"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/5510727773723-EASY-Foto-Instructions"
+claim = "install, enter the serial on first start, Activate; two computers per serial"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/12727249817627-Transform-your-photos-into-Art-Redemption-Instructions"
+claim = "Transform bundle: installers from the download page, serial on the download page"

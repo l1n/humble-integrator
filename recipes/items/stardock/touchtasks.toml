@@ -1,0 +1,20 @@
+schema = 1
+name = "TouchTasks"
+vendor = "stardock"
+kind = "app"
+machine_names = ["touchtasks"]
+verified = false
+skip = true
+skip_reason = "Windows-shell customiser: inside a Wine prefix there is no Windows shell to change and it cannot touch the macOS/Linux desktop. Keep the key unrevealed for a real Windows PC."
+notes = "Best of Stardock (2020). Touch-friendly task switcher/app manager for Windows 10 tablets. Installer from the Humble download page; key + email in the 'Enter Product Key' dialog (see vendors/stardock)."
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360044470794-Humble-Software-Bundle-Best-of-Stardock-2020-TouchTasks-instructions"
+claim = "Enter Product Key pop-up after install; key + email; five devices"

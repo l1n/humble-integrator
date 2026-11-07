@@ -11,5 +11,8 @@ as a service so it isn't swept onto the bundle's vendor route.
 """
 
 [match]
-machine_names = ["^humblemonthly_", "humblechoice", "^humble_?choice"]
+machine_names = ["^humblemonthly_", "humblechoice", "^humble_?choice",
+  # Humble Store discount coupons riding along in game bundles
+  # (a discount amount in the name; vendor coupons without one stay with their vendor)
+  "\\d+percentoff", "\\d+off"]
 developers = ["Humble Choice"]

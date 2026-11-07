@@ -1,0 +1,24 @@
+schema = 1
+name = "Leartes Gumroad 70% Discount Code"
+vendor = "leartes-gumroad"
+kind = "service"
+service = true
+machine_names = ["gumroad70discountcode"]   # Ultimate Game Development Bundle (Nov 2023)
+verified = false
+notes = """
+"Discount code valid for all Leartes Gumroad Marketplace products until
+February 2nd, 2024", in the Ultimate Game Development Bundle (routed to
+vendors/fab for its hb-epic Unreal items). Expired; nothing to download.
+"""
+
+[redeem]
+where = "https://leartesstudios.gumroad.com/"
+expires = "2024-02-02"
+steps = ["Before the expiry: open a Leartes product on Gumroad, enter the code in the discount-code field, check the reduced price, buy."]
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/ultimate-game-development-bundle-software"
+claim = "'Gumroad 70% Discount Code': 'Discount code valid for all Leartes Gumroad Marketplace products until February 2nd, 2024'"

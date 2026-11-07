@@ -1,0 +1,27 @@
+schema = 1
+name = "CLIP ART Collection 1"
+vendor = "summitsoft"
+kind = "content"
+machine_names = ["clipartcollection1"]
+verified = false
+notes = """
+Learn Instruments and Design (Nov 2019, tier 0). Clip-art graphics for use in
+any application. Delivered as a key-activated Windows installer (inference:
+like Summitsoft's other products); unpack it once in the Summitsoft prefix
+and keep the image files in the library folder. Install location not
+documented. No Steam entry.
+"""
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[library]
+files = "clip-art image files unpacked by the installer"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/learn-instruments-and-design-software"
+claim = "Clip Art Collection 1: graphics usable with any application; hb-key, Windows (census)"

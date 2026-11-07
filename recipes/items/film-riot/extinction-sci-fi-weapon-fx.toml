@@ -1,0 +1,32 @@
+schema = 1
+name = "EXTINCTION Sci-Fi Weapon FX Pack (4K)"
+vendor = "film-riot"
+kind = "content"
+machine_names = [
+  "extinctionscifiweaponfxpack_4k_impacts",
+  "extinctionscifiweaponfxpack_4k_electricfx",
+  "extinctionscifiweaponfxpack_4k_energyfx",
+  "extinctionscifiweaponfxpack_4k_bullettrails",
+  "extinctionscifiweaponfxpack_4k_muzzleflashes",
+]
+verified = false
+notes = """
+Professional Filmmaking Tools (Dec 2019). One pack split by Humble into
+five category items. Pre-rendered 4K ProRes 4444 elements on black for
+screen/add blending in any compositor. Delivered as Humble downloads
+(inference, see vendors/film-riot). No Steam entry.
+"""
+
+[install]
+source = "humble"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[library]
+videos = "4K ProRes 4444 .mov clips (inference from the description)"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/professional-filmmaking-tools-software"
+claim = "over 100 drag-and-drop assets, 4K, ProRes 4444, black background, 5 categories: muzzle flashes, energy FX, electric FX, bullet trails, impacts (census)"

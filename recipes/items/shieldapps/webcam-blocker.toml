@@ -1,0 +1,20 @@
+schema = 1
+name = "ShieldApps Webcam Blocker"
+vendor = "shieldapps"
+kind = "app"
+machine_names = ["shieldappswebcamblocker"]
+verified = false
+skip = true
+skip_reason = "Windows-only security tool; protects nothing inside a Wine prefix."
+notes = "Humble Software Bundle: PC Essentials (Feb 2020). Blocks other Windows programs from using the webcam and microphone; inside Wine it could only block the prefix's programs. Licence key (see vendors/shieldapps)."
+
+[install]
+source = "vendor"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/pc-essentials-software"
+claim = "ShieldApps Webcam Blocker: Windows key, publisher ShieldApps Software Innovations (census)"

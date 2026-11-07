@@ -1,0 +1,51 @@
+schema = 1
+name = "MetaSnake (Matt Harrison's Python and pandas courses)"
+kind = "route"
+service = true
+notes = """
+Matt Harrison's MetaSnake courses (store.metasnake.com). Humble keys are
+links to a $0 checkout: 'Buy for Free', then log in to or register a
+MetaSnake account, and the course is in the account. Courses were in "Learn
+Python Programming with PyCharm" (2020: Intermediate Python Programming 2nd
+ed., Python for Data Scientists, Effective Pandas) and "Python 2021" (Applied
+Pandas: Twitter Analytics, Effective Python Testing); item recipes list them.
+
+No developers rule: MetaSnake is also the developer of DRM-free Humble ebooks
+(e.g. Illustrated Guide to Python 3 in "Python 2021"), which belong on
+generic/ebook. MetaSnake items in "Next Level Python" (2024) stay with
+vendors/talk-python.
+"""
+
+[match]
+domains = ["metasnake.com"]
+key_names = ["metasnake"]
+
+[redeem]
+where = "the course link on the Humble download page (MetaSnake checkout)"
+account = true
+delivers = "the course in the MetaSnake account"
+expires = "check the Humble download page"
+steps = [
+  "Click the course's link on the Humble download page; it opens a MetaSnake checkout page.",
+  "Scroll down and click 'Buy for Free' (enter your e-mail if asked).",
+  "Log in to or register a MetaSnake account ('Complete & view your product').",
+  "The course is now accessible in the account; save any downloadable notebooks/PDFs into the library folder.",
+]
+
+[download]
+scriptable = false
+how = "courses on the MetaSnake school site"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4405398803611-MetaSnake-Course-Redemption-Instructions"
+claim = "click the course link; checkout page; 'Buy for Free'; login/register a Metasnake account; access the course"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360050849633-Humble-Software-Bundle-Learn-Python-Programming-with-PyCharm-Intermediate-Python-Programming-2nd-Edition"
+claim = "green link; 'Buy for Free'; enter e-mail; 'Complete & view your product'"
+[[sources]]
+url = "https://www.humblebundle.com/software/python-2021-software"
+claim = "Illustrated Guide to Python 3 (MetaSnake) is an hb-drmfree ebook in the same bundle (census)"

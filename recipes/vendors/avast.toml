@@ -1,0 +1,69 @@
+schema = 1
+name = "Avast (Premium Security, SecureLine VPN, Cleanup Premium, ...)"
+kind = "route"
+notes = """
+Two Humble bundles sold one-year Avast subscriptions: 'Cybersecurity:
+Threat Protection with Avast' (Mar 2021) and 'PC Utility and Security Tools
+with Avast & Laplink' (Jan-Feb 2023, publisher of record Richdale; its
+Laplink items are on vendors/laplink). Each key is an Avast activation code:
+install the Avast app, then Menu > Enter activation code (Windows) or
+Menu > My subscriptions (Mac). The subscription lands in an Avast Account
+and runs one year from activation (Humble's system-requirement articles:
+'1 Year license from time of activation'); device count as in the product
+name (Multi-Device = Windows, Mac and mobile per Humble's articles; 3 PC; 3 Mac).
+
+These are background security/privacy services. Windows-only products
+(Driver Updater, AntiTrack, BreachGuard) are pointless inside a Wine prefix
+and are skip = true. Premium Security, SecureLine VPN, Cleanup Premium and
+Security Pro have native macOS apps: install natively on a Mac. No Linux
+clients (Avast's Linux products are business/server engines, not these
+subscriptions). No Steam entries.
+
+Matched by developer: Avast appears in the census only in these two
+bundles and every item is a key or a mobile app. Publisher 'Richdale' is
+not matched (see vendors/richdale-ventures).
+"""
+
+[match]
+developers = ["Avast", "Avast Software"]
+domains = ["avast.com"]
+key_names = ['\bavast\b']
+
+[redeem]
+where = "the installed Avast app: Menu > Enter activation code (Windows) / Menu > My subscriptions (Mac)"
+account = true
+delivers = "a 1-year Avast subscription in an Avast Account, from activation"
+expires = "subscription: 1 year from activation; Humble key deadline: check the download page (both bundles ended in 2021 / 2023)"
+steps = [
+  "Reveal the activation code on the Humble download page.",
+  "Download and install the Avast product from avast.com on the device (Windows, Mac, or Google Play for Android).",
+  "Windows: open the app, Menu > Enter activation code, paste the code including hyphens, Next twice. Mac: Menu > My subscriptions, paste the code, Activate.",
+  "If the code covers several apps, pick the ones to install and click 'Activate & install'.",
+  "The expiry date shows under Menu > My subscriptions and in the Avast Account (id.avast.com).",
+]
+
+[install]
+source = "vendor"
+serial = "account"
+silent = false
+
+[platforms.macos]
+runner = "native"
+notes = "Native Mac apps for Premium Security, SecureLine VPN, Cleanup Premium and Security Pro (Humble 2021: macOS 10.10+; 2023: 10.12-12, Intel 64-bit)."
+
+[platforms.linux]
+runner = "none"
+notes = "No Linux client for these subscriptions; use them on Windows, Mac or Android."
+
+[[sources]]
+url = "https://support.avast.com/en-us/article/activate-premium-security/"
+claim = "Windows: Menu > Enter activation code, paste code incl. hyphens, Next twice; Mac: Menu > My subscriptions, paste code, Activate; 'Activate & install' for multi-app codes; expiry in Menu > My subscriptions and the Avast Account"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/1260803015170-Humble-Software-Bundle-Cybersecurity-Threat-Protection-with-Avast-System-Requirements"
+claim = "2021 bundle: each product a 1-year licence from activation; platforms per product (Driver Updater/AntiTrack/BreachGuard Windows; Cleanup/Premium Security/SecureLine Windows+Mac(+Android); Security Pro for Mac 3 devices; Mobile Security Android via Google Play)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/11978319972123-PC-Utility-and-Security-Tools-with-Avast-Laplink-System-Requirements"
+claim = "2023 bundle: Premium Security Windows; SecureLine VPN Windows/macOS 10.12-12/Android/iOS; Security Pro for Mac 3 Macs (Intel 64-bit); Mobile Security Premium Android 6+"
+[[sources]]
+url = "https://www.humblebundle.com/software/pc-utility-and-security-tools-with-avast-laplink-software"
+claim = "developer Avast, publisher Richdale; bundle ended 2023-02-06 (census)"

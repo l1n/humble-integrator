@@ -1,0 +1,38 @@
+schema = 1
+name = "Ignite Pro (plugin suite)"
+vendor = "fxhome"
+kind = "addon"
+machine_names = ["ignitepro"]
+verified = false
+notes = """
+Professional Filmmaking Tools bundle (Dec 2019). 185+ HitFilm effects as
+plugins for other video hosts (Adobe After Effects/Premiere Pro, VEGAS,
+DaVinci Resolve/OFX, Final Cut Pro/Motion and others - host list from
+memory of FXhome's marketing, unverified). No program of its own, so no
+Steam shortcut; HitFilm Pro already contains these effects. Install from
+the Humble download page and activate with the FXhome account flow (see
+vendors/fxhome). Discontinued in 2021. Under Wine it is only useful if a
+Windows host runs in the same prefix.
+"""
+
+[install]
+source = "humble"
+file = "*Ignite*.exe"
+serial = "account"
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "native"
+file = "*Ignite*.dmg"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/professional-filmmaking-tools-software"
+claim = "Ignite Pro: 185+ plugin suite bringing HitFilm tech to any video editor; hb-key, Windows and Mac (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4465467195163-Humble-Software-Bundle-Your-Ticket-to-a-New-Creative-Universe-FXhome-Ignite-instructions"
+claim = "Ignite plugins: install from the bundle page, Activate & Unlock, account, serial; accessed through a compatible host"
+[[sources]]
+url = "https://cgchannel.com/2025/02/artlist-discontinues-the-fxhome-apps-hitfilm-and-imerge-dead"
+claim = "Ignite Pro was discontinued in 2021"

@@ -1,0 +1,36 @@
+schema = 1
+name = "Presets #5-#8 for HDR projects (Lost Places, Infrared, X-Process, Portrait)"
+vendor = "franzis"
+kind = "addon"
+machine_names = [
+  "preset_issue5forhdrprojects_lostplaces",
+  "preset_issue6forhdrprojects_infrared",
+  "preset_issue7forhdrprojects_x-process",
+  "preset_issue8forhdrprojects_portrait",
+]
+verified = false
+notes = """
+Transform your photos into Art (Feb 2023; key-only there); #5-#7 also in
+Picture Perfect Creations (2025). Preset packs (15-22 looks each) that plug
+into HDR projects (#5: version 3+, #6-#8: version 4+). The HDR projects 8
+professional from the same bundle (hdrprojects8professional) is on the
+generic DRM-free route, so install it first; there is no recipe id to put in
+`requires`. How a pack installs (its own installer + serial, or an import
+inside HDR projects) is not documented; inference: run the downloaded file
+and enter the serial if asked. Presets #1-#4 in the same bundle were DRM-free
+files on the generic route. No Steam entry.
+"""
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/transform-your-photos-into-art-software"
+claim = "'Plug-in for HDR projects version 3 and higher' (#5) / 'version 4 and higher' (#6-#8); hb-key, Windows (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/5355315901211-Photography-Projects-Bundle-System-Requirements"
+claim = "HDR presets: 'Must have HDR projects 3 or higher installed'"

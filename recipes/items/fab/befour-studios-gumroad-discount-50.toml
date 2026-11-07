@@ -1,0 +1,30 @@
+schema = 1
+name = "Befour Studios Gumroad 50% discount code"
+vendor = "gumroad"
+kind = "service"
+service = true
+publisher = "Befour Studios"
+machine_names = ["gumroadcode_befourstudios"]
+verified = false
+notes = """
+"With this code, you will be able to purchase all current and upcoming
+Befour Studios packages on Gumroad with a 50% discount for one year." A
+bonus item in the Supreme 2 and Supreme 3 Unreal & Unity bundles, which
+otherwise route to vendors/fab; kept here (items/fab/) with those bundles but
+sent to vendors/gumroad. Nothing to download; the tool only shows the code.
+Valid one year from purchase (Supreme 2: Nov 2025, Supreme 3: Mar 2026).
+"""
+
+[redeem]
+where = "https://befourstudios.gumroad.com/"
+steps = ["Open a Befour Studios product on Gumroad (befourstudios.gumroad.com), enter the code in the discount-code field, check the 50% reduction, buy."]
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/supreme-3-best-unity-and-unreal-assets-software"
+claim = "'Gumroad 50% Discount Code - Befour Studios': 'purchase all current and upcoming Befour Studios packages on Gumroad with a 50% discount for one year'"
+[[sources]]
+url = "https://befourstudios.gumroad.com/"
+claim = "Befour Studios' Gumroad store (Nov 2026)"

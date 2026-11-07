@@ -1,0 +1,37 @@
+schema = 1
+name = "CrazyTalk Animator 3 PRO"
+vendor = "reallusion"
+kind = "app"
+machine_names = ["crazytalkanimator3pro"]
+verified = false
+notes = """
+2D Animation bundle, tier 2. 2D character animation (bone rigs, elastic
+motion, lip-sync), later renamed Cartoon Animator; this licence is for CTA 3.
+Humble listed Windows; Reallusion also sold a Mac edition of CTA 3 Pro, so if
+Order History offers a Mac installer, install that natively instead
+(unverified). Exe name/folder are guesses.
+"""
+
+[install]
+source = "vendor"
+url = "https://www.reallusion.com/member/#/en/order-history"
+file = "*CTA*3*.exe"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/Reallusion/CrazyTalk Animator 3*/*CTA*.exe"
+
+[steam]
+shortcut = true
+title = "CrazyTalk Animator 3"
+steamgriddb = "CrazyTalk Animator"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360038790114-Humble-Software-Bundle-2D-Animation-Redemption-Instructions"
+claim = "installer in Order History; serial typed in during installation"
+[[sources]]
+url = "https://deals.androidauthority.com/sales/crazytalk-animator-3-pro-for-mac"
+claim = "a Mac edition of CrazyTalk Animator 3 Pro existed"
+[[sources]]
+url = "https://www.reallusion.com/crazytalk/download.html"
+claim = "CrazyTalk Animator continues as Cartoon Animator (CTA4/CTA5); G3 characters from CTA3"

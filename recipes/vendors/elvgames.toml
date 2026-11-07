@@ -4,64 +4,39 @@ kind = "route"
 notes = """
 Small asset seller (pixel-art tilesets, characters, monsters, VFX, UI and
 music packs for Unity, Unreal, Godot, GameMaker, RPG Maker...) with its own
-store at elvgames.com (WordPress + Easy Digital Downloads, customer
-accounts) and an itch.io shop (elvgames.itch.io). Humble bundle: Complete 2D
-Game Assets Bundle (Apr-May 2025), 90 items, one key each.
+store at elvgames.com and itch.io shops (elvgames.itch.io, elv-games.itch.io).
 
-Humble says "Content is redeemed through ElvGames's website". Inference
-(unverified): elvgames.com's checkout is Easy Digital Downloads, whose
-documented code mechanism is a discount code at checkout, so each key is
-most likely a 100%-off code for its pack, giving a $0 order in the account's
-purchase history. ElvGames' own Humble devlog adds that buyers could claim
-each pack individually (to keep getting updates) or grab everything from a
-single Humble page on itch.io (elvgames.itch.io/humble-bundle-game-assets,
-one "Game Assets" zip plus the music, 5+ GB); that page is gone (404, Oct
-2026). Confirm the route with a key's Humble instructions.
+Deliberately matches nothing. ElvGames' own Humble bundles redeem on
+itch.io, so vendors/itch-io claims them (also the Ultimate Top Down
+Adventure Assets Bundle, Oct 2025: "All keys can be redeemed on the ElvGames
+website", every item linking to elvgames.itch.io):
+- Complete 2D Game Assets Bundle (Apr-May 2025, 90 keys): "Content is
+  redeemed through ElvGames's website" means its itch.io store (all items
+  link to elv-games.itch.io; GameFromScratch: "The assets are all redeemed on
+  the Itch.io store"). An earlier version of this recipe guessed elvgames.com
+  discount codes; nothing supports that.
+- Ultimate Farming RPG Assets Bundle (May 2026, one key): "All keys can be
+  redeemed on the ElvGames Itch.io website".
+ElvGames packs inside GameDev Market bundles follow those bundles
+(vendors/gamedev-market). A developer-name rule would wrongly pull those, so
+there is none; and no domain/key-name rule either, so extracted keys that
+mention elvgames.itch.io resolve to vendors/itch-io.
+
+Seller notes for the itch.io claims: ElvGames offers Humble buyers one page
+with everything (elvgames.itch.io/humble-bundle-game-assets: a single 'Game
+Assets' zip plus the music, 5+ GB; 404 by Oct 2026) or per-pack claims,
+which keep receiving updates.
 """
-
-[match]
-# No developers rule: ElvGames packs also come inside GameDev Market bundles,
-# where the key is redeemed on GDM.
-domains = ["elvgames.com", "elvgames.itch.io"]
-key_names = ['\belv ?games\b']
-# "Content is redeemed through ElvGames's website"
-redeem_text = ['redeem\w*[^.]{0,60}\belv ?games\b']
-bundle_slugs = ['^complete-2d-game-assets-bundle(-software)?$', '^complete2dgameassetsbundle-softwarebundle$']
-
-[redeem]
-where = "https://elvgames.com/my-account/"
-account = true
-delivers = "each pack as a download in the ElvGames account (inferred), with the seller's updates"
-expires = "not stated in the bundle text"
-steps = [
-  "Create an account at https://elvgames.com/register/ (or log in at https://elvgames.com/login/).",
-  "For each key, open the pack it names on elvgames.com, add it to the cart and apply the key as the discount code at https://elvgames.com/checkout/ (inferred: see notes); complete the $0 order.",
-  "Download each pack from the account's purchase history.",
-]
-
-[download]
-scriptable = false
-how = "per pack from the elvgames.com account (Easy Digital Downloads file links)"
-notes = "Easy Digital Downloads serves files through signed, expiring links from the purchase history; with the user's logged-in session they could be fetched into the library folder (inference, untested)."
-
-[install]
-source = "vendor"
-serial = "none"
-silent = false
-notes = "No installer: unzip each pack into the library folder (PNG sprite sheets, Aseprite files, audio)."
-
-[platforms.macos]
-runner = "native"
-
-[platforms.linux]
-runner = "native"
 
 [[sources]]
 url = "https://www.humblebundle.com/software/complete-2d-game-assets-bundle-software"
-claim = "'Content is redeemed through ElvGames's website'; 75+ collections for Unity, Unreal and other engines"
+claim = "'Content is redeemed through ElvGames's website'; all 90 items link to elv-games.itch.io (Wayback, May 2025)"
+[[sources]]
+url = "https://gamefromscratch.com/complete-2d-game-assets-humble-bundle/"
+claim = "'The assets are all redeemed on the Itch.io store' (30 Apr 2025)"
+[[sources]]
+url = "https://www.humblebundle.com/software/ultimate-farming-rpg-assets-bundle-software"
+claim = "'All keys can be redeemed on the ElvGames Itch.io website'; single key (census, May 2026)"
 [[sources]]
 url = "https://elvgames.itch.io/mega-bundle/devlog/934999/humble-bundle-promotion"
 claim = "ElvGames' Humble promotion (2025-04-30); comments: packs claimed individually for updates, or all at once from elvgames.itch.io/humble-bundle-game-assets ('Game Assets' zip)"
-[[sources]]
-url = "https://elvgames.com/checkout/"
-claim = "store runs Easy Digital Downloads with a discount-code field at checkout; login/register/my-account pages"

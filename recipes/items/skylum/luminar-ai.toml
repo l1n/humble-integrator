@@ -1,0 +1,39 @@
+schema = 1
+name = "Luminar AI"
+vendor = "skylum"
+kind = "app"
+machine_names = ["software_luminarai"]
+verified = false
+notes = """
+Photo Editing to the MAX with Luminar AI (Dec 2021) and Photo Editing Cyber
+Bundle with Luminar AI (Nov 2022). Installer from the Humble bundle page; on
+first run sign in to or register a Skylum account; then 'activate' and enter
+the Humble code. Native macOS and Windows. Linux: nothing installed.
+"""
+
+[install]
+source = "humble"
+serial = "account"
+
+[launch]
+find = "C:/Program Files*/Skylum/Luminar AI/*.exe"
+
+[steam]
+shortcut = true
+title = "Luminar AI"
+steamgriddb = "Luminar AI"
+
+[platforms.macos]
+runner = "native"
+file = "*Luminar*AI*.dmg"
+app_find = "/Applications/Luminar AI*.app"
+
+[platforms.linux]
+runner = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4411459090843-Luminar-AI-Installation-Instructions"
+claim = "download LuminarAI from the bundle page; sign in/register a Skylum account; trial mode; 'activate'; enter the code"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4412318025499-Photo-Editing-to-the-MAX-with-Luminar-AI-File-instructions"
+claim = "Luminar AI install path C:\\Program Files\\Skylum\\Luminar AI (SkyTextures, LutFiles folders)"

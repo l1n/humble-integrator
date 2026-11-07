@@ -6,3 +6,5 @@ notes = "Download (FLAC, then MP3) into the library folder; no Steam entry."
 
 [match]
 delivery = ["hb-audio"]
+# Older games bundles list soundtracks with no delivery icon at all.
+machine_names = ["_soundtrack$"]

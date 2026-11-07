@@ -1,0 +1,36 @@
+schema = 1
+name = "SpaceMonger 3"
+vendor = "stardock"
+kind = "app"
+machine_names = ["spacemonger"]
+verified = false
+notes = """
+Stardock Software Bundle (2018), Best of Stardock (2020), Organize Your PC
+(2020), Stardock Desktop Essentials (2023). Disk-space visualiser (treemap of
+files and folders), version 3.0. An ordinary windowed program, so it is the
+one Stardock tool worth a shortcut: under Wine it can scan the host
+filesystem through the Z: drive. Native alternatives exist (GrandPerspective /
+DaisyDisk on macOS, QDirStat / Filelight on Linux). Exe path is a glob, not
+confirmed; Wine behaviour untested.
+"""
+
+[install]
+source = "humble"
+file = "*SpaceMonger*.exe"
+serial = "per-product"
+notes = "Activate with key + email in the 'Enter Product Key' dialog after install (see vendors/stardock)."
+
+[launch]
+find = "C:/Program Files*/Stardock/SpaceMonger*/*.exe"
+
+[steam]
+shortcut = true
+title = "SpaceMonger"
+steamgriddb = "SpaceMonger"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360012368373-SpaceMonger-instructions"
+claim = "download and install from the bundle page; Enter the Product Key; key + email; Activate; five devices"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/18267421322139-Stardock-Desktop-Essentials-System-Requirements"
+claim = "SpaceMonger version 3.0, Windows 2000 to 10"

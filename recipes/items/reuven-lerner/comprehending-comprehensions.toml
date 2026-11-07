@@ -1,0 +1,11 @@
+schema = 1
+name = "Comprehending Comprehensions"
+vendor = "reuven-lerner"
+kind = "service"
+machine_names = ["comprehendingcomprehensions"]
+verified = false
+notes = "Learn Python Programming with PyCharm (Jul 2020). Form https://www.surveymonkey.com/r/hb-python-2020, then the e-mailed registration link."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360050059734-Humble-Software-Bundle-Learn-Python-Programming-with-PyCharm-Comprehending-comprehensions"
+claim = "hb-python-2020 SurveyMonkey form; REDEEM CODE; e-mail; Complete your registration"

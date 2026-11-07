@@ -1,0 +1,46 @@
+schema = 1
+name = "Film Riot / Triune Digital (VFX asset packs, LUTs)"
+kind = "route"
+notes = """
+Film Riot's store is Triune Digital (triunedigital.com, linked as 'Store'
+from filmriot.com). Humble's 'Professional Filmmaking Tools' bundle (Dec
+2019) had the EXTINCTION Sci-Fi Weapon FX Pack (4K ProRes 4444, split into
+five Humble items: impacts, electric FX, energy FX, bullet trails, muzzle
+flashes) and Cinematic LUTs V4. The census shows no delivery icon for these
+items (that bundle's page used Humble's older layout); being finished asset
+files with no licence to activate, they are most likely plain DRM-free
+downloads on the Humble download page (inference). If the download page
+shows a key instead, it would be a Triune Digital store code.
+
+Content only: footage and LUTs go into the library folder for use in the
+user's editor/compositor; no Steam entry. Not matched by publisher (only
+these items carry 'Film Riot/Triune Digital').
+"""
+
+[match]
+domains = ["triunedigital.com", "filmriot.com"]
+key_names = ['film ?riot', 'triune', 'extinction sci-?fi']
+
+[redeem]
+where = "the Humble download page (DRM-free files; inference)"
+account = false
+delivers = "ProRes 4444 VFX clips and LUT files"
+expires = "none known"
+steps = [
+  "Download each item's files from the Humble download page into the library folder.",
+  "If an item shows a key instead, redeem it as a discount/download code at https://www.triunedigital.com/ (account under /account) (inference).",
+]
+
+[install]
+source = "humble"
+serial = "none"
+
+[[sources]]
+url = "https://www.filmriot.com/"
+claim = "Film Riot's 'Store' link goes to triunedigital.com"
+[[sources]]
+url = "https://www.triunedigital.com/"
+claim = "Triune Digital sells Film Riot's Cinematic LUTs packs (now v7) and VFX asset packs (4K, ProRes, black background); customer accounts at /account"
+[[sources]]
+url = "https://www.humblebundle.com/software/professional-filmmaking-tools-software"
+claim = "EXTINCTION Sci-Fi Weapon FX Pack (4K, ProRes 4444, 100+ assets, 5 categories) and Cinematic LUTs V4 items, no delivery icon, publisher Film Riot/Triune Digital (census)"

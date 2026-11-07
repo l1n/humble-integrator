@@ -59,6 +59,28 @@ Wave 2 additions (engine-asset residue):
 NatureManufacture, Infinity PBR / Magic Pig Games and Meshingun have no
 redemption site of their own for Humble keys: their Unity items come here,
 their Unreal items go to vendors/fab.
+
+Wave 3:
+  * Older Unity bundles, routed by slug: Humble Unity Bundle 2019 (Asset Store
+    vouchers per item, plus Unity Learn Premium and a GameDevHQ course, both
+    with item recipes here), Unity Games & Game Dev Assets (2020: "Redeem on
+    Unity Asset Store and on Steam"), Unity Fantasy and Unity FPS Games & Game
+    Dev Assets (2021: "A single key will be provided to redeem all the Unity
+    assets in your bundle"; Fantasy's Zenva course has an item recipe that
+    sends it to vendors/zenva), Ultimate Fantasy Game Development (2020,
+    Infinity PBR). Their Steam games are hb-steam and stay on Steam.
+  * Infinity PBR by developer: the Ultimate Unity Fantasy RPG bundle (2022)
+    mixes its Unity packs with Jason Weimann's courses (game.courses), so it
+    gets no bundle rule.
+  * Top Notch Unity Assets (Chris West, 2026) and Ultimate Stylized Bundle
+    (SICS Games, 2026): texts say only "Redeem your keys"; both publishers
+    sell these packs on the Asset Store (SICS's Toon packs are in Unity's
+    own mega-bundles), so Asset Store vouchers by inference.
+  * Mixed Fab + Unity bundles now stay with vendors/fab (see the
+    redeem_text comment); new "(Unity)" item recipes: Supreme 1-3
+    (befour-*, gabriel-aguiar-*, entroverse-lab-*), Existence Studio's sea
+    creatures, six Leartes/StylArts items of the Ultimate Game Development
+    Bundle, and Hivemind's under items/hivemind/.
 """
 
 [match]
@@ -71,6 +93,11 @@ developers = [
   "Perfect Games", "StarryMoMo Studio", "Dunno", "Mena", "Reinforce Games",
   "gamevanilla", "Dustyroom", "FImpossible Creations", "M STUDIO HUB",
   "polyperfect", "SoftLeitner", "Cainos", "Kyeoms", "Layer Lab", "Ash Dev",
+  # Infinity PBR (Magic Pig Games): Unity-only Humble items in bundles that also hold
+  # someone else's keys (Ultimate Unity Fantasy RPG: Jason Weimann's courses), so no
+  # bundle rule there. Its one Unreal bundle (Unreal Nature & Fantasy Assets) is claimed
+  # by vendors/fab's bundle rules, which outrank this developer rule.
+  "Infinity PBR",
 ]
 bundle_slugs = [
   "^asset-store-mega",          # "Asset Store Mega Bundle" series
@@ -79,21 +106,33 @@ bundle_slugs = [
   "^holiday-encore-unity-",     # Holiday Encore: Unity Art / Unity Tools (one voucher per bundle)
   "^extreme-environment-and-monster-unity-bundle",   # text: "Please read here" (inference)
   "game-dev-?s-guide-to-fantasy-character-assets",   # Infinity PBR, Unity-only (inference)
+  # Wave 3: older (2019-2021) Unity bundles and Unity-only publisher bundles.
+  "^unity-20\\d\\d-bundle",                             # Humble Unity Bundle 2019: "instructions linked on the download page"
+  "^unity-games-and-game-dev-assets",                   # 2020: "Redeem on Unity Asset Store and on Steam" (games are hb-steam)
+  "^unity-fantasy-games-dev-assets",                    # 2021: "can be redeemed on the Unity website" + Steam games (hb-steam)
+  "^unity-fps-games-and-game-dev-assets",               # 2021: same wording
+  "^ultimate-fantasy-game-development(?:-software)?$",  # 2020, Infinity PBR: "5 Star Rating on Unity ... Redeem your keys"
+  "^top-notch-unity-assets",                            # 2026, Chris West's Unity tools; text names no store (inference)
+  "^ultimate-stylized-bundle-sics-games",               # 2026, SICS Games' Unity "Toon" packs; text names no store (inference)
 ]
 # "... redeemable on the Unity website", "Redeemable on Unity Asset Store website",
-# "Keys are redeemed through Unity Store website". The lookahead skips bundles
-# that also contain a Steam game, so the game is not pulled onto this route.
+# "Keys are redeemed through Unity Store website". The lookaheads skip bundles
+# that also contain a Steam game, so the game is not pulled onto this route, and
+# bundles whose text also names Fab: those mix Fab codes with Unity vouchers
+# ("Keys are redeemed through Fab and Unity Store website", "Keys are redeemable
+# through Unity and FAB website") and go to vendors/fab as a whole, with item
+# recipes here for their "(Unity)" / "(Unity Engine)" editions.
 redeem_text = [
-  '(?s)^(?!.*\bon Steam\b).*\bredeem\w*(?:\s|&nbsp;|\u00a0)+(?:on|via|through|at|from)(?:\s|&nbsp;|\u00a0)+(?:the(?:\s|&nbsp;|\u00a0)+)?Unity\b',
+  '(?s)^(?!.*\bon Steam\b)(?!.*\bFab\b).*\bredeem\w*(?:\s|&nbsp;|\u00a0)+(?:on|via|through|at|from)(?:\s|&nbsp;|\u00a0)+(?:the(?:\s|&nbsp;|\u00a0)+)?Unity\b',
   # Not in Cosmos (Leartes) bundles: Big Bang says "provides Unity Asset Store keys directly with
   # your purchase" but every item is a Cosmos code (vendors/leartes-cosmos); the extra Unity keys
   # resolve here at key level (key_names / domains).
-  '(?s)^(?!.*\bon Steam\b)(?!.*\bCosmos\b).*\bUnity Asset Store (?:vouchers?|keys?|codes?)\b',
+  '(?s)^(?!.*\bon Steam\b)(?!.*\bCosmos\b)(?!.*\bFab\b).*\bUnity Asset Store (?:vouchers?|keys?|codes?)\b',
   # "A single key will be provided to redeem all of your content from Unity." (not in course bundles)
-  '(?s)^(?!.*\bon Steam\b)(?!.*\bcourses?\b).*\bredeem\w*[^.]{0,60}\bfrom(?:\s|&nbsp;| )+(?:the(?:\s|&nbsp;| )+)?Unity\b',
+  '(?s)^(?!.*\bon Steam\b)(?!.*\bcourses?\b)(?!.*\bFab\b).*\bredeem\w*[^.]{0,60}\bfrom(?:\s|&nbsp;| )+(?:the(?:\s|&nbsp;| )+)?Unity\b',
 ]
 domains = ["assetstore.unity.com", "id.unity.com"]
-key_names = ['unity asset store', '\(\s*unity\s*\)', 'unity voucher']
+key_names = ['unity asset store', '\(\s*unity(?: engine)?\s*\)', 'unity voucher']
 
 [redeem]
 where = "https://id.unity.com/en/redeem_products/new"
@@ -167,3 +206,15 @@ claim = "Game Dev's Guide to Fantasy Creatures/Character Assets (July 2023): 'a 
 [[sources]]
 url = "https://www.humblebundle.com/software/holiday-encore-unity-art-software"
 claim = "census redeem_text (Holiday Encore Unity Art / Unity Tools): 'A single key will be provided to redeem all of your content from Unity.'"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360035352994-Humble-Unity-Bundle-2019-Unity-Learn-Premium-Instructions"
+claim = "Humble Unity Bundle 2019: Unity Learn Premium redeems at id.unity.com/en/redeem_products/new (same page as Asset Store vouchers)"
+[[sources]]
+url = "https://www.humblebundle.com/software/unity-fps-games-and-game-dev-assets-software"
+claim = "census (2021): 'All of the assets in this bundle can be redeemed on the Unity website. Tannenberg and Verdun are also available on Steam'; 'A single key will be provided to redeem all the Unity assets in your bundle'"
+[[sources]]
+url = "https://www.gamingonlinux.com/2020/09/the-humble-unity-games-and-game-dev-assets-bundle-is-live"
+claim = "Humble Unity Games and Game Dev Assets bundle (Sep 2020): games on Steam, assets on the Unity Asset Store"
+[[sources]]
+url = "https://assetstore.unity.com/packages/tools/modeling/chris-west-bundle-191754"
+claim = "Chris West sells his tools (MegaFiers etc.) on the Unity Asset Store"

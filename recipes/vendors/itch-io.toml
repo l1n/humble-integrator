@@ -2,12 +2,29 @@ schema = 1
 name = "itch.io"
 kind = "route"
 notes = """
-Redemption route for Humble bundles whose keys are itch.io links. Humble has
-run such bundles (it keeps two "Itch.io Redemption Instructions" articles,
-2024 and 2025), but none is in the census yet, so this route is matched by
-redemption text and extracted-key instructions only. Sellers who merely also
-sell on itch.io (GameDev Market sellers, ElvGames) say a Humble purchase does
-not unlock their itch.io pages; their bundles go to their own routes.
+Redemption route for Humble bundles whose keys are itch.io links. Humble
+keeps two "Itch.io Redemption Instructions" articles (2021 and 2025). Census
+bundles redeemed here are ElvGames' (pixel-art tilesets, monsters,
+characters, VFX/UI, music and SFX); "ElvGames's website" in Humble's text
+means its itch.io store, to which every item of these bundles links:
+- Complete 2D Game Assets Bundle (Apr-May 2025), 90 keys: Humble says
+  "Content is redeemed through ElvGames's website", and that website is its
+  itch.io store: every item links to elv-games.itch.io, GameFromScratch's
+  launch post says "The assets are all redeemed on the Itch.io store", and
+  ElvGames points Humble buyers to a single 'Game Assets' download page on
+  elvgames.itch.io (packs can also be claimed one by one, to get updates).
+- Ultimate Top Down Adventure Assets Bundle (Oct 2025; ElvGames and
+  Pegonthetrack packs), 80 keys: "All keys can be redeemed on the ElvGames
+  website"; all 80 items link to elvgames.itch.io (inference from that and
+  the two bundles around it).
+- Ultimate Farming RPG Assets Bundle (May 2026; ElvGames and Pegonthetrack
+  packs): "All keys can be redeemed on the ElvGames Itch.io website", and
+  "A single key will be provided to redeem content in your bundle"; keys
+  expire: "Please redeem before May 28th, 2027".
+So vendors/elvgames no longer claims anything; these bundles are matched
+here by redemption text and slug. Sellers who merely also sell on itch.io
+(GameDev Market sellers, the GAB creators) say a Humble purchase does not
+unlock their itch.io pages; their bundles go to their own routes.
 
 What a key is: a link on the Humble download page ("the green link") that
 opens an itch.io redemption page; logged in, it claims the bundle (or the
@@ -26,13 +43,19 @@ are not in the public reference, so treat that part as inference.
 [match]
 domains = ["itch.io"]
 key_names = ['\bitch\.io\b']
-redeem_text = ['redeem\w*[^.]{0,60}\bitch\.io\b']
+redeem_text = ['redeem\w*[^.]{0,60}\bitch\.io\b']   # also "All keys can be redeemed on the ElvGames Itch.io website"
+bundle_slugs = [
+  '^complete-?2d-?game-?assets-?bundle',     # ElvGames 2025: URL slug and machine name complete2dgameassetsbundle_softwarebundle
+  '^ultimate-?top-?down-?adventure-?assets-?bundle',  # ElvGames Oct 2025: URL slug and machine name ultimatetopdownadventureassetsbundle_softwarebundle
+  '^ultimate-?farming-?rpg-?assets-?bundle', # ElvGames 2026: URL slug and machine name ultimatefarmingrpgassetsbundle_softwarebundle
+]
 
 [redeem]
 where = "https://itch.io/my-collections"
 account = true
 delivers = "the bundle's projects in the itch.io library, with all their current and future uploads"
-expires = "per bundle (none seen yet); itch.io's docs give download keys no expiry of their own"
+expires = "per bundle: Ultimate Farming RPG Assets (ElvGames) 'Please redeem before May 28th, 2027'; Complete 2D Game Assets states none; itch.io's docs give download keys no expiry of their own"
+expiry_text = "(?i)redeem before ([A-Z][a-z]+ \\d{1,2}(?:st|nd|rd|th)?,? \\d{4})"
 steps = [
   "Create or log in to an itch.io account.",
   "On the Humble download page click the (green) redeem link; it opens an itch.io redemption page. Claim the bundle/key to the account.",
@@ -78,3 +101,21 @@ claim = "api.itch.io with Bearer API keys; /profile/owned-keys lists owned keys 
 [[sources]]
 url = "https://itch.io/post/7743606"
 claim = "a seller: Humble Bundle doesn't grant access to the packs on their itch.io page"
+[[sources]]
+url = "https://www.humblebundle.com/software/ultimate-farming-rpg-assets-bundle-software"
+claim = "'All keys can be redeemed on the ElvGames Itch.io website'; 'A single key will be provided to redeem content in your bundle'; 'Please redeem before May 28th, 2027' (census, May 2026)"
+[[sources]]
+url = "https://www.humblebundle.com/software/complete-2d-game-assets-bundle-software"
+claim = "'Content is redeemed through ElvGames's website'; all 90 items link to elv-games.itch.io project pages (Wayback, May 2025)"
+[[sources]]
+url = "https://gamefromscratch.com/complete-2d-game-assets-humble-bundle/"
+claim = "Complete 2D Game Assets Humble Bundle (30 Apr 2025): 'The assets are all redeemed on the Itch.io store'"
+[[sources]]
+url = "https://elvgames.itch.io/mega-bundle/devlog/934999/humble-bundle-promotion"
+claim = "ElvGames to Humble buyers: everything downloadable from elvgames.itch.io/humble-bundle-game-assets ('Game Assets' zip), or claim packs one by one for future updates"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/36347720060571-Itch-io-Redemption-Instructions"
+claim = "article created 25 Apr 2025, days before the ElvGames Complete 2D bundle launched"
+[[sources]]
+url = "https://www.humblebundle.com/software/ultimate-top-down-adventure-assets-bundle-software"
+claim = "'All keys can be redeemed on the ElvGames website'; 80 hb-key items, all linking to elvgames.itch.io (Wayback, Oct 2025)"

@@ -1,0 +1,26 @@
+schema = 1
+name = "Logo Design Studio Pro"
+vendor = "summitsoft"
+kind = "app"
+machine_names = ["logodesignstudiopro"]
+verified = false
+notes = "Learn Instruments and Design (Nov 2019, tier 1). Template-based vector logo designer. Windows app; under Wine untested. Exe path is a glob, not confirmed."
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/Summitsoft/Logo Design Studio*/*.exe"
+
+[steam]
+shortcut = true
+title = "Logo Design Studio Pro"
+steamgriddb = "Logo Design Studio Pro"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/learn-instruments-and-design-software"
+claim = "Logo Design Studio Pro: hb-key, Windows, tier 1 (census)"
+[[sources]]
+url = "https://www.summitsoft.com/content/1317-installation-process"
+claim = "licence key entered on the installer's registration form"

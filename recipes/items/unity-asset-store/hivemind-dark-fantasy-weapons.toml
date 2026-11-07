@@ -2,10 +2,13 @@ schema = 1
 name = "Dark Fantasy Weapons (Unity Asset Store Key)"
 vendor = "unity-asset-store"
 kind = "content"
-machine_names = ["darkfantasyweaponsunityassetstorekey"]
+machine_names = [
+  "darkfantasyweaponsunityassetstorekey",
+  "darkfantasyweaponsunity",
+]
 publisher = "Hivemind"
 verified = false
-notes = "Unity Asset Store voucher (item text: \"*Unity asset store key is provided!\") inside the Battle-Hardened Game Asset Bundle by Hivemind, whose other keys are Fab codes: redeem this one on Unity, not on Fab. The Unreal/Fab edition of the same pack, where the bundle has one, is a separate Humble item on the Fab route. Also in The Builder's Vault by Hivemind - Unity Edition (builders-vault-hivemind-unity-edition-software), a Unity-only bundle: same voucher route."
+notes = "Unity Asset Store voucher (item text: \"*Unity asset store key is provided!\") inside the Battle-Hardened Game Asset Bundle by Hivemind, whose other keys are Fab codes: redeem this one on Unity, not on Fab. The Unreal/Fab edition of the same pack, where the bundle has one, is a separate Humble item on the Fab route. Also in The Builder's Vault by Hivemind - Unity Edition (builders-vault-hivemind-unity-edition-software), a Unity-only bundle: same voucher route. Also (machine name darkfantasyweaponsunity) in the Unreal Engine & Unity Mega Bundle (June 2024, vendors/hivemind: \"Keys for this bundle are redeemed on either the Epic Games Store or Unity Asset Store, dependent on title\"), as its '(Unity)' item."
 
 [install]
 source = "vendor"
@@ -26,3 +29,7 @@ claim = "item names end in '(Unity Asset Store Key)' or '(FAB Professional Licen
 [[sources]]
 url = "https://www.humblebundle.com/software/battle-hardened-game-asset-bundle-hivemind-software"
 claim = "item description begins: *Unity asset store key is provided!"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/unreal-engine-and-unity-mega-bundle-software"
+claim = "'Keys for this bundle are redeemed on either the Epic Games Store or Unity Asset Store, dependent on title'; this item is the '(Unity)' edition"

@@ -1,0 +1,23 @@
+schema = 1
+name = "IconPackager"
+vendor = "stardock"
+kind = "app"
+machine_names = ["iconpackager"]
+verified = false
+skip = true
+skip_reason = "Windows-shell customiser: inside a Wine prefix there is no Windows shell to change and it cannot touch the macOS/Linux desktop. Keep the key unrevealed for a real Windows PC."
+notes = "Stardock Software Bundle (2018), Best of Stardock (2020), Organize Your PC (2020), Stardock Desktop Essentials (2023). Replaces the Windows system icons with icon packages. Installer from the Humble download page; key + email in the 'Enter Product Key' dialog (see vendors/stardock)."
+
+[install]
+source = "humble"
+serial = "per-product"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360012371793-Iconpackager-instructions"
+claim = "Enter Product Key pop-up after install; key + email; five devices"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/18267421322139-Stardock-Desktop-Essentials-System-Requirements"
+claim = "Desktop Essentials 2023 contents and Windows requirements (IconPackager 10.03, CursorFX4, SpaceMonger 3.0, Start11, Fences 4, Multiplicity KM)"

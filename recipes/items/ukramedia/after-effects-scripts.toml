@@ -1,0 +1,32 @@
+schema = 1
+name = "Ukramedia smartREKT, smartL3RD and Controlit (After Effects scripts/templates)"
+vendor = "ukramedia"
+kind = "content"
+machine_names = ["smartrekt", "smartl3rd", "controlit"]
+verified = false
+notes = """
+Professional Filmmaking Tools (Dec 2019). smartREKT: responsive rectangle
+tool script for After Effects; smartL3RD: keyframe-less modular lower-third
+template built with smartREKT (30 presets); Controlit: one-click script that
+turns layer properties into expression controls. All need the user's own
+Adobe After Effects (macOS/Windows). Redemption is undocumented (see
+vendors/ukramedia). Grouped because they install the same way: unzip into
+After Effects' Scripts/ScriptUI Panels. Controlit has since been replaced
+by Ukramedia's 'Smart Controls'.
+"""
+
+[install]
+source = "vendor"
+url = "https://ukramedia.com/my-account/downloads/"
+file = "*.zip"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/professional-filmmaking-tools-software"
+claim = "descriptions of smartREKT, smartL3RD and Controlit; hb-key, Windows and Mac (census)"
+[[sources]]
+url = "https://ukramedia.com/product/smartrekt/"
+claim = "ZIP download, unzip into After Effects Scripts/ScriptUI Panels; free upgrades via My Account > Downloads"

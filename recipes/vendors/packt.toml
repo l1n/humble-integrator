@@ -36,6 +36,13 @@ that a Humble voucher grants that owned/downloadable status rather than
 streaming-only library access. Check the library entry after redeeming
 (unverified).
 
+Wave 3 added two bundles whose text names neither Packt nor its site ("The
+Ultimate AI & Machine Learning Bundle", Jul 2026: "Redeem your keys. Please
+read here."; "Humble Video Learning Bundle: The Ultimate GenAI & LLM Developer
+Bundle", May 2026), matched by slug because every course item has publisher
+Packt/PACKT (inference: Humble's Packt article is the 'read here' target), and
+the "Vibe Coding Bundle by Packt" (Dec 2025) via a 'bundle by Packt' text rule.
+
 Bundle-level rules claim every item in a matched bundle. That includes
 Humble's "10% off your first month of Humble Choice" coupon in the ACI
 bundles, unless a Humble Choice recipe that sorts earlier claims it by
@@ -53,6 +60,10 @@ bundle_slugs = [
   # machine names are Packt courses elsewhere (wave-2 learning-apps report).
   "^game-dev-toolbox-master-unity-unreal-engine-blender",
   "^game-development-mega-bundle",
+  # Packt course bundles (publisher "Packt"/"PACKT") whose text never names Packt
+  # or its site (wave-3 learning-apps): "Please read here." / "Redeem your keys."
+  "^ultimate-ai-machine-learning-bundle-software",
+  "^ultimate-genai-llm-developer-bundle-software",
 ]
 # Every text pattern refuses ebook bundles (leading guard): a Packt *book*
 # bundle that also mentions a Packt voucher must stay on the generic download
@@ -67,6 +78,8 @@ redeem_text = [
   '^(?!.*\b(?:book bundle|bundle of (?:e-?)?books|(?:e-?)?books (?:from|by) packt))(?!.*\bredeem\w*\s+(?:on|through|via|at)\s+(?:the\s+)?(?!packt)[\w.-]+(?:\s+academy)?\s+website).*\bcourses?\s+(?:from|by)\s+(?:the\s+(?:pros|experts)\s+at\s+)?packt\b',
   # "from the pros at Packt with our latest Humble Video Learning Bundle"
   'video learning bundle[^.]{0,150}\bpackt\b|\bpackt\b[^.]{0,150}video learning bundle',
+  # "the Vibe Coding Bundle by Packt", "our latest Software Bundle by Packt"
+  '^(?!.*\b(?:book bundle|bundle of (?:e-?)?books|(?:e-?)?books (?:from|by) packt)).*\bbundle by packt\b',
 ]
 
 [redeem]

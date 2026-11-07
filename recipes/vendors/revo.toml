@@ -1,0 +1,43 @@
+schema = 1
+name = "VS Revo Group (Revo Uninstaller Pro)"
+kind = "route"
+notes = """
+Humble Software Bundle: PC Essentials (Feb 2020): Revo Uninstaller Pro,
+a one-year professional licence key (Humble). Activation: download Revo
+Uninstaller Pro (link on the Humble download page), click 'Register' (top
+right, or in the menu), enter a user name and the key, 'Activate Online'.
+
+A Windows uninstaller with registry/leftover scanning: pointless inside a
+Wine prefix (Wine has its own uninstaller) and the 2020 licence has
+expired, so the item is skip = true. No Steam entry.
+"""
+
+[match]
+developers = ["VS Revo Group", "Revo Uninstaller"]
+domains = ["revouninstaller.com"]
+key_names = ['revo uninstaller']
+
+[redeem]
+where = "Revo Uninstaller Pro: 'Register' > user name + product key > 'Activate Online'"
+account = false
+delivers = "a 1-year Revo Uninstaller Pro licence"
+expires = "1 year from activation (Humble); bundle ended in Feb 2020"
+steps = [
+  "Download Revo Uninstaller Pro from the link on the Humble download page and install it on Windows.",
+  "Click 'Register' at the top right (or Menu > Registration).",
+  "Enter a user name and the product key, click 'Activate Online'.",
+  "Support: https://www.revouninstaller.com/support/",
+]
+
+[install]
+source = "vendor"
+serial = "per-product"
+
+[platforms.macos]
+runner = "none"
+[platforms.linux]
+runner = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360042239454-Humble-Software-Bundle-PC-Essentials-Revo-Uninstaller-instructions"
+claim = "download Revo Uninstaller Pro from the bundle page; Register (top right or Menu); user name + product key; Activate Online; 1-year professional licence"

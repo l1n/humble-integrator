@@ -1,0 +1,144 @@
+schema = 1
+name = "SmiteWorks (Fantasy Grounds VTT)"
+kind = "route"
+notes = """
+SmiteWorks makes Fantasy Grounds, a desktop virtual tabletop. Its current
+version, Fantasy Grounds VTT (called Fantasy Grounds Unity, FGU, until
+2025), has native builds for Windows, macOS and Linux. Licensed rulesets,
+adventures and map packs are bought for the user's Fantasy Grounds account
+(the forum login) and downloaded into the app's data folder by its own
+updater.
+
+Census: "Pathfinder's Finest: 2e Fantasy Grounds Experience" (May-June
+2024): 28 hb-key items by "SmiteWorks USA LLC", one key per item. They are
+a Fantasy Grounds Unity Standard licence, an FGU Ultimate 3-month trial, and
+26 Pathfinder 2E products: Core Rules ruleset, Bestiary 1 and 2, Lost Omens
+guides, adventures, Flip-Mats and Map Packs. "This bundle is redeemable on
+the Fantasy Gr[t]ounds website", linked to fantasygrounds.com. The keys are
+Fantasy Grounds store keys, not Steam keys. The page's 'steam' account link
+is Humble's usual requirement for free claims.
+
+Since 8 November 2025 Fantasy Grounds VTT is free: no licence is needed to
+host or join games. The licence key and the trial from this bundle no longer
+do anything, and only the content keys matter. The free app is also a Steam
+app (1196310, native on all three systems). It logs in to the same Fantasy
+Grounds account and downloads that account's purchases, so the Humble
+content shows up there with no Steam shortcut needed.
+
+Matched by this bundle's redemption text (Humble's own typo included) and
+URL slug, by the SmiteWorks developer name (no DRM-free SmiteWorks bundle
+in the census), and keys by fantasygrounds.com or FG product names. Item
+recipes: smiteworks/fantasy-grounds-vtt (the app; licence + trial) and
+smiteworks/pathfinder-2e-content (the 26 products). A Steam-key Fantasy
+Grounds bundle (e.g. the 2021 'Fantasy Grounds: Ultimate GM Kit for
+Pathfinder', not in the census) goes to the Steam route first.
+"""
+
+[match]
+developers = ["SmiteWorks USA LLC", "SmiteWorks USA, LLC", "SmiteWorks", "Smiteworks USA LLC"]
+domains = ["fantasygrounds.com"]
+key_names = ['fantasy ?grounds', 'smiteworks']
+# "This bundle is redeemable on the Fantasy Grtounds website here."
+redeem_text = ['redeem\w*[^.]{0,60}\bfantasy\s+gr\w{0,2}ounds\b']
+# URL slug, and the order machine name an account reports (pathfindersfinest2efantasygroundsexperience_softwarebundle)
+bundle_slugs = ['^pathfinders-?finest-?2e-?fantasy-?grounds']
+
+[redeem]
+where = "https://www.fantasygrounds.com/store/activateKey.php"
+account = true
+delivers = "each key adds its product to the Fantasy Grounds account; the app's updater then downloads it"
+expires = "not stated on the bundle page; Humble's terms (Dec 2024) expire unrevealed keys 3 years after purchase. Key.is_expired from Humble is authoritative."
+steps = [
+  "Create a Fantasy Grounds account at https://www.fantasygrounds.com (Register New User Account). This is the forum login, and its username is case-sensitive.",
+  "Log in and open Store > Activate a Product Key (https://www.fantasygrounds.com/store/activateKey.php). Enter each revealed Humble key, one product per key.",
+  "Purchases are listed under Store > Order History (https://www.fantasygrounds.com/store/myorders.php) and in My Library. My Library also has a browser Online Reader (beta).",
+  "Install Fantasy Grounds VTT (free; see smiteworks/fantasy-grounds-vtt), log in with the same account, and click Update. The updater downloads every product on the account.",
+  "Optional: to get PDF access to eligible Paizo products, link a paizo.com account at https://www.fantasygrounds.com/store/syncPaizoAccount.php and click 'Send Purchase Info to paizo.com'. The FG wiki says this covers items added via Humble Bundle.",
+  "Support: https://fantasygroundsunity.atlassian.net/servicedesk/customer/portals",
+]
+
+[install]
+source = "steam"
+steam_app_id = 1196310
+serial = "account"
+url = "https://fantasygroundsunity.atlassian.net/wiki/spaces/FGCP/pages/996639303"   # install guide with the per-OS web installers
+notes = """
+The app installs from Steam (free app 1196310) or from SmiteWorks' web
+installers: FGUWebInstall.exe (Windows), FGUWebInstall.pkg (macOS),
+FGUWebInstall.bin (Linux, a terminal self-extractor that asks to accept the
+EULA). Both versions run the same FGUpdaterEngine on first start. It asks
+for a data folder, then the Fantasy Grounds username and password, then
+Update downloads the program and every purchased product. Nothing to type
+per product; content is never installed by hand.
+"""
+
+[download]
+scriptable = false
+how = "content downloads through the app's own updater after login (and Steam for the app itself); there is no separate file per product"
+
+[library]
+files = "none: modules go into the Fantasy Grounds data folder chosen at first start. Paizo PDFs, if claimed through the Paizo sync, are downloaded from paizo.com by hand."
+
+[platforms.macos]
+runner = "native"
+notes = """
+Native app (Metal; macOS 10.14+). Standalone install path:
+/Applications/SmiteWorks/Fantasy Grounds/FantasyGrounds.app, updater
+FantasyGroundsUpdater.app beside it. If the app or updater quits right after
+an update, SmiteWorks' fix is chmod -R +x on that .app.
+"""
+
+[platforms.linux]
+runner = "native"
+notes = """
+Native x86_64 build (OpenGL 3.2+ or Vulkan). Only stock Ubuntu Desktop is
+officially supported; other distros 'may' work. Standalone install goes to
+~/.smiteworks/fantasygrounds/ (FantasyGrounds.x86_64, FantasyGroundsUpdater).
+Missing MS core fonts: install ttf-mscorefonts-installer (or the distro's
+equivalent) and run fc-cache. Crashes at start under Wayland: launch with
+GDK_BACKEND=x11 (a Steam launch option `GDK_BACKEND=x11 %command%` should do
+the same; untested).
+"""
+
+[[sources]]
+url = "https://www.humblebundle.com/software/pathfinders-finest-2e-fantasy-grounds-experience-software"
+claim = "archived capture 2024-05-27 (web.archive.org/web/20240527202810/...): 'This bundle is redeemable on the Fantasy Grtounds website here' linking https://www.fantasygrounds.com/home.php; 28 hb-key items for Windows/Mac/Linux, developer SmiteWorks USA LLC (developer-url www.fantasygrounds.com); 'a key for the standard edition of Fantasy Grounds Unity ... plus a 3-month trial for its feature-packed Ultimate version'"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/25829191216283-Pathfinder-s-Finest-2e-Fantasy-Grounds-Experience-System-Requirements"
+claim = "Humble article (2024-05-27): FGU system requirements for Windows, macOS 10.14+ (Metal), Ubuntu 18.04+; only stock Ubuntu Desktop officially supported"
+[[sources]]
+url = "https://www.fantasygrounds.com/store/activateKey.php"
+claim = "page 'Fantasy Grounds - Activate a key', menu Store > Activate a Product Key, needs login (archived 2026-07-10: web.archive.org/web/20260710004547/...)"
+[[sources]]
+url = "https://fantasygroundsunity.atlassian.net/wiki/spaces/FGCP/pages/996638950/License+Keys+F.A.Q"
+claim = "FG wiki (2025-11-25): Fantasy Grounds VTT is now completely free, no licence or subscription needed to host or join; purchases are tied to the FG account; Standard/Core licences discontinued Feb 2025; Order History at /store/myorders.php"
+[[sources]]
+url = "https://www.fantasygrounds.com/forums/showthread.php?86121-Fantasy-Grounds-Licenses-are-Now-FREE!-Plus-Online-Digital-Reader-launched-in-Beta"
+claim = "SmiteWorks press release (Nov 8, 2025, as reported by gamingonlinux.com and wargamer.com): licences free, Online Reader beta in My Library; paid content still paid"
+[[sources]]
+url = "https://store.steampowered.com/app/1196310/"
+claim = "Steam appdetails (checked 2026-11-07): 'Fantasy Grounds VTT', is_free true, Windows/Mac/Linux"
+[[sources]]
+url = "https://fantasygroundsunity.atlassian.net/wiki/spaces/FGCP/pages/996639303"
+claim = "FG wiki 'Installing Fantasy Grounds VTT' (2026-07-08): FGUWebInstall.exe; FGUpdaterEngine asks for data dir, case-sensitive FG username/password, then Update installs the program and purchased products"
+[[sources]]
+url = "https://fantasygroundsunity.atlassian.net/wiki/spaces/FGCP/pages/996639724"
+claim = "FG wiki 'Installing on Mac OSX': FGUWebInstall.pkg, default /Applications/SmiteWorks/Fantasy Grounds/, FantasyGroundsUpdater.app"
+[[sources]]
+url = "https://fantasygroundsunity.atlassian.net/wiki/spaces/FGCP/pages/996639624"
+claim = "FG wiki 'Installing on Linux': FGUWebInstall.bin (chmod +x, run, accept EULA), ~/.smiteworks/fantasygrounds/FantasyGrounds.x86_64 and FantasyGroundsUpdater; ttf-mscorefonts-installer + fc-cache"
+[[sources]]
+url = "https://fantasygroundsunity.atlassian.net/wiki/spaces/FGCP/pages/996639529"
+claim = "FG wiki 'Installing on Linux (on Steam)': install Fantasy Grounds VTT from Steam with Play; old licence keys on Steam may be disregarded as keys are no longer required; same updater login"
+[[sources]]
+url = "https://fantasygroundsunity.atlassian.net/wiki/spaces/FGCP/pages/1997012993"
+claim = "FG wiki: Wayland crash fix GDK_BACKEND=x11"
+[[sources]]
+url = "https://fantasygroundsunity.atlassian.net/wiki/spaces/FGCP/pages/2108456961"
+claim = "FG wiki: macOS app/updater quits after update; chmod -R +x on FantasyGrounds.app / FantasyGroundsUpdater.app"
+[[sources]]
+url = "https://fantasygroundsunity.atlassian.net/wiki/spaces/FGCP/pages/996639425"
+claim = "FG wiki 'Linking with External Services': Paizo sync at /store/syncPaizoAccount.php; 'items added via Humble Bundle' can be sent to Paizo for PDF access to eligible products; Steam sync at /store/syncSteamAccount.php"
+[[sources]]
+url = "https://www.gamingonlinux.com/2025/11/fantasy-grounds-virtual-tabletop-vtt-is-now-free-to-play/"
+claim = "Fantasy Grounds VTT became free to play in November 2025 (Linux-focused report)"

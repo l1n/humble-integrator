@@ -1,0 +1,42 @@
+schema = 1
+name = "Shapelab 3D asset packs"
+vendor = "shapelab"
+kind = "content"
+machine_names = [
+  "triceratopsandt-rexduo_high-polyrealisticdinosaur3dassetpack",   # Creator's Kit 2024
+  "legendarygreekhero_perseus3dassetcollection",                     # Creator's Kit 2024
+  "ultimatedragon3dsculptingworkflow_acompleteguide",                # both bundles (tutorial + 4 model stages)
+  "farmanimalsbasemeshcollection",                                   # Mega Bundle 2025
+  "wildmammalsbasemeshcollection",
+  "spikedarsenal_3dassetcollection",
+  "wingsofdetail_feathersculptingcollection",
+  "crownofbeasts_hornassetcollection",
+  "legendsawakenbasilisk_chimera_unicornassetcollection",
+]
+verified = false
+notes = """
+Shapelab's own 3D packs: base meshes and props as FBX plus SL3D (Shapelab
+project) files with PBR textures, "for personal use only"; the dragon pack
+pairs four model stages with Shapelab's dragon sculpting video series.
+Redeemed like the licence on Shapelab's site (inference: Humble's articles
+describe only "Shapelab titles" generally); files then download from the
+Shapelab account into the library folder.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+notes = "No installer: load the SL3D files in Shapelab or the FBX files in any 3D app."
+
+[library]
+files = "per pack: FBX models, textures, SL3D project files"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/shapelab-creators-kit-software"
+claim = "item text: 'File formats included in the pack: FBX and SL3D (Shapelab project file)'; 'For personal use only'"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/42239690466715-Ultimate-3D-VR-Sculpting-Character-Game-Asset-Creation-Mega-Bundle-Redemption-Instructions"
+claim = "Shapelab titles: discount code at Shapelab checkout, then download in the Shapelab account"

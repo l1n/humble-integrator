@@ -1,0 +1,42 @@
+schema = 1
+name = "DoubleJump Academy (Houdini for games courses)"
+kind = "route"
+service = true
+notes = """
+DoubleJump Academy (doublejumpacademy.teachable.com) Houdini courses in "The
+Ultimate 3D Creator's Bundle: 3D Assets, HDRIs, and Training" (Jul 2024): one
+course key per tier (Houdini for Games in Unreal Engine Week 1; Weeks 1-2 +
+Film FX Weeks 1-2; Weeks 1-2 + Unreal Engine Complete Automotive...). Each key
+is a Teachable coupon applied on the tier's $0 checkout page. Humble gave a
+redemption deadline of 12 July 2025, so unredeemed keys have expired.
+
+The bundle's other vendors (ActionVFX, MattePaint) are not handled here.
+"""
+
+[match]
+developers = ["DoubleJump Academy"]
+domains = ["doublejumpacademy.teachable.com", "doublejumpacademy.com"]
+key_names = ["doublejump"]
+
+[redeem]
+where = "https://doublejumpacademy.teachable.com/p/dja-hb-redeem (tier 1), /p/dja-hb-redeem2 (tier 2), /p/dja-hb-redeem3 (tier 3)"
+account = true
+delivers = "enrolment in the tier's Houdini course(s) on DoubleJump Academy (Teachable)"
+expires = "2025-07-12"
+steps = [
+  "Reveal and copy the key on the Humble download page.",
+  "Open the redeem page for the tier bought: https://doublejumpacademy.teachable.com/p/dja-hb-redeem, .../dja-hb-redeem2 or .../dja-hb-redeem3.",
+  "On the checkout page click 'add coupon code', paste the key, Apply, check the price is discounted to $0 and complete enrolment (Teachable account).",
+]
+
+[download]
+scriptable = false
+how = "courses stream on the Teachable school; project files are lecture attachments where offered"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/27352814688539-The-Ultimate-3D-Creator-s-Bundle-3D-Assets-HDRIs-and-Training-Terms-and-Redemption-Instructions"
+claim = "DoubleJump Academy expires July 12, 2025; tier pages dja-hb-redeem/2/3 on doublejumpacademy.teachable.com; add coupon code, paste key, apply"

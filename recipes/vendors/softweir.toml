@@ -1,0 +1,46 @@
+schema = 1
+name = "SoftWeir (001 Game Creator, game-design worksheets and e-learning)"
+kind = "route"
+notes = """
+SoftWeir makes 001 Game Creator, a no-code game engine sold on Steam
+(Windows), with its kits/resource packs as Steam DLC. Humble bundles: "Game
+Creator" (2020), "Game Dev STEM" (Oct 2020), "Royalty-Free 001 Game Creator
+STEM Bundle" (Jun 2024), "Game Creator Mega Bundle" (2024). The engine and
+kits are Steam keys and always go to generic/steam-key.
+
+The STEM bundles add SoftWeir's game-design worksheets (character, story,
+weapon, UI, world, map, script, item, project-management, documentation
+builder) and two "E-Book + E-Learning Home Assignments" items. In 2024 Humble
+delivered the worksheets as DRM-free PDFs and the two e-learning items as
+Steam keys (DLC). The Oct 2020 "Game Dev STEM" page uses the older layout and
+shows no delivery icon for them, so item recipes (items/softweir/) carry the
+same handling by machine name: worksheets = Humble PDF downloads, e-learning
+items = Steam keys (inference from the 2024 bundle and the 2020 text "The
+software in this bundle is available on Steam for Windows").
+
+No developers rule: the 2024 worksheets already reach generic/ebook, and the
+Steam items go to Steam regardless.
+"""
+
+[match]
+domains = ["softweir.com"]
+key_names = ["001 game creator", "softweir"]
+
+[redeem]
+where = "Steam (engine, kits, e-learning DLC); worksheets are Humble downloads"
+account = false
+steps = [
+  "Redeem 001 Game Creator and its DLC keys on Steam (generic/steam-key).",
+  "Download the worksheet PDFs from the Humble download page into the library folder.",
+]
+
+[install]
+source = "humble"
+serial = "none"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/royaltyfree-001-game-creator-stem-bundle-software"
+claim = "2024: SoftWeir worksheets are hb-drmfree PDFs; '001 Basics/Resource E-Book + E-Learning Home Assignments' are hb-steam (census)"
+[[sources]]
+url = "https://www.humblebundle.com/software/game-dev-stem-software"
+claim = "Oct 2020: 'The software in this bundle is available on Steam for Windows'; worksheets and e-learning items without delivery icons (census)"

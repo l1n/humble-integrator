@@ -1,0 +1,14 @@
+schema = 1
+name = "Darwin Project: Hunter Pack (in-game content code)"
+vendor = "scavengers-studio"
+kind = "service"
+machine_names = ["darwinproject"]
+verified = false
+notes = "Streaming 2019 (beat-the-average tier). Code for cosmetic content in the free Steam game Darwin Project (544920); redeemed in-game, see vendors/scavengers-studio. The free game itself can be added to Steam; no extra shortcut."
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360024062334-Humble-Software-Bundle-Streaming-2019-Darwin-Project-Hunter-Pack-in-game-redemption-instructions"
+claim = "Hunter Pack is redeemed in-game; game from Steam app 544920"

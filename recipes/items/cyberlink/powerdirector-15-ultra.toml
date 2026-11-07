@@ -1,0 +1,24 @@
+schema = 1
+name = "PowerDirector 15 Ultra"
+vendor = "cyberlink"
+kind = "app"
+machine_names = ["powerdirector15_ultra"]
+verified = false
+notes = "Video & Photo Editing 2018 by CyberLink (top tier). Consumer video editor (Windows). Under Wine: untested; expect GPU/codec problems (see vendors/cyberlink). Exe path is a glob."
+
+[install]
+source = "humble"
+file = "*PowerDirector*.exe"
+serial = "per-product"
+
+[launch]
+find = "C:/Program Files*/CyberLink/PowerDirector*/PDR*.exe"
+
+[steam]
+shortcut = true
+title = "PowerDirector 15"
+steamgriddb = "PowerDirector"
+
+[[sources]]
+url = "https://www.humblebundle.com/software/video-photo-editing-2018-software"
+claim = "PowerDirector 15 Ultra, hb-key, Windows, tier2 (census)"

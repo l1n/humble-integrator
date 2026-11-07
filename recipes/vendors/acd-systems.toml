@@ -1,0 +1,55 @@
+schema = 1
+name = "ACD Systems (ACDSee)"
+kind = "route"
+notes = """
+ACDSee Photo Studio Ultimate 2018 was in Humble's 'Professional
+Photography' bundle (Dec 2018). Humble's article: install from the bundle
+page, sign in or sign up with an email address in the program, enter the
+licence key. The licence was a ONE-YEAR licence from the time of redemption
+(two devices) and replaced any existing ACDSee subscription - so every key
+redeemed back then has lapsed, and an unredeemed 2018 key is unlikely to be
+accepted today (inference). Windows only (ACDSee's Mac product is a
+different program); Linux/macOS via Wine with no reports found.
+ACD's old support URL now redirects to acdsee.com's 404 page.
+"""
+
+[match]
+domains = ["acdsee.com", "acdsystems.com"]
+key_names = ['acdsee']
+
+[redeem]
+where = "the installed program's sign-in + licence-key dialog"
+account = true
+delivers = "a one-year ACDSee Photo Studio Ultimate 2018 licence for two devices"
+expires = "one year after redemption"
+steps = [
+  "Download and install ACDSee Photo Studio Ultimate 2018 from the Humble download page.",
+  "Start it, sign in or sign up with an email address.",
+  "Enter the licence key from Humble and click Continue. The licence runs for one year from this moment and replaces any existing subscription.",
+]
+
+[install]
+source = "humble"
+serial = "account"
+silent = false
+
+[prefix]
+name = "acdsee"
+arch = "win64"
+windows = "win10"
+
+[platforms.macos]
+runner = "crossover"
+notes = "Windows-only program; no CrossOver ratings checked."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Windows-only program; no Wine/Proton reports found (untested)."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360014168154-Professional-Photography-ACDSee-Photo-Studio-Ultimate-2018-instructions"
+claim = "install from the bundle page; sign in/sign up with email; enter the licence key; valid for one year after redemption, two devices; replaces existing subscriptions"
+[[sources]]
+url = "https://www.humblebundle.com/software/professional-photography-software"
+claim = "ACDSee Photo Studio Ultimate 2018: hb-key, Windows only, publisher ACD Systems (census)"

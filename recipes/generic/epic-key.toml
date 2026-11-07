@@ -1,0 +1,34 @@
+schema = 1
+name = "Epic Games Store key"
+kind = "route"
+priority = 15
+verified = false
+notes = """
+Humble's hb-epic delivery: a key for the Epic Games Store (games) or for Fab /
+the old Unreal Engine Marketplace (assets; vendors/fab claims those bundles
+first when their text says so). Redeem at Epic's code-redemption page, signed
+in to an Epic account. Games: install with the Epic Games Launcher (Windows,
+macOS) or Heroic Games Launcher (Linux, macOS; uses Legendary under the hood),
+whose "Add to Steam" puts the game in the Steam library as a non-Steam
+shortcut. Assets: Fab library / Epic Launcher vault.
+"""
+
+[match]
+delivery = ["hb-epic"]
+key_types = ["epic"]
+
+[redeem]
+where = "https://www.epicgames.com/account/code-redemption"
+account = true
+steps = [
+  "Sign in to an Epic Games account and open https://www.epicgames.com/account/code-redemption (or Redeem Code in the Epic Games Launcher).",
+  "Enter the key; the game or asset is added to the Epic library.",
+  "Games: install via Heroic Games Launcher (Linux/macOS) or the Epic Games Launcher, then use Heroic's 'Add to Steam'.",
+]
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360020257973"
+claim = "Humble's 'How to Redeem on Epic Games': keys are redeemed at epicgames.com code redemption"
+[[sources]]
+url = "https://heroicgameslauncher.com/"
+claim = "Heroic Games Launcher: Epic/GOG/Amazon launcher for Linux, macOS, Windows, with Add to Steam"

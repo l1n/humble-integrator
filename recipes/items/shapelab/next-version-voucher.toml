@@ -1,0 +1,30 @@
+schema = 1
+name = "Shapelab next-edition voucher"
+vendor = "shapelab"
+kind = "service"
+service = true
+machine_names = [
+  "shapelab2025voucher",   # Shapelab Creator's Kit (Nov 2024)
+  "shapelab2026voucher",   # Ultimate 3D & VR Sculpting ... Mega Bundle (Oct 2025)
+]
+verified = false
+notes = """
+A discount code for the following yearly edition of Shapelab ("Get a 50%
+discount on the next version of Shapelab, Shapelab 2026, releasing at the
+end of 2025"), applied at checkout on Shapelab's site once that edition is
+out. Nothing to download; the tool only shows the code.
+"""
+
+[redeem]
+where = "https://account.shapelabvr.com/login"
+steps = ["When the new edition is on sale, log in at account.shapelabvr.com, open its checkout, 'Add discount code', enter the code, check the reduced price, complete the purchase."]
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/ultimate-3d-vr-sculpting-character-game-asset-creation-mega-bundle-software"
+claim = "item 'Shapelab 2026 voucher': 'Get a 50% discount on the next version of Shapelab, Shapelab 2026, releasing at the end of 2025'"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/42239690466715-Ultimate-3D-VR-Sculpting-Character-Game-Asset-Creation-Mega-Bundle-Redemption-Instructions"
+claim = "Shapelab codes are entered via 'Add discount code' at Shapelab's checkout"

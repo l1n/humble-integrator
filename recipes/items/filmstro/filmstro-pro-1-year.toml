@@ -1,0 +1,17 @@
+schema = 1
+name = "Filmstro Pro (one-year subscription)"
+vendor = "filmstro"
+kind = "service"
+machine_names = ["filmstropro_oneyearsubscription"]
+verified = false
+notes = "Professional Filmmaking Tools (Dec 2019). Redemption deadline 2 February 2020 has passed; see vendors/filmstro. Nothing to install."
+
+[redeem]
+expires = "2020-02-02"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360039493334-Humble-Software-Bundle-Filmmakers-Filmstro-Pro-Redemption-Instructions"
+claim = "key had to be used by February 2nd, 2020; one year from redemption"

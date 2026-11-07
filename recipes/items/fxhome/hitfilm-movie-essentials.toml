@@ -1,0 +1,40 @@
+schema = 1
+name = "HitFilm Movie Essentials (VEGAS plugin pack)"
+vendor = "fxhome"
+kind = "addon"
+machine_names = ["hitfilmmovieessentials"]
+verified = false
+notes = """
+MAGIX 'VEGAS Pro Even More Creative Freedom' (Dec 2018) and its rebundle
+(May 2019). 15 HitFilm effects (channel mixer/swapper, colour temperature,
+glows, ...) as plugins for VEGAS Pro/Movie Studio; Windows only. Humble
+lists the publisher as Producer Planet (MAGIX's content arm). How the key
+is activated is not documented: FXhome's other MAGIX-bundled plugin
+(Enhance Ultra) used the FXhome 'Activate & Unlock' account flow, so this
+recipe assumes the same (inference); if the installer asks for a MAGIX
+serial instead, register it in the MAGIX Service Center. No Steam shortcut.
+Install it after the bundle's VEGAS Pro 15 Edit / Movie Studio 15 (vendors/magix).
+"""
+
+[install]
+source = "humble"
+serial = "account"
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "crossover"
+notes = "Windows VEGAS plugin; only useful inside a VEGAS prefix."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Windows VEGAS plugin; only useful inside a VEGAS prefix."
+
+[[sources]]
+url = "https://www.humblebundle.com/software/vegas-pro-even-more-software"
+claim = "HitFilm Movie Essentials: 15 Hollywood effects, hb-key, Windows, publisher Producer Planet (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/1260804318710-FXhome-Enhance-Ultra-instructions"
+claim = "the FXhome plugin in a later VEGAS bundle was activated via Activate & Unlock + FXhome account + serial"

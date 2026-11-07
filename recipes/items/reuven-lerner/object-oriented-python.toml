@@ -1,0 +1,11 @@
+schema = 1
+name = "Object-Oriented Python (+ Practice Makes Regexp course in 2021)"
+vendor = "reuven-lerner"
+kind = "service"
+machine_names = ["objectorientedpython150course"]
+verified = false
+notes = "2020 bundle: 'Object-oriented Python' (form hb-python-2020); 2021 bundle: 'Object-Oriented Python + Practice Makes Regexp' (form hb-python-2021). Courses on lernerpython.com after the e-mailed registration link."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360050848133-Humble-Software-Bundle-Learn-Python-Programming-with-PyCharm-Object-orientated-Python-Comprehending-comprehensions"
+claim = "hb-python-2020 form; REDEEM CODE; e-mail; Complete your registration"

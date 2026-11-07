@@ -1,0 +1,25 @@
+schema = 1
+name = "MattePaint Artist Plus subscription (1 year)"
+vendor = "mattepaint"
+kind = "service"
+service = true
+machine_names = ["1yrartistplussubscription"]
+verified = false
+notes = """
+One year of MattePaint's Artist Plus plan ("unlimited access to MattePaint's
+vast library ... high resolution downloads, RAW and EXR filetypes,
+exclusive educational content"), from The Ultimate 3D Creator's Bundle
+(2024). Subscription time on the account, not a file; anything downloaded
+during the year goes into the library folder by hand. Humble's article: the
+code expired 12 months after purchase.
+"""
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/ultimate-3d-creators-bundle-3d-assets-hdris-and-training-software"
+claim = "'Gain unlimited access to MattePaint's vast library of high-resolution digital assets ... high resolution downloads, RAW and EXR filetypes'"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/27352814688539-The-Ultimate-3D-Creator-s-Bundle-3D-Assets-HDRIs-and-Training-Terms-and-Redemption-Instructions"
+claim = "MattePaint codes expire 12 months after purchase"

@@ -1,0 +1,24 @@
+schema = 1
+name = "-35% off RPG Maker MZ (Humble Store coupon)"
+vendor = "rpg-maker"
+kind = "service"
+machine_names = ["35percentoff_rpgmaker_mz"]   # RPG Maker Resurgence (2022), tier 1
+service = true
+verified = false
+notes = """
+A Humble Store discount, not a product: "Get 35% off your purchase of RPG
+Maker MZ in the Humble Store." It shows in the Humble library and applies at
+Humble's checkout; buying is optional and costs money. Nothing to download
+or install. (Humble's own coupons are normally generic/humble-coupon, whose
+machine-name patterns do not cover this one.)
+"""
+
+[redeem]
+where = "https://www.humblebundle.com/store/rpg-maker-mz"
+account = true
+delivers = "35% off RPG Maker MZ at the Humble Store checkout (optional purchase)"
+steps = ["Optional and costs money: only if you want RPG Maker MZ, buy it on the Humble Store while the coupon is valid; the discount applies at checkout."]
+
+[[sources]]
+url = "https://www.humblebundle.com/software/rpg-maker-resurgence-software"
+claim = "'-35% off RPG Maker MZ': 'Get 35% off your purchase of RPG Maker MZ in the Humble Store' (census, coupon badge)"

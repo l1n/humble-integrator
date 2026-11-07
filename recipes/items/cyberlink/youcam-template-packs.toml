@@ -1,0 +1,21 @@
+schema = 1
+name = "YouCam template packs (Travel Pack 3, Holiday Pack 6)"
+vendor = "cyberlink"
+kind = "addon"
+machine_names = ["travelpack_v3_youcam", "holidaypack_v6_youcam"]
+requires = ["cyberlink/youcam-7-deluxe"]
+verified = false
+skip = true
+skip_reason = "Particle and PiP templates for YouCam, which is skipped (needs a real Windows webcam stack)."
+notes = "Video & Photo Editing 2018 by CyberLink (all tiers). 'Designed for: YouCam 5 and above.' The census shows no delivery method for these two; if Humble offers files, they can be kept in the library folder for a real Windows PC."
+
+[install]
+source = "humble"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/video-photo-editing-2018-software"
+claim = "Travel Pack 3 / Holiday Pack 6 for YouCam: 10 particle + 10 PiP templates, for YouCam 5 and above; no delivery icon (census)"

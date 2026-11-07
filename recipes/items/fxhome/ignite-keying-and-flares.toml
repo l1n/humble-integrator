@@ -1,0 +1,38 @@
+schema = 1
+name = "FXhome Ignite Keying & Flares (plugin)"
+vendor = "fxhome"
+kind = "addon"
+machine_names = ["fxhomeignitekeyingandflares"]
+verified = false
+notes = """
+MAGIX 'Your Ticket to a New Creative Universe' (Mar 2022), sold alongside
+Video ProX 12. Chroma-key and lens-flare plugin (Color Difference Key, Matte
+Cleaner, flares) used inside a host editor - inferred to be the MAGIX/VEGAS
+OFX hosts it was bundled for. Install from the Humble download page,
+'activate & unlock', FXhome account, serial. No Steam shortcut. Windows host
+only in practice (Humble lists no platform; MAGIX video editors are
+Windows-only). Install it after the bundle's Video ProX 12 (vendors/magix).
+"""
+
+[install]
+source = "humble"
+serial = "account"
+
+[steam]
+shortcut = false
+
+[platforms.macos]
+runner = "crossover"
+notes = "Only useful inside a Windows MAGIX/VEGAS host in the same prefix."
+
+[platforms.linux]
+runner = "wine"
+fallback = "proton"
+notes = "Only useful inside a Windows MAGIX/VEGAS host in the same prefix."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4465467195163-Humble-Software-Bundle-Your-Ticket-to-a-New-Creative-Universe-FXhome-Ignite-instructions"
+claim = "download and run the installer from the bundle page; activate & unlock; create/log into an account; enter the serial; it is a plugin used inside compatible software"
+[[sources]]
+url = "https://www.humblebundle.com/software/your-ticket-to-a-new-creative-universe-software"
+claim = "bundle of MAGIX software with Video ProX 12 and FXhome Ignite Keying & Flares; item hb-key, developer FXhome (census)"
