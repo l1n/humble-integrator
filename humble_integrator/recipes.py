@@ -9,7 +9,7 @@ Every item resolves to exactly one recipe, most specific first:
 Anything that matches none of them is reported as uncovered.
 
     python3 -I humble_integrator/recipes.py check  [--recipes DIR]
-    python3 -I humble_integrator/recipes.py cover  --census census.jsonl [--recipes DIR]
+    python3 -I humble_integrator/recipes.py cover  --census data/census [--recipes DIR]
     python3 -I humble_integrator/recipes.py plan   --platform macos|linux ID...
 """
 
@@ -81,6 +81,9 @@ class Book:
         `bundle` (the census bundle record) lets vendor recipes claim items
         that only the bundle identifies, like the parts of a 3D-print pack."""
         if "hb-steam" in (item.get("delivery") or []):  # a Steam key is best used on Steam
+            for g in self.generics:  # ...unless it's a Humble Store coupon for a Steam game
+                if g.data.get("before_steam") and self._generic_matches(g, item):
+                    return g, "generic"
             steam_route = self._steam_route()
             if steam_route:
                 return steam_route, "generic"
@@ -94,9 +97,14 @@ class Book:
         if claims:
             return claims[0][0], "vendor"
         delivery = set(item.get("delivery") or [])
-        if not delivery and (bundle or {}).get("drm_free"):
-            delivery = {"hb-drmfree"}
         content = item.get("content_type")
+        category = (bundle or {}).get("category")
+        if not delivery and ((bundle or {}).get("drm_free") or category == "books"):
+            # 2017-2020 book pages don't record delivery; their books were DRM-free downloads
+            # (coupons, codes and physical rewards are caught by name before this).
+            delivery = {"hb-audio"} if content == "audiobook" else {"hb-drmfree"}
+            if category == "books" and not content:
+                content = "ebook"
         for g in self.generics:
             if g.data.get("before_vendors"):
                 continue
@@ -187,6 +195,9 @@ class Book:
         """Return (recipe, layer) for an extracted Humble key (humble.Key or its dict)."""
         k = key if isinstance(key, dict) else vars(key)
         if k.get("steam_app_id") or k.get("key_type") == "steam":
+            for g in self.generics:
+                if g.data.get("before_steam") and self._generic_matches(g, k):
+                    return g, "generic"
             steam_route = self._steam_route()
             if steam_route:
                 return steam_route, "generic"
@@ -215,6 +226,8 @@ class Book:
         for g in self.generics:
             m = g.data.get("match", {})
             if k.get("key_type") in m.get("key_types", []) or (k.get("steam_app_id") and m.get("steam_app_id")):
+                return g, "generic"
+            if m.get("machine_names") and self._generic_matches(g, k):  # e.g. a partner's coupon code
                 return g, "generic"
         return None, None
 

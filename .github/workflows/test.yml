@@ -21,4 +21,4 @@ jobs:
       - name: Recipe book is consistent
         run: python3 -I humble_integrator/recipes.py check
       - name: Census coverage (informational)
-        run: python3 -I humble_integrator/recipes.py cover --census data/census.jsonl --top 20
+        run: python3 -I humble_integrator/recipes.py cover --census data/census --top 20

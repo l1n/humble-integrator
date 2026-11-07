@@ -48,7 +48,7 @@ Read first: `recipes/README.md` (the format), then the worked example
   bundles that should just download (the generic files route handles those);
   items on a vendor route still get their Humble downloads fetched.
 - Reuse the field names in recipes/README.md ("Fields that grew out of wave 1").
-- Run `recipes.py cover --census data/census.jsonl --conflicts` as well as
+- Run `recipes.py cover --census data/census --conflicts` as well as
   `cover`, and resolve any conflict involving your vendors.
 
 ## Rules

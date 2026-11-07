@@ -1,7 +1,7 @@
 # Recipes
 
 A recipe says how one kind of Humble item gets from a purchase into Steam on
-macOS and Linux. Every item in every Humble bundle (see `data/census.jsonl`)
+macOS and Linux. Every item in every Humble bundle (see `data/census`)
 resolves to exactly one recipe, most specific first:
 
 | Layer | Path | Matched by |
@@ -11,7 +11,7 @@ resolves to exactly one recipe, most specific first:
 | generic | `generic/<route>.toml` | the item's delivery method and content type |
 
 `python3 -I humble_integrator/recipes.py check` validates the book;
-`... cover --census data/census.jsonl` reports what is still uncovered.
+`... cover --census data/census` reports what is still uncovered.
 
 Every file starts with `schema = 1`. Unknown keys are allowed but ignored.
 
@@ -136,9 +136,11 @@ where that key goes next.
 | `[library]` `files`, `videos`, `ebooks`, … | what lands in the library folder after redemption; the tool's layout is `<library>/<vendor>/<machine_name>/` for vendor and item routes and `<library>/<ebook\|audio\|files>/<machine_name>/` for generic ones — describe contents, don't prescribe other paths |
 | `service = true` | a code for an online service: nothing to download |
 | `skip` / `skip_reason` | product deliberately not installed (e.g. Windows system utilities under Wine) |
+| `before_vendors` / `before_steam` (generic routes) | match by name ahead of vendor rules / ahead of the Steam route (Humble Store coupons for Steam games show Steam's icon) |
 
-Matching precedence, highest first: Steam keys always go to `generic/steam-key`;
-then item `machine_names`; then `before_vendors` generic routes (Humble's own
+Matching precedence, highest first: Steam keys go to `generic/steam-key` (except
+names a `before_steam` route claims: Humble Store coupons for Steam games); then
+item `machine_names`; then `before_vendors` generic routes (Humble's own
 coupons); then vendor rules, where a bundle's `redeem_text` beats its
 `bundle_slugs`, which beat `developers` (where a key is redeemed is decided by
 the bundle, not by who made the item); then generic routes by delivery.
@@ -147,7 +149,8 @@ the bundle, not by who made the item); then generic routes by delivery.
 Extracted keys resolve the same way, except that evidence on the key itself
 outranks the bundle: Steam keys go to Steam; then item `machine_names`; then
 any vendor whose `domains` appear in the key's instructions; then `key_names`;
-then `bundle_slugs` (matched against the key's bundle). An item recipe's own
+then `bundle_slugs` (matched against the key's bundle); then generic routes by
+key type or name. An item recipe's own
 `[redeem]` is used before its vendor's.
 
 ## Rules for writing recipes

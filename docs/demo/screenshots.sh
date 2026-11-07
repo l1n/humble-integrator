@@ -19,8 +19,8 @@ shot hi-plan.png "hi plan" "env HOME=$demo python3 humble_integrator/cli.py plan
 shot hi-apply-dry-run.png "hi apply --dry-run" \
   "env HOME=$demo python3 humble_integrator/cli.py apply --dry-run --only generic/steam-key generic/drm-free-app \
    generic/ebook generic/audio generic/humble-coupon profantasy/cc3plus profantasy/dd3 profantasy/annual-vol17"
-shot hi-recipes-cover.png "hi-recipes cover --census data/census.jsonl --top 15" \
-  "python3 humble_integrator/recipes.py cover --census data/census.jsonl --top 15 | sed -n 1,16p"
+shot hi-recipes-cover.png "hi-recipes cover --census data/census --top 15" \
+  "python3 humble_integrator/recipes.py cover --census data/census --top 15 | sed -n 1,16p"
 
 HOME=$demo python3 -I - "$demo/steam-keys.html" <<'EOF'
 import sys

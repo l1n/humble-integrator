@@ -13,7 +13,7 @@ and launch target are right, fix what isn't, and set `verified = true`.
   ```sh
   for t in tests/test_*.py; do python3 -I "$t"; done
   python3 -I humble_integrator/recipes.py check
-  python3 -I humble_integrator/recipes.py cover --census data/census.jsonl --conflicts
+  python3 -I humble_integrator/recipes.py cover --census data/census --conflicts
   ```
 
   `check` must report 0 problems and `--conflicts` should stay at 0.

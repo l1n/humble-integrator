@@ -6,7 +6,7 @@ and how it is delivered (Steam key, DRM-free download, other key, ...).
 
     python3 -I humble_integrator/census.py list  --cache DIR
     python3 -I humble_integrator/census.py fetch --cache DIR [--workers N]
-    python3 -I humble_integrator/census.py parse --cache DIR --out census.jsonl
+    python3 -I humble_integrator/census.py parse --cache DIR --out data/census   (one .jsonl per category)
 
 `list` and `fetch` are resumable: everything fetched is cached under DIR.
 """
@@ -413,7 +413,7 @@ def main(argv=None):
         sp.add_argument("--cache", default=str(DEFAULT_CACHE))
     sub.choices["fetch"].add_argument("--workers", type=int, default=3)
     sub.choices["fetch"].add_argument("--only", nargs="*", choices=CATEGORIES)
-    sub.choices["fetch"].add_argument("--skip-census", help="skip bundles already in this census.jsonl")
+    sub.choices["fetch"].add_argument("--skip-census", help="skip bundles already in this census (file or directory)")
     sub.choices["parse"].add_argument("--out", required=True)
     args = p.parse_args(argv)
     {"list": cmd_list, "fetch": cmd_fetch, "parse": cmd_parse}[args.cmd](args)

@@ -4,7 +4,7 @@ A bundle row goes to a cluster when its redemption text, slug, or any item's
 developer/publisher matches the cluster's pattern; only that bundle's
 not-yet-covered items are kept.
 
-    python3 -I humble_integrator/clusters.py --census data/census.jsonl --out data/clusters
+    python3 -I humble_integrator/clusters.py --census data/census --out data/clusters
 """
 
 import argparse
@@ -59,6 +59,22 @@ WAVE3 = {
                     r"pathfinder|\brpg\b|tabletop|dungeon",
 }
 
+# Wave 4: game and book bundles, once their census was crawled.
+WAVE4 = {
+    "w4-kobo-comics-manga": r"kobo|comixology|book.?walker|harper ?collins|\bidw\b|lucasfilm|square enix|"
+                            r"national geographic|harlequin|\bdk\b|marvel|simon & schuster|insight editions|"
+                            r"random house|disney|dh reimagined|del rey|titan comics|cinebook|tokyopop|akita|"
+                            r"one peace|kodansha|viz media|yen press|seven seas|dark horse|dc comics|dstlry|"
+                            r"boom|oni press|image comics|dynamite|aspen|manga|comics",
+    "w4-ttrpg-paizo-dtrpg": r"paizo|pathfinder|starfinder|renegade|magpie|pelgrane|pinnacle|modiphius|chaosium|"
+                            r"cubicle ?7|roll for combat|loke|syrinscape|dungeon masters guild|two little mice|"
+                            r"jason engle|frog god|monte cook|goodman|kobold|free league|evil hat|\brpg\b|ttrpg|"
+                            r"drive ?thru|d&d|5e|dungeon",
+    "w4-tech-and-other-books": r"manning|eduxpress|o'reilly|no starch|wiley|pearson|packt|apress|springer|"
+                               r"morgan|mercury|cengage|mit press|ebook|book",
+    "w4-games-leftovers": r".",
+}
+
 
 def main(argv=None):
     p = argparse.ArgumentParser()
@@ -67,7 +83,7 @@ def main(argv=None):
     p.add_argument("--wave", type=int, default=1)
     p.add_argument("--category", choices=("software", "games", "books"))
     a = p.parse_args(argv)
-    clusters = {1: CLUSTERS, 2: WAVE2, 3: WAVE3}[a.wave]
+    clusters = {1: CLUSTERS, 2: WAVE2, 3: WAVE3, 4: WAVE4}[a.wave]
     book = recipes.load()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -79,9 +95,19 @@ def main(argv=None):
         if not left:
             continue
         hay_bundle = " ".join([b["slug"], b.get("redeem_text", "")])
+        hay = lambda it: hay_bundle + " " + " ".join(
+            n for n in (it.get("developers") or []) + (it.get("publishers") or []) if n)
+        if a.wave >= 4:  # each item goes to the first cluster that matches, so agents never overlap
+            first = {}
+            for it in left:
+                name = next((n for n, pat in clusters.items() if re.search(pat, hay(it), re.I)), None)
+                if name:
+                    first.setdefault(name, []).append(it)
+            for name, hits in first.items():
+                rows[name].append(dict(b, items=hits))
+            continue
         for name, pat in clusters.items():
-            hits = [it for it in left if re.search(pat, hay_bundle + " " + " ".join(
-                n for n in (it.get("developers") or []) + (it.get("publishers") or []) if n), re.I)]
+            hits = [it for it in left if re.search(pat, hay(it), re.I)]
             if hits:
                 rows[name].append(dict(b, items=hits))
     for name, bundles in rows.items():

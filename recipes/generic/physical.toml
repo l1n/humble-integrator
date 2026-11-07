@@ -1,0 +1,18 @@
+schema = 1
+name = "Physical reward (shipped)"
+kind = "route"
+priority = 6
+before_vendors = true
+skip = true
+skip_reason = "Shipped to you: nothing to download or redeem."
+notes = """
+Printed books, boxed games, dice and cards in a bundle's top tiers. Humble or
+the publisher asks for a shipping address (by email, or on the item in your
+Humble library). When the bundle also has a PDF of the same book, that is its
+own item and routes normally.
+"""
+
+[match]
+# Name endings only: titles like "Physically Based Rendering" or
+# "Cyber-Physical Systems" are books.
+machine_names = ["physical(copy|item|hardcover|cards|book)?(_|$)"]

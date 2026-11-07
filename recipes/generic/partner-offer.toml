@@ -1,0 +1,24 @@
+schema = 1
+name = "Partner discount, trial or free month"
+kind = "route"
+priority = 7
+service = true
+notes = """
+Discount codes, trials and free months from partners that ride along in a
+bundle: InformIT, Make: magazine, ebooks.com, DC Universe Infinite, World Anvil,
+IGN, publishers' webstores. The code and the partner's link are on the item in
+your Humble library; there is nothing to download or install. A vendor with a
+recipe keeps its own coupons (that recipe says where to redeem them); this
+catches the rest. Humble's own store coupons are `generic/humble-coupon`.
+"""
+
+[redeem]
+where = "https://www.humblebundle.com/home/keys"
+steps = ["Open the offer in your Humble library: it shows the code and the partner's link",
+         "Redeem it on the partner's site before it expires"]
+
+[match]
+# Names only: "discount" alone would catch the novel *Discount Armageddon*.
+machine_names = ["coupon", "\\d+(percent)?discount", "discount(s?on|code|coupon|of\\d)",
+  "(store|press|print)discount", "_discount$", "dollars?off", "trialoffer", "freetrial", "\\d+-?daytrial",
+  "monthfree", "freesubscription"]

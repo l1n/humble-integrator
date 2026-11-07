@@ -206,6 +206,30 @@ class ShippedRecipesTest(unittest.TestCase):
     def test_shipped_recipe_book_is_consistent(self):
         self.assertEqual(recipes.check(recipes.load(REPO_RECIPES)), [])
 
+    def test_offers_physical_rewards_and_undelivered_books_route_by_name(self):
+        book = recipes.load(REPO_RECIPES)
+        books = {"slug": "x-books", "category": "books", "items": []}
+        games = {"slug": "x", "category": "games", "items": []}
+        item = lambda mn, **kw: dict({"machine_name": mn, "developers": [], "publishers": []}, **kw)
+        route = lambda it, b=books: book.resolve(it, b)[0].id
+        # 2017-2020 book pages record no delivery: the books were DRM-free downloads
+        self.assertEqual(route(item("discountarmageddon")), "generic/ebook")          # a novel
+        self.assertEqual(route(item("physicallybasedshaderdevelopmentforunity2017")), "generic/ebook")
+        self.assertEqual(route(item("gateofbonesbook2", content_type="audiobook")), "generic/audio")
+        self.assertEqual(route(item("exclusivediscountsoninformit")), "generic/partner-offer")
+        self.assertEqual(route(item("dcuiultra30-daytrialoffer")), "generic/partner-offer")
+        self.assertEqual(route(item("monstrositiesphysicalcopy")), "generic/physical")
+        self.assertEqual(route(item("dune_corerulebook_physical")), "generic/physical")
+        # a coupon for a Steam game shows Steam's icon but isn't a Steam key...
+        self.assertEqual(route(item("couponfrostpunk235off", delivery=["hb-steam"]), games), "generic/humble-coupon")
+        self.assertEqual(book.resolve_key({"machine_name": "couponfrostpunk235off", "key_type": "steam",
+                                           "steam_app_id": 1})[0].id, "generic/humble-coupon")
+        # ...while a vendor's own coupon keeps its recipe, which says where to redeem it
+        self.assertEqual(route(item("unityassetstore10offcoupon", delivery=["hb-key"]), games),
+                         "unity-asset-store/asset-store-10-off-coupon")
+        self.assertEqual(book.resolve_key({"machine_name": "websitecoupon20_ebooksdotcom",
+                                           "key_type": "generic"})[0].id, "generic/partner-offer")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -3,6 +3,8 @@ name = "Humble store / Choice coupon"
 kind = "route"
 priority = 5
 before_vendors = true
+# Coupons for Steam games show Steam's icon, but they are coupons, not Steam keys.
+before_steam = true
 notes = """
 Humble's own discount coupons that ride along in bundles ("10% off Humble
 Choice", "25% off ..."). Nothing to install or redeem elsewhere: the coupon

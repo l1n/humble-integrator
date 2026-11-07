@@ -15,8 +15,11 @@ Gets everything in a Humble Bundle account into Steam, on macOS and Linux.
 - **Vendor keys** (ProFantasy serials, Packt/Zenva course codes, Unity/Fab
   vouchers, Ovani audio, …) go to the vendor's own redemption, following a
   recipe; desktop apps among them become Steam shortcuts too.
-- **Ebooks, audio, asset packs, 3D-print files** are downloaded into a library
-  folder (no Steam entry: they aren't things you launch).
+- **Ebooks, audio, asset packs, 3D-print files, courses** are downloaded into a
+  library folder (or redeemed with their vendor). Each Humble bundle with such
+  content gets **one** Steam entry that opens a page for that bundle: its
+  downloaded folders and the keys still to redeem — so a 300-ebook bundle is
+  one library entry, not 300. Turn off with `bundle_shortcuts = false`.
 
 ## Screenshots
 
@@ -110,17 +113,17 @@ most useful contribution (see `CONTRIBUTING.md`).
 
 Recipe coverage: 539 recipes (117 vendors, 416 products, 6 generic routes) resolve every item of every
 software bundle in the census so far; game and book bundles are being added.
-Run `python3 humble_integrator/recipes.py cover --census data/census.jsonl`
+Run `python3 humble_integrator/recipes.py cover --census data/census`
 for the current numbers.
 
 ## Data
 
-`data/census.jsonl` lists Humble bundles and their items (tiers, delivery
+`data/census/` (one file each for software, games and books) lists Humble bundles and their items (tiers, delivery
 methods, developers, redemption text, a short description), rebuilt from
 Wayback Machine snapshots of humblebundle.com taken while each bundle was live.
 Text in it is Humble's and the publishers'. Rebuild or extend it with
-`hi-census list`, `hi-census fetch --skip-census data/census.jsonl`,
-`hi-census parse --out data/census.jsonl` (be gentle: archive.org refuses
+`hi-census list`, `hi-census fetch --skip-census data/census`,
+`hi-census parse --out data/census` (be gentle: archive.org refuses
 connections above a few requests a second).
 
 ## License
