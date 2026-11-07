@@ -48,6 +48,25 @@ def user_config_dirs(root):
                   if d.name.isdigit() and d.name != "0" and (d / "config").is_dir())
 
 
+def target_config_dirs(root, user=None):
+    """The Steam account to write to: USER (account name or userdata id) if given, else the one
+    that logged in most recently, so other people's accounts on a shared machine are left alone."""
+    dirs = user_config_dirs(root)
+    try:
+        users = vdf_loads((root / "config" / "loginusers.vdf").read_text()).get("users", {})
+    except (OSError, ValueError):
+        users = {}
+    by_id = {str(int(k) - STEAMID64_BASE): {f.lower(): v for f, v in u.items()}
+             for k, u in users.items() if k.isdigit() and isinstance(u, dict)}
+    if user:
+        return [d for d in dirs if str(user) in (d.parent.name, by_id.get(d.parent.name, {}).get("accountname"))]
+    known = [d for d in dirs if d.parent.name in by_id]
+    if not known:
+        return dirs
+    recent = lambda d: (by_id[d.parent.name].get("mostrecent") == "1", int(by_id[d.parent.name].get("timestamp") or 0))
+    return [max(known, key=recent)]
+
+
 def steam_running():
     names = ["steam_osx"] if platform.system() == "Darwin" else ["steam", "steamwebhelper"]
     for n in names:
@@ -254,6 +273,7 @@ def set_compat_tool(steam_root, sid, tool="proton_experimental"):
 # ---------------------------------------------------------------- artwork (SteamGridDB)
 
 SGDB = "https://www.steamgriddb.com/api/v2"
+UA = "humble-integrator/0.1"  # Cloudflare refuses Python-urllib's default agent (error 1010)
 SGDB_QUERIES = {  # our artwork kind -> SteamGridDB endpoint + filters
     "cover": "grids/game/{id}?dimensions=600x900",
     "wide": "grids/game/{id}?dimensions=460x215,920x430",
@@ -263,7 +283,57 @@ SGDB_QUERIES = {  # our artwork kind -> SteamGridDB endpoint + filters
 }
 
 
-def steamgriddb_art(api_key, term, opener=None):
+def similarity(a, b):
+    from difflib import SequenceMatcher
+    norm = lambda x: re.sub(r"[^a-z0-9]", "", x.lower())
+    return SequenceMatcher(None, norm(a), norm(b)).ratio()
+
+
+def image_size(data):
+    """(width, height) of a PNG or JPEG image, or None."""
+    if data[:8] == b"\x89PNG\r\n\x1a\n" and data[12:16] == b"IHDR":
+        return struct.unpack(">II", data[16:24])
+    if data[:2] == b"\xff\xd8":
+        i = 2
+        while i + 9 <= len(data) and data[i] == 0xFF:
+            marker = data[i + 1]
+            if marker in (0xD8, 0x01) or 0xD0 <= marker <= 0xD7:
+                i += 2
+                continue
+            if marker in (0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF):
+                h, w = struct.unpack(">HH", data[i + 5:i + 9])
+                return w, h
+            i += 2 + struct.unpack(">H", data[i + 2:i + 4])[0]
+    return None
+
+
+def art_from_images(urls, opener=None, limit=6):
+    """Fallback artwork from a store's own item images: the first portrait one (a book or
+    comic cover) as the cover, the first squarish one as the icon. Other shapes would stretch,
+    and thumbnails (Humble's order API only has 70px ones) are only good enough for an icon."""
+    import urllib.request
+    opener = opener or urllib.request.build_opener()
+    art = {}
+    for url in [u for u in urls if u][:limit]:
+        try:
+            with opener.open(urllib.request.Request(url, headers={"User-Agent": UA}), timeout=60) as resp:
+                data = resp.read()
+        except Exception:
+            continue
+        size = image_size(data)
+        if not size or not size[0]:
+            continue
+        image, ratio = (data, ".png" if data[:4] == b"\x89PNG" else ".jpg"), size[1] / size[0]
+        if ratio >= 1.2 and size[1] >= 300:
+            art.setdefault("cover", image)
+        elif 0.8 <= ratio <= 1.25:
+            art.setdefault("icon", image)
+        if {"cover", "icon"} <= art.keys():
+            break
+    return art
+
+
+def steamgriddb_art(api_key, term, opener=None, min_similarity=0.8):
     """Fetch artwork for TERM: {"cover"|"wide"|"hero"|"logo"|"icon": (bytes, ext)} (missing kinds omitted)."""
     import json
     import urllib.parse
@@ -271,12 +341,13 @@ def steamgriddb_art(api_key, term, opener=None):
     opener = opener or urllib.request.build_opener()
 
     def get(path):
-        req = urllib.request.Request(f"{SGDB}/{path}", headers={"Authorization": f"Bearer {api_key}"})
+        req = urllib.request.Request(f"{SGDB}/{path}", headers={"Authorization": f"Bearer {api_key}", "User-Agent": UA})
         with opener.open(req, timeout=60) as resp:
             return resp.read()
 
     found = json.loads(get("search/autocomplete/" + urllib.parse.quote(term))).get("data") or []
-    if not found:
+    # Autocomplete always returns *something*; only take it when it's really the same title.
+    if not found or similarity(found[0].get("name", ""), term) < min_similarity:
         return {}
     game_id = found[0]["id"]
     art = {}
@@ -288,7 +359,7 @@ def steamgriddb_art(api_key, term, opener=None):
         if hits:
             url = hits[0]["url"]
             ext = os.path.splitext(urllib.parse.urlsplit(url).path)[1] or ".png"
-            with opener.open(url, timeout=60) as resp:
+            with opener.open(urllib.request.Request(url, headers={"User-Agent": UA}), timeout=60) as resp:
                 art[kind] = (resp.read(), ext)
     return art
 
@@ -314,7 +385,8 @@ def owned_app_ids(api_key, steamid, opener=None):
     import urllib.request
     url = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?" + urllib.parse.urlencode(
         {"key": api_key, "steamid": steamid, "include_played_free_games": 1, "skip_unvetted_apps": 0})
-    with (opener or urllib.request.build_opener()).open(url, timeout=60) as resp:
+    with (opener or urllib.request.build_opener()).open(urllib.request.Request(url, headers={"User-Agent": UA}),
+                                                         timeout=60) as resp:
         games = json.loads(resp.read()).get("response", {}).get("games", [])
     return {g["appid"] for g in games}
 
@@ -333,6 +405,7 @@ def main(argv=None):
     a.add_argument("--start-dir")
     a.add_argument("--options", default="")
     a.add_argument("--proton", help="Linux: force this compatibility tool (e.g. proton_experimental)")
+    a.add_argument("--user", help="Steam account name or userdata id (default: the most recent login)")
     args = p.parse_args(argv)
     if args.cmd == "owned":
         if not args.api_key:
@@ -357,7 +430,7 @@ def main(argv=None):
         sys.exit("Steam is running; quit it first (it overwrites shortcuts.vdf on exit)")
     sid, entry = make_shortcut(args.name, args.exe, args.start_dir, args.options)
     for root in roots:
-        for cfg in user_config_dirs(root):
+        for cfg in target_config_dirs(root, args.user):
             upsert_shortcuts(cfg, [entry])
             print(f"added {args.name} ({sid}) for Steam user {cfg.parent.name}")
         if args.proton:

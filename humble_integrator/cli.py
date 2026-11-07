@@ -1,11 +1,12 @@
 """hi: get everything in a Humble account into Steam (macOS and Linux).
 
     hi keys    [--reveal none|needed|all]   pull every key + order from Humble (humble.py extract)
-    hi plan                                  what each owned item will go through, by route
-    hi apply   [--only ROUTE ...] [--dry-run]
+    hi plan    [--bundle NAME ...]           what each owned item will go through, by route
+    hi apply   [--only ROUTE ...] [--bundle NAME ...] [--dry-run]
                steam keys     -> a local page of prefilled Steam activation links
                DRM-free apps  -> download, unpack, Steam shortcut (Windows builds via Wine/umu wrapper)
-               ebooks/audio/files -> download into the library folder
+               ebooks/audio/files -> download into the library folder; one Steam entry per bundle
+                                 opens a page with its files and the keys left to redeem
                vendor routes  -> redemption steps (and the vendor's installers, where a recipe drives them)
 
 Config (optional): ~/.config/humble-integrator/config.toml
@@ -15,12 +16,15 @@ Config (optional): ~/.config/humble-integrator/config.toml
     accept_eulas = ["profantasy"]   # vendors whose EULA you accept for unattended installs
     steam_api_key = "..."           # steamcommunity.com/dev/apikey: lets --reveal needed skip owned games
     steamgriddb_api_key = "..."     # steamgriddb.com/profile/preferences/api: shortcut artwork
+    bundle_shortcuts = true         # one Steam entry per bundle for its courses/assets/ebooks/audio
+    steam_user = "..."              # Steam account (name or userdata id) to add to; default: last login
 """
 
 import argparse
 import html
 import os
 import platform
+import re
 import shlex
 import shutil
 import subprocess
@@ -80,7 +84,15 @@ def account_items(orders):
             payee = (sub.get("payee") or {}).get("human_name")
             yield {"machine_name": sub.get("machine_name", ""), "human_name": sub.get("human_name", ""),
                    "content_type": content, "delivery": delivery, "developers": [payee] if payee else [],
-                   "publishers": [], "downloads": dls}, bundle
+                   "publishers": [], "downloads": dls, "icon": sub.get("icon") or ""}, bundle
+
+
+def select_bundles(orders, patterns):
+    """Orders whose bundle name or machine name contains any of PATTERNS (case-insensitive)."""
+    pats = [p.lower() for p in patterns]
+    return [o for o in orders
+            if any(p in f'{(o.get("product") or {}).get("machine_name", "")} '
+                        f'{(o.get("product") or {}).get("human_name", "")}'.lower() for p in pats)]
 
 
 def make_plan(book, orders, keys, system=None):
@@ -152,6 +164,34 @@ def steam_key_page(entries, path):
     return path
 
 
+def bundle_page(cfg, bundle_name, content):
+    """A local page per Humble bundle: its downloaded files and the keys still to redeem.
+    Steam gets one entry per bundle that opens this page (non-games don't flood the library)."""
+    slug = re.sub(r"[^a-z0-9]+", "-", bundle_name.lower()).strip("-") or "bundle"
+    page = cfg["library"] / "bundles" / slug / "index.html"
+    page.parent.mkdir(parents=True, exist_ok=True)
+    files = "".join(f'<li><span class="item">{_thumb(icon)}{html.escape(n)}</span>'
+                    f'<a class="go" href="{Path(p).resolve().as_uri()}">Open folder</a></li>'
+                    for n, p, icon in content["files"])
+    keys = "".join(
+        f'<li><span>{html.escape(k.human_name)}<br><span class="muted">{html.escape(vendor)}'
+        f'{" · <code>" + html.escape(k.value) + "</code>" if k.value else " · not revealed yet"}</span></span>'
+        f'<a class="go" href="{html.escape(where)}" target="_blank">Redeem</a></li>'
+        for k, where, vendor in content["redeem"])
+    body = (f"<main><h1>{html.escape(bundle_name)}</h1><p>From your Humble library, via humble-integrator.</p>"
+            + (f"<h2>Downloaded</h2><ol>{files}</ol>" if files else "")
+            + (f"<h2>To redeem</h2><ol>{keys}</ol>" if keys else "") + "</main>")
+    humble.write_private(page, "<!doctype html><meta charset=utf-8><meta name=viewport content='width=device-width'>"
+                         f"<title>{html.escape(bundle_name)}</title><style>{STEAM_PAGE_CSS} h2 {{ font-size: 15px; "
+                         "margin: 24px 0 8px; }} .item { display: flex; align-items: center; gap: 12px; } "
+                         ".item img { width: 40px; height: 40px; object-fit: contain; flex: none; }</style>" + body)
+    return page
+
+
+def _thumb(url):
+    return f'<img src="{html.escape(url)}" alt="" loading="lazy">' if url.startswith("https://") else ""
+
+
 def windows_wrapper(cfg, prefix, exe_windows_path, script_path):
     """A launch script that runs a Windows program in a fixed prefix (shortcut target)."""
     if platform.system() == "Linux":
@@ -203,6 +243,13 @@ def install_build(cfg, entry, log=print):
     exe = install.find_launcher(app_dir, platform.system(), item["human_name"])
     if not exe:
         return keep_as_files(cfg, item, app_dir, log)
+    if platform.system() == "Darwin" and not install.runs_on_current_macos(exe):
+        windows = [d for d in item["downloads"] if d.platform == "windows"]
+        if windows and cfg.get("wine"):
+            log(f"  {item['human_name']}: the Mac build is 32-bit (macOS 10.15+ can't run it); using the Windows build")
+            return install_build(cfg, dict(entry, build=humble.pick_build(windows, "Windows")), log)
+        log(f"  {item['human_name']}: the Mac build is 32-bit, which macOS 10.15+ can't run"
+            + ("; set wine in the config to use the Windows build" if windows else ""))
     return item["human_name"], exe
 
 
@@ -219,8 +266,18 @@ def keep_as_files(cfg, item, unpacked, log):
 
 
 def apply(cfg, book, plan, only=None, dry_run=False, log=print):
-    shortcuts = []
+    shortcuts = []  # (name, exe, launch options, Humble image urls for fallback art)
     redeem_groups = {}  # (where, steps) -> key names: one set of instructions per vendor
+    pages = defaultdict(lambda: {"files": [], "redeem": []})  # bundle -> its non-game content
+    failed = []
+
+    def attempt(what, fn, *args):
+        try:
+            return fn(*args)
+        except Exception as exc:  # one bad download or installer shouldn't stop the rest
+            failed.append(what)
+            log(f"  failed: {what}: {exc}")
+            return None
     for rid, entries in plan.items():
         if only and rid not in only:
             continue
@@ -234,18 +291,26 @@ def apply(cfg, book, plan, only=None, dry_run=False, log=print):
             for e in entries:
                 log(f"app {e['item']['human_name']}")
                 if not dry_run:
-                    got = install_build(cfg, e, log)
+                    got = attempt(e["item"]["human_name"], install_build, cfg, e, log)
                     if got:
-                        shortcuts.append(got)
+                        shortcuts.append((*got, "", [e["item"]["icon"]]))
+                    elif (cfg["library"] / "files" / e["item"]["machine_name"]).exists():
+                        pages[e["bundle"]["human_name"]]["files"].append(
+                            (e["item"]["human_name"], cfg["library"] / "files" / e["item"]["machine_name"],
+                             e["item"]["icon"]))
         elif rid == "generic/humble-coupon":
             log(f"{len(entries)} Humble coupon(s): nothing to do; they apply at humblebundle.com checkout")
+        elif rid in book.recipes and book.recipes[rid].data.get("skip"):
+            r = book.recipes[rid]
+            log(f"{len(entries)} {r.data.get('name', rid)}: {r.data.get('skip_reason', 'skipped')}")
         elif rid in ("generic/ebook", "generic/audio", "generic/files"):
             for e in entries:
                 dest = cfg["library"] / rid.split("/")[1] / e["item"]["machine_name"]
                 for d in e["build"]:
                     log(f"file {e['item']['human_name']}: {d.filename}")
                     if not dry_run:
-                        humble.fetch(d, dest)
+                        attempt(d.filename, humble.fetch, d, dest)
+                pages[e["bundle"]["human_name"]]["files"].append((e["item"]["human_name"], dest, e["item"]["icon"]))
         elif rid in book.recipes:
             r = book.recipes[rid]
             vendor = book.recipes.get(f"vendors/{r.vendor}") if r.vendor else None
@@ -256,24 +321,36 @@ def apply(cfg, book, plan, only=None, dry_run=False, log=print):
             if keyed:
                 group = redeem_groups.setdefault((redeem.get("where", "?"), tuple(redeem.get("steps", []))), [])
                 group.extend(e["key"].human_name for e in keyed)
+                for e in keyed:
+                    name = (vendor or r).data.get("name", rid)
+                    pages[e["key"].bundle]["redeem"].append((e["key"], redeem.get("where", ""), name))
             # Items on a vendor route can also have real Humble downloads: install apps
             # (item recipes of kind "app"), fetch everything else into the library.
             for e in files:
                 if r.layer == "item" and r.kind == "app":
                     log(f"app {e['item']['human_name']} ({rid})")
                     if not dry_run:
-                        got = install_build(cfg, dict(e, build=humble.pick_build(e["item"]["downloads"])), log)
+                        got = attempt(e["item"]["human_name"], install_build,
+                                      cfg, dict(e, build=humble.pick_build(e["item"]["downloads"])), log)
                         steam_cfg = r.data.get("steam", {})
                         if got and steam_cfg.get("shortcut", True):
-                            shortcuts.append((steam_cfg.get("title") or got[0], got[1]))
+                            shortcuts.append((steam_cfg.get("title") or got[0], got[1], "", [e["item"]["icon"]]))
                     continue
                 dest = cfg["library"] / (r.vendor or rid.replace("/", "-")) / e["item"]["machine_name"]
                 for d in e["build"] or e["item"]["downloads"]:
                     log(f"file {e['item']['human_name']}: {d.filename}")
                     if not dry_run:
-                        humble.fetch(d, dest)
+                        attempt(d.filename, humble.fetch, d, dest)
+                pages[e["bundle"]["human_name"]]["files"].append((e["item"]["human_name"], dest, e["item"]["icon"]))
         else:
             log(f"{rid}: {len(entries)} item(s) have no recipe yet")
+    if cfg.get("bundle_shortcuts", True) and pages:
+        log(f"{len(pages)} bundle page(s) for courses, assets, ebooks and audio -> {tilde(cfg['library'] / 'bundles')}")
+        if not dry_run:
+            opener = "/usr/bin/open" if platform.system() == "Darwin" else (shutil.which("xdg-open") or "xdg-open")
+            for bundle_name, content in pages.items():
+                page = bundle_page(cfg, bundle_name, content)
+                shortcuts.append((bundle_name, opener, f'"{page}"', [icon for *_, icon in content["files"]]))
     for (where, steps), names in redeem_groups.items():
         log(f"redeem {len(names)} key(s) at {where}: {', '.join(names)}")
         for step in steps:
@@ -282,20 +359,29 @@ def apply(cfg, book, plan, only=None, dry_run=False, log=print):
         if steam.steam_running():
             log("Steam is running: quit it and re-run `hi apply --only generic/drm-free-app` to add shortcuts")
         else:
-            made = [steam.make_shortcut(n, str(x)) for n, x in shortcuts]
+            made = [(*steam.make_shortcut(n, str(x), launch_options=o), images) for n, x, o, images in shortcuts]
             art = {}
-            if cfg.get("steamgriddb_api_key"):
-                for (sid, entry) in made:
+            for sid, entry, images in made:
+                art[sid] = {}
+                if cfg.get("steamgriddb_api_key"):
                     try:
                         art[sid] = steam.steamgriddb_art(cfg["steamgriddb_api_key"], entry["AppName"])
                     except Exception as exc:  # artwork is nice-to-have
-                        log(f"  no artwork for {entry['AppName']}: {exc}")
+                        log(f"  no SteamGridDB artwork for {entry['AppName']}: {exc}")
+                if not {"cover", "icon"} <= art[sid].keys():  # e.g. a whole bundle: use Humble's own images
+                    art[sid] = {**steam.art_from_images(images), **art[sid]}
             for root in steam.steam_roots():
-                for c in steam.user_config_dirs(root):
-                    steam.upsert_shortcuts(c, [entry for _, entry in made])
-                    for sid, images in art.items():
-                        steam.write_artwork(c, sid, images)
+                for c in steam.target_config_dirs(root, cfg.get("steam_user")):
+                    entries = []
+                    for sid, entry, _ in made:
+                        written = steam.write_artwork(c, sid, art[sid])
+                        icon = next((str(w) for w in written if w.stem.endswith("_icon")), "")
+                        entries.append(dict(entry, icon=icon) if icon else entry)
+                    steam.upsert_shortcuts(c, entries)
             log(f"added {len(shortcuts)} Steam shortcuts ({len([a for a in art.values() if a])} with artwork)")
+    if failed:
+        log(f"{len(failed)} failed (re-run `hi apply` to retry; finished ones are skipped): {', '.join(failed)}")
+    return failed
 
 
 def main(argv=None):
@@ -304,10 +390,12 @@ def main(argv=None):
     k = sub.add_parser("keys")
     k.add_argument("--reveal", choices=("none", "needed", "all"), default="none")
     k.add_argument("--cookie-file")
-    sub.add_parser("plan")
+    pl = sub.add_parser("plan")
     a = sub.add_parser("apply")
     a.add_argument("--only", nargs="*")
     a.add_argument("--dry-run", action="store_true")
+    for sp in (pl, a):
+        sp.add_argument("--bundle", nargs="*", help="only bundles whose name or machine name contains one of these")
     args = p.parse_args(argv)
     if args.cmd == "keys":
         cfg, extra = load_config(), []
@@ -325,12 +413,15 @@ def main(argv=None):
     orders, keys = humble.cached_orders(), list(humble.KeyStore().keys.values())
     if not orders and not keys:
         raise SystemExit("nothing extracted yet: run `hi keys` first")
+    if args.bundle:
+        orders = select_bundles(orders, args.bundle)
+        keys = [k for k in keys if k.gamekey in {o.get("gamekey") for o in orders}]
     plan = make_plan(book, orders, keys)
     if args.cmd == "plan":
         print_plan(book, plan)
     else:
-        apply(cfg, book, plan, set(args.only or []), args.dry_run)
+        return 1 if apply(cfg, book, plan, set(args.only or []), args.dry_run) else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

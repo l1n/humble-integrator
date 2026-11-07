@@ -128,12 +128,46 @@ class KeysTest(unittest.TestCase):
         dest = Path(self.tmp.name) / "dl"
         dest.mkdir()
         (dest / "game1.tar.gz.part").write_bytes(body[:4000])  # interrupted earlier
-        out = humble.fetch(d, dest, Opener())
+        out = humble.fetch(d, dest, Opener(), Path(self.tmp.name) / "checksums.json")
         self.assertEqual(out.read_bytes(), body)
-        bad = humble.Download("game1", "Game 1", "linux", "x", "https://dl/other.tar.gz", md5="0" * 32)
+
+    def test_fetch_keeps_a_complete_file_whose_listed_md5_is_stale(self):
+        import hashlib, io
+        body = b"new edition" * 100
+        calls = []
+
+        class Resp(io.BytesIO):
+            def __init__(self, data, headers):
+                super().__init__(data)
+                self.headers, self.status = headers, 206 if "Content-Range" in headers else 200
+            def __enter__(self): return self
+            def __exit__(self, *a): return False
+
+        class Opener:
+            short = False
+            def open(self, req, timeout=None):
+                calls.append(req.headers.get("Range"))
+                start = int((req.headers.get("Range") or "bytes=0-")[6:-1] or 0)
+                if self.short:  # connection dropped: fewer bytes than promised
+                    return Resp(body[:50], {"Content-Length": str(len(body))})
+                if start:
+                    return Resp(body[start:], {"Content-Range": f"bytes {start}-{len(body) - 1}/{len(body)}"})
+                return Resp(body, {"Content-Length": str(len(body))})
+
+        tmp = Path(self.tmp.name)
+        dest, accepted = tmp / "dl", tmp / "checksums.json"
+        stale = humble.Download("book", "Book", "ebook", "EPUB", "https://dl/book.epub", md5="0" * 32, size=99999)
+        cut = Opener()
+        cut.short = True
         with self.assertRaises(RuntimeError):
-            humble.fetch(bad, dest, Opener())
-        self.assertFalse((dest / "other.tar.gz.part").exists())
+            humble.fetch(stale, dest, cut, accepted)
+        self.assertTrue((dest / "book.epub.part").exists())        # kept, to resume
+        out = humble.fetch(stale, dest, Opener(), accepted)       # resumed, mismatched: starts over once
+        self.assertEqual(out.read_bytes(), body)
+        self.assertEqual(calls[1:], ["bytes=50-", None])
+        self.assertIn(hashlib.md5(body).hexdigest(), accepted.read_text())
+        humble.fetch(stale, dest, Opener(), accepted)             # remembered: no new download
+        self.assertEqual(len(calls), 3)
 
     def test_mask_hides_most_of_the_key(self):
         self.assertEqual(humble.mask("AAAAA-BBBBB-CCCCC"), "AAAA…CC")

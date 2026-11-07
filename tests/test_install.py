@@ -93,6 +93,28 @@ class InstallTest(unittest.TestCase):
         (self.d / "m/Game.app/Contents/Helpers/Crash.app").mkdir(parents=True)
         self.assertEqual(install.find_launcher(self.d / "m", "Darwin", "Game").name, "Game.app")
 
+    def test_32_bit_mac_builds_are_recognised(self):
+        import plistlib
+        import struct
+
+        def app(name, exe_bytes):
+            (self.d / name / "Contents/MacOS").mkdir(parents=True)
+            (self.d / name / "Contents/Info.plist").write_bytes(plistlib.dumps({"CFBundleExecutable": "run"}))
+            (self.d / name / "Contents/MacOS/run").write_bytes(exe_bytes)
+            return self.d / name
+
+        fat = lambda *cpus: b"\xca\xfe\xba\xbe" + struct.pack(">I", len(cpus)) + b"".join(
+            struct.pack(">iiIII", c, 3, 0, 0, 0) for c in cpus)
+        old = app("Old.app", fat(7, 18))                                  # i386 + ppc (2012-era universal)
+        modern = app("Modern.app", fat(7, 0x01000007))                   # i386 + x86_64
+        arm = app("Arm.app", b"\xcf\xfa\xed\xfe" + struct.pack("<i", 0x0100000C))
+        script = app("Script.app", b"#!/bin/sh\nexec java -jar game.jar\n")
+        self.assertEqual(install.mac_archs(old), {"i386", "ppc"})
+        self.assertFalse(install.runs_on_current_macos(old))
+        self.assertTrue(install.runs_on_current_macos(modern))
+        self.assertEqual(install.mac_archs(arm), {"arm64"})
+        self.assertTrue(install.runs_on_current_macos(script))           # unknown: don't second-guess it
+
     def test_windows_installer_detection_and_silent_switches(self):
         for marker, kind in ((b"Inno Setup Setup Data", "inno"), (b"Nullsoft Install System", "nsis"),
                              (b"InstallAware", "installaware"), (b"nothing", "exe")):

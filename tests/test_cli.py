@@ -96,6 +96,95 @@ class CliTest(unittest.TestCase):
         self.assertTrue((self.d / "lib/files/coolgame/Loops/kick_01.wav").exists())
         self.assertFalse((self.d / "games/coolgame/app").exists())
 
+    def test_non_games_get_one_steam_entry_per_bundle(self):
+        import steam
+        root = self.d / "Steam"
+        (root / "userdata" / "123" / "config").mkdir(parents=True)
+        saved = (humble.fetch, steam.steam_roots, steam.steam_running)
+
+        def fake_fetch(d, dest, opener=None):
+            Path(dest).mkdir(parents=True, exist_ok=True)
+            (Path(dest) / d.filename).write_text("x")
+            return Path(dest) / d.filename
+
+        humble.fetch, steam.steam_roots, steam.steam_running = fake_fetch, lambda: [root], lambda: False
+        try:
+            cfg = {"games": self.d / "g", "library": self.d / "lib", "umu": "umu-run"}
+            plan = cli.make_plan(self.book, ORDERS, self.keys)
+            cli.apply(cfg, self.book, plan, only={"generic/ebook", "profantasy/dd3"}, log=lambda *_: None)
+        finally:
+            humble.fetch, steam.steam_roots, steam.steam_running = saved
+        page = self.d / "lib/bundles/map-making-mega-bundle-encore/index.html"
+        text = page.read_text()
+        self.assertIn("A Book", text)                      # downloaded ebook
+        self.assertIn("Dungeon Designer 3", text)          # vendor key still to redeem
+        self.assertIn("service.profantasy.com", text)
+        entries = list(steam.read_shortcuts(root / "userdata/123/config").values())
+        self.assertEqual([e["AppName"] for e in entries], ["Map Making MEGA Bundle Encore"])
+        self.assertIn(str(page), entries[0]["LaunchOptions"])
+
+    def test_bundle_filter_keeps_only_matching_orders_and_their_keys(self):
+        other = {"gamekey": "GK2", "product": {"machine_name": "hib7", "human_name": "Humble Indie Bundle 7"}}
+        got = cli.select_bundles(ORDERS + [other], ["indie bundle 7"])
+        self.assertEqual([o["gamekey"] for o in got], ["GK2"])
+        self.assertEqual(cli.select_bundles(ORDERS + [other], ["MAPMAKING"]), ORDERS)
+
+    def test_bundle_entry_gets_humble_cover_art_and_an_icon_path(self):
+        import steam
+        root = self.d / "Steam"
+        (root / "userdata" / "123" / "config").mkdir(parents=True)
+        orders = [dict(ORDERS[0], subproducts=[dict(s, icon="https://img/" + s["machine_name"])
+                                                 for s in ORDERS[0]["subproducts"]])]
+        saved = (humble.fetch, steam.steam_roots, steam.steam_running, steam.art_from_images)
+        seen = []
+
+        def fake_fetch(d, dest, opener=None):
+            Path(dest).mkdir(parents=True, exist_ok=True)
+            (Path(dest) / d.filename).write_text("x")
+            return Path(dest) / d.filename
+
+        def fake_art(urls, opener=None):
+            seen.append(urls)
+            return {"cover": (b"C", ".jpg"), "icon": (b"I", ".png")}
+
+        humble.fetch, steam.steam_roots, steam.steam_running = fake_fetch, lambda: [root], lambda: False
+        steam.art_from_images = fake_art
+        try:
+            plan = cli.make_plan(self.book, orders, self.keys)
+            cli.apply({"games": self.d / "g", "library": self.d / "lib", "umu": "umu-run"}, self.book, plan,
+                      only={"generic/ebook"}, log=lambda *_: None)
+        finally:
+            humble.fetch, steam.steam_roots, steam.steam_running, steam.art_from_images = saved
+        self.assertEqual(seen, [["https://img/abook"]])
+        [entry] = steam.read_shortcuts(root / "userdata/123/config").values()
+        self.assertTrue(entry["icon"].endswith("_icon.png"))
+        self.assertEqual(Path(entry["icon"]).read_bytes(), b"I")
+        self.assertIn("https://img/abook", (self.d / "lib/bundles/map-making-mega-bundle-encore/index.html").read_text())
+
+    def test_one_failed_download_does_not_stop_the_rest(self):
+        orders = [dict(ORDERS[0], subproducts=ORDERS[0]["subproducts"] + [
+            {"machine_name": "bbook", "human_name": "B Book", "downloads": [
+                {"platform": "ebook", "download_struct": [{"name": "EPUB", "url": {"web": "https://dl/bbook.epub"}}]}]}])]
+        saved = humble.fetch
+
+        def flaky_fetch(d, dest, opener=None):
+            if d.filename == "abook.epub":
+                raise RuntimeError("download cut short")
+            Path(dest).mkdir(parents=True, exist_ok=True)
+            (Path(dest) / d.filename).write_text("x")
+
+        humble.fetch = flaky_fetch
+        lines = []
+        try:
+            failed = cli.apply({"games": self.d / "g", "library": self.d / "lib", "umu": "umu-run",
+                                "bundle_shortcuts": False}, self.book, cli.make_plan(self.book, orders, []),
+                               only={"generic/ebook"}, log=lines.append)
+        finally:
+            humble.fetch = saved
+        self.assertEqual(failed, ["abook.epub"])
+        self.assertTrue((self.d / "lib/ebook/bbook/bbook.epub").exists())
+        self.assertIn("1 failed", lines[-1])
+
     def test_dry_run_touches_nothing(self):
         cfg = {"games": self.d / "games", "library": self.d / "lib", "umu": "umu-run"}
         lines = []

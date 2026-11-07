@@ -98,12 +98,13 @@ class SteamTest(unittest.TestCase):
         auth = []
 
         class Opener:
+            title = "Campaign Cartographer 3+"
+
             def open(self, req, timeout=None):
-                url = req if isinstance(req, str) else req.full_url
-                if not isinstance(req, str):
-                    auth.append(req.headers.get("Authorization"))
+                url = req.full_url
+                auth.append((url, req.headers.get("Authorization"), req.headers.get("User-agent")))
                 if "autocomplete" in url:
-                    return Resp(json.dumps({"data": [{"id": 42}]}).encode())
+                    return Resp(json.dumps({"data": [{"id": 42, "name": self.title}]}).encode())
                 if "/grids/game/42?dimensions=600x900" in url:
                     return Resp(json.dumps({"data": [{"url": "https://cdn/x/cover.jpg"}]}).encode())
                 if url.startswith("https://cdn/"):
@@ -112,7 +113,56 @@ class SteamTest(unittest.TestCase):
 
         art = steam.steamgriddb_art("K", "Campaign Cartographer 3+", Opener())
         self.assertEqual(art, {"cover": (b"IMG", ".jpg")})
-        self.assertTrue(all(a == "Bearer K" for a in auth))
+        wrong = Opener()
+        wrong.title = "Cartoon Network Battle Crashers"  # autocomplete's closest match, but not the title
+        self.assertEqual(steam.steamgriddb_art("K", "Campaign Cartographer 3+", wrong), {})
+        self.assertTrue(all(a == "Bearer K" for u, a, _ in auth if u.startswith(steam.SGDB)))
+        self.assertTrue(all(ua == steam.UA for *_, ua in auth))  # Cloudflare 403s urllib's default agent
+
+    def test_fallback_art_uses_portrait_images_as_covers_and_square_ones_as_icons(self):
+        import io
+        import struct
+        import zlib
+
+        def png(w, h):
+            return (b"\x89PNG\r\n\x1a\n" + struct.pack(">I", 13) + b"IHDR" + struct.pack(">IIBBBBB", w, h, 8, 2, 0, 0, 0)
+                    + struct.pack(">I", zlib.crc32(b"IHDR")))
+
+        jpeg = b"\xff\xd8\xff\xe0" + struct.pack(">H", 4) + b"JF" + b"\xff\xc0" + struct.pack(">HBHH", 11, 8, 900, 600)
+        self.assertEqual(steam.image_size(png(600, 900)), (600, 900))
+        self.assertEqual(steam.image_size(jpeg), (600, 900))
+        self.assertIsNone(steam.image_size(b"GIF89a"))
+
+        class Resp(io.BytesIO):
+            def __enter__(self): return self
+            def __exit__(self, *a): return False
+
+        images = {"https://i/wide": png(460, 215), "https://i/square": png(512, 512), "https://i/book": jpeg}
+
+        class Opener:
+            def open(self, req, timeout=None):
+                return Resp(images[req.full_url])
+
+        art = steam.art_from_images(["", "https://i/wide", "https://i/square", "https://i/book"], Opener())
+        self.assertEqual(art, {"icon": (images["https://i/square"], ".png"), "cover": (jpeg, ".jpg")})
+        self.assertEqual(steam.art_from_images(["https://i/wide"], Opener()), {})  # would stretch either way
+        images["https://i/thumb"] = png(53, 70)
+        self.assertEqual(steam.art_from_images(["https://i/thumb"], Opener()), {})  # too small for a cover
+
+    def test_shortcuts_go_to_the_most_recent_login_only(self):
+        root = self.cfg / "Steam"
+        for uid in ("111", "222", "333"):
+            (root / "userdata" / uid / "config").mkdir(parents=True)
+        (root / "config").mkdir()
+        base = steam.STEAMID64_BASE
+        (root / "config/loginusers.vdf").write_text(steam.vdf_dumps({"users": {
+            str(base + 111): {"AccountName": "me", "timestamp": "1792161784"},
+            str(base + 222): {"AccountName": "sibling", "timestamp": "1748394314"}}}))
+        self.assertEqual([c.parent.name for c in steam.target_config_dirs(root)], ["111"])
+        self.assertEqual([c.parent.name for c in steam.target_config_dirs(root, "sibling")], ["222"])
+        self.assertEqual([c.parent.name for c in steam.target_config_dirs(root, "333")], ["333"])
+        (root / "config/loginusers.vdf").unlink()
+        self.assertEqual(len(steam.target_config_dirs(root)), 3)  # nothing to go on: every account
 
     def test_owned_app_ids_reads_the_web_api_response(self):
         import io
@@ -125,13 +175,14 @@ class SteamTest(unittest.TestCase):
         seen = {}
 
         class Opener:
-            def open(self, url, timeout=None):
-                seen["url"] = url
+            def open(self, req, timeout=None):
+                seen["url"], seen["ua"] = req.full_url, req.headers.get("User-agent")
                 return Resp(json.dumps({"response": {"game_count": 2, "games": [
                     {"appid": 10}, {"appid": 620}]}}).encode())
 
         self.assertEqual(steam.owned_app_ids("KEY", 76561197960265729, Opener()), {10, 620})
         self.assertIn("steamid=76561197960265729", seen["url"])
+        self.assertEqual(seen["ua"], steam.UA)
         self.assertEqual(steam.STEAMID64_BASE + 1, 76561197960265729)
 
 

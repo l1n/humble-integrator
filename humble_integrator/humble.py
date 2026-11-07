@@ -245,12 +245,18 @@ def pick_build(downloads, system=None):
     return []
 
 
-def fetch(download, dest_dir, opener=None):
-    """Download one file into dest_dir, resuming a partial file and checking md5."""
+def fetch(download, dest_dir, opener=None, accepted=None):
+    """Download one file into dest_dir, resuming a partial file and checking md5.
+
+    Humble's checksums go stale when a publisher replaces a file (seen: an epub listed at
+    22 MB served at 9 MB). A complete, fresh HTTPS download that differs from the listed md5
+    is kept with a warning and remembered in ACCEPTED, so re-runs don't fetch it again."""
     dest_dir = Path(dest_dir)
     dest_dir.mkdir(parents=True, exist_ok=True)
+    accepted = Path(accepted) if accepted else data_dir() / "checksums.json"
+    known = json.loads(accepted.read_text()) if accepted.exists() else {}
     out = dest_dir / download.filename
-    if out.exists() and download.md5 and md5sum(out) == download.md5:
+    if out.exists() and download.md5 and md5sum(out) in (download.md5, known.get(f"{download.md5} {out}")):
         return out
     part = out.with_name(out.name + ".part")
     have = part.stat().st_size if part.exists() else 0
@@ -259,14 +265,33 @@ def fetch(download, dest_dir, opener=None):
         headers["Range"] = f"bytes={have}-"
     opener = opener or urllib.request.build_opener()
     with opener.open(urllib.request.Request(download.url, headers=headers), timeout=120) as resp:
-        mode = "ab" if have and getattr(resp, "status", 200) == 206 else "wb"
-        with open(part, mode) as f:
+        resumed = bool(have) and getattr(resp, "status", 200) == 206
+        expected = _expected_size(resp, have if resumed else 0)
+        with open(part, "ab" if resumed else "wb") as f:
             shutil.copyfileobj(resp, f, 1 << 20)
-    if download.md5 and md5sum(part) != download.md5:
-        part.unlink()
-        raise RuntimeError(f"md5 mismatch for {download.filename}; deleted, re-run to retry")
+    if expected is not None and part.stat().st_size < expected:
+        raise RuntimeError(f"{download.filename}: download cut short ({part.stat().st_size} of {expected} bytes); "
+                           "re-run to resume")
+    if download.md5 and (actual := md5sum(part)) != download.md5:
+        if resumed:  # the file may have changed since the partial download: start over once
+            part.unlink()
+            return fetch(download, dest_dir, opener, accepted)
+        print(f"warning: {download.filename} doesn't match Humble's listed checksum (the publisher probably "
+              f"replaced it: {part.stat().st_size} bytes, listed {download.size}); keeping it", file=sys.stderr)
+        known[f"{download.md5} {out}"] = actual
+        write_private(accepted, json.dumps(known, indent=1))
     os.replace(part, out)
     return out
+
+
+def _expected_size(resp, offset):
+    """Total size the server promised (Content-Range total, else offset + Content-Length)."""
+    headers = getattr(resp, "headers", None) or {}
+    total = (headers.get("Content-Range") or "").rpartition("/")[2]
+    if total.isdigit():
+        return int(total)
+    length = headers.get("Content-Length") or ""
+    return offset + int(length) if length.isdigit() else None
 
 
 def md5sum(path):

@@ -181,6 +181,44 @@ def find_launcher(root, system=None, name=""):
     return max(candidates, key=score)
 
 
+MACHO_CPU = {7: "i386", 0x01000007: "x86_64", 12: "arm", 0x0100000C: "arm64", 18: "ppc", 0x01000012: "ppc64"}
+
+
+def mac_archs(app):
+    """CPU architectures of a .app's main executable (empty set if it can't be read)."""
+    import plistlib
+    import struct
+    app = Path(app)
+    try:
+        exe_name = plistlib.loads((app / "Contents" / "Info.plist").read_bytes()).get("CFBundleExecutable")
+    except Exception:
+        exe_name = None
+    macos = app / "Contents" / "MacOS"
+    exe = macos / exe_name if exe_name else next((p for p in sorted(macos.glob("*")) if p.is_file()), None)
+    try:
+        head = exe.open("rb").read(4096)
+    except (OSError, AttributeError):
+        return set()
+    magic = head[:4]
+    if magic in (b"\xca\xfe\xba\xbe", b"\xca\xfe\xba\xbf"):  # universal binary
+        step = 20 if magic[3] == 0xBE else 32
+        n = struct.unpack(">I", head[4:8])[0]
+        cpus = [struct.unpack(">i", head[8 + i * step:12 + i * step])[0] for i in range(min(n, 16))]
+    elif magic in (b"\xce\xfa\xed\xfe", b"\xcf\xfa\xed\xfe"):
+        cpus = [struct.unpack("<i", head[4:8])[0]]
+    elif magic in (b"\xfe\xed\xfa\xce", b"\xfe\xed\xfa\xcf"):
+        cpus = [struct.unpack(">i", head[4:8])[0]]
+    else:
+        return set()  # a script or something else: can't tell
+    return {MACHO_CPU.get(c, hex(c)) for c in cpus}
+
+
+def runs_on_current_macos(app):
+    """False only for builds that are definitely 32-bit/PowerPC (macOS 10.15+ runs 64-bit only)."""
+    archs = mac_archs(app)
+    return not archs or bool(archs & {"x86_64", "arm64"})
+
+
 # ---------------------------------------------------------------- Windows installers
 
 def installer_kind(path):
