@@ -22,6 +22,9 @@ from collections import Counter, defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import census  # noqa: E402  (shared census reader)
+
 ROOT = Path(__file__).resolve().parent.parent / "recipes"
 KINDS = {"app", "addon", "content", "document", "service", "route"}
 PLATFORMS = ("macos", "linux")
@@ -190,6 +193,9 @@ class Book:
         r = self.by_machine_name.get(k.get("machine_name"))
         if r:
             return r, "item"
+        for g in self.generics:  # Humble's own coupons and extras outrank vendors here too
+            if g.data.get("before_vendors") and self._generic_matches(g, k):
+                return g, "generic"
         text = " ".join(str(k.get(f) or "") for f in ("instructions", "human_name", "machine_name")).lower()
         # The bundle a key came from often names the vendor when the key itself doesn't
         # (a Packt key is just called after its course).
@@ -310,35 +316,31 @@ def order(book, ids, skip_unknown=False):
 def conflicts(book, census_path):
     """Items claimed by more than one vendor recipe: {(vendor ids...): [example item refs]}."""
     out = defaultdict(list)
-    with open(census_path) as f:
-        for line in f:
-            bundle = json.loads(line)
-            for item in bundle["items"]:
-                if item["machine_name"] in book.by_machine_name:
-                    continue
-                claims = book.vendor_claims(item, bundle)
-                if book.claims_tied(item, bundle):
-                    key = tuple(f"{v.id}({rule})" for v, rule in claims)
-                    out[key].append(f"{bundle['category']}/{bundle['slug']}:{item['machine_name']}")
+    for bundle in census.iter_census(census_path):
+        for item in bundle["items"]:
+            if item["machine_name"] in book.by_machine_name:
+                continue
+            claims = book.vendor_claims(item, bundle)
+            if book.claims_tied(item, bundle):
+                key = tuple(f"{v.id}({rule})" for v, rule in claims)
+                out[key].append(f"{bundle['category']}/{bundle['slug']}:{item['machine_name']}")
     return out
 
 
 def coverage(book, census_path):
     by_layer, by_route, uncovered = Counter(), Counter(), defaultdict(list)
     total = 0
-    with open(census_path) as f:
-        for line in f:
-            bundle = json.loads(line)
-            for item in bundle["items"]:
-                total += 1
-                recipe, layer = book.resolve(item, bundle)
-                if recipe is None:
-                    key = ",".join(item.get("delivery") or ["-"]) + " | " + (
-                        (item.get("developers") or item.get("publishers") or ["?"])[0] or "?")
-                    uncovered[key].append(f"{bundle['category']}/{bundle['slug']}:{item['machine_name']}")
-                    continue
-                by_layer[layer] += 1
-                by_route[recipe.id] += 1
+    for bundle in census.iter_census(census_path):
+        for item in bundle["items"]:
+            total += 1
+            recipe, layer = book.resolve(item, bundle)
+            if recipe is None:
+                key = ",".join(item.get("delivery") or ["-"]) + " | " + (
+                    (item.get("developers") or item.get("publishers") or ["?"])[0] or "?")
+                uncovered[key].append(f"{bundle['category']}/{bundle['slug']}:{item['machine_name']}")
+                continue
+            by_layer[layer] += 1
+            by_route[recipe.id] += 1
     return total, by_layer, by_route, uncovered
 
 

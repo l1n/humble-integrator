@@ -16,5 +16,6 @@ soon" placeholders caught before a mid-sale reveal, and charity tiles.
 [match]
 machine_names = ["_freepromo", "^walletcredit", "^mysterybox", "^giving_fund$", "^roomtoread$",
   "^littlekidsrock$", "^girlsmakegames$", "^youthmusicuk$", "^bethematch$", "^stopaapihate$",
-  "^americancancersociety$"]
-developers = ["Room to Read", "www.girlsmakegames.com", "PayPal Giving Fund"]
+  "^americancancersociety$", "^rettsyndromeresearchtrust$", "^heiferinternational$", "^fraubock$"]
+developers = ["Room to Read", "www.girlsmakegames.com", "PayPal Giving Fund", "rsrt.org", "www.heifer.org",
+  "www.fraubock.at"]

@@ -14,6 +14,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import census  # noqa: E402
 import recipes  # noqa: E402
 
 CLUSTERS = {
@@ -71,8 +72,7 @@ def main(argv=None):
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     rows = {name: [] for name in clusters}
-    for line in open(a.census):
-        b = json.loads(line)
+    for b in census.iter_census(a.census):
         if a.category and b["category"] != a.category:
             continue
         left = [it for it in b["items"] if book.resolve(it, b)[0] is None]

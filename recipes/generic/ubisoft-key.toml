@@ -1,0 +1,28 @@
+schema = 1
+name = "Ubisoft Connect key"
+kind = "route"
+priority = 15
+verified = false
+notes = """
+Humble's hb-uplay delivery: activate in Ubisoft Connect (formerly Uplay) with
+a Ubisoft account. Ubisoft Connect is Windows-only: on Linux run it through
+Proton/umu (or Lutris' Ubisoft Connect installer) and add the game via that
+launcher; on macOS it needs CrossOver/Wine. Games bought this way can't be
+Steam keys, so the Steam entry is a non-Steam shortcut to the launcher.
+"""
+
+[match]
+delivery = ["hb-uplay"]
+key_types = ["uplay", "ubisoft"]
+
+[redeem]
+where = "https://store.ubisoft.com/"
+account = true
+steps = [
+  "Sign in to Ubisoft Connect (desktop app: menu > Activate a key), or the Ubisoft account site.",
+  "Enter the key; the game appears in the Ubisoft Connect library.",
+]
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/115004546107"
+claim = "Ubisoft Connect / Uplay redemption instructions"

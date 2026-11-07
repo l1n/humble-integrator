@@ -14,5 +14,5 @@ as a service so it isn't swept onto the bundle's vendor route.
 machine_names = ["^humblemonthly_", "humblechoice", "^humble_?choice",
   # Humble Store discount coupons riding along in game bundles
   # (a discount amount in the name; vendor coupons without one stay with their vendor)
-  "\\d+percentoff", "\\d+off"]
+  "\\d+perc?ent?off", "\\d+off", "^humblestore", "humblestorediscount", "coupon_.*_bundle$"]
 developers = ["Humble Choice"]

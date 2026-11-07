@@ -71,6 +71,9 @@ class RecipeBookTest(unittest.TestCase):
         self.assertEqual(book.resolve(coupon, b)[0].id, "generic/humble-coupon")
         self.assertEqual(book.resolve(asset, b)[0].id, "vendors/market")
         self.assertEqual(book.resolve(dict(asset, developers=["Humble Choice"]), b)[0].id, "generic/humble-coupon")
+        self.assertEqual(book.resolve_key({"machine_name": "humblemonthly_10percentoff_general", "human_name": "",
+                                           "key_type": "generic", "bundle": "Market bundle"})[0].id,
+                         "generic/humble-coupon")
 
     def test_bundle_rules_beat_developer_rules_and_steam_keys_go_to_steam(self):
         write(self.root, "vendors/aaa-publisher.toml",

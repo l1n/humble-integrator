@@ -187,9 +187,9 @@ def cmd_fetch(args):
     entries = json.loads((cache / "bundles.json").read_text())
     if args.only:
         entries = [e for e in entries if e["category"] in args.only]
-    if args.skip_census and Path(args.skip_census).exists():
+    if args.skip_census and census_files(args.skip_census):
         # Bundles already parsed into a census don't need fetching again.
-        known = {(b["category"], b["slug"]) for b in map(json.loads, open(args.skip_census))}
+        known = {(b["category"], b["slug"]) for b in iter_census(args.skip_census)}
         entries = [e for e in entries if (e["category"], e["slug"]) not in known]
     counts = {}
     with concurrent.futures.ThreadPoolExecutor(args.workers) as pool:
@@ -349,14 +349,44 @@ def bundle_record(category, slug, ts, bundle, html=""):
     }
 
 
+def census_files(path):
+    """A census is one .jsonl file or a directory of per-category .jsonl files."""
+    p = Path(path)
+    if p.is_dir():
+        return sorted(p.glob("*.jsonl"))
+    return [p] if p.exists() else []
+
+
+def iter_census(path):
+    for f in census_files(path):
+        with open(f) as fh:
+            for line in fh:
+                if line.strip():
+                    yield json.loads(line)
+
+
+def write_census(records, path):
+    """Write {(category, slug): record}. A path without .jsonl is a directory that
+    gets one file per category (keeps each file well under GitHub's size limits)."""
+    p = Path(path)
+    groups = {}
+    for key in sorted(records):
+        groups.setdefault(key[0] if p.suffix != ".jsonl" else "", []).append(records[key])
+    if p.suffix != ".jsonl":
+        p.mkdir(parents=True, exist_ok=True)
+    for cat, recs in groups.items():
+        out = p / f"{cat}.jsonl" if cat else p
+        tmp = out.with_suffix(".tmp")  # readers never see a half-written census
+        with open(tmp, "w") as fh:
+            for r in recs:
+                fh.write(json.dumps(r) + "\n")
+        tmp.replace(out)
+
+
 def cmd_parse(args):
     """Rebuild OUT from the cache, keeping records already in OUT that the cache lacks."""
     cache = Path(args.cache)
-    records = {}
-    if Path(args.out).exists():
-        for line in open(args.out):
-            b = json.loads(line)
-            records[(b["category"], b["slug"])] = b
+    records = {(b["category"], b["slug"]): b for b in iter_census(args.out)}
     kept, n = len(records), 0
     for path in sorted((cache / "pages").glob("*/*.html*")):
         category = path.parent.name
@@ -369,11 +399,7 @@ def cmd_parse(args):
         ts = path.with_name(f"{slug}.ts").read_text().strip()
         records[(category, slug)] = bundle_record(category, slug, ts, bundle, html)
         n += 1
-    tmp = Path(args.out).with_suffix(".tmp")  # readers never see a half-written census
-    with open(tmp, "w") as out:
-        for key in sorted(records):
-            out.write(json.dumps(records[key]) + "\n")
-    tmp.replace(args.out)
+    write_census(records, args.out)
     misses = len(list((cache / "pages").glob("*/*.miss")))
     print(f"{len(records)} bundles in census ({n} parsed from cache, {kept} were already there); "
           f"{misses} without item data", file=sys.stderr)

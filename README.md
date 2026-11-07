@@ -18,6 +18,36 @@ Gets everything in a Humble Bundle account into Steam, on macOS and Linux.
 - **Ebooks, audio, asset packs, 3D-print files** are downloaded into a library
   folder (no Steam entry: they aren't things you launch).
 
+## Screenshots
+
+From a fake demo account (`docs/demo/seed_demo_account.py`; regenerate with
+`docs/demo/screenshots.sh`). Games are invented and every key is a `DEMO-…`
+placeholder; the vendor items use real Humble machine names, so they resolve to
+their real recipes.
+
+`hi plan` sorts everything the account owns by route — Steam keys, DRM-free
+builds, vendor keys (here ProFantasy serials, a Packt voucher, a Unity voucher),
+Epic keys, ebooks, audio, Humble's own coupons:
+
+![hi plan](docs/img/hi-plan.png)
+
+`hi apply --dry-run` shows what it would do: install builds as Steam shortcuts,
+fetch files, write the Steam activation page, and give one set of redemption
+steps per vendor:
+
+![hi apply --dry-run](docs/img/hi-apply-dry-run.png)
+
+The Steam activation page — each link opens Steam's own activation page with the
+key filled in; unrevealed keys say how to reveal them:
+
+![Steam activation page](docs/img/steam-keys-page.png)
+
+Recipe coverage over the census of Humble bundles:
+
+![hi-recipes cover](docs/img/hi-recipes-cover.png)
+
+## How it works
+
 Every Humble item resolves to a *recipe* (see `recipes/README.md`): an item
 recipe, a vendor recipe, or a generic route. `hi-recipes cover` measures how
 much of every Humble bundle ever sold is covered.

@@ -40,6 +40,12 @@ CONFIG = Path(os.environ.get("XDG_CONFIG_HOME", Path.home() / ".config")) / "hum
 GAME_PLATFORMS = {"windows", "mac", "linux"}
 
 
+def tilde(path):
+    """Show paths under the home directory as ~/... (also keeps usernames out of pasted output)."""
+    path, home = str(path), str(Path.home())
+    return "~" + path[len(home):] if path == home or path.startswith(home + os.sep) else path
+
+
 def load_config():
     cfg = tomllib.loads(CONFIG.read_text()) if CONFIG.exists() else {}
     cfg.setdefault("library", "~/Humble")
@@ -111,18 +117,38 @@ def print_plan(book, plan, out=sys.stdout):
 
 # ---------------------------------------------------------------- apply
 
+STEAM_PAGE_CSS = """
+:root { color-scheme: light dark; --bg: #f6f7f9; --card: #fff; --fg: #1b1f24; --muted: #5b6470;
+  --accent: #1a73e8; --line: #dde1e6; }
+@media (prefers-color-scheme: dark) { :root { --bg: #15181c; --card: #1e2227; --fg: #e8eaed;
+  --muted: #9aa3ad; --accent: #7cacf8; --line: #2e333a; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.5 system-ui, sans-serif; }
+main { max-width: 640px; margin: 40px auto; padding: 0 16px; }
+h1 { font-size: 22px; margin: 0 0 4px; } p { color: var(--muted); margin: 0 0 20px; }
+ol { list-style: none; padding: 0; margin: 0; }
+li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 16px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 8px; margin-bottom: 8px; }
+a.go { color: var(--accent); text-decoration: none; font-weight: 600; white-space: nowrap; }
+.muted { color: var(--muted); font-size: 13px; } code { font-size: 13px; }
+"""
+
+
 def steam_key_page(entries, path):
     rows = []
     for e in entries:
         k = e["key"]
+        name = html.escape(k.human_name)
         if not k.revealed:
-            rows.append(f"<li>{html.escape(k.human_name)} — not revealed yet (run <code>hi keys --reveal needed</code>)</li>")
+            rows.append(f'<li><span>{name}</span><span class="muted">not revealed yet: '
+                        f'<code>hi keys --reveal needed</code></span></li>')
             continue
         url = "https://store.steampowered.com/account/registerkey?key=" + html.escape(k.value)
-        rows.append(f'<li><a href="{url}" target="_blank">{html.escape(k.human_name)}</a></li>')
-    humble.write_private(Path(path), "<!doctype html><meta charset=utf-8><title>Steam keys</title>"
-                         "<h1>Activate on Steam</h1><p>Each link opens Steam's activation page with the key "
-                         "filled in.</p><ol>" + "\n".join(rows) + "</ol>")
+        rows.append(f'<li><span>{name}</span><a class="go" href="{url}" target="_blank">Activate on Steam</a></li>')
+    humble.write_private(Path(path), "<!doctype html><meta charset=utf-8>"
+                         "<meta name=viewport content='width=device-width'><title>Steam keys</title>"
+                         f"<style>{STEAM_PAGE_CSS}</style><main><h1>Activate on Steam</h1>"
+                         "<p>Each link opens Steam's activation page with the key already filled in.</p>"
+                         "<ol>" + "\n".join(rows) + "</ol></main>")
     return path
 
 
@@ -188,18 +214,19 @@ def keep_as_files(cfg, item, unpacked, log):
     if dest.exists():
         shutil.rmtree(dest)
     shutil.move(str(unpacked), dest)
-    log(f"  {item['human_name']}: nothing to launch, so it's files -> {dest}")
+    log(f"  {item['human_name']}: nothing to launch, so it's files -> {tilde(dest)}")
     return None
 
 
 def apply(cfg, book, plan, only=None, dry_run=False, log=print):
     shortcuts = []
+    redeem_groups = {}  # (where, steps) -> key names: one set of instructions per vendor
     for rid, entries in plan.items():
         if only and rid not in only:
             continue
         if rid == "generic/steam-key":
             page = cfg["library"] / "steam-keys.html"
-            log(f"{len(entries)} Steam keys -> {page}")
+            log(f"{len(entries)} Steam keys -> {tilde(page)}")
             if not dry_run:
                 cfg["library"].mkdir(parents=True, exist_ok=True)
                 webbrowser.open(steam_key_page(entries, page).as_uri())
@@ -227,9 +254,8 @@ def apply(cfg, book, plan, only=None, dry_run=False, log=print):
             keyed = [e for e in entries if e["kind"] == "key"]
             files = [e for e in entries if e["kind"] == "download"]
             if keyed:
-                log(f"{rid}: {len(keyed)} key(s); redeem at {redeem.get('where', '?')}")
-                for step in redeem.get("steps", []):
-                    log(f"    - {step}")
+                group = redeem_groups.setdefault((redeem.get("where", "?"), tuple(redeem.get("steps", []))), [])
+                group.extend(e["key"].human_name for e in keyed)
             # Items on a vendor route can also have real Humble downloads: install apps
             # (item recipes of kind "app"), fetch everything else into the library.
             for e in files:
@@ -248,6 +274,10 @@ def apply(cfg, book, plan, only=None, dry_run=False, log=print):
                         humble.fetch(d, dest)
         else:
             log(f"{rid}: {len(entries)} item(s) have no recipe yet")
+    for (where, steps), names in redeem_groups.items():
+        log(f"redeem {len(names)} key(s) at {where}: {', '.join(names)}")
+        for step in steps:
+            log(f"    - {step}")
     if shortcuts and not dry_run:
         if steam.steam_running():
             log("Steam is running: quit it and re-run `hi apply --only generic/drm-free-app` to add shortcuts")

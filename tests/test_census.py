@@ -63,6 +63,18 @@ class ParseTest(unittest.TestCase):
         rec = census.bundle_record("software", "old", "2019", bundle, '"has_any_keys": true')
         self.assertEqual((rec["has_keys"], rec["drm_free"]), (True, False))
 
+    def test_census_directory_holds_one_file_per_category(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            records = {("software", "a"): {"category": "software", "slug": "a", "items": []},
+                       ("books", "b"): {"category": "books", "slug": "b", "items": []}}
+            census.write_census(records, Path(d) / "census")
+            self.assertEqual(sorted(p.name for p in (Path(d) / "census").iterdir()),
+                             ["books.jsonl", "software.jsonl"])
+            self.assertEqual(sorted(b["slug"] for b in census.iter_census(Path(d) / "census")), ["a", "b"])
+            census.write_census(records, Path(d) / "one.jsonl")
+            self.assertEqual(len(list(census.iter_census(Path(d) / "one.jsonl"))), 2)
+
     def test_parse_merges_cache_into_existing_census(self):
         import gzip
         import tempfile

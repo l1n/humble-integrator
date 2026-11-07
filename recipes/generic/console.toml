@@ -1,0 +1,26 @@
+schema = 1
+name = "Console key (PlayStation, Nintendo)"
+kind = "route"
+priority = 25
+skip = true
+skip_reason = "A console key: nothing to run on macOS or Linux, and no Steam entry possible."
+notes = """
+Humble's hb-psfour delivery (PlayStation Store vouchers, e.g. the Humble Indie
+PlayStation Bundle 2019 and THQ Nordic PlayStation bundles). `hi plan` lists
+them so they aren't forgotten; redeem them on the console or the PlayStation
+Store website. Nintendo keys (Humble article 360014084334) belong here too if
+a bundle with them appears.
+"""
+
+[match]
+delivery = ["hb-psfour"]
+key_types = ["playstation", "psn", "nintendo"]
+
+[redeem]
+where = "https://store.playstation.com/"
+account = true
+steps = ["Redeem the voucher in the PlayStation Store (console: Store > Redeem Codes; or the PlayStation website's Redeem Codes page)."]
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/115005305988"
+claim = "How to redeem a PlayStation Bundle key"
