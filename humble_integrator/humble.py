@@ -245,8 +245,24 @@ def pick_build(downloads, system=None):
     return []
 
 
-def fetch(download, dest_dir, opener=None, accepted=None):
+def fetch(download, dest_dir, opener=None, accepted=None, attempts=4, pause=5):
     """Download one file into dest_dir, resuming a partial file and checking md5.
+    A stalled or dropped connection (Humble's CDN does both on multi-GB files) resumes
+    from where it stopped, up to ATTEMPTS times; an expired link (403/404) fails at once."""
+    for attempt in range(attempts):
+        try:
+            return _fetch_once(download, dest_dir, opener, accepted)
+        except urllib.error.HTTPError as exc:
+            if exc.code in (403, 404) or attempt == attempts - 1:
+                raise
+        except (OSError, RuntimeError) as exc:  # timeouts, resets, cut-short transfers
+            if attempt == attempts - 1 or isinstance(exc, FileNotFoundError):
+                raise
+        time.sleep(pause * (attempt + 1))
+
+
+def _fetch_once(download, dest_dir, opener=None, accepted=None):
+    """One download attempt (see fetch).
 
     Humble's checksums go stale when a publisher replaces a file (seen: an epub listed at
     22 MB served at 9 MB). A complete, fresh HTTPS download that differs from the listed md5
@@ -275,7 +291,7 @@ def fetch(download, dest_dir, opener=None, accepted=None):
     if download.md5 and (actual := md5sum(part)) != download.md5:
         if resumed:  # the file may have changed since the partial download: start over once
             part.unlink()
-            return fetch(download, dest_dir, opener, accepted)
+            return _fetch_once(download, dest_dir, opener, accepted)
         print(f"warning: {download.filename} doesn't match Humble's listed checksum (the publisher probably "
               f"replaced it: {part.stat().st_size} bytes, listed {download.size}); keeping it", file=sys.stderr)
         known[f"{download.md5} {out}"] = actual

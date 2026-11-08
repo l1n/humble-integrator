@@ -3,6 +3,7 @@ import stat
 import sys
 import tempfile
 import unittest
+import urllib.error
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "humble_integrator"))
@@ -160,7 +161,7 @@ class KeysTest(unittest.TestCase):
         cut = Opener()
         cut.short = True
         with self.assertRaises(RuntimeError):
-            humble.fetch(stale, dest, cut, accepted)
+            humble.fetch(stale, dest, cut, accepted, attempts=1)
         self.assertTrue((dest / "book.epub.part").exists())        # kept, to resume
         out = humble.fetch(stale, dest, Opener(), accepted)       # resumed, mismatched: starts over once
         self.assertEqual(out.read_bytes(), body)
@@ -168,6 +169,47 @@ class KeysTest(unittest.TestCase):
         self.assertIn(hashlib.md5(body).hexdigest(), accepted.read_text())
         humble.fetch(stale, dest, Opener(), accepted)             # remembered: no new download
         self.assertEqual(len(calls), 3)
+
+    def test_fetch_resumes_after_a_stalled_connection(self):
+        import io
+        body = b"x" * 5000
+        calls = []
+
+        class Resp(io.BytesIO):
+            def __init__(self, data, status, headers, stall_at=None):
+                super().__init__(data)
+                self.status, self.headers, self.stall_at = status, headers, stall_at
+            def __enter__(self): return self
+            def __exit__(self, *a): return False
+            def read(self, n=-1):  # 1 KB at a time, like a slow CDN
+                if self.stall_at is not None and self.tell() >= self.stall_at:
+                    raise TimeoutError("The read operation timed out")
+                return super().read(1000)
+
+        class Opener:
+            def open(self, req, timeout=None):
+                rng = req.headers.get("Range")
+                calls.append(rng)
+                if rng:
+                    start = int(rng[6:-1])
+                    return Resp(body[start:], 206, {"Content-Range": f"bytes {start}-{len(body) - 1}/{len(body)}"})
+                return Resp(body, 200, {"Content-Length": str(len(body))}, stall_at=2000)
+
+        tmp = Path(self.tmp.name)
+        d = humble.Download("film", "Film", "mac", "x", "https://dl/film.zip")
+        out = humble.fetch(d, tmp / "dl", Opener(), tmp / "c.json", pause=0)
+        self.assertEqual(out.read_bytes(), body)
+        self.assertEqual(calls, [None, "bytes=2000-"])
+        expired = urllib.error.HTTPError("https://dl/x", 403, "Forbidden", {}, None)
+
+        class Gone:
+            def open(self, req, timeout=None):
+                calls.append("gone")
+                raise expired
+
+        with self.assertRaises(urllib.error.HTTPError):
+            humble.fetch(humble.Download("x", "X", "mac", "x", "https://dl/x.zip"), tmp / "dl", Gone(), pause=0)
+        self.assertEqual(calls.count("gone"), 1)
 
     def test_mask_hides_most_of_the_key(self):
         self.assertEqual(humble.mask("AAAAA-BBBBB-CCCCC"), "AAAA…CC")
