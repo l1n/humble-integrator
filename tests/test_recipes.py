@@ -224,6 +224,10 @@ class ShippedRecipesTest(unittest.TestCase):
         self.assertEqual(route(item("couponfrostpunk235off", delivery=["hb-steam"]), games), "generic/humble-coupon")
         self.assertEqual(book.resolve_key({"machine_name": "couponfrostpunk235off", "key_type": "steam",
                                            "steam_app_id": 1})[0].id, "generic/humble-coupon")
+        # ...but "<n>off" at the start of a word is no discount
+        self.assertEqual(book.resolve_key({"machine_name": "hib7offspringflingsteam", "key_type": "steam",
+                                           "steam_app_id": 211360})[0].id, "generic/steam-key")
+        self.assertEqual(route(item("ccnpspcor350-501officialcertguide")), "generic/ebook")
         # ...while a vendor's own coupon keeps its recipe, which says where to redeem it
         self.assertEqual(route(item("unityassetstore10offcoupon", delivery=["hb-key"]), games),
                          "unity-asset-store/asset-store-10-off-coupon")
