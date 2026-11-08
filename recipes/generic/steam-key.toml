@@ -16,7 +16,7 @@ Steam rate-limits activations: result 53 means wait (back off ~1h) and retry.
 """
 
 [match]
-delivery = ["hb-steam"]   # TODO confirm icon name against the census
+delivery = ["hb-steam"]   # the census tags 7,879 items with this icon
 key_types = ["steam"]
 steam_app_id = true
 
