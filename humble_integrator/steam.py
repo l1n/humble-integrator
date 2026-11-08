@@ -309,8 +309,33 @@ def track_cloud_file(path):
     cache.write_text(vdf_dumps({app_dir.name: files}))
 
 
+def remove_note(config_dir, shortcut_name):
+    """Take our note out of a shortcut's notes; the user's stay, and so does ours if they
+    edited it. Returns "removed", "edited" (kept) or "" (none of ours)."""
+    path = notes_path(config_dir, shortcut_name)
+    try:
+        data = json.loads(path.read_text())
+    except (OSError, ValueError):
+        return ""
+    ours = [n for n in data.get("notes", []) if n.get("id") == NOTE_ID]
+    if not ours:
+        return ""
+    if any(n.get("time_modified") != n.get("time_created") for n in ours):
+        return "edited"
+    data["notes"] = [n for n in data["notes"] if n.get("id") != NOTE_ID]
+    for i, n in enumerate(data["notes"]):
+        n["ordinal"] = i
+    shutil.copy2(path, path.parent.parent / f"{path.name}.bak-{time.strftime('%Y%m%d-%H%M%S')}")
+    path.write_text(json.dumps(data))  # an emptied file, not a deleted one: Steam Cloud uploads it
+    track_cloud_file(path)
+    return "removed"
+
+
 SCREENSHOTS_APP = "760"
 NOT_UPLOADED = "18446744073709551615"
+# Every screenshot we add says where it came from; remove_screenshots looks for these.
+FROM_STORE = "from its Steam store page"
+FROM_HUMBLE = "from Humble's store page"
 
 
 def has_screenshots(config_dir, sid):
@@ -349,6 +374,48 @@ def add_screenshots(config_dir, sid, name, shots):
     return len(entries)
 
 
+def _ours(shot):
+    return (shot.get("imported") == "1" and shot.get("hscreenshot") == NOT_UPLOADED
+            and shot.get("caption", "").endswith((FROM_STORE, FROM_HUMBLE)))
+
+
+def remove_screenshots(config_dir, sid):
+    """Take the screenshots we added out of a shortcut's Screenshots panel: imported, never
+    uploaded and still captioned with where they came from. The user's own stay. Returns how
+    many were removed."""
+    gid = str(game_id(sid))
+    base = Path(config_dir).parent / SCREENSHOTS_APP
+    index = base / "screenshots.vdf"
+    if not index.exists():
+        return 0
+    doc = vdf_loads(index.read_text())
+    listed = doc.get("Screenshots", {})
+    shots = listed.get(gid) or {}
+    ours = [s for s in shots.values() if _ours(s)]
+    if not ours:
+        return 0
+    folder = (base / "remote" / gid).resolve()
+    for s in ours:
+        for rel in (s.get("filename"), s.get("thumbnail")):
+            f = (base / "remote" / (rel or "")).resolve()
+            if rel and f.is_relative_to(folder):
+                f.unlink(missing_ok=True)
+    for d in (folder / "screenshots" / "thumbnails", folder / "screenshots", folder):
+        if d.is_dir() and not any(d.iterdir()):
+            d.rmdir()
+    keep = [s for s in shots.values() if not _ours(s)]
+    names = listed.pop("shortcutnames", {})
+    if keep:
+        listed[gid] = {str(i): s for i, s in enumerate(keep)}
+    else:
+        listed.pop(gid)
+        names.pop(gid, None)
+    listed["shortcutnames"] = names
+    backup(index)
+    index.write_text(vdf_dumps(doc))
+    return len(ours)
+
+
 def _cloud_ostype(user_dir):
     """The OS id Steam stamps on this machine's cloud caches (copied from another app's)."""
     for cache in sorted(Path(user_dir).glob("*/remotecache.vdf")):
@@ -373,16 +440,54 @@ def write_artwork(config_dir, sid, images):
     return written
 
 
+def missing_art(config_dir, sid):
+    """The artwork kinds a shortcut has no file for yet (the user may have set their own)."""
+    grid = Path(config_dir) / "grid"
+    images = (".png", ".jpg", ".jpeg", ".ico", ".webp")  # not Steam's <id>.json logo position
+    have = {f.stem for f in grid.glob(f"{sid}*") if f.suffix.lower() in images} if grid.is_dir() else set()
+    return {kind for kind, stem in ART.items() if stem.format(id=sid) not in have}
+
+
+def remove_artwork(config_dir, sid):
+    """Delete a shortcut's artwork (and the logo position Steam keeps beside it)."""
+    grid = Path(config_dir) / "grid"
+    stems = {stem.format(id=sid) for stem in ART.values()}
+    gone = [f for f in grid.glob(f"{sid}*") if f.stem in stems] if grid.is_dir() else []
+    for f in gone:
+        f.unlink()
+    return len(gone)
+
+
+def _compat_mapping(data):
+    node = data
+    for k in ("InstallConfigStore", "Software", "Valve", "Steam", "CompatToolMapping"):
+        node = node.setdefault(k, {})
+    return node
+
+
 def set_compat_tool(steam_root, sid, tool="proton_experimental"):
     """Force a compatibility tool (Proton) for one shortcut: config/config.vdf CompatToolMapping."""
     path = Path(steam_root) / "config" / "config.vdf"
     data = vdf_loads(path.read_text()) if path.exists() else {}
-    node = data
-    for k in ("InstallConfigStore", "Software", "Valve", "Steam", "CompatToolMapping"):
-        node = node.setdefault(k, {})
-    node[str(sid)] = {"name": tool, "config": "", "priority": "250"}
+    _compat_mapping(data)[str(sid)] = {"name": tool, "config": "", "priority": "250"}
     backup(path)
     path.write_text(vdf_dumps(data))
+
+
+def remove_compat_tools(steam_root, sids):
+    """Drop the compatibility tool settings of removed shortcuts."""
+    path = Path(steam_root) / "config" / "config.vdf"
+    if not path.exists():
+        return 0
+    data = vdf_loads(path.read_text())
+    mapping = _compat_mapping(data)
+    drop = [str(s) for s in sids if str(s) in mapping]
+    if drop:
+        for s in drop:
+            del mapping[s]
+        backup(path)
+        path.write_text(vdf_dumps(data))
+    return len(drop)
 
 
 # ---------------------------------------------------------------- artwork (SteamGridDB)

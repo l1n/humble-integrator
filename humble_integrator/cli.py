@@ -10,8 +10,12 @@
                vendor routes  -> redemption steps (and the vendor's installers, where a recipe drives them)
                each Steam entry gets a note (Steam's Notes panel): Humble's description, developer,
                                  store page, bundle and purchase date, how it runs; a bundle's lists
-                                 its contents. Games also get their store page's screenshots.
-    hi details [--bundle NAME ...]           add those notes and screenshots to Humble entries already in Steam
+                                 its contents. Games also get their store page's screenshots; a bundle
+                                 gets its own Humble page's artwork and pictures of what you own in it.
+    hi details [--bundle NAME ...]           add those notes, screenshots and bundle artwork to Humble entries
+                                             already in Steam
+    hi remove  [NAME ...] [--dry-run]        take the Humble entries out of Steam with their artwork, notes
+                                             and screenshots (notes you edited stay; downloads stay)
 
 Config (optional): ~/.config/humble-integrator/config.toml
     library = "~/Humble"            games = "~/Games/Humble"
@@ -23,6 +27,7 @@ Config (optional): ~/.config/humble-integrator/config.toml
     bundle_shortcuts = true         # one Steam entry per bundle for its courses/assets/ebooks/audio
     steam_user = "..."              # Steam account (name or userdata id) to add to; default: last login
     steam_store = true              # look games up on the Steam store for notes and screenshots
+    bundle_art = true               # look bundles' artwork up on their Humble page (or its archived copy)
 """
 
 import argparse
@@ -45,6 +50,7 @@ from urllib.parse import urlsplit
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import humble  # noqa: E402
 import install  # noqa: E402
+import pages  # noqa: E402
 import recipes  # noqa: E402
 import steam  # noqa: E402
 
@@ -75,6 +81,7 @@ def account_items(orders):
     for order in orders:
         product = order.get("product") or {}
         bundle = {"slug": (product.get("machine_name") or "").replace("_", "-"),
+                  "machine_name": product.get("machine_name") or "",
                   "human_name": product.get("human_name", ""), "bought": order.get("created") or ""}
         for sub in order.get("subproducts") or []:
             dls = [d for d in humble.downloads_in_order({"gamekey": order.get("gamekey"), "subproducts": [sub]})]
@@ -357,8 +364,8 @@ def screenshots(item, store):
         by = ", ".join(store.get("developers") or [])
         genres = ", ".join(g.get("description", "") for g in store.get("genres") or [])
         first = " · ".join(s for s in (f"{name} ({year[0]})" if year else name, f"by {by}" if by else "",
-                                       genres, "from its Steam store page") if s)
-        return [(full, thumb, first if i == 0 else f"{name} · from its Steam store page")
+                                       genres, steam.FROM_STORE) if s)
+        return [(full, thumb, first if i == 0 else f"{name} · {steam.FROM_STORE}")
                 for i, (full, thumb) in enumerate(steam.store_screenshots(store))]
     about, shots = item.get("about") or {}, []
     for url in ([about.get("image")] + list((about.get("carousel-content") or {}).get("screenshot") or []))[:6]:
@@ -367,15 +374,59 @@ def screenshots(item, store):
         except Exception:
             continue
         if data[:2] == b"\xff\xd8":  # Steam's screenshots are JPEGs
-            shots.append((data, None, f"{item['human_name']} · from Humble's store page"))
+            shots.append((data, None, f"{item['human_name']} · {steam.FROM_HUMBLE}"))
     return shots
 
 
-def describe(cfg, config_dir, entries, games, notes, app_ids, cache, log=print):
+def _owns(name, owned):
+    n = steam._norm(name)  # page names can drop a subtitle or an edition: "Automate the Boring Stuff with Python"
+    return n in owned or len(n) >= 12 and any(o.startswith(n) or n.startswith(o) for o in owned if len(o) >= 12)
+
+
+def bundle_pictures(cfg, bundle, owned, log=print):
+    """Artwork {kind: (bytes, ext)} and screenshots [(jpeg, None, caption)] for a bundle's entry,
+    from its Humble page (pages.find): the bundle's tile as the hero, its share image as the
+    wide capsule, its logo, and pictures of the items in OWNED (names) - the first portrait one,
+    a book or comic cover, as the cover."""
+    if not cfg.get("bundle_art", True) or not bundle:
+        return {}, []
+    try:
+        found = pages.find(bundle)
+    except Exception as exc:  # artwork is nice-to-have
+        log(f"  no Humble page for {bundle.get('human_name')}: {exc}")
+        return {}, []
+    art, shots, page = {}, [], found.get("page", "")
+    for kind in ("hero", "wide", "logo"):
+        got = pages.picture(found[kind], page) if found.get(kind) else None
+        if got and (kind != "logo" or got[1] == ".png"):  # a logo is drawn over the hero: it needs transparency
+            art[kind] = got
+    mine = {steam._norm(n) for n in owned}
+    items = [(n, u) for n, u in found.get("items") or [] if _owns(n, mine)]
+    for name, url in items:
+        if "cover" in art and len(shots) >= 12:
+            break
+        got = pages.picture(url, page)
+        if not got:
+            continue
+        w, h = steam.image_size(got[0]) or (0, 0)
+        if "cover" not in art and h >= max(300, 1.3 * w):
+            art["cover"] = got
+        if got[1] == ".jpg" and len(shots) < 12:
+            shots.append((got[0], None, f"{name} · {steam.FROM_HUMBLE}"))
+    return art, shots
+
+
+def _bundle_pictures(cfg, cache, name, bundles, log):
+    if ("bundle", name) not in cache:
+        cache[("bundle", name)] = bundle_pictures(cfg, *bundles[name], log=log)
+    return cache[("bundle", name)]
+
+
+def describe(cfg, config_dir, entries, games, notes, app_ids, cache, log=print, bundles=None):
     """Notes and screenshots for our entries in one Steam account: ENTRIES [(sid, name)];
-    GAMES name -> (item, bundle, exe, install dir); NOTES name -> (title, BBCode) for the rest.
-    Adds only what's missing, looking each game's store page up once (CACHE). Returns
-    (notes added, screenshots added)."""
+    GAMES name -> (item, bundle, exe, install dir); NOTES name -> (title, BBCode) for the rest;
+    BUNDLES name -> (bundle, names of its items) for bundle entries. Adds only what's missing,
+    looking each store or bundle page up once (CACHE). Returns (notes added, screenshots added)."""
     added = [0, 0]
     for sid, name in entries:
         if name in games:
@@ -389,17 +440,13 @@ def describe(cfg, config_dir, entries, games, notes, app_ids, cache, log=print):
                 added[1] += steam.add_screenshots(config_dir, sid, name, screenshots(item, cache[name]))
             if need_note:
                 added[0] += steam.add_note(config_dir, name, *game_note(item, bundle, exe, home, cache[name]))
-        elif name in notes:
-            added[0] += steam.add_note(config_dir, name, *notes[name])
+        else:
+            if name in notes:
+                added[0] += steam.add_note(config_dir, name, *notes[name])
+            if name in (bundles or {}) and not steam.has_screenshots(config_dir, sid):
+                shots = _bundle_pictures(cfg, cache, name, bundles, log)[1]
+                added[1] += steam.add_screenshots(config_dir, sid, name, shots)
     return tuple(added)
-
-
-def wine_env(wine):
-    """Extra environment for a Wine inside an app bundle (Kegworks, Wineskin): its libraries
-    (MoltenVK, GStreamer, ...) live in Contents/Frameworks, outside the dynamic loader's path."""
-    contents = next((p for p in Path(wine).parents if p.name == "Contents"), None)
-    frameworks = contents / "Frameworks" if contents else None
-    return {"DYLD_FALLBACK_LIBRARY_PATH": f"{frameworks}:/usr/lib"} if frameworks and frameworks.is_dir() else {}
 
 
 def windows_wrapper(cfg, prefix, exe_windows_path, script_path, workdir=None):
@@ -410,7 +457,7 @@ def windows_wrapper(cfg, prefix, exe_windows_path, script_path, workdir=None):
     else:
         if not cfg.get("wine"):
             raise SystemExit("Windows-only build on macOS: set wine = \"/path/to/wine\" in " + str(CONFIG))
-        env = "".join(f"{k}={shlex.quote(v)} " for k, v in wine_env(cfg["wine"]).items())
+        env = "".join(f"{k}={shlex.quote(v)} " for k, v in install.wine_env(cfg["wine"]).items())
         cmd = f'{env}WINEPREFIX={shlex.quote(str(prefix))} exec {shlex.quote(cfg["wine"])} {shlex.quote(exe_windows_path)} "$@"'
     cd = f"cd {shlex.quote(str(workdir))} || exit 1\n" if workdir else ""
     script_path.write_text("#!/bin/sh\n" + cd + cmd + "\n")
@@ -444,7 +491,7 @@ def install_build(cfg, entry, log=print):
             runner = [cfg["umu"]] if platform.system() == "Linux" else [cfg.get("wine") or "wine"]
             env = dict(os.environ, WINEPREFIX=str(prefix), GAMEID="0",
                        WINEDEBUG=os.environ.get("WINEDEBUG", "-all"),  # Wine's fixme/err chatter
-                       **(wine_env(runner[0]) if platform.system() == "Darwin" else {}))
+                       **(install.wine_env(runner[0]) if platform.system() == "Darwin" else {}))
             log(f"  installing {item['human_name']} ({kind}){'' if cmd else ' interactively'}")
             install.wait_for_installer(subprocess.Popen(runner + (cmd or [str(archive)]), env=env), prefix, log)
             exe = install.find_launcher(prefix / "drive_c" / "Games" / "App", "Windows", item["human_name"]) \
@@ -480,17 +527,18 @@ def keep_as_files(cfg, item, unpacked, log):
     return None
 
 
-def bought_dates(plan):
-    return {e["bundle"]["human_name"]: e["bundle"].get("bought", "")
-            for entries in plan.values() for e in entries if e["kind"] == "download"}
+def bundle_records(plan):
+    """Bundle name -> its order's bundle (machine name, purchase date) for the plan's downloads."""
+    return {e["bundle"]["human_name"]: e["bundle"] for entries in plan.values() for e in entries if e["kind"] == "download"}
 
 
 def apply(cfg, book, plan, only=None, dry_run=False, log=print):
     shortcuts = []  # (name, exe, launch options, Humble image urls for fallback art)
     redeem_groups = {}  # (where, steps) -> key names: one set of instructions per vendor
-    pages = defaultdict(lambda: {"files": [], "redeem": []})  # bundle -> its non-game content
+    contents = defaultdict(lambda: {"files": [], "redeem": []})  # bundle -> its non-game content
     notes = {}  # bundle entry name -> (title, BBCode) for Steam's Notes panel
     games = {}  # game entry name -> (item, bundle, exe, install dir): notes and screenshots
+    bundles = {}  # bundle entry name -> (bundle, names of its items): artwork and screenshots
     failed = []
 
     def attempt(what, fn, *args):
@@ -518,7 +566,7 @@ def apply(cfg, book, plan, only=None, dry_run=False, log=print):
                         shortcuts.append((*got, "", [e["item"]["icon"]]))
                         games[got[0]] = (e["item"], e["bundle"], got[1], cfg["games"] / e["item"]["machine_name"])
                     elif (cfg["library"] / "files" / e["item"]["machine_name"]).exists():
-                        pages[e["bundle"]["human_name"]]["files"].append(
+                        contents[e["bundle"]["human_name"]]["files"].append(
                             (e["item"]["human_name"], cfg["library"] / "files" / e["item"]["machine_name"],
                              e["item"]["icon"]))
         elif rid == "generic/humble-coupon":
@@ -533,7 +581,7 @@ def apply(cfg, book, plan, only=None, dry_run=False, log=print):
                     log(f"file {e['item']['human_name']}: {d.filename}")
                     if not dry_run:
                         attempt(d.filename, humble.fetch, d, dest)
-                pages[e["bundle"]["human_name"]]["files"].append((e["item"]["human_name"], dest, e["item"]["icon"]))
+                contents[e["bundle"]["human_name"]]["files"].append((e["item"]["human_name"], dest, e["item"]["icon"]))
         elif rid in book.recipes:
             r = book.recipes[rid]
             vendor = book.recipes.get(f"vendors/{r.vendor}") if r.vendor else None
@@ -546,7 +594,7 @@ def apply(cfg, book, plan, only=None, dry_run=False, log=print):
                 group.extend(e["key"].human_name for e in keyed)
                 for e in keyed:
                     name = (vendor or r).data.get("name", rid)
-                    pages[e["key"].bundle]["redeem"].append((e["key"], redeem.get("where", ""), name))
+                    contents[e["key"].bundle]["redeem"].append((e["key"], redeem.get("where", ""), name))
             # Items on a vendor route can also have real Humble downloads: install apps
             # (item recipes of kind "app"), fetch everything else into the library.
             for e in files:
@@ -566,19 +614,22 @@ def apply(cfg, book, plan, only=None, dry_run=False, log=print):
                     log(f"file {e['item']['human_name']}: {d.filename}")
                     if not dry_run:
                         attempt(d.filename, humble.fetch, d, dest)
-                pages[e["bundle"]["human_name"]]["files"].append((e["item"]["human_name"], dest, e["item"]["icon"]))
+                contents[e["bundle"]["human_name"]]["files"].append((e["item"]["human_name"], dest, e["item"]["icon"]))
         else:
             log(f"{rid}: {len(entries)} item(s) have no recipe yet")
-    if cfg.get("bundle_shortcuts", True) and pages:
-        log(f"{len(pages)} bundle page(s) for courses, assets, ebooks and audio -> {tilde(cfg['library'] / 'bundles')}")
+    if cfg.get("bundle_shortcuts", True) and contents:
+        log(f"{len(contents)} bundle page(s) for courses, assets, ebooks and audio -> {tilde(cfg['library'] / 'bundles')}")
         if not dry_run:
             opener = "/usr/bin/open" if platform.system() == "Darwin" else (shutil.which("xdg-open") or "xdg-open")
-            for bundle_name, content in pages.items():
+            records = bundle_records(plan)
+            for bundle_name, content in contents.items():
                 page = bundle_page(cfg, bundle_name, content)
                 shortcuts.append((bundle_name, opener, f'"{page}"', [icon for *_, icon in content["files"]]))
                 notes[bundle_name] = bundle_note([n for n, *_ in content["files"]],
                                                  [(k.human_name, vendor) for k, _, vendor in content["redeem"]],
-                                                 bought_dates(plan).get(bundle_name, ""))
+                                                 records.get(bundle_name, {}).get("bought", ""))
+                bundles[bundle_name] = (records.get(bundle_name), [n for n, *_ in content["files"]]
+                                        + [k.human_name for k, *_ in content["redeem"]])
     for (where, steps), names in redeem_groups.items():
         log(f"redeem {len(names)} key(s) at {where}: {', '.join(names)}")
         for step in steps:
@@ -588,7 +639,7 @@ def apply(cfg, book, plan, only=None, dry_run=False, log=print):
             log("Steam is running: quit it and re-run the same `hi apply` to add shortcuts (finished downloads are skipped)")
         else:
             made = [(*steam.make_shortcut(n, str(x), launch_options=o), images) for n, x, o, images in shortcuts]
-            art = {}
+            art, described, cache, app_ids = {}, [0, 0], {}, steam_app_ids(plan)
             for sid, entry, images in made:
                 art[sid] = {}
                 if cfg.get("steamgriddb_api_key"):
@@ -596,9 +647,10 @@ def apply(cfg, book, plan, only=None, dry_run=False, log=print):
                         art[sid] = steam.steamgriddb_art(cfg["steamgriddb_api_key"], entry["AppName"])
                     except Exception as exc:  # artwork is nice-to-have
                         log(f"  no SteamGridDB artwork for {entry['AppName']}: {exc}")
-                if not {"cover", "icon"} <= art[sid].keys():  # e.g. a whole bundle: use Humble's own images
+                if entry["AppName"] in bundles:  # a whole bundle: its own Humble page's artwork
+                    art[sid] = {**_bundle_pictures(cfg, cache, entry["AppName"], bundles, log)[0], **art[sid]}
+                if not {"cover", "icon"} <= art[sid].keys():  # else Humble's item images
                     art[sid] = {**steam.art_from_images(images), **art[sid]}
-            described, cache, app_ids = [0, 0], {}, steam_app_ids(plan)
             for root in steam.steam_roots():
                 for c in steam.target_config_dirs(root, cfg.get("steam_user")):
                     entries = []
@@ -608,7 +660,7 @@ def apply(cfg, book, plan, only=None, dry_run=False, log=print):
                         entries.append(dict(entry, icon=icon) if icon else entry)
                     steam.upsert_shortcuts(c, entries)
                     got = describe(cfg, c, [(sid, e["AppName"]) for (sid, _, _), e in zip(made, entries)],
-                                   games, notes, app_ids, cache, log)
+                                   games, notes, app_ids, cache, log, bundles)
                     described = [a + b for a, b in zip(described, got)]
             log(f"added {len(shortcuts)} Steam shortcuts ({len([a for a in art.values() if a])} with artwork, "
                 f"{described[0]} new notes, {described[1]} screenshots)")
@@ -619,10 +671,11 @@ def apply(cfg, book, plan, only=None, dry_run=False, log=print):
 
 def add_details(cfg, book, plan, log=print):
     """Notes and screenshots for the Humble entries already in Steam (from an earlier
-    `hi apply`); installs nothing. Returns (notes added, screenshots added)."""
+    `hi apply`), and artwork for bundle entries that have none; installs nothing. Returns
+    (notes added, screenshots added, artwork images added)."""
     if steam.steam_running():
         log("Steam is running: quit it first (it rewrites its screenshot and cloud file lists)")
-        return 0, 0
+        return 0, 0, 0
     games, files, keys = {}, defaultdict(list), defaultdict(list)  # as `hi apply` sorts them
     for rid, entries in plan.items():
         r = book.recipes.get(rid)
@@ -637,9 +690,10 @@ def add_details(cfg, book, plan, log=print):
             elif r and rid not in ("generic/steam-key", "generic/humble-coupon") and not r.data.get("skip"):
                 vendor = book.recipes.get(f"vendors/{r.vendor}") if r.vendor else None
                 keys[e["key"].bundle].append((e["key"].human_name, (vendor or r).data.get("name", rid)))
-    bought, cache, app_ids, added = bought_dates(plan), {}, steam_app_ids(plan), [0, 0]
-    notes = {name: bundle_note(files.get(name, []), keys.get(name, []), bought.get(name, ""))
+    records, cache, app_ids, added = bundle_records(plan), {}, steam_app_ids(plan), [0, 0, 0]
+    notes = {name: bundle_note(files.get(name, []), keys.get(name, []), records.get(name, {}).get("bought", ""))
              for name in {*files, *keys}}
+    bundles = {name: (records.get(name), files.get(name, []) + [k for k, _ in keys.get(name, [])]) for name in notes}
     for root in steam.steam_roots():
         for c in steam.target_config_dirs(root, cfg.get("steam_user")):
             ours = [s for s in steam.read_shortcuts(c).values() if steam.TAG in (s.get("tags") or {}).values()]
@@ -647,10 +701,59 @@ def add_details(cfg, book, plan, log=print):
                                    s.get("Exe", "").strip('"'), cfg["games"] / games[s["AppName"]]["item"]["machine_name"])
                     for s in ours if s.get("AppName") in games}
             got = describe(cfg, c, [(s["appid"] & 0xFFFFFFFF, s.get("AppName", "")) for s in ours],
-                           here, notes, app_ids, cache, log)
-            added = [a + b for a, b in zip(added, got)]
-    log(f"added {added[0]} note(s) and {added[1]} screenshot(s) to Humble entries in Steam")
+                           here, notes, app_ids, cache, log, bundles)
+            added[:2] = [a + b for a, b in zip(added, got)]
+            for s in ours:  # bundle entries: the artwork kinds they're missing, from their Humble page
+                sid = s["appid"] & 0xFFFFFFFF
+                missing = steam.missing_art(c, sid) if s.get("AppName") in bundles else set()
+                if missing & {"hero", "wide"}:
+                    art = _bundle_pictures(cfg, cache, s["AppName"], bundles, log)[0]
+                    added[2] += len(steam.write_artwork(c, sid, {k: v for k, v in art.items() if k in missing}))
+    log(f"added {added[0]} note(s), {added[1]} screenshot(s) and {added[2]} artwork image(s) to Humble entries in Steam")
     return tuple(added)
+
+
+def remove(cfg, names=(), dry_run=False, log=print):
+    """Take what `hi apply` added out of Steam: our entries (all, or those whose names contain
+    one of NAMES), their artwork, notes and screenshots. A note you edited stays, and so do
+    downloads and installs. Returns how many entries were removed."""
+    if not dry_run and steam.steam_running():
+        log("Steam is running: quit it first (it rewrites these files on exit)")
+        return 0
+    pats, found, total, kept = [n.lower() for n in names], 0, 0, []
+    for root in steam.steam_roots():
+        gone = []
+        for c in steam.target_config_dirs(root, cfg.get("steam_user")):
+            ours = [s for s in steam.read_shortcuts(c).values() if steam.TAG in (s.get("tags") or {}).values()
+                    and (not pats or any(p in s.get("AppName", "").lower() for p in pats))]
+            for s in ours:
+                log(f"remove {s.get('AppName', '')}")
+            found += len(ours)
+            if dry_run or not ours:
+                continue
+            sids, notes, shots = [s["appid"] & 0xFFFFFFFF for s in ours], 0, 0
+            for sid, s in zip(sids, ours):
+                steam.remove_artwork(c, sid)
+                shots += steam.remove_screenshots(c, sid)
+                result = steam.remove_note(c, s.get("AppName", ""))
+                notes += result == "removed"
+                kept += [s["AppName"]] if result == "edited" else []
+            steam.upsert_shortcuts(c, [], remove_ids=sids)
+            gone += sids
+            log(f"removed {len(ours)} Steam entries ({notes} notes, {shots} screenshots) "
+                f"from Steam account {c.parent.name}")
+        steam.remove_compat_tools(root, gone)
+        total += len(gone)
+    if kept:
+        log(f"kept the notes you edited: {', '.join(kept)}")
+    if not found:
+        log("no Humble entries in Steam" + (f" matching {', '.join(names)}" if names else ""))
+    elif dry_run:
+        log("dry run: nothing was changed")
+    else:
+        log(f"downloads and installs are still in {tilde(cfg['games'])} and {tilde(cfg['library'])}; "
+            "Steam's files were backed up beside themselves as *.bak-<time>")
+    return total
 
 
 def main(argv=None):
@@ -663,10 +766,17 @@ def main(argv=None):
     a = sub.add_parser("apply")
     a.add_argument("--only", nargs="*")
     a.add_argument("--dry-run", action="store_true")
-    n = sub.add_parser("details", aliases=["notes"], help="add notes and screenshots to Humble entries already in Steam")
+    n = sub.add_parser("details", aliases=["notes"],
+                       help="add notes, screenshots and bundle artwork to Humble entries already in Steam")
     for sp in (pl, a, n):
         sp.add_argument("--bundle", nargs="*", help="only bundles whose name or machine name contains one of these")
+    r = sub.add_parser("remove", help="take the Humble entries (and their artwork, notes, screenshots) out of Steam")
+    r.add_argument("names", nargs="*", help="only entries whose name contains one of these")
+    r.add_argument("--dry-run", action="store_true")
     args = p.parse_args(argv)
+    if args.cmd == "remove":
+        remove(load_config(), args.names, args.dry_run)
+        return 0
     if args.cmd == "keys":
         cfg, extra = load_config(), []
         if args.reveal == "needed":

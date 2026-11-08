@@ -29,6 +29,14 @@ Gets everything in a Humble Bundle account into Steam, on macOS and Linux.
   developer and genres (local only; Steam uploads nothing unless you click
   its upload button). Notes sync through Steam Cloud. `hi details` adds both to
   entries made by an earlier `hi apply`; `steam_store = false` skips the store.
+- **Bundle artwork.** A bundle's entry gets its own Humble page's art: its
+  tile as the hero image, its share image as the wide capsule, its logo, and a
+  book or comic cover as the cover where the page has one. The page is read
+  live, or as the Internet Archive saved it while the bundle was on sale (back
+  to 2012). Pictures of the items you own in it fill its Screenshots panel.
+  `bundle_art = false` turns this off.
+- **Undo.** `hi remove` takes the entries back out of Steam, with their
+  artwork, notes and screenshots; `hi remove NAME` only the matching ones.
 
 ## Screenshots
 
@@ -106,6 +114,9 @@ its path.
    it can no longer be gifted).
 3. `hi plan` — shows what each item will go through.
 4. `hi apply --dry-run`, then `hi apply` (quit Steam first so shortcuts stick).
+5. Later: `hi details` adds notes, screenshots and bundle artwork to entries an
+   earlier `hi apply` made; `hi remove --dry-run`, then `hi remove`, takes them
+   all out of Steam again (downloads and installs stay where they are).
 
 Optional config: `~/.config/humble-integrator/config.toml` (see `hi --help`).
 
@@ -116,10 +127,14 @@ Optional config: `~/.config/humble-integrator/config.toml` (see `hi --help`).
   installer; the vendor's licence check still runs. It never accepts a
   licence agreement unless you list that vendor in `accept_eulas`, and it
   stops rather than touch an "already installed: repair/remove" page.
-- Steam files are backed up before every write; only entries tagged
-  `Humble` are ever changed or removed; nothing is written while Steam runs.
-  Notes you wrote are kept, and ours is never rewritten once it's there;
-  screenshots are only added to an entry that has none.
+- Steam files are backed up before every write, as `<file>.bak-<time>` beside
+  the file (to undo a change by hand, quit Steam and copy the backup back);
+  only entries tagged `Humble` are ever changed or removed; nothing is written
+  while Steam runs. Notes you wrote are kept, and ours is never rewritten once
+  it's there; screenshots are only added to an entry that has none.
+- `hi remove` deletes only what it added: our entries, their artwork, our
+  note (unless you edited it) and the screenshots still captioned with where
+  they came from. Your own notes and screenshots stay.
 - Archives can't write outside their install folder.
 
 ## Status
@@ -143,7 +158,12 @@ notes show in the Notes panel and upload to Steam Cloud (Steam client build
 1791918634 on macOS): Steam lists cloud files in `remotecache.vdf`, and ours are
 entered there as local changes waiting to upload. Store screenshots show in the
 Screenshots panel of all seven games tried (one matched by name prefix: "The
-Binding of Isaac" for "… + Wrath of the Lamb DLC").
+Binding of Isaac" for "… + Wrath of the Lamb DLC"). Bundle pages were found
+for six of seven bundles bought between 2012 and 2020 (not a 2015 one); the five
+bundle entries in Steam show their hero and wide images, one its logo, and 23
+pictures of their items. None got a portrait cover, because those pages only
+have landscape pictures of their items. `hi remove --dry-run` lists that
+account's 12 entries; removal itself is verified by the tests.
 
 Also verified live: the installer driver runs AutoHotkey inside Wine and sees a
 real ProFantasy (InstallAware) installer's windows; its full walk through the
@@ -167,7 +187,8 @@ Wayback Machine snapshots of humblebundle.com taken while each bundle was live.
 Text in it is Humble's and the publishers'. Rebuild or extend it with
 `hi-census list`, `hi-census fetch --skip-census data/census`,
 `hi-census parse --out data/census` (be gentle: archive.org refuses
-connections above a few requests a second).
+connections above a few requests a second). `data/bundle-pages.tsv` says where
+each census bundle's page is, for its artwork (`hi-census index` rebuilds it).
 
 ## License
 
@@ -184,4 +205,5 @@ belong to their owners.
 | `hi-census` | `census.py` | every Humble bundle ever, from Wayback snapshots |
 | `hi-install` | `install.py` | unpack builds, find launchers, silent installer switches |
 | `hi-drive` | `drive.py` | drive an installer wizard under Wine (serial entry) |
-| `hi-steam` | `steam.py` | non-Steam shortcuts, artwork, Proton mapping |
+| `hi-steam` | `steam.py` | non-Steam shortcuts, artwork, notes, screenshots, Proton mapping |
+| `hi-pages` | `pages.py` | a bundle's Humble page, live or archived: artwork, item pictures |

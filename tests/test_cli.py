@@ -9,6 +9,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "humble_integrator"))
 import cli  # noqa: E402
 import humble  # noqa: E402
+import install  # noqa: E402
+import pages  # noqa: E402
 import recipes  # noqa: E402
 
 PLAT = {"Darwin": "mac", "Linux": "linux"}.get(platform.system(), "linux")
@@ -40,8 +42,10 @@ class CliTest(unittest.TestCase):
         self.d = Path(self.tmp.name)
         self.book = recipes.load()
         self.keys = [k for o in ORDERS for k in humble.keys_in_order(o)]
+        self.find, pages.find = pages.find, lambda bundle, **kw: {}  # no bundle page lookups
 
     def tearDown(self):
+        pages.find = self.find
         self.tmp.cleanup()
 
     def test_plan_routes_every_owned_thing(self):
@@ -172,8 +176,8 @@ class CliTest(unittest.TestCase):
         try:
             cfg = {"games": self.d / "g", "library": self.d / "lib", "umu": "umu-run"}
             plan = cli.make_plan(self.book, ORDERS, self.keys)
-            self.assertEqual(cli.add_details(cfg, self.book, plan, log=lambda *_: None), (2, 2))
-            self.assertEqual(cli.add_details(cfg, self.book, plan, log=lambda *_: None), (0, 0))  # once only
+            self.assertEqual(cli.add_details(cfg, self.book, plan, log=lambda *_: None), (2, 2, 0))
+            self.assertEqual(cli.add_details(cfg, self.book, plan, log=lambda *_: None), (0, 0, 0))  # once only
         finally:
             steam.steam_roots, steam.steam_running, steam.store_match, steam.http_get = saved
         self.assertEqual(looked_up, ["Cool Game"])  # the second run had nothing to add, so no lookup
@@ -190,6 +194,80 @@ class CliTest(unittest.TestCase):
         self.assertEqual(b["title"], "What's in this bundle")
         self.assertIn("[*]A Book", b["content"])
         self.assertIn("[*]Dungeon Designer 3 (ProFantasy Software)", b["content"])
+
+    def test_bundle_entries_get_their_humble_pages_art_and_pictures_of_what_you_own(self):
+        import struct
+        import steam
+        portrait = b"\xff\xd8\xff\xc0\x00\x11\x08" + struct.pack(">HH", 900, 600) + b"\x03" * 8
+        landscape = b"\xff\xd8\xff\xc0\x00\x11\x08" + struct.pack(">HH", 600, 1200) + b"\x03" * 8
+        root = self.d / "Steam"
+        config = root / "userdata" / "123" / "config"
+        config.mkdir(parents=True)
+        sid, entry = steam.make_shortcut("Map Making MEGA Bundle Encore", "/usr/bin/open", launch_options='"x"')
+        steam.upsert_shortcuts(config, [entry])
+        steam.write_artwork(config, sid, {"icon": (b"I", ".png")})  # from an earlier `hi apply`
+        found = {"page": "https://www.humblebundle.com/books/x", "hero": "https://h/tile", "wide": "https://h/share",
+                 "logo": "https://h/logo", "items": [["Not Yours", "https://h/other"], ["A Book", "https://h/abook"],
+                                                     ["Dungeon Designer 3", "https://h/dd3"]]}
+        images = {"https://h/tile": (landscape, ".jpg"), "https://h/share": (landscape, ".jpg"),
+                  "https://h/logo": (landscape, ".jpg"), "https://h/abook": (portrait, ".jpg"),
+                  "https://h/dd3": (landscape, ".png")}
+        looked_up, fetched = [], []
+        saved = (pages.picture, steam.steam_roots, steam.steam_running)
+        pages.find = lambda bundle, **kw: looked_up.append(bundle["machine_name"]) or found
+        pages.picture = lambda url, page="": fetched.append(url) or images.get(url)
+        steam.steam_roots, steam.steam_running = lambda: [root], lambda: False
+        try:
+            cfg = {"games": self.d / "g", "library": self.d / "lib", "umu": "umu-run"}
+            plan = cli.make_plan(self.book, ORDERS, self.keys)
+            self.assertEqual(cli.add_details(cfg, self.book, plan, log=lambda *_: None), (1, 1, 3))
+            self.assertEqual(cli.add_details(cfg, self.book, plan, log=lambda *_: None), (0, 0, 0))
+            art, shots = cli.bundle_pictures(dict(cfg, bundle_art=False), {"machine_name": "x"}, ["A Book"])
+        finally:
+            pages.picture, steam.steam_roots, steam.steam_running = saved
+        self.assertEqual(looked_up, ["mapmaking_megabundle_encore"])
+        self.assertNotIn("https://h/other", fetched)  # only what you own: not other tiers, not charities
+        self.assertEqual((art, shots), ({}, []))  # bundle_art = false
+        self.assertEqual(sorted(p.name for p in (config / "grid").iterdir()),
+                         sorted(f"{sid}{s}" for s in ("_icon.png", "_hero.jpg", ".jpg", "p.jpg")))  # no JPEG logo
+        self.assertEqual((config / "grid" / f"{sid}p.jpg").read_bytes(), portrait)  # the book's cover
+        listed = steam.vdf_loads((root / "userdata/123/760/screenshots.vdf").read_text())["Screenshots"]
+        self.assertEqual([s["caption"] for s in listed[str(steam.game_id(sid))].values()],
+                         ["A Book · from Humble's store page"])  # the PNG one isn't a screenshot
+
+    def test_hi_remove_takes_out_our_entries_and_nothing_else(self):
+        import json
+        import steam
+        root = self.d / "Steam"
+        config = root / "userdata" / "123" / "config"
+        config.mkdir(parents=True)
+        sid, game = steam.make_shortcut("Cool Game", "/g/coolgame/cool")
+        bsid, page = steam.make_shortcut("Map Making MEGA Bundle Encore", "/usr/bin/open", launch_options='"x"')
+        users = dict(steam.make_shortcut("Cool Game", "/Applications/Cool.app")[1], tags={})  # the user's own
+        steam.upsert_shortcuts(config, [game, page, users])
+        steam.write_artwork(config, sid, {"cover": (b"c", ".png")})
+        steam.add_note(config, "Cool Game", "From X", "[p]about[/p]")
+        saved = (steam.steam_roots, steam.steam_running)
+        steam.steam_roots = lambda: [root]
+        lines = []
+        try:
+            steam.steam_running = lambda: True
+            self.assertEqual(cli.remove({}, log=lines.append), 0)
+            self.assertIn("quit it first", lines[-1])
+            steam.steam_running = lambda: False
+            cfg = {"games": self.d / "g", "library": self.d / "lib"}
+            self.assertEqual(cli.remove(cfg, ["mega"], dry_run=True, log=lines.append), 0)
+            self.assertEqual(len(steam.read_shortcuts(config)), 3)
+            self.assertEqual(cli.remove(cfg, ["mega"], log=lines.append), 1)
+            self.assertEqual(cli.remove(cfg, log=lines.append), 1)
+            self.assertEqual(cli.remove(cfg, log=lines.append), 0)
+        finally:
+            steam.steam_roots, steam.steam_running = saved
+        self.assertEqual([(s["AppName"], s["Exe"]) for s in steam.read_shortcuts(config).values()],
+                         [("Cool Game", '"/Applications/Cool.app"')])
+        self.assertFalse(list((config / "grid").iterdir()))
+        self.assertEqual(json.loads(steam.notes_path(config, "Cool Game").read_text())["notes"], [])
+        self.assertIn("no Humble entries in Steam", lines[-1])
 
     def test_bundle_filter_keeps_only_matching_orders_and_their_keys(self):
         other = {"gamekey": "GK2", "product": {"machine_name": "hib7", "human_name": "Humble Indie Bundle 7"}}
@@ -258,8 +336,8 @@ class CliTest(unittest.TestCase):
         (contents / "Frameworks").mkdir(parents=True)
         (contents / "SharedSupport/wine/bin").mkdir(parents=True)
         wine = contents / "SharedSupport/wine/bin/wine"
-        self.assertEqual(cli.wine_env(wine), {"DYLD_FALLBACK_LIBRARY_PATH": f"{contents / 'Frameworks'}:/usr/lib"})
-        self.assertEqual(cli.wine_env("/opt/homebrew/bin/wine"), {})
+        self.assertEqual(install.wine_env(wine), {"DYLD_FALLBACK_LIBRARY_PATH": f"{contents / 'Frameworks'}:/usr/lib"})
+        self.assertEqual(install.wine_env("/opt/homebrew/bin/wine"), {})
         if platform.system() == "Darwin":
             script = cli.windows_wrapper({"wine": str(wine)}, self.d / "pfx", "C:\\g.exe", self.d / "launch.sh",
                                          self.d / "pfx/drive_c/Game Dir")

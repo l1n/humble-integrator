@@ -240,6 +240,57 @@ class SteamTest(unittest.TestCase):
         self.assertEqual((folder / "thumbnails" / first["filename"].split("/")[-1]).read_bytes(), b"thumb")
         self.assertEqual(steam.add_screenshots(config, sid, "Offspring Fling", [(jpeg, None, "three")]), 0)
 
+    def test_removing_takes_out_only_what_we_added(self):
+        import json
+        import struct
+        config = self.cfg / "Steam/userdata/123/config"
+        config.mkdir(parents=True)
+        jpeg = b"\xff\xd8\xff\xc0\x00\x11\x08" + struct.pack(">HH", 1080, 1920) + b"\x03" * 8
+        sid, gid = 3873975362, str(steam.game_id(3873975362))
+        steam.add_screenshots(config, sid, "Offspring Fling", [(jpeg, None, f"one · {steam.FROM_STORE}"),
+                                                               (jpeg, None, f"two · {steam.FROM_STORE}")])
+        index = self.cfg / "Steam/userdata/123/760/screenshots.vdf"
+        doc = steam.vdf_loads(index.read_text())
+        doc["Screenshots"][gid]["2"] = {"type": "1", "filename": f"{gid}/screenshots/mine.jpg", "imported": "0",
+                                        "caption": "", "hscreenshot": steam.NOT_UPLOADED}  # one the user took
+        index.write_text(steam.vdf_dumps(doc))
+        folder = index.parent / "remote" / gid / "screenshots"
+        (folder / "mine.jpg").write_bytes(jpeg)
+        self.assertEqual(steam.remove_screenshots(config, sid), 2)
+        left = steam.vdf_loads(index.read_text())["Screenshots"]
+        self.assertEqual([s["filename"] for s in left[gid].values()], [f"{gid}/screenshots/mine.jpg"])
+        self.assertEqual(list(left), [gid, "shortcutnames"])
+        self.assertEqual(sorted(p.name for p in folder.rglob("*.jpg")), ["mine.jpg"])
+        self.assertEqual(steam.remove_screenshots(config, sid), 0)
+        # Notes: ours goes (the file stays, emptied, for Steam Cloud to upload); an edited one stays.
+        steam.add_note(config, "Offspring Fling", "From X", "[p]about[/p]")
+        self.assertEqual(steam.remove_note(config, "Offspring Fling"), "removed")
+        path = steam.notes_path(config, "Offspring Fling")
+        self.assertEqual(json.loads(path.read_text())["notes"], [])
+        cache = steam.vdf_loads((path.parent.parent / "remotecache.vdf").read_text())["2371090"]
+        self.assertEqual(cache[path.name]["syncstate"], "3")
+        steam.add_note(config, "Closure", "From X", "[p]about[/p]")
+        path = steam.notes_path(config, "Closure")
+        data = json.loads(path.read_text())
+        data["notes"][0]["time_modified"] += 60
+        path.write_text(json.dumps(data))
+        self.assertEqual(steam.remove_note(config, "Closure"), "edited")
+        self.assertEqual(steam.remove_note(config, "Shank 2"), "")
+        # Artwork: every kind, and Steam's logo position beside it; another entry's stays.
+        steam.write_artwork(config, sid, {"cover": (b"c", ".png"), "logo": (b"l", ".png"), "icon": (b"i", ".ico")})
+        (config / "grid" / f"{sid}.json").write_text("{}")
+        (config / "grid" / f"{sid}1_hero.png").write_bytes(b"other")
+        self.assertEqual(steam.missing_art(config, sid), {"wide", "hero"})
+        self.assertEqual(steam.remove_artwork(config, sid), 4)
+        self.assertEqual([p.name for p in (config / "grid").iterdir()], [f"{sid}1_hero.png"])
+        # Proton settings: ours go, the user's stay.
+        (self.cfg / "Steam/config").mkdir()
+        steam.set_compat_tool(self.cfg / "Steam", sid, "proton_9")
+        steam.set_compat_tool(self.cfg / "Steam", 42, "proton_8")
+        self.assertEqual(steam.remove_compat_tools(self.cfg / "Steam", [sid, 7]), 1)
+        data = steam.vdf_loads((self.cfg / "Steam/config/config.vdf").read_text())
+        self.assertEqual(list(data["InstallConfigStore"]["Software"]["Valve"]["Steam"]["CompatToolMapping"]), ["42"])
+
     def test_store_match_takes_the_same_name_or_a_prefix_by_the_same_maker(self):
         import io
         import json

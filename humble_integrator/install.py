@@ -222,6 +222,14 @@ def runs_on_current_macos(app):
 
 # ---------------------------------------------------------------- Windows installers
 
+def wine_env(wine):
+    """Extra environment for a Wine inside an app bundle (Kegworks, Wineskin): its libraries
+    (MoltenVK, GStreamer, ...) live in Contents/Frameworks, outside the dynamic loader's path."""
+    contents = next((p for p in Path(wine).parents if p.name == "Contents"), None)
+    frameworks = contents / "Frameworks" if contents else None
+    return {"DYLD_FALLBACK_LIBRARY_PATH": f"{frameworks}:/usr/lib"} if frameworks and frameworks.is_dir() else {}
+
+
 def installer_kind(path):
     path = Path(path)
     if path.suffix.lower() == ".msi":

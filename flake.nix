@@ -22,7 +22,7 @@
             version = "0.1.0";
             src = lib.fileset.toSource {
               root = ./.;
-              fileset = lib.fileset.unions [ ./humble_integrator ./recipes ./tests ];
+              fileset = lib.fileset.unions [ ./humble_integrator ./recipes ./tests ./data/bundle-pages.tsv ];
             };
             nativeBuildInputs = [ pkgs.makeWrapper ];
             nativeCheckInputs = [ pkgs.python3 ];
@@ -38,7 +38,8 @@
               runHook preInstall
               mkdir -p $out/share/humble-integrator $out/bin
               cp -r humble_integrator recipes $out/share/humble-integrator/
-              for tool in census recipes humble drive steam install; do
+              install -Dm644 data/bundle-pages.tsv $out/share/humble-integrator/data/bundle-pages.tsv
+              for tool in census recipes humble drive steam install pages; do
                 makeWrapper ${pkgs.python3}/bin/python3 $out/bin/hi-$tool \
                   --add-flags "-I $out/share/humble-integrator/humble_integrator/$tool.py" \
                   --prefix PATH : ${lib.makeBinPath runtimePath}

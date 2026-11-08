@@ -7,6 +7,7 @@ and how it is delivered (Steam key, DRM-free download, other key, ...).
     python3 -I humble_integrator/census.py list  --cache DIR
     python3 -I humble_integrator/census.py fetch --cache DIR [--workers N]
     python3 -I humble_integrator/census.py parse --cache DIR --out data/census   (one .jsonl per category)
+    python3 -I humble_integrator/census.py index --census data/census --out data/bundle-pages.tsv
 
 `list` and `fetch` are resumable: everything fetched is cached under DIR.
 """
@@ -66,12 +67,12 @@ class Throttle:
 THROTTLE = Throttle(1.0)
 
 
-def http_get(url, *, attempts=8, base_delay=5.0):
+def http_get(url, *, attempts=8, base_delay=5.0, ua=UA):
     """GET with backoff on archive.org's 429/5xx and 'Temporarily Offline' pages."""
     for attempt in range(attempts):
         THROTTLE.wait()
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Encoding": "gzip"})
+            req = urllib.request.Request(url, headers={"User-Agent": ua, "Accept-Encoding": "gzip"})
             with urllib.request.urlopen(req, timeout=120) as resp:
                 body = resp.read()
                 if resp.headers.get("Content-Encoding") == "gzip":
@@ -405,6 +406,17 @@ def cmd_parse(args):
           f"{misses} without item data", file=sys.stderr)
 
 
+def cmd_index(args):
+    """Where each census bundle's page is (pages.py looks a bundle's artwork up there):
+    machine name, category, slug and the archived capture, one bundle per line."""
+    rows = {}
+    for b in iter_census(args.census):
+        if b.get("machine_name"):
+            rows.setdefault(b["machine_name"], (b["category"], b["slug"], b["snapshot"]))
+    Path(args.out).write_text("".join(f"{m}\t{c}\t{s}\t{t}\n" for m, (c, s, t) in sorted(rows.items())))
+    print(f"{len(rows)} bundle pages -> {args.out}", file=sys.stderr)
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -415,8 +427,11 @@ def main(argv=None):
     sub.choices["fetch"].add_argument("--only", nargs="*", choices=CATEGORIES)
     sub.choices["fetch"].add_argument("--skip-census", help="skip bundles already in this census (file or directory)")
     sub.choices["parse"].add_argument("--out", required=True)
+    ix = sub.add_parser("index")
+    ix.add_argument("--census", default="data/census")
+    ix.add_argument("--out", default="data/bundle-pages.tsv")
     args = p.parse_args(argv)
-    {"list": cmd_list, "fetch": cmd_fetch, "parse": cmd_parse}[args.cmd](args)
+    {"list": cmd_list, "fetch": cmd_fetch, "parse": cmd_parse, "index": cmd_index}[args.cmd](args)
 
 
 if __name__ == "__main__":
