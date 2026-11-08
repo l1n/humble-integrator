@@ -32,6 +32,24 @@ Gets everything in a Humble Bundle account into Steam, on macOS and Linux.
 
 ## Screenshots
 
+### In Steam
+
+From a real account on macOS 26 (Humble Indie Bundle 7, bought in 2012). A game
+installed from its Humble download, here the Windows build under Wine because
+the 2012 Mac build is 32-bit: SteamGridDB artwork, a note with Humble's
+description and the game's store page, and the store page's screenshots:
+
+![Offspring Fling in Steam](docs/img/steam-game-offspring-fling.jpg)
+
+![Cave Story+ in Steam, with its screenshots](docs/img/steam-game-cave-story.jpg)
+
+A bundle of comics is one entry: Play opens a page with a folder for each
+download, and its note lists what's in it:
+
+![A comics bundle in Steam](docs/img/steam-bundle-entry.jpg)
+
+### hi itself
+
 From a fake demo account (`docs/demo/seed_demo_account.py`; regenerate with
 `docs/demo/screenshots.sh`). Games are invented and every key is a `DEMO-…`
 placeholder; the vendor items use real Humble machine names, so they resolve to
