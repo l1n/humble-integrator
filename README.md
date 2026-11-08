@@ -51,8 +51,9 @@ description and the game's store page, and the store page's screenshots:
 
 ![Cave Story+ in Steam, with its screenshots](docs/img/steam-game-cave-story.jpg)
 
-A bundle of comics is one entry: Play opens a page with a folder for each
-download, and its note lists what's in it:
+A bundle of comics is one entry, with art from the bundle's own Humble page (here
+as archived in 2014): Play opens a page with a folder for each download, its note
+lists what's in it, and its Screenshots panel shows the comics:
 
 ![A comics bundle in Steam](docs/img/steam-bundle-entry.jpg)
 
