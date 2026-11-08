@@ -370,7 +370,7 @@ def apply(cfg, book, plan, only=None, dry_run=False, log=print):
             log(f"    - {step}")
     if shortcuts and not dry_run:
         if steam.steam_running():
-            log("Steam is running: quit it and re-run `hi apply --only generic/drm-free-app` to add shortcuts")
+            log("Steam is running: quit it and re-run the same `hi apply` to add shortcuts (finished downloads are skipped)")
         else:
             made = [(*steam.make_shortcut(n, str(x), launch_options=o), images) for n, x, o, images in shortcuts]
             art = {}
