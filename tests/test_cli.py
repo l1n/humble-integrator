@@ -193,8 +193,10 @@ class CliTest(unittest.TestCase):
         self.assertEqual(cli.wine_env(wine), {"DYLD_FALLBACK_LIBRARY_PATH": f"{contents / 'Frameworks'}:/usr/lib"})
         self.assertEqual(cli.wine_env("/opt/homebrew/bin/wine"), {})
         if platform.system() == "Darwin":
-            script = cli.windows_wrapper({"wine": str(wine)}, self.d / "pfx", "C:\\g.exe", self.d / "launch.sh")
+            script = cli.windows_wrapper({"wine": str(wine)}, self.d / "pfx", "C:\\g.exe", self.d / "launch.sh",
+                                         self.d / "pfx/drive_c/Game Dir")
             self.assertIn("DYLD_FALLBACK_LIBRARY_PATH=", script.read_text())
+            self.assertIn(f"cd '{self.d}/pfx/drive_c/Game Dir' || exit 1", script.read_text())
 
     def test_dry_run_touches_nothing(self):
         cfg = {"games": self.d / "games", "library": self.d / "lib", "umu": "umu-run"}

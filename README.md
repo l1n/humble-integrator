@@ -101,19 +101,28 @@ launcher detection, Steam `shortcuts.vdf` / `config.vdf` writing, the
 installer-driver script generation, and the `hi` plan/apply flow on a fake
 account.
 
-Verified live: the installer driver runs AutoHotkey inside Wine and sees a
-real ProFantasy (InstallAware) installer's windows. Whisky's Wine 7.7 hangs at
-the installer's verify step (a known issue); Wine 10 gets past it to the
-wizard. The driver's full walk through the wizard has not been run yet.
+Verified live against a real Humble account (macOS 26, November 2026):
+`hi keys` reads orders and keys (nothing revealed); `hi plan` routes every item;
+`hi apply` downloads games, ebooks and audio, unpacks them, adds Steam shortcuts
+with SteamGridDB artwork and one entry per bundle for the non-games. That run
+found and fixed: 2012-era 32-bit Mac builds (now swapped for the Windows build
+under Wine; Cave Story+ starts and runs from its Steam wrapper under Kegworks'
+Wine 10), Humble checksums gone stale after a publisher replaced a file,
+CDN stalls on multi-GB downloads (now resumed), and a DirectX web installer
+hanging a game's installer under Wine (now stopped after 5 minutes).
 
-Not yet verified against a real account: Humble's API field names (taken from
-existing open-source tools), Steam activation, and the vendor recipes, all of
-which are `verified = false` until someone runs them end to end — that's the
-most useful contribution (see `CONTRIBUTING.md`).
+Also verified live: the installer driver runs AutoHotkey inside Wine and sees a
+real ProFantasy (InstallAware) installer's windows; its full walk through the
+wizard has not been run yet.
 
-Recipe coverage: 539 recipes (117 vendors, 416 products, 6 generic routes) resolve every item of every
-software bundle in the census so far; game and book bundles are being added.
-Run `python3 humble_integrator/recipes.py cover --census data/census`
+Not yet verified: activating keys on Steam (the tool only pre-fills Steam's own
+activation page), and the vendor recipes, all of which are `verified = false`
+until someone redeems through them end to end — that's the most useful
+contribution (see `CONTRIBUTING.md`).
+
+Recipe coverage: 876 recipes (206 vendors, 656 products, 14 generic routes)
+cover all but 41 of the 68,268 items in 2,703 Humble software, game and book
+bundles in the census. Run `python3 humble_integrator/recipes.py cover --census data/census`
 for the current numbers.
 
 ## Data

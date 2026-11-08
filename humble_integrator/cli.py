@@ -200,8 +200,9 @@ def wine_env(wine):
     return {"DYLD_FALLBACK_LIBRARY_PATH": f"{frameworks}:/usr/lib"} if frameworks and frameworks.is_dir() else {}
 
 
-def windows_wrapper(cfg, prefix, exe_windows_path, script_path):
-    """A launch script that runs a Windows program in a fixed prefix (shortcut target)."""
+def windows_wrapper(cfg, prefix, exe_windows_path, script_path, workdir=None):
+    """A launch script that runs a Windows program in a fixed prefix (shortcut target), from
+    WORKDIR (the exe's folder: games find their data relative to it; Steam starts us elsewhere)."""
     if platform.system() == "Linux":
         cmd = f'GAMEID=0 WINEPREFIX={shlex.quote(str(prefix))} exec {shlex.quote(cfg["umu"])} {shlex.quote(exe_windows_path)} "$@"'
     else:
@@ -209,7 +210,8 @@ def windows_wrapper(cfg, prefix, exe_windows_path, script_path):
             raise SystemExit("Windows-only build on macOS: set wine = \"/path/to/wine\" in " + str(CONFIG))
         env = "".join(f"{k}={shlex.quote(v)} " for k, v in wine_env(cfg["wine"]).items())
         cmd = f'{env}WINEPREFIX={shlex.quote(str(prefix))} exec {shlex.quote(cfg["wine"])} {shlex.quote(exe_windows_path)} "$@"'
-    script_path.write_text("#!/bin/sh\n" + cmd + "\n")
+    cd = f"cd {shlex.quote(str(workdir))} || exit 1\n" if workdir else ""
+    script_path.write_text("#!/bin/sh\n" + cd + cmd + "\n")
     script_path.chmod(0o755)
     return script_path
 
@@ -249,7 +251,7 @@ def install_build(cfg, entry, log=print):
         if not exe_win:
             log(f"  installed {item['human_name']} but couldn't find its exe; add the shortcut by hand")
             return None
-        return item["human_name"], windows_wrapper(cfg, prefix, exe_win, home / "launch.sh")
+        return item["human_name"], windows_wrapper(cfg, prefix, exe_win, home / "launch.sh", exe.parent)
     app_dir = install.unpack(archive, home / "app")
     exe = install.find_launcher(app_dir, platform.system(), item["human_name"])
     if not exe:
