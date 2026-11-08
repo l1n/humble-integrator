@@ -8,6 +8,9 @@
                ebooks/audio/files -> download into the library folder; one Steam entry per bundle
                                  opens a page with its files and the keys left to redeem
                vendor routes  -> redemption steps (and the vendor's installers, where a recipe drives them)
+               each Steam entry gets a note (Steam's Notes panel): Humble's description, developer,
+                                 bundle and purchase date, how it runs; a bundle's lists its contents
+    hi notes   [--bundle NAME ...]           add those notes to Humble entries already in Steam
 
 Config (optional): ~/.config/humble-integrator/config.toml
     library = "~/Humble"            games = "~/Games/Humble"
@@ -21,6 +24,7 @@ Config (optional): ~/.config/humble-integrator/config.toml
 """
 
 import argparse
+import datetime
 import html
 import os
 import platform
@@ -32,7 +36,9 @@ import sys
 import tomllib
 import webbrowser
 from collections import defaultdict
+from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import urlsplit
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import humble  # noqa: E402
@@ -67,7 +73,7 @@ def account_items(orders):
     for order in orders:
         product = order.get("product") or {}
         bundle = {"slug": (product.get("machine_name") or "").replace("_", "-"),
-                  "human_name": product.get("human_name", "")}
+                  "human_name": product.get("human_name", ""), "bought": order.get("created") or ""}
         for sub in order.get("subproducts") or []:
             dls = [d for d in humble.downloads_in_order({"gamekey": order.get("gamekey"), "subproducts": [sub]})]
             if not dls:
@@ -84,7 +90,8 @@ def account_items(orders):
             payee = (sub.get("payee") or {}).get("human_name")
             yield {"machine_name": sub.get("machine_name", ""), "human_name": sub.get("human_name", ""),
                    "content_type": content, "delivery": delivery, "developers": [payee] if payee else [],
-                   "publishers": [], "downloads": dls, "icon": sub.get("icon") or ""}, bundle
+                   "publishers": [], "downloads": dls, "icon": sub.get("icon") or "",
+                   "about": sub.get("display_item") or {}, "url": sub.get("url") or ""}, bundle
 
 
 def select_bundles(orders, patterns):
@@ -192,6 +199,119 @@ def _thumb(url):
     return f'<img src="{html.escape(url)}" alt="" loading="lazy">' if url.startswith("https://") else ""
 
 
+# ---------------------------------------------------------------- Steam notes
+# Steam shows no store details for a non-Steam game; its Notes panel is where they can go.
+
+class _BBCode(HTMLParser):
+    """Humble's description HTML as the BBCode Steam notes use."""
+    TAGS = {"p": "p", "b": "b", "strong": "b", "i": "i", "em": "i", "u": "u", "ul": "list", "ol": "olist"}
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.out, self.links = [], []
+
+    def handle_starttag(self, tag, attrs):
+        if tag in self.TAGS:
+            self.out.append(f"[{self.TAGS[tag]}]")
+        elif tag == "li":
+            self.out.append("[*]")
+        elif tag == "br":
+            self.out.append("\n")
+        elif tag == "a":
+            href = dict(attrs).get("href") or ""
+            self.links.append(bool(_url(href)))
+            self.out.append(f"[url={href}]" if self.links[-1] else "")
+
+    def handle_endtag(self, tag):
+        if tag in self.TAGS:
+            self.out.append(f"[/{self.TAGS[tag]}]")
+        elif tag == "a" and self.links and self.links.pop():
+            self.out.append("[/url]")
+
+    def handle_data(self, data):
+        self.out.append(_bbtext(re.sub(r"\s+", " ", data)))
+
+
+def _bbtext(s):
+    return s.replace("[", "(").replace("]", ")")  # text, not tags
+
+
+def _url(u):
+    return u if u.startswith(("https://", "http://")) and not re.search(r"[\s\[\]]", u) else ""
+
+
+def bbcode(fragment):
+    p = _BBCode()
+    p.feed(fragment or "")
+    p.close()
+    out = "".join(p.out).strip()
+    return out if not out or out.startswith(("[p]", "[list]", "[olist]")) else f"[p]{out}[/p]"
+
+
+def _link(name, url):
+    return f"[url={url}]{_bbtext(name or urlsplit(url).netloc.removeprefix('www.'))}[/url]" if _url(url) \
+        else _bbtext(name)
+
+
+def _date(iso):
+    try:
+        d = datetime.date.fromisoformat((iso or "")[:10])
+    except ValueError:
+        return ""
+    return f"{d.day} {d:%B %Y}"
+
+
+def _bblist(lines, cap=40):
+    lines = list(lines)
+    more = [f"... and {len(lines) - cap} more"] if len(lines) > cap else []
+    return "[list]" + "".join(f"[*]{s}" for s in lines[:cap] + more) + "[/list]"
+
+
+NOTE_FOOTER = "[p][i]Added by humble-integrator from your Humble library. Edit or delete it as you like.[/i][/p]"
+
+
+def game_note(item, bundle, exe, home):
+    """(title, BBCode) for a game's shortcut: Humble's description, who made it, where it came
+    from and how it runs here."""
+    about = item.get("about") or {}
+    payee = (item.get("developers") or [""])[0]
+    devs = about.get("developers") or []
+    facts = []
+    made_by = ", ".join(_link(d.get("developer-name") or (payee if len(devs) == 1 else ""), d.get("developer-url") or "")
+                        for d in devs) or _link(payee, item.get("url") or "")
+    if made_by:
+        facts.append(f"[b]Developer:[/b] {made_by}")
+    pubs = [_bbtext(p["publisher-name"]) for p in about.get("publishers") or [] if p.get("publisher-name")]
+    if pubs:
+        facts.append(f"[b]Publisher:[/b] {', '.join(pubs)}")
+    trailer = next(iter(((about.get("carousel-content") or {}).get("youtube-link") or [])), "")
+    if re.fullmatch(r"[\w-]+", trailer):
+        facts.append(f"[b]Trailer:[/b] [url=https://www.youtube.com/watch?v={trailer}]YouTube[/url]")
+    bought = ", ".join(s for s in (_bbtext(bundle.get("human_name", "")), _date(bundle.get("bought"))) if s)
+    if bought:
+        facts.append(f"[b]Bought:[/b] {bought}")
+    if Path(exe).name == "launch.sh":
+        runner = "Proton (umu-launcher)" if platform.system() == "Linux" else "Wine"
+        how = f"Windows build, run through {runner}"
+    else:
+        how = "native build"
+    facts.append(f"[b]Installed:[/b] {how}, in {_bbtext(tilde(home))}")
+    title = f"From {bundle['human_name']}" if bundle.get("human_name") else "From Humble"
+    return title, bbcode(about.get("description-text")) + _bblist(facts) + NOTE_FOOTER
+
+
+def bundle_note(files, keys, bought=""):
+    """(title, BBCode) for a bundle's entry: what Play opens, and what's in it."""
+    body = "[p]Play opens this bundle's page: a folder for each download and the keys still to redeem.[/p]"
+    if files:
+        body += f"[p][b]Downloaded ({len(files)})[/b][/p]" + _bblist(_bbtext(n) for n in files)
+    if keys:
+        body += f"[p][b]To redeem ({len(keys)})[/b][/p]" + _bblist(f"{_bbtext(n)} ({_bbtext(v)})" for n, v in keys)
+    if bought:
+        body += f"[p][b]Bought:[/b] {_date(bought)}[/p]"
+    return "What's in this bundle", body + NOTE_FOOTER
+
+
 def wine_env(wine):
     """Extra environment for a Wine inside an app bundle (Kegworks, Wineskin): its libraries
     (MoltenVK, GStreamer, ...) live in Contents/Frameworks, outside the dynamic loader's path."""
@@ -278,10 +398,16 @@ def keep_as_files(cfg, item, unpacked, log):
     return None
 
 
+def bought_dates(plan):
+    return {e["bundle"]["human_name"]: e["bundle"].get("bought", "")
+            for entries in plan.values() for e in entries if e["kind"] == "download"}
+
+
 def apply(cfg, book, plan, only=None, dry_run=False, log=print):
     shortcuts = []  # (name, exe, launch options, Humble image urls for fallback art)
     redeem_groups = {}  # (where, steps) -> key names: one set of instructions per vendor
     pages = defaultdict(lambda: {"files": [], "redeem": []})  # bundle -> its non-game content
+    notes = {}  # shortcut name -> (title, BBCode) for Steam's Notes panel
     failed = []
 
     def attempt(what, fn, *args):
@@ -307,6 +433,8 @@ def apply(cfg, book, plan, only=None, dry_run=False, log=print):
                     got = attempt(e["item"]["human_name"], install_build, cfg, e, log)
                     if got:
                         shortcuts.append((*got, "", [e["item"]["icon"]]))
+                        notes[got[0]] = game_note(e["item"], e["bundle"], got[1],
+                                                  cfg["games"] / e["item"]["machine_name"])
                     elif (cfg["library"] / "files" / e["item"]["machine_name"]).exists():
                         pages[e["bundle"]["human_name"]]["files"].append(
                             (e["item"]["human_name"], cfg["library"] / "files" / e["item"]["machine_name"],
@@ -347,7 +475,10 @@ def apply(cfg, book, plan, only=None, dry_run=False, log=print):
                                       cfg, dict(e, build=humble.pick_build(e["item"]["downloads"])), log)
                         steam_cfg = r.data.get("steam", {})
                         if got and steam_cfg.get("shortcut", True):
-                            shortcuts.append((steam_cfg.get("title") or got[0], got[1], "", [e["item"]["icon"]]))
+                            name = steam_cfg.get("title") or got[0]
+                            shortcuts.append((name, got[1], "", [e["item"]["icon"]]))
+                            notes[name] = game_note(e["item"], e["bundle"], got[1],
+                                                    cfg["games"] / e["item"]["machine_name"])
                     continue
                 dest = cfg["library"] / (r.vendor or rid.replace("/", "-")) / e["item"]["machine_name"]
                 for d in e["build"] or e["item"]["downloads"]:
@@ -364,6 +495,9 @@ def apply(cfg, book, plan, only=None, dry_run=False, log=print):
             for bundle_name, content in pages.items():
                 page = bundle_page(cfg, bundle_name, content)
                 shortcuts.append((bundle_name, opener, f'"{page}"', [icon for *_, icon in content["files"]]))
+                notes[bundle_name] = bundle_note([n for n, *_ in content["files"]],
+                                                 [(k.human_name, vendor) for k, _, vendor in content["redeem"]],
+                                                 bought_dates(plan).get(bundle_name, ""))
     for (where, steps), names in redeem_groups.items():
         log(f"redeem {len(names)} key(s) at {where}: {', '.join(names)}")
         for step in steps:
@@ -383,6 +517,7 @@ def apply(cfg, book, plan, only=None, dry_run=False, log=print):
                         log(f"  no SteamGridDB artwork for {entry['AppName']}: {exc}")
                 if not {"cover", "icon"} <= art[sid].keys():  # e.g. a whole bundle: use Humble's own images
                     art[sid] = {**steam.art_from_images(images), **art[sid]}
+            noted = 0
             for root in steam.steam_roots():
                 for c in steam.target_config_dirs(root, cfg.get("steam_user")):
                     entries = []
@@ -391,10 +526,53 @@ def apply(cfg, book, plan, only=None, dry_run=False, log=print):
                         icon = next((str(w) for w in written if w.stem.endswith("_icon")), "")
                         entries.append(dict(entry, icon=icon) if icon else entry)
                     steam.upsert_shortcuts(c, entries)
-            log(f"added {len(shortcuts)} Steam shortcuts ({len([a for a in art.values() if a])} with artwork)")
+                    noted += sum(steam.add_note(c, e["AppName"], *notes[e["AppName"]])
+                                 for e in entries if e["AppName"] in notes)
+            log(f"added {len(shortcuts)} Steam shortcuts ({len([a for a in art.values() if a])} with artwork, "
+                f"{noted} new notes)")
     if failed:
         log(f"{len(failed)} failed (re-run `hi apply` to retry; finished ones are skipped): {', '.join(failed)}")
     return failed
+
+
+def add_notes(cfg, book, plan, log=print):
+    """Notes for the Humble entries already in Steam (from an earlier `hi apply`); installs nothing.
+    Returns the number added: a shortcut that already has our note keeps it."""
+    if steam.steam_running():
+        log("Steam is running: quit it first (it rewrites its list of cloud files)")
+        return 0
+    games, files, keys = {}, defaultdict(list), defaultdict(list)  # as `hi apply` sorts them
+    for rid, entries in plan.items():
+        r = book.recipes.get(rid)
+        for e in entries:
+            if e["kind"] == "download":
+                if rid == "generic/drm-free-app":
+                    games[e["item"]["human_name"]] = e
+                elif r and r.layer == "item" and r.kind == "app":
+                    games[r.data.get("steam", {}).get("title") or e["item"]["human_name"]] = e
+                else:
+                    files[e["bundle"]["human_name"]].append(e["item"]["human_name"])
+            elif r and rid not in ("generic/steam-key", "generic/humble-coupon") and not r.data.get("skip"):
+                vendor = book.recipes.get(f"vendors/{r.vendor}") if r.vendor else None
+                keys[e["key"].bundle].append((e["key"].human_name, (vendor or r).data.get("name", rid)))
+    bought, added = bought_dates(plan), 0
+    for root in steam.steam_roots():
+        for c in steam.target_config_dirs(root, cfg.get("steam_user")):
+            for s in steam.read_shortcuts(c).values():
+                name = s.get("AppName", "")
+                if steam.TAG not in (s.get("tags") or {}).values():
+                    continue
+                if name in games:
+                    e = games[name]
+                    note = game_note(e["item"], e["bundle"], s.get("Exe", "").strip('"'),
+                                     cfg["games"] / e["item"]["machine_name"])
+                elif name in files or name in keys:
+                    note = bundle_note(files.get(name, []), keys.get(name, []), bought.get(name, ""))
+                else:
+                    continue
+                added += steam.add_note(c, name, *note)
+    log(f"added {added} note(s) to Humble entries in Steam")
+    return added
 
 
 def main(argv=None):
@@ -407,7 +585,8 @@ def main(argv=None):
     a = sub.add_parser("apply")
     a.add_argument("--only", nargs="*")
     a.add_argument("--dry-run", action="store_true")
-    for sp in (pl, a):
+    n = sub.add_parser("notes", help="add notes to the Humble entries already in Steam")
+    for sp in (pl, a, n):
         sp.add_argument("--bundle", nargs="*", help="only bundles whose name or machine name contains one of these")
     args = p.parse_args(argv)
     if args.cmd == "keys":
@@ -432,6 +611,8 @@ def main(argv=None):
     plan = make_plan(book, orders, keys)
     if args.cmd == "plan":
         print_plan(book, plan)
+    elif args.cmd == "notes":
+        add_notes(cfg, book, plan)
     else:
         return 1 if apply(cfg, book, plan, set(args.only or []), args.dry_run) else 0
 

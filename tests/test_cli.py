@@ -122,6 +122,57 @@ class CliTest(unittest.TestCase):
         entries = list(steam.read_shortcuts(root / "userdata/123/config").values())
         self.assertEqual([e["AppName"] for e in entries], ["Map Making MEGA Bundle Encore"])
         self.assertIn(str(page), entries[0]["LaunchOptions"])
+        note = steam.notes_path(root / "userdata/123/config", "Map Making MEGA Bundle Encore").read_text()
+        self.assertIn("[*]A Book", note)
+
+    def test_notes_carry_humbles_description_and_what_steam_cant_show(self):
+        self.assertEqual(cli.bbcode('<span>In <i>Closure</i>, <a href="https://c.com">see</a> '
+                                    '<a href="javascript:x()">this</a> [b]\n now</span>'),
+                         "[p]In [i]Closure[/i], [url=https://c.com]see[/url] this (b) now[/p]")
+        self.assertEqual(cli.bbcode("<p>One</p><ul><li>a</li></ul>"), "[p]One[/p][list][*]a[/list]")
+        item = {"human_name": "Isaac", "machine_name": "isaac", "developers": ["Edmund McMillen"], "url": "",
+                "about": {"description-text": "<p>Tears.</p>",
+                          "developers": [{"developer-url": "http://edmundm.com/"}],
+                          "publishers": [{"publisher-name": "Edmund McMillen"}],
+                          "carousel-content": {"youtube-link": ["cLLFFtwddDk"]}}}
+        bundle = {"human_name": "Humble Indie Bundle 7", "bought": "2012-12-21T18:34:20.545630"}
+        title, body = cli.game_note(item, bundle, Path("/g/isaac/launch.sh"), Path("/g/isaac"))
+        self.assertEqual(title, "From Humble Indie Bundle 7")
+        self.assertTrue(body.startswith("[p]Tears.[/p][list]"))
+        self.assertIn("[b]Developer:[/b] [url=http://edmundm.com/]Edmund McMillen[/url]", body)  # name from the payee
+        self.assertIn("[b]Publisher:[/b] Edmund McMillen", body)
+        self.assertIn("[url=https://www.youtube.com/watch?v=cLLFFtwddDk]", body)
+        self.assertIn("[b]Bought:[/b] Humble Indie Bundle 7, 21 December 2012", body)
+        self.assertIn("[b]Installed:[/b] Windows build, run through", body)
+        bare = cli.game_note({"human_name": "X", "machine_name": "x"}, {"human_name": ""}, Path("/g/x/X.app"), Path("/g/x"))
+        self.assertEqual(bare[0], "From Humble")
+        self.assertIn("native build", bare[1])
+
+    def test_hi_notes_adds_notes_to_entries_already_in_steam(self):
+        import json
+        import steam
+        root = self.d / "Steam"
+        config = root / "userdata" / "123" / "config"
+        config.mkdir(parents=True)
+        game = steam.make_shortcut("Cool Game", str(self.d / "g/coolgame/app/cool"))[1]
+        page = steam.make_shortcut("Map Making MEGA Bundle Encore", "/usr/bin/open", launch_options='"x"')[1]
+        users = dict(steam.make_shortcut("Cool Game", "/Applications/Cool.app")[1], tags={})  # the user's own
+        steam.upsert_shortcuts(config, [game, page, users])
+        saved = (steam.steam_roots, steam.steam_running)
+        steam.steam_roots, steam.steam_running = lambda: [root], lambda: False
+        try:
+            cfg = {"games": self.d / "g", "library": self.d / "lib", "umu": "umu-run"}
+            plan = cli.make_plan(self.book, ORDERS, self.keys)
+            self.assertEqual(cli.add_notes(cfg, self.book, plan, log=lambda *_: None), 2)
+            self.assertEqual(cli.add_notes(cfg, self.book, plan, log=lambda *_: None), 0)  # once only
+        finally:
+            steam.steam_roots, steam.steam_running = saved
+        [g] = json.loads(steam.notes_path(config, "Cool Game").read_text())["notes"]
+        self.assertIn("native build", g["content"])
+        [b] = json.loads(steam.notes_path(config, "Map Making MEGA Bundle Encore").read_text())["notes"]
+        self.assertEqual(b["title"], "What's in this bundle")
+        self.assertIn("[*]A Book", b["content"])
+        self.assertIn("[*]Dungeon Designer 3 (ProFantasy Software)", b["content"])
 
     def test_bundle_filter_keeps_only_matching_orders_and_their_keys(self):
         other = {"gamekey": "GK2", "product": {"machine_name": "hib7", "human_name": "Humble Indie Bundle 7"}}

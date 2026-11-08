@@ -196,7 +196,8 @@ def mac_archs(app):
     macos = app / "Contents" / "MacOS"
     exe = macos / exe_name if exe_name else next((p for p in sorted(macos.glob("*")) if p.is_file()), None)
     try:
-        head = exe.open("rb").read(4096)
+        with exe.open("rb") as f:
+            head = f.read(4096)
     except (OSError, AttributeError):
         return set()
     magic = head[:4]

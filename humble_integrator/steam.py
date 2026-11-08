@@ -1,4 +1,4 @@
-"""Non-Steam shortcuts: shortcuts.vdf, grid artwork, and Proton mapping.
+"""Non-Steam shortcuts: shortcuts.vdf, grid artwork, notes, and Proton mapping.
 
 Every entry this tool writes carries the tag "Humble" and is keyed by its
 Steam shortcut id, so re-running updates our entries and never touches the
@@ -11,6 +11,8 @@ Steam is running.
 
 import argparse
 import binascii
+import hashlib
+import json
 import os
 import platform
 import re
@@ -243,6 +245,69 @@ def upsert_shortcuts(config_dir, entries, remove_ids=()):
     backup(path)
     path.write_bytes(bvdf_dump({"shortcuts": {str(i): s for i, s in enumerate(merged)}}))
     return len(merged)
+
+
+NOTES_APP = "2371090"  # Steam keeps game notes in this app's cloud folder
+NOTE_ID = "humbleintegrator"
+
+
+def notes_path(config_dir, shortcut_name):
+    """A non-Steam game's notes file: named after its display name, ASCII punctuation and
+    spaces as "_" (FilenameForNotes in Steam's client UI)."""
+    safe = re.sub(r"[!-/:-@ \[\\\]^`]", "_", shortcut_name.strip())
+    return Path(config_dir).parent / NOTES_APP / "remote" / f"notes_shortcut_{safe}"
+
+
+def add_note(config_dir, shortcut_name, title, bbcode):
+    """Add our note (Steam's Notes panel, BBCode) to a shortcut's notes; Steam syncs them via
+    Steam Cloud. The user's notes are kept, and so is ours once there: they may have edited it."""
+    path, name = notes_path(config_dir, shortcut_name), shortcut_name.strip()
+    data = {"notes": [], "shortcut_name": name}
+    if path.exists():
+        try:
+            data = json.loads(path.read_text())
+        except ValueError:
+            return False  # not ours to repair
+        if any(n.get("id") == NOTE_ID for n in data.get("notes", [])):
+            return False
+        # back up outside remote/, which is Steam Cloud's
+        shutil.copy2(path, path.parent.parent / f"{path.name}.bak-{time.strftime('%Y%m%d-%H%M%S')}")
+    now = int(time.time())
+    notes = data.setdefault("notes", [])
+    notes.append({"id": NOTE_ID, "shortcut_name": name, "ordinal": len(notes), "time_created": now,
+                  "time_modified": now, "title": title, "content": bbcode})
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(data))
+    track_cloud_file(path)
+    return True
+
+
+def track_cloud_file(path):
+    """List a file we wrote in an app's remote/ folder in Steam Cloud's remotecache.vdf as a
+    local change waiting to upload (syncstate 3). Steam only reads cloud files listed there,
+    and uploads this one on its next sync. Steam rewrites the cache, so it must not be running."""
+    app_dir = Path(path).parent.parent
+    cache = app_dir / "remotecache.vdf"
+    files = vdf_loads(cache.read_text()).get(app_dir.name, {}) if cache.exists() else {}
+    if not files:
+        files = {"ChangeNumber": "0", "ostype": _cloud_ostype(app_dir.parent)}
+    data, mtime = Path(path).read_bytes(), str(int(Path(path).stat().st_mtime))
+    files[Path(path).name] = {
+        "root": "0", "size": str(len(data)), "localtime": mtime, "time": mtime,
+        "remotetime": (files.get(Path(path).name) or {}).get("remotetime", "0"),
+        "sha": hashlib.sha1(data).hexdigest(), "syncstate": "3", "persiststate": "0", "platformstosync2": "-1"}
+    if cache.exists():
+        shutil.copy2(cache, app_dir / f"remotecache.vdf.bak-{time.strftime('%Y%m%d-%H%M%S')}")
+    cache.write_text(vdf_dumps({app_dir.name: files}))
+
+
+def _cloud_ostype(user_dir):
+    """The OS id Steam stamps on this machine's cloud caches (copied from another app's)."""
+    for cache in sorted(Path(user_dir).glob("*/remotecache.vdf")):
+        for files in vdf_loads(cache.read_text()).values():
+            if isinstance(files, dict) and "ostype" in files:
+                return files["ostype"]
+    return "0"
 
 
 ART = {"cover": "{id}p", "wide": "{id}", "hero": "{id}_hero", "logo": "{id}_logo", "icon": "{id}_icon"}

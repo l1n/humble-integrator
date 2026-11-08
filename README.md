@@ -20,6 +20,12 @@ Gets everything in a Humble Bundle account into Steam, on macOS and Linux.
   content gets **one** Steam entry that opens a page for that bundle: its
   downloaded folders and the keys still to redeem — so a 300-ebook bundle is
   one library entry, not 300. Turn off with `bundle_shortcuts = false`.
+- **Steam notes.** Steam shows no store details for a non-Steam entry ("Some
+  detailed information is unavailable…"), so each entry gets a note in its
+  Notes panel: Humble's description, developer and publisher, trailer, the
+  bundle and date you bought it, and how it runs; a bundle's entry lists what's
+  in it. Notes sync through Steam Cloud. `hi notes` adds them to entries made
+  by an earlier `hi apply`.
 
 ## Screenshots
 
@@ -91,6 +97,7 @@ Optional config: `~/.config/humble-integrator/config.toml` (see `hi --help`).
   stops rather than touch an "already installed: repair/remove" page.
 - Steam files are backed up before every write; only entries tagged
   `Humble` are ever changed or removed; nothing is written while Steam runs.
+  Notes you wrote are kept, and ours is never rewritten once it's there.
 - Archives can't write outside their install folder.
 
 ## Status
@@ -109,7 +116,10 @@ found and fixed: 2012-era 32-bit Mac builds (now swapped for the Windows build
 under Wine; Cave Story+ starts and runs from its Steam wrapper under Kegworks'
 Wine 10), Humble checksums gone stale after a publisher replaced a file,
 CDN stalls on multi-GB downloads (now resumed), and a DirectX web installer
-hanging a game's installer under Wine (now stopped after 5 minutes).
+hanging a game's installer under Wine (now stopped after 5 minutes). Steam
+notes show in the Notes panel and upload to Steam Cloud (Steam client build
+1791918634 on macOS): Steam lists cloud files in `remotecache.vdf`, and ours are
+entered there as local changes waiting to upload.
 
 Also verified live: the installer driver runs AutoHotkey inside Wine and sees a
 real ProFantasy (InstallAware) installer's windows; its full walk through the

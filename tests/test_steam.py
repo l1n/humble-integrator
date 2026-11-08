@@ -175,6 +175,46 @@ class SteamTest(unittest.TestCase):
         (root / "config/loginusers.vdf").unlink()
         self.assertEqual(len(steam.target_config_dirs(root)), 3)  # nothing to go on: every account
 
+    def test_notes_are_named_like_steams_and_listed_in_its_cloud_cache(self):
+        import hashlib
+        import json
+        user = self.cfg / "userdata" / "123"
+        (user / "config").mkdir(parents=True)
+        (user / "632470").mkdir()
+        (user / "632470/remotecache.vdf").write_text(steam.vdf_dumps({"632470": {"ChangeNumber": "5", "ostype": "-102"}}))
+        path = steam.notes_path(user / "config", " Cave Story+ ")
+        self.assertEqual(path, user / "2371090/remote/notes_shortcut_Cave_Story_")
+        self.assertEqual(steam.notes_path(user / "config", "A [b] c^`{x}").name, "notes_shortcut_A__b__c__{x}")
+        self.assertTrue(steam.add_note(user / "config", " Cave Story+ ", "From X", "[p]hi[/p]"))
+        data = json.loads(path.read_text())
+        self.assertEqual(data["shortcut_name"], "Cave Story+")
+        [note] = data["notes"]
+        self.assertEqual((note["id"], note["shortcut_name"], note["title"], note["content"]),
+                         (steam.NOTE_ID, "Cave Story+", "From X", "[p]hi[/p]"))
+        cache = steam.vdf_loads((user / "2371090/remotecache.vdf").read_text())["2371090"]
+        self.assertEqual(cache["ostype"], "-102")  # this machine's, from another app's cache
+        entry = cache[path.name]
+        self.assertEqual((entry["syncstate"], entry["size"], entry["sha"]),  # a local change to upload
+                         ("3", str(path.stat().st_size), hashlib.sha1(path.read_bytes()).hexdigest()))
+
+    def test_add_note_keeps_the_users_notes_and_never_replaces_ours(self):
+        import json
+        config = self.cfg / "userdata" / "123" / "config"
+        config.mkdir(parents=True)
+        path = steam.notes_path(config, "Closure")
+        path.parent.mkdir(parents=True)
+        mine = {"id": "lx1", "shortcut_name": "Closure", "ordinal": 0, "title": "level 3 trick", "content": "[p]x[/p]"}
+        path.write_text(json.dumps({"notes": [mine], "shortcut_name": "Closure"}))
+        self.assertTrue(steam.add_note(config, "Closure", "From X", "[p]about[/p]"))
+        notes = json.loads(path.read_text())["notes"]
+        self.assertEqual([n["id"] for n in notes], ["lx1", steam.NOTE_ID])
+        self.assertEqual(notes[1]["ordinal"], 1)
+        notes[1]["content"] = "[p]edited by the user[/p]"
+        path.write_text(json.dumps({"notes": notes, "shortcut_name": "Closure"}))
+        self.assertFalse(steam.add_note(config, "Closure", "From X", "[p]about[/p]"))
+        self.assertIn("edited by the user", path.read_text())
+        self.assertTrue(list(path.parent.parent.glob("notes_shortcut_Closure.bak-*")))  # outside remote/
+
     def test_owned_app_ids_reads_the_web_api_response(self):
         import io
         import json
