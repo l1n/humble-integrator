@@ -258,6 +258,14 @@ def notes_path(config_dir, shortcut_name):
     return Path(config_dir).parent / NOTES_APP / "remote" / f"notes_shortcut_{safe}"
 
 
+def has_note(config_dir, shortcut_name):
+    path = notes_path(config_dir, shortcut_name)
+    try:
+        return any(n.get("id") == NOTE_ID for n in json.loads(path.read_text()).get("notes", []))
+    except (OSError, ValueError):
+        return False
+
+
 def add_note(config_dir, shortcut_name, title, bbcode):
     """Add our note (Steam's Notes panel, BBCode) to a shortcut's notes; Steam syncs them via
     Steam Cloud. The user's notes are kept, and so is ours once there: they may have edited it."""
@@ -299,6 +307,46 @@ def track_cloud_file(path):
     if cache.exists():
         shutil.copy2(cache, app_dir / f"remotecache.vdf.bak-{time.strftime('%Y%m%d-%H%M%S')}")
     cache.write_text(vdf_dumps({app_dir.name: files}))
+
+
+SCREENSHOTS_APP = "760"
+NOT_UPLOADED = "18446744073709551615"
+
+
+def has_screenshots(config_dir, sid):
+    index = Path(config_dir).parent / SCREENSHOTS_APP / "screenshots.vdf"
+    return index.exists() and bool(vdf_loads(index.read_text()).get("Screenshots", {}).get(str(game_id(sid))))
+
+
+def add_screenshots(config_dir, sid, name, shots):
+    """Fill a shortcut's Screenshots panel: shots = [(jpeg, thumbnail jpeg or None, caption)].
+    Only for a shortcut with no screenshots yet, so the user's own are never mixed in. Local
+    only: nothing is uploaded. Steam rewrites screenshots.vdf, so it must not be running."""
+    gid = str(game_id(sid))
+    base = Path(config_dir).parent / SCREENSHOTS_APP
+    index = base / "screenshots.vdf"
+    doc = vdf_loads(index.read_text()) if index.exists() else {}
+    listed = doc.setdefault("Screenshots", {})
+    if listed.get(gid) or not shots:
+        return 0
+    folder = base / "remote" / gid / "screenshots"
+    (folder / "thumbnails").mkdir(parents=True, exist_ok=True)
+    stamp, now, entries = time.strftime("%Y%m%d%H%M%S"), str(int(time.time())), {}
+    for i, (jpeg, thumb, caption) in enumerate(shots):
+        fn = f"{stamp}_{i + 1}.jpg"  # Steam's own naming: capture time, then a counter
+        (folder / fn).write_bytes(jpeg)
+        (folder / "thumbnails" / fn).write_bytes(thumb or jpeg)
+        w, h = image_size(jpeg) or (0, 0)
+        entries[str(i)] = {"type": "1", "filename": f"{gid}/screenshots/{fn}",
+                           "thumbnail": f"{gid}/screenshots/thumbnails/{fn}", "imported": "1",
+                           "width": str(w), "height": str(h), "gameid": gid, "creation": now,
+                           "caption": caption, "Permissions": "2", "hscreenshot": NOT_UPLOADED}
+    names = listed.pop("shortcutnames", {})
+    listed[gid] = entries
+    listed["shortcutnames"] = {**names, gid: name}  # Steam keeps this section last
+    backup(index)
+    index.write_text(vdf_dumps(doc))
+    return len(entries)
 
 
 def _cloud_ostype(user_dir):
@@ -429,6 +477,67 @@ def steamgriddb_art(api_key, term, opener=None, min_similarity=0.8):
             with opener.open(urllib.request.Request(url, headers={"User-Agent": UA}), timeout=60) as resp:
                 art[kind] = (resp.read(), ext)
     return art
+
+
+# ---------------------------------------------------------------- store page
+
+STORE = "https://store.steampowered.com/api"
+
+
+def _norm(s):
+    return re.sub(r"[^a-z0-9]", "", s.lower())
+
+
+def http_get(url, opener=None):
+    import urllib.request
+    opener = opener or urllib.request.build_opener()
+    with opener.open(urllib.request.Request(url, headers={"User-Agent": UA}), timeout=60) as resp:
+        return resp.read()
+
+
+def store_details(appid, opener=None):
+    """The Steam store's public data for an app (name, developers, release date, genres,
+    screenshots), or None."""
+    got = json.loads(http_get(f"{STORE}/appdetails?appids={int(appid)}&cc=us&l=en", opener)).get(str(appid)) or {}
+    return got.get("data") if got.get("success") else None
+
+
+def store_match(name, developers=(), opener=None):
+    """Store details for the game called NAME, or None: the same name ignoring case and
+    punctuation ("Offspring Fling!"), else the longest store name ours starts with ("The
+    Binding of Isaac" for "... + Wrath of the Lamb DLC") if its developer or publisher matches."""
+    import urllib.parse
+    want = _norm(name)
+    # The search finds nothing for "... Isaac + Wrath of the Lamb DLC": then try "... Isaac".
+    for term in dict.fromkeys([name, re.split(r"\s+[-+&:(]|:\s", name)[0]]):
+        found = json.loads(http_get(f"{STORE}/storesearch/?term={urllib.parse.quote(term)}&cc=us&l=en", opener))
+        items = found.get("items") or []
+        if items:
+            break
+    exact = [i for i in items if _norm(i["name"]) == want]
+    prefix = sorted((i for i in items if len(_norm(i["name"])) >= 6 and want.startswith(_norm(i["name"]))),
+                    key=lambda i: -len(_norm(i["name"])))
+    ours = {_norm(d) for d in developers if d}
+    for item in (exact or prefix)[:3]:
+        details = store_details(item["id"], opener)
+        if not details:
+            continue
+        theirs = {_norm(d) for d in (details.get("developers") or []) + (details.get("publishers") or [])}
+        same_maker = any(a in b or b in a for a in ours for b in theirs if a and b)
+        if same_maker or len(exact) == 1:  # a lone exact name is enough; a prefix needs its maker
+            return details
+    return None
+
+
+def store_screenshots(details, opener=None, limit=6):
+    """[(jpeg, thumbnail jpeg)] from a store page: 1920x1080 shots with the store's 600px thumbnails."""
+    shots = []
+    for s in (details.get("screenshots") or [])[:limit]:
+        try:
+            shots.append((http_get(s["path_full"], opener), http_get(s["path_thumbnail"], opener)))
+        except Exception:
+            continue
+    return shots
 
 
 # ---------------------------------------------------------------- ownership

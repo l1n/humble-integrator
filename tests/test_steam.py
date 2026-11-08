@@ -215,6 +215,63 @@ class SteamTest(unittest.TestCase):
         self.assertIn("edited by the user", path.read_text())
         self.assertTrue(list(path.parent.parent.glob("notes_shortcut_Closure.bak-*")))  # outside remote/
 
+    def test_screenshots_go_in_the_shortcuts_own_folder_and_never_beside_the_users(self):
+        import struct
+        config = self.cfg / "userdata" / "123" / "config"
+        config.mkdir(parents=True)
+        index = self.cfg / "userdata/123/760/screenshots.vdf"
+        index.parent.mkdir(parents=True)
+        mine = {"0": {"type": "1", "filename": "1478500/screenshots/a.jpg", "gameid": "1478500"}}
+        index.write_text(steam.vdf_dumps({"Screenshots": {"1478500": mine, "shortcutnames": {}}}))
+        jpeg = b"\xff\xd8\xff\xc0\x00\x11\x08" + struct.pack(">HH", 1080, 1920) + b"\x03" * 8
+        sid, gid = 3873975362, str(steam.game_id(3873975362))
+        self.assertFalse(steam.has_screenshots(config, sid))
+        self.assertEqual(steam.add_screenshots(config, sid, "Offspring Fling", [(jpeg, b"thumb", "one"), (jpeg, None, "two")]), 2)
+        self.assertTrue(steam.has_screenshots(config, sid))
+        doc = steam.vdf_loads(index.read_text())["Screenshots"]
+        self.assertEqual(list(doc), ["1478500", gid, "shortcutnames"])  # Steam keeps the names last
+        self.assertEqual(doc["1478500"], mine)
+        self.assertEqual(doc["shortcutnames"], {gid: "Offspring Fling"})
+        first = doc[gid]["0"]
+        self.assertEqual((first["width"], first["height"], first["caption"], first["hscreenshot"]),
+                         ("1920", "1080", "one", steam.NOT_UPLOADED))
+        folder = self.cfg / "userdata/123/760/remote" / gid / "screenshots"
+        self.assertEqual((folder / first["filename"].split("/")[-1]).read_bytes(), jpeg)
+        self.assertEqual((folder / "thumbnails" / first["filename"].split("/")[-1]).read_bytes(), b"thumb")
+        self.assertEqual(steam.add_screenshots(config, sid, "Offspring Fling", [(jpeg, None, "three")]), 0)
+
+    def test_store_match_takes_the_same_name_or_a_prefix_by_the_same_maker(self):
+        import io
+        import json
+
+        class Resp(io.BytesIO):
+            def __enter__(self): return self
+            def __exit__(self, *a): return False
+
+        search = {"Offspring Fling": [{"id": 1, "name": "Offspring Fling!"}],
+                  "The Binding of Isaac + Wrath of the Lamb DLC": [],
+                  "The Binding of Isaac": [{"id": 2, "name": "The Binding of Isaac: Rebirth"},
+                                           {"id": 3, "name": "The Binding of Isaac"}],
+                  "Snapshot": [{"id": 4, "name": "Snapshot"}, {"id": 5, "name": "SNAPSHOT"}]}
+        devs = {1: ["Kyle Pulver"], 2: ["Nicalis"], 3: ["Edmund McMillen"], 4: ["Retro Affect"], 5: ["Someone"]}
+
+        class Opener:
+            def open(self, req, timeout=None):
+                import urllib.parse
+                q = urllib.parse.parse_qs(urllib.parse.urlsplit(req.full_url).query)
+                if "term" in q:
+                    return Resp(json.dumps({"items": search[q["term"][0]]}).encode())
+                appid = int(q["appids"][0])
+                return Resp(json.dumps({str(appid): {"success": True, "data": {
+                    "steam_appid": appid, "developers": devs[appid]}}}).encode())
+
+        match = lambda name, makers=(): (steam.store_match(name, makers, Opener()) or {}).get("steam_appid")
+        self.assertEqual(match("Offspring Fling"), 1)  # a lone exact name needs no maker
+        self.assertEqual(match("The Binding of Isaac + Wrath of the Lamb DLC", ["Edmund McMillen and Florian Himsl"]), 3)
+        self.assertIsNone(match("The Binding of Isaac + Wrath of the Lamb DLC", ["Someone Else"]))
+        self.assertEqual(match("Snapshot", ["Retro Affect"]), 4)
+        self.assertIsNone(match("Snapshot"))  # two games of that name, nothing to tell them apart
+
     def test_owned_app_ids_reads_the_web_api_response(self):
         import io
         import json

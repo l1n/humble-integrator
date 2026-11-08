@@ -148,27 +148,44 @@ class CliTest(unittest.TestCase):
         self.assertEqual(bare[0], "From Humble")
         self.assertIn("native build", bare[1])
 
-    def test_hi_notes_adds_notes_to_entries_already_in_steam(self):
+    def test_hi_details_adds_notes_and_store_screenshots_to_entries_already_in_steam(self):
         import json
+        import struct
         import steam
         root = self.d / "Steam"
         config = root / "userdata" / "123" / "config"
         config.mkdir(parents=True)
-        game = steam.make_shortcut("Cool Game", str(self.d / "g/coolgame/app/cool"))[1]
+        sid, game = steam.make_shortcut("Cool Game", str(self.d / "g/coolgame/app/cool"))
         page = steam.make_shortcut("Map Making MEGA Bundle Encore", "/usr/bin/open", launch_options='"x"')[1]
         users = dict(steam.make_shortcut("Cool Game", "/Applications/Cool.app")[1], tags={})  # the user's own
         steam.upsert_shortcuts(config, [game, page, users])
-        saved = (steam.steam_roots, steam.steam_running)
+        jpeg = b"\xff\xd8\xff\xc0\x00\x11\x08" + struct.pack(">HH", 1080, 1920) + b"\x03" * 8
+        store = {"steam_appid": 42, "name": "Cool Game!", "developers": ["Cool Co"],
+                 "release_date": {"date": "May 11, 2012"}, "genres": [{"description": "Indie"}],
+                 "screenshots": [{"path_full": "https://s/1.jpg", "path_thumbnail": "https://s/1t.jpg"},
+                                 {"path_full": "https://s/2.jpg", "path_thumbnail": "https://s/2t.jpg"}]}
+        looked_up = []
+        saved = (steam.steam_roots, steam.steam_running, steam.store_match, steam.http_get)
         steam.steam_roots, steam.steam_running = lambda: [root], lambda: False
+        steam.store_match = lambda name, makers: looked_up.append(name) or store
+        steam.http_get = lambda url, opener=None: jpeg
         try:
             cfg = {"games": self.d / "g", "library": self.d / "lib", "umu": "umu-run"}
             plan = cli.make_plan(self.book, ORDERS, self.keys)
-            self.assertEqual(cli.add_notes(cfg, self.book, plan, log=lambda *_: None), 2)
-            self.assertEqual(cli.add_notes(cfg, self.book, plan, log=lambda *_: None), 0)  # once only
+            self.assertEqual(cli.add_details(cfg, self.book, plan, log=lambda *_: None), (2, 2))
+            self.assertEqual(cli.add_details(cfg, self.book, plan, log=lambda *_: None), (0, 0))  # once only
         finally:
-            steam.steam_roots, steam.steam_running = saved
+            steam.steam_roots, steam.steam_running, steam.store_match, steam.http_get = saved
+        self.assertEqual(looked_up, ["Cool Game"])  # the second run had nothing to add, so no lookup
         [g] = json.loads(steam.notes_path(config, "Cool Game").read_text())["notes"]
         self.assertIn("native build", g["content"])
+        self.assertIn("[b]On Steam:[/b] [url=https://store.steampowered.com/app/42]Cool Game![/url], released May 11, 2012",
+                      g["content"])
+        shots = steam.vdf_loads((root / "userdata/123/760/screenshots.vdf").read_text())["Screenshots"]
+        listed = shots[str(steam.game_id(sid))]
+        self.assertEqual(listed["0"]["caption"], "Cool Game! (2012) · by Cool Co · Indie · from its Steam store page")
+        self.assertEqual(listed["1"]["caption"], "Cool Game! · from its Steam store page")
+        self.assertEqual(shots["shortcutnames"], {str(steam.game_id(sid)): "Cool Game"})
         [b] = json.loads(steam.notes_path(config, "Map Making MEGA Bundle Encore").read_text())["notes"]
         self.assertEqual(b["title"], "What's in this bundle")
         self.assertIn("[*]A Book", b["content"])
