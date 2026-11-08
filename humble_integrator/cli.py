@@ -239,6 +239,7 @@ def install_build(cfg, entry, log=print):
             cmd = install.silent_command(archive, kind, target)
             runner = [cfg["umu"]] if platform.system() == "Linux" else [cfg.get("wine") or "wine"]
             env = dict(os.environ, WINEPREFIX=str(prefix), GAMEID="0",
+                       WINEDEBUG=os.environ.get("WINEDEBUG", "-all"),  # Wine's fixme/err chatter
                        **(wine_env(runner[0]) if platform.system() == "Darwin" else {}))
             log(f"  installing {item['human_name']} ({kind}){'' if cmd else ' interactively'}")
             install.wait_for_installer(subprocess.Popen(runner + (cmd or [str(archive)]), env=env), prefix, log)
