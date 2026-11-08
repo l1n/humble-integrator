@@ -224,10 +224,12 @@ def backup(path):
 
 
 def upsert_shortcuts(config_dir, entries, remove_ids=()):
-    """Add or replace our shortcuts (by id); drop ours listed in remove_ids. Others are untouched."""
+    """Add or replace our shortcuts (by id, or by name: an item reinstalled from another build
+    gets a new id); drop ours listed in remove_ids. Others are untouched."""
     path = Path(config_dir) / "shortcuts.vdf"
     current = list(read_shortcuts(config_dir).values())
     by_id = {e["appid"]: e for e in entries}
+    names = {e["AppName"] for e in entries}
     drop = {_to_i32(i) for i in remove_ids}
     merged = []
     for s in current:
@@ -235,7 +237,7 @@ def upsert_shortcuts(config_dir, entries, remove_ids=()):
         ours = TAG in (s.get("tags") or {}).values()
         if sid in by_id:
             merged.append(by_id.pop(sid))
-        elif not (ours and sid in drop):
+        elif not (ours and (sid in drop or s.get("AppName") in names)):
             merged.append(s)
     merged.extend(by_id.values())
     backup(path)

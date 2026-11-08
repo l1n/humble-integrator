@@ -72,6 +72,17 @@ class SteamTest(unittest.TestCase):
         steam.upsert_shortcuts(self.cfg, [], remove_ids=[user_sid])
         self.assertEqual(len(steam.read_shortcuts(self.cfg)), 1)
 
+    def test_reinstalled_item_replaces_its_old_shortcut_but_not_the_users(self):
+        user_sid = steam.shortcut_id('"/x"', "Cave Story+")
+        (self.cfg / "shortcuts.vdf").write_bytes(
+            raw_shortcuts_vdf([(steam._to_i32(user_sid), "Cave Story+", '"/x"', [])]))
+        _, mac = steam.make_shortcut("Cave Story+", "/Games/cave/Cave Story+.app")
+        steam.upsert_shortcuts(self.cfg, [mac])
+        _, win = steam.make_shortcut("Cave Story+", "/Games/cave/launch.sh")    # now via Wine
+        steam.upsert_shortcuts(self.cfg, [win])
+        exes = sorted(e["Exe"] for e in steam.read_shortcuts(self.cfg).values())
+        self.assertEqual(exes, ['"/Games/cave/launch.sh"', '"/x"'])
+
     def test_artwork_file_names(self):
         paths = steam.write_artwork(self.cfg, 3000000001, {"cover": (b"x", ".png"), "hero": (b"y", ".jpg")})
         self.assertEqual(sorted(p.name for p in paths), ["3000000001_hero.jpg", "3000000001p.png"])

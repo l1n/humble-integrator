@@ -192,6 +192,14 @@ def _thumb(url):
     return f'<img src="{html.escape(url)}" alt="" loading="lazy">' if url.startswith("https://") else ""
 
 
+def wine_env(wine):
+    """Extra environment for a Wine inside an app bundle (Kegworks, Wineskin): its libraries
+    (MoltenVK, GStreamer, ...) live in Contents/Frameworks, outside the dynamic loader's path."""
+    contents = next((p for p in Path(wine).parents if p.name == "Contents"), None)
+    frameworks = contents / "Frameworks" if contents else None
+    return {"DYLD_FALLBACK_LIBRARY_PATH": f"{frameworks}:/usr/lib"} if frameworks and frameworks.is_dir() else {}
+
+
 def windows_wrapper(cfg, prefix, exe_windows_path, script_path):
     """A launch script that runs a Windows program in a fixed prefix (shortcut target)."""
     if platform.system() == "Linux":
@@ -199,7 +207,8 @@ def windows_wrapper(cfg, prefix, exe_windows_path, script_path):
     else:
         if not cfg.get("wine"):
             raise SystemExit("Windows-only build on macOS: set wine = \"/path/to/wine\" in " + str(CONFIG))
-        cmd = f'WINEPREFIX={shlex.quote(str(prefix))} exec {shlex.quote(cfg["wine"])} {shlex.quote(exe_windows_path)} "$@"'
+        env = "".join(f"{k}={shlex.quote(v)} " for k, v in wine_env(cfg["wine"]).items())
+        cmd = f'{env}WINEPREFIX={shlex.quote(str(prefix))} exec {shlex.quote(cfg["wine"])} {shlex.quote(exe_windows_path)} "$@"'
     script_path.write_text("#!/bin/sh\n" + cmd + "\n")
     script_path.chmod(0o755)
     return script_path
@@ -229,7 +238,8 @@ def install_build(cfg, entry, log=print):
             target = r"C:\Games\App"
             cmd = install.silent_command(archive, kind, target)
             runner = [cfg["umu"]] if platform.system() == "Linux" else [cfg.get("wine") or "wine"]
-            env = dict(os.environ, WINEPREFIX=str(prefix), GAMEID="0")
+            env = dict(os.environ, WINEPREFIX=str(prefix), GAMEID="0",
+                       **(wine_env(runner[0]) if platform.system() == "Darwin" else {}))
             log(f"  installing {item['human_name']} ({kind}){'' if cmd else ' interactively'}")
             subprocess.run(runner + (cmd or [str(archive)]), env=env, check=False)
             exe = install.find_launcher(prefix / "drive_c" / "Games" / "App", "Windows", item["human_name"]) \

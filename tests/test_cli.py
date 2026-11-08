@@ -185,6 +185,17 @@ class CliTest(unittest.TestCase):
         self.assertTrue((self.d / "lib/ebook/bbook/bbook.epub").exists())
         self.assertIn("1 failed", lines[-1])
 
+    def test_wine_inside_an_app_bundle_gets_its_frameworks(self):
+        contents = self.d / "Kegworks/Game.app/Contents"
+        (contents / "Frameworks").mkdir(parents=True)
+        (contents / "SharedSupport/wine/bin").mkdir(parents=True)
+        wine = contents / "SharedSupport/wine/bin/wine"
+        self.assertEqual(cli.wine_env(wine), {"DYLD_FALLBACK_LIBRARY_PATH": f"{contents / 'Frameworks'}:/usr/lib"})
+        self.assertEqual(cli.wine_env("/opt/homebrew/bin/wine"), {})
+        if platform.system() == "Darwin":
+            script = cli.windows_wrapper({"wine": str(wine)}, self.d / "pfx", "C:\\g.exe", self.d / "launch.sh")
+            self.assertIn("DYLD_FALLBACK_LIBRARY_PATH=", script.read_text())
+
     def test_dry_run_touches_nothing(self):
         cfg = {"games": self.d / "games", "library": self.d / "lib", "umu": "umu-run"}
         lines = []
