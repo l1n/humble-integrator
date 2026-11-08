@@ -45,9 +45,11 @@ HKCU\\Software\\EvolutionComputing\\CampaignCartographer3Plus and stop with
 'CC3+ Not Found' unless CC3+ is installed and registered. Afterwards they run
 CC3MenuConfig.exe and fetch secure.profantasy.com/admin/menuconfigplus.txt.
 The License Check page is one 'I accept the license agreement' checkbox
-(TRzCheckBox), not radio buttons.
-(Static analysis of CA203_CityUnderSiege.exe, 2023, and a live run under Wine 10
-as far as the licence page, November 2026; not yet run end to end.)
+(TRzCheckBox), not radio buttons. Right after it, without CC3+ installed, an
+Annual shows 'CC3+ Not Found: Sorry, your CC3+ serial number could not be
+located. Please install and run CC3+ first.'
+(Static analysis of CA203_CityUnderSiege.exe, 2023, and live runs under Wine 10
+through the licence page to that check, November 2026; not yet run end to end.)
 """
 notes = """
 Installers are InstallAware, shipped as 7-Zip self-extractors; a few

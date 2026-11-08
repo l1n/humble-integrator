@@ -168,12 +168,15 @@ account's 12 entries; removal itself is verified by the tests.
 
 Also verified live, under Kegworks' Wine 10 with ProFantasy's free "CA203 City
 Under Siege" installer (InstallAware): the installer driver gets through the
-verify step and the Welcome page, then stops at the licence page because
-ProFantasy isn't in `accept_eulas`, and ends the installer behind it. That run
-found two bugs, now fixed: this licence page is a single checkbox, not radio
-buttons, so the driver waited on it; and a stopped driver left the installer
-running. The pages after the licence are untested: they need the EULA accepted,
-and this installer then needs CC3+ installed.
+verify step and the Welcome page to the licence page. Without ProFantasy in
+`accept_eulas` it stops there; with it, it ticks "I accept" and goes on to the
+installer's own check for CC3+, which ends the run with the installer's
+message ("your CC3+ serial number could not be located"), since CC3+ isn't
+installed. Either way it ends the installer behind it. That testing found two
+bugs, now fixed: this licence page is a single checkbox, not radio buttons, so
+the driver waited on it; and a stopped driver left the installer running. The
+serial, folder and install pages are untested: they need a ProFantasy product
+with its own serial.
 
 Not yet verified: activating keys on Steam (the tool only pre-fills Steam's own
 activation page), and the vendor recipes, all of which are `verified = false`
