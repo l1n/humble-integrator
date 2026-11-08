@@ -252,6 +252,59 @@ def silent_command(path, kind, target_dir):
     return None  # unknown: run interactively, with the wizard driver if a serial is needed
 
 
+# Redistributables that game installers bundle and run after copying the game. Under Wine
+# they're mostly unneeded (Wine has its own DirectX), and DirectX's web setup can wait
+# forever on a dialog nobody sees, holding up the installer that started it.
+REDISTS = re.compile(r"(?:^|[\\/\s\"])(dxwebsetup|dxwsetup|dxsetup|vcredist[^\\/\s]*|vc_redist[^\\/\s]*|oalinst|"
+                     r"dotnetfx[^\\/\s]*|ndp\d+[^\\/\s]*|physx[^\\/\s]*|xnafx[^\\/\s]*)\.exe\b", re.I)
+
+
+def _cwd(pid):
+    """A process's working directory ("" if unknown). Wine keeps it at the Unix side of the
+    Windows working directory, which for an installer's helpers is inside the prefix."""
+    try:
+        if Path("/proc").is_dir():
+            return os.readlink(f"/proc/{pid}/cwd")
+        out = subprocess.run(["lsof", "-a", "-d", "cwd", "-p", str(pid), "-Fn"],
+                             capture_output=True, text=True).stdout
+        return next((line[1:] for line in out.splitlines() if line.startswith("n")), "")
+    except OSError:
+        return ""
+
+
+def stuck_redists(prefix, ps=None, cwd=_cwd):
+    """(pid, name) of bundled redistributable installers running in Wine prefix PREFIX only."""
+    prefix = str(Path(prefix).resolve())
+    if ps is None:
+        ps = subprocess.run(["ps", "-Aww", "-o", "pid=,command="], capture_output=True, text=True).stdout
+    for line in ps.splitlines():
+        pid, _, command = line.strip().partition(" ")
+        m = REDISTS.search(command)
+        if m and pid.isdigit() and (os.path.realpath(cwd(int(pid)) or "/") + "/").startswith(prefix + "/"):
+            yield int(pid), m.group(1)
+
+
+def wait_for_installer(proc, prefix, log=print, patience=300, poll=10, find=stuck_redists):
+    """Wait for an installer running under Wine in PREFIX. A bundled redistributable still
+    running after PATIENCE seconds is stopped, so the game's installer can finish."""
+    import signal
+    import time
+    since = {}
+    while proc.poll() is None:
+        now = time.monotonic()
+        for pid, name in find(prefix):
+            if now - since.setdefault(pid, now) >= patience:
+                log(f"  stopped {name}.exe, a bundled redistributable stuck for {patience // 60} min "
+                    "(Wine has its own DirectX)")
+                try:
+                    os.kill(pid, signal.SIGTERM)
+                except ProcessLookupError:
+                    pass
+                since[pid] = float("inf")
+        time.sleep(poll)
+    return proc.returncode
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest="cmd", required=True)

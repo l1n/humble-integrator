@@ -241,7 +241,7 @@ def install_build(cfg, entry, log=print):
             env = dict(os.environ, WINEPREFIX=str(prefix), GAMEID="0",
                        **(wine_env(runner[0]) if platform.system() == "Darwin" else {}))
             log(f"  installing {item['human_name']} ({kind}){'' if cmd else ' interactively'}")
-            subprocess.run(runner + (cmd or [str(archive)]), env=env, check=False)
+            install.wait_for_installer(subprocess.Popen(runner + (cmd or [str(archive)]), env=env), prefix, log)
             exe = install.find_launcher(prefix / "drive_c" / "Games" / "App", "Windows", item["human_name"]) \
                 or install.find_launcher(prefix / "drive_c", "Windows", item["human_name"])
             exe_win = ("C:\\" + str(exe.relative_to(prefix / "drive_c")).replace("/", "\\")) if exe else None

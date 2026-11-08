@@ -115,6 +115,38 @@ class InstallTest(unittest.TestCase):
         self.assertEqual(install.mac_archs(arm), {"arm64"})
         self.assertTrue(install.runs_on_current_macos(script))           # unknown: don't second-guess it
 
+    def test_stuck_redistributables_in_our_prefix_are_stopped(self):
+        prefix = self.d / "pfx"
+        (prefix / "drive_c/users/me/Temp").mkdir(parents=True)
+        ps = "\n".join([
+            r" 843 C:\users\me\AppData\Local\Temp\IXP000.TMP\dxwsetup.exe ",
+            r" 844 C:\users\me\AppData\Local\Temp\vcredist_x86.exe /q",
+            r" 845 C:\Games\App\snapshot.exe",
+            r" 846 C:\users\other\Temp\dxwebsetup.exe",                  # someone else's prefix
+        ])
+        cwds = {843: prefix / "drive_c/users/me/Temp", 844: prefix / "drive_c", 845: prefix / "drive_c",
+                846: self.d / "otherprefix/drive_c"}
+        found = list(install.stuck_redists(prefix, ps, cwd=lambda pid: str(cwds[pid])))
+        self.assertEqual(found, [(843, "dxwsetup"), (844, "vcredist_x86")])
+
+        class Proc:  # the installer: finishes once its stuck helper is gone
+            def __init__(self): self.polls = 0
+            def poll(self):
+                self.polls += 1
+                return 0 if killed else None
+            returncode = 0
+
+        killed, lines = [], []
+        real_kill = os.kill
+        os.kill = lambda pid, sig: killed.append(pid)
+        try:
+            install.wait_for_installer(Proc(), prefix, lines.append, patience=0, poll=0,
+                                       find=lambda p: [(843, "dxwsetup")])
+        finally:
+            os.kill = real_kill
+        self.assertEqual(killed, [843])
+        self.assertIn("dxwsetup.exe", lines[0])
+
     def test_windows_installer_detection_and_silent_switches(self):
         for marker, kind in ((b"Inno Setup Setup Data", "inno"), (b"Nullsoft Install System", "nsis"),
                              (b"InstallAware", "installaware"), (b"nothing", "exe")):
