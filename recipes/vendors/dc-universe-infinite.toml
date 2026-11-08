@@ -1,0 +1,35 @@
+schema = 1
+name = "DC Universe Infinite (DC's comics subscription)"
+kind = "route"
+service = true
+notes = """
+DC's digital comics subscription. Humble DC comic bundles carry a free-trial
+code for it next to the comics (which are redeemed on Neon Ichiban or
+GlobalComix). The trial codes have an item recipe
+(items/dc-universe-infinite/dcui-ultra-trial.toml) so the bundles' comic
+vendors don't claim them. No census-wide match rule: generic/partner-offer
+catches any other DCUI coupon by name. Extracted keys reach this recipe by
+the join URL's domain in their instructions.
+"""
+
+[match]
+domains = ["dcuniverseinfinite.com"]
+
+[redeem]
+where = "https://dcuniverseinfinite.com/join/humble"
+account = true
+delivers = "a free trial month of a DC Universe Infinite monthly plan, then a paid subscription unless cancelled"
+steps = [
+  "Open https://dcuniverseinfinite.com/join/humble and click JOIN NOW.",
+  "Choose the MONTHLY plan (the code is not valid for annual plans) and verify your age if asked.",
+  "Sign up with email and password, paste the code from the Humble download page into the promo box; the payment section should change to 'no payment required' (codes from before Aug 2024 may still ask for payment details).",
+  "Click START FREE TRIAL NOW, and cancel before the trial ends to avoid being charged.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/19380774038171-DC-Universe-Infinite-Redemption-Instructions"
+claim = "join page dcuniverseinfinite.com/join/humble; MONTHLY plan only; promo box; 'no payment required'; pre-Aug-2024 codes may need payment info; START FREE TRIAL NOW"

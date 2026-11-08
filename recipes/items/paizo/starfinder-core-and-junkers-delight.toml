@@ -1,0 +1,29 @@
+schema = 1
+name = "Starfinder Core Rulebook and Junker's Delight (PDF)"
+vendor = "paizo"
+kind = "document"
+machine_names = [
+  "starfindercorerulebook",               # Starfinder Core Rulebook
+  "starfinderadventure_junkersdelight",   # Starfinder: Junker's Delight
+]
+verified = false
+notes = """
+Exists for the Türkiye-Syria Earthquake Relief Bundle (games, March 2023),
+whose page offers 'the Starfinder tabletop RPG from Paizo' alongside Steam
+games and DRM-free comics: these two hb-key items (publisher Paizo) are
+Paizo codes for the store (inference; the bundle text only names Steam for
+its game keys). Elsewhere these machine names occur only in Paizo's own
+bundles (Starfinder Bug-Buster, Solidarity, Give the Gift, PF2 Beginners),
+which go to Paizo anyway.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://web.archive.org/web/20230305135539id_/https://www.humblebundle.com/games/turkiye-syria-earthquake-relief-bundle"
+claim = "'All 10 current digital volumes of Image Comics' Eisner Award-winning series Saga, plus the Starfinder tabletop RPG from Paizo'; the two Starfinder items, publisher Paizo, link to paizo product pages"

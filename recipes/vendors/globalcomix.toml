@@ -1,0 +1,62 @@
+schema = 1
+name = "GlobalComix (digital comics reader)"
+kind = "route"
+notes = """
+"Batman Day Comics Bundle by DC Comics" (Sep-Oct 2026): "Keys can be redeemed
+on the GlobalComix website. ... Please redeem and activate before October
+10th, 2027." Each key is a GlobalComix claim code (globalcomix.com/claim/CODE).
+Redeemed books stay in the GlobalComix account permanently and are read on the
+web or in the GlobalComix app; GlobalComix only sells PDF downloads for titles
+whose creator enables them, so expect nothing to download for DC titles
+(inference). The bundle's DC Universe Infinite trial has its own item recipe
+(items/dc-universe-infinite/).
+"""
+
+[match]
+domains = ["globalcomix.com"]
+key_names = ['globalcomix']
+redeem_text = ['globalcomix']
+# For extracted keys without a globalcomix.com link (census slug or the bundle's name).
+bundle_slugs = ['batman-?day-?comics']
+
+[redeem]
+where = "https://globalcomix.com/claim/<CODE>"
+account = true
+delivers = "the comics in the GlobalComix account, permanently (web reader and iOS/Android app)"
+expires = "2027-10-10"
+expiry_text = "Batman Day bundle: 'Keys expire. Please redeem and activate before October 10th, 2027.'"
+steps = [
+  "Open globalcomix.com/claim/<CODE> for each key (the link on the Humble download page); it opens the GlobalComix app if installed, else the browser.",
+  "Sign in, or create a free GlobalComix account.",
+  "Press Redeem to confirm; the books are added to the account permanently.",
+]
+
+[download]
+scriptable = false
+how = "not offered for these titles as far as known: read on globalcomix.com or in the app"
+notes = "GlobalComix's FAQ only mentions creator-enabled PDF sales; no download of bundle titles is documented."
+
+[library]
+ebooks = "none expected (online/app reading)"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[platforms.macos]
+runner = "native"
+notes = "Web reader in any browser."
+
+[platforms.linux]
+runner = "native"
+notes = "Web reader in any browser."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/55833608656283-GlobalComix-Redemption-Instructions"
+claim = "globalcomix.com/claim/YOURCODE opens the app or browser; sign in or create a free account; Redeem; books added permanently, web and app"
+[[sources]]
+url = "https://web.archive.org/web/20260919180334/https://www.humblebundle.com/books/batman-day-comics-bundle-dc-comics-books"
+claim = "'Keys can be redeemed on the GlobalComix website'; 'Please redeem and activate before October 10th, 2027'"
+[[sources]]
+url = "https://globalcomix.com/support/faq"
+claim = "web reading on any device plus iOS/Android app; PDF downloads only as optional creator-set PDF sales"

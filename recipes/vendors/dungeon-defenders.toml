@@ -1,0 +1,40 @@
+schema = 1
+name = "Dungeon Defenders II in-game codes (Trendy Entertainment / Chromatic Games)"
+kind = "route"
+service = true        # in-game currency and cosmetics: redeemed inside the game, nothing to install
+notes = """
+Dungeon Defenders II is a free-to-play game on Steam. Humble's Dungeon
+Defenders bundles sell the games and DLC as Steam keys (generic Steam route)
+plus gem/cosmetic codes that are redeemed inside Dungeon Defenders II at the
+in-game mailbox: Dungeon Defenders Legendary Collection (2022; 500/1000 gems
++ Shutter Shades flair, +Dragon Captain costumes) and Dungeon Defenders II
+Complete DLC Chest (2026; 500 and 1000 gem bundles, Golden Headless Horseman
+pet). Those six codes have the item recipe dungeon-defenders/in-game-codes.
+No match rules beyond the item recipe: the developers also sell Steam keys.
+"""
+
+[redeem]
+where = "inside Dungeon Defenders II: the mailbox in the Town hub or a Private Tavern"
+account = true
+delivers = "gems / cosmetics / pet on the Dungeon Defenders II account"
+steps = [
+  "Install Dungeon Defenders II (free on Steam) and log in.",
+  "Go to the mailbox in Town or a Private Tavern and interact with it (E).",
+  "Paste the code (with its dashes) into the redemption field, click Redeem Code, then Claim.",
+  "Each key type can be redeemed once per account; the Shutter Shades flair only once per account.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download"
+
+[install]
+source = "steam"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/51736278460315-Dungeon-Defenders-II-Complete-DLC-Chest-In-Game-Key-Redemption"
+claim = "mailbox in Town or a Private Tavern; press E; paste the code including dashes; Redeem Code (June 2026)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/5306929655067-Dungeon-Defenders-II-in-game-redemption"
+claim = "log into Dungeon Defenders II, mailbox in the town hub or a private tavern, enter the code, Redeem Code, Claim; one Shutter Shades per account; each key type once per account"

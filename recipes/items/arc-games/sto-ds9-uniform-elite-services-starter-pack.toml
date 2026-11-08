@@ -1,0 +1,37 @@
+schema = 1
+name = "Star Trek Online: Original DS9 Uniform and Elite Services Starter Pack"
+vendor = "arc-games"
+kind = "service"
+machine_names = ["startrekonline_startrekadventuresrpgmodiphius"]
+skip = true
+skip_reason = "Humble's article says this code had to be redeemed by 30 December 2022."
+verified = false
+notes = """
+In-game pack for Star Trek Online from Humble RPG Book Bundle: Star Trek
+Adventures RPG by Modiphius (2020; the bundle's only item without a recipe
+in the census). The DS9 uniform unlocks for all characters on the Arc
+account; the Elite Services Starter Pack goes to the character logged in
+when it is claimed. Each can be claimed once. Humble's article gives a
+redemption deadline of 30 Dec 2022, so an unrevealed code is very likely
+dead; Key.is_expired from Humble is authoritative.
+"""
+
+[redeem]
+where = "https://www.arcgames.com/en/code-redemption"
+account = true
+delivers = "the DS9 uniform (account-wide) and the Elite Services Starter Pack (one character) in STO's Zen Store -> Promotions tab"
+steps = [
+  "Redeem the code on the Arc account (see vendors/arc-games); check https://www.arcgames.com/en/my/redeem/history.",
+  "In Star Trek Online, after the tutorial, log in with the character that should get the starter pack and claim both from Zen Store -> Promotions.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360051605754-Humble-RPG-Book-Bundle-Star-Trek-Adventures-RPG-Redeeming-the-Star-Trek-Online-Original-DS9-Uniform-and-Elite-Services-Starter-Pack-Key"
+claim = "redeem via arcgames.com/en/code-redemption or the Arc client; uniform account-wide, starter pack per character; claim once; 'must be redeemed by December 30, 2022'"

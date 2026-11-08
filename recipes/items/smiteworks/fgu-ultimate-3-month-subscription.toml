@@ -1,0 +1,33 @@
+schema = 1
+name = "Fantasy Grounds Unity Ultimate 3-month subscription (Ultimate GM Kit for Pathfinder, 2021)"
+vendor = "smiteworks"
+kind = "service"
+service = true
+machine_names = ["fantasygroundsunityultimate3-monthsubscription"]
+skip = true
+skip_reason = "Fantasy Grounds VTT has been free to host and join since 8 November 2025; a subscription key adds nothing, and starting one would only create a PayPal subscription to cancel."
+verified = false
+notes = """
+From the games bundle 'Fantasy Grounds: Ultimate GM Kit for Pathfinder'
+(Dec 2021), where the census lists it with publisher 'Paizo' (so no
+SmiteWorks rule claims it). Its Pathfinder content keys go to
+vendors/smiteworks and the Steam keys to Steam. Same situation as the
+Ultimate trial in smiteworks/fantasy-grounds-vtt: since FG VTT became free
+the licence/subscription keys are moot. Existing subscriptions are not
+cancelled automatically (cancel under Store > Order History if one was
+started).
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://fantasygroundsunity.atlassian.net/wiki/spaces/FGCP/pages/996638950/License+Keys+F.A.Q"
+claim = "'Fantasy Grounds VTT is now completely free to play'; host and join without a licence or subscription (Nov 8, 2025 press release); subscriptions are not cancelled automatically, cancel via Store > Order History; subscriptions handled by PayPal"
+[[sources]]
+url = "https://www.humblebundle.com/games/fantasy-grounds-ultimate-gm-kit-pathfinder-bundle"
+claim = "'Fantasy Grounds Unity Ultimate 3-Month Subscription': 'Receive 3 MONTHS of FANTASY GROUNDS Unity. Then continue use for just $9.99 USD - monthly or $149 for a LIFETIME!' (census item, publisher Paizo)"

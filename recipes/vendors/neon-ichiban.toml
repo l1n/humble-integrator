@@ -1,0 +1,96 @@
+schema = 1
+name = "Neon Ichiban (digital comics and manga platform by DSTLRY Media)"
+kind = "route"
+notes = """
+Neon Ichiban is the digital comics marketplace launched in late 2025 by
+DSTLRY Media (founded by Comixology veterans David Steinberger and Chip
+Mosher), selling DC, Marvel, Dark Horse, IDW, Kodansha, Titan, DSTLRY and
+other publishers' comics. Humble comic bundles from 2026 deliver keys
+redeemed there: "Dive into DC's Vertigo Comics" (Feb-Mar 2026, "Keys
+redeemable on the Neon Ichiban site"), the Sonic 35th Anniversary megabundle
+by IDW (Jun-Jul 2026) and "Supergirl: Woman of Tomorrow and More" by DC
+(Jun-Jul 2026, "redeemable on the neonichiban.com website").
+
+"Amazing Creator-Owned Comics by DSTLRY" (Oct 2026) says only "The comics in
+this bundle must be redeemed through a third-party platform". It is matched
+here by its slug as an inference: DSTLRY's own FAQ says its digital comics
+moved to Neon Ichiban (DSTLRY Media's platform, which carries the DSTLRY
+catalogue), and the old DSTLRY redemption page now redirects to the print
+shop. Check the link shown with the key on the Humble download page: if it is
+a globalcomix.com/claim link, use vendors/globalcomix instead. Extracted keys
+follow the domain in their instructions, which outranks this slug rule.
+
+The 2025 "New Frontier of Comics" DSTLRY bundle (redeemed on dstlry.co) is
+vendors/dstlry. Partner trials riding along (DC Universe Infinite) have item
+recipes under items/dc-universe-infinite/.
+
+Comics are read in the web reader or the iOS app (Android announced); a PDF
+copy can be downloaded only for titles whose publisher enables it, and a
+downloaded comic can no longer be resold on the Neon Ichiban marketplace.
+"""
+
+[match]
+domains = ["neonichiban.com"]
+key_names = ['neon ?ichiban']
+redeem_text = ['neon ?ichiban']
+# The DSTLRY Oct 2026 bundle (inferred, see notes); the rest only help extracted keys.
+bundle_slugs = ['amazing-creator-?owned-comics', 'dive-?into-?dcs?-?vertigo', 'sonic-?35th-?anniversary', 'supergirl-?woman-?(of-?)?tomorrow']
+
+[redeem]
+where = "https://www.neonichiban.com/redeem"
+account = true
+delivers = "the comics in the Neon Ichiban collection (web reader and app; PDF download only where the publisher enables it)"
+steps = [
+  "Create a Neon Ichiban account at https://www.neonichiban.com (Sign Up, or continue with Google/Apple) and finish the email confirmation.",
+  "Log in and open https://www.neonichiban.com/redeem (also Discover -> Redeem).",
+  "Enter each redemption code from the Humble download page; the product is added to the collection immediately.",
+  "Read on the web or in the Neon Ichiban app. Where the publisher allows downloads, a PDF copy can be saved from the comic's page (doing so ends its marketplace resale eligibility).",
+]
+
+[download]
+scriptable = false
+how = "by hand from the comic's page in the Neon Ichiban collection, only for publisher-enabled titles"
+notes = "Download formats are PDF: DRM-free or non-printable, visibly or invisibly watermarked, as each publisher chooses. No public API found."
+
+[library]
+ebooks = "PDF per comic where the publisher enables downloads; otherwise nothing to download (read online/in the app)"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[platforms.macos]
+runner = "native"
+notes = "Web reader in any browser; the iOS/iPadOS app (App Store id6746939477) may also run on Apple-silicon Macs (unverified)."
+
+[platforms.linux]
+runner = "native"
+notes = "Web reader in any browser."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/38994349079579-Neon-Ichiban-Redemption-Instructions"
+claim = "redeem at www.neonichiban.com/redeem; new users Sign Up (or Google/Apple), confirm email, then Discover -> Redeem; enter code, product added immediately"
+[[sources]]
+url = "https://neonichiban.com/faq"
+claim = "publishers (Dark Horse, DC, DSTLRY, Kodansha, Marvel, Oni, Vault); web reader and mobile app; PDF downloads from participating publishers, DRM-free or non-printable watermarked; downloading ends resale; (c) DSTLRY Media, Inc."
+[[sources]]
+url = "https://dstlry.co/pages/faq"
+claim = "'Digital is moving to Neon Ichiban'; the DSTLRY digital marketplace is becoming part of Neon Ichiban"
+[[sources]]
+url = "https://dstlry.co/blogs/news/neon-ichiban-launches-ios-app"
+claim = "Neon Ichiban launched late 2025; iOS app Jan 2026, Android coming; publishers include DC, DSTLRY, IDW, Marvel, Titan; offline reading and backup download when enabled"
+[[sources]]
+url = "https://neonichiban.com/pubs"
+claim = "DSTLRY titles are listed on Neon Ichiban (publisher page, fetched 2026-11-07)"
+[[sources]]
+url = "https://web.archive.org/web/20260228194627/https://www.humblebundle.com/books/dive-into-dcs-vertigo-comics-dc-comics-books"
+claim = "'The titles in this bundle are available through Neon Ichiban. To access the content, create or log in to your Neon Ichiban account'; 'Keys redeemable on the Neon Ichiban site'"
+[[sources]]
+url = "https://web.archive.org/web/20260620190024/https://www.humblebundle.com/books/sonic-35th-anniversary-megabundle-idw-books"
+claim = "'All of the content in this bundle is redeemable on the Neon Ichiban website' (link neonichiban.com/auth/login?redirect_to=/redeem)"
+[[sources]]
+url = "https://web.archive.org/web/20260627182122/https://www.humblebundle.com/books/supergirl-woman-tomorrow-and-more-dc-comics-books"
+claim = "'The ebooks in this bundle are redeemable on the neonichiban.com website'"
+[[sources]]
+url = "https://web.archive.org/web/20261008180250/https://www.humblebundle.com/books/amazing-creatorowned-comics-dstlry-books"
+claim = "'The comics in this bundle must be redeemed through a third-party platform' (platform not named; instructions link is Humble's generic comics article 202844690); all 41 items DSTLRY hb-key"

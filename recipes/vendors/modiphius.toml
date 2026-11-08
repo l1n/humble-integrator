@@ -1,0 +1,62 @@
+schema = 1
+name = "Modiphius Entertainment webstore (modiphius.us / modiphius.net)"
+kind = "route"
+item_kind = "document"   # PDFs from the Modiphius webstore
+notes = """
+Modiphius (Dune: Adventures in the Imperium, Star Trek Adventures, Fallout,
+Achtung! Cthulhu, Mutant Chronicles) runs two Shopify webstores:
+modiphius.us (North America) and modiphius.net (rest of the world, ships
+from the UK). In 2024 its Humble keys were discount codes for those stores:
+the PDF product goes in the cart and the code takes 100% off at checkout
+(Humble's Fallout RPG Encore article); its 2026 Dune physical bundle used
+the same kind of code for print products.
+Census: Humble RPG Bundle: Dune Adventures Tabletop RPG by Modiphius
+(Feb-Mar 2024). The page has no redemption sentence, but its twelve hb-key
+items link to modiphius.us product pages, so they are taken to be webstore
+codes (inference). The bundle's four hb-drmfree PDFs also resolve here
+(vendor rules are per bundle); they are ordinary Humble downloads that
+`hi apply` still fetches. Its 50%-off-physical coupon is a Modiphius code
+too.
+Matched by that bundle's slug and by domain only: other Modiphius bundles are
+DRM-free downloads or DriveThruRPG keys (vendors/drivethrurpg, e.g. the
+Complete Dune RPG Digital Megabundle), so there is no developers rule.
+"""
+
+[match]
+domains = ["modiphius.us", "modiphius.net"]
+# URL slug and order machine name (duneadventurestabletoprpgmodiphius_bookbundle)
+bundle_slugs = ['^dune-?adventures-?tabletop-?rpg-?modiphius']
+
+[redeem]
+where = "the product link for the item on the Humble download page (modiphius.us for North America, modiphius.net for the rest of the world)"
+account = true
+delivers = "the PDFs as Modiphius webstore orders"
+expires = "not stated in the census; check the Humble download page. Key.is_expired from Humble is authoritative."
+steps = [
+  "Pick the webstore for your region: https://modiphius.us (North America) or https://www.modiphius.net (rest of world); log in or create an account.",
+  "Open the item's product page (link on the Humble download page) and add the PDF to the cart.",
+  "At checkout type the Humble code into the promo/discount code box and click Apply: the PDF is discounted 100%.",
+  "Complete the order and download the PDF from the order's download link / account (delivery details not documented in the sources found).",
+  "Problems with a code: support@modiphius.com",
+]
+
+[download]
+scriptable = false
+how = "by hand from the Modiphius webstore order"
+
+[library]
+ebooks = "PDF per product"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/24998319396635-Fallout-RPG-3D-Miniatures-by-Modiphius-Encore-Redemption-Instructions"
+claim = "Modiphius Humble code ('HBF24...') used on the Modiphius webstore (modiphius.us North America / modiphius.net rest of world): enter it in the discount box at checkout, PDF discounted 100% (April 2024)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/48932345984155-Humble-Physical-Book-Bundle-The-Dune-RPG-Physical-Megabundle-by-Modiphius-Redemption-Instructions"
+claim = "Dune RPG Physical Megabundle: discount code (DUNEHB...) on the Modiphius webstore reduces the bundle to 0.00; use the link for your region; support@modiphius.com"
+[[sources]]
+url = "https://web.archive.org/web/20240312015450id_/https://www.humblebundle.com/books/dune-adventures-tabletop-rpg-modiphius-books"
+claim = "no redemption sentence; items link to modiphius.us product pages (e.g. /products/dune-adventures-in-the-imperium-core-rulebook-standard-edition)"

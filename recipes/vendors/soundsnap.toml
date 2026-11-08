@@ -1,0 +1,57 @@
+schema = 1
+name = "Soundsnap (sound-effects library download credits)"
+kind = "route"
+notes = """
+"Soundsnap 1,000 Sound Effects Bundle" (Jul-Aug 2026): one key worth 1,000
+downloads from Soundsnap's sound-effects library. The user picks the sounds
+on soundsnap.com after redeeming, so the tool cannot know or fetch them in
+advance; it can only hand over the redemption steps and later file what the
+user downloaded. Item text: "Redeem your Humble code, create a new Soundsnap
+account, browse the library and download the sounds you need. Code
+redemption is valid for 12 months after the bundle ends. Downloads expire
+after 10 years after redemption." The bundle text: "Keys Expire. Please
+redeem before August 7th, 2027", "Redeem your keys at www.soundsnap.com".
+
+Humble's instructions link for this bundle was not found in its help centre
+and Soundsnap's own redemption page is not public (soundsnap.com/redeem and
+/humble return 404), so the exact form is unknown: look for a redeem or
+promo-code field after creating the account.
+"""
+
+[match]
+developers = ["Soundsnap", "OJOO Limited / Soundsnap"]
+domains = ["soundsnap.com"]
+key_names = ['soundsnap']
+
+[redeem]
+where = "https://www.soundsnap.com/"
+account = true
+delivers = "1,000 sound-effect downloads (WAV/MP3 per sound, user's choice) on a new Soundsnap account"
+expires = "2027-08-07"
+expiry_text = "Keys Expire. Please redeem before August 7th, 2027. (Item text: valid for 12 months after the bundle ends; downloads expire 10 years after redemption.)"
+steps = [
+  "Reveal the key on the Humble download page.",
+  "Create a new Soundsnap account at https://www.soundsnap.com/ and redeem the Humble code there (the item text says a new account; the exact redemption field is not documented publicly).",
+  "Browse the library and download the sounds you want, up to 1,000; save them into the library folder.",
+]
+
+[download]
+scriptable = false
+how = "by hand on soundsnap.com: each sound is chosen and downloaded individually"
+
+[library]
+files = "whatever sound files the user downloads from Soundsnap (up to 1,000)"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/software/soundsnap-1000-sound-effects-bundle-software"
+claim = "census redeem_text 'Redeem your keys at www.soundsnap.com', 'Keys Expire. Please redeem before August 7th, 2027'; item text: 1,000 downloads, create a new Soundsnap account, redemption valid 12 months after the bundle ends, downloads expire 10 years after redemption"
+[[sources]]
+url = "https://www.soundsnap.com/redeem"
+claim = "returns 404 (as do /humble and /humblebundle): no public Humble redemption page (fetched 2026-11-07)"

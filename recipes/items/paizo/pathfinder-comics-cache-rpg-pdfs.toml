@@ -1,0 +1,50 @@
+schema = 1
+name = "Pathfinder Comics Cache: Paizo RPG PDFs"
+vendor = "paizo"
+kind = "document"
+machine_names = [
+  "pathfinder_masksofthelivinggod",   # Masks of the Living God Adventure
+  "pathfinderroleplaying_gameultimatemagic",   # Pathfinder RPG Ultimate Magic
+  "pathfinderroleplaying_gameultimateequipment",   # Pathfinder RPG Ultimate Equipment
+  "pathfinder_cryptoftheeverflame",   # Crypt of the Everflame Adventure
+  "pathfinderroleplaying_gamegamemasteryguide",   # Pathfinder RPG GameMastery Guide
+  "pathfinderroleplaying_gamebestiary2",   # Pathfinder RPG Bestiary 2
+  "pathfinderroleplaying_gameadvancedplayersguide",   # Pathfinder RPG Advanced Player's Guide
+  "pathfinder_cityofgoldendeath",   # City of Golden Death Adventure
+  "pathfinderroleplaying_gameultimatecampaign",   # Pathfinder RPG Ultimate Campaign
+  "pathfinderroleplayinggame_bestiary3",   # Pathfinder RPG Bestiary 3
+  "pathfinderroleplaying_gamestrategyguide",   # Pathfinder RPG Strategy Guide
+  "pathfinderroleplaying_gameultimatecombat",   # Pathfinder RPG Ultimate Combat
+  "pathfinderroleplaying_gameplayercharacterfolio",   # Pathfinder RPG Player Character Folio
+  "pathfinderroleplaying_gamecorerulebook",   # Pathfinder RPG Core Rulebook
+  "pathfinderroleplaying_gameadvancedclassguide",   # Pathfinder RPG Advanced Class Guide
+  "pathfinderroleplaying_gamebestiary",   # Pathfinder RPG Bestiary
+  "pathfinderroleplayinggame_beginnerbox_ebook",   # Pathfinder RPG Beginner Box (PDF)
+]
+verified = false
+notes = """
+Humble Book Bundle: Pathfinder Comics Cache (Nov-Dec 2019) mixed Dynamite's
+Pathfinder comics (DRM-free Humble downloads, generic routes) with Paizo's
+Pathfinder First Edition rulebooks and adventures as keys. The page has no
+redemption sentence, but these items are publisher Paizo / Paizo Inc., carry
+hb-key delivery, and link to paizo.com product pages, like Paizo's own
+bundles of the time, whose codes are redeemed on Paizo's store (inference).
+Item recipes rather than a bundle rule, so the comics stay on the ebook
+route. Most of these machine names recur in Paizo's own bundles (Pathfinder
+10th Anniversary, PF1 Character Options, PF2 Bestiary), which go to Paizo
+anyway.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://web.archive.org/web/20191202190334id_/https://www.humblebundle.com/books/pathfinder-comics-cache-books"
+claim = "the Pathfinder RPG items link to paizo.com product pages (paizo.com/products/btpy..., paizo.com/pathfinderRPG/products/beginnerbox); no redemption sentence"
+[[sources]]
+url = "https://www.humblebundle.com/books/pathfinder-comics-cache-books"
+claim = "17 hb-key Pathfinder First Edition items by Paizo / Paizo Inc.; the Dynamite comics have no key delivery (census)"

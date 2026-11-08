@@ -1,0 +1,51 @@
+schema = 1
+name = "Beadle & Grimm's (physical D&D merchandise, beadleandgrimms.com)"
+kind = "route"
+service = true        # dice sets shipped to the buyer; nothing to download
+notes = """
+Beadle & Grimm's Pandemonium Warehouse sells premium D&D merchandise. Humble
+RPG Bundle: Beadle & Grimm's D&D Classic Module Dice Sets (Oct-Nov 2026,
+American Cancer Society) contains six physical dice sets (White Plume
+Mountain, Ravenloft, Vecna Lives, Temple of Elemental Evil, Tomb of Horrors,
+Expedition to the Barrier Peaks). Humble's article claims 'your complete
+set' with one product (D&D Classic Module Dice Complete Set) and a code
+entered at Shopify-style checkout ('Discount code or gift card'); the
+product drops to $0 and only shipping is paid (US only, about $30, 2-3
+weeks). Whether each of the six items has its own code is not stated; the
+article implies one code for the complete set (inference).
+Matched by this bundle's URL slug only: Beadle & Grimm also appear as a
+developer in DriveThruRPG-redeemed bundles (Candela Obscura), so there is no
+developers rule.
+"""
+
+[match]
+domains = ["beadleandgrimms.com"]
+# URL slug and order machine name (beadlegrimmsddclassicmoduledicesets_bookbundle)
+bundle_slugs = ['^beadle-?grimms-?dd-?classic-?module-?dice']
+
+[redeem]
+where = "https://beadleandgrimms.com/products/d-d-classic-module-dice-complete-set"
+account = false
+delivers = "the six D&D Classic Module dice sets, shipped (US addresses only)"
+expires = "2027-04-27"
+expiry_text = '(?i)redeem by ([A-Z][a-z]+ \d{1,2},? \d{4})'
+steps = [
+  "Open https://beadleandgrimms.com/products/d-d-classic-module-dice-complete-set and add the complete set to the cart.",
+  "At checkout enter the Humble code in 'Discount code or gift card' and click APPLY; the product price drops to $0.",
+  "Pay the shipping (US only, about $30) and complete the order; allow 2-3 weeks.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download: physical goods"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/57870261231131-How-to-Redeem-Your-D-D-Classic-Module-Dice-Set"
+claim = "add the D&D Classic Module Dice Complete Set (beadleandgrimms.com/products/d-d-classic-module-dice-complete-set) to the cart; code in 'Discount code or gift card'; price drops to $0; pay shipping; US only, average $30, 2-3 weeks"
+[[sources]]
+url = "https://web.archive.org/web/20261103165227id_/https://www.humblebundle.com/books/beadle-grimms-dd-classic-module-dice-sets-books"
+claim = "'All six of these physical sets are included'; 'SHIPPING COSTS AVERAGE $30.00'; 'PLEASE REDEEM BY APRIL 27, 2027'; 'US ONLY'; links the Humble article above"

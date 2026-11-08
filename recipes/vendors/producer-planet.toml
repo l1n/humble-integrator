@@ -1,0 +1,70 @@
+schema = 1
+name = "Producer Planet (MAGIX content store: Soundpools, Studio Box, vouchers)"
+kind = "route"
+notes = """
+Producer Planet (producerplanet.com) is MAGIX's online store for loops,
+Soundpools, sound effects and video content; it uses the MAGIX account.
+Humble software bundles built around MAGIX/VEGAS software (The Beat Goes
+On, Your Beats. ACIDized., Your Sounds. Your Movies. (and REBundle), VEGAS
+Pro Even More Creative Freedom (and REBundle), VEGAS Pro 2022 / Discover
+Your Endless Freedom, VEGAS Pro Digital Creator's Collection) include
+Producer Planet codes of two kinds:
+  * a product code for one Soundpool or Studio Box pack: put that product in
+    the Producer Planet cart, 'Redeem coupon', and the total drops to $0;
+  * "Voucher Code for Producer Planet": a one-transaction coupon worth a
+    fixed amount ($9.99 / $19.99 depending on the bundle) towards any
+    product; dearer items need payment for the difference.
+Either way the content is then downloaded from 'MY PRODUCTS'. Soundpools can
+also be redeemed inside MAGIX Music Maker's in-app Store ('Purchase' >
+'Redeem Coupon'), which installs them straight into Music Maker's Loops tab.
+Licences: most bundle codes are Commercial (Standard); codes from 2023 and
+earlier bundles are likely Non-commercial; pick the matching licence in the
+cart or the code may not apply.
+
+No match rules: these items are claimed by machine name (items/producer-
+planet/), because a developers rule for "Producer Planet" would tie with
+vendors/magix on the many items that list both MAGIX and Producer Planet.
+Extracted keys whose instructions name producerplanet.com resolve to
+vendors/magix (its domains and key_names); the steps there point here.
+"""
+
+[redeem]
+where = "https://www.producerplanet.com/us"
+account = true
+delivers = "the Soundpool / pack (or whatever the voucher buys) under MY PRODUCTS on producerplanet.com, as a download"
+expires = "codes expire; dates are on each bundle's download page (e.g. The Beat Goes On: voucher by December 31st 2020, ELECTRO TRAP Soundpool by December 31st 2022)"
+steps = [
+  "Go to https://www.producerplanet.com/us and find the product (for a product code: the named Soundpool or pack; for a voucher: anything you like). Choose the licence the code is for (usually Commercial/Standard; older codes may be Non-commercial).",
+  "Add it to the cart; log in to or create a MAGIX account.",
+  "Click 'Redeem coupon', enter the code from the Humble download page and click NEXT. The price drops by the code's value ($0 for a product code).",
+  "Click BUY NOW and finish the order (a voucher larger than the price leaves no balance; a smaller one needs payment for the rest).",
+  "Download the content under MY PRODUCTS into the library folder.",
+  "Alternative for Soundpools: in MAGIX Music Maker, Store tab > the Soundpool > Purchase > Redeem Coupon (choose Commercial) > Next > Buy Now; it installs into the Loops tab.",
+]
+
+[download]
+scriptable = false
+how = "by hand from MY PRODUCTS on producerplanet.com (or installed by Music Maker's in-app Store)"
+
+[library]
+files = "Soundpool / Studio Box archives (loops and samples) downloaded from MY PRODUCTS"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360019144533-Producer-Planet-Key-Redemption-Instructions"
+claim = "add the title to the cart, choose the licence (most bundle vouchers Commercial/Standard; 2023 and earlier likely Non-commercial), log in or create an account, 'Redeem Coupon', NEXT, BUY NOW at no cost, download under MY PRODUCTS (updated 2026-10-24)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360013107874-Voucher-Code-for-Producer-Planet-Redemption-Instructions"
+claim = "Voucher Code for Producer Planet: one-transaction coupon ($9.99 or $19.99 by bundle), not a credit; vouchers expire; MAGIX account; Redeem coupon; download under MY PRODUCTS"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360033673034-Humble-Software-Bundle-The-Beat-Goes-On-Voucher-Code-for-Producer-Planet-instructions"
+claim = "The Beat Goes On: $19.99 off one item, redeem by December 31st 2020, no remaining balance; MAGIX support"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360034290853-Humble-Software-Bundle-The-Beat-Goes-On-Soundpool-ELECTRO-TRAP-instructions"
+claim = "ELECTRO TRAP Soundpool: open the product page from the bundle link, add to cart, MAGIX account, Redeem coupon, full price deducted, BUY NOW, download under My Products; redeem by December 31st 2022"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/25133506127259-Soundpool-License-and-Redemption-Instructions"
+claim = "Soundpool codes can be redeemed in Music Maker's in-app Store (Purchase > Redeem Coupon, choose Commercial, Next, Buy Now); installed automatically into the Loops tab; licence info at producerplanet.com/us/licenses"

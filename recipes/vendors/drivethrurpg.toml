@@ -13,10 +13,42 @@ Beadle & Grimm, La Lionne Publishing, Nostromo's Reliquary, Aetherworks,
 MargoMods and Shaeomar. Its three "(Demiplane Edition)" items are web-only
 books read on Demiplane; they have item recipes under items/demiplane/.
 
-Matched only by redemption text (and keys by domain): DRM-free RPG ebook
-bundles that are ordinary Humble downloads must stay on the generic ebook
-route, and the publishers above also sell through other channels, so there is
-no developers rule.
+Wave 4 added the other RPG bundles whose text sends keys to DriveThruRPG
+("redeemable through DTRPG", "on the dtrpg.com website", "available through
+the DriveThru RPG website", Humble's typo "DriveTrhuRPG"): Call of Cthulhu
+ENCORE (Chaosium), the Complete Dune RPG Digital Megabundle (Modiphius),
+Deadlands Reloaded Megabundle (Pinnacle), Warhammer RPG Starter Bundle
+(Cubicle 7), The Witcher TTRPG (R. Talsorian), the ENNIE Awards bundle, and
+Cyberpunk RED: Ready-to-Run Essentials ("redeemable through DTRPG and
+Syrinscape website": Loke Battle Mats maps and R. Talsorian/Roll20
+"Cross-Platform Bundles", which the item text says unlock the book on
+DriveThruRPG and Demiplane and sheets on Roll20; its Syrinscape SoundSets and
+SuperSyrin month have item recipes under items/syrinscape/, its StartPlaying
+coupon under items/startplaying/).
+The ENNIE bundle says "some on DriveThruRPG, and some with Paizo": its one
+Paizo-published title (Pathfinder Player Core) has the item recipe
+paizo/pathfinder-player-core; Paizo's own PDFs only reached DriveThruRPG in
+August 2026, after that bundle.
+By URL slug, because the census snapshot lacks the sentence: Roll Big or Go
+Home RPG Megabundle (2025; a later snapshot says "The titles in this bundle
+are available through DriveThruRPG", as does its Encore), Roll Big or Go Home
+2 (2026; "The content of this bundle is redeemable through DTRPG and some PDF
+files"), and Dungeon Master's Guild Top Content (2026; "redeemable through
+the DriveThruRPG website", like the earlier Bestselling bundle with the same
+items). 7th Sea RPG Collection (Nov 2024) says "redeemable on the Chaosium,
+Inc. website", but Chaosium's own announcement says the bundle "adds the
+titles direct to your personal DriveThruRPG library"; this recipe follows
+Chaosium (single key for the whole bundle).
+
+Mixed bundles: Roll Big or Go Home and The Witcher also have hb-drmfree items.
+Vendor rules are per bundle, so those resolve here too; they are ordinary
+Humble downloads that `hi apply` still fetches, and only the hb-key items
+need the DriveThruRPG steps below.
+
+Matched only by redemption text and bundle slugs (and keys by domain):
+DRM-free RPG ebook bundles that are ordinary Humble downloads must stay on
+the generic ebook route, and the publishers above also sell through other
+channels, so there is no developers rule.
 
 Library: DriveThruRPG keeps every purchase in the account's library with
 re-downloads (and publisher updates). No public download API was found, so
@@ -24,19 +56,38 @@ fetching is by hand from the library page (not scriptable as far as known).
 """
 
 [match]
-domains = ["drivethrurpg.com"]
-key_names = ['drivethru ?rpg']
-# "Keys are redeemable through DriveThruRPG."
-redeem_text = ['redeem\w*[^.]{0,60}\bdrive ?thru ?rpg\b']
-# For extracted keys, whose instructions may not name the site: this bundle's
-# URL slug or order machine name (candelaobscuradarringtonpressfriends_bookbundle).
-bundle_slugs = ['^candela-?obscura-?darrington-?press-?friends']
+domains = ["drivethrurpg.com", "dtrpg.com"]
+key_names = ['drivethru ?rpg', '\bdtrpg\b']
+redeem_text = [
+  # "Keys are redeemable through DriveThruRPG." / "redeemable on the dtrpg.com website" /
+  # "redeemable through DTRPG and Syrinscape website" / Humble's typo "DriveTrhuRPG"
+  'redeem\w*[^.]{0,60}\b(drive ?t(hr|rh)u ?rpg|dtrpg)\b',
+  # "The titles in this bundle are available through DriveThruRPG" (also "through:"),
+  # "available through the DriveThru RPG website", and the ENNIE bundle's
+  # "available through two partners: some on DriveThruRPG, and some with Paizo"
+  # (its one Paizo title has an item recipe, paizo/pathfinder-player-core).
+  'available\s+through[^.]{0,40}\b(drive ?thru ?rpg|dtrpg)\b',
+]
+# Bundles whose census snapshot lacks the redemption sentence (the live page had it
+# later), and keys whose instructions may not name the site. URL slugs or order
+# machine names (hyphen-free).
+bundle_slugs = [
+  '^candela-?obscura-?darrington-?press-?friends',
+  # Roll Big or Go Home RPG Megabundle (2025), its Encore, and Roll Big or Go Home 2 (2026)
+  '^roll-?big-?or-?go-?home',
+  # Dungeon Master's Guild Top Content (Sept-Oct 2026)
+  '^dungeon-?masters-?guild-?top-?content',
+  # 7th Sea RPG Collection by Chaosium (Nov 2024): Humble says "Chaosium, Inc. website",
+  # Chaosium says the titles go to the DriveThruRPG library (see notes)
+  '^7th-?sea-?rpg-?collection-?chaosium',
+]
 
 [redeem]
 where = "the unique DriveThruRPG URL shown for each item on the Humble download page"
 account = true
 delivers = "the ebooks (PDF) in the DriveThruRPG library, re-downloadable"
-expires = "not stated in the bundle text or Humble's article; check the Humble download page. Key.is_expired from Humble is authoritative."
+expires = "per bundle when stated (Cyberpunk RED Ready-to-Run: redeem before June 30th, 2027; Roll Big or Go Home 2: before June 25, 2027); otherwise check the Humble download page. Key.is_expired from Humble is authoritative."
+expiry_text = '(?i)redeem(?:ed)? before ([A-Z][a-z]+ \d{1,2}(?:st|nd|rd|th)?,? \d{4})'
 steps = [
   "Create or log in to a DriveThruRPG account first: https://www.drivethrurpg.com/login.php (use one account for every key).",
   "Open the unique URL for the item from the Humble download page.",
@@ -62,3 +113,24 @@ claim = "make a DriveThruRPG account before redemption (drivethrurpg.com/login.p
 [[sources]]
 url = "https://www.humblebundle.com/books/candela-obscura-darrington-press-friends-books"
 claim = "'Keys are redeemable through DriveThruRPG'; items are hb-key ebooks (census redeem_text and items)"
+[[sources]]
+url = "https://web.archive.org/web/20250715042334id_/https://www.humblebundle.com/books/roll-big-or-go-home-rpg-megabundle-books"
+claim = "Roll Big or Go Home RPG Megabundle (July 2025): 'The titles in this bundle are available through DriveThruRPG' (missing from the census snapshot)"
+[[sources]]
+url = "https://web.archive.org/web/20260624175851id_/https://www.humblebundle.com/books/roll-big-or-go-home-2-books"
+claim = "Roll Big or Go Home 2 (June 2026): 'The content of this bundle is redeemable through DTRPG and some PDF files'; 'All titles should be redeemed before June 25, 2027'"
+[[sources]]
+url = "https://web.archive.org/web/20261002175934id_/https://www.humblebundle.com/books/dungeon-masters-guild-top-content-from-dd-community-books"
+claim = "Dungeon Master's Guild Top Content (Sept-Oct 2026): 'The ebooks in this bundles are redeemable through the DriveThruRPG website'"
+[[sources]]
+url = "https://chaosium.com/bloga-new-humble-bundle-7th-sea-the-perfect-mix-of-swashbuckling-and-sorcery"
+claim = "Chaosium on the 7th Sea Humble Bundle: 'This bundle adds the titles direct to your personal DriveThruRPG library'"
+[[sources]]
+url = "https://www.humblebundle.com/books/cyberpunk-red-readytorun-essentials-bundle"
+claim = "'The content of this bundle are redeemable through DTRPG and Syrinscape website'; 'Keys Expire. Please redeem before June 30th, 2027'; Cross-Platform Bundle items unlock the book on Demiplane and DriveThruRPG and sheets on Roll20 (census redeem_text and item descriptions)"
+[[sources]]
+url = "https://www.humblebundle.com/books/awardwinning-nominated-tabletop-rpgs-presented-ennie-awards-books"
+claim = "'The titles in this bundle are available through two partners: some on DriveThruRPG, and some with Paizo' (census redeem_text, July-Aug 2025)"
+[[sources]]
+url = "https://www.gamedeveloper.com/press-release/drivethrurpg-to-offer-paizo-s-title-catalog"
+claim = "12 Aug 2026: 1,200+ Paizo PDFs now on DriveThruRPG; Paizo's official titles were not sold there before; 'Paizo Connect' library sync between paizo.com and DriveThruRPG planned"

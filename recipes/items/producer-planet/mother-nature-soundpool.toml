@@ -1,0 +1,30 @@
+schema = 1
+name = "Soundpool: Mother Nature"
+vendor = "producer-planet"
+kind = "content"
+machine_names = ["soundpoolmothernature"]
+verified = false
+notes = """
+VEGAS Pro Digital Creator's Collection (Apr-May 2024). The census shows no delivery icon for it, so how it was delivered is an inference: Humble's 'Soundpool License and Redemption Instructions' article was created on 2024-04-24, minutes after this bundle's system-requirements article, and describes Soundpool voucher codes, so this is taken to be a Producer Planet / Music Maker code like the other Soundpools. If the download page shows a file instead, just keep the file.
+A code for this one product on Producer Planet (vendors/producer-planet): add it to the cart with the licence the code is for, 'Redeem coupon', check out at $0, download it from MY PRODUCTS into the library folder (or redeem it in Music Maker's in-app Store). Loops and samples for any DAW or editor; nothing to launch.
+"""
+
+[library]
+files = "the pack's loops/samples as downloaded from MY PRODUCTS"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360019144533-Producer-Planet-Key-Redemption-Instructions"
+claim = "product codes: add the title (right licence) to the Producer Planet cart, Redeem Coupon, BUY NOW at no cost, download under MY PRODUCTS"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/25133506127259-Soundpool-License-and-Redemption-Instructions"
+claim = "created 2024-04-24 14:22 UTC, 19 minutes after Humble's 'VEGAS Pro Digital Creator's Collection - System Requirements' article (Zendesk API created_at); Soundpool voucher codes redeem in Music Maker's in-app Store (Purchase > Redeem Coupon, Commercial)"
+[[sources]]
+url = "https://www.humblebundle.com/software/vegas-pro-digital-creators-collection-bundle-software"
+claim = "census: VEGAS Pro Digital Creator's Collection (Apr-May 2024): these Producerplanet items have no delivery icons; text says only 'Redeem your keys'"

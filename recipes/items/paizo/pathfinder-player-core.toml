@@ -1,0 +1,31 @@
+schema = 1
+name = "Pathfinder Player Core (PDF)"
+vendor = "paizo"
+kind = "document"
+machine_names = ["pathfinderplayercorep2"]   # ENNIE Awards bundle (2025) and Kingmaker bundle (Paizo)
+verified = false
+notes = """
+Exists to split the 'Award-Winning & Nominated Tabletop RPGs presented by
+the ENNIE Awards' bundle (July-Aug 2025): 'The titles in this bundle are
+available through two partners: some on DriveThruRPG, and some with Paizo.'
+That bundle-level sentence sends the bundle to vendors/drivethrurpg; this
+title is the only Paizo-published one in it (publisher 'Paizo Inc.'), and in
+2025 Paizo's own PDFs were not sold on DriveThruRPG (they arrived there in
+August 2026), so its code is redeemed on Paizo's store (inference from the
+two facts). The same machine name in the Kingmaker bundle is a Paizo code
+anyway.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/books/awardwinning-nominated-tabletop-rpgs-presented-ennie-awards-books"
+claim = "'available through two partners: some on DriveThruRPG, and some with Paizo'; Pathfinder Player Core is the only item published by Paizo Inc. (census)"
+[[sources]]
+url = "https://www.gamedeveloper.com/press-release/drivethrurpg-to-offer-paizo-s-title-catalog"
+claim = "Paizo's official titles reached DriveThruRPG only in August 2026"

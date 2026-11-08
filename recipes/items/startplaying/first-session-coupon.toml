@@ -1,0 +1,19 @@
+schema = 1
+name = "StartPlaying $10 off first session"
+vendor = "startplaying"
+kind = "service"
+service = true
+machine_names = ["startplayinggamescoupon"]
+verified = false
+notes = "Discount coupon (new players, expires 2026-12-31). Optional; nothing to download or install."
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/books/cyberpunk-red-readytorun-essentials-bundle"
+claim = "'get $10 OFF your first session! (New players only. Expires 12/31/26)' (census item description)"

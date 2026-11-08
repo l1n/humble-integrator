@@ -1,0 +1,91 @@
+schema = 1
+name = "BOOK☆WALKER / BookWalker (manga and light-novel ebook store)"
+kind = "route"
+notes = """
+"Hinamatsuri" manga bundle from One Peace Books (Aug-Sep 2023): "The titles in
+this bundle are available through BOOK☆WALKER. To access the content, create
+or log in to your BOOK☆WALKER account at https://global.bookwalker.jp". The
+keys supersede each other: one gift code (the highest tier's) redeems all
+purchased volumes.
+
+In March 2026 the English store moved from BOOK☆WALKER Global
+(global.bookwalker.jp, Kadokawa) to a new BookWalker platform at
+bookwalker.com run by M12 Media LLC; global.bookwalker.jp pages now redirect
+to support.bookwalker.com. Old accounts migrate by logging in with the same
+email; eligible English purchases carry over. A code not yet redeemed would be
+entered on the new store's Redeem code page (inference: the new store's gift
+codes use the same format as Humble's example, but whether 2023 Humble codes
+still work there is not documented; BookWalker gift codes are valid 180
+days, so a 2023 code has probably lapsed).
+
+Reading: web Browser Viewer and iOS/Android apps. The old Mac app
+(unsupported since macOS 10.15) is gone; downloads are now .lcpl licences for
+Readium LCP readers (encrypted EPUB, BookWalker password as passphrase).
+"""
+
+[match]
+domains = ["bookwalker.jp", "bookwalker.com"]
+key_names = ['book.?walker']
+redeem_text = ['book.?walker']
+# For extracted keys without a bookwalker link (census slug or the bundle's name).
+bundle_slugs = ['hinamatsuri']
+
+[redeem]
+where = "https://bookwalker.com/user/coins (More (Profile) -> Redeem code); for 2023 codes Humble documented global.bookwalker.jp"
+account = true
+delivers = "the manga volumes in the BookWalker library (Browser Viewer, apps, or .lcpl licences for LCP readers)"
+expiry_text = "BookWalker says gift codes are valid for 180 days from purchase; Humble's key page and Key.is_expired are authoritative."
+steps = [
+  "Log in to https://bookwalker.com (an old BOOK☆WALKER Global account migrates by logging in with the same email and setting a new password), or create a free account.",
+  "Open More (Profile) -> Redeem code (https://bookwalker.com/user/coins).",
+  "Enter the gift code from the Humble download page (only the highest-tier code is needed) and click Redeem; confirm the volumes.",
+  "Read from Library -> Purchases in the Browser Viewer or the iOS/Android app.",
+]
+
+[download]
+scriptable = false
+how = "by hand from the BookWalker library: a small .lcpl licence per volume, opened in an LCP-capable reader"
+notes = "The .lcpl does not contain the book; the reader downloads the encrypted EPUB and asks for the BookWalker password. Not convertible to a plain EPUB."
+
+[library]
+ebooks = ".lcpl licence per volume (Readium LCP)"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[platforms.macos]
+runner = "native"
+notes = "Browser Viewer. The old BOOK☆WALKER Mac app only ran on OS X 10.9-10.14 and is not usable on current macOS. For offline reading, an LCP-capable desktop reader such as Thorium (inference: BookWalker lists only PocketBook apps by name)."
+
+[platforms.linux]
+runner = "native"
+notes = "Browser Viewer; LCP-capable desktop reader for .lcpl files (inference, as on macOS)."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/17735531843227-BOOK-WALKER-Redemption-Instructions"
+claim = "keys supersede: one code redeems all purchased content; reveal key, 'Redeem Here', log in or register, enter the gift code, confirm, 'Redeem Gift Code'; granted within minutes"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/17735646258075-BOOK-WALKER-App-System-Requirements"
+claim = "Mac app OS X 10.9 to macOS 10.14 only, unavailable on Catalina or later; Windows 7-10; Android and iPhone apps"
+[[sources]]
+url = "https://web.archive.org/web/20230818002650/https://www.humblebundle.com/books/hinamatsuri-one-peace-books-manga"
+claim = "'available through BOOK☆WALKER ... create or log in to your BOOK☆WALKER account at https://global.bookwalker.jp'; 'redeemable on the BOOKWALKER website'"
+[[sources]]
+url = "https://support.bookwalker.com/faq/how-can-i-redeem-an-ebook-audiobook-received-as-a-gift/"
+claim = "Redeem code page (More (Profile) -> Redeem code, bookwalker.com/user/coins); gift codes valid 180 days, single use; read via Browser Viewer or iOS/Android app"
+[[sources]]
+url = "https://support.bookwalker.com/faq/migrate-your-account-using-an-e-mail-address/"
+claim = "old BookWalker Global accounts migrate by logging in with the same email; (c) M12 Media LLC"
+[[sources]]
+url = "https://support.bookwalker.com/faq/what-happens-to-my-library-after-migration/"
+claim = "eligible English purchases carry over to the new store after migration"
+[[sources]]
+url = "https://support.bookwalker.com/changelog/"
+claim = "new BookWalker platform released March 24, 2026"
+[[sources]]
+url = "https://support.bookwalker.com/faq/can-i-download-ebooks-from-bookwalker-for-other-ereaders/"
+claim = "downloads are .lcpl licences for LCP readers; encrypted EPUB; BookWalker password prompt; no DRM-free EPUB"
+[[sources]]
+url = "https://support.bookwalker.com/faq/third-party-apps-with-lcp-support/"
+claim = "global.bookwalker.jp/info-u-pc/ now redirects here; LCP third-party apps listed (PocketBook)"

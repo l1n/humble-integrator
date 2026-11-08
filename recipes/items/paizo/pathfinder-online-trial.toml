@@ -1,0 +1,26 @@
+schema = 1
+name = "Pathfinder Online 1-month trial (MMO, shut down)"
+vendor = "paizo"
+kind = "service"
+service = true
+machine_names = ["pathfinderonline_freetrial"]   # Pathfinder 10th Anniversary and Lost Omens Lore Archive bundles
+skip = true
+skip_reason = "Pathfinder Online (Goblinworks' MMO) shut down on 28 November 2021; the trial code no longer does anything."
+verified = false
+notes = """
+A free-month code for Pathfinder Online (developer Goblin Works, publisher
+Paizo Inc. in the census) in two Paizo book bundles. Without this recipe the
+bundles' Paizo slug rule would send it to the Paizo store steps, which don't
+apply. Nothing to redeem or install.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://en.wikipedia.org/wiki/Pathfinder_Online"
+claim = "developed by Goblinworks; 'the game was shut down on November 28, 2021'"

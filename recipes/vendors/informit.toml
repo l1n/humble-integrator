@@ -35,6 +35,8 @@ redeem_text = [
   # "Keys are reedemable through Pearson's website." (Pearson Programming Sampler, Oct 2024;
   # Humble's typo). Taken to mean InformIT, Pearson's video-course store (inference).
   "\\b(?:redeem|reedem)\\w*[^.]{0,40}\\bpearson\\W{0,2}s website",
+  # "The titles in this bundle are available through: InformIT" (Linux Complete by Pearson)
+  'available through:?(?:\s|&nbsp;)*InformIT',
 ]
 
 [redeem]

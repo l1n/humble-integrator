@@ -1,0 +1,66 @@
+schema = 1
+name = "eBooks.com (ebook store)"
+kind = "route"
+notes = """
+"Disney Manga by TOKYOPOP" book bundle (Apr-May 2022): "The titles in this
+bundle are available through eBooks.com. To access the content, create or log
+in to your eBooks.com account." The page's reading-programs link is
+eBooks.com's own format guide. Humble's help centre has no eBooks.com
+article; the steps below are eBooks.com's documented flow for an ebook
+voucher received from a third party (inference that Humble's keys are such
+vouchers). The bundle's 20%-off eBooks.com website coupon has an item recipe
+(items/ebooks-com/website-coupon-20.toml).
+
+Most eBooks.com titles carry DRM chosen by the publisher: downloads are for
+Thorium Reader (Readium LCP) or Adobe Digital Editions (Adobe DRM); the
+online reader and the eBooks.com app need neither.
+
+Matched by redemption text; extracted keys by key name (a word-bounded
+'ebooks.com', so packtebooks.com-style domains don't match).
+"""
+
+[match]
+key_names = ['\bebooks\.com\b']
+redeem_text = ['available (through|via)\s+(&nbsp;\s*)?ebooks\.com', 'your ebooks\.com account']
+# For extracted keys without an ebooks.com link (census slug or the bundle's name).
+bundle_slugs = ['disney-?manga-?(by-?)?tokyopop']
+
+[redeem]
+where = "https://www.ebooks.com (My Account -> 'Redeem a Book Voucher')"
+account = true
+delivers = "the manga in the eBooks.com account (My eBooks): online reader, eBooks.com app, or downloads for Thorium Reader (LCP) / Adobe Digital Editions"
+steps = [
+  "Sign in to, or create, an eBooks.com account at https://www.ebooks.com.",
+  "On the account pages choose 'Redeem a Book Voucher', enter the code from the Humble download page and click 'Redeem Voucher' (or open the redemption link if Humble shows one). The voucher deactivates once used.",
+  "Open My eBooks to read online or download each title.",
+]
+
+[download]
+scriptable = false
+how = "by hand from My eBooks on ebooks.com, per title and format"
+notes = "DRM-protected titles download for Thorium Reader (LCP passphrase shown on the download page) or Adobe Digital Editions (ByteBooks-authorised); DRM-free ones as plain EPUB/PDF."
+
+[library]
+ebooks = "EPUB/PDF per title, DRM-free or LCP/Adobe-DRM protected as the publisher chose"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[platforms.macos]
+runner = "native"
+notes = "Online reader in a browser; Thorium Reader and Adobe Digital Editions both have Mac builds for downloaded files."
+
+[platforms.linux]
+runner = "native"
+notes = "Online reader in a browser. For downloads, Thorium Reader (LCP) is eBooks.com's recommended desktop reader; whether it has a Linux build was not checked here. Adobe Digital Editions has no Linux build."
+
+[[sources]]
+url = "https://web.archive.org/web/20220411235133/https://www.humblebundle.com/books/disney-manga-tokyopop-books"
+claim = "'The titles in this bundle are available through eBooks.com. To access the content, create or log in to your eBooks.com account'; reading-programs link is support.ebooks.com article 213875366"
+[[sources]]
+url = "https://support.ebooks.com/hc/en-gb/articles/360001644936-Redeeming-an-ebook-voucher-gift-voucher"
+claim = "third-party voucher code: sign in or create an account, 'Redeem a Book Voucher', 'Redeem Voucher'; voucher deactivates; read online or download from My eBooks"
+[[sources]]
+url = "https://support.ebooks.com/hc/en-gb/articles/360000726656-What-is-DRM-DRM-FAQs"
+claim = "Readium LCP (Thorium Reader) and Adobe DRM (ADE, ByteBooks); most titles DRM-protected by publisher choice; online reader and app need no setup"

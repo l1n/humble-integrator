@@ -1,0 +1,40 @@
+schema = 1
+name = "Arc Games (Star Trek Online / Neverwinter in-game codes)"
+kind = "route"
+service = true
+notes = """
+Arc Games (formerly Perfect World Entertainment) runs Star Trek Online and
+redeems its promotional in-game codes on the Arc account. Humble book bundles
+from IDW and Modiphius (Star Trek) included STO item packs as keys. Codes go
+to the Arc account; the items are then claimed in game from the Zen Store's
+Promotions tab. Nothing to install here: Star Trek Online itself is a
+free-to-play Windows game (also on Steam, which the generic Steam route and
+Proton handle if the user installs it).
+
+No developers rule (Perfect World also publishes games sold as Steam keys);
+item recipes claim the codes, and extracted keys match by domain.
+"""
+
+[match]
+domains = ["arcgames.com"]
+
+[redeem]
+where = "https://www.arcgames.com/en/code-redemption"
+account = true
+delivers = "the in-game items on the Arc account, claimed per character in Star Trek Online's Zen Store -> Promotions"
+steps = [
+  "Create or sign in to an Arc account (https://www.arcgames.com).",
+  "Redeem the code at https://www.arcgames.com/en/code-redemption (or in the Arc client: Redeem Code / gear -> Activate a Product); check it under https://www.arcgames.com/en/my/redeem/history.",
+  "In Star Trek Online, create a character and finish the tutorial, then open the Zen Store -> Promotions tab and click Claim (character-specific items go to the logged-in character).",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360051605754-Humble-RPG-Book-Bundle-Star-Trek-Adventures-RPG-Redeeming-the-Star-Trek-Online-Original-DS9-Uniform-and-Elite-Services-Starter-Pack-Key"
+claim = "STO is free-to-play via Arc; redeem at arcgames.com/en/code-redemption or in the Arc client; history page; claim in game via Zen Store -> Promotions after the tutorial"
+[[sources]]
+url = "https://www.arcgames.com/en/code-redemption"
+claim = "'Arc Code Redemption: sign into an Arc account' page live (fetched 2026-11-07), (c) 2026 Arc Games Inc."

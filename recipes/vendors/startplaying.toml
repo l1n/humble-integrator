@@ -1,0 +1,38 @@
+schema = 1
+name = "StartPlaying (paid online TTRPG sessions)"
+kind = "route"
+service = true        # a discount on a booked game session: nothing to download
+notes = """
+StartPlaying is a marketplace for paid tabletop RPG sessions with
+professional Game Masters. Its Humble item so far is a coupon in the
+Cyberpunk RED: Ready-to-Run Essentials bundle (June 2026): $10 off a new
+player's first session, expiring 12/31/26. That bundle's DriveThruRPG
+sentence would otherwise sweep the coupon onto the DriveThruRPG route, so it
+has the item recipe startplaying/first-session-coupon. No match rules beyond
+the developer name used in the census.
+"""
+
+[match]
+developers = ["Start Playing", "StartPlaying"]
+
+[redeem]
+where = "the StartPlaying link and code on the Humble download page"
+account = true
+delivers = "$10 off the first booked session (new players only)"
+expires = "2026-12-31"
+steps = [
+  "Optional. Open the coupon item on the Humble download page for the code and link.",
+  "Sign up on StartPlaying and apply the code when booking a first session before it expires.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://www.humblebundle.com/books/cyberpunk-red-readytorun-essentials-bundle"
+claim = "'StartPlaying Games Coupon': '$10 OFF your first session! (New players only. Expires 12/31/26)', developer 'Start Playing', hb-key (census)"

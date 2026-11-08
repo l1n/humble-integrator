@@ -1,0 +1,60 @@
+schema = 1
+name = "Battlezoo (Roll for Combat's store: 5E/PF2E books, VTT assets, STL files)"
+kind = "route"
+item_kind = "document"   # PDFs, map packs, token and VTT asset packs, STL files: files for the library folder
+notes = """
+Battlezoo is Roll for Combat's line of D&D 5E / Pathfinder 2E monster,
+ancestry and adventure books, sold with VTT maps, tokens and 3D-print files
+in its own Shopify shop (battlezoo.com). Humble RPG Bundle: Battlezoo
+Ultimate Monster & Adventure Bundle for D&D 5E (2026) sold 22 items (PDFs,
+digital assets, digital/animated tokens, map packs, pre-generated
+characters, an STL set); its keys are Battlezoo discount codes that only
+work with the product behind the store link Humble gives. 'Keys expire.
+Please redeem before December 31st, 2026.'
+After the $0 checkout the files come with the Battlezoo order/account
+(Humble: 'the product will be added to your account'); how the downloads
+are delivered (order email, account page or a download app) is not
+documented in the sources found. Matched by the bundle's text (Humble's typo
+'Reedem' included), its URL slug, and keys by domain.
+"""
+
+[match]
+domains = ["battlezoo.com"]
+key_names = ['battlezoo']
+# "Reedem your keys via www.battlezoo.com"
+redeem_text = ['re+de+m\w*[^.]{0,40}\bbattlezoo\b']
+bundle_slugs = ['^battlezoo']
+
+[redeem]
+where = "the Battlezoo store link given for the key on the Humble download page (https://www.battlezoo.com)"
+account = true
+delivers = "the bundle's PDFs, VTT assets, tokens, map packs and STL files on the Battlezoo order/account"
+expires = "2026-12-31"
+expiry_text = '(?i)redeem before ([A-Z][a-z]+ \d{1,2}(?:st|nd|rd|th)?,? \d{4})'
+steps = [
+  "Open the store link shown with the key on the Humble download page (the code only discounts that product).",
+  "Add the product to the cart and go to checkout.",
+  "Enter the Humble code in the discount field; it covers the full price. Confirm the order.",
+  "Download the files from the order / Battlezoo account into the library folder.",
+]
+
+[download]
+scriptable = false
+how = "by hand from the Battlezoo order after checkout"
+
+[library]
+files = "PDF books, map and token packs (images), VTT asset packs and STL files as Battlezoo provides them"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/49429515436187-Battlezoo-Ultimate-Monster-Adventure-Bundle-for-D-D-5E-by-Roll-for-Combat-Key-Redemption"
+claim = "redeem at the Battlezoo store using the store link provided (the discount only works for that product); add to cart, enter the code at checkout; the code covers the cost and the product is added to your account"
+[[sources]]
+url = "https://www.humblebundle.com/books/battlezoo-ultimate-monster-adventure-bundle-for-dd-5e-books"
+claim = "'Reedem your keys via www.battlezoo.com'; 'Keys expire. Please redeem before December 31st, 2026'; 22 hb-key items (census)"
+[[sources]]
+url = "https://battlezoo.com/"
+claim = "the Battlezoo store is a Shopify shop"

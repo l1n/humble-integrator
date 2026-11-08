@@ -1,0 +1,58 @@
+schema = 1
+name = "Paizo adventure modules for Foundry Virtual Tabletop"
+vendor = "paizo"
+kind = "content"
+machine_names = [
+  "zombiefeastbloodlords1of6foundryvttmodule",     # Blood Lords 1-6 (Bundle of the Dead)
+  "graveclawbloodlords2of6foundryvttmodule",
+  "fieldofmaidensbloodlords3of6foundryvttmodule",
+  "ghoulshungerbloodlords4of6foundryvttmodule",
+  "atasteofashesbloodlords5of6foundryvttmodule",
+  "ghostkingsragebloodlords6of6foundryvttmodule",
+  "punksinapowderkegfoundryvttmodule",             # Outlaws of Alkenstar 1-3 (Guns of Alkenstar)
+  "cradleofquartzfoundryvttmodule",
+  "smokinggunfoundryvttmodule",
+  "pathfinderadventurepathabominationvaultsfoundryvtt",   # Abomination Vaults (So You Wanna Try Out Pathfinder + Encore)
+  "paizoprintables_welcomepackdemoadventure_lastcroakfoundryvtt",   # Last Croak demo adventure (Bundle of Frogs)
+]
+verified = false
+notes = """
+Premium Foundry VTT modules (maps, tokens and the adventure text as Foundry
+compendiums) for Pathfinder 2E adventures, sold in Paizo's Humble bundles.
+They live on a Foundry VTT account (foundryvtt.com) and are installed from
+inside the Foundry app, which is a separately licensed desktop program with
+native macOS and Linux builds (not in these bundles; no recipe yet, so no
+`requires`). Nothing goes in the library folder.
+Where the key is entered depends on what the Humble download page shows:
+Bundle of the Dead says 'Foundry VTT modules are redeemed on your Foundry VTT
+account page', so its keys are Foundry content keys. For the other bundles
+('The ebooks in this bundle can be redeemed on the Paizo website') the module
+may come as a Paizo code; Paizo's library then shows the Foundry content key
+to activate (inference, not confirmed by a source).
+"""
+
+[redeem]
+where = "https://foundryvtt.com/me/purchases"
+account = true
+delivers = "the module unlocked on the Foundry VTT account, installable from the Foundry app"
+steps = [
+  "If the Humble key is a Paizo code, redeem it first at https://store.paizo.com/redemption (see vendors/paizo) and take the Foundry content key it gives.",
+  "Log in at https://foundryvtt.com with the account the content should belong to (a key can be used once) and open Purchased Content (https://foundryvtt.com/me/purchases).",
+  "Paste the key into 'Content Key' and click 'Activate Content'; it then shows under Unlocked Premium Content.",
+  "In the Foundry app's Setup screen, open Add-on Modules (or Game Worlds) > Install > Premium Content, find the module and click Install.",
+  "In a world: Settings > Manage Modules, enable it, then import from its compendiums.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://foundryvtt.com/article/premium-content/"
+claim = "activate a content key at foundryvtt.com Purchased Content (/me/purchases) > Content Key > Activate Content; install via Setup > Install > Premium Content; enable via Manage Modules"
+[[sources]]
+url = "https://www.humblebundle.com/books/pathfinder-second-edition-bundle-dead-paizo-inc-books"
+claim = "'The ebooks in this bundle are redeemable on Paizo's website. Foundry VTT modules are redeemed on your Foundry VTT account page.' (census redeem_text)"

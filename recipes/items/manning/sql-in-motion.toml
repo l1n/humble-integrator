@@ -1,0 +1,25 @@
+schema = 1
+name = "SQL in Motion (liveVideo)"
+vendor = "manning"
+kind = "service"
+machine_names = ["sqlinmotion"]
+verified = false
+notes = """
+A Manning liveVideo course, watched in the browser on livevideo.manning.com (Manning account). Streaming only as far as known; no Steam entry.
+Humble bundles: Code Like a Pro (2021).
+The Humble item is a Manning code: redeem it as vendors/manning describes (manning.com/humble-bundle, or dashboard > Register Bundle when signed in).
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/1260803819510-Manning-Publications-How-to-Redeem-liveBook-and-liveVideo-Content"
+claim = "liveBook/liveVideo codes are redeemed at manning.com/humble-bundle (or dashboard/accessCodeRegistration) and accessed from the Manning dashboard"
+[[sources]]
+url = "https://www.manning.com/livevideo-program"
+claim = "liveVideo courses are launched on livevideo.manning.com"

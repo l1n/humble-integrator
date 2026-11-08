@@ -1,0 +1,39 @@
+schema = 1
+name = "Deep Magic Volume 1 (Kobold Press) - Foundry VTT module licence key"
+vendor = "foundry-vtt"
+kind = "content"
+machine_names = ["deepmagicvolume1foundrylicensekey"]
+verified = false
+notes = """
+From the Heroic Hoard 5E bundle by Kobold Press (Mar-Apr 2025). The other 43
+items of that bundle are DRM-free PDFs on the generic ebook route (including,
+presumably, Deep Magic's own PDF); this one is a 'Foundry License Key' for the
+Foundry VTT edition of Deep Magic Volume 1. Inference from the item name and
+Foundry's documented external-content keys: the key is activated on the
+user's foundryvtt.com account and the module installed from Foundry's Package
+Installer. Needs a Foundry VTT licence and install (native Windows, macOS and
+Linux app; not part of the bundle, no recipe for it here). No Steam entry.
+"""
+
+[redeem]
+where = "https://foundryvtt.com/me/purchases"
+account = true
+delivers = "the Deep Magic Volume 1 premium module on the Foundry VTT account"
+steps = [
+  "Activate the key from the Humble download page on foundryvtt.com -> Purchased Content -> Content Key -> Activate Content (see vendors/foundry-vtt).",
+  "Install it in Foundry VTT from Add-on Modules -> Install -> Premium Content, then enable it in the world's Manage Modules.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://web.archive.org/web/20250322195344/https://www.humblebundle.com/books/heroic-hoard-5e-power-kobold-press-books"
+claim = "'Deep Magic Volume 1 Foundry License Key', publisher Kobold Press, hb-key; the rest of the bundle hb-drmfree PDFs (census)"
+[[sources]]
+url = "https://foundryvtt.com/article/premium-content/"
+claim = "external premium content keys are activated on foundryvtt.com Purchased Content and installed via the Package Installer"

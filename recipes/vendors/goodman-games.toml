@@ -1,0 +1,44 @@
+schema = 1
+name = "Goodman Games (print books via goodman-games.com)"
+kind = "route"
+service = true        # print books shipped by Goodman Games (the store adds a PDF to the account)
+notes = """
+Goodman Games (Dungeon Crawl Classics, Mutant Crawl Classics, 5E
+conversions) puts top-tier print books in some of its Humble bundles. Those
+keys are coupons for goodman-games.com: the 'Redeem here' link under the key
+opens the product, the coupon covers book + tax, and the buyer pays
+shipping. Goodman's store attaches the matching PDF to the buyer's Goodman
+Games account, so make the account before checking out.
+The bundles' digital books are DRM-free Humble downloads or DriveThruRPG keys
+(other routes), so this vendor has no developers or bundle rule; the print
+items have the item recipe goodman-games/print-books, and extracted keys
+match by domain.
+"""
+
+[match]
+domains = ["goodman-games.com"]
+
+[redeem]
+where = "the 'Redeem here' link below the key on the Humble download page (goodman-games.com product page)"
+account = true
+delivers = "the print book shipped by Goodman Games, plus its PDF on the Goodman Games account"
+expires = "check the Humble download page (Humble: 'Please check your download page for any key expiration dates')"
+steps = [
+  "Create a Goodman Games account first (https://goodman-games.com/store/my-account/); without it the PDF that comes with the purchase can't be accessed.",
+  "Reveal and copy the key; click 'Redeem here' below it and click 'Add to cart' on the product page.",
+  "In the cart paste the code into the coupon field and click 'Apply coupon'; check it applied, then 'Proceed to checkout'.",
+  "Fill in billing and shipping details and pay the shipping (the coupon covers book + tax only).",
+  "Download the PDF from the Goodman Games account if wanted. Questions: info@goodman-games.com; shipping times: https://goodman-games.com/store/store-policies/",
+]
+
+[download]
+scriptable = false
+how = "the companion PDF by hand from the Goodman Games account; the book ships"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/23625826028571-Goodman-Games-Key-Redemption-Instructions"
+claim = "coupon covers book + tax, not shipping; create a Goodman Games account or the PDF can't be accessed; 'Redeem here' link; Add to cart; Apply coupon; checkout pays shipping; info@goodman-games.com (updated 2026-06-08)"

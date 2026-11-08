@@ -1,0 +1,109 @@
+schema = 1
+name = "Renegade Game Studios physical goods (board games, expansions, RPG accessories)"
+vendor = "renegade-game-studios"
+kind = "service"
+service = true        # shipped goods: coupon at Renegade's shop + shipping; nothing to download
+machine_names = [
+  # Humble Physical Game Bundle: G.I. JOE Deck-Building Game Collection
+  "gijoedeck-buildinggameshadowoftheserpentexpansion",   # G.I. JOE Deck-Building Game Shadow of the Serpent Expansion
+  "gijoedeck-buildinggamecoldsnapexpansion",   # G.I. JOE Deck-Building Game Cold Snap Expansion
+  "gijoedeck-buildinggamecoldsnapbonusbox2",   # G.I. JOE Deck-Building Game Cold Snap Bonus Box 3
+  "gijoedeck-buildinggame",   # G.I. JOE Deck-Building Game
+  "gijoedeck-buildinggamebonusbox1",   # G.I. JOE Deck-Building Game Bonus Box 1
+  # Humble RPG Bundle: G.I. JOE Roleplaying Game by Renegade Game Studio
+  "gijoeroleplayinggamecobradicebag",   # GI JOE Roleplaying Game Cobra Dice Bag
+  "gijoeroleplayinggamesgtslaughterlimitededitionaccessorypack",   # GI JOE Roleplaying Game Sgt. Slaughter Limited Edition Accessory Pack
+  "gijoeroleplayinggamecobradiceset",   # GI JOE Roleplaying Game Cobra Dice Set
+  "gijoeroleplayinggamestandeepack1",   # GI JOE Roleplaying Game Standee Pack 1
+  "gijoeroleplayinggameexpandedcharacterjournal",   # GI JOE Roleplaying Game Expanded Character Journal
+  # Humble RPG Bundle: Power Rangers Roleplaying Game by Renegade Game Studios
+  "powerrangersroleplayinggameherominiaturesset1",   # Power Rangers Roleplaying Game Hero Miniatures Set 1
+  "powerrangersroleplayinggameexpandedcharactersheetjournal",   # Power Rangers Roleplaying Game Expanded Character Sheet Journal
+  "powerrangersroleplayinggameherominiaturesset2",   # Power Rangers Roleplaying Game Hero Miniatures Set 2
+  # Humble Physical Game Bundle: Transformers Deck-Building Game Collection
+  "transformersdeck-buildinggame_arisingdarkness",   # Transformers Deck-Building Game: A Rising Darkness
+  "transformersdeck-buildinggame_arisingdarknessbonuspack2",   # Transformers Deck-Building Game: A Rising Darkness Bonus Pack 2
+  "transformersdeck-buildinggame_infiltrationprotocol",   # Transformers Deck-Building Game: Infiltration Protocol
+  "transformersdeck-buildinggamedawnofthedinobotsexpansion",   # Transformers Deck-Building Game Dawn of the Dinobots Expansion
+  "transformersdeck-buildinggamebonuspack1",   # Transformers Deck-Building Game Bonus Pack 1
+  # Humble RPG Bundle: Transformers Roleplaying Game by Renegade Game Studios
+  "transformersrpgdiceset",   # Transformers RPG Dice Set
+  "decepticonrpgdiceset",   # Decepticon RPG Dice Set
+  "characterjournalrpg",   # Character Journal RPG
+  "decepticonrpgdicebag",   # Decepticon RPG Dice Bag
+  "beaconofhopegmscreen",   # Beacon of Hope GM Screen
+  # Humble RPG Bundle: World of Darkness: Month of Darkness 2024 Bundle by Renegade Game Studios
+  "vampire_themasqueraderivals",   # Vampire: The Masquerade Rivals
+  "vampire_themasqueraderivalsheartofeuropeexpansion",   # Vampire: The Masquerade Rivals Heart of Europe Expansion
+  "vampire_themasqueraderivalsshadowsandshroudsexpansion",   # Vampire: The Masquerade Rivals Shadows & Shrouds Expansion
+  # Humble Board Game Bundle: Board Game All Stars by Renegade Game Studios
+  "searchforlostspecies",   # The Search for Lost Species
+  "fusecountdown",   # Fuse Countdown
+  "junkorbit20",   # Junk Orbit 2.0
+  "worldsfair1893",   # World's Fair 1893
+  "searchforuaps",   # The Search for UAPs
+  "deadmentellnotales",   # Dead Men Tell No Tales
+  "provinggrounds",   # Proving Grounds
+  # Humble Tabletop Board Game Bundle: Garphill Game Expansions
+  "paladinsofthewestkingdomcityofcrowns",   # Paladins of the West Kingdom City of Crowns
+  "circadiansspeclaiistspack",   # Circadians Speclaiists Pack
+  "chaosorderharbingersexpansion",   # Chaos Order Harbingers Expansion
+  "circadiansalliespack",   # Circadians Allies Pack
+  "westkingdomtomesaga",   # The West Kingdom Tome Saga
+  "architectsofthewestkingdomworksofwonder",   # Architects of the West Kingdom Works of Wonder
+  "explorersofthenorthsearocksofruin",   # Explorers of the North Sea Rocks of Ruin
+  "raidersofnorthseafieldsoffame",   # Raiders of North Sea Fields of Fame
+  # Humble Tabletop Board Game Bundle: Garphill Games Core Games
+  "raidersofscythia",   # Raiders of Scythia
+  "inventorsofthesouthtigress",   # Inventors of the South Tigress
+  "viscountsofthewestkingdom",   # Viscounts of the West Kingdom
+  # Humble Deck-Builder Bundle: My Little Pony: Adventures in Equestria Deck-Building Game Physical Bundle
+  "mylittlepony_adventuresinequestriadeck-buildinggamecore",   # My Little Pony: Adventures in Equestria Deck-Building Game CORE
+  "mylittlepony_adventuresinequestriadeck-buildinggame_meeplepack_iss",   # My Little Pony: Adventures in Equestria Deck-Building Game: Meeple Pack #3
+  "mylittlepony_adventuresinequestriadeck-buildinggame_meeplepack",   # My Little Pony: Adventures in Equestria Deck-Building Game: Meeple Pack
+  "mylittlepony_adventuresinequestriadeck-buildinggame_familiarfacese",   # My Little Pony: Adventures in Equestria Deck-Building Game: Familiar Faces Expansion
+  "mylittlepony_adventuresinequestriadeck-buildinggame_princesspagean",   # My Little Pony: Adventures in Equestria Deck-Building Game: Princess Pageantry Expansion
+  "mylittlepony_adventuresinequestriadeck-buildinggame_truetalentsexp",   # My Little Pony: Adventures in Equestria Deck-Building Game: True Talents Expansion
+]
+verified = false
+notes = """
+Physical items in Renegade's Humble bundles: whole 'Physical Game' bundles
+(deck-builders, Board Game All Stars, Garphill Games) and the physical
+add-ons in the RPG bundles (dice sets and bags, journals, standees,
+miniatures, GM screens, Sgt. Slaughter accessory pack, V:TM Rivals card
+game and expansions). In the RPG bundles they are the items Humble typed
+'game' among the PDFs; in the physical bundles every item. Redeemed with the
+same coupon flow as the PDFs, plus a shipping address (US, Canada, Australia,
+New Zealand only) and shipping paid at Renegade's checkout. The Power Rangers
+RPG Core Rulebook (typed 'game' in its own bundle) is left on the vendor
+route because the same machine name is a PDF in the Roll Big or Go Home
+bundles.
+"""
+
+[redeem]
+where = "the 'Click here to redeem your key' link on the Humble download page (renegadegamestudios.com product page)"
+account = true
+delivers = "the physical products, shipped by Renegade (shipping paid by the buyer)"
+steps = [
+  "Log in to (or create) a Renegade account: https://renegadegamestudios.com/login.php",
+  "Open the 'Click here to redeem your key' link from the Humble download page and add the product to the cart.",
+  "Enter the Humble key as the cart's Coupon Code and click Apply.",
+  "Check out with a US, Canadian, Australian or New Zealand shipping address and pay the shipping shown.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/28753718041755-Renegade-Game-Studios-Key-Redemption-Instructions"
+claim = "coupon in the cart; shipping address US, Canada, Australia and New Zealand only; shipping costs not included"
+[[sources]]
+url = "https://www.humblebundle.com/games/garphill-game-expansions"
+claim = "'Keys redeemable on the Renegade website for physical books'; 'Humble Bundle cost does not include shipping costs' (census redeem_text; likewise Garphill core games, Board Game All Stars, My Little Pony and Transformers/G.I. JOE deck-building bundles)"
+[[sources]]
+url = "https://www.humblebundle.com/books/gi-joe-roleplaying-game-renegade-game-studio-books"
+claim = "'Shipping of physical items is limited to addresses in the US, Canada, Australia, and New Zealand' (census redeem_text)"

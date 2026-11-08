@@ -26,9 +26,18 @@ set; the article does not say whether each item has its own code
 Matched by these bundles' slugs only: Magpie Games also publishes DRM-free
 ebook bundles on Humble that must stay on the generic download routes, and
 the item machine names (e.g. urbanshadows2ndedition) could recur as ebooks.
-Humble's 'Magpie Games Classic Indie RPG Physical Book Bundle' (May 2026,
-not in the census) used the same coupon flow; its keys would reach this
-recipe through the magpiegames.com domain.
+Humble's 'Magpie Games Classic Indie RPG Physical Book Bundle' (May 2026)
+used the same coupon flow ('Keys are redeemable on the Magpie site';
+shipping US $11, UK $15, Canada $19, Europe $23, rest of world $29): five
+physical books (Our Last Best Hope + Expansion, Epyllion + Encyclopedia
+Draconica, The Play's The Thing). Wave 4 added it, the 'Best of Humble
+Bundle' re-run of the Avatar Legends 20th Anniversary bundle, and a
+redemption-text rule for "redeemable ... Magpie" sentences (only physical
+Magpie bundles use them in the census; Magpie's digital books on Humble are
+DRM-free downloads or DriveThruRPG keys).
+'Best of Magpie Games' (March-April 2024) is a DRM-free ebook bundle whose
+top tier added a physical Avatar Legends Starter Set: that one item has the
+item recipe magpie-games/avatar-legends-starter-set-physical.
 """
 
 [match]
@@ -36,7 +45,13 @@ recipe through the magpiegames.com domain.
 bundle_slugs = [
   '^urban-?shadows-?physical-?collection',
   '^avatar-?legends-?20th-?anniversary-?physical',   # URL slug and order machine_name (avatarlegends20thanniversaryphysicalrpgbundle_bundle)
+  # Wave 4: the "Best of Humble Bundle" re-run (best-humble-bundle-avatar-legends-20th-anniversary-physical-rpg-bundle)
+  # and the Classic Indie RPG Physical Book Bundle (May 2026)
+  '^best-?humble-?bundle-?avatar-?legends-?20th-?anniversary-?physical',
+  '^magpie-?games-?classic-?indie-?rpg-?physical',
 ]
+# "Keys are redeemable through Magpie Games' website." / "Keys are redeemable on the Magpie site."
+redeem_text = ['redeem\w*[^.]{0,40}\bmagpie\b']
 domains = ["magpiegames.com"]
 
 [redeem]
@@ -48,6 +63,8 @@ tier_products = [
   "Urban Shadows $39 tier: https://magpiegames.com/collections/urban-shadows/products/core-book-urban-shadows-1",
   "Urban Shadows $59 tier: https://magpiegames.com/products/urban-shadows-physical-collection-humble-bundle",
   "Avatar Legends 20th Anniversary ($49): https://magpiegames.com/products/accessories-bundle-avatar-legends",
+  "Classic Indie RPG Physical Book Bundle: https://magpiegames.com/products/classic-indie-bundle",
+  "Best of Magpie Games (2024) physical Avatar Legends Starter Set: https://magpiegames.com/products/avatar-legends-the-roleplaying-game-starter-set",
 ]
 steps = [
   "Open the product page for the bundle and tier bought (see tier_products) and add the item to the cart.",
@@ -81,3 +98,9 @@ claim = "'Keys are redeemable through Magpie Games' website'; 'Shipping is paid 
 [[sources]]
 url = "https://support.humblebundle.com/hc/en-us/articles/23872732261275-Avatar-Legends-Starter-Set-Redemption-Instructions"
 claim = "an earlier Avatar Legends Starter Set offer (not in the census) used the same coupon flow with magpiegames.com/products/avatar-legends-the-roleplaying-game-starter-set"
+[[sources]]
+url = "https://www.humblebundle.com/books/magpie-games-classic-indie-rpg-physical-book-bundle-books"
+claim = "'Keys are redeemable on the Magpie site'; shipping estimates US $11, UK $15, Canada $19, Europe $23, ROW $29; five physical hb-key items (census)"
+[[sources]]
+url = "https://www.humblebundle.com/games/best-humble-bundle-avatar-legends-20th-anniversary-physical-rpg-bundle"
+claim = "'Keys are redeemable through Magpie Games' website'; redeem before May 31st, 2026; same six physical items as the 2025 bundle (census)"

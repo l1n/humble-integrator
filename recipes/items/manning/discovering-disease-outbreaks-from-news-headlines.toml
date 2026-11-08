@@ -1,0 +1,29 @@
+schema = 1
+name = "Discovering Disease Outbreaks from News Headlines (liveProject)"
+vendor = "manning"
+kind = "service"
+machine_names = ["liveprojectdiscoveringdiseaseoutbreaksfromnewsheadlines"]
+verified = false
+notes = """
+A Manning liveProject: guided hands-on project work done in the browser on liveproject.manning.com. Web-only; nothing to download or install, no Steam entry.
+Humble bundles: Machine Learning: Zero to Hero.
+The Humble item is a Manning code: redeem it as vendors/manning describes (manning.com/humble-bundle, or dashboard > Register Bundle when signed in).
+In the older bundles without delivery icons (Technology Essentials for Business; Machine Learning: Zero to Hero, by inference from its 'liveVideo!'/'liveProject!' items and 'access keys' text) the code was a checkout discount code instead: add the title to the cart on manning.com, enter the code in 'Discount Code', Apply, check out at $0. Whether the old codes still work is unknown.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/1260803819510-Manning-Publications-How-to-Redeem-liveBook-and-liveVideo-Content"
+claim = "liveBook/liveVideo codes are redeemed at manning.com/humble-bundle (or dashboard/accessCodeRegistration) and accessed from the Manning dashboard"
+[[sources]]
+url = "https://liveproject.manning.com/"
+claim = "liveProject platform (Manning's site navigation links it as liveProject)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360049910074-Redeeming-your-Humble-Book-Bundle-Technology-Essentials-for-Business-videos"
+claim = "Technology Essentials for Business: four liveVideos (Machine Learning for Mere Mortals, Get Programming with Python in Motion, Rust in Motion, Grokking Deep Learning in Motion) redeemed as Discount Codes at manning.com checkout, one code per video; watched from the Manning account"

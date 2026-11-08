@@ -1,0 +1,34 @@
+schema = 1
+name = "Foundry Virtual Tabletop (premium content keys)"
+kind = "route"
+service = true
+notes = """
+Foundry VTT premium content (modules, worlds, game systems) that publishers
+sell outside the Foundry marketplace comes with a content activation key,
+redeemed once on the Foundry VTT account; the content then installs from the
+in-app Package Installer. Foundry VTT itself is a separately licensed app
+that no Humble item here includes.
+
+No match rules: Paizo's Foundry modules in Paizo bundles are redeemed on
+paizo.com (vendors/paizo), so a broad 'foundry' or foundryvtt.com rule would
+steal them. Item recipes claim the Humble keys that are plain Foundry keys.
+"""
+
+[redeem]
+where = "https://foundryvtt.com/me/purchases"
+account = true
+delivers = "the premium package unlocked on the Foundry VTT account, installable from the Package Installer"
+steps = [
+  "Log in to https://foundryvtt.com (the account that holds your Foundry VTT licence).",
+  "Open the Purchased Content page (https://foundryvtt.com/me/purchases), paste the key into 'Content Key' and click 'Activate Content'. The key then belongs to that account.",
+  "In Foundry VTT: Setup -> Add-on Modules (or Game Worlds / Game Systems) -> Install -> filter 'Premium Content' -> Install.",
+  "In a World: Settings -> Manage Modules, tick the module, Save Module Settings.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://foundryvtt.com/article/premium-content/"
+claim = "external premium content key: log in, Purchased Content page, Content Key field, Activate Content (single account); install via Package Installer filtered by Premium Content; activate in the World's Manage Modules"

@@ -1,0 +1,40 @@
+schema = 1
+name = "Frog God Games (print books via froggodgames.com)"
+kind = "route"
+service = true        # physical book; shipping paid on Frog God Games' site
+notes = """
+Frog God Games / Necromancer Games (Swords & Wizardry, Lost Lands). Its
+Humble RPG Bundle: Swords and Wizardry RPG Mega Bundle by Necromancer Games
+(2025) had one physical reward, Razor Coast: Heart of the Razor (US only,
+$9 shipping), claimed on froggodgames.com through a link that fills in the
+coupon. The bundle's ebooks are DRM-free Humble downloads, so this vendor has
+no developers or bundle rule; the book has the item recipe
+frog-god-games/heart-of-the-razor-print and keys match by domain.
+"""
+
+[match]
+domains = ["froggodgames.com"]
+
+[redeem]
+where = "https://www.froggodgames.com/products/razor-coast-heart-of-the-razor-humble-bundle/"
+account = true
+delivers = "the printed book shipped from Frog God Games' US warehouse"
+expires = "2026-03-31"
+steps = [
+  "Create or log in to a Frog God Games account: https://www.froggodgames.com/my-account/",
+  "Open https://www.froggodgames.com/products/razor-coast-heart-of-the-razor-humble-bundle/ (the coupon fills in; the total should be $0.00).",
+  "Proceed to checkout, enter billing and shipping details (US only) and pay the $9 shipping by card or PayPal; Place Order.",
+  "Help: help@froggodgames.com with name and order number.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download: physical book"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/40850646865435-Humble-RPG-Bundle-Swords-and-Wizardry-RPG-Mega-Bundle-by-Necromancer-Games-Redemption-Instructions"
+claim = "Frog God Games account; product link auto-applies the coupon, total $0.00; shipping $9 US only paid on redemption; must be redeemed by 11:59PM PST 3/31/2026; help@froggodgames.com"

@@ -1,0 +1,71 @@
+schema = 1
+name = "Starfinder Second Edition Playtest Primer bundle: Paizo PDFs"
+vendor = "paizo"
+kind = "document"
+machine_names = [
+  "starfinderfirsteditionadventure_driftcrisiscasefilespdf",   # Starfinder First Edition Adventure: Drift Crisis Case Files (PDF)
+  "starfindersecondcontactpdf",   # Starfinder Second Contact (PDF)
+  "starfinderflip-mat_spacecolonypdfandjpg",   # Starfinder Flip-Mat: Space Colony (PDF/JPG)
+  "starfinderplaytestscenario_issue2_itcamefromthevastpdf",   # Starfinder Playtest Scenario #2: It Came from the Vast! (PDF)
+  "starfinderplaytestscenario_issue1_shardsoftheglassplanetpdf",   # Starfinder Playtest Scenario #1: Shards of the Glass Planet (PDF)
+  "starfinderfirsteditionadventurepath_issue48_mastersoftimeandspaced",   # Starfinder First Edition Adventure Path #48: Masters of Time and Space (Drift Crashers 3 of 3)(PDF)
+  "starfinderfirsteditionadventurepath_issue51_intothedataversedrifth",   # Starfinder First Edition Adventure Path #51: Into the Dataverse (Drift Hackers 3 of 3)(PDF)
+  "starfinderfirsteditioncorerulebookpdf",   # Starfinder First Edition Core Rulebook (PDF)
+  "starfinderflip-mat_livingstarshipspdfandjpg",   # Starfinder Flip-Mat: Living Starships (PDF/JPG)
+  "starfinderfirsteditionsocietyscenario_issues5-07_planarbloompdf",   # Starfinder First Edition Society Scenario #5-07: Planar Bloom (PDF)
+  "starfinderfirstedition_nearspacepdf",   # Starfinder First Edition: Near Space (PDF)
+  "starfinderfirsteditiiondrifthackersplayersguidepdf",   # Starfinder First Edition Drift Hackers Player's Guide (PDF)
+  "starfinderflip-mat_crashedstarshippdfandjpg",   # Starfinder Flip-Mat: Crashed Starship (PDF/JPG)
+  "starfinderflip-tiles_alienplanetruinsexpansionpdfandjpg",   # Starfinder Flip-Tiles: Alien Planet Ruins Expansion (PDF/JPG)
+  "starfinderflip-mat_driftcrisispdfandjpg",   # Starfinder Flip-Mat: Drift Crisis (PDF/JPG)
+  "starfinderflip-mat_spacestation",   # Starfinder Flip-Mat: Space Station (PDF/JPG)
+  "starfinderfieldtest_issue5",   # Starfinder Field Test #5
+  "starfinderfirsteditionpactworldspdf",   # StarfinderFirst Edition Pact Worlds (PDF)
+  "starfinderflip-mat_jungleworld",   # Starfinder Flip-Mat: Jungle World (PDF/JPG)
+  "starfinderfirsteditionadventurepath_issue46_theperfectstormdriftcr",   # Starfinder First Edition Adventure Path #46: The Perfect Storm (Drift Crashers 1 of 3) (PDF)
+  "starfinderfirstedition_portsofcallpdf",   # Starfinder First Edition: Ports of Call (PDF)
+  "starfinderone-shot_beforethestormpdf",   # Starfinder One-Shot: Before the Storm (PDF)
+  "starfinderfirsteditionadventurepath_issue49_alightinthedarkdriftha",   # Starfinder First Edition Adventure Path #49: A Light in the Dark (Drift Hackers 1 of 3)(PDF)
+  "starfinderfirstedition_driftcrashersplayersguidepdf",   # Starfinder First Edition: Drift Crashers Player's Guide (PDF)
+  "starfinderfirsteditionadventurepath_issue50_clockworkdemonsdriftha",   # Starfinder First Edition Adventure Path #50: Clockwork Demons (Drift Hackers 2 of 3)(PDF)
+  "starfinderfirsteditionsocietyscenario_issues5-04_fragmentofthe4thp",   # Starfinder First Edition Society Scenario #5-04: Fragment of the 4th (PDF)
+  "starfinderfirsteditionsocietyscenario_issues6-02_driftscarspdf",   # Starfinder First Edition Society Scenario #6-02: Drift Scars (PDF)
+  "starfinderflip-mat_forestmoon",   # Starfinder Flip-Mat: Forest Moon (PDF/JPG)
+  "starfinderfirsteditionalienarchivepdf",   # Starfinder First Edition Alien Archive (PDF)
+  "starfinderflip-mat_desertworldpdfandjpg",   # Starfinder Flip-Mat: Desert World (PDF/JPG)
+  "starfinderfirsteditionalienarchive2pdf",   # Starfinder First Edition Alien Archive 2 (PDF)
+  "starfinderflip-tiles_alienplanetstartersetpdfandjpg",   # Starfinder Flip-Tiles: Alien Planet Starter Set (PDF/JPG)
+  "starfinderfirsteditionsocietyscenario_issues5-14_ghostleveldelvepd",   # Starfinder First Edition Society Scenario #5-14: Ghost Level Delve (PDF)
+  "starfinderfirsteditionalienarchive3pdf",   # Starfinder First Edition Alien Archive 3 (PDF)
+  "starfinderfirsteditionadventurepath_issue47_nightmarescenariodrift",   # Starfinder First Edition Adventure Path #47: Nightmare Scenario (Drift Crashers 2 of 3)(PDF)
+  "starfinderfirstedition_driftcrisispdf",   # Starfinder First Edition: Drift Crisis (PDF)
+  "starfinderflip-mat_giantstarshippdfandjpg",   # Starfinder Flip-Mat: Giant Starship (PDF/JPG)
+  "starfinderfirsteditionsocietyspecial_issues4-99_atimeofcrisispdf",   # Starfinder First Edition Society Special #4-99: A Time of Crisis (PDF)
+  "starfinderfirsteditionalienarchive4pdf",   # Starfinder First Edition Alien Archive 4 (PDF)
+  "starfindersecondeditionplaytestrulebookpdf",   # Starfinder Second Edition Playtest Rulebook (PDF)
+  "starfinderfirsteditionbeginnerboxpdf",   # Starfinder First Edition Beginner Box (PDF)
+]
+verified = false
+notes = """
+Humble RPG Bundle: Starfinder Second Edition Playtest Primer from Paizo Inc.
+(Aug 2024): 'The content in this bundle is provided via keys redeemed on the
+Paizo and Hero Lab websites.' That sentence matches Lone Wolf's
+redemption-text rule, so the bundle resolves to
+vendors/lone-wolf-development; its 'Hero Lab Online: ... Character Creation
+Content' items belong there. These are the bundle's Paizo products
+(rulebooks, adventures, Society scenarios and Flip-Mats as PDF or PDF/JPG):
+Paizo codes for store.paizo.com, downloaded from the Paizo library. Three
+Flip-Mat machine names also occur in other Paizo bundles, which go to Paizo
+anyway. The bundle's Drift Crisis hardcover is in paizo/physical-rewards.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/books/starfinder-second-edition-playtest-primer-from-paizo-inc-books"
+claim = "'The content in this bundle is provided via keys redeemed on the Paizo and Hero Lab websites'; Paizo PDF / PDF-JPG items and Hero Lab Online items, all publisher Paizo (census)"

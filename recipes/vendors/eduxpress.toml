@@ -1,0 +1,62 @@
+schema = 1
+name = "EduXpress (interactive Python/AI ebooks, web platform)"
+kind = "route"
+service = true        # web learning platform: nothing to download or install
+notes = """
+"Humble Tech Book Bundle: Python for AI Development by EduXpress" (Oct-Nov
+2026): 25 Python/AI "eBooks" (hb-key, developer EduXpress). The bundle text
+says "A single key will be provided to redeem content in your bundle" and
+that money cannot be added later to unlock more. EduXpress's "eBooks" are
+courses on its WordPress/LearnPress site ebook.eduxpress.co.uk (16 lessons
+plus a capstone, "built-in simulation", "interactive format", lifetime
+access), read in the browser after enrolment. No PDF/ePub download is
+offered on the product pages we fetched, so nothing lands in the library
+folder (inference from those pages; check the account after redeeming).
+
+The redemption form asks for name, email and phone number and sends a
+verification code before redeeming. The page also advertises a paid
+"Lifetime Prime" membership; it is optional and not needed to redeem.
+"""
+
+[match]
+developers = ["EduXpress"]
+bundle_slugs = ['python-?for-?ai-?development-?(?:by-?)?eduxpress']
+domains = ["eduxpress.co.uk"]
+key_names = ['eduxpress']
+
+[redeem]
+where = "https://ebook.eduxpress.co.uk/redeem-voucher/"
+account = true
+delivers = "enrolment in every eBook of the purchased tier on ebook.eduxpress.co.uk (browser access, lifetime)"
+expires = "not stated in the bundle text; check the Humble download page"
+steps = [
+  "Reveal the single bundle key on the Humble download page.",
+  "Open https://ebook.eduxpress.co.uk/redeem-voucher/ and fill in Student Name, Student Email Address and Phone Number; paste the key into Voucher Code and click Redeem Voucher.",
+  "Enter the verification code EduXpress sends and click 'Verify & Redeem'. You are enrolled in the bundle's eBooks automatically; skip the optional paid membership offer.",
+  "Read them after logging in at https://ebook.eduxpress.co.uk/lp-profile/.",
+  "Problems: info@eduxpress.co.uk.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download: the eBooks are read in the browser"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/57259901133723-Humble-Tech-Book-Bundle-Python-for-AI-Development-by-EduXpress-Redemption-Instructions"
+claim = "redeem at ebook.eduxpress.co.uk/redeem-voucher/, provide the required information, key in the Voucher Code field, automatic enrolment; support info@eduxpress.co.uk (2026-10-15)"
+[[sources]]
+url = "https://ebook.eduxpress.co.uk/redeem-voucher/"
+claim = "form fields Student Name / Student Email Address / Phone Number / Voucher Code, 'Verify & Redeem' with a verification code; optional Lifetime Prime upsell 'No membership purchase is required to redeem your voucher'"
+[[sources]]
+url = "https://ebook.eduxpress.co.uk/ebooks/python-data-structures/"
+claim = "an EduXpress 'eBook' is a 16-lesson course with capstone, built-in simulation, interactive format, mobile-friendly, lifetime access (no download format listed)"
+[[sources]]
+url = "https://www.humblebundle.com/books/python-for-ai-development-eduxpress-books"
+claim = "census redeem_text: 'ATTENTION: A single key will be provided to redeem content in your bundle. You will not be able to add money to unlock additional content after your initial purchase.'"

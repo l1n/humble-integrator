@@ -1,0 +1,73 @@
+schema = 1
+name = "Gaijin Entertainment (War Thunder pack codes)"
+kind = "route"
+service = true        # in-game packs on a Gaijin account: nothing to install from Humble
+notes = """
+"Humble Take Control Bundle" (Jul 2021) included two War Thunder packs as
+activation keys (not Steam keys): Japanese Pacific Campaign (A6M5 Ko,
+850 Golden Eagles, 15 days of Premium account, the campaign) and USA
+Pacific Campaign (YP-38). Item text: "provided via activation key. For key
+redemption, a free War Thunder account is required as well as free game
+client from official website"; owners of a pack do not get a second copy.
+
+Activation page: Gaijin's own activation article (for its older games) uses
+store.gaijin.net/activate.php after signing in to a Gaijin account; that
+War Thunder pack codes go there too is an inference (the page exists and
+asks for a Gaijin login; no Gaijin article names Humble codes).
+
+The game is free: War Thunder has a native macOS launcher from Gaijin
+(sourced below) and is also free on Steam. A Gaijin account created through
+Steam has no email/password until one is linked, which may be needed to
+sign in on store.gaijin.net (inference from Gaijin's gift rules, which
+exclude Steam-created accounts without a linked email). The packs follow the
+account, so whichever client the user plays with gets them.
+"""
+
+[match]
+developers = ["Gaijin Entertainment", "Gaijin Distribution KFT"]
+domains = ["gaijin.net"]
+key_names = ['war thunder', 'gaijin']
+
+[redeem]
+where = "https://store.gaijin.net/activate.php"
+account = true
+delivers = "the pack's vehicles, Golden Eagles and Premium time on the Gaijin (War Thunder) account"
+expires = "not stated in the bundle text; check the Humble download page"
+steps = [
+  "Create or sign in to a Gaijin account at https://store.gaijin.net/ (if you play War Thunder via Steam, link an email to that account first so you can sign in on the website).",
+  "Open https://store.gaijin.net/activate.php, enter the key from the Humble download page and press Activate.",
+  "Repeat for the second pack's key.",
+  "Start War Thunder (Gaijin launcher or Steam) with the same account; the packs are there.",
+]
+
+[download]
+scriptable = false
+how = "nothing to download from Humble; the game client is free from Gaijin or Steam"
+
+[install]
+source = "vendor"
+serial = "account"
+
+[steam]
+shortcut = false
+notes = "War Thunder itself is free on Steam; install it there rather than adding a shortcut (inference: not checked here)."
+
+[platforms.macos]
+runner = "native"
+notes = "Gaijin ships a Mac launcher DMG (WarThunderLauncher.app) that downloads the client."
+
+[[sources]]
+url = "https://www.humblebundle.com/games/take-control"
+claim = "census item descriptions: War Thunder Japanese / USA Pacific Campaign packs 'provided via activation key', free War Thunder account and client required, owners do not get a second copy; pack contents"
+[[sources]]
+url = "https://support.gaijin.net/hc/en-us/articles/200070651-Wings-Of-Prey-Activation"
+claim = "Gaijin: sign up or sign in at store.gaijin.net, go to store.gaijin.net/activate.php, input the serial key and press Activate"
+[[sources]]
+url = "https://store.gaijin.net/activate.php"
+claim = "activation page exists and redirects to the Gaijin login (fetched 2026-11-07)"
+[[sources]]
+url = "https://support.gaijin.net/hc/en-us/articles/115000162045-The-gift-system-of-Store-gaijin-net"
+claim = "Steam-created Gaijin accounts without a linked email cannot receive store.gaijin.net gifts (basis for the link-an-email advice; inference)"
+[[sources]]
+url = "https://support.gaijin.net/hc/en-us/articles/201581172-War-Thunder-on-Mac"
+claim = "War Thunder on Mac: download the launcher DMG from warthunder.com, drag WarThunderLauncher.app out, it downloads the client"

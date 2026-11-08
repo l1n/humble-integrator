@@ -1,0 +1,30 @@
+schema = 1
+name = "Soundpool: Trance Masters"
+vendor = "producer-planet"
+kind = "content"
+machine_names = ["soundpool_trancemasters"]
+verified = false
+notes = """
+Humble Software Bundle: Your Beats. ACIDized.
+A code for this one product on Producer Planet (vendors/producer-planet): add it to the cart with the licence the code is for, 'Redeem coupon', check out at $0, download it from MY PRODUCTS into the library folder (or redeem it in Music Maker's in-app Store). Loops and samples for any DAW or editor; nothing to launch.
+"""
+
+[library]
+files = "the pack's loops/samples as downloaded from MY PRODUCTS"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360019144533-Producer-Planet-Key-Redemption-Instructions"
+claim = "product codes: add the title (right licence) to the Producer Planet cart, Redeem Coupon, BUY NOW at no cost, download under MY PRODUCTS"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/25133506127259-Soundpool-License-and-Redemption-Instructions"
+claim = "Soundpool codes also redeem in Music Maker's in-app Store and install into its Loops tab"
+[[sources]]
+url = "https://www.humblebundle.com/software/your-beats-acidized-software"
+claim = "census: Your Beats. ACIDized.: Soundpool items are hb-key, publisher Producer Planet"

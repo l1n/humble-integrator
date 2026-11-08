@@ -1,0 +1,62 @@
+schema = 1
+name = "Paizo physical rewards (hardcovers, boxed sets, board game)"
+vendor = "paizo"
+kind = "service"
+service = true        # shipped goods: redeem the code and pay shipping; nothing to download
+machine_names = [
+  "pathfinderkingmakerbestiaryp1hardcoveredition",   # Kingmaker Bestiary [P1] (Hardcover Edition) - Kingmaker bundle
+  "pathfindermonstercoresketchcoverhardcover",       # Monster Core [Sketch Cover] - Primer bundle
+  "pathfinderplayercoresketchcoverhardcover",        # Player Core [Sketch Cover] - Asian Fantasy bundle
+  "pathfindernpccorehardcover",                      # NPC Core (Hardcover) - Bundle at the Center of the World
+  "bookofthedeadhardcover",                          # Book of the Dead (Hardcover) - Bundle of the Dead
+  "pathfindergamenight_dawnofthefrogs_boxedset",     # Game Night: Dawn of the Frogs (boxed set) - Bundle of Frogs
+  "pathfinderelementalstones",                       # Pathfinder Elemental Stones (board game) - Holiday Haul
+  "innerseaworldguidehardcover",                     # Inner Sea World Guide hardcover - PF1 Character Options ($35 tier)
+  "starfinderpactworldshardcover",                   # Starfinder Pact Worlds Hardcover - Starfinder bundle ($50 tier)
+  "starfinderfirstedition_driftcrisishardcover",     # Starfinder Drift Crisis (hardcover) - Starfinder 2E Playtest Primer bundle
+]
+verified = false
+notes = """
+Top-tier physical rewards in Paizo's Humble bundles whose machine names don't
+say "physical" (those that do, e.g. corerulebookphysical, go to
+generic/physical). Each is a Paizo code like the bundle's digital ones: it is
+redeemed on store.paizo.com, and the checkout asks for a shipping address and
+the shipping cost (item texts: 'Shipping cost will be calculated upon
+redeeming this title on the Paizo website'; e.g. NPC Core domestic $8,
+international $17-$25; Dawn of the Frogs domestic $11-18). The census item
+descriptions say so; the deadlines were set per bundle and most of these
+bundles ended in 2021-2025, so an unredeemed physical code may have lapsed.
+starfinderbeginnerbox is not listed: in the Starfinder bundle (2021) it was
+the physical $50 tier, but the same machine name is the PDF in Give the Gift
+of Pathfinder & Starfinder, so it stays on the vendor route (Paizo either way).
+"""
+
+[redeem]
+where = "https://store.paizo.com/redemption"
+account = true
+delivers = "the printed book / boxed set, shipped by Paizo once shipping is paid"
+steps = [
+  "Log in to https://store.paizo.com and open https://store.paizo.com/redemption.",
+  "Enter the code for the physical tier and click Apply: the item goes into the cart.",
+  "Check out with your shipping address and pay the shipping cost (customs/VAT are the buyer's). Sold-out items are backordered.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/44156413201435-Paizo-Redemption-Instructions"
+claim = "a physical reward in the cart: proceed through checkout to pay for shipping"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/216821337-Paizo-Physical-and-Digital-Key-Redemption-Instructions"
+claim = "physical content: buyer pays shipping through Paizo; back order if sold out"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4404342241819-Humble-RPG-Book-Bundle-Starfinder-by-Paizo-Redeeming-Your-Physical-Starfinder-Beginner-s-Kit"
+claim = "Starfinder bundle $50 tier: physical Beginner Box and Pact Worlds shipped from one code; shipping estimates; redeem by 2022-02-09"
+[[sources]]
+url = "https://www.humblebundle.com/books/pathfinder-second-edition-bundle-at-center-world-paizo-inc-books"
+claim = "Pathfinder NPC Core (Hardcover) hb-key 'game' item: 'Estimated Shipping: Domestic: $8 International: $17-$25' (census item description); other items likewise in their bundles"

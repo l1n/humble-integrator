@@ -1,0 +1,27 @@
+schema = 1
+name = "Soundpool: ELECTRO TRAP"
+vendor = "producer-planet"
+kind = "content"
+machine_names = ["soundpool_electrotrap"]
+verified = false
+notes = """
+Humble Software Bundle: The Beat Goes On. Key redeemed on its Producer Planet product page (bundle link 'Redeem your Soundpool code here'); deadline was December 31st, 2022.
+A code for this one product on Producer Planet (vendors/producer-planet): add it to the cart with the licence the code is for, 'Redeem coupon', check out at $0, download it from MY PRODUCTS into the library folder (or redeem it in Music Maker's in-app Store). Loops and samples for any DAW or editor; nothing to launch.
+"""
+
+[library]
+files = "the pack's loops/samples as downloaded from MY PRODUCTS"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360034290853-Humble-Software-Bundle-The-Beat-Goes-On-Soundpool-ELECTRO-TRAP-instructions"
+claim = "ELECTRO TRAP Soundpool key: product page via the bundle link, Redeem coupon deducts the full price, download under My Products; redeem by December 31st 2022"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360019144533-Producer-Planet-Key-Redemption-Instructions"
+claim = "product codes: add the title (right licence) to the Producer Planet cart, Redeem Coupon, BUY NOW at no cost, download under MY PRODUCTS"

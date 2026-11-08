@@ -1,0 +1,69 @@
+schema = 1
+name = "Jagex (RuneScape account codes)"
+kind = "route"
+service = true        # one code that credits a RuneScape account: nothing to install
+notes = """
+The RuneScape bundles sell in-game goods for one RuneScape account: Paths to
+Adventure (Dec 2022), Paths to Adventure - The Return (Aug 2023) and
+Devourer (Nov 2024). Their items (1 Month Membership, RuneCoins, Treasure
+Hunter Keys, Umbral Chests, Protean Packs, Knowledge Bombs, cosmetic
+weapons, shields and pets) are not separate keys: "Bundle purchase grants
+single key that will redeem all items on one Runescape account" (The Return
+and Devourer texts; Paths to Adventure 2022 says only "Redeem your keys",
+taken to be the same).
+
+Restrictions from Humble's article and the bundle texts: one redemption per
+account; one Humble code per player (Standard or Premium, not both, for
+Devourer); cosmetics already owned are not duplicated; Ironman accounts get
+reduced rewards (Devourer: only membership, cosmetics and RuneCoins) or are
+ineligible (Humble's article); accounts with 2.5 years or more of stacked
+membership cannot redeem; an active RuneScape mobile (Google/Apple)
+subscription blocks or defers the membership. Paths to Adventure keys
+expired on January 31st, 2024.
+
+Matched by bundle slug only: Jagex also publishes ordinary Steam games
+(SCUM, Ikonei Island) and an Old School RuneScape membership sold as a
+Steam key, which stay on the Steam route.
+
+RuneScape itself is a free download; the account, not the client, holds
+everything this code grants, so the tool has nothing to install here.
+"""
+
+[match]
+bundle_slugs = ['^runescape-']
+domains = ["runescape.com"]
+key_names = ['runescape']
+
+[redeem]
+where = "https://secure.runescape.com/m=billing_core/voucherform.ws"
+account = true
+delivers = "membership time and in-game items on the chosen RuneScape account"
+expires = "per bundle: Paths to Adventure (2022) keys expired January 31st, 2024; later bundles' dates are on the Humble download page"
+steps = [
+  "Check the restrictions first (one code per account; not for Ironman accounts or accounts with 2.5+ years of stacked membership; an active mobile subscription interferes).",
+  "Copy the single key from the Humble download page.",
+  "Open RuneScape's Redeem a Code page (https://secure.runescape.com/m=billing_core/voucherform.ws) and log in to the account that should receive the items (or create one).",
+  "Enter the code and follow the prompts. Everything in the purchased tier is credited to that account.",
+  "Problems: Jagex support (https://support.runescape.com/hc/en-gb/articles/207480615).",
+]
+
+[download]
+scriptable = false
+how = "nothing to download"
+
+[install]
+source = "vendor"
+serial = "account"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/11042170110875-RuneScape-Bundle-Key-Redemption-Instructions"
+claim = "copy the key; RuneScape's Redeem a Code page (secure.runescape.com/m=billing_core/voucherform.ws); log in or create the account; enter the code; restrictions: no duplicate cosmetics, one redemption per account, Ironman accounts ineligible, mobile subscription blocks membership/items, 2.5+ years stacked membership cannot redeem"
+[[sources]]
+url = "https://support.runescape.com/hc/en-gb/articles/207480615-Pre-Paid-cards-and-Membership-passcodes"
+claim = "Jagex: redeem codes at secure.runescape.com/m=billing_core/voucherform.ws after logging in to the receiving account; codes from third parties; Google/Apple memberships block redemption until they expire"
+[[sources]]
+url = "https://www.humblebundle.com/games/runescape-devourer"
+claim = "census redeem_text (Devourer, The Return): 'Bundle purchase grants single key that will redeem all items on one Runescape account'; Ironman, mobile-membership and one-code-per-player limits; Paths to Adventure 2022: 'Keys expire January 31st, 2024'"

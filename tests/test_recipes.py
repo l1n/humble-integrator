@@ -217,7 +217,7 @@ class ShippedRecipesTest(unittest.TestCase):
         self.assertEqual(route(item("physicallybasedshaderdevelopmentforunity2017")), "generic/ebook")
         self.assertEqual(route(item("gateofbonesbook2", content_type="audiobook")), "generic/audio")
         self.assertEqual(route(item("exclusivediscountsoninformit")), "generic/partner-offer")
-        self.assertEqual(route(item("dcuiultra30-daytrialoffer")), "generic/partner-offer")
+        self.assertEqual(route(item("makemagazine_15dollaroff_2023")), "generic/partner-offer")
         self.assertEqual(route(item("monstrositiesphysicalcopy")), "generic/physical")
         self.assertEqual(route(item("dune_corerulebook_physical")), "generic/physical")
         # a coupon for a Steam game shows Steam's icon but isn't a Steam key...
@@ -227,7 +227,7 @@ class ShippedRecipesTest(unittest.TestCase):
         # ...while a vendor's own coupon keeps its recipe, which says where to redeem it
         self.assertEqual(route(item("unityassetstore10offcoupon", delivery=["hb-key"]), games),
                          "unity-asset-store/asset-store-10-off-coupon")
-        self.assertEqual(book.resolve_key({"machine_name": "websitecoupon20_ebooksdotcom",
+        self.assertEqual(book.resolve_key({"machine_name": "worldanvilaccess_25percentdiscount",
                                            "key_type": "generic"})[0].id, "generic/partner-offer")
 
 

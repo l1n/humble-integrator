@@ -1,0 +1,121 @@
+schema = 1
+name = "Paizo (Pathfinder / Starfinder PDFs and print, store.paizo.com)"
+kind = "route"
+item_kind = "document"   # PDFs (and a few ePub/MOBI novels, JPG flip-mats) for the library folder
+notes = """
+Paizo's Humble RPG bundles (Pathfinder 1E/2E, Starfinder, Pathfinder Tales
+fiction; 2019-2025 in the census) are not Humble downloads. Humble gives
+redemption codes that are entered on Paizo's own store; the PDFs then sit in
+the Paizo account's download library. Many bundles say so in the text
+("redemption code to be redeemed on Paizo.com", "redeemable on Paizo's
+website", "available in PDF format through a key from Paizo"); others don't
+say anything but are Paizo-only bundles. Their URL slugs all contain "paizo"
+except Pathfinder 10th Anniversary.
+Older Humble articles (2021-2022) describe one code per tier ("$30 ... code"),
+and Pathfinder Tales says "A single key will be provided to redeem all the
+content". One code can therefore unlock many of the census items; enter
+whatever codes the Humble download page shows.
+
+Store change: Paizo moved to a new store on 10-13 November 2025. The old
+https://paizo.com/humblebundle page now redirects (301) to
+https://store.paizo.com/redemption ("Redeem a Code"), and Humble's newer
+article describes that flow: the code puts the items in the cart and a
+digital-only cart checks out with no payment method. The new store has its
+own login (old paizo.com passwords must be reset once with "Forgot Password").
+Downloads: the new Library at https://store.paizo.com/library/ holds digital
+purchases from 2020 on; older ones are still in the legacy "Digital Content"
+page https://paizo.com/paizo/account/assets until Paizo migrates them.
+
+Physical rewards (hardcovers, boxed sets, a board game) use the same code and
+checkout, with shipping paid at checkout; items whose machine names don't
+say "physical" are listed in paizo/physical-rewards. Foundry VTT modules are
+in paizo/foundry-vtt-modules.
+
+Matching: redemption text naming Paizo, and bundle slugs. No developers rule:
+Paizo-published items also come through Fantasy Grounds (vendors/smiteworks),
+Roll20, Hero Lab (vendors/lone-wolf-development) and, since August 2026,
+DriveThruRPG, and the bundle decides where a key goes. The redemption-text
+rule deliberately skips "redeemed on the Paizo and Hero Lab websites" (the
+Starfinder Second Edition Playtest Primer bundle, claimed by Lone Wolf's
+rule); that bundle's Paizo PDFs have the item recipe
+paizo/starfinder-playtest-primer-pdfs. In the ENNIE Awards bundle ("some on
+DriveThruRPG, and some with Paizo") the Paizo title has the item recipe
+paizo/pathfinder-player-core.
+Since August 2026 DriveThruRPG also sells Paizo PDFs and a "Paizo Connect"
+library sync is planned; Humble's Paizo codes are still redeemed on Paizo's
+store.
+"""
+
+[match]
+domains = ["paizo.com"]
+key_names = ['\bpaizo\b']
+redeem_text = [
+  # "redemption code to be redeemed on Paizo.com", "redeemable on Paizo's website",
+  # "Key redeemable on the Paizo&nbsp; website", "available by redemption through Paizo's website",
+  # "available in PDF format once redeemed on the Paizo website";
+  # not "keys redeemed on the Paizo and Hero Lab websites" (Lone Wolf's bundle)
+  'redeem\w*[^.]{0,40}\bpaizo\b(?![^.]{0,40}hero ?lab)',
+  # "available in PDF format through a key from Paizo", "available through Paizo's website",
+  # "available in PDF format through Paizo"
+  'available[^.]{0,30}\bthrough (a key from )?paizo\b',
+]
+# URL slugs and order machine names (e.g. pathfindersecondeditionbestiarypaizo_bookbundle)
+bundle_slugs = ['paizo', '^pathfinder-?10th-?anniversary']
+
+[redeem]
+where = "https://store.paizo.com/redemption"
+account = true
+delivers = "the PDFs in the Paizo account's download library (store.paizo.com/library); physical rewards shipped by Paizo after paying shipping"
+expires = "per bundle when stated (e.g. Pathfinder 2E Bundle at the Center of the World: redeem before November 30th, 2026; physical tiers had their own deadlines in Humble's articles); otherwise check the Humble download page. Key.is_expired from Humble is authoritative."
+expiry_text = '(?i)redeem (?:your keys )?before ([A-Z][a-z]+ \d{1,2}(?:st|nd|rd|th)?,? \d{4})'
+steps = [
+  "Log in to, or create, an account on https://store.paizo.com (an old paizo.com customer's first login on the new store needs 'Forgot Password'; check the spam folder for the reset mail).",
+  "Open https://store.paizo.com/redemption (also the footer link 'Redeem A Code'; http://paizo.com/humblebundle redirects there).",
+  "Paste one Humble code into 'Enter your redemption code' and click Apply: its items are added to the cart. Repeat for every code from the Humble download page.",
+  "Digital items only: complete checkout; no payment method is needed. A physical reward in the cart: go through checkout with a shipping address and pay the shipping (backordered if sold out).",
+  "Download the PDFs from the Library (https://store.paizo.com/library/): tick the products, Action > 'Download Selected' > Apply. Products with several formats are listed once per format. Codes redeemed before the store change (pre-2021 purchases) may still be under https://paizo.com/paizo/account/assets.",
+  "If a code is refused: Humble's older article says to type it with a space after every fourth character (XXXX XXXX XXXX XXXX), and to try a private window with extensions off and third-party cookies allowed. Paizo customer service: customer.service@paizo.com.",
+]
+
+[download]
+scriptable = false
+how = "by hand from https://store.paizo.com/library/ (Download Selected) after login"
+notes = "No public download API is documented."
+
+[library]
+ebooks = "PDF per product (flip-mats and map packs as PDF/JPG, Pathfinder Tales novels may add other ebook formats), as Paizo's library offers them"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/44156413201435-Paizo-Redemption-Instructions"
+claim = "log in to store.paizo.com; redemption link store.paizo.com/redemption or footer 'Redeem A Code'; paste code, Apply, items added to cart; digital-only checkout needs no payment; physical rewards: pay shipping at checkout (Dec 2025)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/216821337-Paizo-Physical-and-Digital-Key-Redemption-Instructions"
+claim = "older paizo.com/humblebundle flow; enter keys with a space after every fourth character; PDFs appear in the account; physical: pay shipping, backorder if sold out; troubleshooting (incognito, extensions, third-party cookies)"
+[[sources]]
+url = "https://paizo.com/humblebundle"
+claim = "301 redirect to https://store.paizo.com/redemption (checked Nov 2026)"
+[[sources]]
+url = "https://store.paizo.com/redemption"
+claim = "'Redeem a Code' page with a 'Redemption Code' field and Apply button"
+[[sources]]
+url = "https://paizo.com/community/blog/v5748dyo727b6"
+claim = "new Paizo store launched the week of 10 Nov 2025; My Downloads move to the new store; old password must be reset"
+[[sources]]
+url = "https://paizo.com/blog/welcome-to-the-new-paizo-store"
+claim = "Library at store.paizo.com/library/ holds digital purchases from 2020 on; older ones in legacy paizo.com/paizo/account/assets; Download Selected; Humble Bundle codes via 'Redeem a Code'"
+[[sources]]
+url = "https://paizo.com/threads/rzs8456v"
+claim = "April 2026: Humble Paizo content appears in the new library; pre-2021 purchases not yet migrated"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360050996454-Humble-RPG-Book-Bundle-Pathfinder-Second-Edition-Redeeming-Your-Physical-Second-Edition-Core-Rulebook"
+claim = "one code per tier ('your $30 ... code'); physical shipping paid by card on redemption, ships from Paizo's US warehouse"
+[[sources]]
+url = "https://www.gamedeveloper.com/press-release/drivethrurpg-to-offer-paizo-s-title-catalog"
+claim = "Aug 2026: Paizo PDFs on DriveThruRPG for the first time; Paizo Connect library sync planned"
+[[sources]]
+url = "https://www.humblebundle.com/books/pathfinder-second-edition-bundle-at-center-world-paizo-inc-books"
+claim = "'Key redeemable on the Paizo website'; 'Please redeem before November 30th, 2026' (census redeem_text)"

@@ -1,0 +1,38 @@
+schema = 1
+name = "izneo Pass: 1 month free subscription (Cinebook bundle)"
+vendor = "izneo"
+kind = "service"
+machine_names = ["1monthfreesubscriptiontoizneopass"]
+verified = false
+notes = """
+A 30-day free trial of izneo Pass (unlimited reading of a selection of BD,
+manga, comics and webtoons) that came with the European Sci-Fi and Fantasy
+Comics from Cinebook bundle (Apr-May 2022); after the free month it bills
+$7.99/month unless cancelled. Optional, nothing to download. Not the bundle's
+comics: those are one separate izneo promo code (see vendors/izneo). How the
+trial code is entered is not documented (inference: the same 'Promo Code'
+field, or the izneo Pass subscription page). Probably expired.
+"""
+
+[redeem]
+where = "https://www.izneo.com (izneo Pass subscription; promo code)"
+account = true
+delivers = "30 days of izneo Pass, then a paid monthly subscription unless cancelled"
+steps = [
+  "Only if you want the subscription: log in to izneo, start izneo Pass and enter the trial code from the Humble download page (inference: Settings -> Payment methods -> Promo Code, as for the comics code).",
+  "Cancel before the 30 days end to avoid the $7.99/month charge.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://web.archive.org/web/20220428180343/https://www.humblebundle.com/books/european-sci-fi-and-fantasy-comics-from-cinebook-books"
+claim = "'1 month Free subscription to Izneo Pass': first 30 days free with the Humble code, then $7.99 per month; cancel any time (census item description)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/5589517364379-Izneo-Key-Redemption-Steps"
+claim = "izneo promo codes go in Settings -> Payment methods -> Promo Code"

@@ -1,0 +1,95 @@
+schema = 1
+name = "Manning Publications (ebooks, MEAP, liveVideo, liveProject)"
+kind = "route"
+notes = """
+Manning's Humble Tech Book Bundles since 2025 sell every title as a key
+("The ebooks in this bundle are redeemable on the Manning website", "All
+keys can be redeemed on the Manning website"): AI in Production (Oct 2026),
+Software Engineering (Sep 2026), High Tech Career Playbook (Feb 2026),
+Create the Future Now! MEAP and liveProjects (Sep 2025), Ultimate AI:
+Algorithms and LLMs (Dec 2025; its text names no store, so it is matched by
+slug) and AI Foundations and Applications (Jul 2026; its items carry both
+the DRM-free and the key icon, and its text says they are redeemed on
+Manning, so they come here too; fetch any Humble download as well).
+
+A key added at manning.com/humble-bundle puts the products in the Manning
+account library: ebooks as PDF and ePub downloads plus the liveBook online
+reader. MEAP titles (Manning Early Access Program, "(MEAP)" in the name) are
+unfinished: chapters are added as they are written, Manning emails when an
+update is out, and the final ebook arrives in the same account. Re-download
+MEAP files after each update. liveProject series (content type "game" in
+the census) are hands-on projects on liveproject.manning.com and liveVideo
+courses play in livevideo.manning.com: both are web-only (kind service in
+their item recipes).
+
+Older Manning bundles (2021-2024) were DRM-free Humble downloads and stay on
+generic/ebook, so there is no developers rule. Their few liveProject and
+liveVideo keys (Code Like a Pro 2021, Programming Bootcamp 2022) have item
+recipes under items/manning/. Humble's 2024 article for Code Like a Pro 2024
+pointed at manning.com/freebook; its current Manning article and Manning's
+own page use manning.com/humble-bundle.
+
+Single key: Humble's text does not say whether a bundle gets one key or one
+per title. Manning's form takes "the code", one at a time; repeat it for
+every key shown on the download page.
+"""
+
+[match]
+# "The ebooks in this bundle are redeemable on the&nbsp; Manning &nbsp;website."
+# "All keys can be redeemed on the Manning website."
+redeem_text = ['redeem\w*[^.]{0,40}\bManning(?:\s|&nbsp;|\xa0)*website']
+# Ultimate AI: Algorithms and LLMs by Manning (Dec 2025): all keys, text names no store.
+# Unanchored with optional hyphens so an extracted key's bundle machine name matches too.
+bundle_slugs = ['ultimate-?ai-?algorithms-?and-?llms-?(?:by-?)?manning']
+domains = ["manning.com"]
+key_names = ['\(meap\)', 'liveproject', 'livevideo']
+
+[redeem]
+where = "https://www.manning.com/humble-bundle"
+account = true
+delivers = "the titles in the Manning account library: PDF and ePub downloads, liveBook online reading; MEAP updates by email; liveVideo/liveProject access on Manning's sites"
+expires = "not stated in the bundle texts; check the Humble download page"
+steps = [
+  "Reveal the key(s) on the Humble download page.",
+  "Open https://www.manning.com/humble-bundle and enter your name, email address and one code, then submit. Without a Manning account for that email, Manning creates one: confirm it from the email Manning sends and set a password.",
+  "Already signed in to Manning? Codes can also be entered at https://www.manning.com/dashboard/accessCodeRegistration ('Register Bundle' on the dashboard).",
+  "Repeat for every code.",
+  "The products are on https://www.manning.com/dashboard: download the PDF and ePub of each ebook into the library folder; liveBook, liveVideo and liveProject titles open in the browser.",
+  "MEAP titles: Manning emails when new chapters or the final book are out; download again from the dashboard.",
+  "Account problems: https://www.manning.com/contact; redemption problems: Humble support.",
+]
+
+[download]
+scriptable = false
+how = "by hand from the Manning dashboard (PDF / ePub per title) after login"
+notes = "No documented download API was found; a logged-in session could fetch the dashboard links (not researched)."
+
+[library]
+ebooks = "PDF and ePub per title from the Manning dashboard (MEAP titles: the latest draft, replaced as updates arrive)"
+videos = "none: liveVideo courses stream on livevideo.manning.com"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/43540740352155-Manning-Redemption-Instructions"
+claim = "visit manning.com/humble-bundle, sign up for a Manning account, Register Bundle, input code; items show in the account dashboard (updated 2026-07-03)"
+[[sources]]
+url = "https://www.manning.com/humble-bundle"
+claim = "Humble Bundle Access Code Registration: name, email, code; books land in the Manning library 'where you can download PDF or ePub copies and read online on liveBook'; account created and confirmed by email if none exists; MEAP updates and new chapters sent to that address"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/1260803819510-Manning-Publications-How-to-Redeem-liveBook-and-liveVideo-Content"
+claim = "liveBook and liveVideo content redeemed at manning.com/humble-bundle; verify the account by email; content on manning.com/dashboard; existing accounts can use manning.com/dashboard/accessCodeRegistration; Manning contact page for account help"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/24093917594139-Code-Like-a-Pro-2024-by-Manning-Redemption-Instructions"
+claim = "2024 variant of the same flow via manning.com/freebook (Register Bundle, input code, items in dashboard)"
+[[sources]]
+url = "https://www.manning.com/meap-program"
+claim = "MEAP: read chapters while the book is written, updates announced and fetched from the Manning account, final eBook delivered when published; cancelled MEAPs can be exchanged or refunded"
+[[sources]]
+url = "https://www.manning.com/livevideo-program"
+claim = "liveVideo courses are launched on livevideo.manning.com"
+[[sources]]
+url = "https://www.humblebundle.com/books/ai-in-production-governance-reliability-and-application-manning-books"
+claim = "census redeem_text: 'The ebooks in this bundle are redeemable on the Manning website' (likewise Software Engineering, High Tech Career Playbook, Create the Future Now, AI Foundations and Applications); Ultimate AI: Algorithms and LLMs names no store"

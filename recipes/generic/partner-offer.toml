@@ -21,4 +21,6 @@ steps = ["Open the offer in your Humble library: it shows the code and the partn
 # Names only: "discount" alone would catch the novel *Discount Armageddon*.
 machine_names = ["coupon", "\\d+(percent)?discount", "discount(s?on|code|coupon|of\\d)",
   "(store|press|print)discount", "_discount$", "dollars?off", "trialoffer", "freetrial", "\\d+-?daytrial",
-  "monthfree", "freesubscription"]
+  "monthfree", "freesubscription",
+  # promos for streaming/events: a Caffeine gamer pack, a Day of the Devs VIP pass
+  "^caffeinegamerpack", "dayofthedevsvippass"]

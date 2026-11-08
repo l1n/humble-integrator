@@ -1,0 +1,70 @@
+schema = 1
+name = "DSTLRY Digital (dstlry.co comics reader, now moving to Neon Ichiban)"
+kind = "route"
+notes = """
+"New Frontier of Comics" bundle from DSTLRY (Aug-Sep 2025): "The ebooks in
+this bundle are redeemable on the dstlry.co website", per Humble's DSTLRY
+article at digital.dstlry.co/auth/redeem/. Since then DSTLRY's FAQ says its
+digital comics are moving to Neon Ichiban (DSTLRY Media's own platform), and
+digital.dstlry.co/auth/redeem/ and dstlry.app now redirect to the dstlry.co
+print shop (checked 2026-11-07). So an unredeemed code from this bundle most
+likely belongs at neonichiban.com/redeem now (inference, not documented);
+comics redeemed on DSTLRY Digital before the move should show up in a Neon
+Ichiban account with the same email (inference). Contact DSTLRY / Neon
+Ichiban support (support@neonichiban.com) if the code is refused.
+
+Matched by redemption text (dstlry.co) and, for keys, by domain. The later
+"Amazing Creator-Owned Comics by DSTLRY" bundle (Oct 2026) is
+vendors/neon-ichiban.
+"""
+
+[match]
+domains = ["dstlry.co"]
+redeem_text = ['dstlry\.co\b']
+# For extracted keys without a dstlry.co link (census slug or the bundle's name).
+bundle_slugs = ['new-?frontier-?(of-?)?comics']
+
+[redeem]
+where = "https://digital.dstlry.co/auth/redeem/ (Humble's documented page; now redirects to dstlry.co) - try https://www.neonichiban.com/redeem"
+account = true
+delivers = "the comics in the DSTLRY / Neon Ichiban library (online reader and app)"
+steps = [
+  "Humble's documented flow: open digital.dstlry.co/auth/redeem/, enter the code with a username and email (new users), confirm the email, and the comic appears in the library; existing users log in first and enter the code.",
+  "As of Nov 2026 that page redirects to the dstlry.co shop because DSTLRY Digital moved to Neon Ichiban: create or log in to a Neon Ichiban account with the same email and try the code at https://www.neonichiban.com/redeem (inference).",
+  "If the code is refused, contact support@neonichiban.com with the Humble order details.",
+]
+
+[download]
+scriptable = false
+how = "only via Neon Ichiban, for titles whose publisher enables PDF downloads (see vendors/neon-ichiban)"
+
+[library]
+ebooks = "PDF per comic where the publisher enables downloads on Neon Ichiban; otherwise read online/in the app"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[platforms.macos]
+runner = "native"
+notes = "Web reader."
+
+[platforms.linux]
+runner = "native"
+notes = "Web reader."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/38995207099291-DSTLRY-Redemption-Instructions"
+claim = "redeem at digital.dstlry.co/auth/redeem/; new users enter code, username and email, then confirm by email; existing users log in first"
+[[sources]]
+url = "https://web.archive.org/web/20250816200313/https://www.humblebundle.com/books/new-frontier-comics-from-dstlry-books"
+claim = "'The ebooks in this bundle are redeemable on the dstlry.co website'; instructions link to Humble article 38995207099291"
+[[sources]]
+url = "https://dstlry.co/pages/faq"
+claim = "'Digital is moving to Neon Ichiban'; DSTLRY reader at digital.dstlry.co and dstlry.app"
+[[sources]]
+url = "https://digital.dstlry.co/auth/redeem/"
+claim = "redirects to https://dstlry.co/ (fetched 2026-11-07)"
+[[sources]]
+url = "https://neonichiban.com/faq"
+claim = "Neon Ichiban is (c) DSTLRY Media, Inc.; support@neonichiban.com"

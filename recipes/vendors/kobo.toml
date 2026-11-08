@@ -1,0 +1,128 @@
+schema = 1
+name = "Kobo (Rakuten Kobo ebook store)"
+kind = "route"
+notes = """
+Most Humble book bundles since 2023 from big trade publishers (HarperCollins,
+Penguin Random House / Del Rey / Random House Worlds, Disney / Lucasfilm Press,
+Marvel, IDW, Square Enix Manga, Akita Publishing (BAKI), DAW Books, National
+Geographic, Insight Editions, Titan, Red Wheel/Weiser, Harlequin, DK...) are
+not Humble downloads but Kobo promotions: the page says "The titles in this
+bundle are available through Kobo.com. To access the content, create or log in
+to your Kobo.com account" / "The ebooks in this bundle are redeemable on the
+Kobo.com website". The Humble "key" is a single-use Kobo promo code plus a
+redemption page URL (kobo.com/promotionalreward/<campaign>); one code usually
+covers the whole bundle ("ATTENTION: A single key will be provided to redeem
+content in your bundle"). On the redemption page you tick the titles to add:
+anything left unticked is lost, because the code cannot be used again.
+
+DK's "How Everything Works" bundle (Jul-Aug 2025) says only "redeemable through
+DK", but its "See instructions here" link is Humble's Kobo article, so it is
+matched here too (inference from that link; no separate DK redemption article
+exists in Humble's help centre).
+
+Matched by the bundle's redemption text (keys by kobo.com in the instructions).
+Some older Kobo bundles (2023: Mercedes Lackey, Tad Williams, Seanan McGuire,
+Red Wheel/Weiser) have no delivery icons in the census and used to fall to
+generic/ebook; the bundle text says they are Kobo too. The one hb-drmfree item
+in the Seanan McGuire bundle (tricksforfree) may be a real Humble download;
+items on a vendor route still get their Humble downloads fetched, so nothing
+is lost. Humble's own store coupons in these bundles stay on
+generic/humble-coupon (it runs before vendors).
+
+Some bundles were region-locked ("This bundle is only available to those in
+the US", Discworld 2024) - Kobo may refuse the promotion from another
+country's store (inference).
+"""
+
+[match]
+domains = ["kobo.com"]
+key_names = ['\bkobo\b']
+redeem_text = [
+  # "available through Kobo.com", "redeemable on the Kobo.com website",
+  # "available to redeem on Kobo", "redeemable through www.kobo.com"
+  '(available|redeem\w*|reedemable)\s+(\w+\s+){0,3}(on|through|via)\s+(the\s+)?(&nbsp;\s*)?(www\.)?kobo(\.com)?\b',
+  'your kobo(\.com)? account',
+  "kobo's website",
+  # DK bundle: "redeemable through DK. See instructions here" -> Humble's Kobo article
+  'redeemable through DK\b',
+]
+# For extracted keys whose instructions don't name kobo.com.
+bundle_slugs = ['^how-everything-works-dk']
+
+[redeem]
+where = "the Kobo redemption page linked next to the code on the Humble download page (https://www.kobo.com/promotionalreward/<campaign>)"
+account = true
+delivers = "the selected ebooks in the Kobo account (My Books): read in the Kobo apps or web reader, or download per title as EPUB/PDF (DRM-free where the publisher allows, otherwise an Adobe DRM .acsm)"
+expiry_text = "Not stated in most bundle texts. Humble's Terry Pratchett article gives 'Expiry Date: February 17, 2027' for the Discworld Encore 2026 code. Key.is_expired from Humble is authoritative."
+steps = [
+  "Create a Kobo account at https://www.kobo.com (email + password) and stay logged in before opening the redemption link; logged out, Kobo answers 'Sorry, but this promotion is currently not available'.",
+  "Open the redemption page URL shown with the code on the Humble download page.",
+  "Tick EVERY title you want: titles not selected are not added, and the single-use code cannot be used again for them.",
+  "Enter the promo code from the Humble download page and click 'Get Titles' (or 'Get eBook').",
+  "The books appear under My Account -> My Books.",
+  "To keep files: My Books -> Actions (beside each title) -> Download -> Download file. DRM-free titles download as EPUB/PDF; DRM-protected ones as an .acsm to open in Adobe Digital Editions (now signed in with a ByteBooks ID).",
+]
+
+[download]
+scriptable = false
+how = "by hand from kobo.com My Books (Actions -> Download -> Download file), one title at a time"
+notes = "No public Kobo library API was found. Most store titles carry Adobe DRM (an .acsm licence, not the book); the tool can only file what Kobo hands out, and never strips DRM."
+
+[library]
+ebooks = "per title: EPUB or PDF when DRM-free; otherwise an .acsm licence that Adobe Digital Editions turns into a DRM-protected EPUB/PDF"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[platforms.macos]
+runner = "native"
+notes = """
+Kobo Desktop has a macOS build (cdn.kobo.com/downloads/desktop/kobodesktop/kobosetup.dmg,
+OS X 10.9+), but Kobo says it is no longer available to users in Europe;
+the Kobo web reader works in any browser. Adobe Digital Editions (needed for
+DRM-protected downloads) has a Mac version.
+"""
+
+[platforms.linux]
+runner = "native"
+notes = """
+Kobo Desktop is not compatible with Linux (Humble's and Kobo's articles).
+Read in the Kobo web reader; DRM-free EPUB/PDF downloads open in any reader.
+Adobe Digital Editions is offered for Windows and Mac only, so DRM-protected
+titles stay readable in the web reader (or on a Kobo eReader / phone app).
+"""
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/15811065155099-Kobo-Key-Redemption-Instructions-Troubleshooting"
+claim = "create a Kobo account; open the redemption page from the download page; select titles (unselected ones are lost, code is one-time use); enter the single-use promo code, 'Get Titles'; My Account -> My Books; log in and retry on 'promotion is currently not available'"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/46566028831643-Kobo-Redemption-Terry-Pratchett-bundle"
+claim = "redemption URL form kobo.com/promotionalreward/HBTerryPratchett; Expiry Date February 17, 2027; 'Get eBook' button"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/15984798234523-Kobo-Books-App-System-Requirements"
+claim = "Kobo Desktop: Mac OS X 10.9+, not compatible with Linux; mobile apps for iOS/Android"
+[[sources]]
+url = "https://help.kobo.com/hc/en-us/articles/360019527954-Download-books-from-your-Kobo-account-to-export-to-another-device-or-app"
+claim = "My Books -> Actions -> Download -> Download file; DRM-protected (Adobe Digital Editions) or DRM-free EPUB/PDF; most books carry DRM"
+[[sources]]
+url = "https://help.kobo.com/hc/en-us/articles/360017814074-Add-eBooks-with-Adobe-Digital-Editions"
+claim = "DRM books download as .acsm for Adobe Digital Editions; ADE for Windows or Mac; ByteBooks ID replaces Adobe ID"
+[[sources]]
+url = "https://help.kobo.com/hc/en-us/articles/360017707874-About-the-Kobo-Desktop-app"
+claim = "Kobo Desktop for Windows and macOS, not Linux; no longer available for users in Europe; web reader alternative"
+[[sources]]
+url = "https://web.archive.org/web/20251129200323/https://www.humblebundle.com/books/getyourshttogether-growth-bundle-harpercollins-books"
+claim = "'The titles in this bundle are available through Kobo.com. To access the content, create or log in to your Kobo.com account'; instructions link is Humble article 15811065155099"
+[[sources]]
+url = "https://web.archive.org/web/20250726184540/https://www.humblebundle.com/books/how-everything-works-dk-books"
+claim = "'The ebooks in this bundle are redeemable through DK. See instructions here' - the link is Humble's Kobo article 15811065155099"
+[[sources]]
+url = "https://web.archive.org/web/20241109190446/https://www.humblebundle.com/books/teenage-mutant-ninja-turtles-ultimate-collection-books"
+claim = "'ATTENTION: A single key will be provided to redeem content in your bundle'; available through Kobo.com"
+[[sources]]
+url = "https://web.archive.org/web/20240111210545/https://www.humblebundle.com/books/terry-pratchetts-discworld-harpercollins-books"
+claim = "'This bundle is only available to those in the US'; available through Kobo.com"
+[[sources]]
+url = "https://web.archive.org/web/20230603214047/https://www.humblebundle.com/books/mercedes-lackey-valdemar-and-beyond-daw-books"
+claim = "'The ebooks in this bundle are available to redeem on Kobo'; items have no delivery icons in the census"

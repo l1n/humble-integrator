@@ -1,0 +1,52 @@
+schema = 1
+name = "iRacing (online racing-sim subscription)"
+kind = "route"
+service = true        # subscription promo code: nothing to install from Humble
+notes = """
+"The Ultimate Racing Sim Bundle" (Mar 2022) included a 3-month iRacing
+membership as a promo code entered at sign-up. New users only; the
+redemption deadline was June 1st, 2022, so any unredeemed code is expired.
+Sign-up asks for payment details: the 3 months are $0, but the
+subscription renews at full price unless cancelled before it ends.
+
+iRacing's simulator client is downloaded from iRacing after sign-up (its
+Quick Start Guide); it is not part of the Humble purchase and is not
+covered by this recipe. The bundle's Thrustmaster discount codes are on
+generic/humble-coupon.
+"""
+
+[match]
+developers = ["iRacing"]
+domains = ["iracing.com"]
+key_names = ['iracing']
+
+[redeem]
+where = "https://www.iracing.com/"
+account = true
+delivers = "3 months of iRacing membership on a new account"
+expires = "2022-06-01"
+expiry_text = "The Redemption Deadline for the 3 month iRacing subscription is June 1st, 2022. New Users Only."
+steps = [
+  "Expired: the deadline was June 1st, 2022 (new iRacing accounts only).",
+  "On iRacing.com click SIGN UP, enter the Humble key in 'Enter Promo Code Here' under the subscription options; the next screen shows $0.00 for three months.",
+  "Enter account and payment details (not charged unless the subscription renews after 3 months; cancel before then to avoid the charge).",
+  "Follow iRacing's Quick Start Guide to download the software. Support: https://support.iracing.com/support/solutions.",
+]
+
+[download]
+scriptable = false
+how = "nothing from Humble"
+
+[install]
+source = "vendor"
+serial = "account"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4578598720923-The-Ultimate-Racing-Sim-Bundle-3-months-of-iRacing-com-instructions"
+claim = "deadline June 1st 2022, new users only; SIGN UP, 'Enter Promo Code Here', $0.00 for three months, payment info required but not charged unless renewed; Quick Start Guide; support.iracing.com"
+[[sources]]
+url = "https://www.humblebundle.com/games/ultimate-racing-sim-bundle"
+claim = "census: item 'iracing' (hb-key, developer iRacing) in The Ultimate Racing Sim Bundle, ended 2022-03-30"

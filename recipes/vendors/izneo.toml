@@ -1,0 +1,65 @@
+schema = 1
+name = "izneo (European digital comics platform)"
+kind = "route"
+notes = """
+"European Sci-Fi and Fantasy Comics from Cinebook" (Apr-May 2022): "The
+comics in this bundle are redeemed with keys through Izneo website. The code
+will add all the content to your Izneo library. From there, you will be able
+to read on Izneo website or inside izneo apps for iOS, Android, Nintendo
+Switch." One promo code adds the whole bundle; it is entered as a promo code
+under the account's payment settings. Humble's izneo landing page
+(izneo.com/en/universe/humble-bundle-175) returned 404 on 2026-11-07; sign up
+on izneo.com directly. The bundle's one-month izneo Pass trial has an item
+recipe (items/izneo/izneo-pass-trial.toml).
+
+izneo is a streaming-style reader: comics are read in the browser or the
+apps (offline in the mobile apps, inference); no DRM-free download is
+documented.
+"""
+
+[match]
+domains = ["izneo.com"]
+key_names = ['izneo']
+redeem_text = ['izneo']
+# For extracted keys without an izneo link (census slug or the bundle's name).
+bundle_slugs = ['sci-?fi-?and-?fantasy-?comics-?from-?cinebook']
+
+[redeem]
+where = "https://www.izneo.com (Settings -> Payment methods -> Promo Code)"
+account = true
+delivers = "every comic of the bundle in the izneo library (web reader; iOS, Android and Nintendo Switch apps)"
+steps = [
+  "Create an izneo account at https://www.izneo.com (Humble's dedicated landing page is gone).",
+  "Open Settings (the nut icon, top right) -> Payment methods.",
+  "In 'Promo Code' enter the code from the Humble download page and validate it.",
+  "The comics are in the library (three-bar icon, top right); read on the web or log in to the izneo app with the same account.",
+]
+
+[download]
+scriptable = false
+how = "no file download documented: read online or in the izneo apps"
+
+[library]
+ebooks = "none expected (online/app reading)"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[platforms.macos]
+runner = "native"
+notes = "Web reader in a browser."
+
+[platforms.linux]
+runner = "native"
+notes = "Web reader in a browser."
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/5589517364379-Izneo-Key-Redemption-Steps"
+claim = "create an account (izneo.com/en/universe/humble-bundle-175); Settings -> Payment methods -> Promo Code; comics then in the library; apps for iOS, Android, Switch"
+[[sources]]
+url = "https://web.archive.org/web/20220428180343/https://www.humblebundle.com/books/european-sci-fi-and-fantasy-comics-from-cinebook-books"
+claim = "'redeemed with keys through Izneo website. The code will add all the content to your Izneo library'; read on izneo website or apps for iOS, Android, Nintendo Switch"
+[[sources]]
+url = "https://www.izneo.com/en/universe/humble-bundle-175"
+claim = "404 (redirected to izneo.com/fr/...) when fetched 2026-11-07; izneo.com itself is up"

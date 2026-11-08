@@ -1,0 +1,81 @@
+schema = 1
+name = "Renegade Game Studios (RPG PDFs and physical games, renegadegamestudios.com)"
+kind = "route"
+item_kind = "document"   # RPG PDFs; physical goods have the item recipe renegade-game-studios/physical-goods
+notes = """
+Renegade publishes the Essence20 RPGs (G.I. JOE, Power Rangers,
+Transformers, My Little Pony), the World of Darkness 5th-edition lines
+(Vampire: The Masquerade, Hunter: The Reckoning, Werewolf) and board/card
+games (incl. Garphill Games titles it distributes). Its Humble bundles are
+redeemed in Renegade's own web shop: each Humble key is a coupon code; the
+'Click here to redeem your key' link on the Humble download page opens the
+product page, the item goes in the cart, and the code zeroes it. Digital-only
+carts check out at $0 (a billing address is still asked); the PDFs are then
+on the order's downloads ('Go to Downloads', or the account's Orders page).
+Physical tiers ship only to the US, Canada, Australia and New Zealand and the
+buyer pays shipping at checkout. Humble's 2025 article adds separate EU and
+UK shops (eu./uk.renegadegamestudios.com) with their own accounts: use the
+link for your country. 'Keys are superseding': one link per purchase redeems
+the bundle's content.
+Census bundles (2023-2026): RPG PDF bundles (World of Darkness Month of
+Darkness 2023/2024/2025, Power Rangers RPG, Transformers RPG, G.I. JOE RPG)
+with a few physical add-ons (dice, journals, standees, miniatures, GM
+screens), and physical-only bundles (Transformers and G.I. JOE Deck-Building
+Game collections, Board Game All Stars, Garphill Games core games and
+expansions, My Little Pony deck-builder). G.I. JOE Roleplaying Game (Nov
+2024) has no redemption sentence in the census, but its items link to
+renegadegamestudios.com product pages, so it is matched by URL slug.
+No developers rule: Renegade titles also come through DriveThruRPG (ENNIE
+and Roll Big or Go Home bundles) and as DRM-free Humble downloads.
+"""
+
+[match]
+domains = ["renegadegamestudios.com"]
+key_names = ['renegade game studios?']
+# "redeemable on the Renegade website", "Keys redeemable on the Renegade website for physical
+# books", "The keys are redeemable through Renegade's website", "redeemable on the Renegade
+# Games website", "redeemed on the Renegade site with a key", "Redeem your key through
+# Renegade Game Studios website"
+redeem_text = ['redeem\w*[^.]{0,40}\brenegade\b']
+# URL slug / order machine name (gijoeroleplayinggamerenegadegamestudio_bookbundle)
+bundle_slugs = ['^gi-?joe-?roleplaying-?game-?renegade']
+
+[redeem]
+where = "the 'Click here to redeem your key' link on the Humble download page (a renegadegamestudios.com product page; EU/UK shops for buyers there)"
+account = true
+delivers = "the PDFs on the Renegade order's downloads; physical items shipped by Renegade (shipping paid by the buyer)"
+expires = "not stated in the census texts; Key.is_expired from Humble is authoritative"
+steps = [
+  "Create or log in to an account on the Renegade shop for your country: https://renegadegamestudios.com/login.php?action=create_account (US/CA/AU/NZ and the rest), https://eu.renegadegamestudios.com/login.php?action=create_account (EU), https://uk.renegadegamestudios.com/login.php?action=create_account (UK).",
+  "Reveal the key on the Humble download page and click its 'Click here to redeem your key' link (the one for your country); on the product page click 'Add to Cart'.",
+  "In the cart, enter the key in 'Coupon Code' and click Apply (it also removes the tax).",
+  "Check out: digital-only carts cost $0 but ask for a billing address. Physical items: choose shipping (US, Canada, Australia, New Zealand only) and pay it.",
+  "After the order: 'Go to Downloads', or the account's Orders page > the arrow on the product art, and download the PDFs into the library folder. Help: https://renegade-games-studios-customer-support.gorgias.help/en-US/how-do-i-download-my-pdf-45496",
+]
+
+[download]
+scriptable = false
+how = "by hand from the Renegade order's downloads after checkout"
+
+[library]
+ebooks = "PDF per product"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/19343689857563-Renegade-Game-Studios-Key-Redemption-Instructions"
+claim = "keys superseding, one link; shipping paid on Renegade; per-country links and accounts (US/CA/AU/NZ + non-EU/UK, EU, UK); add to cart, apply code (removes tax); downloads on the Orders page; physical tiers ship only to US/CAN/AUS/NZ (Oct 2025)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/28753718041755-Renegade-Game-Studios-Key-Redemption-Instructions"
+claim = "create an account; 'Click here to redeem your key' link opens the product page; Add to Cart; key in 'Coupon Code'; checkout with shipping address (US, Canada, Australia, NZ only), shipping not included (Sept 2024)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/9769822045083-World-of-Darkness-Bundle-Redemption-Instructions"
+claim = "World of Darkness bundle: item in cart, enter code, Apply, billing address but no payment for a $0 digital cart, Place Order, 'Go to Downloads'; Renegade help links; each key is one-time use"
+[[sources]]
+url = "https://web.archive.org/web/20241122051041id_/https://www.humblebundle.com/books/gi-joe-roleplaying-game-renegade-game-studio-books"
+claim = "G.I. JOE Roleplaying Game bundle items link to renegadegamestudios.com product pages (PDF and physical)"
+[[sources]]
+url = "https://www.humblebundle.com/games/board-game-all-stars-renegade-game-studios"
+claim = "'Keys redeemable on the Renegade website for physical books'; shipping not included; single key (census redeem_text)"

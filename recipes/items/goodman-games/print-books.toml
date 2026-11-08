@@ -1,0 +1,33 @@
+schema = 1
+name = "Goodman Games print books from Humble bundles"
+vendor = "goodman-games"
+kind = "service"
+service = true
+machine_names = [
+  "printpack_lostloreofthracia5eplusdcc",              # Print pack - Lost Lore of Thracia 5E+DCC (Caverns of Thracia & More, 2026)
+  "cryptofthedevillich5esoftcover",                    # Crypt of the Devil Lich, 5E softcover (DnD 5E Adventures and More)
+  "mutantcrawlclassicssoftcover",                      # Mutant Crawl Classics Softcover (DCC & MCC Megabundle 2)
+  "grimtoothstrapsylvania_hardbackdccrpgsourcebook",   # Grimtooth's Trapsylvania - Hardback (Monsters, Traps & DM Tricks)
+]
+verified = false
+notes = """
+The single physical item in each of four Goodman Games book bundles (the
+other items are DRM-free ebooks or DriveThruRPG keys). Census descriptions
+say 'Price does not include shipping & handling' / call them softcover,
+hardback or print pack. Redeemed as a goodman-games.com coupon with shipping
+paid at checkout; Goodman's store adds the PDF to the account.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/23625826028571-Goodman-Games-Key-Redemption-Instructions"
+claim = "Goodman Games physical-book coupon flow; shipping paid by the buyer"
+[[sources]]
+url = "https://www.humblebundle.com/books/dungeon-crawl-classics-mutant-crawl-classics-megabundle-2-books"
+claim = "'Mutant Crawl Classics Softcover': 'Price does not include shipping & handling' (census item description; the other three items are likewise hb-key print editions in their bundles)"

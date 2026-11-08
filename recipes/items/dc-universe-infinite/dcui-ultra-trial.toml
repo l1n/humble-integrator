@@ -1,0 +1,47 @@
+schema = 1
+name = "DC Universe Infinite Ultra: 30-day free trial"
+vendor = "dc-universe-infinite"
+kind = "service"
+machine_names = ["dcuiultra30-daytrialoffer", "dcuicoupon_30days"]
+verified = false
+notes = """
+Free 30-day trial of the DC Universe Infinite Monthly Ultra plan, bundled
+with DC comic bundles: "Dive into DC's Vertigo Comics" (Feb-Mar 2026,
+dcuicoupon_30days), "Batman Day Comics Bundle" (Sep-Oct 2026) and "The
+Frightening and Fantastic Worlds of James Tynion IV" (Jul-Aug 2025)
+(dcuiultra30-daytrialoffer). US only, new or returning subscribers, once per
+person; it turns into a paid subscription (then $12.99/month) unless
+cancelled. Optional; nothing to download (DCUI reading is online / offline in
+its apps). Humble's article says the join page's code works for the MONTHLY
+plan; the item texts name the Monthly Ultra plan.
+"""
+
+[redeem]
+where = "https://dcuniverseinfinite.com/join/humble"
+account = true
+delivers = "30 days of DC Universe Infinite Ultra (monthly plan), then a paid subscription unless cancelled"
+steps = [
+  "Only if you want the subscription (US accounts): open https://dcuniverseinfinite.com/join/humble, JOIN NOW, pick the monthly plan.",
+  "Sign up and paste the code from the Humble download page into the promo box, then START FREE TRIAL NOW.",
+  "Cancel before day 30 to avoid the monthly charge.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/19380774038171-DC-Universe-Infinite-Redemption-Instructions"
+claim = "join page, MONTHLY plan, promo box, START FREE TRIAL NOW"
+[[sources]]
+url = "https://web.archive.org/web/20260919180334/https://www.humblebundle.com/books/batman-day-comics-bundle-dc-comics-books"
+claim = "'DCUI 30-day trial offer': Monthly Ultra plan, new or returning US subscribers, once per person, converts to paid ($12.99/month) (census item description)"
+[[sources]]
+url = "https://web.archive.org/web/20260228194627/https://www.humblebundle.com/books/dive-into-dcs-vertigo-comics-dc-comics-books"
+claim = "'DCUI Coupon': 30-day free trial of DC Universe Infinite Ultra monthly plan; offline access in iOS/Android/web apps; see dcuniverseinfinite.com/join/humble (census item description)"
+[[sources]]
+url = "https://web.archive.org/web/20250717191352/https://www.humblebundle.com/books/frightening-and-fantastic-worlds-james-tynion-iv-books"
+claim = "'DCUI Ultra 30-Day Trial Offer' hb-key item in the bundle (census)"

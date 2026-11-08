@@ -1,0 +1,38 @@
+schema = 1
+name = "Star Trek Online: Cross Faction Intel Science Bundle"
+vendor = "arc-games"
+kind = "service"
+machine_names = ["startrekonline_crossfactionintelsciencebundle"]
+verified = false
+notes = """
+In-game pack for Star Trek Online (PC only) from the Star Trek 2020 book
+bundle by IDW (Jan-Feb 2020): Somerville Intel Science Vessel [T6], Balth
+Intel Science Vessel [T6], a Fleet Ship Module and 5 Master Keys. The other 27
+items in that bundle are DRM-free comics on generic routes. The code is
+redeemed on an Arc account and claimed in game. A redemption deadline is not
+in the census; Humble's comparable STO code (Star Trek Adventures bundle) had
+to be redeemed by Dec 30, 2022, so this 2020 code has probably expired.
+"""
+
+[redeem]
+where = "https://www.arcgames.com/en/code-redemption"
+account = true
+delivers = "the ships, module and Master Keys in the STO Zen Store -> Promotions tab, claimed once"
+steps = [
+  "Redeem the code from the Humble download page on the Arc account (see vendors/arc-games).",
+  "Claim the pack in Star Trek Online: Zen Store -> Promotions -> Claim.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://web.archive.org/web/20200129190317/https://www.humblebundle.com/books/star-trek-2020-idw-books"
+claim = "item contents (two T6 Intel Science Vessels, Fleet Ship Module, 5 Master Keys), PC only, publisher Perfect World Entertainment, hb-key on Windows (census)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/360051605754-Humble-RPG-Book-Bundle-Star-Trek-Adventures-RPG-Redeeming-the-Star-Trek-Online-Original-DS9-Uniform-and-Elite-Services-Starter-Pack-Key"
+claim = "STO code redemption via Arc and Zen Store Promotions; that bundle's code had a Dec 30, 2022 deadline"

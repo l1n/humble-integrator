@@ -1,0 +1,25 @@
+schema = 1
+name = "Six Small Algorithm Projects (liveProject series)"
+vendor = "manning"
+kind = "service"
+machine_names = ["liveprojectsixsmallalgorithmprojects"]
+verified = false
+notes = """
+A Manning liveProject: guided hands-on project work done in the browser on liveproject.manning.com. Web-only; nothing to download or install, no Steam entry.
+Humble bundles: Programming Bootcamp (2022). By Rod Stephens.
+The Humble item is a Manning code: redeem it as vendors/manning describes (manning.com/humble-bundle, or dashboard > Register Bundle when signed in).
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/1260803819510-Manning-Publications-How-to-Redeem-liveBook-and-liveVideo-Content"
+claim = "liveBook/liveVideo codes are redeemed at manning.com/humble-bundle (or dashboard/accessCodeRegistration) and accessed from the Manning dashboard"
+[[sources]]
+url = "https://liveproject.manning.com/"
+claim = "liveProject platform (Manning's site navigation links it as liveProject)"

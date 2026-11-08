@@ -1,0 +1,38 @@
+schema = 1
+name = "Avatar Legends RPG Starter Set (physical, Best of Magpie Games 2024)"
+vendor = "magpie-games"
+kind = "service"
+service = true        # shipped boxed set
+machine_names = ["avatarlegends_starterset"]
+verified = false
+notes = """
+Top-tier physical reward in 'Humble RPG Bundle: Best of Magpie Games'
+(March-April 2024), whose other items are DRM-free ebooks for the generic
+routes. The key is a magpiegames.com coupon for the boxed Starter Set;
+shipping is paid separately at Magpie's checkout. (The bundle's digital
+starter set is a separate DRM-free item.)
+"""
+
+[redeem]
+where = "https://magpiegames.com/products/avatar-legends-the-roleplaying-game-starter-set"
+account = false
+delivers = "the boxed Avatar Legends Starter Set, shipped by Magpie Games (shipping paid by the buyer)"
+steps = [
+  "Add https://magpiegames.com/products/avatar-legends-the-roleplaying-game-starter-set to the cart.",
+  "At checkout enter the shipping details and the code from the Humble download page; the item drops to zero.",
+  "Pay the remaining shipping cost.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/23872732261275-Avatar-Legends-Starter-Set-Redemption-Instructions"
+claim = "created 2024-03-15: add the starter set from the redemption link to the cart, enter the code at checkout, item shows zero, only shipping remains"
+[[sources]]
+url = "https://www.humblebundle.com/books/best-of-magpie-games-books"
+claim = "'including a physical edition of the Avatar Legends Starter Set!'; avatarlegends_starterset is the bundle's only hb-key item (census)"

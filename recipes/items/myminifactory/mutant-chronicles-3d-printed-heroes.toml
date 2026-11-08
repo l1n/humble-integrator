@@ -1,0 +1,39 @@
+schema = 1
+name = "Mutant Chronicles 3D Printed Heroes Collection (18 pre-supported heroes)"
+vendor = "myminifactory"
+kind = "content"
+machine_names = ["mutantchronicles3dprintedheroescollection18pre-supportedheroes"]
+verified = false
+notes = """
+The one key item of Humble RPG Bundle: Mutant Chronicles with 3D Miniatures
+(Modiphius, 2021; publisher 'Modiphius', census type 'software'): 18
+pre-supported STL character files (Mitch Hunter, Big Bob, Luna PD
+Detective, ...). Humble's article for this bundle sends it to MyMiniFactory:
+the download-page link opens MMF, which adds the files to the Library under
+'Objects shared with me', folder 'Mutant Chronicles RPG 3D Print
+Characters', as a .zip. The bundle's books are DRM-free Humble downloads on
+the generic routes.
+"""
+
+[redeem]
+where = "the MyMiniFactory link on the Humble download page"
+account = true
+delivers = "a .zip of 18 pre-supported STL heroes in the MMF Library ('Objects shared with me')"
+steps = [
+  "Click the MyMiniFactory link for the item on the Humble download page; sign in to or create an MMF account when asked.",
+  "The files are added to https://www.myminifactory.com/library under 'Objects shared with me' > 'Mutant Chronicles RPG 3D Print Characters'; download the .zip into the library folder.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/4405060331291-Humble-RPG-Bundle-Mutant-Chronicles-How-to-Redeem-Your-3D-Miniatures-Files"
+claim = "link on the download page goes to MyMiniFactory; create/log in; files added to the library (myminifactory.com/library) under 'Objects shared with me', folder 'Mutant Chronicles RPG 3D Print Characters', as a .zip"
+[[sources]]
+url = "https://www.humblebundle.com/books/mutant-chronicles-with-3d-miniatures-books"
+claim = "'18 pre-supported 3D print files for Mutant Chronicles characters ...' hb-key item, publisher Modiphius (census)"

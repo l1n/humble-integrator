@@ -1,0 +1,37 @@
+schema = 1
+name = "20% discount on eBooks.com (Disney Manga by TOKYOPOP bundle)"
+vendor = "ebooks-com"
+kind = "service"
+machine_names = ["websitecoupon20_ebooksdotcom"]
+verified = false
+notes = """
+A 20%-off code for the eBooks.com store that came with the Disney Manga by
+TOKYOPOP bundle (Apr-May 2022). Humble's description: 'Discount is valid from
+4/6/22 to 5/6/22. Restrictions apply.' - so it has expired. Nothing to
+download. An item recipe because the bundle's eBooks.com vendor rule would
+otherwise treat it like the manga.
+"""
+
+[redeem]
+where = "https://www.ebooks.com (code applied at checkout)"
+account = true
+delivers = "20% off an eBooks.com purchase (expired 2022-05-06)"
+expires = "2022-05-06"
+expiry_text = "'Discount is valid from 4/6/22 to 5/6/22.'"
+steps = [
+  "Expired. While valid: add ebooks to the eBooks.com cart, 'Review Order & Checkout', and on the Payment Details page use 'Do you have a coupon or gift certificate?' to enter the code from the Humble download page, then 'Apply' and 'Process Order'.",
+]
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://web.archive.org/web/20220411235133/https://www.humblebundle.com/books/disney-manga-tokyopop-books"
+claim = "'20% Discount on eBooks.com': '20% discount code for use on eBooks.com Discount is valid from 4/6/22 to 5/6/22. Restrictions apply.' (census item description)"
+[[sources]]
+url = "https://support.ebooks.com/hc/en-gb/articles/360001397975-Using-a-gift-certificate-or-coupon-code"
+claim = "cart -> 'Review Order & Checkout' -> Payment Details -> 'Do you have a coupon or gift certificate?' -> Apply -> Process Order; coupon codes can expire"

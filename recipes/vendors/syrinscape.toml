@@ -1,0 +1,52 @@
+schema = 1
+name = "Syrinscape (tabletop RPG soundscapes)"
+kind = "route"
+service = true        # SoundSets and subscriptions unlock on the Syrinscape account; played from its online player
+notes = """
+Syrinscape sells ambience/music "SoundSets" for tabletop games and a
+"SuperSyrin" subscription; everything is tied to a Syrinscape account and
+played through its online player (app.syrinscape.com). Humble's codes are
+Syrinscape vouchers. Kind service: nothing to download into the library and
+no Steam entry.
+Census: Humble RPG Bundle: Cyberpunk RED: The Ready-to-Run Essentials Bundle
+(June 2026): ten Cyberpunk RED SoundSets and a 1-month SuperSyrin trial
+(developer 'Syrinscape'). That bundle's text ("redeemable through DTRPG and
+Syrinscape website") sends the bundle to vendors/drivethrurpg, so these
+items have item recipes: syrinscape/cyberpunk-red-soundsets and
+syrinscape/supersyrin-month. The developers rule catches Syrinscape items in
+other bundles without such a sentence.
+"""
+
+[match]
+developers = ["Syrinscape"]
+domains = ["syrinscape.com"]
+key_names = ['syrinscape', 'supersyrin', 'soundset']
+
+[redeem]
+where = "https://syrinscape.com (menu at the bottom of the page: 'Voucher')"
+account = true
+delivers = "the SoundSets (or subscription time) on the Syrinscape account, playable in the online player"
+expires = "Cyberpunk RED Ready-to-Run bundle: 'Keys Expire. Please redeem before June 30th, 2027'. Key.is_expired from Humble is authoritative."
+steps = [
+  "Register (free) or log in at https://syrinscape.com.",
+  "Choose 'Voucher' from the menu at the bottom of the page and enter one Humble code; repeat per code.",
+  "Play from https://app.syrinscape.com ('Play now' at the top of the site).",
+]
+
+[download]
+scriptable = false
+how = "nothing to download: streamed/played through Syrinscape's player"
+
+[library]
+files = "none"
+
+[install]
+source = "vendor"
+serial = "none"
+
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/51138613493275-Humble-RPG-Bundle-Cyberpunk-RED-The-Ready-to-Run-Essentials-Bundle"
+claim = "register a free Syrinscape account; select 'Voucher' from the menu at the bottom; enter the voucher code; 'Play now' or https://app.syrinscape.com"
+[[sources]]
+url = "https://www.humblebundle.com/books/cyberpunk-red-readytorun-essentials-bundle"
+claim = "ten 'Cyberpunk RED - ... SoundSet' items and '1-Month Free Supersyrin Access', developer Syrinscape; 'redeemable through DTRPG and Syrinscape website'; redeem before June 30th, 2027 (census)"

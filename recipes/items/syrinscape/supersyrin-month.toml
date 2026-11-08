@@ -1,0 +1,28 @@
+schema = 1
+name = "SuperSyrin subscription, 1 month free (Syrinscape)"
+vendor = "syrinscape"
+kind = "service"
+service = true
+machine_names = ["1monthfree_supersyrinaccess"]
+verified = false
+notes = """
+A free month of SuperSyrin (access to all of Syrinscape's fantasy, sci-fi
+and board-game sound content plus the SoundSet creation tools) from the
+Cyberpunk RED: Ready-to-Run Essentials bundle. Redeemed as a Syrinscape
+voucher like the SoundSets. Optional; whether it renews into a paid plan is
+not stated in the sources found, so check the account after redeeming.
+"""
+
+[install]
+source = "vendor"
+serial = "none"
+
+[steam]
+shortcut = false
+
+[[sources]]
+url = "https://www.humblebundle.com/books/cyberpunk-red-readytorun-essentials-bundle"
+claim = "'1-Month Free Supersyrin Access': complete access to all Syrinscape Fantasy, Sci-Fi and Board Game content plus SoundSet creation tools (census item description)"
+[[sources]]
+url = "https://support.humblebundle.com/hc/en-us/articles/51138613493275-Humble-RPG-Bundle-Cyberpunk-RED-The-Ready-to-Run-Essentials-Bundle"
+claim = "Syrinscape codes are entered under 'Voucher' on syrinscape.com"
