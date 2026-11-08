@@ -165,9 +165,14 @@ pictures of their items. None got a portrait cover, because those pages only
 have landscape pictures of their items. `hi remove --dry-run` lists that
 account's 12 entries; removal itself is verified by the tests.
 
-Also verified live: the installer driver runs AutoHotkey inside Wine and sees a
-real ProFantasy (InstallAware) installer's windows; its full walk through the
-wizard has not been run yet.
+Also verified live, under Kegworks' Wine 10 with ProFantasy's free "CA203 City
+Under Siege" installer (InstallAware): the installer driver gets through the
+verify step and the Welcome page, then stops at the licence page because
+ProFantasy isn't in `accept_eulas`, and ends the installer behind it. That run
+found two bugs, now fixed: this licence page is a single checkbox, not radio
+buttons, so the driver waited on it; and a stopped driver left the installer
+running. The pages after the licence are untested: they need the EULA accepted,
+and this installer then needs CC3+ installed.
 
 Not yet verified: activating keys on Steam (the tool only pre-fills Steam's own
 activation page), and the vendor recipes, all of which are `verified = false`

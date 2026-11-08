@@ -13,12 +13,16 @@ import argparse
 import os
 import re
 import shutil
+import signal
 import subprocess
 import sys
 import time
 import urllib.request
 import zipfile
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import install  # noqa: E402
 
 AHK_URL = "https://www.autohotkey.com/download/1.1/AutoHotkey_1.1.37.02.zip"
 AHK_EXE = "AutoHotkeyU64.exe"
@@ -52,6 +56,7 @@ acceptEula := %ACCEPT_EULA%
 logFile := %LOG_FILE%
 titleRe := %TITLE_RE%
 lastPage := ""
+pageSince := A_TickCount
 lastMsg := ""
 seen := false
 waited := 0
@@ -97,6 +102,11 @@ Loop {
     if (page != lastPage) {
         Log("PAGE: " . page)
         lastPage := page
+        pageSince := A_TickCount
+    } else if (A_TickCount - pageSince > 600000 && !InStr(ControlsOf(hwnd), "Progress")) {
+        ; Nothing on this page lets us go on (and it isn't installing): say so instead of waiting.
+        Log("no way past this page after 10 minutes")
+        Finish(7)
     }
     if RegExMatch(page, "i)\b(remove|uninstall|repair)\b") {
         Log("maintenance page (already installed?): not touching it")
@@ -166,12 +176,18 @@ ClickButton(hwnd, re) {
     return false
 }
 
+ControlsOf(hwnd) {
+    WinGet, ctrls, ControlList, ahk_id %hwnd%
+    return ctrls
+}
+
 HandleLicense(hwnd) {
+    ; "I accept" is a pair of radio buttons, or in some InstallAware themes one checkbox.
     global acceptEula
     WinGet, ctrls, ControlList, ahk_id %hwnd%
     Loop, Parse, ctrls, `n
     {
-        if !InStr(A_LoopField, "Radio")
+        if !RegExMatch(A_LoopField, "Radio|Check")
             continue
         ControlGetText, t, %A_LoopField%, ahk_id %hwnd%
         if (RegExMatch(t, "i)accept") && !RegExMatch(t, "i)not|don't|do not")) {
@@ -340,7 +356,7 @@ def fetch_ahk(cache_dir):
 
 def run(prefix, wine, installer, args, script, cache_dir, timeout=3 * 3600):
     """Run INSTALLER in PREFIX with the AutoHotkey driver alongside it. Returns the driver's exit code."""
-    env = dict(os.environ, WINEPREFIX=str(prefix), WINEDEBUG="-all")
+    env = dict(os.environ, WINEPREFIX=str(prefix), WINEDEBUG="-all", **install.wine_env(wine))
     ahk = fetch_ahk(cache_dir)
     public = Path(prefix) / "drive_c" / "users" / "Public"
     public.mkdir(parents=True, exist_ok=True)
@@ -362,6 +378,12 @@ def run(prefix, wine, installer, args, script, cache_dir, timeout=3 * 3600):
         for proc in (driver, setup):
             if proc and proc.poll() is None:
                 proc.terminate()
+        # The wizard itself is a child the launcher left behind (self-extractors do that):
+        # end everything still running in this prefix.
+        server = Path(wine).with_name("wineserver")
+        server = str(server) if server.exists() else shutil.which("wineserver")
+        if server:
+            subprocess.run([server, "-k"], env=env)
         if log_path.exists():
             sys.stderr.write(log_path.read_text(errors="replace"))
 
@@ -388,6 +410,7 @@ def main(argv=None):
     if a.cmd == "script":
         print(script)
         return
+    signal.signal(signal.SIGTERM, lambda *_: sys.exit(143))  # still clean up when stopped
     sys.exit(run(a.prefix, a.wine, a.installer, a.args, script, a.cache))
 
 
